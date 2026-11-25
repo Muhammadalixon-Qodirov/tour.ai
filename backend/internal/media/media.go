@@ -39,6 +39,8 @@ type Stored struct {
 
 type Store interface {
 	Save(name string, data []byte) (url string, err error)
+	Open(name string) (io.ReadCloser, error)
+	Delete(name string) error
 }
 
 // Process — rasmni o'qiydi, tekshiradi, uzun tomonini MaxLongSide gacha kichraytiradi va JPEG ga qayta kodlaydi.
@@ -109,4 +111,22 @@ func (l Local) Save(name string, data []byte) (string, error) {
 		return "", err
 	}
 	return l.BaseURL + "/uploads/" + name, nil
+}
+
+func (l Local) Open(name string) (io.ReadCloser, error) {
+	if !SafeName(name) {
+		return nil, fmt.Errorf("xavfsiz bo'lmagan nom %q", name)
+	}
+	return os.Open(filepath.Join(l.Dir, name))
+}
+
+func (l Local) Delete(name string) error {
+	if !SafeName(name) {
+		return fmt.Errorf("xavfsiz bo'lmagan nom %q", name)
+	}
+	err := os.Remove(filepath.Join(l.Dir, name))
+	if errors.Is(err, os.ErrNotExist) {
+		return nil
+	}
+	return err
 }

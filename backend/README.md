@@ -45,6 +45,8 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` |
+| Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
+| Lenta | `GET /feed?city=`, `GET /posts/{id}`, `POST·DELETE /posts/{id}/like`, `POST /posts/{id}/report`, `DELETE /posts/{id}`; ochiq: `GET /s/{slug}` (HTML + OpenGraph), `GET /s/{slug}/card.png`; admin: `GET /admin/posts?status=reported`, `POST /admin/posts/{id}/hide·restore` |
 | Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30` |
 | Xizmat | `GET /healthz`, `GET /static/ph/{category}.svg` (rasm yo'q joylar uchun vaqtinchalik rasm), `GET /uploads/{file}` (yuklangan rasmlar) |
 
@@ -64,6 +66,7 @@ internal/
   api          router, middleware, handlerlar, DTO
   auth         JWT (HS256) sessiya tokenlari, argon2id parollar
   media        rasm yuklash: tekshirish, kichraytirish, EXIF/GPS ni o'chirish, saqlash
+  diary        kun hikoyasi (shablon; AI keyin shu interfeysga) va ulashish kartasi (PNG)
   weather      Open-Meteo kunlik prognozi (kalitsiz, 1 soat kesh)
   i18n         tillar va foydalanuvchiga ko'rinadigan matnlar
   seed         seed yuklovchi
@@ -111,3 +114,21 @@ draft ──submit──▶ pending ──publish──▶ published ──unpub
 
 "Bordim" / "o'tkazib yubordim" deb belgilangan va vaqti o'tgan to'xtashlar o'zgarmaydi.
 Ob-havo servisiga faqat shahar koordinatasi (~1 km gacha yaxlitlangan) yuboriladi.
+
+## Sayohat kundaligi va lenta
+
+```
+kun davomida: PATCH stop {status: visited} + POST /diary/photos
+20:00 (mahalliy): push "Bugungi hikoyangiz tayyor ✨" — hikoya oldindan yoziladi (EXPO_PUSH_ENABLED=true)
+POST /trips/{id}/days/{idx}/diary → hikoya (sarlavha, matn, lahzalar, heshteglar, caption, joylar, rasmlar)
+PATCH /diary/{id} (tahrir) · POST /regenerate (ohang, 5 marta)
+POST /publish → lentaga post + ochiq havola /s/{slug}  ·  GET /share-card → Instagram/Telegram uchun PNG
+```
+
+- Hikoya **faqat** borilgan joylar va bazadagi tasdiqlangan faktlardan yoziladi; AI ulanganda ham
+  `diary.CheckGrounded` ro'yxatda yo'q joy nomini rad etadi va shablonga qaytadi.
+- Rasmlardan EXIF/GPS olib tashlanadi; postda faqat shahar va sana ko'rinadi; muallif — taxallus.
+- Postda havola (`http`, `t.me/` …) bo'lsa rad etiladi. 3 ta turli shikoyat → post avtomatik yashiriladi,
+  admin `restore` qiladi.
+- Push: kuniga bitta, faqat kamida 2 ta joyga "bordim" belgisi qo'yilgan bo'lsa.
+- Geofence orqali "Rasmga oling" eslatmasi — ilova tomonida (lokal bildirishnoma).

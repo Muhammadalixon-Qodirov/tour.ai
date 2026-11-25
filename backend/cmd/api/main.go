@@ -42,9 +42,14 @@ func run() error {
 		return err
 	}
 
+	apiSrv := api.NewServer(cfg, store.New(db))
+	if os.Getenv("EXPO_PUSH_ENABLED") == "true" {
+		go apiSrv.RunNudger(ctx, api.NewExpoPush(os.Getenv("EXPO_ACCESS_TOKEN")), 5*time.Minute)
+		slog.Info("kechki eslatmalar yoqildi")
+	}
 	srv := &http.Server{
 		Addr:              cfg.Addr,
-		Handler:           api.NewServer(cfg, store.New(db)).Handler(),
+		Handler:           apiSrv.Handler(),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,

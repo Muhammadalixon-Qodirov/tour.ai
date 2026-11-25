@@ -16,6 +16,7 @@ import (
 	"github.com/google/uuid"
 
 	"yoldosh/internal/auth"
+	"yoldosh/internal/diary"
 	"yoldosh/internal/i18n"
 	"yoldosh/internal/media"
 	"yoldosh/internal/platform"
@@ -30,12 +31,13 @@ type Server struct {
 	limiter *Limiter
 	media   media.Store
 	weather weather.Source
+	story   diary.Writer
 	now     func() time.Time
 }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
 	return &Server{cfg: cfg, store: st, signer: auth.NewSigner(cfg.TokenSecret), limiter: NewLimiter(),
-		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), now: time.Now}
+		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 }
 
 func (s *Server) Handler() http.Handler {
@@ -68,6 +70,30 @@ func (s *Server) Handler() http.Handler {
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
 
+	// sayohat kundaligi
+	mux.Handle("POST /api/v1/diary/photos", s.requireUser(s.rate("photos", 60, http.HandlerFunc(s.uploadDiaryPhoto))))
+	user("DELETE /api/v1/diary/photos/{id}", s.deleteDiaryPhoto)
+	user("GET /api/v1/trips/{id}/days/{idx}/photos", s.dayPhotos)
+	mux.Handle("POST /api/v1/trips/{id}/days/{idx}/diary", s.requireUser(s.rate("diary", 20, http.HandlerFunc(s.createDiary))))
+	user("GET /api/v1/trips/{id}/days/{idx}/diary", s.getDayDiary)
+	user("GET /api/v1/diary/{entryId}", s.getDiary)
+	user("PATCH /api/v1/diary/{entryId}", s.patchDiary)
+	mux.Handle("POST /api/v1/diary/{entryId}/regenerate", s.requireUser(s.rate("diary", 20, http.HandlerFunc(s.regenerateDiary))))
+	user("POST /api/v1/diary/{entryId}/publish", s.publishDiary)
+	user("POST /api/v1/diary/{entryId}/shares", s.recordShare)
+	user("GET /api/v1/diary/{entryId}/share-card", s.shareCard)
+	user("POST /api/v1/me/push-token", s.setPushToken)
+
+	// lenta
+	mux.Handle("GET /api/v1/feed", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.feed))))
+	mux.Handle("GET /api/v1/posts/{id}", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.getPost))))
+	user("POST /api/v1/posts/{id}/like", s.likePost(true))
+	user("DELETE /api/v1/posts/{id}/like", s.likePost(false))
+	mux.Handle("POST /api/v1/posts/{id}/report", s.requireUser(s.rate("report", 10, http.HandlerFunc(s.reportPost))))
+	user("DELETE /api/v1/posts/{id}", s.deletePost)
+	mux.Handle("GET /s/{slug}", s.rateIP("public", 120, http.HandlerFunc(s.publicPost)))
+	mux.Handle("GET /s/{slug}/card.png", s.rateIP("public-card", 60, http.HandlerFunc(s.publicCard)))
+
 	mux.HandleFunc("GET /uploads/{file}", s.serveUpload)
 	adm := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.requireAdmin(s.rate("admin", 300, h))) }
 	mux.Handle("POST /api/v1/admin/auth/login", s.rateIP("admin-login", 10, http.HandlerFunc(s.adminLogin)))
@@ -83,6 +109,9 @@ func (s *Server) Handler() http.Handler {
 	adm("PUT /api/v1/admin/places/{id}/rules", s.adminPutRules)
 	mux.Handle("POST /api/v1/admin/places/{id}/images", s.requireAdmin(s.rate("admin-upload", 30, http.HandlerFunc(s.adminUploadImage))))
 	adm("GET /api/v1/admin/analytics/novelty", s.adminNovelty)
+	adm("GET /api/v1/admin/posts", s.adminPosts)
+	adm("POST /api/v1/admin/posts/{id}/hide", s.adminPostStatus("hidden"))
+	adm("POST /api/v1/admin/posts/{id}/restore", s.adminPostStatus("visible"))
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, r, http.StatusNotFound, "not_found", false)

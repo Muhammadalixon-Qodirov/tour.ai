@@ -121,6 +121,16 @@ var messages = map[string]map[string]string{
 	"weather_unavailable":           {"uz": "Ob-havo ma'lumoti hozir mavjud emas", "ru": "Данные о погоде сейчас недоступны", "en": "Weather data is unavailable right now"},
 	"day_in_past":                   {"uz": "O'tib ketgan kunni qayta rejalab bo'lmaydi", "ru": "Нельзя перепланировать прошедший день", "en": "A past day can't be replanned"},
 
+	// kundalik va lenta
+	"diary_not_found":        {"uz": "Hikoya topilmadi", "ru": "История не найдена", "en": "Story not found"},
+	"diary_day_not_started":  {"uz": "Bu kun hali boshlanmagan — hikoya kun o'tgandan keyin yoziladi", "ru": "Этот день ещё не начался — история пишется после него", "en": "This day hasn't started yet — the story is written afterwards"},
+	"diary_nothing_visited":  {"uz": "Hikoya uchun bu kunda borilgan joy yo'q", "ru": "В этот день нет посещённых мест для истории", "en": "No visited places that day to write a story about"},
+	"diary_regenerate_limit": {"uz": "Qayta yozish limiti tugadi — matnni o'zingiz tahrirlashingiz mumkin", "ru": "Лимит перегенерации исчерпан — можно отредактировать текст вручную", "en": "Regeneration limit reached — you can still edit the text yourself"},
+	"too_many_photos":        {"uz": "Bir kunga 30 tagacha rasm yuklash mumkin", "ru": "Можно загрузить до 30 фото за день", "en": "Up to 30 photos per day"},
+	"content_rejected":       {"uz": "Postda havolalar bo'lmasligi kerak", "ru": "В публикации не должно быть ссылок", "en": "Posts can't contain links"},
+	"post_not_found":         {"uz": "Post topilmadi", "ru": "Публикация не найдена", "en": "Post not found"},
+	"post_hidden":            {"uz": "Post shikoyatlar sababli yashirilgan va moderator tekshiruvida", "ru": "Публикация скрыта из-за жалоб и проверяется модератором", "en": "The post is hidden after reports and is under review"},
+
 	// geofence
 	"geofence_headline": {"uz": "Siz {0} hududidasiz", "ru": "Вы находитесь: {0}", "en": "You are at {0}"},
 }
