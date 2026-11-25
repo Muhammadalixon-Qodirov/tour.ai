@@ -96,6 +96,8 @@ type PlaceRecord struct {
 	IsPartner       bool                  `json:"isPartner"`
 	Images          []domain.Image        `json:"images"`
 	Source          string                `json:"source"`
+	Contacts        map[string]string     `json:"contacts"`
+	Research        json.RawMessage       `json:"research"` // faqat o'qish: tadqiqot manbalari va ishonch darajasi
 	RejectReason    *string               `json:"rejectReason"`
 	CreatedBy       *string               `json:"createdBy"`
 
@@ -120,14 +122,14 @@ type PlaceText struct {
 
 const recordCols = `id, city_id, category, novelty, to_char(opened_at, 'YYYY-MM-DD'), status, lat, lng, geofence_radius_m,
   interests, price_level, visit_duration_min, opening_hours, entry_fee, wheelchair, family_friendly, easy_walk,
-  pay_card, cash_only, is_partner, images, source, reject_reason, created_by,
+  pay_card, cash_only, is_partner, images, source, contacts, research, reject_reason, created_by,
   rating::float8, reviews_count, rules_version, created_at, updated_at, published_at`
 
 func scanRecord(row pgx.Row) (PlaceRecord, error) {
 	var p PlaceRecord
 	err := row.Scan(&p.ID, &p.CityID, &p.Category, &p.Novelty, &p.OpenedAt, &p.Status, &p.Location.Lat, &p.Location.Lng,
 		&p.GeofenceRadiusM, &p.Interests, &p.PriceLevel, &p.VisitMin, &p.OpeningHours, &p.EntryFee, &p.Wheelchair,
-		&p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.IsPartner, &p.Images, &p.Source, &p.RejectReason,
+		&p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.IsPartner, &p.Images, &p.Source, &p.Contacts, &p.Research, &p.RejectReason,
 		&p.CreatedBy, &p.Rating, &p.ReviewsCount, &p.RulesVersion, &p.CreatedAt, &p.UpdatedAt, &p.PublishedAt)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return p, ErrNotFound
@@ -173,14 +175,18 @@ func (s *Store) SavePlace(ctx context.Context, adminID string, p PlaceRecord, te
 		if len(p.EntryFee) > 0 && string(p.EntryFee) != "null" {
 			fee = p.EntryFee
 		}
+		if p.Contacts == nil {
+			p.Contacts = map[string]string{}
+		}
+		contacts, _ := json.Marshal(p.Contacts)
 		if isNew {
 			_, err := tx.Exec(ctx, `INSERT INTO places (id, city_id, category, novelty, opened_at, status, lat, lng, geofence_radius_m,
 				interests, price_level, visit_duration_min, opening_hours, entry_fee, wheelchair, family_friendly, easy_walk,
-				pay_card, cash_only, is_partner, images, source, created_by)
-				VALUES ($1,$2,$3,$4,$5::date,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)`,
+				pay_card, cash_only, is_partner, images, source, created_by, contacts)
+				VALUES ($1,$2,$3,$4,$5::date,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)`,
 				p.ID, p.CityID, p.Category, p.Novelty, p.OpenedAt, p.Status, p.Location.Lat, p.Location.Lng, p.GeofenceRadiusM,
 				p.Interests, p.PriceLevel, p.VisitMin, hours, fee, p.Wheelchair, p.FamilyFriendly, p.EasyWalk,
-				p.PayCard, p.CashOnly, p.IsPartner, images, p.Source, adminID)
+				p.PayCard, p.CashOnly, p.IsPartner, images, p.Source, adminID, contacts)
 			if err != nil {
 				if strings.Contains(err.Error(), "places_pkey") {
 					return ErrConflict
@@ -191,10 +197,10 @@ func (s *Store) SavePlace(ctx context.Context, adminID string, p PlaceRecord, te
 			tag, err := tx.Exec(ctx, `UPDATE places SET city_id=$2, category=$3, novelty=$4, opened_at=$5::date, lat=$6, lng=$7,
 				geofence_radius_m=$8, interests=$9, price_level=$10, visit_duration_min=$11, opening_hours=$12, entry_fee=$13,
 				wheelchair=$14, family_friendly=$15, easy_walk=$16, pay_card=$17, cash_only=$18, is_partner=$19, images=$20,
-				updated_at=now() WHERE id=$1`,
+				contacts=$21, updated_at=now() WHERE id=$1`,
 				p.ID, p.CityID, p.Category, p.Novelty, p.OpenedAt, p.Location.Lat, p.Location.Lng, p.GeofenceRadiusM,
 				p.Interests, p.PriceLevel, p.VisitMin, hours, fee, p.Wheelchair, p.FamilyFriendly, p.EasyWalk,
-				p.PayCard, p.CashOnly, p.IsPartner, images)
+				p.PayCard, p.CashOnly, p.IsPartner, images, contacts)
 			if err != nil {
 				return err
 			}

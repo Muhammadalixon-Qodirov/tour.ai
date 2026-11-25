@@ -36,8 +36,10 @@ type Server struct {
 }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
-	return &Server{cfg: cfg, store: st, signer: auth.NewSigner(cfg.TokenSecret), limiter: NewLimiter(),
+	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
+	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
+	return s
 }
 
 func (s *Server) Handler() http.Handler {

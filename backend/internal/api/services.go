@@ -130,16 +130,18 @@ type emergencyNumber struct {
 }
 
 var emergencyLabels = map[string]map[string]string{
-	"unified":   {"uz": "Yagona favqulodda xizmat", "ru": "Единая служба экстренной помощи", "en": "Emergency (all services)"},
-	"ambulance": {"uz": "Tez yordam", "ru": "Скорая помощь", "en": "Ambulance"},
-	"police":    {"uz": "Politsiya", "ru": "Полиция", "en": "Police"},
-	"fire":      {"uz": "Yong'in xizmati", "ru": "Пожарная служба", "en": "Fire service"},
-	"gas":       {"uz": "Gaz avariya xizmati", "ru": "Аварийная газовая служба", "en": "Gas emergency"},
+	"unified":            {"uz": "Yagona favqulodda xizmat", "ru": "Единая служба экстренной помощи", "en": "Emergency (all services)"},
+	"ambulance":          {"uz": "Tez yordam", "ru": "Скорая помощь", "en": "Ambulance"},
+	"police":             {"uz": "Politsiya", "ru": "Полиция", "en": "Police"},
+	"fire":               {"uz": "Yong'in xizmati", "ru": "Пожарная служба", "en": "Fire service"},
+	"gas":                {"uz": "Gaz avariya xizmati", "ru": "Аварийная газовая служба", "en": "Gas emergency"},
+	"emergency_ministry": {"uz": "Favqulodda vaziyatlar vazirligi", "ru": "МЧС", "en": "Ministry of Emergency Situations"},
+	"tourist_hotline":    {"uz": "Turistlar uchun call-markaz (24/7, uz/ru/en)", "ru": "Колл-центр для туристов (24/7, uz/ru/en)", "en": "Tourist hotline (24/7, English)"},
 }
 
 func emergencyNumbers(c store.City, lang string) []emergencyNumber {
 	out := []emergencyNumber{}
-	for _, k := range []string{"unified", "ambulance", "police", "fire", "gas"} {
+	for _, k := range []string{"unified", "tourist_hotline", "ambulance", "police", "fire", "gas", "emergency_ministry"} {
 		if n, ok := c.Emergency[k]; ok && n != "" {
 			out = append(out, emergencyNumber{Kind: k, Number: n, Label: i18n.Pick(emergencyLabels[k], lang)})
 		}

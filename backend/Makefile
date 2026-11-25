@@ -7,7 +7,10 @@ export
 admin:      ## make admin EMAIL=... ROLE=admin|moderator
 	go run ./cmd/admin -email $(EMAIL) -role $(or $(ROLE),moderator)
 
-.PHONY: admin db-start db-stop migrate seed run test test-unit lint build docker-up
+import-candidates: ## seed/candidates → pending joylar
+	go run ./cmd/import-candidates seed/candidates
+
+.PHONY: admin import-candidates db-start db-stop migrate seed run test test-unit lint build docker-up
 
 db-start:   ## Docker siz lokal PostgreSQL (port 5433)
 	./scripts/dev-db.sh start

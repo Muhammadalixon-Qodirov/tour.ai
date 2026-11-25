@@ -1,0 +1,2011 @@
+{
+  "region": "samarkand",
+  "cities": [
+    {
+      "id": "samarkand",
+      "name": {
+        "uz": "Samarqand",
+        "ru": "Самарканд",
+        "en": "Samarkand"
+      },
+      "center": {
+        "lat": 39.6542,
+        "lng": 66.9597
+      }
+    },
+    {
+      "id": "urgut",
+      "name": {
+        "uz": "Urgut",
+        "ru": "Ургут",
+        "en": "Urgut"
+      },
+      "center": {
+        "lat": 39.4092386,
+        "lng": 67.2494167
+      }
+    },
+    {
+      "id": "dahbed",
+      "name": {
+        "uz": "Dahbed",
+        "ru": "Дахбед",
+        "en": "Dahbed"
+      },
+      "center": {
+        "lat": 39.7652068,
+        "lng": 66.9123026
+      }
+    },
+    {
+      "id": "oqsoy",
+      "name": {
+        "uz": "Oqsoy",
+        "ru": "Аксай",
+        "en": "Aksay"
+      },
+      "center": {
+        "lat": 39.5109223,
+        "lng": 66.6279819
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "sam-imom-buxoriy-majmuasi",
+      "cityId": "samarkand",
+      "category": "mosque",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "Imom al-Buxoriy yodgorlik majmuasi (yangilangan)",
+        "ru": "Мемориальный комплекс Имама аль-Бухари (обновлённый)",
+        "en": "Imam al-Bukhari Memorial Complex (rebuilt)"
+      },
+      "tagline": {
+        "uz": "Qayta qurilgan ulkan ziyoratgoh va 9 pavilonli muzey",
+        "ru": "Обновлённая святыня с инновационным музеем",
+        "en": "Rebuilt shrine with a nine-pavilion museum"
+      },
+      "description": {
+        "uz": "Xartang qishlog'idagi muhaddis maqbarasi atrofida qayta barpo etilgan 45 gektarlik majmua 2026-yil martda ochildi. Unda 10 ming kishilik masjid, to'rt baland minora va Imom Buxoriy hayotiga bag'ishlangan zamonaviy muzey bor.",
+        "ru": "Комплекс площадью около 45 га вокруг могилы знаменитого собирателя хадисов в кишлаке Хартанг открыт после реконструкции в марте 2026 года. Здесь мечеть на 10 тысяч человек, четыре высоких минарета и мультимедийный музей о жизни Имама Бухари.",
+        "en": "The 45-hectare complex around the great hadith scholar's tomb in Khartang village reopened after reconstruction in March 2026. It has a 10,000-capacity mosque, four tall minarets and a high-tech museum on al-Bukhari's life."
+      },
+      "address": "Payariq tumani, Xo'ja Ismoil (Xartang) qishlog'i, Samarqanddan ~25 km",
+      "lat": 39.814571,
+      "lng": 66.9449533,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Samarqanddagi yangilangan Imom Buxoriy majmuasi",
+          "url": "https://www.afisha.uz/uz/tourism/2026/03/27/imom-buxoriy-majmuasi",
+          "date": "2026-03-27"
+        },
+        {
+          "title": "Daily Sabah: Uzbek heritage reborn through Turkish-led museum innovations",
+          "url": "https://www.dailysabah.com/arts/uzbek-heritage-reborn-through-turkish-led-museum-innovations/news",
+          "date": "2025-10-20"
+        },
+        {
+          "title": "OpenStreetMap relation/14615831",
+          "url": "https://www.openstreetmap.org/relation/14615831"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Samarqand shahridan tashqarida (Payariq tumani) — alohida shahar yozuvi kerak bo'lsa qo'shilsin. Ish vaqti, kirish narxi va kiyinish qoidasi manbada yo'q. Majmua o'zi mashhur, lekin yangilangan holati 'new'."
+    },
+    {
+      "id": "sam-yoshlar-kreativ-shaharchasi",
+      "cityId": "samarkand",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "Yoshlar kreativ shaharchasi va jamoat bog'i",
+        "ru": "Молодёжный креативный городок и общественный парк",
+        "en": "Youth Creative Town & Public Park"
+      },
+      "tagline": {
+        "uz": "Eski harbiy gospital o'rnida yoshlar uchun yangi maskan",
+        "ru": "Новое пространство для молодёжи на месте бывшего госпиталя",
+        "en": "New youth hub on a former military hospital site"
+      },
+      "description": {
+        "uz": "O'zbekiston ko'chasidagi 5,4 gektarlik hududda tarixiy binolar kutubxona, IT va robototexnika markazlariga aylantirildi, yer osti eko-muzeyi ham bor. Yonidagi bog'da mini-golf, tennis kortlari va bolalar attraksionlari joylashgan.",
+        "ru": "На 5,4 га вдоль улицы Узбекистанской исторические здания превращены в библиотеку, IT- и робототехнические центры, есть подземный экомузей. В соседнем парке — мини-гольф, теннисные корты и детские аттракционы.",
+        "en": "On a 5.4-hectare site along Uzbekistan Street, heritage buildings now house a library, IT and robotics labs and an underground eco-museum. The adjoining park has mini-golf, tennis courts and kids' rides."
+      },
+      "address": "O'zbekiston ko'chasi bo'yi, sobiq harbiy gospital hududi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "architecture",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Spot.uz: creative park",
+          "url": "https://www.spot.uz/ru/2026/03/20/creative-park/",
+          "date": "2026-03-20"
+        },
+        {
+          "title": "Anhor.uz: Mirziyoyev oznakomilsya s Molodezhnym kreativnym gorodkom",
+          "url": "https://anhor.uz/news/samarkand-73/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Rasmiy nomi va aniq manzili (raqam) topilmadi; koordinata OSMda topilmadi. Turistlar uchun ochiq qismlarini tekshirish kerak."
+    },
+    {
+      "id": "sam-vatanparvar-bogi",
+      "cityId": "samarkand",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2026-07",
+      "name": {
+        "uz": "Vatanparvar bog'i",
+        "ru": "Парк «Ватанпарвар»",
+        "en": "Vatanparvar Park"
+      },
+      "tagline": {
+        "uz": "Oynali ko'prik va attraksionli yangi istirohat bog'i",
+        "ru": "Новый парк со стеклянным мостом и аттракционами",
+        "en": "New amusement park with a glass bridge"
+      },
+      "description": {
+        "uz": "2026-yil yozida ochilgan 7,3 gektarlik bog'da sun'iy ko'l, 85 metrlik oynali ko'prik, kichik hayvonot bog'i, karting va 30 dan ortiq attraksion bor. Oilaviy dam olish uchun qulay.",
+        "ru": "Открытый летом 2026 года парк на 7,3 га: искусственное озеро, 85-метровый стеклянный мост, мини-зоопарк, картинг и более 30 аттракционов. Хорош для семейного отдыха.",
+        "en": "Opened in summer 2026, this 7.3-hectare park has an artificial lake, an 85 m glass bridge, a small zoo, karting and 30+ rides. A family-friendly outing."
+      },
+      "address": "Samarqand, Vatanparvar mahallasi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Gov.uz: New park named Vatanparvar has opened in Samarkand",
+          "url": "https://gov.uz/en/samarqand/news/view/193701",
+          "date": "2026-07-15"
+        },
+        {
+          "title": "UzA: Samarqandda Vatanparvar bog'i yangilandi",
+          "url": "https://uza.uz/ar/posts/samarqandda-vatanparvar-bogi-yangilandi_882885"
+        }
+      ],
+      "confidence": "high",
+      "notes": "2025-yilda loyiha 'Neopark' deb atalgan — nom o'zgargan bo'lishi mumkin. Koordinata OSMda topilmadi; attraksionlar pullik bo'lishi ehtimol."
+    },
+    {
+      "id": "sam-boqiy-shahar",
+      "cityId": "samarkand",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2022-09",
+      "name": {
+        "uz": "Boqiy shahar (Eternal City)",
+        "ru": "Вечный город (Eternal City)",
+        "en": "Eternal City"
+      },
+      "tagline": {
+        "uz": "Hunarmandlar ko'chalari bor tarixiy-etnografik shaharcha",
+        "ru": "Историко-этнографический город ремесленников",
+        "en": "Ethnographic old-town of crafts and teahouses"
+      },
+      "description": {
+        "uz": "Silk Road Samarkand majmuasidagi 11 gektarlik hudud Samarqand, Buxoro, Xiva va Farg'ona me'morchiligini takrorlaydi. Tor ko'chalarda 50 dan ortiq ustaxona va salon — kulolchilik, yog'och o'ymakorligi, qog'oz, zardo'zlik, pichoq bezash — hamda choyxonalar va qo'g'irchoq teatri bor.",
+        "ru": "11-гектарный квартал комплекса Silk Road Samarkand воссоздаёт архитектуру Самарканда, Бухары, Хивы и Ферганы. В узких улочках более 50 мастерских и салонов — керамика, резьба по дереву, бумага, вышивка, чеканка ножей — а также чайханы и кукольный театр.",
+        "en": "An 11-hectare quarter of the Silk Road Samarkand resort recreating the architecture of Samarkand, Bukhara, Khiva and Fergana. Its lanes hold 50+ workshops — ceramics, woodcarving, paper, embroidery, knife-chasing — plus teahouses and a puppet theatre."
+      },
+      "address": "Silk Road Samarkand, Eshkak eshish kanali, Konigil massivi",
+      "lat": 39.6538355,
+      "lng": 67.0612756,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "history",
+        "shopping",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": "https://www.silkroad-samarkand.com/resort/eternal-city/",
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: Eternal City",
+          "url": "https://www.silkroad-samarkand.com/resort/eternal-city/"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/1083701137",
+          "url": "https://www.openstreetmap.org/way/1083701137"
+        }
+      ],
+      "confidence": "high",
+      "notes": "2022-yil sentabrda ochilgan — 'new' chegarasida (4 yil). Kirish narxi va umumiy ish vaqti manbada yo'q. Pilov, qog'oz, keramika master-klasslari oldindan band qilinadi."
+    },
+    {
+      "id": "sam-buyuk-samarqand-restoran",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2022-09",
+      "name": {
+        "uz": "Buyuk Samarqand restorani",
+        "ru": "Ресторан «Великий Самарканд»",
+        "en": "Buyuk Samarkand Restaurant"
+      },
+      "tagline": {
+        "uz": "Boqiy shahardagi eng katta milliy taomlar restorani",
+        "ru": "Крупнейший ресторан национальной кухни в «Вечном городе»",
+        "en": "The Eternal City's flagship Uzbek restaurant"
+      },
+      "description": {
+        "uz": "Boqiy shaharning asosiy restorani milliy oshxona va tematik interyerga ega. Hunarmandlar ko'chalarini aylangandan keyin tushlik yoki kechki ovqat uchun qulay.",
+        "ru": "Главный ресторан «Вечного города» с национальной кухней и тематическим интерьером. Удобно зайти на обед или ужин после прогулки по ремесленным улицам.",
+        "en": "The main restaurant of the Eternal City, serving Uzbek cuisine in a themed setting. A natural lunch or dinner stop after wandering the craft lanes."
+      },
+      "address": "Silk Road Samarkand, Boqiy shahar",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "11:00-00:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: The Buyuk Samarkand Restaurant",
+          "url": "https://www.silkroad-samarkand.com/restaurants/buyuk/"
+        },
+        {
+          "title": "Silk Road Samarkand: Eternal City",
+          "url": "https://www.silkroad-samarkand.com/resort/eternal-city/"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Narxlar manbada yo'q. Majmua ichidagi aniq nuqta OSMda belgilanmagan (Boqiy shahar: 39.6538, 67.0613)."
+    },
+    {
+      "id": "sam-manzara-choyxona",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Manzara\" choyxonasi",
+        "ru": "Чайхана «Манзара»",
+        "en": "Manzara Teahouse"
+      },
+      "tagline": {
+        "uz": "Uch ayvonli choyxonada Farg'ona oshi",
+        "ru": "Ферганский плов на трёх террасах",
+        "en": "Fergana-style plov on three terraces"
+      },
+      "description": {
+        "uz": "Silk Road Samarkand hududidagi choyxona mahalliy oshpazlar tayyorlaydigan Farg'ona palovi bilan tanilgan. Mehmonlar uchta shinam ayvondan birida o'tiradi; asosan yuqori mavsumda ishlaydi.",
+        "ru": "Чайхана на территории Silk Road Samarkand, где местные повара готовят ферганский плов. Гостей сажают на одну из трёх уютных террас; работает в основном в высокий сезон.",
+        "en": "A teahouse in the Silk Road Samarkand resort where local cooks make Fergana-style plov. Guests sit on one of three cosy terraces; open mainly in high season."
+      },
+      "address": "Silk Road Samarkand, Konigil massivi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "11:00-23:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: Teahouse Manzara",
+          "url": "https://www.silkroad-samarkand.com/restaurants/haykhona-plov/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ochilgan sanasi va narxlari noma'lum; faqat rasmiy saytda tasdiqlangan. Mavsumiy ishlaydi."
+    },
+    {
+      "id": "sam-rubaiy-tandir",
+      "cityId": "samarkand",
+      "category": "cafe",
+      "novelty": "new",
+      "openedAt": "2022-09",
+      "name": {
+        "uz": "\"Rubaiy\" choyxonasi va tandir non",
+        "ru": "Чайхана «Рубаи» и тандырная пекарня",
+        "en": "Rubaiy Teahouse & Tandoor Bakery"
+      },
+      "tagline": {
+        "uz": "Issiq Samarqand noni va somsa bilan choy",
+        "ru": "Горячий самаркандский хлеб и самса к чаю",
+        "en": "Hot Samarkand bread and samsa with tea"
+      },
+      "description": {
+        "uz": "Boqiy shahardagi an'anaviy choyxona va yonidagi tandirxonada Samarqand noni hamda somsa ko'z oldingizda yopiladi. Ertalabki sayr va yengil nonushta uchun yaxshi to'xtash joyi.",
+        "ru": "Традиционная чайхана «Вечного города» и соседняя пекарня, где самаркандские лепёшки и самсу пекут прямо при гостях. Хорошая остановка для утренней прогулки и лёгкого завтрака.",
+        "en": "A traditional teahouse in the Eternal City with a tandoor bakery next door turning out Samarkand flatbread and samsa in front of you. A good stop for a morning walk and light breakfast."
+      },
+      "address": "Silk Road Samarkand, Boqiy shahar",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "08:00-20:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: Rubaiy",
+          "url": "https://www.silkroad-samarkand.com/restaurants/chaykhana-chay/"
+        },
+        {
+          "title": "Silk Road Samarkand: Bakery: Samarkand bread and samsa",
+          "url": "https://www.silkroad-samarkand.com/restaurants/tandyr/"
+        },
+        {
+          "title": "Silk Road Samarkand: Eternal City",
+          "url": "https://www.silkroad-samarkand.com/resort/eternal-city/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "priceLevel=1 — taxmin, manbada narx yo'q; tekshirilsin yoki null qilinsin. Ikki joy (choyxona+novvoyxona) bitta yozuvga birlashtirildi."
+    },
+    {
+      "id": "sam-sky-bar-hilton",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2024-02",
+      "name": {
+        "uz": "Sky Bar (Hilton Samarkand Regency)",
+        "ru": "Sky Bar (Hilton Samarkand Regency)",
+        "en": "Sky Bar (Hilton Samarkand Regency)"
+      },
+      "tagline": {
+        "uz": "20-qavatdagi tungi lounge va jonli musiqa",
+        "ru": "Ночной лаунж на 20-м этаже с живой музыкой",
+        "en": "20th-floor night lounge with live music"
+      },
+      "description": {
+        "uz": "Silk Road Samarkand'dagi Hilton Samarkand Regency mehmonxonasining 20-qavatidagi bar shahar va eshkak eshish kanaliga panorama ochadi. Kechqurun kokteyllar va jonli musiqa bilan ishlaydi.",
+        "ru": "Бар на 20-м этаже отеля Hilton Samarkand Regency в комплексе Silk Road Samarkand с панорамой на гребной канал. Работает вечером: коктейли и живая музыка.",
+        "en": "A bar on the 20th floor of the Hilton Samarkand Regency in the Silk Road Samarkand resort, overlooking the rowing canal. Open evenings with cocktails and live music."
+      },
+      "address": "Silk Road Samarkand, Hilton Samarkand Regency, 20-qavat",
+      "lat": 39.6599031,
+      "lng": 67.0594547,
+      "coordsSource": "osm",
+      "interests": [
+        "nightlife",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: Sky Bar",
+          "url": "https://www.silkroad-samarkand.com/restaurants/sky-bar/"
+        },
+        {
+          "title": "Spot.uz: Hilton Samarkand Regency",
+          "url": "https://www.spot.uz/ru/2024/02/21/hilton-samarkand/",
+          "date": "2024-02-21"
+        },
+        {
+          "title": "OpenStreetMap way/1083693582",
+          "url": "https://www.openstreetmap.org/way/1083693582"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ish vaqti 17:00-02:00, dushanba va seshanba yopiq (rasmiy sayt) — format bir xil bo'lmagani uchun hours=null. priceLevel=3 taxmin (5* mehmonxona bari), narx manbada yo'q. Koordinata — mehmonxona binosi."
+    },
+    {
+      "id": "sam-silk-and-spice",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": null,
+      "name": {
+        "uz": "Silk & Spice restorani",
+        "ru": "Ресторан Silk & Spice",
+        "en": "Silk & Spice Restaurant & Bar"
+      },
+      "tagline": {
+        "uz": "Zamonaviy talqindagi o'zbek taomlari",
+        "ru": "Современная узбекская кухня",
+        "en": "Contemporary take on Uzbek cuisine"
+      },
+      "description": {
+        "uz": "Lia! by Minyoun Stars of Ulugbek mehmonxonasining birinchi qavatidagi kichik restoran mahalliy mahsulotlardan zamonaviy uslubda o'zbek taomlarini tayyorlaydi. Ichkari zal va terrasa bor.",
+        "ru": "Небольшой ресторан на первом этаже отеля Lia! by Minyoun Stars of Ulugbek готовит узбекские блюда из местных продуктов в современной подаче. Есть зал и терраса.",
+        "en": "A small restaurant on the ground floor of the Lia! by Minyoun Stars of Ulugbek hotel serving Uzbek dishes from local produce with modern plating. Indoor room plus a terrace."
+      },
+      "address": "Silk Road Samarkand, Lia! by Minyoun Stars of Ulugbek",
+      "lat": 39.6572792,
+      "lng": 67.0696996,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand: Silk & Spice — Restaurant & Bar",
+          "url": "https://www.silkroad-samarkand.com/restaurants/silk-spice-restaurant-bar-en/"
+        },
+        {
+          "title": "OpenStreetMap way/1083693564",
+          "url": "https://www.openstreetmap.org/way/1083693564"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ochilgan sanasi noma'lum — 'new' ekanini tekshirish kerak. Ish vaqti: tushlik 11-15, kechki 17-23. Koordinata — mehmonxona binosi."
+    },
+    {
+      "id": "sam-pub-street",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2023-09",
+      "name": {
+        "uz": "Pub Street — tungi ko'cha",
+        "ru": "Pub Street — ночная улица",
+        "en": "Pub Street"
+      },
+      "tagline": {
+        "uz": "Pulsar pivo zavodi yonidagi 400 metrlik bar ko'chasi",
+        "ru": "400-метровая барная улица у пивзавода «Пульсар»",
+        "en": "400 m bar street beside the Pulsar brewery"
+      },
+      "description": {
+        "uz": "1885-yildan pivo tayyorlanadigan joy yonida ochilgan piyodalar ko'chasida 12 ta ovqatlanish va ichimlik maskani bor. Kechqurun sayyohlar va mahalliylar uchun asosiy tungi hayot nuqtalaridan biri.",
+        "ru": "Пешеходная улица у места, где пиво варят с 1885 года, с 12 заведениями еды и напитков. Одна из главных точек ночной жизни города для туристов и местных.",
+        "en": "A pedestrian strip next to a site brewing beer since 1885, with 12 food-and-drink venues. One of the city's main evening hangouts for visitors and locals alike."
+      },
+      "address": "Samarqand, Pulsar pivo zavodi yonida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nightlife",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Gov.uz (Uzbektourism): Samarkand develops night tourism",
+          "url": "https://gov.uz/en/uzbektourism/news/view/216668",
+          "date": "2026-09-09"
+        },
+        {
+          "title": "Daryo: Samarkand unveils 24-hour street of establishments",
+          "url": "https://daryo.uz/en/2023/09/29/uzbekistans-samarkand-unveils-24-hour-street-of-establishments",
+          "date": "2023-09-29"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bu ko'cha (bitta biznes emas). Aniq ko'cha nomi manbalarda yo'q; Afisha Daily bo'yicha pivo barlar Ozod Sharq ko'chasida — tekshirilsin. priceLevel=2 taxmin."
+    },
+    {
+      "id": "sam-osh-markazi-1",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Osh markazi №1",
+        "ru": "Плов-центр «Ош Маркази» №1",
+        "en": "Osh Markazi No.1 Plov Centre"
+      },
+      "tagline": {
+        "uz": "Tushgacha tugab qoladigan oilaviy osh",
+        "ru": "Семейный плов, который раскупают к обеду",
+        "en": "Family plov that sells out by early afternoon"
+      },
+      "description": {
+        "uz": "Ikkinchi avlod oshpazi boshqaradigan osh markazida palov har kuni tush paytida tayyor bo'ladi va tez tugaydi. Mahalliylar orasida mashhur, shuning uchun erta borgan ma'qul.",
+        "ru": "Плов-центр, которым руководит повар во втором поколении: плов готов к полудню и быстро заканчивается. Популярен у местных, поэтому лучше приходить пораньше.",
+        "en": "A plov centre run by a second-generation cook: the rice is ready around noon and goes fast. Popular with locals, so arrive early."
+      },
+      "address": "Ibn Sino ko'chasi, 12",
+      "lat": 39.6815059,
+      "lng": 66.9847533,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap node/9103338617",
+          "url": "https://www.openstreetmap.org/node/9103338617"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Manba 2022-yilgi; hali ishlayotgani tekshirilsin. priceLevel=1 taxmin. Registon ko'chasida ham 'Osh Markazi' nomli boshqa nuqta bor (OSM node 11992054162) — adashtirmaslik kerak."
+    },
+    {
+      "id": "sam-oq-amur",
+      "cityId": "samarkand",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Oq Amur\" baliq restorani",
+        "ru": "Рыбный ресторан «Ок Амур»",
+        "en": "Oq Amur Fish Restaurant"
+      },
+      "tagline": {
+        "uz": "Hovuz bo'yida sazan va karp",
+        "ru": "Сазан и карп у пруда",
+        "en": "Carp and sazan by a pond"
+      },
+      "description": {
+        "uz": "Eski Darg'om kanali va hovuz yonidagi baliq restorani yil bo'yi ishlaydi, bir nechta zali bor. Mahalliylar sazan va karp uchun keladi.",
+        "ru": "Рыбный ресторан у пруда и старого канала Даргом работает круглый год и имеет несколько залов. Местные едут сюда за сазаном и карпом.",
+        "en": "A year-round fish restaurant by a pond and the old Dargom canal, with several dining halls. Locals come for the fried carp and sazan."
+      },
+      "address": "Sobiq avtobozor yaqini, Darg'om kanali bo'yi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        }
+      ],
+      "confidence": "low",
+      "notes": "Faqat bitta (2022) manba. OSMda 'Oq Amur No. 3' (node 11999132578, Usmon Yusupov ko'chasi) bor — tarmoq bo'lishi mumkin, qaysi filial ekanligi aniq emas, shuning uchun koordinata qo'yilmadi."
+    },
+    {
+      "id": "sam-el-merosi-coffee",
+      "cityId": "samarkand",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "El Merosi qahvaxonasi",
+        "ru": "Кофейня El Merosi",
+        "en": "Coffee House El-Merosi"
+      },
+      "tagline": {
+        "uz": "Teatr binosidagi shahar manzarali terrasa",
+        "ru": "Терраса с видом на город при театре костюма",
+        "en": "Terrace café at the historic-costume theatre"
+      },
+      "description": {
+        "uz": "Tarixiy libos teatri \"El Merosi\" qoshidagi qahvaxonada pishiriqlar, tortlar, limonad va maxsus choylar bor. Shahar manzarasi ochiladigan terrasasi bilan ajralib turadi.",
+        "ru": "Кофейня при театре исторического костюма «Эль Мероси» с выпечкой, тортами, лимонадами и авторскими чаями. Выделяется террасой с видом на город.",
+        "en": "A café attached to the El Merosi historical-costume theatre serving pastries, cakes, lemonades and house teas. Its terrace looks out over the city."
+      },
+      "address": "Alisher Navoiy ko'chasi, 27",
+      "lat": 39.6568978,
+      "lng": 66.9563246,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@coffeehouse_elmerosi",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WeProject: 5 coffee shops in Samarkand",
+          "url": "https://www.weproject.media/en/articles/detail/5-coffee-shops-in-samarkand-where-you-can-find-high-quality-coffee-and-excellent-service/",
+          "date": "2024-12-03"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap node/5199353621",
+          "url": "https://www.openstreetmap.org/node/5199353621"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM nuqtasi 'El Merosi' kafe — qahvaxona bilan bir joy ekani tekshirilsin. priceLevel=2 taxmin."
+    },
+    {
+      "id": "sam-xoja-doniyor",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Doniyor maqbarasi",
+        "ru": "Мавзолей Ходжа Даниёр",
+        "en": "Khoja Daniyar (St. Daniel) Mausoleum"
+      },
+      "tagline": {
+        "uz": "Siyob bo'yidagi uzun qabrli ziyoratgoh",
+        "ru": "Святыня с длинным надгробием у речки Сиаб",
+        "en": "Shrine with a very long tomb above the Siab stream"
+      },
+      "description": {
+        "uz": "Afrosiyob tepaligi etagida, Siyob soyi bo'yida joylashgan maqbarada uch dinda hurmat qilinadigan Doniyor payg'ambarga nisbat beriladigan 18 metrcha uzun sag'ana bor. Pastda buloq va sokin bog'.",
+        "ru": "Мавзолей у подножия Афрасиаба над речкой Сиаб с надгробием длиной около 18 м, связанным с пророком Даниилом, почитаемым в трёх религиях. Внизу родник и тихий сад.",
+        "en": "A mausoleum below Afrasiab hill above the Siab stream, housing a roughly 18 m-long tomb linked to the prophet Daniel, revered by three faiths. A spring and quiet garden lie below."
+      },
+      "address": "Obi Rahmat mahallasi, Afrosiyob shimoli-sharqi",
+      "lat": 39.6733989,
+      "lng": 66.994555,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "CNN Travel: Samarkand guide",
+          "url": "https://amp.cnn.com/cnn/travel/samarkand-uzbekistan-guide"
+        },
+        {
+          "title": "OpenStreetMap way/302989825",
+          "url": "https://www.openstreetmap.org/way/302989825"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Sag'ana uzunligi (≈18 m) umumiy ma'lumot asosida — manbadan qayta tekshirilsin. Kirish narxi noma'lum."
+    },
+    {
+      "id": "sam-ishratxona",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Ishratxona maqbarasi",
+        "ru": "Мавзолей Ишратхана",
+        "en": "Ishratkhana Mausoleum"
+      },
+      "tagline": {
+        "uz": "Gumbazi qulagan temuriylar davri maqbarasi",
+        "ru": "Тимуридский мавзолей с обрушенным куполом",
+        "en": "Timurid tomb with a collapsed dome"
+      },
+      "description": {
+        "uz": "XV asrda temuriy malikalar uchun qurilgan maqbara bugun gumbazsiz, yarim vayrona holda turadi, lekin ichki bezak izlari saqlangan. Sayyohlar kam keladigan, kayfiyatli joy.",
+        "ru": "Мавзолей XV века, построенный для женщин тимуридской династии, стоит без купола, полуразрушенным, но со следами росписи внутри. Атмосферное и малолюдное место.",
+        "en": "A 15th-century tomb built for Timurid noblewomen, now domeless and half-ruined but with traces of interior decoration. Atmospheric and rarely crowded."
+      },
+      "address": "Amir Shohmurod ko'chasi (Sadriddin Ayniy ko'chasi yaqini)",
+      "lat": 39.6430707,
+      "lng": 66.9909996,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Ishratkhana Mausoleum",
+          "url": "https://en.wikipedia.org/wiki/Ishratkhana_Mausoleum"
+        },
+        {
+          "title": "Orexca: Ishratkhana Mausoleum",
+          "url": "https://orexca.com/uzbekistan/samarkand/ishratkhana-mausoleum.htm"
+        },
+        {
+          "title": "OpenStreetMap way/189129099",
+          "url": "https://www.openstreetmap.org/way/189129099"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ichkariga kirish ruxsati/restavratsiya holati tekshirilsin."
+    },
+    {
+      "id": "sam-xoja-abdi-darun",
+      "cityId": "samarkand",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Abdi Darun majmuasi",
+        "ru": "Комплекс Ходжа Абди Дарун",
+        "en": "Khoja Abdi Darun Complex"
+      },
+      "tagline": {
+        "uz": "Hovuz va qari daraxtlar orasidagi mahalla ziyoratgohi",
+        "ru": "Квартальная святыня с хаузом и старыми деревьями",
+        "en": "Neighbourhood shrine with a pool and old trees"
+      },
+      "description": {
+        "uz": "XII asrdan ma'lum qozi Abdi qabri atrofida shakllangan majmuada maqbara, masjid, xonaqoh va soyali hovuz bor. Mahalliylar ibodat qiladigan tinch hovli, Ishratxonaning ro'parasida.",
+        "ru": "Ансамбль вокруг могилы судьи Абди, известной с XII века: мавзолей, мечеть, ханака и тенистый хауз. Тихий двор, где молятся местные, напротив Ишратханы.",
+        "en": "An ensemble around the 12th-century grave of judge Abdi: mausoleum, mosque, khanqah and a shaded pool. A quiet courtyard used by locals, opposite Ishratkhana."
+      },
+      "address": "Sadriddin Ayniy ko'chasi, Qo'shchinor mahallasi",
+      "lat": 39.641314,
+      "lng": 66.9918125,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Mausoleum of Khoja Abdi Darunee",
+          "url": "https://www.advantour.com/uzbekistan/samarkand/abdi-darunee.htm"
+        },
+        {
+          "title": "Lonely Planet: Hoja Abdi Darun Mausoleum",
+          "url": "https://www.lonelyplanet.com/points-of-interest/hoja-abdi-darun-mausoleum/443613"
+        },
+        {
+          "title": "OpenStreetMap way/110310502",
+          "url": "https://www.openstreetmap.org/way/110310502"
+        }
+      ],
+      "confidence": "high",
+      "notes": "priceLevel=0 taxmin (faol ziyoratgoh). Kiyinish qoidasiga rioya qilish kerak."
+    },
+    {
+      "id": "sam-xoja-ahror-nodir-devonbegi",
+      "cityId": "samarkand",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Ahror Valiy majmuasi va Nodir Devonbegi madrasasi",
+        "ru": "Комплекс Ходжи Ахрара и медресе Надир Диванбеги",
+        "en": "Khoja Ahrar Complex & Nadir Divan-Begi Madrasa"
+      },
+      "tagline": {
+        "uz": "Shahar janubidagi Registondan kam gavjum ansambl",
+        "ru": "Тихий ансамбль на юге города",
+        "en": "Quiet southern ensemble, far from the crowds"
+      },
+      "description": {
+        "uz": "Naqshbandiya shayxi Xo'ja Ahror qabri atrofidagi masjid va XVII asr Nodir Devonbegi madrasasidan iborat ansambl. Registonga o'xshash peshtoqlarni sayyohlarsiz ko'rish mumkin.",
+        "ru": "Ансамбль у могилы шейха накшбандийского ордена Ходжи Ахрара с мечетью и медресе Надир Диванбеги XVII века. Порталы не хуже Регистана — но без толп.",
+        "en": "An ensemble around the grave of Naqshbandi sheikh Khoja Ahrar, with a mosque and the 17th-century Nadir Divan-Begi madrasa. Grand portals without the Registan crowds."
+      },
+      "address": "Samarqand janubi, Xo'ja Ahrori Valiy (Usmon Samiyev ko'chasi)",
+      "lat": 39.6183556,
+      "lng": 66.9536334,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Khoja Ahrar Complex",
+          "url": "https://en.wikipedia.org/wiki/Khoja_Ahrar_Complex"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/499421063",
+          "url": "https://www.openstreetmap.org/way/499421063"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM obyekti 'Xo'ja Ahror Vali qabrlari' — majmua markazi bilan mosligi xaritada tekshirilsin. priceLevel=0 taxmin."
+    },
+    {
+      "id": "sam-imom-moturidiy",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Imom Moturidiy maqbarasi",
+        "ru": "Мавзолей Имама аль-Матуриди",
+        "en": "Imam al-Maturidi Mausoleum"
+      },
+      "tagline": {
+        "uz": "Chokardiza qabristonidagi buyuk ilohiyotchi maqbarasi",
+        "ru": "Мавзолей великого богослова на кладбище Чокардиза",
+        "en": "Tomb of a great theologian in Chokardiza cemetery"
+      },
+      "description": {
+        "uz": "Moturidiya kalom maktabi asoschisi Abu Mansur al-Moturidiy dafn etilgan joyda qayta qurilgan maqbara va obodonlashtirilgan hudud. Ziyoratchilar ko'p, oddiy sayyohlar kam keladi.",
+        "ru": "Восстановленный мавзолей основателя матуридитской школы Абу Мансура аль-Матуриди на историческом кладбище Чокардиза. Паломников много, туристов мало.",
+        "en": "A rebuilt mausoleum of Abu Mansur al-Maturidi, founder of the Maturidi theological school, in the historic Chokardiza cemetery. Popular with pilgrims, little known to tourists."
+      },
+      "address": "G'ijduvon ko'chasi, Yahudiylar mahallasi yaqini",
+      "lat": 39.654525,
+      "lng": 66.9862415,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Mausoleum of Abu Mansur al-Maturidi",
+          "url": "https://www.orexca.com/uzbekistan/samarkand/mausoleum-of-maturidi.htm"
+        },
+        {
+          "title": "Advantour: Mausoleum of Imam al-Moturidi",
+          "url": "https://advantour.com/uzbekistan/samarkand/al-moturidi.htm"
+        },
+        {
+          "title": "OpenStreetMap way/411621247",
+          "url": "https://www.openstreetmap.org/way/411621247"
+        }
+      ],
+      "confidence": "high",
+      "notes": "2026-yilda majmuada qayta qurish ishlari boshlangani xabar qilingan — vaqtincha yopiq bo'lishi mumkin."
+    },
+    {
+      "id": "sam-oqsaroy",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Oqsaroy maqbarasi",
+        "ru": "Мавзолей Аксарай",
+        "en": "Ak-Saray Mausoleum"
+      },
+      "tagline": {
+        "uz": "Go'ri Amir ortidagi yashirin temuriylar maqbarasi",
+        "ru": "Скрытый тимуридский мавзолей за Гур-Эмиром",
+        "en": "Hidden Timurid tomb behind Gur-e-Amir"
+      },
+      "description": {
+        "uz": "Go'ri Amirdan bir necha yuz metr janubda joylashgan kichik temuriylar maqbarasi. Ichki devorlaridagi zarhal naqshlari bilan qiziq, lekin juda kam odam biladi.",
+        "ru": "Небольшой тимуридский мавзолей в нескольких сотнях метров к югу от Гур-Эмира. Интересен остатками золочёной росписи внутри, но о нём мало кто знает.",
+        "en": "A small Timurid mausoleum a few hundred metres south of Gur-e-Amir, notable for remnants of gilded interior painting yet known to few."
+      },
+      "address": "Oqsaroy ko'chasi, Go'ri Amir mahallasi",
+      "lat": 39.6479406,
+      "lng": 66.9699879,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "OpenStreetMap way/615780496",
+          "url": "https://www.openstreetmap.org/way/615780496"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Faqat OSM bilan tasdiqlangan; tavsifdagi zarhal naqsh haqidagi ma'lumot ikkinchi manba bilan tekshirilishi SHART. Ochiq/yopiqligi noma'lum."
+    },
+    {
+      "id": "sam-chopon-ota",
+      "cityId": "samarkand",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Cho'pon ota tepaligi",
+        "ru": "Холм Чупан-ата",
+        "en": "Chupan-Ata Hill"
+      },
+      "tagline": {
+        "uz": "Butun shaharga qaraydigan tepadagi maqbara",
+        "ru": "Мавзолей на холме, видный со всего города",
+        "en": "Hilltop shrine visible from all over the city"
+      },
+      "description": {
+        "uz": "Shahar shimoli-sharqidagi baland tepalikda cho'ponlar homiysi Cho'pon otaga nisbat beriladigan maqbara bor. Tepadan Samarqand va Zarafshon vodiysi keng ko'rinadi; quyosh botishida chiroyli.",
+        "ru": "На высоком холме к северо-востоку от города стоит мавзолей, связанный с покровителем пастухов Чупан-ата. С вершины открывается широкий вид на Самарканд и долину Зеравшана.",
+        "en": "A shrine to Chupan-Ata, patron of shepherds, on a high hill northeast of the city. The summit offers broad views over Samarkand and the Zarafshan valley, best at sunset."
+      },
+      "address": "Samarqand halqa yo'li yaqini, shahar shimoli-sharqi",
+      "lat": 39.6880079,
+      "lng": 67.0330024,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbek-travel: Chupan-Ata Mausoleum",
+          "url": "https://uzbek-travel.com/about-uzbekistan/monuments/chupan-ata-mausoleum/"
+        },
+        {
+          "title": "Yuz.uz: Konigil — Cho'ponota tepaligi etagida",
+          "url": "https://yuz.uz/uz/news/qishloq-emas-ertaknamo-maskan",
+          "date": "2021-12-02"
+        },
+        {
+          "title": "OpenStreetMap way/414071054",
+          "url": "https://www.openstreetmap.org/way/414071054"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Panorama haqida bevosita manba topilmadi (tepalik balandligi va ko'rinishi haqida manbalar bor). Hudud harbiy ob'ekt yaqinida bo'lishi mumkin — kirish tekshirilsin."
+    },
+    {
+      "id": "sam-gumbaz-sinagogasi",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Gumbaz sinagogasi",
+        "ru": "Синагога Гумбаз",
+        "en": "Gumbaz Synagogue"
+      },
+      "tagline": {
+        "uz": "Buxoro yahudiylari mahallasidagi faol sinagoga",
+        "ru": "Действующая синагога в бухарско-еврейском квартале",
+        "en": "Working synagogue in the old Jewish quarter"
+      },
+      "description": {
+        "uz": "XIX asr oxirida qurilgan sinagoga Registon yonidagi eski yahudiylar mahallasida, belgisiz darvoza ortida joylashgan. Mahalla ko'chalari Samarqandning ko'p millatli o'tmishini ko'rsatadi.",
+        "ru": "Синагога конца XIX века в старом еврейском квартале у Регистана скрыта за неприметными воротами. Улочки квартала напоминают о многонациональном прошлом Самарканда.",
+        "en": "A late-19th-century synagogue hidden behind an unmarked gate in the old Jewish quarter near Registan. The surrounding lanes recall Samarkand's multi-ethnic past."
+      },
+      "address": "Denov ko'chasi, Yahudiylar mahallasi",
+      "lat": 39.658427,
+      "lng": 66.9872164,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Samarkand attractions",
+          "url": "https://www.lonelyplanet.com/uzbekistan/central-uzbekistan/samarkand/attractions"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap node/815635514",
+          "url": "https://www.openstreetmap.org/node/815635514"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Tashrif vaqti (shanba kuni yopiq bo'lishi mumkin) tekshirilsin. Lonely Planet 1891-yil deb ko'rsatgan."
+    },
+    {
+      "id": "sam-aleksiy-sobori",
+      "cityId": "samarkand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Avliyo Aleksiy sobori",
+        "ru": "Собор святителя Алексия",
+        "en": "St. Alexius Cathedral"
+      },
+      "tagline": {
+        "uz": "\"Rus Samarqandi\"ning g'isht sobori",
+        "ru": "Кирпичный собор «Русского Самарканда»",
+        "en": "Brick cathedral of 'Russian Samarkand'"
+      },
+      "description": {
+        "uz": "Shaharning XIX asr oxiridagi yevropacha qismida joylashgan pravoslav sobori. Atrofdagi bulvarlar va eski binolar bilan birga tarixiy shaharning boshqa yuzini ko'rsatadi.",
+        "ru": "Православный собор в европейской части города конца XIX века. Вместе с бульварами и старыми особняками вокруг показывает совсем другое лицо Самарканда.",
+        "en": "An Orthodox cathedral in the city's late-19th-century European quarter. With the surrounding boulevards and old mansions, it shows a very different side of Samarkand."
+      },
+      "address": "Bobur Mirzo ko'chasi, 1",
+      "lat": 39.6466966,
+      "lng": 66.9582926,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Tripster: Russkiy Samarkand",
+          "url": "https://experience.tripster.ru/sights/60792-russkij-samarkand/"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/201223897",
+          "url": "https://www.openstreetmap.org/way/201223897"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Qurilish yili manbada aniq ko'rsatilmagan — tavsifda umumiy 'XIX asr oxiri' deyildi, tekshirilsin."
+    },
+    {
+      "id": "sam-behbudiy-uy-muzeyi",
+      "cityId": "samarkand",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": "2021",
+      "name": {
+        "uz": "Mahmudxo'ja Behbudiy uy-muzeyi",
+        "ru": "Дом-музей Махмудходжи Бехбуди",
+        "en": "Mahmudkhoja Behbudi House-Museum"
+      },
+      "tagline": {
+        "uz": "Jadidlar yetakchisining uyi",
+        "ru": "Дом лидера джадидов",
+        "en": "Home of the Jadid reformer"
+      },
+      "description": {
+        "uz": "Ma'rifatparvar Behbudiy va jadidlar harakatiga bag'ishlangan kichik uy-muzey. Uning maqolalari, suratlari va XIX asr oxiri ish xonasi qayta tiklangan.",
+        "ru": "Небольшой дом-музей просветителя Бехбуди и движения джадидов. Здесь его статьи, фотографии и воссозданный рабочий кабинет конца XIX века.",
+        "en": "A small house-museum on the reformer Behbudi and the Jadid movement, with his articles, photos and a recreated late-19th-century study."
+      },
+      "address": "Mirsaid Barak ko'chasi, 47",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": "bolalar 5 000, kattalar 10 000 so'mdan (Afisha.uz, 2025-05)",
+      "hours": "09:00-17:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Muzei Samarkanda 2025",
+          "url": "https://www.afisha.uz/ru/tourism/2025/05/17/museum-samarkand",
+          "date": "2025-05-17"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata OSMda topilmadi."
+    },
+    {
+      "id": "sam-abdurasulov-uy-muzeyi",
+      "cityId": "samarkand",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": "2019-08",
+      "name": {
+        "uz": "Hoji Abdulaziz Abdurasulov uy-muzeyi",
+        "ru": "Дом-музей Ходжи Абдулазиза Абдурасулова",
+        "en": "Hoji Abdulaziz Abdurasulov House-Museum"
+      },
+      "tagline": {
+        "uz": "Maqom ustasining tiklangan uyi",
+        "ru": "Восстановленный дом мастера макома",
+        "en": "Restored home of a maqam master"
+      },
+      "description": {
+        "uz": "XIX–XX asr maqom xonandasi va bastakori yashagan uy to'liq ta'mirlanib, uning cholg'ulari, kitoblari va shaxsiy buyumlari namoyish etiladi. Musiqa ixlosmandlari uchun noyob joy.",
+        "ru": "Полностью отреставрированный дом певца и композитора макома рубежа XIX–XX веков с его инструментами, книгами и личными вещами. Редкое место для любителей музыки.",
+        "en": "The fully restored home of a 19th–20th-century maqam singer and composer, showing his instruments, books and belongings. A rare stop for music lovers."
+      },
+      "address": "Hoji Abdulaziz ko'chasi, 49",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history",
+        "art"
+      ],
+      "priceLevel": 1,
+      "priceNote": "bolalar 5 000, kattalar 10 000 so'mdan (Afisha.uz, 2025-05)",
+      "hours": "09:00-17:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Muzei Samarkanda 2025",
+          "url": "https://www.afisha.uz/ru/tourism/2025/05/17/museum-samarkand",
+          "date": "2025-05-17"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata OSMda topilmadi (Abdurasulov ko'chasi Ko'ksaroy mahallasida)."
+    },
+    {
+      "id": "sam-xalqlar-dostligi-muzeyi",
+      "cityId": "samarkand",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": "2022-09",
+      "name": {
+        "uz": "Xalqlar do'stligi va diniy bag'rikenglik muzeyi",
+        "ru": "Музей дружбы народов и религиозной толерантности",
+        "en": "Museum of Friendship of Peoples & Religious Tolerance"
+      },
+      "tagline": {
+        "uz": "Ko'p millatli Samarqand hikoyasi",
+        "ru": "История многонационального Самарканда",
+        "en": "The story of multi-ethnic Samarkand"
+      },
+      "description": {
+        "uz": "SamDUning sobiq rektorat binosidagi muzeyda turli xalqlarning milliy liboslari va arxiv suratlari bor. Urush yillarida 14 yetimni asrab olgan temirchi oilasi hikoyasi ham shu yerda.",
+        "ru": "Музей в бывшем здании ректората СамГУ с национальными костюмами и архивными фото разных народов. Здесь же история семьи кузнеца, приютившей 14 сирот в годы войны.",
+        "en": "Set in the former SamSU rectorate, the museum displays costumes and archive photos of many peoples, and tells of a blacksmith's family who took in 14 war orphans."
+      },
+      "address": "Shohrux ko'chasi, 96 (sobiq SamDU rektorati)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": "bolalar 5 000, kattalar 10 000 so'mdan (Afisha.uz, 2025-05)",
+      "hours": "09:00-17:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Muzei Samarkanda 2025",
+          "url": "https://www.afisha.uz/ru/tourism/2025/05/17/museum-samarkand",
+          "date": "2025-05-17"
+        },
+        {
+          "title": "Kun.uz: Museums dedicated to friendship of peoples to be opened",
+          "url": "https://kun.uz/en/news/2022/08/24/museums-dedicated-to-friendship-of-peoples-to-be-opened-in-samarkand-city-center",
+          "date": "2022-08-24"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata topilmadi."
+    },
+    {
+      "id": "sam-olkashunoslik-muzeyi",
+      "cityId": "samarkand",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Viloyat o'lkashunoslik muzeyi",
+        "ru": "Областной краеведческий музей",
+        "en": "Samarkand Regional Local Lore Museum"
+      },
+      "tagline": {
+        "uz": "Savdogar saroyidagi tarix va tabiat muzeyi",
+        "ru": "Музей истории и природы в особняке купца",
+        "en": "History and nature museum in a merchant's mansion"
+      },
+      "description": {
+        "uz": "XX asr boshidagi boy savdogar uyida joylashgan muzeyda tarix va tabiat bo'limlari bor. Binoning bezakli zallari eksponatlardan kam qiziq emas.",
+        "ru": "Музей в особняке богатого купца начала XX века с отделами истории и природы. Нарядные залы здания интересны не меньше экспонатов.",
+        "en": "Housed in a wealthy merchant's early-20th-century mansion, with history and nature sections. The ornate halls are as interesting as the exhibits."
+      },
+      "address": "Abdurahmon Jomiy ko'chasi, 51",
+      "lat": 39.6533458,
+      "lng": 66.9541713,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 1,
+      "priceNote": "bolalar 5 000, kattalar 10 000 so'mdan (Afisha.uz, 2025-05)",
+      "hours": "09:00-17:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Muzei Samarkanda 2025",
+          "url": "https://www.afisha.uz/ru/tourism/2025/05/17/museum-samarkand",
+          "date": "2025-05-17"
+        },
+        {
+          "title": "OpenStreetMap node/1260071800",
+          "url": "https://www.openstreetmap.org/node/1260071800"
+        }
+      ],
+      "confidence": "high",
+      "notes": "2022-yilda bino peshtoqida yoriq aniqlangani xabar qilingan (kun.uz) — hozirgi holati tekshirilsin."
+    },
+    {
+      "id": "sam-xovrenko-vino-muzeyi",
+      "cityId": "samarkand",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xovrenko vino zavodi muzeyi",
+        "ru": "Музей винзавода имени Ховренко",
+        "en": "Khovrenko Winery Museum & Tasting Hall"
+      },
+      "tagline": {
+        "uz": "XIX asr podvallari va degustatsiya zali",
+        "ru": "Подвалы XIX века и дегустационный зал",
+        "en": "19th-century cellars and a tasting room"
+      },
+      "description": {
+        "uz": "XIX asrda asos solingan vino zavodida kichik muzey, eski podvallar va mahalliy vinolarni tatib ko'rish zali bor. Samarqand vinochiligi tarixi bilan tanishish uchun.",
+        "ru": "Винзавод, основанный в XIX веке, с небольшим музеем, старыми подвалами и залом для дегустации местных вин. Для знакомства с историей самаркандского виноделия.",
+        "en": "A winery founded in the 19th century with a small museum, old cellars and a hall for tasting local wines — an introduction to Samarkand's winemaking history."
+      },
+      "address": "Mahmud Koshg'ariy ko'chasi, 58",
+      "lat": 39.6536072,
+      "lng": 66.9493359,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/168848643",
+          "url": "https://www.openstreetmap.org/way/168848643"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Degustatsiya narxi/ish vaqti tekshirilsin. Spirtli ichimlik — 18+."
+    },
+    {
+      "id": "sam-aysel-galereyasi",
+      "cityId": "samarkand",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Aysel\" san'at galereyasi",
+        "ru": "Арт-галерея «Айсель»",
+        "en": "Aysel Art Gallery"
+      },
+      "tagline": {
+        "uz": "Samarqandlik rassomlarning xususiy galereyasi",
+        "ru": "Частная галерея самаркандских художников",
+        "en": "Private gallery of Samarkand artists"
+      },
+      "description": {
+        "uz": "Registon yaqinidagi xususiy galereyada mahalliy rassomlarning rangtasvir va zamonaviy asarlari namoyish etiladi. Zamonaviy san'at bo'yicha doimiy kurator — haykaltarosh Normurod Negmatov.",
+        "ru": "Частная галерея у Регистана показывает живопись и современное искусство местных авторов. Постоянный куратор современного искусства — скульптор Нормурод Негматов.",
+        "en": "A private gallery near Registan showing paintings and contemporary work by local artists, with sculptor Normurod Negmatov as resident contemporary-art curator."
+      },
+      "address": "Registon ko'chasi",
+      "lat": 39.6532097,
+      "lng": 66.9766962,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "Arthive: Normurod Negmatov biography",
+          "url": "https://arthive.com/artists/84196~Normurod_Dzhamshedovich_Negmatov/biography"
+        },
+        {
+          "title": "OpenStreetMap node/10892620405",
+          "url": "https://www.openstreetmap.org/node/10892620405"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "priceLevel=0 — kirish bepul deb taxmin; tekshirilsin."
+    },
+    {
+      "id": "sam-hujum-ipak-gilam",
+      "cityId": "samarkand",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Hujum\" ipak gilam ustaxonasi",
+        "ru": "Шёлковая ковровая мастерская «Худжум»",
+        "en": "Hudjum Silk Carpet Workshop"
+      },
+      "tagline": {
+        "uz": "Pilladan tabiiy bo'yoqqacha — qo'lda to'qilgan gilam",
+        "ru": "От кокона до натуральной краски — ручной ковёр",
+        "en": "Hand-knotted silk carpets from cocoon to loom"
+      },
+      "description": {
+        "uz": "Oilaviy korxonada ipak qurti, tabiiy o'simlik bo'yoqlari va to'quv dastgohlarida ayollar gilam to'qishini ko'rish mumkin. Buyurtma asosida o'z naqshingiz bilan gilam ham to'qitsa bo'ladi.",
+        "ru": "Семейное предприятие, где можно увидеть шелкопряда, натуральные растительные краски и работу ковровщиц за станками. Можно заказать ковёр по собственному рисунку.",
+        "en": "A family enterprise where you can watch silkworms, natural plant dyes and women knotting carpets on looms. Custom-design carpets can be commissioned."
+      },
+      "address": "Hujum ko'chasi, 12A (Shohi Zinda va Bibixonim yaqini)",
+      "lat": 39.6601846,
+      "lng": 66.9927636,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "priceLevel": 0,
+      "priceNote": "ekskursiya odatda bepul; gilamlar qimmat",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Silk Carpet Factory Hudjum",
+          "url": "https://www.advantour.com/uzbekistan/samarkand/silk-carpet-factory.htm"
+        },
+        {
+          "title": "Eurasia.travel: Hudjum silk carpet factory",
+          "url": "https://eurasia.travel/uzbekistan/samarkand/hudjum-silk-factory/"
+        },
+        {
+          "title": "OpenStreetMap node/6487459285",
+          "url": "https://www.openstreetmap.org/node/6487459285"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Rasmiy nomi 'Samarkand-Bukhara Silk Carpets'. Bepul ekskursiya haqidagi ma'lumot tekshirilsin."
+    },
+    {
+      "id": "sam-nabiyev-kulolchilik",
+      "cityId": "samarkand",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abduvali Nabiyev bilan loy o'ymakorligi",
+        "ru": "Резьба по глине с Абдували Набиевым",
+        "en": "Clay-carving class with Abduvali Nabiev"
+      },
+      "tagline": {
+        "uz": "Taniqli kulol bilan o'z koshinni o'yib ko'ring",
+        "ru": "Вырежьте свою изразцовую плитку с мастером",
+        "en": "Carve your own tile with a noted ceramist"
+      },
+      "description": {
+        "uz": "Samarqandning taniqli kulollaridan biri kichik guruhlarga o'ymakor sopol koshin yasashni o'rgatadi. Mashg'ulot taxminan bir soat davom etadi va tayyor buyum o'zingizda qoladi.",
+        "ru": "Один из известных керамистов Самарканда учит небольшие группы вырезать узорную глиняную плитку. Занятие длится около часа, готовая работа остаётся у вас.",
+        "en": "One of Samarkand's noted ceramists teaches small groups to carve patterned clay tiles. The session takes about an hour and you keep what you make."
+      },
+      "address": "Silk Road Samarkand orqali bron qilinadi (aniq joy ko'rsatilmagan)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "20 USD/kishi, 3–10 kishi, 40–60 daqiqa (discover.silkroad-samarkand.com)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand Discover: Workshop on clay carving",
+          "url": "https://discover.silkroad-samarkand.com/venues/8d6859cb-ad01-459b-bf19-218838ceef25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ustaxona manzili yo'q — ehtimol Boqiy shaharda; tekshirilsin. Ikkinchi mustaqil manba topilmadi."
+    },
+    {
+      "id": "sam-azimov-terrakota",
+      "cityId": "samarkand",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sharif Azimov bilan terrakota haykalchalar",
+        "ru": "Терракота с мастером Шарифом Азимовым",
+        "en": "Terracotta modelling with Sharif Azimov"
+      },
+      "tagline": {
+        "uz": "54 yillik tajribali usta bilan loydan haykalcha",
+        "ru": "Лепка фигурок с мастером с 54-летним стажем",
+        "en": "Shape a figurine with a 54-year veteran"
+      },
+      "description": {
+        "uz": "Sirlanmagan Samarqand haykalchalari an'anasini davom ettiruvchi usta bilan loydan buyum yasab, bezatasiz. Ustoz Umar Jo'raqulov maktabidan chiqqan.",
+        "ru": "Вы лепите и украшаете фигурку вместе с мастером, продолжающим традицию неглазурованной самаркандской мелкой пластики — ученика Умара Джуракулова.",
+        "en": "Mould and decorate a figure alongside a master of Samarkand's unglazed small-figurine tradition, a pupil of Umar Jurakulov."
+      },
+      "address": "Silk Road Samarkand orqali bron qilinadi (aniq joy ko'rsatilmagan)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "20 USD/kishi, 4–6 kishi, 40–60 daqiqa (discover.silkroad-samarkand.com)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Silk Road Samarkand Discover: clay modelling with Sharif Azimov",
+          "url": "https://discover.silkroad-samarkand.com/venues/0ecd0077-7462-4ebe-9595-5ae0f8adfca4"
+        },
+        {
+          "title": "San'at: Metamorphoses in the Ceramics of Uzbekistan",
+          "url": "https://sanat.orexca.com/2012/2012-3/metamorphoses-in-the-ceramics-of-uzbekistan-individuality-and-tradition/",
+          "date": "2012"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ustaxona manzili noma'lum. Kuydirish usta bilan kelishiladi."
+    },
+    {
+      "id": "sam-konigil-bobomurodov-kulolchilik",
+      "cityId": "samarkand",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bobomurodovlar kulolchilik ustaxonasi (Konigil)",
+        "ru": "Гончарная мастерская Бобомуродовых (Конигил)",
+        "en": "Bobomurodov Family Pottery (Konigil)"
+      },
+      "tagline": {
+        "uz": "Siyob arig'i bo'yidagi oilaviy kulolxona",
+        "ru": "Семейная гончарня у арыка Сиаб",
+        "en": "Family pottery on the Siab canal"
+      },
+      "description": {
+        "uz": "Konigil turistik qishlog'ida oilaviy ustaxona \"Afrosiyob uslubi\"dagi sirlangan va terrakota idishlar hamda ertak qahramonlari haykalchalarini yasaydi. Meros qog'oz ustaxonasiga yaqin, birga ko'rish qulay.",
+        "ru": "Семейная мастерская в туристической деревне Конигил делает глазурованную и терракотовую посуду в «афрасиабском стиле» и фигурки сказочных героев. Рядом с бумажной мастерской «Мерос».",
+        "en": "A family workshop in Konigil tourist village making glazed and terracotta ware in the 'Afrasiab style' plus fairy-tale figurines. Easy to combine with the nearby Meros paper mill."
+      },
+      "address": "Konigil qishlog'i, Siyob arig'i bo'yi (Samarqand tumani)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Yuz.uz: Qishloq emas, ertaknamo maskan",
+          "url": "https://yuz.uz/uz/news/qishloq-emas-ertaknamo-maskan",
+          "date": "2021-12-02"
+        },
+        {
+          "title": "Silk Road International University: students visited a pottery workshop in Konigil",
+          "url": "https://univ-silkroad.uz/en/news/novosti-universiteta/item/1633-our-university-master-s-students-visited-a-pottery-workshop-in-the-tourist-village-of-konigil"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Usta: Mehrojiddin Bobomurodov (ommaviy shaxs sifatida tilga olingan). Koordinata topilmadi (Konigil qishlog'i: 39.6655, 67.0416). Mavjud 'Meros' yozuvi bilan takrorlanmaydi."
+    },
+    {
+      "id": "sam-bogibaland-anjirzor",
+      "cityId": "samarkand",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bog'ibaland anjirzori",
+        "ru": "Инжирные сады Багибаланд",
+        "en": "Bogibaland Fig Gardens"
+      },
+      "tagline": {
+        "uz": "Temuriylar bog'i o'rnidagi qari anjir daraxtlari",
+        "ru": "Старые инжирные деревья на месте тимуридского сада",
+        "en": "Ancient fig trees on a Timurid garden site"
+      },
+      "description": {
+        "uz": "Rivoyatga ko'ra temuriylar davri bog'i o'rnidagi mahallada keng anjirzorlar bor. Iyun va sentabrdagi hosil paytida oilalar mehmonlarni terimga va yangi anjir bilan choyga taklif qiladi.",
+        "ru": "Махалля на месте, по преданию, тимуридского сада окружена обширными инжирниками. В июне и сентябре, в сезон урожая, семьи зовут гостей собирать плоды и пить чай со свежим инжиром.",
+        "en": "A neighbourhood on what tradition says was a Timurid garden, surrounded by extensive fig orchards. In the June and September harvests, families invite visitors to pick fruit and have tea with fresh figs."
+      },
+      "address": "Bog'ibaland mahallasi (aeroport yaqini)",
+      "lat": 39.6830788,
+      "lng": 66.9943133,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "food",
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": "choy, non, murabbo va yangi anjir — 20 000 so'm (Afisha Daily, 2022)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Kursiv: How Rustam-aka's family is developing fig tourism",
+          "url": "https://uz.kursiv.media/en/2025-09-08/how-rustam-akas-family-is-developing-fig-tourism-in-amir-temurs-garden/",
+          "date": "2025-09-08"
+        },
+        {
+          "title": "Eurasia.travel: Bogibaland — Garden of Amir Temur",
+          "url": "https://eurasia.travel/bogibaland-garden-of-amir-temur-in-samarkand/"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/120650743",
+          "url": "https://www.openstreetmap.org/way/120650743"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata — mahalla poligoni markazi. Temur bilan bog'liqligi rivoyat. Narx 2022-yilgi."
+    },
+    {
+      "id": "dah-mahdumi-azam",
+      "cityId": "dahbed",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mahdumi A'zam majmuasi (Dahbed)",
+        "ru": "Комплекс Махдуми Азама (Дахбед)",
+        "en": "Makhdumi Azam Complex (Dahbed)"
+      },
+      "tagline": {
+        "uz": "Naqshbandiya shayxining qishloqdagi ziyoratgohi",
+        "ru": "Сельская святыня накшбандийского шейха",
+        "en": "Village shrine of a Naqshbandi sheikh"
+      },
+      "description": {
+        "uz": "Samarqanddan 12 km shimoldagi Dahbedda XVI asr shayxi Mahdumi A'zam qabri atrofida masjid va xonaqoh bor; yaqinida Yalangto'sh Bahodir dafn etilgan. Shahar shovqinidan uzoq, sokin ziyoratgoh.",
+        "ru": "В Дахбеде, в 12 км к северу от Самарканда, вокруг могилы шейха XVI века Махдуми Азама стоят мечеть и ханака; рядом похоронен Ялангтуш Бахадур. Тихое место паломничества.",
+        "en": "In Dahbed, 12 km north of Samarkand, a mosque and khanqah surround the tomb of 16th-century sheikh Makhdumi Azam; Yalangtush Bahadur is buried nearby. A calm pilgrimage site."
+      },
+      "address": "Dahbed, Amir Temur ko'chasi (Oqdaryo tumani)",
+      "lat": 39.7626305,
+      "lng": 66.9171923,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "Wikipedia: Yalangtoʻsh Bakhodir",
+          "url": "https://en.wikipedia.org/wiki/Yalangto%CA%BBsh_Bakhodir"
+        },
+        {
+          "title": "OpenStreetMap way/659723235",
+          "url": "https://www.openstreetmap.org/way/659723235"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM obyekti umumiy 'Masjid' deb belgilangan, Nominatim uni Mahdumi A'zam so'rovi bilan topdi — moslik xaritada tekshirilsin."
+    },
+    {
+      "id": "urg-urgut-bozori",
+      "cityId": "urgut",
+      "category": "bazaar",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Urgut bozori",
+        "ru": "Ургутский базар",
+        "en": "Urgut Bazaar"
+      },
+      "tagline": {
+        "uz": "Yakshanba kungi so'zana va antikvar bozori",
+        "ru": "Воскресный базар сюзане и старины",
+        "en": "Sunday market for suzani and antiques"
+      },
+      "description": {
+        "uz": "Samarqanddan bir soatcha yo'ldagi tog' etagidagi bozor qo'lda tikilgan so'zana, eski zargarlik va gilamlari bilan mashhur. Eng gavjum va tanlov ko'p kuni — yakshanba, erta tongda borish tavsiya etiladi.",
+        "ru": "Базар у подножия гор, примерно в часе езды от Самарканда, славится ручными сюзане, старинными украшениями и коврами. Самый оживлённый день — воскресенье, приезжать лучше рано утром.",
+        "en": "A foothill market about an hour from Samarkand, famous for hand-stitched suzani, vintage jewellery and carpets. Sunday is the busiest day; arrive at dawn for the best choice."
+      },
+      "address": "Urgut shahri",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "shopping",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": "savdolashish odatiy",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Urgut Bazaar",
+          "url": "https://www.lonelyplanet.com/points-of-interest/urgut-bazaar/1583457"
+        },
+        {
+          "title": "Uzbek-travel: Urgut Bazaar",
+          "url": "https://uzbek-travel.com/about-uzbekistan/monuments/urgut_bazaar/"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        }
+      ],
+      "confidence": "high",
+      "notes": "OSMda bir nechta bozor bor (Urgut dehqon bozori node 4597877991, Urgut yangi bozor way 252886374, Eski bozor node 5183416422) — qaysi biri so'zana bozori ekani aniq emas, shuning uchun koordinata qo'yilmadi. Ish kunlari manbalarda turlicha (yakshanba/chorshanba)."
+    },
+    {
+      "id": "urg-chor-chinor",
+      "cityId": "urgut",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chor Chinor bog'i",
+        "ru": "Сад Чор-Чинор",
+        "en": "Chor Chinor Plane-Tree Grove"
+      },
+      "tagline": {
+        "uz": "Asrlar yoshidagi ulkan chinorlar soyasida",
+        "ru": "В тени многовековых чинар",
+        "en": "In the shade of centuries-old plane trees"
+      },
+      "description": {
+        "uz": "Urgutdagi ziyoratgoh bog'ida yoshi ming yilga yaqin deb aytiladigan ulkan chinorlar, buloq va eski masjid bor. Ba'zi daraxtlar tanasi ichida xona sig'adigan darajada keng.",
+        "ru": "Сад-святыня в Ургуте с огромными чинарами, которым, по преданию, около тысячи лет, родником и старой мечетью. Стволы некоторых деревьев настолько широки, что внутри помещается комната.",
+        "en": "A shrine garden in Urgut with giant plane trees said to be nearly a thousand years old, a spring and an old mosque. Some trunks are wide enough to hold a small room inside."
+      },
+      "address": "Urgut, Alisher Navoiy ko'chasi",
+      "lat": 39.3861151,
+      "lng": 67.240263,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Kun.uz: Ming yillik chinorlari ko'kka bo'y cho'zgan Urgut",
+          "url": "https://kun.uz/news/2022/05/19/foto-ming-yillik-chinorlari-kokka-boy-chozgan-urgut",
+          "date": "2022-05-19"
+        },
+        {
+          "title": "Afisha Daily: insayder gid po Samarkandu",
+          "url": "https://daily.afisha.ru/cities/24244-medrese-v-duple-shelkovaya-bumaga-i-kultovyy-plov-insayderskiy-gid-po-samarkandu/",
+          "date": "2022-09-27"
+        },
+        {
+          "title": "OpenStreetMap way/1044085441",
+          "url": "https://www.openstreetmap.org/way/1044085441"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Daraxtlar yoshi — rivoyat. Kirish narxi noma'lum."
+    },
+    {
+      "id": "urg-gus-sozana",
+      "cityId": "urgut",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "G'us qishlog'ida so'zana tikish",
+        "ru": "Вышивка сюзане в кишлаке Гус",
+        "en": "Suzani embroidery in Gus village"
+      },
+      "tagline": {
+        "uz": "Oilaviy ustaxonada so'zana tikishni o'rganing",
+        "ru": "Научитесь вышивать сюзане в семейной мастерской",
+        "en": "Learn suzani stitching with a village family"
+      },
+      "description": {
+        "uz": "Urgut tumanidagi G'us qishlog'ida so'zanachi ayollar oilasi mehmonlarga an'anaviy kashtachilikni o'rgatadi va uyda tushlik beradi. Odatda Urgut bozori va Chor Chinor bilan birga bir kunlik safar.",
+        "ru": "В кишлаке Гус Ургутского района семья вышивальщиц учит гостей традиционной вышивке и угощает домашним обедом. Обычно совмещается с Ургутским базаром и Чор-Чинором.",
+        "en": "In Gus village, Urgut district, a family of embroiderers teaches visitors traditional suzani stitching and serves a home-cooked lunch. Usually paired with Urgut bazaar and Chor Chinor."
+      },
+      "address": "G'us qishlog'i, Urgut tumani",
+      "lat": 39.3969218,
+      "lng": 67.3113012,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "food"
+      ],
+      "priceLevel": 3,
+      "priceNote": "tur operator orqali 100–290 USD/kishi (guruh hajmiga qarab, uzbek-travel.com)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbek-travel: Suzani class",
+          "url": "https://uzbek-travel.com/tours/traditions/suzani_class/"
+        },
+        {
+          "title": "Uzbek-travel: Urgut Bazaar tour",
+          "url": "https://uzbek-travel.com/tours/traditions/urgut_bazaar/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata — G'us qishlog'i markazi (OSM way 432676473), ustaxona emas. Narx tur paketi (transport bilan) uchun. Mustaqil tashrif imkoni tekshirilsin."
+    },
+    {
+      "id": "urg-omonqoton",
+      "cityId": "urgut",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Omonqo'ton turizm qishlog'i",
+        "ru": "Туристическая деревня Аманкутан",
+        "en": "Omonqo'ton Mountain Village"
+      },
+      "tagline": {
+        "uz": "Tog' soylari, mehmon uylari va noyob lola",
+        "ru": "Горные ручьи, гостевые дома и редкий тюльпан",
+        "en": "Mountain streams, guesthouses and a rare tulip"
+      },
+      "description": {
+        "uz": "Zarafshon tizmasidagi tog' qishlog'i rasman turizm qishlog'i maqomini olgan; bu yerda 50 dan ortiq oilaviy mehmon uyi bor. Faqat shu tog'larda o'sadigan Omonqo'ton lolasi va salqin soylar yozda minglab dam oluvchilarni jalb qiladi.",
+        "ru": "Горный кишлак на Зеравшанском хребте официально получил статус туристической деревни; здесь более 50 семейных гостевых домов. Эндемичный аманкутанский тюльпан и прохладные ручьи летом привлекают тысячи отдыхающих.",
+        "en": "A mountain village on the Zarafshan range with official tourism-village status and 50+ family guesthouses. Its endemic Omonqo'ton tulip and cool streams draw thousands of holidaymakers in summer."
+      },
+      "address": "Omonqo'ton qishlog'i, Urgut tumani (Samarqand–Qarshi yo'li, dovon)",
+      "lat": 39.3133107,
+      "lng": 66.9586398,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Samarkand.uz: Omonqo'ton qishlog'iga turizm qishlog'i maqomi berildi",
+          "url": "https://samarkand.uz/en/press/news/urgut-tumanidagi-omonqoton-qishlogiga-rasman-turizm-qishlogi-maqomi-berildi"
+        },
+        {
+          "title": "OpenStreetMap node/9611622352",
+          "url": "https://www.openstreetmap.org/node/9611622352"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Urgut shahridan uzoq (shahar markazi emas, tuman). Yozda juda gavjum. Lola endemikligi haqida manba — viloyat hokimligi."
+    },
+    {
+      "id": "oqs-hazrati-dovud-gori",
+      "cityId": "oqsoy",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Hazrati Dovud g'ori",
+        "ru": "Пещера Хазрати Довуд",
+        "en": "Hazrat Daud Cave"
+      },
+      "tagline": {
+        "uz": "1300 dan ortiq zinapoyali tog'dagi ziyoratgoh",
+        "ru": "Святыня в горах — более 1300 ступеней",
+        "en": "Mountain shrine up 1,300+ steps"
+      },
+      "description": {
+        "uz": "Oqsoy qishlog'idan tog' cho'qqisiga 1300 dan ortiq zinapoya ko'tariladi, so'ng Dovud payg'ambarga nisbat beriladigan g'orga tushiladi. Yo'l og'ir, lekin tepadan vodiyga keng manzara ochiladi; otda chiqish imkoni ham bor.",
+        "ru": "Из кишлака Аксай к вершине ведут более 1300 ступеней, затем спуск к пещере, связанной с пророком Давидом. Путь тяжёлый, зато сверху — широкий вид на долину; можно подняться верхом.",
+        "en": "From Aksay village 1,300+ steps climb to a summit, then descend to a cave associated with the prophet David. A tough hike rewarded with wide valley views; horseback is an option."
+      },
+      "address": "Oqsoy qishlog'i, Nurobod tumani (Samarqanddan ~40 km janubi-g'arb)",
+      "lat": 39.4928824,
+      "lng": 66.6135643,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbekistan.travel: 1303 steps to the cave of Hazrati Daud",
+          "url": "https://uzbekistan.travel/en/o/1303steps-to-the-cave-of-hazrati-daud"
+        },
+        {
+          "title": "Advantour: Hazrat Daud Cave",
+          "url": "https://www.advantour.com/uzbekistan/samarkand/hazrat-daud-cave.htm"
+        },
+        {
+          "title": "OpenStreetMap node/1897864656",
+          "url": "https://www.openstreetmap.org/node/1897864656"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Zinapoyalar soni manbalarda turlicha. OSMda ikkita 'Hazrati Dovud' nuqtasi bor (1897864656 va 1897948606) — qaysi biri g'or, qaysi biri pastki kirish ekanini tekshirish kerak. Category: viewpoint/monument chegarasida."
+    }
+  ]
+}

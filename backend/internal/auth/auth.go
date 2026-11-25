@@ -18,9 +18,18 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
-type Signer struct{ secret []byte }
+type Signer struct {
+	secret []byte
+	now    func() time.Time
+}
 
-func NewSigner(secret []byte) *Signer { return &Signer{secret: secret} }
+// NewSigner — now: tekshiruvda ishlatiladigan soat (server soati bilan bir xil bo'lsin).
+func NewSigner(secret []byte, now func() time.Time) *Signer {
+	if now == nil {
+		now = time.Now
+	}
+	return &Signer{secret: secret, now: now}
+}
 
 // AdminTokenTTL — admin sessiyasi qisqaroq.
 const AdminTokenTTL = 12 * time.Hour
@@ -46,7 +55,7 @@ func (s *Signer) Issue(userID, role string, now time.Time) (string, time.Time, e
 func (s *Signer) Verify(token string) (*Claims, error) {
 	c := &Claims{}
 	_, err := jwt.ParseWithClaims(token, c, func(*jwt.Token) (any, error) { return s.secret, nil },
-		jwt.WithValidMethods([]string{"HS256"}), jwt.WithIssuer(Issuer), jwt.WithExpirationRequired())
+		jwt.WithValidMethods([]string{"HS256"}), jwt.WithIssuer(Issuer), jwt.WithExpirationRequired(), jwt.WithTimeFunc(s.now))
 	if err != nil {
 		return nil, err
 	}

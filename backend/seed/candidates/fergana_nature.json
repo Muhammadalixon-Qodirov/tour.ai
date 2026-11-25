@@ -1,0 +1,2392 @@
+{
+  "region": "fergana_nature",
+  "cities": [
+    {
+      "id": "kokand",
+      "name": {
+        "uz": "Qo'qon",
+        "ru": "Коканд",
+        "en": "Kokand"
+      },
+      "center": {
+        "lat": 40.5408,
+        "lng": 70.9474
+      }
+    },
+    {
+      "id": "margilan",
+      "name": {
+        "uz": "Marg'ilon",
+        "ru": "Маргилан",
+        "en": "Margilan"
+      },
+      "center": {
+        "lat": 40.4695,
+        "lng": 71.7195
+      }
+    },
+    {
+      "id": "rishtan",
+      "name": {
+        "uz": "Rishton",
+        "ru": "Риштан",
+        "en": "Rishtan"
+      },
+      "center": {
+        "lat": 40.3618,
+        "lng": 71.2789
+      }
+    },
+    {
+      "id": "fergana",
+      "name": {
+        "uz": "Farg'ona",
+        "ru": "Фергана",
+        "en": "Fergana"
+      },
+      "center": {
+        "lat": 40.3765,
+        "lng": 71.7913
+      }
+    },
+    {
+      "id": "andijan",
+      "name": {
+        "uz": "Andijon",
+        "ru": "Андижан",
+        "en": "Andijan"
+      },
+      "center": {
+        "lat": 40.7833,
+        "lng": 72.3507
+      }
+    },
+    {
+      "id": "namangan",
+      "name": {
+        "uz": "Namangan",
+        "ru": "Наманган",
+        "en": "Namangan"
+      },
+      "center": {
+        "lat": 40.9996,
+        "lng": 71.6726
+      }
+    },
+    {
+      "id": "bostanliq",
+      "name": {
+        "uz": "Bo'stonliq (Chimyon–Chorvoq)",
+        "ru": "Бостанлык (Чимган–Чарвак)",
+        "en": "Bostanliq (Chimgan–Charvak)"
+      },
+      "center": {
+        "lat": 41.5629,
+        "lng": 69.7708
+      }
+    },
+    {
+      "id": "parkent",
+      "name": {
+        "uz": "Parkent",
+        "ru": "Паркент",
+        "en": "Parkent"
+      },
+      "center": {
+        "lat": 41.2923,
+        "lng": 69.669
+      }
+    },
+    {
+      "id": "zaamin",
+      "name": {
+        "uz": "Zomin",
+        "ru": "Заамин",
+        "en": "Zaamin"
+      },
+      "center": {
+        "lat": 39.962,
+        "lng": 68.397
+      }
+    },
+    {
+      "id": "nurata",
+      "name": {
+        "uz": "Nurota (Nurota tog'lari)",
+        "ru": "Нурата (горы Нуратау)",
+        "en": "Nurata (Nuratau mountains)"
+      },
+      "center": {
+        "lat": 40.5628,
+        "lng": 65.6904
+      }
+    },
+    {
+      "id": "aydarkul",
+      "name": {
+        "uz": "Aydarko'l",
+        "ru": "Айдаркуль",
+        "en": "Aydarkul Lake"
+      },
+      "center": {
+        "lat": 40.9162,
+        "lng": 66.7997
+      }
+    },
+    {
+      "id": "navoi",
+      "name": {
+        "uz": "Navoiy",
+        "ru": "Навои",
+        "en": "Navoi"
+      },
+      "center": {
+        "lat": 40.1035,
+        "lng": 65.3734
+      }
+    },
+    {
+      "id": "shahrisabz",
+      "name": {
+        "uz": "Shahrisabz",
+        "ru": "Шахрисабз",
+        "en": "Shahrisabz"
+      },
+      "center": {
+        "lat": 39.0526,
+        "lng": 66.8279
+      }
+    },
+    {
+      "id": "langar",
+      "name": {
+        "uz": "Langar (Qamashi)",
+        "ru": "Лангар (Камаши)",
+        "en": "Langar (Qamashi)"
+      },
+      "center": {
+        "lat": 38.6816,
+        "lng": 66.7576
+      }
+    },
+    {
+      "id": "boysun",
+      "name": {
+        "uz": "Boysun",
+        "ru": "Байсун",
+        "en": "Boysun"
+      },
+      "center": {
+        "lat": 38.2041,
+        "lng": 67.2034
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "kok-khudoyar-khan-palace",
+      "cityId": "kokand",
+      "category": "museum",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Xudoyorxon O'rdasi",
+        "ru": "Дворец Худояр-хана",
+        "en": "Khudoyar Khan Palace"
+      },
+      "tagline": {
+        "uz": "Qo'qon xonligining so'nggi saroyi, bugun muzey",
+        "ru": "Последний дворец Кокандского ханства, ныне музей",
+        "en": "The last palace of the Kokand Khanate, now a museum"
+      },
+      "description": {
+        "uz": "XIX asr 70-yillarida qurilgan, ko'plab hovli va xonalardan iborat saroy; rang-barang koshinli peshtoqi bilan mashhur. Ichida o'lkashunoslik muzeyi ishlaydi.",
+        "ru": "Дворец 1870-х годов с несколькими внутренними дворами и множеством комнат, известный пёстрым изразцовым фасадом. Внутри работает краеведческий музей.",
+        "en": "An 1870s palace arranged around several courtyards, known for its colourful tiled facade. It now houses the local history museum."
+      },
+      "address": "Istiqlol ko'chasi 2, Qo'qon",
+      "lat": 40.5386501,
+      "lng": 70.9380493,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Palace of Khudáyár Khán",
+          "url": "https://en.wikipedia.org/wiki/Palace_of_Khud%C3%A1y%C3%A1r_Kh%C3%A1n",
+          "date": null
+        },
+        {
+          "title": "OSM way 174718684",
+          "url": "https://www.openstreetmap.org/way/174718684",
+          "date": null
+        },
+        {
+          "title": "Lonely Planet: Khan's Palace",
+          "url": "https://www.lonelyplanet.com/uzbekistan/kokand/attractions/khan-s-palace/a/poi-sig/1089582/357836",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Qurilish yillari manbalarda farq qiladi (1863–1874 / 1871)."
+    },
+    {
+      "id": "kok-juma-mosque",
+      "cityId": "kokand",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qo'qon Jome masjidi",
+        "ru": "Джума-мечеть Коканда",
+        "en": "Kokand Juma Mosque"
+      },
+      "tagline": {
+        "uz": "98 ta yog'och ustunli uzun ayvon",
+        "ru": "Длинный айван на 98 деревянных колоннах",
+        "en": "A long veranda held up by 98 carved wooden columns"
+      },
+      "description": {
+        "uz": "XIX asr boshida Umarxon davrida qurilgan jome majmuasi; ayvonining bezakli ustunlari va baland minorasi diqqatga sazovor. Hovlida muzey ekspozitsiyasi bor.",
+        "ru": "Пятничная мечеть начала XIX века эпохи Умар-хана: длинный айван с расписными колоннами и высокий минарет. Во дворе работает музейная экспозиция.",
+        "en": "An early-19th-century Friday mosque from Umar Khan's era, with a long painted-column veranda and a tall minaret. Part of the complex works as a museum."
+      },
+      "address": "Amir Umarxon ko'chasi 3, Qo'qon",
+      "lat": 40.5328116,
+      "lng": 70.9492294,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Kokand Jami Mosque",
+          "url": "https://en.wikipedia.org/wiki/Kokand_Jami_Mosque",
+          "date": null
+        },
+        {
+          "title": "Orexca: Jami Mosque, Kokand",
+          "url": "https://www.orexca.com/uzbekistan/kokand/jomi_mosque.htm",
+          "date": null
+        },
+        {
+          "title": "OSM way 174718685",
+          "url": "https://www.openstreetmap.org/way/174718685",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "OSM obyekti 'Jome madrasasi' deb atalgan (majmua); qurilish sanasi manbalarda 1812–1822 oralig'ida turlicha."
+    },
+    {
+      "id": "kok-dakhmai-shakhon",
+      "cityId": "kokand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Dahmai Shohon",
+        "ru": "Дахмаи Шахон",
+        "en": "Dakhma-i Shakhon"
+      },
+      "tagline": {
+        "uz": "Qo'qon xonlari oilaviy maqbarasi",
+        "ru": "Семейный некрополь кокандских ханов",
+        "en": "Family necropolis of the Kokand khans"
+      },
+      "description": {
+        "uz": "Umarxon va uning yaqinlari dafn etilgan XIX asr maqbarasi; o'ymakor yog'och eshik va ayvoni bilan ajralib turadi. Shoira Nodirabegim qabri ham shu yerda.",
+        "ru": "Некрополь XIX века, где похоронены Умар-хан и его родня; славится резными дверями и айваном. Рядом — могила поэтессы Нодиры.",
+        "en": "A 19th-century royal burial site of Umar Khan and his family, noted for its carved wooden doors and porch. The poet Nodira's grave lies beside it."
+      },
+      "address": "Qo'qon eski shahar qismi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Dahma-Shakhon",
+          "url": "https://www.orexca.com/uzbekistan/kokand/dahma_shahon_burial-vault.htm",
+          "date": null
+        },
+        {
+          "title": "Lonely Planet: Dakhma-i-Shokhon",
+          "url": "https://www.lonelyplanet.com/uzbekistan/fergana-valley/kokand/attractions/dakhma-i-shokhon/a/poi-sig/1383900/357836",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata OSM/Nominatimda topilmadi — xaritadan tekshirish kerak. Sana 1825 yoki 1830-yillar."
+    },
+    {
+      "id": "kok-modari-khan-mausoleum",
+      "cityId": "kokand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Modarixon maqbarasi",
+        "ru": "Мавзолей Модари-хан",
+        "en": "Modari Khan Mausoleum"
+      },
+      "tagline": {
+        "uz": "Xon onasi uchun qurilgan feruza gumbazli maqbara",
+        "ru": "Мавзолей с бирюзовым куполом для матери хана",
+        "en": "Turquoise-domed tomb built for the khan's mother"
+      },
+      "description": {
+        "uz": "Umarxonning onasi uchun barpo etilgan, keyinchalik xon oilasi ayollari dafn qilingan maqbara. Qadimiy rangli koshinlari asl holicha saqlangan.",
+        "ru": "Гробница, возведённая для матери Умар-хана и ставшая усыпальницей женщин ханского рода. Сохранила необычную многоцветную облицовку.",
+        "en": "A tomb raised for Umar Khan's mother that later became the burial place for women of the khan's family, with unusual multicoloured tilework."
+      },
+      "address": "Jambul ko'chasi, Qo'qon",
+      "lat": 40.5385325,
+      "lng": 70.9534019,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Monuments of Kokand",
+          "url": "https://www.orexca.com/uzbekistan/kokand/monuments_kokand.htm",
+          "date": null
+        },
+        {
+          "title": "OSM node 5922167343",
+          "url": "https://www.openstreetmap.org/node/5922167343",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "kok-narbutabey-madrasa",
+      "cityId": "kokand",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Norbo'tabiy madrasasi",
+        "ru": "Медресе Нарбутабий",
+        "en": "Narbutabey Madrasa"
+      },
+      "tagline": {
+        "uz": "XVIII asr oxiridagi sodda, ammo salobatli madrasa",
+        "ru": "Строгое медресе конца XVIII века",
+        "en": "A plain but imposing late-18th-century madrasa"
+      },
+      "description": {
+        "uz": "Norbo'tabiy davrida qurilgan madrasa, sovet yillarida yopilgan va mustaqillikdan keyin qayta ochilgan. Dahmai Shohon yonida joylashgan.",
+        "ru": "Медресе времён правителя Нарбута-бия, закрытое в советское время и вновь открытое после независимости. Стоит рядом с Дахмаи Шахон.",
+        "en": "A madrasa from the reign of Narbuta Bey, closed in Soviet times and reopened after independence; it stands next to Dakhma-i Shakhon."
+      },
+      "address": "Qo'qon eski shahar qismi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Narbutabey Medressa",
+          "url": "https://www.lonelyplanet.com/uzbekistan/attractions/narbutabey-medressa/a/poi-sig/1384146/357826",
+          "date": null
+        },
+        {
+          "title": "Uzbek-travel: Narbutabey Medressa",
+          "url": "https://uzbek-travel.com/about-uzbekistan/monuments/narbutabey-medressa/",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Hozirgi holati (ochiq/yopiq, faol madrasa) manbalarda qarama-qarshi. Koordinata topilmadi."
+    },
+    {
+      "id": "mar-yodgorlik-silk-factory",
+      "cityId": "margilan",
+      "category": "workshop",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Yodgorlik\" ipak fabrikasi",
+        "ru": "Шёлковая фабрика «Ёдгорлик»",
+        "en": "Yodgorlik Silk Factory"
+      },
+      "tagline": {
+        "uz": "Pilladan atlasgacha — qo'l mehnati jarayoni ko'z oldingizda",
+        "ru": "От кокона до атласа — ручной процесс вживую",
+        "en": "Watch silk go from cocoon to hand-woven ikat"
+      },
+      "description": {
+        "uz": "An'anaviy usulda ipak yigirish, bo'yash va to'qish ko'rsatiladigan fabrika-ustaxona. Do'konida atlas va adras matolari sotiladi.",
+        "ru": "Фабрика-мастерская, где показывают традиционную размотку, окраску и ткачество шёлка. В магазине продают атлас и адрас.",
+        "en": "A working mill that shows traditional silk reeling, dyeing and weaving by hand, with a shop selling atlas and adras fabric."
+      },
+      "address": "Imom Zahriddin ko'chasi, Marg'ilon",
+      "lat": 40.4763606,
+      "lng": 71.7178272,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Atlas Obscura: Yodgorlik Silk Factory",
+          "url": "https://atlasobscura.com/places/yodgorlik-silk-factory",
+          "date": null
+        },
+        {
+          "title": "Orexca: Yodgorlik Silk Factory",
+          "url": "https://orexca.com/yodgorlik_factory.shtml",
+          "date": null
+        },
+        {
+          "title": "OSM node 1232186498",
+          "url": "https://www.openstreetmap.org/node/1232186498",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Tashkil topgan yil manbalarda 1972 yoki 1983."
+    },
+    {
+      "id": "mar-kumtepa-bazaar",
+      "cityId": "margilan",
+      "category": "bazaar",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qumtepa bozori",
+        "ru": "Базар Кумтепа",
+        "en": "Kumtepa Bazaar"
+      },
+      "tagline": {
+        "uz": "Payshanba va yakshanba kungi qishloq bozori",
+        "ru": "Сельский базар по четвергам и воскресеньям",
+        "en": "A village market that comes alive on Thursdays and Sundays"
+      },
+      "description": {
+        "uz": "Marg'ilon chetidagi an'anaviy bozor: matolar, atlas, meva-sabzavot va ro'zg'or buyumlari. Asosan haftada ikki kun gavjum bo'ladi.",
+        "ru": "Традиционный базар на окраине Маргилана: ткани, атлас, продукты и бытовые мелочи. Оживлён в основном два дня в неделю.",
+        "en": "A traditional market on Margilan's outskirts selling fabrics, ikat, produce and household goods, busiest on its two weekly market days."
+      },
+      "address": "Burxoniddin Marg'iloniy ko'chasi 64, Marg'ilon",
+      "lat": 40.4551536,
+      "lng": 71.6661578,
+      "coordsSource": "osm",
+      "interests": [
+        "shopping",
+        "food",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Margilan",
+          "url": "https://www.orexca.com/uzbekistan/margilan.htm",
+          "date": null
+        },
+        {
+          "title": "OSM way 253749024",
+          "url": "https://www.openstreetmap.org/way/253749024",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Bozor kunlari (payshanba, yakshanba) joyida tekshirilsin."
+    },
+    {
+      "id": "mar-crafts-center-said-ahmad-khoja",
+      "cityId": "margilan",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sayid Ahmadxo'ja madrasasidagi hunarmandchilik markazi",
+        "ru": "Центр ремёсел в медресе Саид Ахмад-Ходжа",
+        "en": "Crafts Centre at Said Ahmad Khoja Madrasa"
+      },
+      "tagline": {
+        "uz": "Atlas-adras ustalari ishlaydigan XIX asr madrasasi",
+        "ru": "Мастера атласа и адраса в медресе XIX века",
+        "en": "Ikat weavers at work inside a 19th-century madrasa"
+      },
+      "description": {
+        "uz": "Ta'mirlangan madrasa hujralarida to'quvchilar, bo'yoqchilar va boshqa hunarmandlar ishlaydi. Atlas tayyorlashning har bir bosqichini ko'rish mumkin.",
+        "ru": "В кельях отреставрированного медресе работают ткачи, красильщики и другие ремесленники; можно увидеть все этапы изготовления атласа.",
+        "en": "Weavers, dyers and other artisans work in the cells of a restored madrasa, showing each stage of making Margilan ikat."
+      },
+      "address": "Said Ahmadxo'ja Eshon ko'chasi, Marg'ilon",
+      "lat": 40.4718675,
+      "lng": 71.7249571,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "architecture",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Sayid Ahmad Hoja Medressa",
+          "url": "https://www.lonelyplanet.com/uzbekistan/attractions/sayid-ahmad-hoja-medressa/a/poi-sig/1575034/357826",
+          "date": null
+        },
+        {
+          "title": "Eurasia.travel: Fergana Valley's Artisanal Heritage",
+          "url": "https://eurasia.travel/uzbekistan/fergana-valley/artisans/",
+          "date": null
+        },
+        {
+          "title": "OSM way 449151719",
+          "url": "https://www.openstreetmap.org/way/449151719",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "mar-burhoniddin-marginoniy-complex",
+      "cityId": "margilan",
+      "category": "museum",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "Burhoniddin Marg'inoniy majmuasi",
+        "ru": "Комплекс Бурханиддина Маргинани",
+        "en": "Burhanuddin al-Marghinani Complex"
+      },
+      "tagline": {
+        "uz": "Marg'ilondagi yangi ilm-ma'rifat va turizm shaharchasi",
+        "ru": "Новый научно-туристический квартал Маргилана",
+        "en": "Margilan's new heritage, learning and crafts quarter"
+      },
+      "description": {
+        "uz": "2026-yilda birinchi navbati ochilgan katta majmua: muzey, karvonsaroy, hunarmandlar markazi, bozor va \"O'tkan kunlar\" romaniga bag'ishlangan ekspozitsiya bor.",
+        "ru": "Крупный комплекс, первая очередь которого открылась в 2026 году: музей, караван-сарай, центр ремёсел, базар и экспозиция по роману «Минувшие дни».",
+        "en": "A large complex whose first stage opened in 2026, with a local museum, caravanserai, crafts centre, bazaar and an exhibit on the novel 'Bygone Days'."
+      },
+      "address": "Marg'ilon",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history",
+        "craft",
+        "architecture",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Spot.uz: комплекс Бурханиддина Маргинани",
+          "url": "https://www.spot.uz/ru/2026/04/29/marginani-center/",
+          "date": "2026-04-29"
+        },
+        {
+          "title": "Anhor.uz: Marg'ilonda Burhoniddin Marg'inoniy majmuasi ochildi",
+          "url": "https://anhor.uz/uzl/news/margilonda-burhoniddin-marginoniy-majmuasi-ochildi/",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ochilish sanasi 27-mart (2026) deb ko'rsatilgan. Koordinata va ish vaqti topilmadi; aniq manzilni tekshirish kerak."
+    },
+    {
+      "id": "ris-rustam-usmanov-workshop",
+      "cityId": "rishtan",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Rustam Usmonov kulolchilik ustaxonasi",
+        "ru": "Мастерская керамики Рустама Усманова",
+        "en": "Rustam Usmanov Ceramics Workshop"
+      },
+      "tagline": {
+        "uz": "Ishqor sirli moviy Rishton sopoli oilaviy ustaxonada",
+        "ru": "Голубая риштанская керамика на щелочной глазури",
+        "en": "Family studio of blue-glazed Rishtan pottery"
+      },
+      "description": {
+        "uz": "Taniqli usta va uning oilasi uyidagi ustaxonada idishlar charxda yasaladi va qo'lda bezatiladi. Oilaviy kolleksiya va pishirish jarayoni bilan tanishish mumkin.",
+        "ru": "В домашней мастерской известного мастера посуду формуют на круге и расписывают вручную; хранится семейная коллекция лучших работ.",
+        "en": "At a renowned master's home studio, pieces are thrown on the wheel and hand-painted by the family, who also keep a collection of their best work."
+      },
+      "address": "Rishton",
+      "lat": 40.3657819,
+      "lng": 71.2708215,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "art",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Голубая керамика Риштана (мастерская Р. Усманова)",
+          "url": "https://www.orexca.com/rus/uzbekistan/rishtan/rustam_usmanov_workshop.htm",
+          "date": null
+        },
+        {
+          "title": "Advantour: Rustam Usmanov",
+          "url": "https://www.advantour.com/uzbekistan/artisans/usmanov-rustam.htm",
+          "date": null
+        },
+        {
+          "title": "OSM node 5159139802 (Ceramic of Rustam Usmanov)",
+          "url": "https://www.openstreetmap.org/node/5159139802",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Tashrif oldindan kelishiladimi — tekshirish kerak."
+    },
+    {
+      "id": "ris-alisher-nazirov-workshop",
+      "cityId": "rishtan",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Alisher Nazirov ustaxonasi",
+        "ru": "Мастерская Алишера Назирова",
+        "en": "Alisher Nazirov Ceramics Workshop"
+      },
+      "tagline": {
+        "uz": "\"Usto-shogird\" maktabi bor Rishton kulolxonasi",
+        "ru": "Риштанская мастерская со школой «Усто-шогирд»",
+        "en": "A Rishtan studio with its own master-apprentice school"
+      },
+      "description": {
+        "uz": "Xalqaro ko'rgazmalarda qatnashgan usta yoshlarga kulolchilikni o'rgatadi. Ustaxonada ish jarayoni va tayyor buyumlarni ko'rish mumkin.",
+        "ru": "Мастер, участвовавший в международных выставках, обучает молодёжь гончарному делу; в мастерской можно увидеть процесс и готовые изделия.",
+        "en": "A master potter with international exhibitions behind him trains young ceramicists; visitors can watch the work and see finished pieces."
+      },
+      "address": "Rishton",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Мастерская Алишера Назирова",
+          "url": "https://www.orexca.com/rus/uzbekistan/rishtan/alisher_nazirov_workshop.htm",
+          "date": null
+        },
+        {
+          "title": "UzA: Риштанская керамика завоевывает мировые рынки",
+          "url": "https://uza.uz/ru/posts/rishtanskaya-keramika-zavoevyvaet-mirovye-rynki_481446",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Aniq manzil/koordinata topilmadi (OSMda 'Голубая керамика' muzey nuqtasi bor, lekin qaysi ustaga tegishli ekani aniq emas)."
+    },
+    {
+      "id": "fer-al-fargoniy-park",
+      "cityId": "fergana",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Ahmad al-Farg'oniy bog'i",
+        "ru": "Парк Ахмада аль-Фаргани",
+        "en": "Ahmad al-Fergani Park"
+      },
+      "tagline": {
+        "uz": "Farg'ona markazidagi soyali katta bog'",
+        "ru": "Большой тенистый парк в центре Ферганы",
+        "en": "Fergana's big shady central park"
+      },
+      "description": {
+        "uz": "Shahar markazidagi keng bog', IX asr astronomi al-Farg'oniy nomi bilan ataladi va uning haykali o'rnatilgan. Mahalliylar oqshom sayr qiladigan sevimli joy.",
+        "ru": "Просторный центральный парк, названный в честь астронома IX века аль-Фаргани, с его памятником; любимое место вечерних прогулок горожан.",
+        "en": "A large central park named after the 9th-century astronomer al-Fergani, with his statue, and a favourite evening strolling spot for locals."
+      },
+      "address": "Farg'ona shahri markazi",
+      "lat": 40.3881029,
+      "lng": 71.7814305,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: What to See in Fergana",
+          "url": "https://eurasia.travel/uzbekistan/fergana/what-to-see/",
+          "date": null
+        },
+        {
+          "title": "OSM way 84969065",
+          "url": "https://www.openstreetmap.org/way/84969065",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "fer-regional-museum",
+      "cityId": "fergana",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Farg'ona viloyat o'lkashunoslik muzeyi",
+        "ru": "Ферганский областной краеведческий музей",
+        "en": "Fergana Regional Museum of Local Lore"
+      },
+      "tagline": {
+        "uz": "1894-yildan beri vodiy tarixini saqlab kelayotgan muzey",
+        "ru": "Музей истории долины, основанный в 1894 году",
+        "en": "A valley history museum founded in 1894"
+      },
+      "description": {
+        "uz": "Arxeologiya, qo'lyozmalar va etnografiya kolleksiyasiga ega muzey, jumladan Xudoyorxonga tegishli Qur'on nusxasi saqlanadi.",
+        "ru": "Собрание археологии, рукописей и этнографии, в том числе Коран, связанный с Худояр-ханом.",
+        "en": "Holds archaeology, manuscripts and ethnography, including a Quran associated with Khudoyar Khan."
+      },
+      "address": "Vatan Ravnaqi ko'chasi, Farg'ona",
+      "lat": 40.3910728,
+      "lng": 71.783203,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: Fergana Regional Museum",
+          "url": "https://eurasia.travel/uzbekistan/fergana/regional-museum/",
+          "date": null
+        },
+        {
+          "title": "Lonely Planet: Museum of Regional Studies",
+          "url": "https://www.lonelyplanet.com/points-of-interest/museum-of-regional-studies/1383927",
+          "date": null
+        },
+        {
+          "title": "OSM way 163579871",
+          "url": "https://www.openstreetmap.org/way/163579871",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Kolleksiya hajmi manbalarda turlicha; LP sharhi salbiyroq."
+    },
+    {
+      "id": "and-jami-complex",
+      "cityId": "andijan",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Andijon Jome majmuasi",
+        "ru": "Комплекс Джами в Андижане",
+        "en": "Andijan Jami Complex"
+      },
+      "tagline": {
+        "uz": "Vodiydagi eng yirik jome, madrasa va minora",
+        "ru": "Крупнейший пятничный комплекс долины",
+        "en": "Mosque, madrasa and minaret — the valley's largest Friday complex"
+      },
+      "description": {
+        "uz": "XIX asr oxirida qurilgan masjid, madrasa va minoradan iborat majmua; bir qismida adabiyot va san'at muzeyi joylashgan.",
+        "ru": "Ансамбль конца XIX века из мечети, медресе и минарета; в части зданий работает музей литературы и искусства.",
+        "en": "A late-19th-century ensemble of mosque, madrasa and minaret; part of it hosts a museum of literature and art."
+      },
+      "address": "Erkin ko'chasi, Andijon",
+      "lat": 40.7880561,
+      "lng": 72.3450091,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Andijan Jame Mosque Complex",
+          "url": "https://en.wikipedia.org/wiki/Andijan_Jame_Mosque_Complex",
+          "date": null
+        },
+        {
+          "title": "Advantour: Jami Complex, Andijan",
+          "url": "https://www.advantour.com/us/uzbekistan/andijan/djami.htm",
+          "date": null
+        },
+        {
+          "title": "OSM way 452166915",
+          "url": "https://www.openstreetmap.org/way/452166915",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "and-babur-house-museum",
+      "cityId": "andijan",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bobur uy-muzeyi va Bog'ishamol tepaligi",
+        "ru": "Дом-музей Бабура на холме Богишамол",
+        "en": "Babur House Museum on Bogishamol Hill"
+      },
+      "tagline": {
+        "uz": "\"Boburnoma\" muallifi xotirasiga bag'ishlangan muzey",
+        "ru": "Музей памяти автора «Бабур-наме»",
+        "en": "A museum honouring the author of the Baburnama"
+      },
+      "description": {
+        "uz": "Andijon markazidagi tepalikda, Bobur nomidagi bog' ichida joylashgan adabiy muzey; Bobur va boburiylar asarlari to'plami namoyish etiladi.",
+        "ru": "Литературный музей на холме в центре Андижана, в парке имени Бабура: рукописи и издания Бабура и его потомков.",
+        "en": "A literary museum on a hill in central Andijan, set in Babur's park, showing works by Babur and his descendants."
+      },
+      "address": "Bog'ishamol tepaligi, Andijon",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Babur House Museum, Andijan",
+          "url": "https://www.advantour.com/uzbekistan/andijan/babur-museum.htm",
+          "date": null
+        },
+        {
+          "title": "Uzbekistan.travel: Babur Memorial Park and House Museum",
+          "url": "https://uzbekistan.travel/en/o/babur-memorial-park-and-house-museum",
+          "date": null
+        },
+        {
+          "title": "Lonely Planet: Babur Literary Museum",
+          "url": "https://www.lonelyplanet.com/uzbekistan/attractions/babur-literary-museum/a/poi-sig/1384109/357826",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata topilmadi. Andijondan 5 km da yangi 'Boburiylar memoriali' qurilmoqda (gov.uz, 2026-09) — keyin alohida qo'shish mumkin."
+    },
+    {
+      "id": "nam-mullah-kyrgyz-madrasa",
+      "cityId": "namangan",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mulla Qirg'iz madrasasi",
+        "ru": "Медресе Муллы Киргиза",
+        "en": "Mullah Kyrgyz Madrasa"
+      },
+      "tagline": {
+        "uz": "1910-yilgi bezakli peshtoq, bugun muzey",
+        "ru": "Нарядный портал 1910 года, ныне музей",
+        "en": "An ornate 1910 portal, now a museum"
+      },
+      "description": {
+        "uz": "XX asr boshida qurilgan madrasa, g'ishtin naqshli peshtoqi bilan Namanganning ramziy obidalaridan biri. Bir necha bor ta'mirlangan.",
+        "ru": "Медресе начала XX века с узорным кирпичным порталом — одна из визитных карточек Намангана; несколько раз реставрировалось.",
+        "en": "An early-20th-century madrasa whose patterned brick portal is one of Namangan's signature sights; restored several times."
+      },
+      "address": "Chorsu mahallasi, Namangan",
+      "lat": 41.0025607,
+      "lng": 71.6811578,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbekistan.travel: Namangan",
+          "url": "https://uzbekistan.travel/en/i/namangan",
+          "date": null
+        },
+        {
+          "title": "Orexca: Namangan",
+          "url": "https://www.orexca.com/uzbekistan/namangan.htm",
+          "date": null
+        },
+        {
+          "title": "OSM way 452349254",
+          "url": "https://www.openstreetmap.org/way/452349254",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "nam-khoja-amin-mausoleum",
+      "cityId": "namangan",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Amin maqbarasi",
+        "ru": "Мавзолей Ходжа Амина",
+        "en": "Khoja Amin Mausoleum"
+      },
+      "tagline": {
+        "uz": "XVIII asr koshinli gumbazli maqbara",
+        "ru": "Мавзолей XVIII века с изразцовым порталом",
+        "en": "An 18th-century tiled mausoleum in old Namangan"
+      },
+      "description": {
+        "uz": "Eski shahar qismidagi XVIII asr maqbarasi, sirlangan koshinli peshtoqi qisman saqlangan. Afsonaga ko'ra toshkentlik shayx avlodi dafn etilgan.",
+        "ru": "Мавзолей XVIII века в старом городе с частично сохранившейся глазурованной облицовкой; по преданию, здесь похоронен потомок ташкентского шейха.",
+        "en": "An 18th-century mausoleum in the old town with partly surviving glazed tilework; legend says a descendant of a Tashkent sheikh lies here."
+      },
+      "address": "Ko'zagarlik ko'chasi, Chorsu mahallasi, Namangan",
+      "lat": 40.9991282,
+      "lng": 71.6843936,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbekistan.travel: Mausoleum of Khoja Amin",
+          "url": "https://uzbekistan.travel/en/o/mausoleum-of-khoja-amin",
+          "date": null
+        },
+        {
+          "title": "OSM way 624198255",
+          "url": "https://www.openstreetmap.org/way/624198255",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "nam-babur-park",
+      "cityId": "namangan",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bobur bog'i",
+        "ru": "Парк Бабура",
+        "en": "Babur Park"
+      },
+      "tagline": {
+        "uz": "Asriy chinorlar soyasidagi 1884-yilgi bog'",
+        "ru": "Сад 1884 года в тени вековых чинар",
+        "en": "An 1884 garden shaded by ancient plane trees"
+      },
+      "description": {
+        "uz": "Shahar markazidagi eng eski bog'lardan biri, ulkan chinorlari bilan mashhur. Gul shahri Namanganning sokin sayr joyi.",
+        "ru": "Один из старейших парков в центре города, известный огромными чинарами; тихое место для прогулок в «городе цветов».",
+        "en": "One of the oldest parks in the city centre, known for its giant plane trees; a quiet walk in the 'city of flowers'."
+      },
+      "address": "Namangan markazi",
+      "lat": 40.9967872,
+      "lng": 71.6717447,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbekistan.travel: Namangan",
+          "url": "https://uzbekistan.travel/en/i/namangan",
+          "date": null
+        },
+        {
+          "title": "OSM way 399917916 (Bobur bog'i)",
+          "url": "https://www.openstreetmap.org/way/399917916",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda obyekt 'wood' sifatida belgilangan; bog' chegarasini tekshirish kerak."
+    },
+    {
+      "id": "nam-afsonalar-vodiysi",
+      "cityId": "namangan",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Afsonalar vodiysi\" bog'i",
+        "ru": "Парк «Афсоналар водийси»",
+        "en": "Afsonalar Vodiysi (Valley of Legends) Park"
+      },
+      "tagline": {
+        "uz": "Namanganning ulkan dam olish bog'i",
+        "ru": "Огромный парк отдыха Намангана",
+        "en": "Namangan's sprawling leisure park"
+      },
+      "description": {
+        "uz": "Sobiq \"Mashrab\" bog'i o'rnida barpo etilgan 150 gektardan ortiq hudud: attraksionlar, favvoralar va sayr yo'laklari. Oilaviy dam olish uchun mashhur.",
+        "ru": "Парк площадью более 150 га на месте бывшего парка «Машраб»: аттракционы, фонтаны, аллеи — популярен для семейного отдыха.",
+        "en": "A park of over 150 hectares built on the former Mashrab park site, with rides, fountains and promenades popular with families."
+      },
+      "address": "Islom Karimov ko'chasi, Namangan",
+      "lat": 41.00333333,
+      "lng": 71.61694444,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "nature",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Afsonalar Vodiysi Park",
+          "url": "https://en.wikipedia.org/wiki/Afsonalar_Vodiysi_Park",
+          "date": null
+        },
+        {
+          "title": "Uzbekistan.travel: Afsonalar Vodiysi",
+          "url": "https://uzbekistan.travel/en/o/afsonalar-vodiysi-valley-legends",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "2019-yilda attraksionda baxtsiz hodisa bo'lgan (kun.uz); hozirgi holati va ish vaqtini tekshirish kerak."
+    },
+    {
+      "id": "bos-charvak-reservoir",
+      "cityId": "bostanliq",
+      "category": "viewpoint",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Chorvoq suv ombori",
+        "ru": "Чарвакское водохранилище",
+        "en": "Charvak Reservoir"
+      },
+      "tagline": {
+        "uz": "Tog'lar qurshovidagi feruza ko'l",
+        "ru": "Бирюзовое озеро среди гор",
+        "en": "A turquoise lake ringed by mountains"
+      },
+      "description": {
+        "uz": "Toshkentdan taxminan 80–100 km uzoqlikdagi tog' suv ombori; yozda qirg'oqlari dam olish maskanlari va manzarali nuqtalar bilan to'lib ketadi.",
+        "ru": "Горное водохранилище в паре часов от Ташкента; летом его берега заполнены базами отдыха и смотровыми точками.",
+        "en": "A mountain reservoir a couple of hours from Tashkent whose shores fill with resorts and lookout spots every summer."
+      },
+      "address": "Bo'stonliq tumani, Toshkent viloyati",
+      "lat": 41.64,
+      "lng": 70.03,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Lake Charvak",
+          "url": "https://en.wikipedia.org/wiki/Lake_Charvak",
+          "date": null
+        },
+        {
+          "title": "OSM relation 2979229",
+          "url": "https://www.openstreetmap.org/relation/2979229",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bos-big-chimgan",
+      "cityId": "bostanliq",
+      "category": "viewpoint",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Katta Chimyon cho'qqisi",
+        "ru": "Большой Чимган",
+        "en": "Big Chimgan Peak"
+      },
+      "tagline": {
+        "uz": "Toshkentliklarning eng sevimli tog' cho'qqisi",
+        "ru": "Любимая вершина ташкентцев",
+        "en": "Tashkent's favourite mountain to climb"
+      },
+      "description": {
+        "uz": "G'arbiy Tyan-Shandagi taniqli cho'qqi; etagida qishda chang'i, yozda piyoda sayohat yo'llari bor. Cho'qqidan Chorvoq va vodiylar ko'rinadi.",
+        "ru": "Известная вершина Западного Тянь-Шаня: у подножия зимой лыжи, летом пешие тропы; сверху видны Чарвак и долины.",
+        "en": "A well-known Western Tien Shan peak with skiing at its foot in winter and hiking trails in summer, overlooking Charvak and the valleys."
+      },
+      "address": "Chimyon, Bo'stonliq tumani",
+      "lat": 41.494444,
+      "lng": 70.057778,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikidata Q1073123: Chimgan",
+          "url": "https://www.wikidata.org/wiki/Q1073123",
+          "date": null
+        },
+        {
+          "title": "Advantour: Gulkam Canyon, Chimgan Mountains",
+          "url": "https://www.advantour.com/uzbekistan/chimgan/gulkam-canyon.htm",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata Wikidata (cho'qqi nuqtasi)."
+    },
+    {
+      "id": "bos-amirsoy-resort",
+      "cityId": "bostanliq",
+      "category": "park",
+      "novelty": "iconic",
+      "openedAt": "2019-12",
+      "name": {
+        "uz": "Amirsoy tog' kurorti",
+        "ru": "Горный курорт Амирсой",
+        "en": "Amirsoy Mountain Resort"
+      },
+      "tagline": {
+        "uz": "O'zbekistonning eng katta chang'i kurorti",
+        "ru": "Крупнейший горнолыжный курорт страны",
+        "en": "Uzbekistan's largest ski resort"
+      },
+      "description": {
+        "uz": "2019-yil oxirida ochilgan to'rt fasl kurorti: gondola, chang'i yonbag'irlari, yozda esa tog' sayrlari va manzarali kanat yo'li.",
+        "ru": "Всесезонный курорт, открытый в конце 2019 года: гондола и трассы зимой, горные прогулки и канатка летом.",
+        "en": "An all-season resort opened in late 2019, with gondola and ski runs in winter and mountain walks and scenic lifts in summer."
+      },
+      "address": "Amirsoy, Bo'stonliq tumani",
+      "lat": 41.486706,
+      "lng": 69.942341,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Amirsoy Mountain Resort",
+          "url": "https://en.wikipedia.org/wiki/Amirsoy_Mountain_Resort",
+          "date": null
+        },
+        {
+          "title": "Tashkent Times: Express cable car launched to Amirsoy",
+          "url": "https://www.tashkenttimes.uz/national/8072-express-cable-car-launched-to-amirsoy-resort",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bos-beldersoy-resort-spa",
+      "cityId": "bostanliq",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2026-07",
+      "name": {
+        "uz": "Beldersoy Resort & Spa",
+        "ru": "Beldersoy Resort & Spa",
+        "en": "Beldersoy Resort & Spa"
+      },
+      "tagline": {
+        "uz": "Beldersoyda yangilangan xalqaro darajadagi tog' kurorti",
+        "ru": "Обновлённый горный курорт международного уровня",
+        "en": "A rebuilt international-standard mountain resort at Beldersay"
+      },
+      "description": {
+        "uz": "2026-yil yozida ochilgan kurort: mehmonxona, premium kottejlar, kanat yo'llari, 3,5 km chang'i trassasi va yopiq SPA markazi.",
+        "ru": "Курорт, открытый летом 2026 года: отель, премиальные коттеджи, канатные дороги, 3,5-км трасса и крытый SPA-центр.",
+        "en": "Opened in summer 2026 with a hotel, premium cottages, cable cars, a 3.5 km ski run and an indoor spa centre."
+      },
+      "address": "Beldersoy, Bo'stonliq tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Gov.uz (Uzbektourism): Beldersoy Resort and Spa opens",
+          "url": "https://gov.uz/en/uzbektourism/news/view/191207",
+          "date": "2026-07-10"
+        },
+        {
+          "title": "Spot.uz: Бельдерсай",
+          "url": "https://www.spot.uz/ru/2020/08/22/beldersay/",
+          "date": "2020-08-22"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata: OSMda faqat Beldersoy chang'i hududi (41.4896, 69.9756) bor, mehmonxona nuqtasi emas — null qoldirildi."
+    },
+    {
+      "id": "bos-balandda-chimgan",
+      "cityId": "bostanliq",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Balandda Chimgan",
+        "ru": "Balandda Chimgan",
+        "en": "Balandda Chimgan"
+      },
+      "tagline": {
+        "uz": "Chimyon etagidagi A-frame uylar va infinity basseyn",
+        "ru": "A-frame домики и инфинити-бассейн у Чимгана",
+        "en": "A-frame cabins and an infinity pool beneath Chimgan"
+      },
+      "description": {
+        "uz": "Katta va Kichik Chimyon etagidagi butik-majmua: A-frame uylar, isitiladigan basseyn, SPA va tog' manzarali restoran.",
+        "ru": "Бутик-комплекс у подножия Большого и Малого Чимгана: A-frame домики, подогреваемый бассейн, SPA и ресторан с видом на горы.",
+        "en": "A boutique complex at the foot of Big and Small Chimgan with A-frame houses, a heated pool, spa and a restaurant with mountain views."
+      },
+      "address": "Chimyon, Bo'stonliq tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature",
+        "food"
+      ],
+      "priceLevel": 3,
+      "priceNote": "o'rtacha ~340 $ / tun (CMWP tadqiqoti, Spot.uz, 2026-04-23)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: в Balandda Chimgan открылись аквазона и ресторан",
+          "url": "https://www.afisha.uz/ru/gorod/2022/06/24/balandda-chimgan-infinity",
+          "date": "2022-06-24"
+        },
+        {
+          "title": "Spot.uz: рынок глэмпинга в Центральной Азии",
+          "url": "https://www.spot.uz/ru/2026/04/23/glamping/",
+          "date": "2026-04-23"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata topilmadi."
+    },
+    {
+      "id": "bos-chorvoqview-glamping",
+      "cityId": "bostanliq",
+      "category": "ecovillage",
+      "novelty": "new",
+      "openedAt": null,
+      "name": {
+        "uz": "ChorvoqView Glamping",
+        "ru": "Глэмпинг ChorvoqView",
+        "en": "ChorvoqView Glamping"
+      },
+      "tagline": {
+        "uz": "Chorvoq ustidagi panoramali glamping kottejlari",
+        "ru": "Глэмпинг-домики с панорамой Чарвака",
+        "en": "Glamping cabins with panoramic Charvak views"
+      },
+      "description": {
+        "uz": "Chorvoq hududidagi glamping: qorli cho'qqilar va suv omboriga qaragan kichik kottejlar. 2026-yilgi Toshkent glampinglari ro'yxatida tilga olingan.",
+        "ru": "Глэмпинг в районе Чарвака с домиками, смотрящими на заснеженные вершины и водохранилище; упомянут в подборке глэмпингов 2026 года.",
+        "en": "A glamping spot near Charvak with cabins facing snowy peaks and the reservoir, featured in a 2026 roundup of Tashkent-area glamping."
+      },
+      "address": "Chorvoq, Bo'stonliq tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@chorvoqview.uz",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WeProject: 7 стильных глэмпингов, A-Frame и эко-домиков в Ташкенте",
+          "url": "https://www.weproject.media/articles/detail/7-stilnykh-glempingov-a-frame-i-eko-domikov-v-tashkente/",
+          "date": "2026-01-21"
+        }
+      ],
+      "confidence": "low",
+      "notes": "Ochilgan sana noma'lum — 'new' taxminiy. Faqat bitta manba; ikkinchi manba va koordinata kerak. Shu maqolada Skyvillage, Shamuk Homes, Kapsula Resort, Rano Eco Village ham bor (joylashuvi aniq emas)."
+    },
+    {
+      "id": "bos-gulkam-canyon",
+      "cityId": "bostanliq",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Gulkam darasi va sharsharasi",
+        "ru": "Каньон и водопад Гулькам",
+        "en": "Gulkam Canyon & Waterfall"
+      },
+      "tagline": {
+        "uz": "Quyosh faqat tushda tushadigan tor tog' darasi",
+        "ru": "Узкий каньон, куда солнце заглядывает лишь в полдень",
+        "en": "A narrow gorge where sunlight reaches only at noon"
+      },
+      "description": {
+        "uz": "Katta Chimyon tizmasidagi tik devorli dara, ichida taxminan 10 metrli sharshara bor. Yo'l qiyin joylari bilan — tajribali sayohatchilar uchun.",
+        "ru": "Ущелье с отвесными стенами в массиве Большого Чимгана с ~10-метровым водопадом; маршрут местами сложный.",
+        "en": "A steep-walled gorge in the Big Chimgan massif with a roughly 10 m waterfall; parts of the trail are tricky."
+      },
+      "address": "Gulkam, Bo'stonliq tumani",
+      "lat": 41.5387741,
+      "lng": 70.0625019,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Gulkam Canyon, Chimgan Mountains",
+          "url": "https://www.advantour.com/uzbekistan/chimgan/gulkam-canyon.htm",
+          "date": null
+        },
+        {
+          "title": "Eurasia.travel: Gulkam canyon",
+          "url": "https://eurasia.travel/uzbekistan/tashkent/gulkam-canyon/",
+          "date": null
+        },
+        {
+          "title": "OSM node 2602017101 (waterfall)",
+          "url": "https://www.openstreetmap.org/node/2602017101",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Mavsum: may o'rtasi – sentyabr. Xavfsizlik bo'yicha ogohlantirish kerak."
+    },
+    {
+      "id": "bos-paltau-waterfall",
+      "cityId": "bostanliq",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Paltau sharsharasi",
+        "ru": "Водопад Пальтау",
+        "en": "Paltau Waterfall"
+      },
+      "tagline": {
+        "uz": "Obirahmat g'oridan yuriladigan 38 metrli sharshara",
+        "ru": "38-метровый водопад за гротом Обирахмат",
+        "en": "A 38 m waterfall reached past Obirakhmat grotto"
+      },
+      "description": {
+        "uz": "Paltau soyidagi baland sharsharaga Obirahmat g'oridan piyoda boriladi; tepasidagi qayinzor piknik uchun qulay. Yaxshi jismoniy tayyorgarlik talab qilinadi.",
+        "ru": "Высокий водопад на реке Пальтау, к которому идут пешком от грота Обирахмат; над ним — берёзовая роща для пикника.",
+        "en": "A tall waterfall on the Paltau river reached on foot from Obirakhmat grotto, with a birch grove above it for picnics."
+      },
+      "address": "Paltau, Bo'stonliq tumani",
+      "lat": 41.5818819,
+      "lng": 70.1688326,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Central Asia Adventures: Paltau",
+          "url": "https://centralasia-adventures.com/en/sights/uzbekistan/paltau.html",
+          "date": null
+        },
+        {
+          "title": "Advantour: Obi-Rakhmat Grotto and Paltau Waterfall",
+          "url": "https://www.advantour.com/uzbekistan/tours/obi-rakhmat-paltau.htm",
+          "date": null
+        },
+        {
+          "title": "OSM node 4424670694 (waterfall)",
+          "url": "https://www.openstreetmap.org/node/4424670694",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Mavsum: may o'rtasi – oktyabr boshi."
+    },
+    {
+      "id": "park-oltin-bel",
+      "cityId": "parkent",
+      "category": "ecovillage",
+      "novelty": "new",
+      "openedAt": "2025-07",
+      "name": {
+        "uz": "\"Oltin Bel\" dam olish maskani",
+        "ru": "Курорт «Олтин Бел»",
+        "en": "Oltin Bel Mountain Retreat"
+      },
+      "tagline": {
+        "uz": "Parkent tog'laridagi kapsula uylar va mehmonxona",
+        "ru": "Капсульные домики и отели в горах Паркента",
+        "en": "Capsule cabins and hotels high above Parkent"
+      },
+      "description": {
+        "uz": "Parkent tumanidagi Oltin Bel cho'qqisi yonbag'rida ochilgan maskan: ikki mehmonxona, kapsula uylar va restoran.",
+        "ru": "Курортная зона на склоне вершины Олтин Бел в Паркентском районе: два отеля, капсульные домики и ресторан.",
+        "en": "A retreat on the slopes of Oltin Bel peak in Parkent district with two hotels, capsule cabins and a restaurant."
+      },
+      "address": "Oltin Bel, Parkent tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Zamin.uz: A new Oltin Bel resort in Parkent",
+          "url": "https://zamin.uz/en/uzbekiston/153877-parkentda-yangi-oltin-bel-kurorti-turizmda-yangi-davr-boshlanmoqda.html",
+          "date": "2025-07-05"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bitta manba (xorijiy nashrga tayanadi). Koordinata va rasmiy akkaunt topilmadi."
+    },
+    {
+      "id": "zaa-zaamin-national-park",
+      "cityId": "zaamin",
+      "category": "park",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Zomin milliy tabiat bog'i",
+        "ru": "Национальный парк Заамин",
+        "en": "Zaamin National Park"
+      },
+      "tagline": {
+        "uz": "Archazorlar va toza havo — Turkiston tizmasida",
+        "ru": "Арчовые леса и чистый воздух Туркестанского хребта",
+        "en": "Juniper forests and clean air in the Turkestan range"
+      },
+      "description": {
+        "uz": "Turkiston tizmasidagi qo'riqlanadigan hudud: archazorlar, tog' soylari va sanatoriylar. Yozgi salqin uchun mashhur.",
+        "ru": "Охраняемая территория на Туркестанском хребте: арчовые леса, горные речки и санатории; популярна летом ради прохлады.",
+        "en": "A protected area in the Turkestan range with juniper forests, mountain streams and sanatoriums, popular for summer cool."
+      },
+      "address": "Zomin tumani, Jizzax viloyati",
+      "lat": 39.613,
+      "lng": 68.501,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Zaamin National Park",
+          "url": "https://en.wikipedia.org/wiki/Zaamin_National_Park",
+          "date": null
+        },
+        {
+          "title": "OSM relation 8792200",
+          "url": "https://www.openstreetmap.org/relation/8792200",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "zaa-zomin-suspension-bridge",
+      "cityId": "zaamin",
+      "category": "viewpoint",
+      "novelty": "new",
+      "openedAt": "2023-12",
+      "name": {
+        "uz": "Zomin osma ko'prigi va kanat yo'li",
+        "ru": "Подвесной мост и канатная дорога Заамина",
+        "en": "Zaamin Suspension Bridge & Cable Car"
+      },
+      "tagline": {
+        "uz": "150 metr balandlikdagi 305 metrlik piyodalar ko'prigi",
+        "ru": "Пешеходный мост длиной 305 м на высоте 150 м",
+        "en": "A 305 m footbridge hanging 150 m above the gorge"
+      },
+      "description": {
+        "uz": "Zomin turistik zonasida ochilgan osma ko'prik va kanat yo'li; dara ustidan tog' manzarasini ko'rish uchun yangi nuqta.",
+        "ru": "Подвесной мост и канатная дорога в туристической зоне Заамина — новая точка для видов на горы над ущельем.",
+        "en": "A suspension footbridge and cable car in the Zaamin tourist zone, giving new views over the gorge and mountains."
+      },
+      "address": "Zomin turistik-rekreatsion zonasi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Zominda osma ko'prik ochildi",
+          "url": "https://www.afisha.uz/uz/gorod/2023/12/28/zomin",
+          "date": "2023-12-28"
+        },
+        {
+          "title": "Yuz.uz: в зоне Зомин сдана канатная дорога",
+          "url": "https://yuz.uz/ru/news/v-turistsko-rekreatsionnoy-zone-zomin-sdana-v-ekspluatatsiyu-kanatnaya-doroga-",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "2023-dekabrda ochilgan — 'new' chegarasida. Koordinata topilmadi."
+    },
+    {
+      "id": "nur-sentob-village",
+      "cityId": "nurata",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sentob qishlog'i (mehmon uylari)",
+        "ru": "Кишлак Сентоб (гостевые дома)",
+        "en": "Sentob Village Homestays"
+      },
+      "tagline": {
+        "uz": "Nurota tog'laridagi oilaviy mehmon uylari",
+        "ru": "Семейные гостевые дома в горах Нуратау",
+        "en": "Family guesthouses in the Nuratau mountains"
+      },
+      "description": {
+        "uz": "Tog' etagidagi qadimiy qishloq: buloqlar, yong'oqzorlar va bir nechta oilaviy mehmon uyi. Aydarko'lga safar bilan birga borish qulay.",
+        "ru": "Старинный горный кишлак с родниками, ореховыми садами и несколькими семейными гостевыми домами; удобно сочетать с поездкой на Айдаркуль.",
+        "en": "An old foothill village with springs, walnut groves and several family guesthouses, easy to combine with a trip to Aydarkul."
+      },
+      "address": "Sentob, Nurota tumani, Navoiy viloyati",
+      "lat": 40.6062358,
+      "lng": 66.6718859,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "food",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Сентоб — сельский тур",
+          "url": "https://www.advantour.com/rus/uzbekistan/nurata/sentob-village.htm",
+          "date": null
+        },
+        {
+          "title": "Gov.uz (Navoiy): Туристическая деревня «Сентоб» глазами СМИ",
+          "url": "https://gov.uz/ru/navoi/news/view/88419",
+          "date": "2025-09"
+        },
+        {
+          "title": "OSM node 2299322928",
+          "url": "https://www.openstreetmap.org/node/2299322928",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "nur-asraf-yahshigul-guesthouse",
+      "cityId": "nurata",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Asrof qishlog'i — \"Yaxshigul\" mehmon uyi",
+        "ru": "Асраф — гостевой дом «Яхшигуль»",
+        "en": "Asraf Village — Yahshigul Guesthouse"
+      },
+      "tagline": {
+        "uz": "Nurota tog'idagi qishloqda oilaviy mehmondorchilik",
+        "ru": "Деревенское гостеприимство на склонах Нуратау",
+        "en": "Village hospitality on the Nuratau slopes"
+      },
+      "description": {
+        "uz": "Asrof qishlog'idagi oilaviy mehmon uyi 2010-yildan sayyohlarni qabul qiladi; atrofda bog'lar va tog' yo'laklari bor.",
+        "ru": "Семейный гостевой дом в кишлаке Асраф, принимающий туристов с 2010 года; вокруг сады и горные тропы.",
+        "en": "A family guesthouse in Asraf village hosting travellers since 2010, surrounded by orchards and mountain paths."
+      },
+      "address": "Asrof/Porasht, Forish tumani, Jizzax viloyati",
+      "lat": 40.553543,
+      "lng": 66.842181,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Поселок Асраф",
+          "url": "https://www.advantour.com/rus/uzbekistan/nurata/asraf.htm",
+          "date": null
+        },
+        {
+          "title": "Advantour: Гостевой дом Яхшигуль",
+          "url": "https://www.advantour.com/rus/uzbekistan/hotels/nurata/yahshigul.htm",
+          "date": null
+        },
+        {
+          "title": "OSM way 436219336",
+          "url": "https://www.openstreetmap.org/way/436219336",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Manba eski bo'lishi mumkin — hozir ishlayotganini tekshirish kerak. Ma'muriy jihatdan Jizzax viloyati, Forish tumani."
+    },
+    {
+      "id": "nur-chashma-complex",
+      "cityId": "nurata",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chashma majmuasi va Nur qal'asi",
+        "ru": "Комплекс Чашма и крепость Нур",
+        "en": "Chashma Complex & Nur Fortress"
+      },
+      "tagline": {
+        "uz": "Muqaddas buloq, baliqlar va Iskandar qal'asi xarobalari",
+        "ru": "Святой источник, рыбы и руины крепости Александра",
+        "en": "A holy spring, sacred fish and Alexander's fortress ruins"
+      },
+      "description": {
+        "uz": "Nurotadagi ziyoratgoh: buloq, jome masjidi va hammom; yonidagi tepalikda Iskandar Zulqarnayn davriga bog'lanadigan qal'a qoldiqlari bor.",
+        "ru": "Святыня Нураты: источник с рыбой, пятничная мечеть и баня; на холме рядом — руины крепости, связываемой с Александром Македонским.",
+        "en": "Nurata's pilgrimage site with a fish-filled spring, Friday mosque and bathhouse, beside a hill with fortress ruins linked to Alexander the Great."
+      },
+      "address": "Nurota shahri",
+      "lat": 40.5557188,
+      "lng": 65.680883,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: The Chashma Complex, Nurata",
+          "url": "https://www.advantour.com/uzbekistan/nurata/chashma-complex.htm",
+          "date": null
+        },
+        {
+          "title": "Uzbekistan.travel: Chashma complex",
+          "url": "https://uzbekistan.travel/en/o/chashma-complex",
+          "date": null
+        },
+        {
+          "title": "Eurasia.travel: Nur fortress",
+          "url": "https://eurasia.travel/uzbekistan/nurata/nur-fortress/",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata OSMdagi 'Чашма' soyi (way 383055811) markazidan — majmua nuqtasi emas, bir necha yuz metr farq bo'lishi mumkin; tekshirish kerak."
+    },
+    {
+      "id": "nur-sarmishsay-petroglyphs",
+      "cityId": "navoi",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sarmishsoy petroglif darasi",
+        "ru": "Петроглифы Сармишсая",
+        "en": "Sarmishsay Petroglyphs"
+      },
+      "tagline": {
+        "uz": "Qoyalarga chizilgan minglab qadimiy tasvirlar",
+        "ru": "Тысячи древних рисунков на скалах",
+        "en": "Thousands of ancient rock carvings in a desert gorge"
+      },
+      "description": {
+        "uz": "Qoratog' yonbag'ridagi dara, toshlarda turli davrlarga oid minglab petrogliflar saqlangan; UNESCO dastlabki ro'yxatida.",
+        "ru": "Ущелье на склонах Каратау с тысячами петроглифов разных эпох; объект предварительного списка ЮНЕСКО.",
+        "en": "A gorge on the Karatau slopes holding thousands of petroglyphs from many eras, on UNESCO's Tentative List."
+      },
+      "address": "Navbahor tumani, Navoiy viloyati",
+      "lat": 40.3075584,
+      "lng": 65.6199598,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Sarmishsay",
+          "url": "https://en.wikipedia.org/wiki/Sarmishsay",
+          "date": null
+        },
+        {
+          "title": "Uzbekistan.travel: Sarmyshsay gorge",
+          "url": "https://uzbekistan.travel/en/o/sarmyshsay-gorge",
+          "date": null
+        },
+        {
+          "title": "OSM way 192145581",
+          "url": "https://www.openstreetmap.org/way/192145581",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Rasmiy saytda 9:00–18:00, du–ju deyilgan (har kuni emas) — hours null qoldirildi. Suv va quyoshdan himoya kerak."
+    },
+    {
+      "id": "nur-aydar-yurt-camp",
+      "cityId": "aydarkul",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "\"Aydar\" o'tov lageri",
+        "ru": "Юртовый лагерь «Айдар»",
+        "en": "Aydar Yurt Camp"
+      },
+      "tagline": {
+        "uz": "Qizilqumda o'tovda tunash, ko'lga yaqin",
+        "ru": "Ночь в юрте в Кызылкуме, недалеко от озера",
+        "en": "A night in a yurt in the Kyzylkum, near the lake"
+      },
+      "description": {
+        "uz": "Aydarko'lga yaqin cho'ldagi o'tov lageri: tuya sayri, gulxan atrofida kechki ovqat va yulduzli osmon.",
+        "ru": "Юртовый лагерь в пустыне неподалёку от Айдаркуля: прогулки на верблюдах, ужин у костра и звёздное небо.",
+        "en": "A desert yurt camp near Aydarkul offering camel rides, campfire dinners and starry skies."
+      },
+      "address": "Tomdi tumani, Navoiy viloyati",
+      "lat": 41.0845754,
+      "lng": 65.9625132,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Trip.com: Aydar yurt camp",
+          "url": "https://ca.trip.com/hotels/jizzakh-district-hotel-detail-18077183/aydar",
+          "date": null
+        },
+        {
+          "title": "Uzbek-travel: Aidarkul lake yurt camps",
+          "url": "https://www.uzbek-travel.com/about-uzbekistan/monuments/aidarkul-lake-yurt-camps/",
+          "date": null
+        },
+        {
+          "title": "OSM way 671214233",
+          "url": "https://www.openstreetmap.org/way/671214233",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Advantourda 'Safari Yurt Camp' ham bor (OSMda 'Golden Safari Yurt Camp' 41.0686, 65.9573) — alohida qo'shish mumkin."
+    },
+    {
+      "id": "nur-sayyod-yurt-camp",
+      "cityId": "aydarkul",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sayyod o'tov lageri",
+        "ru": "Юртовый лагерь «Сайёд»",
+        "en": "Sayyod Yurt Camp"
+      },
+      "tagline": {
+        "uz": "Mahalliy sayohatchilar uchun an'anaviy o'tov lageri",
+        "ru": "Традиционный юртовый лагерь для местных туристов",
+        "en": "A traditional yurt camp aimed at domestic travellers"
+      },
+      "description": {
+        "uz": "Jizzax viloyatidagi an'anaviy o'tov lageri, glamping bozori tadqiqotida ommabop segment vakili sifatida tilga olingan.",
+        "ru": "Традиционный юртовый лагерь в Джизакской области, упомянутый в исследовании рынка глэмпинга как представитель массового сегмента.",
+        "en": "A traditional yurt camp in Jizzakh region, cited in a glamping market study as an example of the mass-market segment."
+      },
+      "address": "Jizzax viloyati (Aydarko'l hududi)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@yurtcamp.uz",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Spot.uz: рынок глэмпинга в Центральной Азии",
+          "url": "https://www.spot.uz/ru/2026/04/23/glamping/",
+          "date": "2026-04-23"
+        }
+      ],
+      "confidence": "low",
+      "notes": "Aniq joylashuv (Aydarko'l bo'yi ekanligi) tasdiqlanmagan; manbada narx diapazoni 55–73 $ ikki lager uchun umumiy berilgan. Ikkinchi manba va koordinata kerak."
+    },
+    {
+      "id": "nur-aydarkol-resort",
+      "cityId": "aydarkul",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2025-11",
+      "name": {
+        "uz": "Aydarko'l Resort",
+        "ru": "Aydarko'l Resort",
+        "en": "Aydarkul Resort"
+      },
+      "tagline": {
+        "uz": "Ko'l bo'yidagi yangi plyaj va kapsula uylar",
+        "ru": "Новый пляжный курорт с капсулами на берегу",
+        "en": "A new lakeside beach resort with capsule cabins"
+      },
+      "description": {
+        "uz": "Jizzax tomonidagi qirg'oqda 2025-yil oxirida ochilgan majmua: sanatoriy, hostel, kapsula uylar, plyaj, qayiq xizmati, kafe va basseyn.",
+        "ru": "Комплекс на джизакском берегу, открытый в конце 2025 года: санаторий, хостел, капсулы, пляж, лодки, кафе и открытый бассейн.",
+        "en": "Opened in late 2025 on the Jizzakh shore with a sanatorium, hostel, capsule cabins, beach, boats, café and outdoor pool."
+      },
+      "address": "Navro'z, Forish tumani, Jizzax viloyati",
+      "lat": 40.6101713,
+      "lng": 67.6122653,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Gov.uz (Uzbektourism): A modern tourist center opens on the shore of Aydarkul",
+          "url": "https://gov.uz/en/uzbektourism/news/view/104617",
+          "date": "2025-11-24"
+        },
+        {
+          "title": "OSM way 1512198156 (Aydarko'l resort)",
+          "url": "https://www.openstreetmap.org/way/1512198156",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM nuqtasi ko'l tizimining sharqiy qismida (Tuzkon tomonda) — gov.uz xabaridagi obyekt bilan bir xilligini tekshirish kerak."
+    },
+    {
+      "id": "shah-ak-saray",
+      "cityId": "shahrisabz",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Oqsaroy",
+        "ru": "Дворец Ак-Сарай",
+        "en": "Ak-Saray Palace"
+      },
+      "tagline": {
+        "uz": "Amir Temur saroyining ulkan peshtoq qoldiqlari",
+        "ru": "Гигантские пилоны дворца Тимура",
+        "en": "The colossal ruined gateway of Timur's palace"
+      },
+      "description": {
+        "uz": "Amir Temur o'z ona shahrida qurdirgan saroyning saqlanib qolgan ulkan ravoq ustunlari; YuNESKO merosi bo'lgan tarixiy markazda.",
+        "ru": "Сохранившиеся гигантские пилоны портала дворца, построенного Тимуром в родном городе; часть исторического центра из списка ЮНЕСКО.",
+        "en": "The surviving giant pylons of the palace Timur built in his home town, within a UNESCO-listed historic centre."
+      },
+      "address": "Shahrisabz tarixiy markazi",
+      "lat": 39.06083333,
+      "lng": 66.82916667,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Ak-Saray Palace",
+          "url": "https://en.wikipedia.org/wiki/Ak-Saray_Palace",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "shah-dorut-tilovat",
+      "cityId": "shahrisabz",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Dorut Tilovat majmuasi va Ko'k Gumbaz",
+        "ru": "Ансамбль Дорут-Тиловат и мечеть Кок-Гумбаз",
+        "en": "Dorut Tilovat Ensemble & Kok Gumbaz Mosque"
+      },
+      "tagline": {
+        "uz": "Ulug'bek qurdirgan moviy gumbazli jome",
+        "ru": "Пятничная мечеть Улугбека с голубым куполом",
+        "en": "Ulugh Beg's blue-domed Friday mosque"
+      },
+      "description": {
+        "uz": "Temuriylar davri majmuasi: Ko'k Gumbaz jome masjidi, Shamsiddin Kulol va Gumbazi Sayyidon maqbaralari. Oqsaroydan uncha uzoq emas.",
+        "ru": "Тимуридский ансамбль: мечеть Кок-Гумбаз, мавзолеи Шамсиддина Кулола и Гумбази Сайидан; недалеко от Ак-Сарая.",
+        "en": "A Timurid ensemble of the Kok Gumbaz mosque and the Shamsuddin Kulol and Gumbazi Sayyidon mausoleums, a short walk from Ak-Saray."
+      },
+      "address": "Hovuz Mardon ko'chasi, Shahrisabz",
+      "lat": 39.0497125,
+      "lng": 66.8271963,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Dorut Tilavat",
+          "url": "https://en.wikipedia.org/wiki/Dorut_Tilavat",
+          "date": null
+        },
+        {
+          "title": "Wikipedia: Kuk Gumbaz Mosque (Shahrisabz)",
+          "url": "https://en.wikipedia.org/wiki/Kuk_Gumbaz_Mosque_(Shahrisabz)",
+          "date": null
+        },
+        {
+          "title": "OSM way 171374621",
+          "url": "https://www.openstreetmap.org/way/171374621",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "shah-langar-ota",
+      "cityId": "langar",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Langar Ota majmuasi",
+        "ru": "Комплекс Лангар-ата",
+        "en": "Langar Ota Complex"
+      },
+      "tagline": {
+        "uz": "Hisor tog'laridagi qishloqda XV asr so'fiylar ziyoratgohi",
+        "ru": "Суфийская святыня XV века в горном кишлаке",
+        "en": "A 15th-century Sufi shrine in a Hissar mountain village"
+      },
+      "description": {
+        "uz": "Langar qishlog'idagi maqbara va masjid majmuasi; 2025-yilda AQSh ko'magida ta'mirlanib qayta ochilgan. Atrofdagi tog' manzarasi ham diqqatga sazovor.",
+        "ru": "Мавзолей и мечеть в кишлаке Лангар, отреставрированные при поддержке США и вновь открытые в 2025 году; вокруг — горные пейзажи.",
+        "en": "A mausoleum and mosque in Langar village, restored with US support and reopened in 2025, set among mountain scenery."
+      },
+      "address": "Langar, Qamashi tumani, Qashqadaryo viloyati",
+      "lat": 38.68169,
+      "lng": 66.75807,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Langar Ota Mausoleum",
+          "url": "https://en.wikipedia.org/wiki/Langar_Ota_Mausoleum",
+          "date": null
+        },
+        {
+          "title": "Daryo: Langar Ota complex reopens with US conservation support",
+          "url": "https://daryo.uz/en/2025/06/05/langar-ota-complex-reopens-in-uzbekistan-with-250000-us-conservation-support",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "Uzbekistan.travel: Langar village",
+          "url": "https://uzbekistan.travel/en/o/langar-village-the-mountains-of-kashkadarya-region",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Dafn etilgan shaxs va sana manbalarda farq qiladi. Chiroqchidagi 'Yangi Langar' bilan adashtirmaslik kerak."
+    },
+    {
+      "id": "boy-omonxona",
+      "cityId": "boysun",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Omonxona buloq ziyoratgohi",
+        "ru": "Святыня Аманхана",
+        "en": "Omonxona Spring Shrine"
+      },
+      "tagline": {
+        "uz": "Tor tog' darasidagi buloq va masjid",
+        "ru": "Источник и мечеть в узком горном ущелье",
+        "en": "A spring and mosque in a narrow mountain gorge"
+      },
+      "description": {
+        "uz": "Boysundan taxminan yarim soatlik yo'lda joylashgan ziyoratgoh: shifobaxsh deb hisoblanadigan buloq, masjid va g'or.",
+        "ru": "Святыня примерно в получасе езды от Байсуна: почитаемый целебным источник, мечеть и пещера.",
+        "en": "A shrine about half an hour's drive from Boysun with a spring locals consider healing, a mosque and a cave."
+      },
+      "address": "Omonxona, Boysun tumani, Surxondaryo viloyati",
+      "lat": 38.2381568,
+      "lng": 67.3166225,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbek-travel: Boysun",
+          "url": "https://uzbek-travel.com/about-uzbekistan/places/boysun/",
+          "date": null
+        },
+        {
+          "title": "OSM node 2468970466",
+          "url": "https://www.openstreetmap.org/node/2468970466",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ikkinchi mustaqil manba kerak."
+    },
+    {
+      "id": "boy-teshik-tash-cave",
+      "cityId": "boysun",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Teshiktosh g'ori",
+        "ru": "Пещера Тешик-Таш",
+        "en": "Teshik-Tash Cave"
+      },
+      "tagline": {
+        "uz": "Neandertal topilgan Boysuntog'dagi mashhur g'or",
+        "ru": "Пещера в Байсунтау, где нашли неандертальца",
+        "en": "The Boysuntau cave where a Neanderthal child was found"
+      },
+      "description": {
+        "uz": "Boysuntog'dagi tosh davri makoni; 1938-yilda bu yerda neandertal bola qoldiqlari topilgan. Yo'l tog' darasi orqali o'tadi.",
+        "ru": "Стоянка каменного века в горах Байсунтау, где в 1938 году нашли останки ребёнка-неандертальца; путь проходит по горному ущелью.",
+        "en": "A Stone Age site in the Boysuntau range where a Neanderthal child's remains were found in 1938, reached through a mountain gorge."
+      },
+      "address": "Boysuntog', Surxondaryo viloyati",
+      "lat": 37.96583333,
+      "lng": 67.15638889,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Teshik-Tash 1",
+          "url": "https://en.wikipedia.org/wiki/Teshik-Tash_1",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Faqat bitta manba; borish shart-sharoiti (gid, ruxsat) tekshirilsin."
+    },
+    {
+      "id": "boy-abdusalom-aka-guesthouse",
+      "cityId": "boysun",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abdusalom aka mehmon uyi",
+        "ru": "Гостевой дом Абдусалом-ака",
+        "en": "Abdusalom-aka Guesthouse"
+      },
+      "tagline": {
+        "uz": "Boysunda tog' manzarali oilaviy mehmon uyi",
+        "ru": "Семейный гостевой дом с видом на горы Байсуна",
+        "en": "A family homestay with mountain views in Boysun"
+      },
+      "description": {
+        "uz": "Boysun chetidagi Pasurxi mahallasida, tepalikda joylashgan oddiy oilaviy uy; mahalliy turmush va Boysun madaniyati bilan tanishish imkoni.",
+        "ru": "Простой семейный дом на возвышенности в махалле Пасурхи на окраине Байсуна — шанс увидеть местный быт и культуру.",
+        "en": "A simple family home on a rise in Pasurkhi mahalla on Boysun's edge, offering a look at local life and culture."
+      },
+      "address": "Pasurxi mahallasi, Boysun",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Abdusalom-aka Guest House",
+          "url": "https://advantour.com/uzbekistan/hotels/baysun/abdusalom-aka.htm",
+          "date": null
+        }
+      ],
+      "confidence": "low",
+      "notes": "Bitta manba, sharhlar yo'q; ishlayotganini tekshirish kerak. Koordinata topilmadi."
+    }
+  ]
+}

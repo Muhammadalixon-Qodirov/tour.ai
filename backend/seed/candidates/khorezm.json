@@ -1,0 +1,1927 @@
+{
+  "region": "khorezm",
+  "cities": [
+    {
+      "id": "khiva",
+      "name": {
+        "uz": "Xiva",
+        "ru": "Хива",
+        "en": "Khiva"
+      },
+      "center": {
+        "lat": 41.3775101,
+        "lng": 60.3634553
+      }
+    },
+    {
+      "id": "urgench",
+      "name": {
+        "uz": "Urganch",
+        "ru": "Ургенч",
+        "en": "Urgench"
+      },
+      "center": {
+        "lat": 41.5517903,
+        "lng": 60.631281
+      }
+    },
+    {
+      "id": "ellikqala",
+      "name": {
+        "uz": "Ellikqal'a",
+        "ru": "Элликкала",
+        "en": "Ellikqala"
+      },
+      "center": {
+        "lat": 41.8264075,
+        "lng": 60.9259379
+      }
+    },
+    {
+      "id": "nukus",
+      "name": {
+        "uz": "Nukus",
+        "ru": "Нукус",
+        "en": "Nukus"
+      },
+      "center": {
+        "lat": 42.4600229,
+        "lng": 59.6176603
+      }
+    },
+    {
+      "id": "moynaq",
+      "name": {
+        "uz": "Mo'ynoq",
+        "ru": "Муйнак",
+        "en": "Moynaq"
+      },
+      "center": {
+        "lat": 43.7643276,
+        "lng": 59.0297467
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "xiva-ichan-qala",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Ichan-Qal'a",
+        "ru": "Ичан-Кала",
+        "en": "Itchan Kala"
+      },
+      "tagline": {
+        "uz": "Devorlar ichidagi tirik shahar-muzey",
+        "ru": "Живой город-музей за глиняными стенами",
+        "en": "A living walled museum-city"
+      },
+      "description": {
+        "uz": "Xivaning devor bilan o'ralgan ichki shahri — UNESCO ro'yxatidagi madrasa, minora va saroylar jamlanmasi. Ko'chalarida hozir ham odamlar yashaydi, hunarmandlar ishlaydi.",
+        "ru": "Обнесённый стеной внутренний город Хивы из списка ЮНЕСКО с медресе, минаретами и дворцами. В его кварталах по-прежнему живут люди и работают ремесленники.",
+        "en": "Khiva's walled inner town, a UNESCO site packed with madrasas, minarets and palaces. People still live and craftspeople still work inside its lanes."
+      },
+      "address": "Xiva, Ichan-Qal'a (Ota Darvoza — g'arbiy darvoza)",
+      "lat": 41.3781118,
+      "lng": 60.3597939,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 2,
+      "priceNote": "umumiy chipta (2 kun) ~250 000 so'm, Ak Sheikh Bobo alohida — Tripadvisor sharhi orqali, tasdiqlanmagan",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Itchan Kala",
+          "url": "https://en.wikipedia.org/wiki/Itchan_Kala"
+        },
+        {
+          "title": "OpenStreetMap way/185036984",
+          "url": "https://www.openstreetmap.org/way/185036984"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Chipta narxi rasmiy manbadan tekshirilsin."
+    },
+    {
+      "id": "xiva-kalta-minor",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Kalta Minor",
+        "ru": "Минарет Кальта-Минор",
+        "en": "Kalta Minor Minaret"
+      },
+      "tagline": {
+        "uz": "Tugallanmay qolgan feruza minora",
+        "ru": "Недостроенный бирюзовый минарет",
+        "en": "The unfinished turquoise minaret"
+      },
+      "description": {
+        "uz": "XIX asr o'rtasida boshlanib, oxiriga yetkazilmagan keng va past minora. Butunlay sirli koshinlar bilan qoplangani uchun Xivaning ramziga aylangan.",
+        "ru": "Широкий и невысокий минарет, начатый в середине XIX века и так и не достроенный. Сплошная облицовка глазурованной плиткой сделала его символом Хивы.",
+        "en": "A squat, wide minaret begun in the mid-19th century and never completed. Its full glazed-tile cladding made it Khiva's emblem."
+      },
+      "address": "Palvon Qori ko'chasi, Ota Darvoza yonida",
+      "lat": 41.3783452,
+      "lng": 60.3579829,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Kaltaminor",
+          "url": "https://en.wikipedia.org/wiki/Kaltaminor"
+        },
+        {
+          "title": "OpenStreetMap way/178606424",
+          "url": "https://www.openstreetmap.org/way/178606424"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-juma-masjid",
+      "cityId": "khiva",
+      "category": "mosque",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Juma masjidi",
+        "ru": "Джума-мечеть",
+        "en": "Juma Mosque"
+      },
+      "tagline": {
+        "uz": "Yog'och ustunlar o'rmoni",
+        "ru": "Лес из резных деревянных колонн",
+        "en": "A forest of carved wooden columns"
+      },
+      "description": {
+        "uz": "Gumbazsiz, tomi ikki yuzdan ortiq o'ymakor yog'och ustunlarga tayangan ulkan masjid. Ayrim ustunlar juda qadimiy davrlarga borib taqaladi.",
+        "ru": "Огромная бескупольная мечеть, крыша которой держится на двух сотнях резных деревянных колонн. Некоторые колонны относятся к очень раннему периоду.",
+        "en": "A vast domeless mosque whose roof rests on more than two hundred carved wooden pillars, some of them very old."
+      },
+      "address": "Buxoro ko'chasi, Ichan-Qal'a",
+      "lat": 41.3775149,
+      "lng": 60.359943,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Juma Mosque, Khiva",
+          "url": "https://en.wikipedia.org/wiki/Juma_Mosque,_Khiva"
+        },
+        {
+          "title": "OpenStreetMap way/185051424",
+          "url": "https://www.openstreetmap.org/way/185051424"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-islom-xoja",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Islom Xo'ja minorasi va madrasasi",
+        "ru": "Минарет и медресе Ислам-Ходжа",
+        "en": "Islam Khodja Minaret & Madrasa"
+      },
+      "tagline": {
+        "uz": "Xivaning eng baland minorasi — tepaga chiqish mumkin",
+        "ru": "Самый высокий минарет Хивы — можно подняться",
+        "en": "Khiva's tallest minaret — climb it"
+      },
+      "description": {
+        "uz": "XX asr boshida qurilgan, Xivadagi eng baland minora; ichki zinadan tepaga chiqib, butun shaharni ko'rish mumkin. Yonidagi madrasada amaliy san'at ko'rgazmasi joylashgan.",
+        "ru": "Самый высокий минарет Хивы начала XX века: по внутренней лестнице можно подняться и увидеть весь город. В соседнем медресе — экспозиция прикладного искусства.",
+        "en": "Early-20th-century minaret, the tallest in Khiva, with an inner staircase to a panoramic top. The adjoining madrasa holds an applied-arts exhibition."
+      },
+      "address": "Buxoro ko'chasi / Islom Xo'ja ko'chasi",
+      "lat": 41.3765803,
+      "lng": 60.3601249,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Islamkhodja Madrasah",
+          "url": "https://en.wikipedia.org/wiki/Islamkhodja_Madrasah"
+        },
+        {
+          "title": "OpenStreetMap way/185036985",
+          "url": "https://www.openstreetmap.org/way/185036985"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Minoraga chiqish uchun alohida to'lov bo'lishi mumkin — tekshirish kerak."
+    },
+    {
+      "id": "xiva-kohna-ark",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Ko'hna Ark",
+        "ru": "Кухна-Арк",
+        "en": "Kunya-Ark Citadel"
+      },
+      "tagline": {
+        "uz": "Xonlar qal'asi va qabulxonasi",
+        "ru": "Крепость и приёмные покои ханов",
+        "en": "The khans' citadel and throne room"
+      },
+      "description": {
+        "uz": "Ichan-Qal'a g'arbidagi xonlar qarorgohi: koshinli ayvon, masjid, zarbxona va qabul zali. Ichida Oq Shayx Bobo burjiga chiqish yo'li bor.",
+        "ru": "Резиденция ханов у западной стены Ичан-Калы: изразцовый айван, мечеть, монетный двор и тронный зал. Отсюда поднимаются на бастион Ак-Шейх-Бобо.",
+        "en": "The khans' fortress-residence by the west wall, with a tiled iwan, mosque, mint and throne hall; it also gives access to the Ak Sheikh Bobo bastion."
+      },
+      "address": "Boltaev ko'chasi, Ota Darvoza yonida",
+      "lat": 41.3788828,
+      "lng": 60.3582215,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Kuhna Ark",
+          "url": "https://www.lonelyplanet.com/points-of-interest/kuhna-ark/443759"
+        },
+        {
+          "title": "OpenStreetMap node/1956482954",
+          "url": "https://www.openstreetmap.org/node/1956482954"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-pahlavon-mahmud",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Pahlavon Mahmud maqbarasi",
+        "ru": "Мавзолей Пахлавана Махмуда",
+        "en": "Pahlavon Mahmud Mausoleum"
+      },
+      "tagline": {
+        "uz": "Shahar homiysi pahlavon-shoir ziyoratgohi",
+        "ru": "Святыня поэта-богатыря, покровителя города",
+        "en": "Shrine of Khiva's poet-wrestler patron"
+      },
+      "description": {
+        "uz": "Xivaning homiysi hisoblangan pahlavon, shoir va po'stindo'z Pahlavon Mahmud dafn etilgan majmua. Moviy gumbazi va ichki koshinlari bilan mashhur, ziyoratchilar ko'p keladi.",
+        "ru": "Комплекс над могилой Пахлавана Махмуда — борца, поэта и скорняка, почитаемого покровителем Хивы. Известен голубым куполом и изразцами; здесь много паломников.",
+        "en": "Complex over the grave of Pahlavon Mahmud — wrestler, poet and furrier revered as Khiva's patron. Known for its blue dome and tilework; a busy pilgrimage spot."
+      },
+      "address": "Pahlavon Mahmud ko'chasi, Ichan-Qal'a",
+      "lat": 41.3769839,
+      "lng": 60.3593645,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Pahlavon Mahmud Complex",
+          "url": "https://en.wikipedia.org/wiki/Pahlavon_Mahmud_Complex"
+        },
+        {
+          "title": "OpenStreetMap relation/2469174",
+          "url": "https://www.openstreetmap.org/relation/2469174"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-tosh-hovli",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Tosh Hovli saroyi",
+        "ru": "Дворец Таш-Хаули",
+        "en": "Tash-Hauli Palace"
+      },
+      "tagline": {
+        "uz": "Haram hovlisi va eng nafis koshinlar",
+        "ru": "Гарем и самые тонкие изразцы Хивы",
+        "en": "Harem courtyards and Khiva's finest tiles"
+      },
+      "description": {
+        "uz": "XIX asrda Olloqulixon qurdirgan saroy: haram, qabul va sud hovlilari. Baland ayvonlari va ko'k-oq koshin naqshlari bilan e'tiborli.",
+        "ru": "Дворец Аллакули-хана XIX века с гаремом, приёмным и судебным дворами. Славится высокими айванами и сине-белыми изразцовыми узорами.",
+        "en": "Allakuli Khan's 19th-century palace with harem, reception and court yards, noted for tall iwans and blue-and-white tile patterns."
+      },
+      "address": "Boyaqchilar ko'chasi, Polvon Darvoza yaqinida",
+      "lat": 41.3782073,
+      "lng": 60.3616276,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Toshhovli Palace",
+          "url": "https://en.wikipedia.org/wiki/Toshhovli_Palace"
+        },
+        {
+          "title": "OpenStreetMap relation/2469418",
+          "url": "https://www.openstreetmap.org/relation/2469418"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "nuk-savitskiy-muzeyi",
+      "cityId": "nukus",
+      "category": "museum",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "I. Savitskiy nomidagi san'at muzeyi",
+        "ru": "Музей искусств им. И. Савицкого",
+        "en": "Savitsky Art Museum"
+      },
+      "tagline": {
+        "uz": "Cho'ldagi Luvr: avangard kolleksiyasi",
+        "ru": "«Лувр в пустыне»: коллекция авангарда",
+        "en": "'Louvre of the desert': avant-garde trove"
+      },
+      "description": {
+        "uz": "Sovet davrida taqiqlangan rus va Turkiston avangardi asarlarini saqlab qolgan mashhur muzey. 2025-yilda ikkinchi binoning ko'rgazma zali yangilandi.",
+        "ru": "Знаменитый музей, сохранивший запрещённое в СССР искусство русского и туркестанского авангарда. В 2025 году обновлён выставочный зал второго корпуса.",
+        "en": "Famed museum that rescued Soviet-banned Russian and Turkestan avant-garde art; the second building's exhibition hall was refurbished in 2025."
+      },
+      "address": "Jipek jolı ko'chasi (Rashidov ko'chasi), Nukus",
+      "lat": 42.4654528,
+      "lng": 59.6130804,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "history"
+      ],
+      "priceLevel": 2,
+      "priceNote": "xorijiy kattalar 100 000 so'm, O'zbekiston fuqarolari 20 000 so'm (Afisha.uz, 2025-10-30)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Музей Савицкого после реэкспозиции",
+          "url": "https://www.afisha.uz/ru/tourism/2025/10/30/savitskiy-muzey",
+          "date": "2025-10-30"
+        },
+        {
+          "title": "Wikipedia: Nukus Museum of Art",
+          "url": "https://en.wikipedia.org/wiki/Nukus_Museum_of_Art"
+        },
+        {
+          "title": "OpenStreetMap way/884013231",
+          "url": "https://www.openstreetmap.org/way/884013231"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Afisha.uz: seshanba–yakshanba 09:00–18:00, dushanba — oldindan yozilish bilan."
+    },
+    {
+      "id": "xiva-terrassa",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "iconic",
+      "openedAt": null,
+      "name": {
+        "uz": "Terrassa kafe-restorani",
+        "ru": "Кафе-ресторан Terrassa",
+        "en": "Terrassa Cafe & Restaurant"
+      },
+      "tagline": {
+        "uz": "Kalta Minorga qaragan mashhur terassa",
+        "ru": "Знаменитая терраса с видом на Кальта-Минор",
+        "en": "Famous terrace facing Kalta Minor"
+      },
+      "description": {
+        "uz": "Ichan-Qal'a markazidagi ko'p qavatli restoran; tomidagi terassada quyosh botishini kuzatish uchun ko'pchilik joy band qiladi. Menyuda tuxum barak va shivit oshi bor, shivit oshi bo'yicha master-klass ham o'tkaziladi.",
+        "ru": "Многоэтажный ресторан в центре Ичан-Калы; столики на крыше бронируют ради заката. В меню тухум-барак и шивит оши, проводятся мастер-классы по шивит оши.",
+        "en": "Multi-level restaurant in the heart of Itchan Kala whose roof terrace is booked for sunsets; serves tukhum barak and shivit oshi and runs shivit oshi cooking classes."
+      },
+      "address": "Ichan-Qal'a, Kalta Minor yaqinida",
+      "lat": 41.379149,
+      "lng": 60.3592563,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "architecture"
+      ],
+      "priceLevel": 2,
+      "priceNote": "tuxum barak 39 000 so'm (WE project, 2026-09); shivit oshi 78 000 so'm (Afisha.uz, 2025-06)",
+      "hours": null,
+      "instagram": "@terrassa_khiva",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE project: тухум-барак в Хиве — 5 мест",
+          "url": "https://weproject.media/articles/detail/tukhum-barak-v-khive-gde-poprobovat-traditsionnoe-blyudo-khorezmskoy-kukhni/",
+          "date": "2026-09-28"
+        },
+        {
+          "title": "Afisha.uz: шивит оши в Хиве",
+          "url": "https://www.afisha.uz/ru/tourism/2025/06/05/shivit-osh",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "Megan Starr: 8 places to eat in Khiva",
+          "url": "https://www.meganstarr.com/?p=96472"
+        },
+        {
+          "title": "OpenStreetMap node/12174963801",
+          "url": "https://www.openstreetmap.org/node/12174963801"
+        }
+      ],
+      "confidence": "high",
+      "notes": "OSMda 'Arxi Terrassa' (node 13811834801) nomli boshqa restoran ham bor — adashtirmaslik kerak; koordinata 'Restaurant Terrassa' nuqtasidan."
+    },
+    {
+      "id": "xiva-arda-xiva",
+      "cityId": "khiva",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2025-05",
+      "name": {
+        "uz": "Arda Xiva turistik majmuasi",
+        "ru": "Туристический комплекс «Арда Хива»",
+        "en": "Arda Khiva Tourist Complex"
+      },
+      "tagline": {
+        "uz": "G'ovuk ko'li bo'yidagi yangi «port-shahar»",
+        "ru": "Новый «город-порт» у озера Гавкуль",
+        "en": "Khiva's new lakeside 'port city' complex"
+      },
+      "description": {
+        "uz": "2025-yil mayda ochilgan 25 gektarlik majmua: kanalda gondola sayri, amfiteatr, akvapark, hunarmandlar ustaxonalari va gumbazli bozor. Kirish bepul.",
+        "ru": "Открытый в мае 2025 года комплекс на 25 га: гондолы на канале, амфитеатр, аквапарк, ремесленные мастерские и купольный базар. Вход свободный.",
+        "en": "A 25-ha complex opened in May 2025 with gondola rides on a canal, an amphitheatre, water park, artisan workshops and a domed bazaar. Entry is free."
+      },
+      "address": "Xiva, G'ovuk (Gavkul) ko'li yaqinida, Ichan-Qal'adan tashqarida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "architecture",
+        "shopping",
+        "craft",
+        "nightlife"
+      ],
+      "priceLevel": 0,
+      "priceNote": "kirish bepul; gondola/akvapark narxi ko'rsatilmagan (Afisha.uz, 2025-07)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Kun.uz: Arda Khiva opens",
+          "url": "https://kun.uz/en/news/2025/05/02/international-tourist-center-arda-khiva-opens-in-khorezm",
+          "date": "2025-05-02"
+        },
+        {
+          "title": "Afisha.uz: Arda Xiva",
+          "url": "https://www.afisha.uz/ru/tourism/2025/07/17/arda-xiva",
+          "date": "2025-07-17"
+        }
+      ],
+      "confidence": "high",
+      "notes": "OSMda majmua topilmadi. Yaqin atrofda 'Chorsu Bozor' (node 13787383001, 41.4018, 60.3792) bor — Arda Xivadagi bozor bo'lishi mumkin, tasdiqlanmagan."
+    },
+    {
+      "id": "xiva-nurullaboy",
+      "cityId": "khiva",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Nurullaboy saroyi",
+        "ru": "Дворец Нуруллабая",
+        "en": "Nurullabay Palace"
+      },
+      "tagline": {
+        "uz": "Hamma o'tib ketadigan, devordan tashqaridagi saroy",
+        "ru": "Дворец за стенами, мимо которого все проходят",
+        "en": "The palace outside the walls most visitors miss"
+      },
+      "description": {
+        "uz": "Ichan-Qal'adan shimoldagi XX asr boshidagi saroy majmuasi: bir necha hovli, Yevropa uslubi aralash interyerlar va fotograf Xudoybergan Devonov haqidagi ko'rgazma.",
+        "ru": "Дворцовый комплекс начала XX века к северу от Ичан-Калы: несколько дворов, интерьеры с европейскими мотивами и выставка о фотографе Худайбергене Диванове.",
+        "en": "Early-20th-century palace complex north of Itchan Kala with several courtyards, European-tinged interiors and an exhibition on photographer Khudaybergen Divanov."
+      },
+      "address": "Najmiddin Kubro ko'chasi, Dishan-Qal'a",
+      "lat": 41.382842,
+      "lng": 60.3567325,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "yagona chipta 80 000 so'm (Eurasia.Travel, 2025-12)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.Travel: Inside Khiva's forgotten royal residence",
+          "url": "https://eurasia.travel/inside-khivas-forgotten-royal-residence/"
+        },
+        {
+          "title": "Wikipedia: Nurullabay's Palace",
+          "url": "https://en.wikipedia.org/wiki/Nurullabay%27s_Palace"
+        },
+        {
+          "title": "OpenStreetMap way/497045347",
+          "url": "https://www.openstreetmap.org/way/497045347"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-dishan-qala",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Dishan-Qal'a",
+        "ru": "Дишан-Кала",
+        "en": "Dishan Kala (Outer Town)"
+      },
+      "tagline": {
+        "uz": "Xivaning tashqi shahri va qadimiy devorlari",
+        "ru": "Внешний город Хивы и его старые стены",
+        "en": "Khiva's outer town and its old walls"
+      },
+      "description": {
+        "uz": "Ichan-Qal'ani o'rab turgan tashqi shahar: saqlanib qolgan devor bo'laklari, darvozalar, saroylar va oddiy mahalla hayoti. Hokimiyat uni turistik hududga aylantirishni rejalashtirgan.",
+        "ru": "Внешний город вокруг Ичан-Калы: остатки стен, ворота, дворцы и обычная махаллинская жизнь. Власти планируют превратить его в туристическую зону.",
+        "en": "The outer town ringing Itchan Kala, with surviving wall sections, gates, palaces and everyday neighbourhood life; officials plan to develop it for tourism."
+      },
+      "address": "Xiva, Ichan-Qal'a atrofi",
+      "lat": 41.3727068,
+      "lng": 60.3585799,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Dishan Kala",
+          "url": "https://en.wikipedia.org/wiki/Dishan_Kala"
+        },
+        {
+          "title": "UzDaily: Dishan Qal'a turistik hududga aylantiriladi",
+          "url": "https://www.uzdaily.uz/uz/dishan-qal%CA%BCa-xivada-turistik-hududga-aylantiriladi/",
+          "date": "2025-05"
+        },
+        {
+          "title": "OpenStreetMap node/4908609322",
+          "url": "https://www.openstreetmap.org/node/4908609322"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata OSMdagi Dishan-Qal'a janubiy darvozasi nuqtasi (butun hudud emas)."
+    },
+    {
+      "id": "xiva-kubla-tozabog",
+      "cityId": "khiva",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qibla Tozabog' saroyi",
+        "ru": "Дворец Кибла Тозабог",
+        "en": "Kibla Tozabog Palace"
+      },
+      "tagline": {
+        "uz": "Bog' ichidagi xonning yozgi qarorgohi",
+        "ru": "Летняя ханская резиденция в саду",
+        "en": "A khan's summer residence in a garden"
+      },
+      "description": {
+        "uz": "XIX asr oxirida qurilgan, bog' bilan o'ralgan yozgi saroy, Xivaning janubi-g'arbiy chekkasida. Hozir uning hududida mehmonxona ishlaydi.",
+        "ru": "Летний дворец конца XIX века в окружении сада на юго-западной окраине Хивы. Сейчас на его территории работает гостиница.",
+        "en": "Late-19th-century summer palace set in gardens on Khiva's south-western edge; a hotel now operates on the grounds."
+      },
+      "address": "Bol-xovuz ko'chasi, Xiva",
+      "lat": 41.3724013,
+      "lng": 60.3407896,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Pagetour: Khiva palaces",
+          "url": "https://pagetour.org/khiva/palaces.html"
+        },
+        {
+          "title": "OpenStreetMap relation/2533902",
+          "url": "https://www.openstreetmap.org/relation/2533902"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda 'Дворец Кубла Тоза Бека' deb belgilangan; yonida 'Qibla tozabog mehmonxonasi'. Tashrif tartibi (ochiqmi) tekshirilsin."
+    },
+    {
+      "id": "xiva-oq-shayx-bobo",
+      "cityId": "khiva",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Oq Shayx Bobo burji",
+        "ru": "Бастион Ак-Шейх-Бобо",
+        "en": "Ak Sheikh Bobo Bastion"
+      },
+      "tagline": {
+        "uz": "Ichan-Qal'adagi eng yaxshi quyosh botishi",
+        "ru": "Лучший закат над Ичан-Калой",
+        "en": "Best sunset over Itchan Kala"
+      },
+      "description": {
+        "uz": "Ko'hna Ark ichidagi qadimiy qo'riqchi burj; tepasidan Kalta Minor, gumbazlar va minoralar bir qarashda ko'rinadi. Quyosh botishi oldidan borish tavsiya etiladi.",
+        "ru": "Старинная сторожевая башня в Кухна-Арке: сверху видно Кальта-Минор, купола и минареты разом. Лучше приходить перед закатом.",
+        "en": "An old watchtower inside Kunya-Ark whose top takes in Kalta Minor, domes and minarets at once — go just before sunset."
+      },
+      "address": "Ko'hna Ark, Ichan-Qal'a",
+      "lat": 41.3796046,
+      "lng": 60.3580812,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 1,
+      "priceNote": "alohida chipta; manbalar turlicha: 30 000 so'm (Wander-lush) yoki 100 000 so'm (Tripadvisor sharhi) — tekshirish kerak",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Ak Sheikh Bobo watchtower",
+          "url": "https://www.lonelyplanet.com/points-of-interest/ak-sheikh-bobo-watchtower/1388612"
+        },
+        {
+          "title": "Locationscout: Kuhna Ark",
+          "url": "https://locationscout.net/uzbekistan/43168-kuhna-ark"
+        },
+        {
+          "title": "OpenStreetMap node/1956491362",
+          "url": "https://www.openstreetmap.org/node/1956491362"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Yopilish vaqti (taxminan 18:00) mavsumga qarab o'zgaradi."
+    },
+    {
+      "id": "xiva-ipak-gilam-ustaxonasi",
+      "cityId": "khiva",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xiva ipak gilam ustaxonasi",
+        "ru": "Хивинская мастерская шёлковых ковров",
+        "en": "Khiva Silk Carpet Workshop"
+      },
+      "tagline": {
+        "uz": "Tabiiy bo'yoqli ipak gilam to'qilishini ko'ring",
+        "ru": "Шёлковые ковры на натуральных красителях",
+        "en": "Watch natural-dye silk carpets being woven"
+      },
+      "description": {
+        "uz": "2001-yilda UNESCO va Operation Mercy tashabbusi bilan eski madrasada ochilgan ustaxona. Ayollar koshin va miniatyura naqshlari asosida ipak gilam to'qiydi, yonida so'zana tikiladi.",
+        "ru": "Мастерская, открытая в 2001 году при участии ЮНЕСКО и Operation Mercy в бывшем медресе. Женщины ткут шёлковые ковры по мотивам изразцов и миниатюр, рядом вышивают сюзане.",
+        "en": "Founded in 2001 with UNESCO and Operation Mercy in a former madrasa; women weave silk carpets based on tile and miniature motifs, with suzani embroidery alongside."
+      },
+      "address": "Ichan-Qal'a, Yoqubboy Xo'ja madrasasi (manbalarga ko'ra)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Cabana Magazine: Khiva silk workshops",
+          "url": "https://cabanamagazine.com/blogs/atlas-of-craftsmanship/khiva-silk-workshops"
+        },
+        {
+          "title": "The National: Fruits of the loom",
+          "url": "https://www.thenationalnews.com/arts/fruits-of-the-loom-picking-up-the-threads-of-an-ancient-story-1.506505"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Madrasa nomi manbalarda turlicha (Yakub Bay Khodja). Hozirgi faoliyati va manzili joyida tekshirilsin; OSMda topilmadi."
+    },
+    {
+      "id": "xiva-yogoch-oymakorlik-master-klass",
+      "cityId": "khiva",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Yog'och o'ymakorligi master-klassi",
+        "ru": "Мастер-класс по резьбе по дереву",
+        "en": "Wood-Carving Masterclass"
+      },
+      "tagline": {
+        "uz": "Minora soyasida o'zingiz naqsh o'ying",
+        "ru": "Вырежьте узор сами у подножия минарета",
+        "en": "Carve your own pattern beside a minaret"
+      },
+      "description": {
+        "uz": "Islom Xo'ja minorasi yonidagi ochiq ustaxonada usta rahbarligida 1–1,5 soatlik mashg'ulot: Xiva naqshini taxtachaga o'yib olasiz. Oldindan bron qilish kerak.",
+        "ru": "Полуторачасовое занятие под руководством мастера в открытой мастерской у минарета Ислам-Ходжа: вы вырезаете хивинский узор на дощечке. Нужна предварительная запись.",
+        "en": "A 1–1.5-hour session with a master carver at an open-air workshop by the Islam Khodja minaret, where you carve a Khivan motif onto a board. Book ahead."
+      },
+      "address": "Islom Xo'ja minorasi yonida, Ichan-Qal'a",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft"
+      ],
+      "priceLevel": 3,
+      "priceNote": "3 kishilik xususiy mashg'ulot jami $72, minimum 3 kishi (Megan Starr, 2026)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: Is a Khiva wood carving workshop worth it?",
+          "url": "https://www.meganstarr.com/?p=96383",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "WE project: Wood carving and silk carpets in Khiva",
+          "url": "https://www.weproject.media/en/articles/detail/wood-carving-and-silk-carpets-how-khivan-craftsmen-turned-tradition-into-business/",
+          "date": "2026-05-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bron GetYourGuide orqali, operator 'Khiva Adventure' (manbaga ko'ra). Aniq koordinata yo'q."
+    },
+    {
+      "id": "xiva-masharipov-ustaxonasi",
+      "cityId": "khiva",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Odamboy Masharipov yog'och ustaxonasi",
+        "ru": "Мастерская резчика Одамбоя Машарипова",
+        "en": "Odamboy Masharipov Woodcarving Studio"
+      },
+      "tagline": {
+        "uz": "Yog'och va sopolni uyg'unlashtirgan usta",
+        "ru": "Мастер, соединяющий дерево и керамику",
+        "en": "A carver who pairs wood with ceramics"
+      },
+      "description": {
+        "uz": "2002-yildan ishlayotgan ustaxona: o'ymakor eshik, ustun, mebel va tarixiy binolarning yog'och maketlari yasaladi. Kichik shaxsiy muzeyi bor, tashrif oldindan kelishiladi.",
+        "ru": "Мастерская работает с 2002 года: резные двери, колонны, мебель и деревянные макеты исторических зданий. Есть небольшой музей, визит по договорённости.",
+        "en": "Running since 2002, this studio makes carved doors, columns, furniture and wooden models of historic buildings; it has a small museum and visits are by appointment."
+      },
+      "address": "Yuzboshi ko'chasi, Xiva (manbada: Ichan-Qal'a)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Masharipov Odamboy",
+          "url": "https://www.advantour.com/uzbekistan/artisans/masharipov-odamboy.htm"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Faqat oldindan kelishuv bilan. Telefon raqamlari yozilmadi (shaxsiy bo'lishi mumkin)."
+    },
+    {
+      "id": "xiva-sultan",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": null,
+      "name": {
+        "uz": "Sultan restorani",
+        "ru": "Ресторан Sultan",
+        "en": "Sultan Restaurant"
+      },
+      "tagline": {
+        "uz": "Tomida terassa, menyuda tuxum barak",
+        "ru": "Терраса на крыше и тухум-барак",
+        "en": "Rooftop terrace and tukhum barak"
+      },
+      "description": {
+        "uz": "Ichan-Qal'a ichidagi nisbatan yangi restoran: pastda konditsionerli zal, tomda shaharga qaragan terassa. Palov, tuxum barak va vegetarian taomlar bor.",
+        "ru": "Относительно новый ресторан в Ичан-Кале: внизу зал с кондиционером, на крыше терраса с видом на город. Плов, тухум-барак и вегетарианские блюда.",
+        "en": "A fairly new Itchan Kala restaurant with an air-conditioned hall and a rooftop terrace over the city; serves plov, tukhum barak and vegetarian dishes."
+      },
+      "address": "Buxoro ko'chasi, Ichan-Qal'a",
+      "lat": 41.3764208,
+      "lng": 60.3598445,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": null,
+      "hours": "11:00-23:00",
+      "instagram": "@sultan_restaurant_khiva",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 8 places to eat in Khiva",
+          "url": "https://www.meganstarr.com/?p=96472"
+        },
+        {
+          "title": "WE project: 5 лучших ресторанов Хивы",
+          "url": "https://www.weproject.media/articles/detail/5-luchshikh-restoranov-v-gorode-khiva-ot-traditsionnoy-kukhni-do-zarubezhnykh-blyud/",
+          "date": "2025-01-28"
+        },
+        {
+          "title": "Tripadvisor: Sultan Restourant",
+          "url": "https://www.tripadvisor.com/--d28146041.html"
+        },
+        {
+          "title": "OpenStreetMap node/12707839001",
+          "url": "https://www.openstreetmap.org/node/12707839001"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "'Yangi' deb Tripadvisor sharhida aytilgan; aniq ochilgan sanasi topilmadi. Soatlar Megan Starr blogidan."
+    },
+    {
+      "id": "xiva-ayvon-zarafshon",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Ayvon by Zarafshon",
+        "ru": "Ayvon by Zarafshon",
+        "en": "Ayvon by Zarafshon"
+      },
+      "tagline": {
+        "uz": "360° manzarali ko'p qavatli terassa",
+        "ru": "Многоэтажная терраса с обзором 360°",
+        "en": "Tiered rooftop with a 360° old-town view"
+      },
+      "description": {
+        "uz": "Ichan-Qal'adagi bir necha qavatli restoran; yuqori terassasidan eski shahar har tomondan ko'rinadi. Milliy va Yevropa taomlari, shivit oshi ham bor.",
+        "ru": "Многоуровневый ресторан в Ичан-Кале, с верхней террасы старый город виден со всех сторон. Национальная и европейская кухня, есть шивит оши.",
+        "en": "A multi-storey Itchan Kala restaurant whose top terrace overlooks the old town on all sides; national and European dishes including shivit oshi."
+      },
+      "address": "Islom Xo'ja ko'chasi, Ichan-Qal'a",
+      "lat": 41.3759803,
+      "lng": 60.3610491,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": "shivit oshi 55 000 so'm (Afisha.uz, 2025-06)",
+      "hours": null,
+      "instagram": "@ayvon_restaurant",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE project: 5 лучших ресторанов Хивы",
+          "url": "https://www.weproject.media/articles/detail/5-luchshikh-restoranov-v-gorode-khiva-ot-traditsionnoy-kukhni-do-zarubezhnykh-blyud/",
+          "date": "2025-01-28"
+        },
+        {
+          "title": "Afisha.uz: шивит оши в Хиве",
+          "url": "https://www.afisha.uz/ru/tourism/2025/06/05/shivit-osh",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "Tripadvisor: Ayvon Zarafshon",
+          "url": "https://www.tripadvisor.com/--d28111084.html"
+        },
+        {
+          "title": "OpenStreetMap node/11942520337",
+          "url": "https://www.openstreetmap.org/node/11942520337"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Tripadvisorda hisob bo'yicha nizo haqida sharh bor — chekni tekshirish tavsiya qilinadi."
+    },
+    {
+      "id": "xiva-sofra",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sofra",
+        "ru": "Sofra",
+        "en": "Sofra"
+      },
+      "tagline": {
+        "uz": "Devordan tashqarida, olomonsiz Xorazm taomlari",
+        "ru": "Хорезмская кухня за стенами, без толп",
+        "en": "Khorezm food outside the walls, fewer crowds"
+      },
+      "description": {
+        "uz": "Ichan-Qal'adan sharqda joylashgan oilaviy restoran; shivit oshini an'anaviy usulda tayyorlaydi va turistik ko'chalarga qaraganda tinchroq.",
+        "ru": "Уютный ресторан к востоку от Ичан-Калы: шивит оши готовят по традиции, а народу меньше, чем на туристических улицах.",
+        "en": "A cosy restaurant just east of Itchan Kala that makes traditional shivit oshi and is calmer than the tourist lanes."
+      },
+      "address": "Amir Temur ko'chasi, Xiva",
+      "lat": 41.3781265,
+      "lng": 60.3745445,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 1,
+      "priceNote": "shivit oshi 40 000 so'm (Afisha.uz, 2025-06)",
+      "hours": null,
+      "instagram": "@sofra__khiva",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: шивит оши в Хиве",
+          "url": "https://www.afisha.uz/ru/tourism/2025/06/05/shivit-osh",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "WE project: 5 лучших ресторанов Хивы",
+          "url": "https://www.weproject.media/articles/detail/5-luchshikh-restoranov-v-gorode-khiva-ot-traditsionnoy-kukhni-do-zarubezhnykh-blyud/",
+          "date": "2025-01-28"
+        },
+        {
+          "title": "National Geographic: Khiva 2026",
+          "url": "https://www.nationalgeographic.com/travel/best-of-the-world-2026/article/khiva-uzbekistan"
+        },
+        {
+          "title": "OpenStreetMap node/10002830400",
+          "url": "https://www.openstreetmap.org/node/10002830400"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-tapas",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Tapas restorani",
+        "ru": "Ресторан Tapas",
+        "en": "Restaurant Tapas"
+      },
+      "tagline": {
+        "uz": "Juma masjidi qarshisida barak va ijjon",
+        "ru": "Барак и иджан напротив Джума-мечети",
+        "en": "Barak and ijjon opposite the Juma Mosque"
+      },
+      "description": {
+        "uz": "Kalta Minor yaqinidagi restoran: tuxum barak, barak assorti, shivit oshi va ijjon kabi Xorazm taomlariga ixtisoslashgan.",
+        "ru": "Ресторан у Кальта-Минора с упором на хорезмские блюда: тухум-барак, ассорти барака, шивит оши и иджан.",
+        "en": "Near Kalta Minor, focused on Khorezm dishes such as tukhum barak, a barak platter, shivit oshi and ijjon."
+      },
+      "address": "Palvon Qori ko'chasi, Ichan-Qal'a",
+      "lat": 41.3780131,
+      "lng": 60.3589016,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": "tuxum barak 62 000 so'm (WE project, 2026-09); shivit oshi 45 000 so'm (Afisha.uz, 2025-06)",
+      "hours": null,
+      "instagram": "@restaurant_tapas_khiva",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE project: тухум-барак в Хиве — 5 мест",
+          "url": "https://weproject.media/articles/detail/tukhum-barak-v-khive-gde-poprobovat-traditsionnoe-blyudo-khorezmskoy-kukhni/",
+          "date": "2026-09-28"
+        },
+        {
+          "title": "Afisha.uz: шивит оши в Хиве",
+          "url": "https://www.afisha.uz/ru/tourism/2025/06/05/shivit-osh",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "OpenStreetMap node/12241131002",
+          "url": "https://www.openstreetmap.org/node/12241131002"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "xiva-mirzaboshi",
+      "cityId": "khiva",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mirzaboshi choyxonasi",
+        "ru": "Чайхана Мирзабоши",
+        "en": "Mirza Boshi Tea House"
+      },
+      "tagline": {
+        "uz": "Oilaviy choyxona: qovoq somsa va gumma",
+        "ru": "Семейная чайхана: тыквенная самса и гумма",
+        "en": "Family teahouse: pumpkin samsa and gumma"
+      },
+      "description": {
+        "uz": "Ichan-Qal'adagi oilaviy choyxona-restoran, Xorazm oshxonasiga ixtisoslashgan: qovoqli somsa, gumma, tuxum barak va shivit oshi.",
+        "ru": "Семейная чайхана-ресторан в Ичан-Кале с хорезмской кухней: тыквенная самса, гумма, тухум-барак и шивит оши.",
+        "en": "Family-run teahouse-restaurant in Itchan Kala specialising in Khorezm food — pumpkin samsa, gumma, tukhum barak and shivit oshi."
+      },
+      "address": "Pahlavon Mahmud ko'chasi, Ichan-Qal'a",
+      "lat": 41.377563,
+      "lng": 60.3589725,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": "tuxum barak 57 000 so'm, 280 g (WE project, 2026-09)",
+      "hours": "09:00-23:00",
+      "instagram": "@restaurant_mirzoboshi",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE project: тухум-барак в Хиве — 5 мест",
+          "url": "https://weproject.media/articles/detail/tukhum-barak-v-khive-gde-poprobovat-traditsionnoe-blyudo-khorezmskoy-kukhni/",
+          "date": "2026-09-28"
+        },
+        {
+          "title": "Megan Starr: 8 places to eat in Khiva",
+          "url": "https://www.meganstarr.com/?p=96472"
+        },
+        {
+          "title": "OpenStreetMap node/5547241421",
+          "url": "https://www.openstreetmap.org/node/5547241421"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Yonida xuddi shu nomdagi mehmonxona bor."
+    },
+    {
+      "id": "xiva-art-xorazm",
+      "cityId": "khiva",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xorazm Art restorani",
+        "ru": "Арт-ресторан «Хорезм»",
+        "en": "Khorezm Art Restaurant"
+      },
+      "tagline": {
+        "uz": "Madrasa hujralarida milliy kechki ovqat",
+        "ru": "Ужин в стенах медресе",
+        "en": "Dinner inside a historic madrasa"
+      },
+      "description": {
+        "uz": "Olloqulixon madrasasi hovlisida joylashgan restoran; mastava, tuxum barak, Xorazm palovi va shivit oshi tortiladi.",
+        "ru": "Ресторан во дворе медресе Аллакули-хана: мастава, тухум-барак, хорезмский плов и шивит оши.",
+        "en": "Restaurant set in the Allakuli Khan madrasa courtyard serving mastava, tukhum barak, Khorezm plov and shivit oshi."
+      },
+      "address": "Palvon Qori ko'chasi, Olloqulixon madrasasi",
+      "lat": 41.3776722,
+      "lng": 60.3617224,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "architecture"
+      ],
+      "priceLevel": 2,
+      "priceNote": "shivit oshi 50 000 so'm (Afisha.uz, 2025-06)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: шивит оши в Хиве",
+          "url": "https://www.afisha.uz/ru/tourism/2025/06/05/shivit-osh",
+          "date": "2025-06-05"
+        },
+        {
+          "title": "Advantour: Популярные кафе и рестораны Хивы",
+          "url": "https://www.advantour.com/rus/uzbekistan/khiva/restaurants.htm"
+        },
+        {
+          "title": "OpenStreetMap node/4916282621",
+          "url": "https://www.openstreetmap.org/node/4916282621"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda 'Art Khorezm Restaurant'; Afisha'dagi 'Xorazm Art' bilan bir joy ekanini tekshirish kerak."
+    },
+    {
+      "id": "xiva-aim-coffee",
+      "cityId": "khiva",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Aim Coffee",
+        "ru": "Aim Coffee",
+        "en": "Aim Coffee"
+      },
+      "tagline": {
+        "uz": "Sharqiy darvoza yonida haqiqiy espresso",
+        "ru": "Настоящий эспрессо у Восточных ворот",
+        "en": "Proper espresso by the East Gate"
+      },
+      "description": {
+        "uz": "Sharqiy darvoza yaqinidagi kichik qahvaxona: flat white, muzli qahva va asal tortlari. Ichida joy kam, qahva sifati bilan ajralib turadi.",
+        "ru": "Небольшая кофейня у Восточных ворот: флэт уайт, айс-кофе и медовик. Мест немного, зато хороший кофе.",
+        "en": "Small coffee shop near the East Gate with flat whites, iced coffee and honey cake; little seating but good coffee."
+      },
+      "address": "Xiva, Polvon Darvoza (sharqiy darvoza) yaqinida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "09:00-22:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 8 places to eat in Khiva",
+          "url": "https://www.meganstarr.com/?p=96472"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda ikkita 'Aim Coffee' bor (node 13091952801 va 12542120207) — qaysi biri blogdagi joy ekani aniq emas, shuning uchun koordinata qo'yilmadi."
+    },
+    {
+      "id": "urg-yoshlar-koli",
+      "cityId": "urgench",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Yoshlar ko'li bog'i",
+        "ru": "Парк «Озеро молодёжи»",
+        "en": "Youth Lake Park"
+      },
+      "tagline": {
+        "uz": "Urganch yoshlarining ko'l bo'yidagi sayrgohi",
+        "ru": "Место прогулок урганчской молодёжи у озера",
+        "en": "Urgench's lakeside hangout"
+      },
+      "description": {
+        "uz": "Urganchdagi taxminan 15 gektarlik dam olish maskani: ko'l, charxpalak, kema shaklidagi kafe va mashhur obidalarning kichik maketlari. Kechqurun mahalliy oilalar sayr qiladi.",
+        "ru": "Зона отдыха в Ургенче около 15 га: озеро, колесо обозрения, кафе в форме корабля и макеты известных памятников. Вечером здесь гуляют местные семьи.",
+        "en": "A roughly 15-ha leisure park in Urgench with a lake, Ferris wheel, a ship-shaped cafe and miniature landmarks; local families stroll here in the evening."
+      },
+      "address": "Urganch shahri",
+      "lat": 41.5528305,
+      "lng": 60.6130816,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "nightlife"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Tour Central Asia: Urgench guide",
+          "url": "https://tourcentralasia.com/uzbekistan/urgench-guide-things-to-do/"
+        },
+        {
+          "title": "OpenStreetMap way/825811101",
+          "url": "https://www.openstreetmap.org/way/825811101"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Kirish narxi va attraksionlar ishlashi tekshirilsin."
+    },
+    {
+      "id": "ell-ayoz-qala",
+      "cityId": "ellikqala",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Ayoz qal'a",
+        "ru": "Аяз-Кала",
+        "en": "Ayaz-Kala"
+      },
+      "tagline": {
+        "uz": "Cho'l tepaligidagi qadimiy Xorazm qal'asi",
+        "ru": "Древняя крепость на холме в пустыне",
+        "en": "Ancient Khorezm fortress on a desert hill"
+      },
+      "description": {
+        "uz": "Qizilqum chetidagi tepalikda turgan, miloddan avvalgi davrlarga oid paxsa qal'alar majmuasi. Tepasidan cho'l va Ayoz ko'li manzarasi ochiladi.",
+        "ru": "Комплекс глинобитных крепостей античного Хорезма на холме у края Кызылкума. С вершины видны пустыня и озеро Аяз-Куль.",
+        "en": "A cluster of mud-brick fortresses of ancient Khorezm on a hill at the edge of the Kyzylkum, with views over the desert and Ayaz lake."
+      },
+      "address": "Ellikqal'a tumani, Qoraqalpog'iston",
+      "lat": 42.0140406,
+      "lng": 61.0281668,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Ayaz-Kala",
+          "url": "https://en.wikipedia.org/wiki/Ayaz-Kala"
+        },
+        {
+          "title": "Wikivoyage: Ayaz-Kala",
+          "url": "https://en.wikivoyage.org/wiki/Ayaz-Kala"
+        },
+        {
+          "title": "OpenStreetMap relation/12537937",
+          "url": "https://www.openstreetmap.org/relation/12537937"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Xiva/Urganchdan ekskursiya bilan boriladi (Urganchdan ~70 km)."
+    },
+    {
+      "id": "ell-ayoz-qala-oy-lager",
+      "cityId": "ellikqala",
+      "category": "ecovillage",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Ayoz qal'a o'tov lageri",
+        "ru": "Юрточный лагерь Аяз-Кала",
+        "en": "Ayaz-Kala Yurt Camp"
+      },
+      "tagline": {
+        "uz": "Qal'a etagida o'tovda tunash",
+        "ru": "Ночь в юрте у подножия крепости",
+        "en": "Sleep in a yurt below the fortress"
+      },
+      "description": {
+        "uz": "Ayoz qal'a ostidagi o'tov lageri: tunash, tuya sayri, qal'alarga ekskursiya va ko'lda qushlarni kuzatish taklif etiladi. Odatda bahordan kuzgacha ishlaydi.",
+        "ru": "Юрточный лагерь под Аяз-Калой: ночёвка, прогулки на верблюдах, поездки к крепостям и наблюдение за птицами на озере. Обычно работает с весны до осени.",
+        "en": "Yurt camp beneath Ayaz-Kala offering overnight stays, camel rides, fortress trips and birdwatching on the lake; usually open spring to autumn."
+      },
+      "address": "Ayoz qal'a etagi, Ellikqal'a tumani",
+      "lat": 42.0191014,
+      "lng": 61.02521,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Visit Silk Road: Ayaz Qala yurt camp",
+          "url": "https://visitsilkroad.org/destination/ayaz-qala-yurt-camp/"
+        },
+        {
+          "title": "People Travels: Ayazkala yurt camp",
+          "url": "https://people-travels.com/sights/ayazkala-yurt-camp"
+        },
+        {
+          "title": "OpenStreetMap way/292421211",
+          "url": "https://www.openstreetmap.org/way/292421211"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Mavsum (mart–noyabr) va narxlar tekshirilsin."
+    },
+    {
+      "id": "ell-tuproq-qala",
+      "cityId": "ellikqala",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Tuproq qal'a",
+        "ru": "Топрак-Кала",
+        "en": "Toprak-Kala"
+      },
+      "tagline": {
+        "uz": "Qadimgi Xorazm shohlari saroyi xarobasi",
+        "ru": "Руины дворца древнехорезмийских царей",
+        "en": "Ruined palace-city of Khorezm kings"
+      },
+      "description": {
+        "uz": "Milodiy dastlabki asrlarga oid shahar-saroy xarobalari; arxeologlar bu yerdan devoriy rasmlar va hujjatlar topgan. Ayoz qal'a va Qizil qal'a bilan bitta marshrutda ko'riladi.",
+        "ru": "Руины города-дворца первых веков нашей эры, где археологи нашли росписи и документы. Обычно посещается вместе с Аяз-Калой и Кызыл-Калой.",
+        "en": "Ruins of an early-centuries-AD palace city where archaeologists found murals and documents; usually combined with Ayaz-Kala and Kyzyl-Kala."
+      },
+      "address": "Bo'ston yaqini, Ellikqal'a tumani",
+      "lat": 41.9272823,
+      "lng": 60.8229963,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Toprak-Kala",
+          "url": "https://en.wikipedia.org/wiki/Toprak-Kala"
+        },
+        {
+          "title": "Freetour: Ayazkala, Toprakkala & Kizilkala tour from Khiva",
+          "url": "https://www.freetour.com/khiva/ayazkala-toprakkala-kizilkala-fortress-tour-from-khiva"
+        },
+        {
+          "title": "OpenStreetMap way/166029472",
+          "url": "https://www.openstreetmap.org/way/166029472"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "ell-qizil-qala",
+      "cityId": "ellikqala",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qizil qal'a",
+        "ru": "Кызыл-Кала",
+        "en": "Kyzyl-Kala"
+      },
+      "tagline": {
+        "uz": "Kichik, lekin yaxshi saqlangan qizil qal'a",
+        "ru": "Маленькая, но хорошо сохранившаяся крепость",
+        "en": "Small but well-kept red fortress"
+      },
+      "description": {
+        "uz": "Tuproq qal'a yaqinidagi ixcham, to'rtburchak paxsa qal'a; devorlari nisbatan yaxshi saqlangan va qayta tiklangan.",
+        "ru": "Компактная квадратная глинобитная крепость рядом с Топрак-Калой; стены сохранились сравнительно хорошо и частично восстановлены.",
+        "en": "A compact square mud-brick fort near Toprak-Kala whose walls are comparatively well preserved and partly restored."
+      },
+      "address": "Ellikqal'a tumani, Tuproq qal'adan g'arbda",
+      "lat": 41.9301409,
+      "lng": 60.7842246,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Kyzyl-Kala",
+          "url": "https://en.wikipedia.org/wiki/Kyzyl-Kala"
+        },
+        {
+          "title": "Freetour: Ayazkala, Toprakkala & Kizilkala tour from Khiva",
+          "url": "https://www.freetour.com/khiva/ayazkala-toprakkala-kizilkala-fortress-tour-from-khiva"
+        },
+        {
+          "title": "OpenStreetMap way/241854093",
+          "url": "https://www.openstreetmap.org/way/241854093"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "ell-qoy-qirilgan-qala",
+      "cityId": "ellikqala",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qo'y qirilgan qal'a",
+        "ru": "Кой-Крылган-Кала",
+        "en": "Koi Krylgan Kala"
+      },
+      "tagline": {
+        "uz": "Dumaloq ibodatxona-observatoriya xarobasi",
+        "ru": "Круглый храм-обсерватория в пустыне",
+        "en": "A round temple-observatory ruin"
+      },
+      "description": {
+        "uz": "Doira shaklidagi noyob qadimiy inshoot qoldiqlari; olimlar uni ibodatxona va osmon jismlarini kuzatish joyi bo'lgan deb hisoblaydi. Asosiy qal'alar marshrutidan biroz chetda.",
+        "ru": "Остатки редкой круглой постройки античного Хорезма, которую учёные считают храмом и местом наблюдения за небом. Чуть в стороне от основного маршрута крепостей.",
+        "en": "Remains of a rare circular ancient Khorezm structure thought to be a temple and sky-watching site, a little off the main fortress route."
+      },
+      "address": "To'rtko'l tumani, Qoraqalpog'iston",
+      "lat": 41.7557021,
+      "lng": 61.1171791,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Koi Krylgan Kala",
+          "url": "https://en.wikipedia.org/wiki/Koi_Krylgan_Kala"
+        },
+        {
+          "title": "OpenStreetMap way/251432679",
+          "url": "https://www.openstreetmap.org/way/251432679"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ma'muriy jihatdan To'rtko'l tumanida; cityId qulaylik uchun 'ellikqala'. Yo'l holati tekshirilsin."
+    },
+    {
+      "id": "nuk-tarix-muzeyi",
+      "cityId": "nukus",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qoraqalpog'iston tarix va madaniyat muzeyi",
+        "ru": "Музей истории и культуры Каракалпакстана",
+        "en": "Karakalpakstan History & Culture Museum"
+      },
+      "tagline": {
+        "uz": "Orol faunasi, arxeologiya va o'tov bir joyda",
+        "ru": "Фауна Арала, археология и юрта",
+        "en": "Aral wildlife, archaeology and a yurt"
+      },
+      "description": {
+        "uz": "1929-yilda tashkil etilgan muzey: Orol hayvonot dunyosi, qadimgi Xorazm arxeologiyasi va etnografiya zallari, birinchi qavatda o'tov. Savitskiy muzeyidan bir necha daqiqalik yo'l.",
+        "ru": "Музей 1929 года: залы фауны Арала, археологии древнего Хорезма и этнографии, юрта на первом этаже. В нескольких минутах ходьбы от музея Савицкого.",
+        "en": "Founded in 1929, with halls on Aral wildlife, ancient Khorezm archaeology and ethnography plus a yurt on the ground floor — a few minutes' walk from the Savitsky."
+      },
+      "address": "S. Kamalov ko'chasi 24, Nukus",
+      "lat": 42.4622721,
+      "lng": 59.6111354,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Нукус — культурный маршрут",
+          "url": "https://www.afisha.uz/ru/tourism/2025/08/07/nukus",
+          "date": "2025-08-07"
+        },
+        {
+          "title": "OpenStreetMap way/628614053",
+          "url": "https://www.openstreetmap.org/way/628614053"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Afisha: yozuvlar kam, gid bilan borish yaxshi."
+    },
+    {
+      "id": "nuk-serekeev-uy-muzeyi",
+      "cityId": "nukus",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bazarbay Serekeev uy-muzeyi",
+        "ru": "Дом-музей Базарбая Серекеева",
+        "en": "Bazarbay Serekeev House-Museum"
+      },
+      "tagline": {
+        "uz": "Rassomning saqlab qolingan ustaxonasi",
+        "ru": "Нетронутая мастерская художника",
+        "en": "A painter's studio left as it was"
+      },
+      "description": {
+        "uz": "Mashhur qoraqalpoq rassomining mahalladagi uyi: birinchi qavatda kech davr asarlari, ikkinchi qavatda u qoldirgan ustaxona, hovlida o'tov.",
+        "ru": "Дом известного каракалпакского художника в махалле: на первом этаже поздние работы, на втором — его мастерская в нетронутом виде, во дворе юрта.",
+        "en": "The neighbourhood home of a noted Karakalpak painter: late works downstairs, his untouched studio upstairs and a yurt in the yard."
+      },
+      "address": "Nukus chekkasidagi mahalla",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Нукус — культурный маршрут",
+          "url": "https://www.afisha.uz/ru/tourism/2025/08/07/nukus",
+          "date": "2025-08-07"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Aniq manzil va tashrif tartibi (qo'ng'iroq bilan kiriladi) tekshirilsin."
+    },
+    {
+      "id": "nuk-atiyaj",
+      "cityId": "nukus",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Atiyaj restorani",
+        "ru": "Ресторан Atiyaj",
+        "en": "Atiyaj Restaurant"
+      },
+      "tagline": {
+        "uz": "Beshbarmak va jugeri gurtik",
+        "ru": "Бешбармак и джугери гуртик",
+        "en": "Beshbarmak and zhugeri gurtik"
+      },
+      "description": {
+        "uz": "Nukusdagi qoraqalpoq taomlari restorani: qo'y, mol yoki kurka go'shtli beshbarmak va jo'xori xamirli gurtik tayyorlanadi.",
+        "ru": "Ресторан каракалпакской кухни в Нукусе: бешбармак с бараниной, говядиной или индейкой и гуртик из джугари.",
+        "en": "Karakalpak-cuisine restaurant in Nukus serving beshbarmak with lamb, beef or turkey and sorghum-dough gurtik."
+      },
+      "address": "O'zbekiston guzari, Nukus",
+      "lat": 42.4366812,
+      "lng": 59.6271461,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "12:00-00:00",
+      "instagram": "@atiyaj_restoran_",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE project: 5 заведений в Нукусе с каракалпакской кухней",
+          "url": "https://www.weproject.media/articles/detail/5-zavedeniy-v-nukuse-gde-poprobovat-beshbarmak-i-drugie-blyuda-karakalpakskoy-kukhni/",
+          "date": "2026-09-23"
+        },
+        {
+          "title": "OpenStreetMap way/381766758",
+          "url": "https://www.openstreetmap.org/way/381766758"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMdagi 'A'tıyaj' nuqtasi shu restoran ekanligi nomga ko'ra moslashtirildi."
+    },
+    {
+      "id": "nuk-mizdahkan",
+      "cityId": "nukus",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mizdahkan nekropoli",
+        "ru": "Некрополь Миздахкан",
+        "en": "Mizdakhan Necropolis"
+      },
+      "tagline": {
+        "uz": "Qadimiy tepalikdagi maqbaralar shahri",
+        "ru": "Город мавзолеев на древнем холме",
+        "en": "A hilltop city of mausoleums"
+      },
+      "description": {
+        "uz": "Xo'jayli yaqinidagi ko'p asrlik qabriston-ziyoratgoh: maqbaralar, Mazlumxon Sulu maqbarasi va qadimiy shahar xarobalari. Mahalliylar orasida afsonalari ko'p.",
+        "ru": "Многовековое кладбище-святыня у Ходжейли с мавзолеями, в том числе Мазлумхан-Сулу, и руинами древнего города. О нём ходит много местных легенд.",
+        "en": "A centuries-old cemetery and shrine near Khodjeyli with mausoleums, including Mazlum Khan Sulu, and ruins of an ancient town, wrapped in local legends."
+      },
+      "address": "Xo'jayli tumani, Nukusdan ~20 km g'arbda",
+      "lat": 42.3977883,
+      "lng": 59.3843915,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Mizdahkan",
+          "url": "https://en.wikipedia.org/wiki/Mizdahkan"
+        },
+        {
+          "title": "OpenStreetMap way/168249296",
+          "url": "https://www.openstreetmap.org/way/168249296"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ma'muriy jihatdan Xo'jayli tumani; cityId 'nukus' qulaylik uchun."
+    },
+    {
+      "id": "nuk-chilpiq",
+      "cityId": "nukus",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chilpiq",
+        "ru": "Чильпык",
+        "en": "Chilpik Dakhma"
+      },
+      "tagline": {
+        "uz": "Amudaryo bo'yidagi zardushtiylar «sukunat minorasi»",
+        "ru": "Зороастрийская «башня молчания» у Амударьи",
+        "en": "Zoroastrian 'tower of silence' by the Amu Darya"
+      },
+      "description": {
+        "uz": "Tepalik ustidagi dumaloq paxsa devor — qadimgi zardushtiylarning dafn marosimi bilan bog'liq inshoot. Atrofdagi cho'l va daryo vodiysi manzarasi uchun ham boriladi.",
+        "ru": "Круглая глинобитная стена на вершине холма, связанная с погребальными обрядами зороастрийцев. Сюда приезжают и ради вида на пустыню и долину реки.",
+        "en": "A ring of mud-brick wall atop a hill, linked to ancient Zoroastrian funerary rites; also visited for its views over desert and river valley."
+      },
+      "address": "A380 avtoyo'li, 43-km, Amudaryo tumani",
+      "lat": 42.2641552,
+      "lng": 60.069876,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Atlas Obscura: Chilpik Tower of Silence",
+          "url": "https://www.atlasobscura.com/places/chilpik-tower-of-silence-dakhma"
+        },
+        {
+          "title": "UNESCO tentative list: Chilpik",
+          "url": "https://whc.unesco.org/fr/listesindicatives/6902/"
+        },
+        {
+          "title": "OpenStreetMap way/192125466",
+          "url": "https://www.openstreetmap.org/way/192125466"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Nukusdan janubi-sharqda (~45 km); Xiva–Nukus yo'lida. 2025-yilda UNESCO dastlabki ro'yxatiga kiritilgan (manbaga ko'ra)."
+    },
+    {
+      "id": "moy-kemalar-qabristoni",
+      "cityId": "moynaq",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mo'ynoq kemalar qabristoni",
+        "ru": "Кладбище кораблей в Муйнаке",
+        "en": "Moynaq Ship Cemetery"
+      },
+      "tagline": {
+        "uz": "Sobiq dengiz tubida zanglagan kemalar",
+        "ru": "Ржавые суда на бывшем дне моря",
+        "en": "Rusting ships on a vanished seabed"
+      },
+      "description": {
+        "uz": "Orol dengizi chekingach, quruqlikda qolib ketgan baliqchilar kemalari. Tepadagi yodgorlik va muzey Orol fojiasi haqida hikoya qiladi.",
+        "ru": "Рыболовецкие суда, оставшиеся на суше после отступления Аральского моря. Мемориал и музей над ними рассказывают об Аральской катастрофе.",
+        "en": "Fishing boats stranded on dry land after the Aral Sea retreated; the memorial and museum above them tell the story of the disaster."
+      },
+      "address": "Mo'ynoq, Orol yodgorligi (Aqqan juldız) yonida",
+      "lat": 43.7901951,
+      "lng": 59.0329517,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": 1,
+      "priceNote": "Orol muzeyi kirish 30 000 so'm (Journal of Nomads, 2026-03, tekshirilsin)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Journal of Nomads: Moynaq & Aral Sea guide",
+          "url": "https://www.journalofnomads.com/moynaq-aral-sea-disaster-uzbekistan/",
+          "date": "2026-03-09"
+        },
+        {
+          "title": "Wikipedia: Moynaq",
+          "url": "https://en.wikipedia.org/wiki/Moynaq"
+        },
+        {
+          "title": "OpenStreetMap way/487326694",
+          "url": "https://www.openstreetmap.org/way/487326694"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata kemalar ustidagi 'Aqqan juldız' yodgorligi (OSM). Muzey seshanba–yakshanba 09:00–18:00 (manbaga ko'ra). Har yili yaqinda Stihia festivali o'tadi."
+    },
+    {
+      "id": "moy-sudochye",
+      "cityId": "moynaq",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sudochye ko'llari",
+        "ru": "Озёра Судочье",
+        "en": "Sudochye Lakes"
+      },
+      "tagline": {
+        "uz": "Flamingo va qamishzorli cho'l ko'llari",
+        "ru": "Озёра с камышами и фламинго",
+        "en": "Reed-fringed lakes with flamingos"
+      },
+      "description": {
+        "uz": "Amudaryo deltasidagi ko'llar tizimi; qamishzorlarda kamyob qushlar, jumladan flamingolar uchraydi. Odatda Mo'ynoq yoki Ustyurt sayohatiga qo'shib boriladi.",
+        "ru": "Система озёр в дельте Амударьи; в камышах встречаются редкие птицы, включая фламинго. Обычно сюда заезжают в поездке на Муйнак или Устюрт.",
+        "en": "A delta lake system of the Amu Darya whose reedbeds host rare birds, flamingos among them; usually added to Moynaq or Ustyurt trips."
+      },
+      "address": "Mo'ynoq tumani, Qoraqalpog'iston",
+      "lat": 43.5112219,
+      "lng": 58.6103774,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Journal of Nomads: Moynaq & Aral Sea guide",
+          "url": "https://www.journalofnomads.com/moynaq-aral-sea-disaster-uzbekistan/",
+          "date": "2026-03-09"
+        },
+        {
+          "title": "OpenStreetMap relation/7232274",
+          "url": "https://www.openstreetmap.org/relation/7232274"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Borish faqat yo'ltanlamas avtomobil/tur bilan; koordinata ko'llar tizimining markazi."
+    }
+  ]
+}

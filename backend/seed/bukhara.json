@@ -10,14 +10,16 @@
       "lat": 39.7747,
       "lng": 64.4286
     },
-    "taxiBaseFare": 8000,
-    "taxiPerKm": 2500,
+    "taxiBaseFare": 4600,
+    "taxiPerKm": 2400,
     "emergency": {
+      "unified": "112",
       "fire": "101",
       "police": "102",
       "ambulance": "103",
       "gas": "104",
-      "unified": "112"
+      "emergency_ministry": "1050",
+      "tourist_hotline": "1173"
     }
   },
   "places": [

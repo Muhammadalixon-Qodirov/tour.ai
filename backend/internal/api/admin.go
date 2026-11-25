@@ -195,6 +195,7 @@ type placeInput struct {
 	CashOnly         *bool                      `json:"cashOnly"`
 	IsPartner        *bool                      `json:"isPartner"`
 	Images           *[]domain.Image            `json:"images"`
+	Contacts         *map[string]string         `json:"contacts"`
 	Texts            map[string]*placeTextInput `json:"texts"`
 }
 
@@ -250,6 +251,7 @@ func (in placeInput) apply(p *store.PlaceRecord, texts map[string]store.PlaceTex
 	set(&p.CashOnly, in.CashOnly)
 	set(&p.IsPartner, in.IsPartner)
 	set(&p.Images, in.Images)
+	set(&p.Contacts, in.Contacts)
 	for lang, ti := range in.Texts {
 		if ti == nil {
 			delete(texts, lang)
@@ -326,6 +328,12 @@ func (s *Server) validatePlace(r *http.Request, p store.PlaceRecord, texts map[s
 			fe.add("entryFee", "object or null")
 		}
 	}
+	for k, v := range p.Contacts {
+		if !slices.Contains([]string{"instagram", "telegram", "website", "phone"}, k) || !runeLen(v, 0, 200) {
+			fe.add("contacts", "instagram | telegram | website | phone, max 200 chars")
+			break
+		}
+	}
 	if len(p.Images) > 20 {
 		fe.add("images", "max 20")
 	}
@@ -393,7 +401,8 @@ func (s *Server) adminCreatePlace(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	p := store.PlaceRecord{Status: "draft", Novelty: domain.NoveltyNew, GeofenceRadiusM: 80, VisitMin: 45,
-		FamilyFriendly: true, EasyWalk: true, Interests: []string{}, Images: []domain.Image{}, Source: "manual"}
+		FamilyFriendly: true, EasyWalk: true, Interests: []string{}, Images: []domain.Image{}, Source: "manual",
+		Contacts: map[string]string{}}
 	texts := map[string]store.PlaceText{}
 	in.apply(&p, texts)
 	fe := s.validatePlace(r, p, texts)

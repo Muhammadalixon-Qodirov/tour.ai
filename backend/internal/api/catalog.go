@@ -151,6 +151,9 @@ func (s *Server) listCities(w http.ResponseWriter, r *http.Request) {
 	}
 	out := make([]cityDTO, 0, len(cities))
 	for _, c := range cities {
+		if c.PlacesCount == 0 {
+			continue // hali tasdiqlangan joyi yo'q shahar turistga ko'rinmaydi
+		}
 		cover := domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/city.svg"}
 		if c.CoverURL != nil && *c.CoverURL != "" {
 			cover = domain.Image{URL: *c.CoverURL}

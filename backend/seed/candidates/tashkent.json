@@ -1,0 +1,1762 @@
+{
+  "region": "tashkent",
+  "cities": [
+    {
+      "id": "tashkent",
+      "name": {
+        "uz": "Toshkent",
+        "ru": "Ташкент",
+        "en": "Tashkent"
+      },
+      "center": {
+        "lat": 41.2995,
+        "lng": 69.2401
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "tash-islamic-civilization-center",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "O'zbekistondagi Islom sivilizatsiyasi markazi",
+        "ru": "Центр исламской цивилизации в Узбекистане",
+        "en": "Center for Islamic Civilization in Uzbekistan"
+      },
+      "tagline": {
+        "uz": "Ulkan gumbazli yangi muzey-ilmiy majmua",
+        "ru": "Новый музейный комплекс под огромным куполом",
+        "en": "Vast new museum complex under a giant dome"
+      },
+      "description": {
+        "uz": "Hazrati Imom yonidagi yangi majmuada ilk islom sivilizatsiyasi, olimlar va noyob qo'lyozmalar haqida multimedia ekspozitsiyalar bor. Kechqurun binoda yorug'lik shousi bo'ladi.",
+        "ru": "Новый комплекс рядом с Хазрати Имам с мультимедийными залами об исламской цивилизации, учёных Востока и редких рукописях. Вечером на фасаде проходит световое шоу.",
+        "en": "A new complex beside Hazrati Imam with multimedia halls on Islamic civilisation, Central Asian scholars and rare manuscripts. A light show plays on the building in the evening."
+      },
+      "address": "Olcha o'tish yo'li 89a, Hazrati Imom majmuasi yonida, Olmazor tumani",
+      "lat": 41.3352458,
+      "lng": 69.2403965,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 3,
+      "priceNote": "O'zbekiston fuqarolari uchun 60 000 so'mdan, chet elliklar uchun guruhda 25$ (Afisha.uz, 2026-03-19)",
+      "hours": "09:00-22:00",
+      "instagram": null,
+      "telegram": null,
+      "website": "https://iccu.uz",
+      "sources": [
+        {
+          "title": "Afisha.uz: Когда и как можно посетить Центр исламской цивилизации",
+          "url": "https://www.afisha.uz/ru/gorod/2026/03/19/iccu",
+          "date": "2026-03-19"
+        },
+        {
+          "title": "Daryo: President reviews Center for Islamic Civilization",
+          "url": "https://daryo.uz/en/2026/03/18/uzbekistans-president-reviews-center-for-islamic-civilization-and-quran-hall-exhibition-in-tashkent/",
+          "date": "2026-03-18"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Rasmiy ochilish 2026-03-17 (Daryo). Bir manbada (Anadolu) 2026-08-28 deyilgan — ziddiyat. Narxlarni iticket.uz da tekshirish."
+    },
+    {
+      "id": "tash-iccu-childrens-museum",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "new",
+      "openedAt": "2026-06",
+      "name": {
+        "uz": "Interaktiv bolalar muzeyi",
+        "ru": "Интерактивный детский музей",
+        "en": "Interactive Children's Museum"
+      },
+      "tagline": {
+        "uz": "7–12 yoshli bolalar uchun ilk interaktiv muzey",
+        "ru": "Первый в стране интерактивный музей для детей",
+        "en": "Uzbekistan's first hands-on museum for kids"
+      },
+      "description": {
+        "uz": "Islom sivilizatsiyasi markazi hududida 1001 Inventions bilan birga ochilgan muzey. Bolalar fan va ixtirolar tarixini o'yin orqali o'rganadi.",
+        "ru": "Музей на территории Центра исламской цивилизации, созданный вместе с 1001 Inventions. Дети 7–12 лет знакомятся с наукой и изобретениями через игру.",
+        "en": "Set within the Center for Islamic Civilization and built with 1001 Inventions, it lets children aged 7–12 explore science and invention through play."
+      },
+      "address": "Islom sivilizatsiyasi markazi hududi, Olmazor tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: В Ташкенте открылся первый интерактивный детский музей",
+          "url": "https://www.weproject.media/articles/detail/v-tashkente-otkrylsya-pervyy-interaktivnyy-detskiy-muzey/",
+          "date": "2026-06-03"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Rasmiy nomi, narx va ish vaqti topilmadi; faqat bitta manba (zamin.uz ga havola bor). Koordinata: ICCU majmuasi ichida (41.3352, 69.2404) bo'lishi mumkin — tekshirish."
+    },
+    {
+      "id": "tash-cca",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "new",
+      "openedAt": "2026-09",
+      "name": {
+        "uz": "CCA Tashkent — Zamonaviy san'at markazi",
+        "ru": "Центр современного искусства CCA Tashkent",
+        "en": "Centre for Contemporary Arts Tashkent"
+      },
+      "tagline": {
+        "uz": "Eski tramvay deposida zamonaviy san'at markazi",
+        "ru": "Современное искусство в бывшем трамвайном депо",
+        "en": "Contemporary art in a 1912 tram depot"
+      },
+      "description": {
+        "uz": "1912-yilgi dizel stansiyasi va tramvay deposi binosi Studio KO loyihasi bilan san'at markaziga aylantirildi. Ko'rgazmalar, kutubxona, konsept-stor va restoran bor.",
+        "ru": "Здание дизельной электростанции и трамвайного депо 1912 года перестроено бюро Studio KO в первый постоянный центр современного искусства страны. Внутри выставки, библиотека, концепт-стор и ресторан.",
+        "en": "A 1912 diesel plant and tram depot reworked by Studio KO into the country's first permanent contemporary art centre, with galleries, a library, a concept store and a restaurant."
+      },
+      "address": "Amir Temur 2-o'tish ko'chasi 8 (ba'zi manbalarda Shahrisabz ko'chasi 6), Mirobod tumani",
+      "lat": 41.3064914,
+      "lng": 69.2799455,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@cca_tashkent",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Euronews: From tram depot to contemporary art",
+          "url": "https://www.euronews.com/culture/2026/09/09/from-tram-depot-to-contemporary-art-a-new-cultural-centre-looks-beyond-the-silk-road",
+          "date": "2026-09-09"
+        },
+        {
+          "title": "Kursiv: CCA Tashkent opens in historic tram depot",
+          "url": "https://uz.kursiv.media/en/2026-09-06/cca-tashkent-opens-in-historic-tram-depot-with-major-exhibition/",
+          "date": "2026-09-06"
+        },
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ochilish 2026-09-06; 'Hikmah' ko'rgazmasi 2027-01-31 gacha. Manzilda ziddiyat (Shahrisabz 6 / Amir Temur). Kirish narxi noma'lum."
+    },
+    {
+      "id": "tash-state-history-museum",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "new",
+      "openedAt": "2026-07",
+      "name": {
+        "uz": "O'zbekiston tarixi davlat muzeyi (yangilangan)",
+        "ru": "Государственный музей истории Узбекистана (после реконструкции)",
+        "en": "State Museum of History of Uzbekistan (renovated)"
+      },
+      "tagline": {
+        "uz": "150 yillik muzey yangi multimedia ekspozitsiya bilan",
+        "ru": "150-летний музей с новой мультимедийной экспозицией",
+        "en": "A 150-year-old museum reborn with multimedia halls"
+      },
+      "description": {
+        "uz": "2024-yildan ta'mirda bo'lgan muzey 2026-yil yozida qayta ochildi. Arxeologik topilmalar, Buyuk ipak yo'li va tarixiy shaxslar interaktiv tarzda ko'rsatiladi; bino 'Toshkent modernizmi' sifatida ham qiziq.",
+        "ru": "Закрытый с 2024 года музей вновь открылся летом 2026-го. Археология, Великий шёлковый путь и исторические личности показаны интерактивно, а само здание — образец ташкентского модернизма.",
+        "en": "Closed for renovation from 2024, the museum reopened in summer 2026 with interactive displays on archaeology, the Silk Road and historical figures; the building itself is a Tashkent modernist landmark."
+      },
+      "address": "Sharof Rashidov ko'chasi 3, Yunusobod tumani",
+      "lat": 41.31152,
+      "lng": 69.269333,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": "https://history-museum.uz",
+      "sources": [
+        {
+          "title": "Uzbektourism (gov.uz): Renovated State Museum of the History of Uzbekistan",
+          "url": "https://gov.uz/en/uzbektourism/news/view/197142",
+          "date": "2026-07-24"
+        },
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Aniq qayta ochilish sanasi, narx va ish vaqti topilmadi."
+    },
+    {
+      "id": "tash-suzani-by-kasimbaeva",
+      "cityId": "tashkent",
+      "category": "workshop",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "Suzani by Kasimbaeva",
+        "ru": "Галерея сюзане Suzani by Kasimbaeva",
+        "en": "Suzani by Kasimbaeva"
+      },
+      "tagline": {
+        "uz": "O'zbekistondagi eng katta so'zana va kashtachilik ustaxonasi",
+        "ru": "Самое большое сюзане страны и мастерская вышивки",
+        "en": "Home of Uzbekistan's largest suzani"
+      },
+      "description": {
+        "uz": "Suzuk-ota hunarmandlar mahallasidagi kashtachilik majmuasi: ustaxona, galereya, o'quv markazi va do'kon. Ipakni bo'yashdan tayyor so'zanagacha bo'lgan jarayonni ko'rish mumkin.",
+        "ru": "Комплекс вышивки в ремесленной махалле Сузук-ота: мастерская, галерея, учебный центр и магазин. Можно увидеть весь путь от окраски шёлка до готового сюзане.",
+        "en": "An embroidery complex in the Suzuk-ota artisans' mahalla with a workshop, gallery, school and shop, where you can follow the process from dyeing silk to a finished suzani."
+      },
+      "address": "Suzuk-ota hunarmandlar mahallasi, Shayxontohur tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "Majmua bo'ylab ekskursiya 100 000 so'm, choy/qahva bilan (Afisha.uz, 2026-03-03)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Первая в Узбекистане галерея сюзане Suzani by Kasimbaeva",
+          "url": "https://www.afisha.uz/ru/gorod/2026/03/03/suzani",
+          "date": "2026-03-03"
+        },
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Dushanba–shanba ishlaydi, yakshanba dam. Aniq manzil yo'q; Suzuk Ota maqbarasi OSM: 41.3182, 69.2257 — galereya aniq nuqtasini tekshirish."
+    },
+    {
+      "id": "tash-chilla-by-potters",
+      "cityId": "tashkent",
+      "category": "workshop",
+      "novelty": "new",
+      "openedAt": "2026",
+      "name": {
+        "uz": "CHILLa Coffee by Potters",
+        "ru": "CHILLa Coffee by Potters",
+        "en": "CHILLa Coffee by Potters"
+      },
+      "tagline": {
+        "uz": "Kulolchilik ustaxonasidagi qahvaxona va master-klass",
+        "ru": "Кофейня в гончарной мастерской с мастер-классами",
+        "en": "Coffee shop inside a potter's studio"
+      },
+      "description": {
+        "uz": "Navro'z bog'idagi kulol ustaxonasi qahvaxonaga aylangan: halva-kapuchino kabi o'ziga xos ichimliklar va har kuni bir soatlik kulolchilik master-klassi. Ikkinchi qavatda bog'ga qaragan terrasa bor.",
+        "ru": "Гончарная студия в парке «Навруз» превратилась в кофейню: авторские напитки вроде халва-капучино и ежедневные часовые мастер-классы по керамике. На втором этаже — терраса с видом на парк.",
+        "en": "A potter's studio in Navruz Park turned café, serving drinks like halva cappuccino and running daily one-hour pottery classes, with a terrace overlooking the park."
+      },
+      "address": "Navro'z bog'i, Xorazm ko'chasi, Labzak 12A/1, minora yonida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "food",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "Kulolchilik master-klassi 250 000 so'm, loy va pishirish bilan (Afisha.uz, 2026-10-21)",
+      "hours": "10:00-22:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: CHILLa Coffee — Toshkentda kafe va hunarmandchilikni birlashtirgan art-makon",
+          "url": "https://www.afisha.uz/uz/restaurants/2026/10/21/chill-a-coffee",
+          "date": "2026-10-21"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bitta manba. Ustaxona ~5 yil ishlagan, kafe formati 2026-yilda. Navro'z bog'i OSM: 41.3260, 69.2661 (aniq nuqta emas). Instagram akkauntini topish kerak."
+    },
+    {
+      "id": "tash-chocolate-museum",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "new",
+      "openedAt": "2025-04",
+      "name": {
+        "uz": "Shokolad muzeyi",
+        "ru": "Музей шоколада",
+        "en": "Chocolate Museum"
+      },
+      "tagline": {
+        "uz": "Markaziy Osiyodagi ilk shokolad muzeyi",
+        "ru": "Первый в Центральной Азии музей шоколада",
+        "en": "Central Asia's first chocolate museum"
+      },
+      "description": {
+        "uz": "Navro'z bog'idagi muzeyda shokoladdan yasalgan me'moriy obidalar va tarixiy shaxslar haykalchalari, shokolad tarixi haqida interaktiv zona va ishlab chiqarish sexi bor.",
+        "ru": "В парке «Навруз»: скульптуры из шоколада — миниатюры памятников архитектуры и исторических личностей, интерактивная зона об истории шоколада и цех.",
+        "en": "In Navruz Park: hand-made chocolate sculptures of landmarks and historical figures, an interactive zone on chocolate history and a production workshop."
+      },
+      "address": "Navro'z bog'i, Shayxontohur tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "art"
+      ],
+      "priceLevel": 2,
+      "priceNote": "Kattalar 75 000, bolalar 50 000, turistlar 100 000 so'm (Afisha.uz, 2025-04-21)",
+      "hours": "09:00-18:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Первый музей шоколада в Центральной Азии открылся в Ташкенте",
+          "url": "https://www.afisha.uz/ru/gorod/2025/04/21/chocolate-museum",
+          "date": "2025-04-21"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Iman Chocolate & Fruits tashabbusi. Bitta manba; hozir ham ishlayotganini tekshirish."
+    },
+    {
+      "id": "tash-artera-studio",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "new",
+      "openedAt": "2025-04",
+      "name": {
+        "uz": "Artera Studio",
+        "ru": "Artera Studio",
+        "en": "Artera Studio"
+      },
+      "tagline": {
+        "uz": "Ko'rgazma, rangtasvir va kulolchilik darslari makoni",
+        "ru": "Выставки, живопись и керамика в одном пространстве",
+        "en": "Exhibitions plus painting and ceramics classes"
+      },
+      "description": {
+        "uz": "Hamid Olimjon maydonidagi yangi ijodiy makon: yosh va taniqli rassomlar ko'rgazmalari, kattalar va bolalar uchun rangtasvir hamda kulolchilik mashg'ulotlari.",
+        "ru": "Новое творческое пространство на площади Хамида Алимджана: выставки молодых и известных художников, занятия живописью и керамикой для детей и взрослых.",
+        "en": "A new creative space on Hamid Olimjon Square hosting shows by emerging and established artists, plus painting and ceramics classes for children and adults."
+      },
+      "address": "Hamid Olimjon maydoni, Mirzo Ulug'bek tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "art",
+        "craft"
+      ],
+      "priceLevel": 0,
+      "priceNote": "Ochilish ko'rgazmasiga kirish bepul (gov.uz, 2025-04-21)",
+      "hours": "09:00-17:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "gov.uz (Ekologiya vazirligi): new art space in the capital hosts its first exhibition",
+          "url": "https://gov.uz/en/eco/news/view/47163",
+          "date": "2025-04-21"
+        },
+        {
+          "title": "UzDaily: Artera Studio presents 'Eski Shahar'",
+          "url": "https://www.uzdaily.uz/en/artera-studio-presents-eski-shahar-a-dialogue-between-tradition-and-modernity/",
+          "date": "2025-04"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ish vaqti birinchi ko'rgazma uchun berilgan. Hozirgi faoliyat va aniq manzilni tekshirish."
+    },
+    {
+      "id": "tash-zarkaynar-street",
+      "cityId": "tashkent",
+      "category": "monument",
+      "novelty": "new",
+      "openedAt": "2026-01",
+      "name": {
+        "uz": "Zarqaynar ko'chasi",
+        "ru": "Улица Заркайнар",
+        "en": "Zarkaynar Street"
+      },
+      "tagline": {
+        "uz": "Eski shahar ruhini saqlagan yangilangan ko'cha",
+        "ru": "Обновлённая улица со старым ташкентским духом",
+        "en": "Restored old-city lane near Hazrati Imam"
+      },
+      "description": {
+        "uz": "Hazrati Imom atrofidagi tarixiy mahallalar orqali o'tadigan ko'cha: loy devorlar, o'ymakor eshiklar va hovlilar saqlangan, yangi dam olish joylari qo'shilgan. Atrofdagi yuzlab uylar milliy uslubda ta'mirlangan.",
+        "ru": "Улица через исторические махалли у Хазрати Имам: глинобитные стены, резные двери и дворики сохранены, добавлены зоны отдыха. Сотни домов вокруг отремонтированы в национальном стиле.",
+        "en": "A street through the historic mahallas around Hazrati Imam, keeping clay walls, carved doors and courtyards while adding rest areas; hundreds of surrounding houses were restored in traditional style."
+      },
+      "address": "Zarqaynar ko'chasi, Olmazor/Shayxontohur tumanlari",
+      "lat": 41.3304455,
+      "lng": 69.2406233,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture",
+        "craft"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "UzDaily: President inspects renovated Zarkainar Street",
+          "url": "https://www.uzdaily.uz/en/president-of-uzbekistan-inspects-renovated-zarkainar-street-and-tourism-facilities-in-tashkents-old-city/",
+          "date": "2026-01-23"
+        },
+        {
+          "title": "WE Project: Гид по обновлённому Ташкенту 2026",
+          "url": "https://www.weproject.media/articles/detail/gid-po-obnovlennomu-tashkentu-2026-novye-lokatsii-kontseptualnye-ulitsy-i-gastro-trendy/",
+          "date": "2026-04-03"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Kategoriya ro'yxatida 'ko'cha' yo'q — 'monument' tanlandi. Koordinata ko'chaning bir segmenti."
+    },
+    {
+      "id": "tash-uzbekistan-ovozi-street",
+      "cityId": "tashkent",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2025-09",
+      "name": {
+        "uz": "O'zbekiston Ovozi gastro-ko'chasi",
+        "ru": "Гастроулица «Узбекистон овози»",
+        "en": "Uzbekistan Ovozi Food Street"
+      },
+      "tagline": {
+        "uz": "Qahvaxona va butiklar bilan tunu kun ochiq ko'cha",
+        "ru": "Круглосуточная улица кофеен и бутиков",
+        "en": "A 24-hour street of cafés and boutiques"
+      },
+      "description": {
+        "uz": "2,1 km lik ko'cha qayta qurilib, keng piyodalar yo'lagi, velosiped yo'li va dam olish maydonchalari paydo bo'ldi. Bu yerda ko'plab qahvaxonalar va do'konlar, ularning bir qismi kecha-kunduz ishlaydi.",
+        "ru": "Улицу длиной 2,1 км перестроили: широкие тротуары, велодорожки и зоны отдыха. Здесь много кофеен и магазинов, часть из них работает круглосуточно.",
+        "en": "This 2.1 km street was rebuilt with wide pavements, bike lanes and seating, and is now lined with cafés and shops, many open around the clock."
+      },
+      "address": "O'zbekiston Ovozi ko'chasi, Mirzo Ulug'bek tumani",
+      "lat": 41.3117003,
+      "lng": 69.2882087,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "shopping",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Spot.uz: 24-hour street",
+          "url": "https://www.spot.uz/ru/2025/09/12/24-hour-street/",
+          "date": "2025-09-12"
+        },
+        {
+          "title": "Afisha.uz: Как выглядит улица Узбекистон Овози после реконструкции",
+          "url": "https://www.afisha.uz/ru/gorod/2025/11/11/uzbekistan-ovozi",
+          "date": "2025-11-11"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ko'cha — 'park' (yangi jamoat makoni) sifatida belgilandi; kategoriyani admin tanlasin."
+    },
+    {
+      "id": "tash-shevchenko-pedestrian-street",
+      "cityId": "tashkent",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2024",
+      "name": {
+        "uz": "Taras Shevchenko piyodalar ko'chasi",
+        "ru": "Пешеходная улица Тараса Шевченко",
+        "en": "Taras Shevchenko Pedestrian Street"
+      },
+      "tagline": {
+        "uz": "Markazdagi mashinasiz gastro-ko'cha",
+        "ru": "Пешеходная гастроулица в центре",
+        "en": "Car-free dining street in the centre"
+      },
+      "description": {
+        "uz": "2024-yildagi rekonstruksiyadan keyin mashinalar uchun yopilgan ko'cha restoranlar va kafelar bilan sayr joyiga aylangan.",
+        "ru": "После реконструкции 2024 года улица закрыта для машин и превратилась в прогулочную зону с ресторанами и кафе.",
+        "en": "Closed to cars since its 2024 rebuild, the street is now a walking zone lined with restaurants and cafés."
+      },
+      "address": "Taras Shevchenko ko'chasi, Mirobod tumani",
+      "lat": 41.3012945,
+      "lng": 69.2765523,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Anhor.uz: улица Тараса Шевченко стала пешеходной",
+          "url": "https://anhor.uz/ru/news/taras-shevchenko",
+          "date": "2025-11-21"
+        },
+        {
+          "title": "Afisha.uz: 10 ресторанов, ради которых стоит приехать в Ташкент",
+          "url": "https://www.afisha.uz/ru/tourism/2026/11/12/tashkent-restaurants",
+          "date": "2026-11-12"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Piyodalar qismining aniq chegarasi noma'lum; koordinata OSM dagi bitta segment."
+    },
+    {
+      "id": "tash-shavi-coffee",
+      "cityId": "tashkent",
+      "category": "cafe",
+      "novelty": "new",
+      "openedAt": "2026-03",
+      "name": {
+        "uz": "Shavi Coffee Roasters",
+        "ru": "Shavi Coffee Roasters",
+        "en": "Shavi Coffee Roasters"
+      },
+      "tagline": {
+        "uz": "Tbilisidan kelgan speciality qahvaxona",
+        "ru": "Спешелти-кофейня из Тбилиси",
+        "en": "Specialty coffee roasters from Tbilisi"
+      },
+      "description": {
+        "uz": "Gruzin brendining Toshkentdagi qahvaxonasi: donlar shu yerda qovuriladi, filtr-qahva va gruzincha desertlar bor. Mavsumiy blendlar, masalan, Navro'z uchun 'Sumalak'.",
+        "ru": "Грузинский бренд, который обжаривает зерно прямо в Ташкенте: фильтр-кофе, десерты по тбилисским рецептам и сезонные бленды вроде «Сумаляк».",
+        "en": "A Georgian roaster that roasts beans in Tashkent, serving filter coffee, Tbilisi-style desserts and seasonal blends such as a Navruz 'Sumalak'."
+      },
+      "address": "Buxoro ko'chasi 26 (yana bir filial: Shota Rustaveli 43), Mirobod tumani",
+      "lat": 41.3105382,
+      "lng": 69.2698968,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": "Espresso 28–30 ming, kapuchino 40–45 ming so'm (Afisha.uz, 2026-09-24)",
+      "hours": null,
+      "instagram": "@shavi.coffee.uz",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Tbilisidan Toshkentga — Shavi Coffee",
+          "url": "https://www.afisha.uz/uz/restaurants/2026/09/24/shavi-coffee",
+          "date": "2026-09-24"
+        },
+        {
+          "title": "WE Project: Гид по обновлённому Ташкенту 2026",
+          "url": "https://www.weproject.media/articles/detail/gid-po-obnovlennomu-tashkentu-2026-novye-lokatsii-kontseptualnye-ulitsy-i-gastro-trendy/",
+          "date": "2026-04-03"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata Buxoro 26 filiali (OSM nodi)."
+    },
+    {
+      "id": "tash-mushtum-makon",
+      "cityId": "tashkent",
+      "category": "cafe",
+      "novelty": "new",
+      "openedAt": "2026-07",
+      "name": {
+        "uz": "Mushtum Makon",
+        "ru": "Mushtum Makon",
+        "en": "Mushtum Makon"
+      },
+      "tagline": {
+        "uz": "'Mushtum' jurnali binosida retro burgerxona",
+        "ru": "Ретро-бургерная в здании журнала «Муштум»",
+        "en": "Retro burger joint in a satire magazine's old home"
+      },
+      "description": {
+        "uz": "'Sharq' nashriyoti binosidagi kafe: zira va piyozli 'Jaydari' smesh-burger, tandir tovuqli burger va o'zbek retro musiqasi. Nomi shu binoda chiqqan satirik jurnaldan olingan.",
+        "ru": "Кафе в здании издательства «Шарк»: смэш-бургер «Жайдари» с зирой, бургер с тандырной курицей и узбекская ретро-музыка. Название — в честь сатирического журнала, выходившего в этом здании.",
+        "en": "A café in the Sharq publishing house serving a cumin-spiced 'Jaydari' smash burger and tandir-chicken burgers to Uzbek retro pop, named after the satirical magazine once printed here."
+      },
+      "address": "Buxoro ko'chasi 26, 'Sharq' nashriyoti binosi, Mirobod tumani",
+      "lat": 41.3106,
+      "lng": 69.2700936,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": "https://mshtm.uz",
+      "sources": [
+        {
+          "title": "Afisha.uz: Mushtum Makon — retro muhit va jaydari burgerlar",
+          "url": "https://www.afisha.uz/uz/restaurants/2026/08/04/mushtum",
+          "date": "2026-08-04"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bitta manba. Koordinata — OSM dagi Buxoro 26 binosi. Narx/ish vaqti noma'lum."
+    },
+    {
+      "id": "tash-bazar-restaurant",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2025",
+      "name": {
+        "uz": "Bazar",
+        "ru": "Bazar",
+        "en": "Bazar"
+      },
+      "tagline": {
+        "uz": "Bozor ta'mlarini zamonaviy talqin qiluvchi restoran",
+        "ru": "Ресторан с новым прочтением базарных вкусов",
+        "en": "Bazaar flavours reimagined by a local chef"
+      },
+      "description": {
+        "uz": "Oshpaz Ilhom Xudoberganov bolalikdagi bozor ta'mlari — manti, qutob, somsa, cheburekni zamonaviy texnika bilan tayyorlaydi. Ochiq oshxona va naqshinkor koshinli ikki qavatli zal.",
+        "ru": "Шеф Ильхом Худоберганов переосмысляет базарные вкусы детства — манты, кутабы, самсу, чебуреки. Открытая кухня и двухэтажный зал с орнаментальной плиткой.",
+        "en": "Chef Ilhom Khudoberganov reworks childhood bazaar staples—manti, kutab, samsa, chebureki—in an open-kitchen, two-level room with patterned tiles."
+      },
+      "address": "O'qchi ko'chasi 3, Tashkent City Boulevard hududi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@bazar.tashkent",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: 10 ресторанов, ради которых стоит приехать в Ташкент",
+          "url": "https://www.afisha.uz/ru/tourism/2026/11/12/tashkent-restaurants",
+          "date": "2026-11-12"
+        },
+        {
+          "title": "WE Project: 6 stylish places in Tashkent for Uzbek cuisine",
+          "url": "https://weproject.media/en/articles/detail/6-stylish-places-in-tashkent-for-uzbek-cuisine-and-atmosphere/",
+          "date": "2026-11-03"
+        },
+        {
+          "title": "Borjomi Gastro-Guide: Bazar",
+          "url": "https://gastroguide.borjomi.com/en/restaurants/bazar",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ochilish yili taxminan 2025 (oshpaz 2024-da qaytgan, 2025-12 sharhlari bor). OSM da topilmadi."
+    },
+    {
+      "id": "tash-plov-museum",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2025-10",
+      "name": {
+        "uz": "Palov muzeyi",
+        "ru": "Музей плова",
+        "en": "Plov Museum"
+      },
+      "tagline": {
+        "uz": "Turli viloyat ustalari palov damlaydigan 'palov teatri'",
+        "ru": "«Театр плова» с мастерами из разных регионов",
+        "en": "A 'theatre of plov' by masters from every region"
+      },
+      "description": {
+        "uz": "Salar bo'yidagi majmuada turli hududlar ustalari o'z retsepti bo'yicha palov tayyorlaydi, mehmonlar jarayonni ko'rib tatib ko'radi. Ichkarida qadimiy ustunlar, yog'och o'ymakorligi va kulolchilik namunalari bor.",
+        "ru": "В комплексе на берегу Салара мастера из разных регионов готовят плов по своим рецептам на глазах у гостей. Внутри — старинные колонны, резьба по дереву и керамика.",
+        "en": "On the Salar canal, cooks from different regions make plov to their own recipes in front of guests, amid antique columns, woodcarving and ceramics."
+      },
+      "address": "Katta Darxon ko'chasi 55, Salar bo'yi, Mirzo Ulug'bek tumani",
+      "lat": 41.3315153,
+      "lng": 69.312449,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "history",
+        "craft"
+      ],
+      "priceLevel": 3,
+      "priceNote": "Asoschi so'ziga ko'ra palov boshqa joylardan ~3 baravar qimmat bo'lishi mumkin (WE Project, 2025-10-13)",
+      "hours": null,
+      "instagram": "@caravan_group",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: Музей плова в Ташкенте — Тимур Мусин",
+          "url": "https://www.weproject.media/articles/detail/muzey-plova-v-tashkente-timur-musin-o-tom-kak-sokhranit-traditsii-i-vdokhnovit-novoe-pokolenie/",
+          "date": "2025-10-13"
+        },
+        {
+          "title": "Afisha.uz: 10 ресторанов, ради которых стоит приехать в Ташкент",
+          "url": "https://www.afisha.uz/ru/tourism/2026/11/12/tashkent-restaurants",
+          "date": "2026-11-12"
+        }
+      ],
+      "confidence": "high",
+      "notes": "2025-10 da test rejimida edi. Caravan Group loyihasi. Instagram — guruh akkaunti."
+    },
+    {
+      "id": "tash-havo-gastropark",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2025-06",
+      "name": {
+        "uz": "H.A.V.O.",
+        "ru": "H.A.V.O.",
+        "en": "H.A.V.O."
+      },
+      "tagline": {
+        "uz": "Markazda plyaj kayfiyatidagi ochiq gastro-park",
+        "ru": "Гастропарк под открытым небом с пляжным вайбом",
+        "en": "Open-air food park with a beach-club vibe"
+      },
+      "description": {
+        "uz": "Shahar markazidagi ochiq osmon ostidagi gastronomik makon: turli oshxonalar, mualliflik ichimliklari va sovutish tizimi bilan yozgi kechalar uchun.",
+        "ru": "Гастрономическое пространство под открытым небом в центре: разные кухни, авторские напитки и система охлаждения для летних вечеров.",
+        "en": "A central open-air food space with several cuisines, signature drinks and cooling systems built for summer nights."
+      },
+      "address": "Shahrisabz ko'chasi 31B (ma'lumotnoma bo'yicha)",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "19:00-05:00",
+      "instagram": "@havo.tashkent",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 10 самых необычных кафе и ресторанов, открывшихся этим летом",
+          "url": "https://www.weproject.media/articles/detail/10-samykh-neobychnykh-kafe-i-restoranov-tashkenta-kotorye-otkrylis-etim-letom/",
+          "date": "2025-08-12"
+        },
+        {
+          "title": "Yellow Pages Uzbekistan: H.A.V.O.",
+          "url": "https://www.yellowpages.uz/kompaniya/h-a-v-o",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Manzil va ish vaqti faqat ma'lumotnomadan; mavsumiy bo'lishi mumkin. Yozda ishlashini tekshirish."
+    },
+    {
+      "id": "tash-yangiobod-flea-market",
+      "cityId": "tashkent",
+      "category": "bazaar",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Yangiobod bozori (baraholka)",
+        "ru": "Янгиабадский рынок (барахолка)",
+        "en": "Yangiobod Flea Market"
+      },
+      "tagline": {
+        "uz": "Sovet davri buyumlari va antikvar topiladigan baraholka",
+        "ru": "Барахолка с антиквариатом и советским винтажом",
+        "en": "Flea market for antiques and Soviet-era finds"
+      },
+      "description": {
+        "uz": "Mashhur 'Tezikovka'ning vorisi: eski mebel, chinni, kitoblar, markalar, soatlar va radiolar sotiladi. Hokimiyat bozorni formatini saqlagan holda obodonlashtirishni rejalashtirmoqda.",
+        "ru": "Наследник легендарной «Тезиковки»: старая мебель, фарфор, книги, марки, часы и радиоприёмники. Хокимият планирует благоустройство с сохранением формата.",
+        "en": "Heir to the legendary Tezikovka market, selling old furniture, porcelain, books, stamps, watches and radios; the city plans upgrades while keeping its format."
+      },
+      "address": "Tolariq ko'chasi, Yangiobod dahasi, Yashnobod tumani",
+      "lat": 41.2583021,
+      "lng": 69.3535143,
+      "coordsSource": "osm",
+      "interests": [
+        "shopping",
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: Где в Ташкенте купить антиквариат — гид по базару Янгиабад",
+          "url": "https://www.weproject.media/articles/detail/gde-v-tashkente-kupit-tot-samyy-antikvariat-gid-po-bazaru-yangiabad/",
+          "date": null
+        },
+        {
+          "title": "Spot.uz: Yangiabad bazaar",
+          "url": "https://www.spot.uz/ru/2026/08/18/yangiabad-bazaar/",
+          "date": "2026-08-18"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Asosan dam olish kunlari ishlaydi deb aytiladi — tekshirish. OSM da 'Янгиабад (барахолка)' obyekti; boshqa 'Yangiobod bozori' (Tuzel) bilan adashtirmaslik. Rekonstruksiya rejasi bor."
+    },
+    {
+      "id": "tash-ming-urik",
+      "cityId": "tashkent",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Mingo'rik qadimiy shahar xarobalari",
+        "ru": "Городище Минг-Урюк",
+        "en": "Ming-Urik Ancient Settlement"
+      },
+      "tagline": {
+        "uz": "Toshkentning arxeologik boshlanishi",
+        "ru": "Археологическое начало Ташкента",
+        "en": "Where Tashkent's story began"
+      },
+      "description": {
+        "uz": "Shahar markazidagi tepalik: milodiy I asrdan boshlangan qal'a va hukmdor saroyi qoldiqlari. Ko'pchilik bilmaydigan, tinch tarixiy joy.",
+        "ru": "Холм в центре города с остатками цитадели и дворца правителя, старейшие слои — I век н. э. Тихое место, о котором мало кто знает.",
+        "en": "A mound in the city centre holding the remains of a citadel and ruler's palace dating back to the 1st century AD—quiet and little visited."
+      },
+      "address": "Moshtabib ko'chasi, Mirobod tumani",
+      "lat": 41.2984063,
+      "lng": 69.2859285,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 8 необычных музеев Ташкента",
+          "url": "https://www.weproject.media/articles/detail/8-neobychnykh-muzeev-tashkenta-o-kotorykh-malo-kto-znaet/",
+          "date": "2025-10-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ochiqligi va kirish tartibini tekshirish."
+    },
+    {
+      "id": "tash-railway-museum",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Temir yo'l texnikasi muzeyi",
+        "ru": "Музей железнодорожной техники",
+        "en": "Railway Technology Museum"
+      },
+      "tagline": {
+        "uz": "Ochiq osmon ostida 30 dan ortiq lokomotiv",
+        "ru": "Более 30 локомотивов под открытым небом",
+        "en": "30+ vintage locomotives in the open air"
+      },
+      "description": {
+        "uz": "Bug', teplovoz va elektrovozlar to'plami ochiq maydonda; kichik poyezdda ekskursiya qilish mumkin. Bolali oilalar uchun qiziq.",
+        "ru": "Паровозы, тепловозы и электровозы разных эпох на открытой площадке, есть экскурсии на маленьком поезде. Интересно семьям с детьми.",
+        "en": "Steam, diesel and electric engines from different eras on an open-air site, with rides on a small train—great for families."
+      },
+      "address": "Turkiston ko'chasi 6, Toshkent vokzali yaqinida, Mirobod tumani",
+      "lat": 41.2959202,
+      "lng": 69.2916806,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 8 необычных музеев Ташкента",
+          "url": "https://www.weproject.media/articles/detail/8-neobychnykh-muzeev-tashkenta-o-kotorykh-malo-kto-znaet/",
+          "date": "2025-10-25"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Narx va ish vaqti noma'lum."
+    },
+    {
+      "id": "tash-photo-house",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Toshkent fotografiya uyi",
+        "ru": "Ташкентский дом фотографии",
+        "en": "Tashkent House of Photography"
+      },
+      "tagline": {
+        "uz": "Me'moriy yodgorlik binosidagi foto-galereya",
+        "ru": "Фотогалерея в здании-памятнике архитектуры",
+        "en": "Photo gallery in a heritage building"
+      },
+      "description": {
+        "uz": "Mahalliy va xorijiy fotograflar ko'rgazmalari o'tadigan galereya. Binoning o'zi ham chiroyli me'moriy obida.",
+        "ru": "Галерея с выставками местных и зарубежных фотографов, расположенная в красивом историческом здании.",
+        "en": "Hosts exhibitions by local and international photographers inside a handsome historic building."
+      },
+      "address": "Istiqbol ko'chasi 3, Mirobod tumani",
+      "lat": 41.3090541,
+      "lng": 69.2813279,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "architecture"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 8 необычных музеев Ташкента",
+          "url": "https://www.weproject.media/articles/detail/8-neobychnykh-muzeev-tashkenta-o-kotorykh-malo-kto-znaet/",
+          "date": "2025-10-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Narx va ish vaqti noma'lum."
+    },
+    {
+      "id": "tash-bonum-factum",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": "2010",
+      "name": {
+        "uz": "Bonum Factum galereyasi",
+        "ru": "Галерея Bonum Factum",
+        "en": "Bonum Factum Gallery"
+      },
+      "tagline": {
+        "uz": "Sobiq bomboboshpanadagi zamonaviy san'at galereyasi",
+        "ru": "Галерея современного искусства в бывшем бомбоубежище",
+        "en": "Contemporary art in a former bomb shelter"
+      },
+      "description": {
+        "uz": "Toshkentdagi ilk xususiy galereyalardan biri: yosh rassomlarni qo'llab-quvvatlaydi, ko'rgazmalar, ma'ruzalar va master-klasslar o'tkazadi.",
+        "ru": "Одна из первых частных галерей Ташкента: поддерживает молодых художников, проводит выставки, лекции и мастер-классы.",
+        "en": "One of Tashkent's first private galleries, backing young artists with exhibitions, talks and workshops."
+      },
+      "address": "Sodiq Azimov 3-o'tish ko'chasi 20A, Yashnobod tumani",
+      "lat": 41.3050645,
+      "lng": 69.2939784,
+      "coordsSource": "osm",
+      "interests": [
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "12:00-20:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        },
+        {
+          "title": "Afisha.uz: Bonum Factum Gallery",
+          "url": "https://www.afisha.uz/ru/places/bonum-factum-gallery",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Bomboboshpana haqidagi ma'lumot faqat WE Project da. Ish vaqti Afisha bo'yicha."
+    },
+    {
+      "id": "tash-hlmrdv-gallery",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": "2014",
+      "name": {
+        "uz": "Hlmrdv Gallery",
+        "ru": "Hlmrdv Gallery",
+        "en": "Hlmrdv Gallery"
+      },
+      "tagline": {
+        "uz": "San'at va dizayn chorrahasidagi galereya",
+        "ru": "Галерея на стыке искусства и дизайна",
+        "en": "Where Central Asian art meets design"
+      },
+      "description": {
+        "uz": "Me'mor Ulug'bek Xolmuradov galereyasi: Markaziy Osiyo rassomlari asarlari, mualliflik zargarlik buyumlari, san'at kitoblari va dizayn predmetlari.",
+        "ru": "Галерея архитектора Улугбека Холмурадова: работы художников Центральной Азии, авторские украшения, книги по искусству и предметы дизайна.",
+        "en": "Architect Ulugbek Kholmuradov's gallery showing Central Asian artists alongside designer jewellery, art books and design objects."
+      },
+      "address": "Nukus ko'chasi 31/7, Mirobod tumani",
+      "lat": 41.2929155,
+      "lng": 69.2825513,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Bitta manba (+OSM obyekti). Ish vaqti noma'lum."
+    },
+    {
+      "id": "tash-fine-arts-gallery",
+      "cityId": "tashkent",
+      "category": "gallery",
+      "novelty": "hidden",
+      "openedAt": "2004",
+      "name": {
+        "uz": "O'zbekiston tasviriy san'at galereyasi",
+        "ru": "Галерея изобразительного искусства Узбекистана",
+        "en": "Fine Arts Gallery of Uzbekistan"
+      },
+      "tagline": {
+        "uz": "XX asr o'zbek rassomlari bo'yicha 15 zalli galereya",
+        "ru": "15 залов узбекской живописи XX века",
+        "en": "15 halls of 20th-century Uzbek art"
+      },
+      "description": {
+        "uz": "Mustaqillik maydoni yaqinidagi davlat galereyasi: XX asr va zamonaviy o'zbek rassomlari asarlari, kinozal va master-klass studiyasi.",
+        "ru": "Государственная галерея у площади Мустакиллик: работы узбекских художников XX века и современных авторов, кинозал и студия мастер-классов.",
+        "en": "A state gallery near Mustaqillik Square with 20th-century and contemporary Uzbek art, a cinema hall and a workshop studio."
+      },
+      "address": "Buyuk Turon ko'chasi 2, Yunusobod tumani",
+      "lat": 41.3155213,
+      "lng": 69.2712588,
+      "coordsSource": "osm",
+      "interests": [
+        "art"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 10 музеев и галерей Ташкента",
+          "url": "https://weproject.media/articles/detail/10-muzeev-i-galerey-tashkenta-ot-drevnikh-artefaktov-do-sovremennogo-iskusstva/",
+          "date": "2026-09-10"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Turistlar kam biladi, lekin mashhur muassasa. Narx noma'lum."
+    },
+    {
+      "id": "tash-abulkasim-madrasa",
+      "cityId": "tashkent",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abulqosim madrasasi hunarmandlari",
+        "ru": "Мастерские в медресе Абулкасым",
+        "en": "Abulkasim Madrasa Craft Workshops"
+      },
+      "tagline": {
+        "uz": "Hujralarda ishlayotgan ustalar ustaxonalari",
+        "ru": "Ремесленники за работой в старых худжрах",
+        "en": "Watch artisans at work in old student cells"
+      },
+      "description": {
+        "uz": "XIX asr madrasasining hujralarida yog'och o'ymakorlari, kandakorlar, kulollar va rassomlar ishlaydi; ularning ishini ko'rish va buyum xarid qilish mumkin.",
+        "ru": "В худжрах медресе XIX века работают резчики по дереву, чеканщики, керамисты и художники — можно наблюдать за работой и купить изделия.",
+        "en": "In the cells of a 19th-century madrasa, woodcarvers, metal chasers, ceramists and painters work in view of visitors and sell their pieces."
+      },
+      "address": "Xalqlar do'stligi saroyi va Oliy Majlis binosi orasida",
+      "lat": 41.3067,
+      "lng": 69.2399,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "craft",
+        "history",
+        "shopping"
+      ],
+      "priceLevel": 0,
+      "priceNote": "Kirish bepul (Eurasia.travel, sana yo'q)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Abulkasym Madrassah",
+          "url": "https://en.wikipedia.org/wiki/Abulkasym_Madrassah",
+          "date": null
+        },
+        {
+          "title": "Tashkent City Administration: Abulkasim madrasa",
+          "url": "https://tashkent.uz/en/city/interesting-places/19",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Madrasa qurilgan sanasida manbalar ziddiyatli. Kunduzi tashrif tavsiya etiladi."
+    },
+    {
+      "id": "tash-rakhimov-ceramics",
+      "cityId": "tashkent",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Rahimovlar kulolchilik ustaxonasi",
+        "ru": "Керамическая студия Рахимовых",
+        "en": "Rakhimov Ceramics Studio"
+      },
+      "tagline": {
+        "uz": "Bir necha avlod kulollar sulolasi ustaxonasi",
+        "ru": "Мастерская династии керамистов",
+        "en": "Workshop of a multi-generation potters' dynasty"
+      },
+      "description": {
+        "uz": "Eski shahardagi oilaviy ustaxona: Akbar Rahimov va uning o'g'li Shohrux an'anaviy sopol san'atini davom ettiradi. 2005-yildan ustoz-shogird maktabi ishlaydi; tashrif oldindan kelishib.",
+        "ru": "Семейная мастерская в старом городе: Акбар Рахимов и его сын Шохрух продолжают традиции керамики. С 2005 года здесь работает школа «мастер–ученик», визит по договорённости.",
+        "en": "A family studio in the old city where Akbar Rakhimov and his son Shokhrukh carry on the ceramic tradition; a master-apprentice school has run here since 2005. Visits by appointment."
+      },
+      "address": "Ko'kcha Darvoza ko'chasi 15, Shayxontohur tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Akbar Rakhimov",
+          "url": "https://www.advantour.com/uzbekistan/artisans/akbar-rakhimov.htm",
+          "date": null
+        },
+        {
+          "title": "Homo Faber: Akbar Rakhimov",
+          "url": "https://www.homofaber.com/en/discover/rakhimov-akbar-iwt1fh",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Faqat oldindan kelishilgan holda. OSM da aniq nuqta topilmadi (faqat Ko'kcha Darvoza 1-tor ko'chasi)."
+    },
+    {
+      "id": "tash-japanese-garden",
+      "cityId": "tashkent",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Yapon bog'i",
+        "ru": "Японский сад",
+        "en": "Japanese Garden"
+      },
+      "tagline": {
+        "uz": "Ko'l, ko'prikchalar va sakura bilan tinch bog'",
+        "ru": "Тихий сад с прудом, мостиками и сакурой",
+        "en": "Quiet pond garden, lovely in spring bloom"
+      },
+      "description": {
+        "uz": "Yunusoboddagi kichik bog': ko'l, tosh yo'lakchalar va ko'prikchalar, bahorda gullagan daraxtlar. Suratga olish va sayr uchun yoqimli joy.",
+        "ru": "Небольшой сад в Юнусабаде с прудом, каменными дорожками и мостиками; весной здесь цветут деревья. Хорош для прогулок и фото.",
+        "en": "A small Yunusabad garden with a pond, stone paths and bridges, at its best when the trees bloom in spring."
+      },
+      "address": "Amir Temur ko'chasi, InterContinental mehmonxonasi orqasida, Yunusobod tumani",
+      "lat": 41.3395531,
+      "lng": 69.2820214,
+      "coordsSource": "osm",
+      "interests": [
+        "nature"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Весенняя эстетика — Японский сад 2026",
+          "url": "https://www.afisha.uz/ru/gorod/2026/03/31/yaponbogi",
+          "date": "2026-03-31"
+        },
+        {
+          "title": "Uzbekistan.travel: Japanese Garden",
+          "url": "https://uzbekistan.travel/en/o/japanese-garden",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Kirish pullik (20–40 ming so'm, sharhlarda turlicha) va ish vaqti manbalarda ziddiyatli — priceNote qo'yilmadi."
+    },
+    {
+      "id": "tash-navruz-park",
+      "cityId": "tashkent",
+      "category": "park",
+      "novelty": "hidden",
+      "openedAt": "2019",
+      "name": {
+        "uz": "Navro'z bog'i",
+        "ru": "Парк «Навруз»",
+        "en": "Navruz Park"
+      },
+      "tagline": {
+        "uz": "Etnografik qishloq, amfiteatr va hunar makonlari",
+        "ru": "Этнодеревня, амфитеатр и ремесленные пространства",
+        "en": "Ethno-village park with crafts and an amphitheatre"
+      },
+      "description": {
+        "uz": "Labzakdagi bog'da etnografik qishloq va Navro'z bayramlari uchun amfiteatr qurilgan. Hududda shokolad muzeyi va kulolchilik qahvaxonasi ham bor.",
+        "ru": "Парк на Лабзаке с этнографической деревней и амфитеатром для празднования Навруза. Здесь же музей шоколада и гончарная кофейня.",
+        "en": "A Labzak park with an ethnographic village and an amphitheatre for Navruz celebrations, also home to a chocolate museum and a pottery café."
+      },
+      "address": "Labzak, Xorazm ko'chasi, Shayxontohur tumani",
+      "lat": 41.3260125,
+      "lng": 69.2661099,
+      "coordsSource": "osm",
+      "interests": [
+        "nature",
+        "craft",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "UzDaily: Navruz park to demonstrate national traditions",
+          "url": "https://www.uzdaily.uz/en/navruz-park-to-demonstrate-national-traditions/",
+          "date": null
+        },
+        {
+          "title": "President.uz: Navruz park visit",
+          "url": "https://www.president.uz/en/lists/view/2837",
+          "date": "2019-08-30"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ochilish taxminan 2019. Kirish bepulligini tekshirish."
+    },
+    {
+      "id": "tash-pumpkin-house-museum",
+      "cityId": "tashkent",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qovoq uy-muzeyi",
+        "ru": "Дом-музей тыквы",
+        "en": "Pumpkin House Museum"
+      },
+      "tagline": {
+        "uz": "Bezatilgan qovoqlardan iborat oilaviy uy-muzey",
+        "ru": "Семейный музей расписных тыкв",
+        "en": "A family's museum of painted gourds"
+      },
+      "description": {
+        "uz": "Ustoz er-xotin Po'latovlar manzarali qovoq yetishtirib, ularni bezab, uyida ko'rgazma qilishgan. Kam tanilgan, o'ziga xos oilaviy joy.",
+        "ru": "Супруги-педагоги Пулатовы выращивают декоративные тыквы, расписывают их и показывают коллекцию у себя дома. Малоизвестное и необычное место.",
+        "en": "Teacher couple the Pulatovs grow ornamental gourds, decorate them and display the collection in their home—an offbeat, little-known stop."
+      },
+      "address": "Mirzo Ulug'bek tumani, M-Clinic va 5-klinik shifoxona yaqinida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "art",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 8 необычных музеев Ташкента",
+          "url": "https://www.weproject.media/articles/detail/8-neobychnykh-muzeev-tashkenta-o-kotorykh-malo-kto-znaet/",
+          "date": "2025-10-25"
+        },
+        {
+          "title": "Golden Pages: Дом-музей тыквы",
+          "url": "https://www.goldenpages.uz/company/?Id=74105",
+          "date": null
+        }
+      ],
+      "confidence": "low",
+      "notes": "Xususiy uy — tashrif oldindan kelishib bo'lishi mumkin. Aniq manzil yo'q."
+    },
+    {
+      "id": "tash-olov",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Olov",
+        "ru": "Olov",
+        "en": "Olov"
+      },
+      "tagline": {
+        "uz": "Olovda va tandirda pishgan zamonaviy milliy taomlar",
+        "ru": "Современная национальная кухня на огне и в тандыре",
+        "en": "Modern Central Asian cooking over open fire"
+      },
+      "description": {
+        "uz": "Markaziy Osiyo oshxonasining zamonaviy talqini: ochiq olov va tandirda pishirilgan go'sht, nonushtalar ham bor. Dizayn milliy va zamonaviy uslubni uyg'unlashtiradi.",
+        "ru": "Современный взгляд на кухню Центральной Азии: мясо на открытом огне и из тандыра, есть завтраки. Интерьер сочетает национальные и современные мотивы.",
+        "en": "A modern take on Central Asian food—meat cooked over open fire and in the tandir, plus breakfasts—in a room mixing national and contemporary design."
+      },
+      "address": "Shevchenko ko'chasi (WE Project bo'yicha); Yango xaritada Farg'ona yo'li 61",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@olov.tashkent",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 6 stylish places in Tashkent for Uzbek cuisine",
+          "url": "https://weproject.media/en/articles/detail/6-stylish-places-in-tashkent-for-uzbek-cuisine-and-atmosphere/",
+          "date": "2026-11-03"
+        },
+        {
+          "title": "WE Project: Гид по обновлённому Ташкенту 2026",
+          "url": "https://www.weproject.media/articles/detail/gid-po-obnovlennomu-tashkentu-2026-novye-lokatsii-kontseptualnye-ulitsy-i-gastro-trendy/",
+          "date": "2026-04-03"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Manzil ziddiyatli (bir nechta filial bo'lishi mumkin). priceLevel 2 — 'hamyonbop' deb ta'riflangan, aniq narx yo'q."
+    },
+    {
+      "id": "tash-uzbekona",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Uzbekona",
+        "ru": "Uzbekona",
+        "en": "Uzbekona"
+      },
+      "tagline": {
+        "uz": "O'zbek oilaviy dasturxoni muhitidagi restoran",
+        "ru": "Ресторан в духе узбекского семейного застолья",
+        "en": "Uzbek family-feast dining with traditional tableware"
+      },
+      "description": {
+        "uz": "An'anaviy idishlarda tanish o'zbek taomlari, uydagi bayram dasturxoni kayfiyatini qayta yaratadi.",
+        "ru": "Знакомые узбекские блюда в традиционной посуде и атмосфера домашнего праздничного застолья.",
+        "en": "Classic Uzbek dishes served on traditional tableware in a cosy, family-feast setting."
+      },
+      "address": "Sayilgoh (Brodvey) hududi, Yunusobod tumani",
+      "lat": 41.3118744,
+      "lng": 69.2760443,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@uzbekona.restaurant",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 6 stylish places in Tashkent for Uzbek cuisine",
+          "url": "https://weproject.media/en/articles/detail/6-stylish-places-in-tashkent-for-uzbek-cuisine-and-atmosphere/",
+          "date": "2026-11-03"
+        },
+        {
+          "title": "WE Project: Гид по обновлённому Ташкенту 2026",
+          "url": "https://www.weproject.media/articles/detail/gid-po-obnovlennomu-tashkentu-2026-novye-lokatsii-kontseptualnye-ulitsy-i-gastro-trendy/",
+          "date": "2026-04-03"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM dagi 'Uzbekona' nodi shu restoran ekanini tekshirish."
+    },
+    {
+      "id": "tash-the-choyxona",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": "2022-06",
+      "name": {
+        "uz": "TheChoyxona",
+        "ru": "TheChoyxona",
+        "en": "TheChoyxona"
+      },
+      "tagline": {
+        "uz": "Kabinalari va hovlisi bor yangi formatdagi choyxona",
+        "ru": "Чайхана нового формата с кабинками и двориком",
+        "en": "A modern-format choyxona with private cabins"
+      },
+      "description": {
+        "uz": "Choyxona an'analarini zamonaviy servis bilan birlashtirgan joy: guruhlar uchun 13 ta kabinka, kaminli hovli, milliy va yevropa taomlari; payshanba kunlari palov.",
+        "ru": "Чайхана, объединяющая традиции и современный сервис: 13 кабинок для компаний, дворик с камином, узбекская и европейская кухня, по четвергам — плов.",
+        "en": "A choyxona blending tradition with modern service: 13 group cabins, a courtyard with a fireplace, Uzbek and European dishes, and plov on Thursdays."
+      },
+      "address": "Bog'ishamol 1-proyezdi 131",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 2,
+      "priceNote": null,
+      "hours": "12:00-01:00",
+      "instagram": "@thechoyxona",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: В Ташкенте открылась The Choyxona",
+          "url": "https://www.afisha.uz/ru/gorod/2022/06/11/the-choyxona",
+          "date": "2022-06-11"
+        },
+        {
+          "title": "WE Project: Чайхана в Ташкенте — 7 мест",
+          "url": "https://www.weproject.media/articles/detail/chaykhana-v-tashkente-7-mest-gde-vy-smozhete-prochuvstvovat-uzbekskiy-kolorit/",
+          "date": "2025-07-07"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Kabinalar oldindan bron qilinadi. Ish vaqti 2022 ma'lumoti."
+    },
+    {
+      "id": "tash-tandiriy",
+      "cityId": "tashkent",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Tandiriy",
+        "ru": "Tandiriy",
+        "en": "Tandiriy"
+      },
+      "tagline": {
+        "uz": "Tandir go'shti va tandirdan to'g'ri keladigan somsa",
+        "ru": "Тандырное мясо и самса прямо из тандыра",
+        "en": "Tandir-roasted meat and samsa straight from the oven"
+      },
+      "description": {
+        "uz": "Tashkent City'dagi restoran: asosiy taom — tandir go'shti, somsa stolga to'g'ridan-to'g'ri tandirdan keladi. Loy devorlar, dasturxonlar va kechqurun jonli milliy musiqa.",
+        "ru": "Ресторан в Tashkent City: главное блюдо — тандырное мясо, самсу подают прямо из тандыра. Глинобитные стены, дастарханы и живая национальная музыка по вечерам.",
+        "en": "A Tashkent City restaurant centred on tandir-roasted meat, with samsa served straight from the oven, clay walls, dastarkhans and live folk music in the evenings."
+      },
+      "address": "Tashkent City, shopping avenue",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 3,
+      "priceNote": "Tandir go'shti 30 000 so'm/100 g (min. 300 g), mastava 42 000 so'm (Afisha.uz, 2023-11-10)",
+      "hours": null,
+      "instagram": "@tandiriy_uz",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Тандыр и узбекские традиции — обзор ресторана Tandiriy",
+          "url": "https://www.afisha.uz/ru/restaurants/2023/11/10/tandiriy",
+          "date": "2023-11-10"
+        },
+        {
+          "title": "WE Project: 6 stylish places in Tashkent for Uzbek cuisine",
+          "url": "https://weproject.media/en/articles/detail/6-stylish-places-in-tashkent-for-uzbek-cuisine-and-atmosphere/",
+          "date": "2026-11-03"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Narxlar 2023-yilniki — yangilash kerak. Aniq manzil topilmadi."
+    },
+    {
+      "id": "tash-kosmonavtlar-metro",
+      "cityId": "tashkent",
+      "category": "monument",
+      "novelty": "iconic",
+      "openedAt": "1984",
+      "name": {
+        "uz": "Kosmonavtlar metro bekati",
+        "ru": "Станция метро «Космонавтлар»",
+        "en": "Kosmonavtlar Metro Station"
+      },
+      "tagline": {
+        "uz": "Kosmos mavzusidagi eng chiroyli metro bekati",
+        "ru": "Самая «космическая» станция ташкентского метро",
+        "en": "Tashkent's space-themed metro station"
+      },
+      "description": {
+        "uz": "Ko'k tusdagi zal, kosmonavtlar portretlari tushirilgan medalonlar — metroning o'zi ham diqqatga sazovor joy. Bir chipta narxiga ko'rish mumkin.",
+        "ru": "Синий зал с медальонами-портретами космонавтов: само метро — достопримечательность, которую можно увидеть по цене одного проезда.",
+        "en": "A deep-blue hall with medallion portraits of cosmonauts—a sight you can see for the price of a metro ride."
+      },
+      "address": "Sharof Rashidov ko'chasi, Yakkasaroy tumani",
+      "lat": 41.305022,
+      "lng": 69.265344,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "architecture",
+        "art",
+        "history"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Kosmonavtlar (Tashkent Metro)",
+          "url": "https://en.wikipedia.org/wiki/Kosmonavtlar_(Tashkent_Metro)",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Iconic — metro bekatlari 'g'ayrioddiy joy' sifatida. Ochilish yili Wikipedia ma'lumotiga ko'ra 1984 — tekshirish."
+    },
+    {
+      "id": "tash-tv-tower",
+      "cityId": "tashkent",
+      "category": "viewpoint",
+      "novelty": "iconic",
+      "openedAt": "1985",
+      "name": {
+        "uz": "Toshkent teleminorasi",
+        "ru": "Ташкентская телебашня",
+        "en": "Tashkent TV Tower"
+      },
+      "tagline": {
+        "uz": "97 m balandlikdan shaharning 360° manzarasi",
+        "ru": "Панорама города на 360° с высоты 97 м",
+        "en": "360° city views from 97 metres up"
+      },
+      "description": {
+        "uz": "375 metrlik minoraning kuzatuv maydonchasidan tiniq kunlarda Tyan-Shan etaklari ko'rinadi; aylanadigan 'Koinot' restorani ham bor.",
+        "ru": "С обзорной площадки 375-метровой башни в ясный день видны предгорья Тянь-Шаня; есть вращающийся ресторан «Коинот».",
+        "en": "From the 375 m tower's deck you can see the Tien Shan foothills on clear days; there is also the revolving Koinot restaurant."
+      },
+      "address": "Amir Temur shoh ko'chasi 109, Yunusobod tumani",
+      "lat": 41.3455916,
+      "lng": 69.2847485,
+      "coordsSource": "osm",
+      "interests": [
+        "architecture"
+      ],
+      "priceLevel": 2,
+      "priceNote": "Koinot restoranida o'rtacha chek 250–600 ming so'm (Yandex Eda Open Kitchen, 2025-03-17)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: The best viewpoints in Tashkent",
+          "url": "https://weproject.media/en/articles/detail/the-best-viewpoints-in-tashkent-where-to-see-the-city-from-above/",
+          "date": "2025-07-11"
+        },
+        {
+          "title": "Wikipedia: Tashkent Tower",
+          "url": "https://en.wikipedia.org/wiki/Tashkent_Tower",
+          "date": null
+        }
+      ],
+      "confidence": "high",
+      "notes": "Iconic. Kuzatuv maydonchasi chiptasi narxi topilmadi; chet elliklar uchun pasport talab qilinishi mumkin — tekshirish."
+    },
+    {
+      "id": "tash-minor-mosque-promenade",
+      "cityId": "tashkent",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Minor masjidi yonidagi Anhor sohili",
+        "ru": "Набережная Анхора у мечети Минор",
+        "en": "Ankhor Embankment by Minor Mosque"
+      },
+      "tagline": {
+        "uz": "Oltin soatda oq masjid va kanal manzarasi",
+        "ru": "Белая мечеть и канал в «золотой час»",
+        "en": "White mosque and canal views at golden hour"
+      },
+      "description": {
+        "uz": "Anhor kanali bo'yidagi sayr yo'lagidan oq marmar Minor masjidi chiroyli ko'rinadi; quyosh botishida surat uchun ayniqsa yaxshi.",
+        "ru": "С прогулочной набережной Анхора открывается вид на белоснежную мечеть Минор — особенно красиво на закате.",
+        "en": "The Ankhor canal promenade frames the white-marble Minor Mosque, especially photogenic around sunset."
+      },
+      "address": "Anhor kanali bo'yi, Minor masjidi yonida, Yunusobod tumani",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "architecture",
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: The best viewpoints in Tashkent",
+          "url": "https://weproject.media/en/articles/detail/the-best-viewpoints-in-tashkent-where-to-see-the-city-from-above/",
+          "date": "2025-07-11"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata topilmadi (Nominatim limit). Minor masjidi OSM obyektini qo'lda tekshirish."
+    },
+    {
+      "id": "tash-alay-bazaar",
+      "cityId": "tashkent",
+      "category": "bazaar",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Oloy bozori",
+        "ru": "Алайский базар",
+        "en": "Alay Bazaar"
+      },
+      "tagline": {
+        "uz": "Markazdagi qadimiy bozor: mevalar, ziravorlar, quruq mevalar",
+        "ru": "Старый базар в центре: фрукты, специи, сухофрукты",
+        "en": "Central old market for fruit, spices and nuts"
+      },
+      "description": {
+        "uz": "Chorsuga qaraganda tinchroq, shahar markazidagi bozor: quruq mevalar, yong'oqlar, ziravorlar va mavsumiy meva-sabzavotlar. Mahalliylar xarid qiladigan joy.",
+        "ru": "Более спокойный, чем Чорсу, базар в центре города: сухофрукты, орехи, специи и сезонные фрукты. Здесь закупаются местные.",
+        "en": "A calmer, central alternative to Chorsu where locals shop for dried fruit, nuts, spices and seasonal produce."
+      },
+      "address": "Amir Temur shoh ko'chasi / Oloy ko'chasi, Yunusobod tumani",
+      "lat": 41.3187831,
+      "lng": 69.2851054,
+      "coordsSource": "osm",
+      "interests": [
+        "shopping",
+        "food"
+      ],
+      "priceLevel": 1,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 5 известных базаров Ташкента",
+          "url": "https://weproject.media/articles/detail/5-izvestnykh-bazarov-tashkenta-vostochnyy-kolorit-i-srednevekovoe-proshloe/",
+          "date": null
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Mashhurroq joy — 'hidden' turistlar nuqtai nazaridan. Ikkinchi manba kerak."
+    }
+  ]
+}

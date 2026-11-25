@@ -1,0 +1,1961 @@
+{
+  "region": "bukhara",
+  "cities": [
+    {
+      "id": "bukhara",
+      "name": {
+        "uz": "Buxoro",
+        "ru": "Бухара",
+        "en": "Bukhara"
+      },
+      "center": {
+        "lat": 39.7747,
+        "lng": 64.4286
+      }
+    },
+    {
+      "id": "kogon",
+      "name": {
+        "uz": "Kogon",
+        "ru": "Каган",
+        "en": "Kogon"
+      },
+      "center": {
+        "lat": 39.7246281,
+        "lng": 64.5550916
+      }
+    },
+    {
+      "id": "gijduvan",
+      "name": {
+        "uz": "G'ijduvon",
+        "ru": "Гиждуван",
+        "en": "Gijduvan"
+      },
+      "center": {
+        "lat": 40.1029573,
+        "lng": 64.6828621
+      }
+    },
+    {
+      "id": "vobkent",
+      "name": {
+        "uz": "Vobkent",
+        "ru": "Вабкент",
+        "en": "Vobkent"
+      },
+      "center": {
+        "lat": 40.0211761,
+        "lng": 64.518133
+      }
+    },
+    {
+      "id": "shofirkon",
+      "name": {
+        "uz": "Shofirkon",
+        "ru": "Шафиркан",
+        "en": "Shofirkon"
+      },
+      "center": {
+        "lat": 40.1186169,
+        "lng": 64.5022273
+      }
+    },
+    {
+      "id": "romitan",
+      "name": {
+        "uz": "Romitan",
+        "ru": "Ромитан",
+        "en": "Romitan"
+      },
+      "center": {
+        "lat": 39.9331585,
+        "lng": 64.3826789
+      }
+    },
+    {
+      "id": "jondor",
+      "name": {
+        "uz": "Jondor",
+        "ru": "Жондор",
+        "en": "Jondor"
+      },
+      "center": {
+        "lat": 39.740839,
+        "lng": 64.1818037
+      }
+    },
+    {
+      "id": "qorakol",
+      "name": {
+        "uz": "Qorako'l",
+        "ru": "Каракуль",
+        "en": "Qorakol"
+      },
+      "center": {
+        "lat": 39.5186832,
+        "lng": 63.8424719
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "bux-gavkushon-house-of-softness",
+      "cityId": "bukhara",
+      "category": "gallery",
+      "novelty": "new",
+      "openedAt": "2025-09",
+      "name": {
+        "uz": "Gavkushon madrasasi — «House of Softness»",
+        "ru": "Медресе Гавкушон — «House of Softness»",
+        "en": "Gavkushon Madrasa — House of Softness"
+      },
+      "tagline": {
+        "uz": "Biennale uchun tiklangan XVI asr madrasasi",
+        "ru": "Медресе XVI века, обновлённое к биеннале",
+        "en": "16th-century madrasa revived for the Biennial"
+      },
+      "description": {
+        "uz": "1570-yilgi madrasa 2025-yilgi Buxoro biennalesi uchun ta'mirlanib, ma'ruza va ustaxonalar markaziga aylantirildi. Sobiq namozxonasi qo'lda yasalgan ko'k koshinlar bilan qoplangan «Blue Room» installyatsiyasiga ega.",
+        "ru": "Медресе 1570 года отреставрировали к Бухарской биеннале 2025 и превратили в площадку для лекций и мастерских. В бывшем молельном зале — инсталляция «Blue Room» из синей керамической плитки ручной работы.",
+        "en": "This 1570 madrasa was restored for the 2025 Bukhara Biennial and became its hub for talks and workshops. Its former prayer hall holds the 'Blue Room', lined entirely with handmade blue tiles."
+      },
+      "address": "Xo'ja Gavkushon ansambli, Bahovaddin Naqshband ko'chasi",
+      "lat": 39.7722,
+      "lng": 64.416,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "art",
+        "architecture",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "ArchDaily: Bukhara Biennial 2025 opens across restored landmarks",
+          "url": "https://www.archdaily.com/1034009/uzbekistans-inaugural-bukhara-biennial-2025-opens-across-restored-historic-landmarks",
+          "date": "2025-09"
+        },
+        {
+          "title": "AramcoWorld: Art biennial reviving the ancient city of Bukhara",
+          "url": "https://www.aramcoworld.com/articles/2025/online-only/art-biennial-reviving-the-ancient-city-of-bukhara-uzbekistan",
+          "date": "2025"
+        },
+        {
+          "title": "Wikipedia: Govkushon Madrasah",
+          "url": "https://en.wikipedia.org/wiki/Govkushon_Madrasah"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Biennale 2025-11-20 da tugagan; madrasa doimiy ochiqmi, qanday rejimda ishlashi tekshirilsin."
+    },
+    {
+      "id": "bux-rashid-madrasa",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Rashid madrasasi",
+        "ru": "Медресе Рашид",
+        "en": "Rashid Madrasa"
+      },
+      "tagline": {
+        "uz": "Biennale ko'rgazmasi bo'lgan XVIII asr madrasasi",
+        "ru": "Медресе XVIII века — площадка биеннале",
+        "en": "18th-century madrasa that hosted Biennial art"
+      },
+      "description": {
+        "uz": "Xo'ja Gavkushon yonidagi kichik XVIII asr madrasasi. 2025-yilgi biennalening yakuniy bo'limi shu yerda namoyish etilgan.",
+        "ru": "Небольшое медресе XVIII века рядом с ансамблем Ходжа Гавкушон. В 2025 году здесь разместился финальный раздел Бухарской биеннале.",
+        "en": "A small 18th-century madrasa next to the Khoja Gavkushon ensemble. In 2025 it hosted the final section of the Bukhara Biennial."
+      },
+      "address": "Bahovaddin Naqshband ko'chasi",
+      "lat": 39.77299,
+      "lng": 64.41434,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Rashid Madrasah",
+          "url": "https://en.wikipedia.org/wiki/Rashid_Madrasah"
+        },
+        {
+          "title": "AramcoWorld: Art biennial reviving the ancient city of Bukhara",
+          "url": "https://www.aramcoworld.com/articles/2025/online-only/art-biennial-reviving-the-ancient-city-of-bukhara-uzbekistan",
+          "date": "2025"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Biennaledan keyin ichkariga kirish mumkinmi — tekshirilsin."
+    },
+    {
+      "id": "bux-alam-madrasa",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abdurahmon A'lam madrasasi",
+        "ru": "Медресе Абдурахмона Аълама",
+        "en": "Abdurahmon A'lam Madrasa"
+      },
+      "tagline": {
+        "uz": "Biennale oshxonasi joylashgan XIX asr madrasasi",
+        "ru": "Медресе XIX века, где работало кафе биеннале",
+        "en": "19th-century madrasa that housed the Biennial café"
+      },
+      "description": {
+        "uz": "Savdo gumbazlari yaqinidagi XIX asr madrasasi. Biennale davrida unda Karsten Xyoller loyihasi — «Café Oshqozon» vaqtinchalik restorani ishlagan.",
+        "ru": "Медресе XIX века у торговых куполов. Во время биеннале здесь работал временный ресторан «Café Oshqozon» по проекту Карстена Хёллера.",
+        "en": "A 19th-century madrasa near the trading domes. During the Biennial it housed Café Oshqozon, a pop-up restaurant conceived by Carsten Höller."
+      },
+      "address": null,
+      "lat": 39.77254,
+      "lng": 64.41688,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture",
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: A'lam madrasah",
+          "url": "https://en.wikipedia.org/wiki/A%27lam_madrasah"
+        },
+        {
+          "title": "e-flux: Bukhara Biennial interdisciplinary programme",
+          "url": "https://www.e-flux.com/announcements/656716/bukhara-biennial-s-interdisciplinary-programme",
+          "date": "2025"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Café Oshqozon vaqtinchalik edi (2025-09..11); hozir bino qanday ishlatilayotgani noma'lum."
+    },
+    {
+      "id": "bux-ayozjon-caravanserai",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "new",
+      "openedAt": "2025-09",
+      "name": {
+        "uz": "Ayozjon karvonsaroyi",
+        "ru": "Караван-сарай Аязджан",
+        "en": "Ayozjon Caravanserai"
+      },
+      "tagline": {
+        "uz": "Biennale uchun tiklangan karvonsaroylar majmuasi",
+        "ru": "Отреставрированный к биеннале караван-сарай",
+        "en": "Restored caravanserai, a Biennial main venue"
+      },
+      "description": {
+        "uz": "O'zaro tutashgan to'rtta XVIII–XIX asr karvonsaroyidan biri; 2025-yilda ta'mirlanib, biennalening asosiy maydonlaridan biri bo'ldi. Bu yerda «Mis shahar» Buxoroga ishora qiluvchi mis installyatsiya qo'yilgan.",
+        "ru": "Один из четырёх соединённых между собой караван-сараев XVIII–XIX веков; отреставрирован в 2025 году и стал главной площадкой биеннале. Здесь стояла медная инсталляция — отсылка к Бухаре как «медному городу».",
+        "en": "One of four interconnected 18th–19th-century caravanserais, restored in 2025 as a main Biennial venue. It hosted a copper installation referencing Bukhara as the 'Copper City'."
+      },
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "history",
+        "architecture",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "AramcoWorld: Art biennial reviving the ancient city of Bukhara",
+          "url": "https://www.aramcoworld.com/articles/2025/online-only/art-biennial-reviving-the-ancient-city-of-bukhara-uzbekistan",
+          "date": "2025"
+        },
+        {
+          "title": "ArchDaily: Bukhara Biennial 2025 opens across restored landmarks",
+          "url": "https://www.archdaily.com/1034009/uzbekistans-inaugural-bukhara-biennial-2025-opens-across-restored-historic-landmarks",
+          "date": "2025-09"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM da topilmadi — koordinata kerak. Biennaledan keyingi ish rejimi noma'lum."
+    },
+    {
+      "id": "bux-faizulla-khodjaev-house",
+      "cityId": "bukhara",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Fayzulla Xo'jayev uy-muzeyi",
+        "ru": "Дом-музей Файзуллы Ходжаева",
+        "en": "Fayzulla Khodjaev House Museum"
+      },
+      "tagline": {
+        "uz": "Boy savdogarning XIX asr hovlisi",
+        "ru": "Особняк богатого купца XIX века",
+        "en": "A rich merchant's 19th-century home"
+      },
+      "description": {
+        "uz": "G'oziyon mahallasidagi savdogar Ubaydullo Xo'ja qurdirgan uy, keyin o'g'li — siyosatchi Fayzulla Xo'jayevga o'tgan. Ichki va tashqi hovli, naqshinkor xonalar va oila buyumlari saqlangan; 2023-yilda qayta ta'mirlangan.",
+        "ru": "Дом купца Убайдуллы Ходжи в квартале Гозиён, позже принадлежавший его сыну — политику Файзулле Ходжаеву. Сохранились внутренний и внешний дворы, расписные комнаты и семейная утварь; реконструирован в 2023 году.",
+        "en": "Built for merchant Ubaydullo Khoja in the Goziyon quarter and later home to his son, politician Fayzulla Khodjaev. Inner and outer courtyards, painted rooms and family objects survive; reconstructed in 2023."
+      },
+      "address": "A. To'qay ko'chasi, 70",
+      "lat": 39.7690655,
+      "lng": 64.4128791,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Fayzulla Xoʻjayev house museum",
+          "url": "https://en.wikipedia.org/wiki/Fayzulla_Xo%CA%BBjayev_house_museum"
+        },
+        {
+          "title": "Advantour: House Museum of Fayzulla Khodjaev",
+          "url": "https://www.advantour.com/uzbekistan/bukhara/fayzulla-khodjaev.htm"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ish vaqti manbalarda turlicha (09:00-17:00, yakshanba dam yoki dam olishsiz)."
+    },
+    {
+      "id": "bux-jewish-quarter-synagogue",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Yahudiylar mahallasi va sinagoga",
+        "ru": "Еврейский квартал и синагога",
+        "en": "Jewish Quarter & Synagogue"
+      },
+      "tagline": {
+        "uz": "Buxoro yahudiylarining asrlik ibodatxonasi",
+        "ru": "Вековая синагога бухарских евреев",
+        "en": "Centuries-old synagogue of Bukharan Jews"
+      },
+      "description": {
+        "uz": "Lyabi-hovuz janubidagi tor ko'chalarda XVI–XVII asrlarda shakllangan yahudiylar mahallasi. Faol sinagoga va jamoa markaziga eshikni taqillatib kirish mumkin; jamoa bugun juda kichik.",
+        "ru": "Еврейский квартал в узких улочках к югу от Ляби-Хауза, сложившийся в XVI–XVII веках. В действующую синагогу и общинный центр обычно пускают, если постучать; община сегодня очень мала.",
+        "en": "A Jewish quarter in the lanes south of Lyabi-Hauz, formed in the 16th–17th centuries. Visitors usually get into the working synagogue and community centre by knocking; the community today is tiny."
+      },
+      "address": "Sarrafon ko'chasi, 20",
+      "lat": 39.7719649,
+      "lng": 64.4202216,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Jewish Community Centre & Synagogue",
+          "url": "https://www.lonelyplanet.com/uzbekistan/central-uzbekistan/bukhara/attractions/jewish-community-centre-synagogue/a/poi-sig/1385491/357828"
+        },
+        {
+          "title": "Jewish Virtual Library: Uzbekistan Jewish history tour",
+          "url": "https://www.jewishvirtuallibrary.org/uzbekistan-virtual-jewish-history-tour"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM da yana bir sinagoga bor (Koinot ko'chasi). Kategoriya ro'yxatida 'synagogue' yo'q, shuning uchun monument qo'yildi; ibodat vaqtlarida odob qoidalari."
+    },
+    {
+      "id": "bux-baland-mosque",
+      "cityId": "bukhara",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Baland masjidi",
+        "ru": "Мечеть Баланд",
+        "en": "Baland Mosque"
+      },
+      "tagline": {
+        "uz": "Ichkarisi oltin naqshli kichik guzar masjidi",
+        "ru": "Квартальная мечеть с золочёным интерьером",
+        "en": "Neighbourhood mosque with a gilded interior"
+      },
+      "description": {
+        "uz": "Shahar g'arbiy qismidagi XVI asrga oid guzar masjidi. Tashqi ko'rinishi oddiy, lekin ichkaridagi bo'yoqli shift va koshinlar bilan mashhur.",
+        "ru": "Квартальная мечеть XVI века в западной части старого города. Снаружи скромная, но славится расписным потолком и изразцами внутри.",
+        "en": "A 16th-century neighbourhood mosque in the western old town. Plain outside, it is known for its painted ceiling and tilework inside."
+      },
+      "address": "Masjidi Baland ko'chasi",
+      "lat": 39.77180555,
+      "lng": 64.40505556,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Baland Mosque",
+          "url": "https://en.wikipedia.org/wiki/Baland_Mosque"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-khoja-zayniddin",
+      "cityId": "bukhara",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Zayniddin masjidi va xonaqohi",
+        "ru": "Мечеть-ханака Ходжа Зайнуддин",
+        "en": "Khoja Zayniddin Mosque & Khanaqah"
+      },
+      "tagline": {
+        "uz": "Hovuz bo'yidagi sokin XVI asr xonaqohi",
+        "ru": "Тихая ханака XVI века у хауза",
+        "en": "Quiet 16th-century khanaqah by a pool"
+      },
+      "description": {
+        "uz": "Ark yaqinidagi ichki ko'chalarda joylashgan XVI asr masjid-xonaqohi. Turistlar kam keladi, ichki bezaklari va oldidagi hovuz bilan qadrlanadi.",
+        "ru": "Мечеть-ханака XVI века в переулках недалеко от Арка. Туристов здесь мало; ценится за внутренний декор и хауз перед входом.",
+        "en": "A 16th-century mosque-khanaqah in the backstreets near the Ark. Few tourists come; it is valued for its interior decoration and the pool in front."
+      },
+      "address": "Zayniddin ko'chasi, 2",
+      "lat": 39.7747534,
+      "lng": 64.4120266,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Bukhara attractions",
+          "url": "https://www.lonelyplanet.com/uzbekistan/central-uzbekistan/bukhara/attractions"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-abdulaziz-khan-madrasa",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abdulazizxon madrasasi",
+        "ru": "Медресе Абдулазиз-хана",
+        "en": "Abdulaziz Khan Madrasa"
+      },
+      "tagline": {
+        "uz": "Ulug'bek madrasasi ro'parasidagi bezakli madrasa",
+        "ru": "Узорное медресе напротив Улугбека",
+        "en": "Ornate madrasa facing Ulugbek's"
+      },
+      "description": {
+        "uz": "1652-yilda qurilgan, Ulug'bek madrasasi ro'parasidagi madrasa. Bezaklarida Hindiston va Xitoy motivlari uchraydi; ichida kichik yog'och o'ymakorligi ko'rgazmasi bor.",
+        "ru": "Медресе 1652 года напротив медресе Улугбека. В декоре встречаются индийские и китайские мотивы; внутри небольшая экспозиция резьбы по дереву.",
+        "en": "A madrasa from 1652 opposite Ulugbek's. Its decoration shows Indian and Chinese motifs, and it houses a small woodcarving exhibition."
+      },
+      "address": "Xorazm ko'chasi",
+      "lat": 39.776,
+      "lng": 64.4177,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture",
+        "craft"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Abdulaziz Khan Madrasah",
+          "url": "https://en.wikipedia.org/wiki/Abdulaziz_Khan_Madrasah"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Yog'och o'ymakorligi muzeyi hali ishlayotgani tekshirilsin."
+    },
+    {
+      "id": "bux-chashma-ayub",
+      "cityId": "bukhara",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chashmai Ayub maqbarasi (suv muzeyi)",
+        "ru": "Мавзолей Чашма-Аюб (музей воды)",
+        "en": "Chashma-Ayub Mausoleum (Water Museum)"
+      },
+      "tagline": {
+        "uz": "Afsonaviy buloq ustidagi konussimon maqbara",
+        "ru": "Мавзолей с коническим куполом над родником",
+        "en": "Conical-domed shrine over a legendary spring"
+      },
+      "description": {
+        "uz": "Somoniylar bog'i yonidagi maqbara afsonaga ko'ra Ayub payg'ambar chiqargan buloq ustida qurilgan. Ichida Buxoroning suv ta'minoti tarixiga bag'ishlangan kichik muzey bor.",
+        "ru": "Мавзолей у парка Саманидов, по легенде стоящий над родником пророка Аюба. Внутри — небольшой музей истории водоснабжения Бухары.",
+        "en": "A shrine by the Samanid park said to stand over a spring struck by the Prophet Job. Inside is a small museum on the history of Bukhara's water supply."
+      },
+      "address": "Muxtor Ashrafiy ko'chasi",
+      "lat": 39.77805556,
+      "lng": 64.40222222,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Chashma-Ayub Mausoleum",
+          "url": "https://en.wikipedia.org/wiki/Chashma-Ayub_Mausoleum"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-kosh-madrasa",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qo'sh madrasa (Modarixon va Abdullaxon)",
+        "ru": "Кош-медресе (Модарихан и Абдуллахан)",
+        "en": "Kosh Madrasa (Modarikhan & Abdullakhan)"
+      },
+      "tagline": {
+        "uz": "Bir-biriga qaragan juft XVI asr madrasalari",
+        "ru": "Пара медресе XVI века лицом к лицу",
+        "en": "Twin 16th-century madrasas facing each other"
+      },
+      "description": {
+        "uz": "Abdullaxon II onasi uchun qurilgan Modarixon va o'zi qurdirgan Abdullaxon madrasalari ko'chaning ikki tomonida turadi. Gavjum markazdan biroz chetda, sokin ansambl.",
+        "ru": "Медресе Модарихан, построенное Абдуллахан II в честь матери, и его собственное медресе Абдуллахан стоят по разные стороны улицы. Тихий ансамбль чуть в стороне от туристического центра.",
+        "en": "Modarikhan, built by Abdullah Khan II for his mother, and his own Abdullakhan madrasa face each other across a street. A quiet ensemble just off the busy centre."
+      },
+      "address": "Mirdo'stim ko'chasi",
+      "lat": 39.7748,
+      "lng": 64.4049,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Abdullakhan Madrasah (Bukhara)",
+          "url": "https://en.wikipedia.org/wiki/Abdullakhan_Madrasah_(Bukhara)"
+        },
+        {
+          "title": "Wikipedia: Modarikhan madrasah",
+          "url": "https://en.wikipedia.org/wiki/Modarikhan_madrasah"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Koordinata — Abdullaxon madrasasi (Modarixon: 39.7745, 64.4059)."
+    },
+    {
+      "id": "bux-talipach-gate",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Talipoch darvozasi va shahar devori",
+        "ru": "Ворота Талипач и городская стена",
+        "en": "Talipach Gate & City Wall"
+      },
+      "tagline": {
+        "uz": "Shayboniylar davri devorining saqlangan qismi",
+        "ru": "Уцелевший участок стены эпохи Шейбанидов",
+        "en": "Surviving stretch of the old city walls"
+      },
+      "description": {
+        "uz": "Somoniylar maqbarasi yaqinidagi tarixiy shahar darvozalaridan biri va unga tutash devor bo'lagi. Buxoro bir paytlar qanday mustahkamlanganini tasavvur qilishga yordam beradi.",
+        "ru": "Одни из исторических городских ворот рядом с мавзолеем Саманидов и прилегающий участок стены. Помогают представить, как когда-то была укреплена Бухара.",
+        "en": "One of the historic city gates near the Samanid Mausoleum, with an adjoining section of wall. It gives a sense of how fortified old Bukhara once was."
+      },
+      "address": "Abu Ali ibn Sino shoh ko'chasi",
+      "lat": 39.7788008,
+      "lng": 64.3974623,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Lonely Planet: Bukhara attractions",
+          "url": "https://www.lonelyplanet.com/uzbekistan/central-uzbekistan/bukhara/attractions"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-zindan",
+      "cityId": "bukhara",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Zindon — amir qamoqxonasi",
+        "ru": "Зиндан — тюрьма эмира",
+        "en": "Zindan — the Emir's Prison"
+      },
+      "tagline": {
+        "uz": "Ark yonidagi qorong'i tarixga ega qamoqxona",
+        "ru": "Тюрьма эмира с мрачной историей у Арка",
+        "en": "The emir's grim prison beside the Ark"
+      },
+      "description": {
+        "uz": "Ark shimoli-sharqidagi XVIII asr oxiridagi qamoqxona, 1920-yildan beri muzey. Amirlik davri sud ishlari va mahbuslar saqlangan chuqur kameralar haqida hikoya qiladi.",
+        "ru": "Тюрьма конца XVIII века к северо-востоку от Арка, музей с 1920 года. Рассказывает о судах эмирата и показывает глубокие ямы для узников.",
+        "en": "A late-18th-century prison northeast of the Ark, a museum since 1920. It covers the emirate's justice and shows the deep pits used for prisoners."
+      },
+      "address": null,
+      "lat": 39.7791936,
+      "lng": 64.4138758,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Orexca: Zindan, Bukhara",
+          "url": "https://orexca.com/uzbekistan/bukhara/zindan.htm"
+        },
+        {
+          "title": "GPSmyCity: Zindan, the Emir's Prison",
+          "url": "https://gpsmycity.com/attractions/zindan--the-emirs-prison-36077.html"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-bokharzi-bayan-quli",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sayfiddin Boxarziy va Bayonqulixon maqbaralari",
+        "ru": "Мавзолеи Сайфиддина Бохарзи и Баянкули-хана",
+        "en": "Bokharzi & Bayan-Quli Khan Mausoleums"
+      },
+      "tagline": {
+        "uz": "Fathobodda XIV asr koshinlari bilan maqbaralar",
+        "ru": "Мавзолеи XIV века с редкой майоликой в Фатхабаде",
+        "en": "14th-century tombs with rare glazed tilework"
+      },
+      "description": {
+        "uz": "Shahar sharqidagi Fathobod mavzesida ikki maqbara yonma-yon turadi: so'fiy shayx Boxarziy va Bayonqulixonniki. Ikkinchisi nozik o'yilgan sirli koshinlari bilan mashhur.",
+        "ru": "Два мавзолея стоят рядом в восточном районе Фатхабад: суфийского шейха Бохарзи и Баянкули-хана. Второй известен тонкой резной глазурованной керамикой.",
+        "en": "Two mausoleums stand side by side in the eastern Fathabad area: that of Sufi sheikh Bokharzi and of Bayan-Quli Khan, the latter famed for finely carved glazed tiles."
+      },
+      "address": null,
+      "lat": 39.7666,
+      "lng": 64.4447,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Saif ed-Din Bokharzi & Bayan-Quli Khan Mausoleums",
+          "url": "https://en.wikipedia.org/wiki/Saif_ed-Din_Bokharzi_%26_Bayan-Quli_Khan_Mausoleums"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-chor-bakr",
+      "cityId": "bukhara",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chor Bakr majmuasi",
+        "ru": "Некрополь Чор-Бакр",
+        "en": "Chor-Bakr Necropolis"
+      },
+      "tagline": {
+        "uz": "Shahar chetidagi Juybor shayxlari «o'liklar shahri»",
+        "ru": "«Город мёртвых» джуйбарских шейхов",
+        "en": "'City of the dead' of the Juybari sheikhs"
+      },
+      "description": {
+        "uz": "Buxorodan 5 km g'arbda, Sumitan qishlog'idagi XVI asr nekropoli: hovlilar, maqbaralar, masjid va xonaqoh. Juybor sayyidlari sulolasiga tegishli, sokin va keng majmua.",
+        "ru": "Некрополь XVI века в селе Сумитан в 5 км к западу от Бухары: дворики-усыпальницы, мечеть и ханака. Принадлежал роду джуйбарских сейидов; тихий и просторный.",
+        "en": "A 16th-century necropolis in Sumitan village 5 km west of Bukhara, with family courtyards, tombs, a mosque and khanaqah of the Juybari sayyids. Quiet and spacious."
+      },
+      "address": "Sumitan qishlog'i, Buxoro tumani",
+      "lat": 39.77444444,
+      "lng": 64.33444444,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Chor-Bakr",
+          "url": "https://en.wikipedia.org/wiki/Chor-Bakr"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-bahouddin-naqshband",
+      "cityId": "kogon",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Bahouddin Naqshband majmuasi",
+        "ru": "Комплекс Бахауддина Накшбанда",
+        "en": "Bahouddin Naqshband Complex"
+      },
+      "tagline": {
+        "uz": "Naqshbandiya tariqati asoschisining ziyoratgohi",
+        "ru": "Святыня основателя ордена Накшбандия",
+        "en": "Shrine of the Naqshbandi order's founder"
+      },
+      "description": {
+        "uz": "Qasri Orifon qishlog'idagi XIV asr so'fiy shayxi Bahouddin Naqshband maqbarasi atrofidagi majmua. «Yetti pir» ziyoratining yakuniy va eng muhim manzili; dunyo bo'ylab ziyoratchilar keladi.",
+        "ru": "Комплекс вокруг гробницы суфийского шейха XIV века Бахауддина Накшбанда в селе Касри Орифон. Главная и завершающая точка паломничества «Семи пиров».",
+        "en": "A complex around the tomb of 14th-century Sufi master Bahouddin Naqshband in Kasri Orifon village. The final and most important stop on the Seven Pirs pilgrimage."
+      },
+      "address": "Qasri Orifon qishlog'i, Kogon tumani",
+      "lat": 39.8023768,
+      "lng": 64.5365897,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Bahoutdin Architectural Complex",
+          "url": "https://en.wikipedia.org/wiki/Bahoutdin_Architectural_Complex"
+        },
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Shahardan ~12 km. Bazada mavjud emasligi tekshirilsin (mashhur ziyoratgoh)."
+    },
+    {
+      "id": "bux-sayyid-amir-kulol",
+      "cityId": "kogon",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Sayyid Amir Kulol ziyoratgohi",
+        "ru": "Святыня Сайида Амира Кулола",
+        "en": "Sayyid Amir Kulol Shrine"
+      },
+      "tagline": {
+        "uz": "Naqshbandning ustoziga bag'ishlangan ziyoratgoh",
+        "ru": "Святыня учителя Накшбанда",
+        "en": "Shrine of Naqshband's teacher"
+      },
+      "description": {
+        "uz": "Bahouddin Naqshbandning ustozi, kulol bo'lgan so'fiy Amir Kulol dafn etilgan joy. «Yetti pir» ziyorat yo'nalishining oltinchi manzili.",
+        "ru": "Место погребения суфия-гончара Амира Кулола, наставника Бахауддина Накшбанда. Шестая остановка на маршруте «Семи пиров».",
+        "en": "Burial place of the potter-turned-Sufi Amir Kulol, teacher of Bahouddin Naqshband, and the sixth stop on the Seven Pirs route."
+      },
+      "address": "Kalikon (Suxor) qishlog'i, Kogon tumani",
+      "lat": 39.7728424,
+      "lng": 64.5715108,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        },
+        {
+          "title": "Times of Israel blog: Ancient and unique Uzbekistan — 7 saints of Bukhara",
+          "url": "https://blogs.timesofisrael.com/ancient-and-unique-uzbekistan-7-saints-of-bukhara/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-puppet-workshop-museum",
+      "cityId": "bukhara",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Qo'g'irchoq ustaxona-muzeyi",
+        "ru": "Мастерская-музей кукол",
+        "en": "Puppet Workshop-Museum"
+      },
+      "tagline": {
+        "uz": "Qo'lda yasalgan qo'g'irchoqlar va mini-teatr",
+        "ru": "Куклы ручной работы и мини-театр",
+        "en": "Handmade puppets and a tiny theatre"
+      },
+      "description": {
+        "uz": "Lyabi-hovuz yonidagi muzeyda an'anaviy o'zbek qo'g'irchoq teatri tarixi namoyish etiladi; usta tepada qavatda qo'g'irchoq yasaydi. Ba'zan master-klass va kichik tomosha bo'ladi.",
+        "ru": "Музей у Ляби-Хауза рассказывает об узбекском кукольном театре, а мастер делает кукол в мастерской этажом выше. Иногда проходят мастер-классы и мини-спектакли.",
+        "en": "A museum near Lyabi-Hauz on Uzbek puppet theatre, with the master making puppets in the workshop upstairs. Occasional master classes and short shows."
+      },
+      "address": "Sarrafon ko'chasi, 2 (Lyabi-hovuz yaqini)",
+      "lat": 39.7726021,
+      "lng": 64.4201073,
+      "coordsSource": "osm",
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: Puppet Workshop-Museum",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/puppet-workshop-museum/"
+        },
+        {
+          "title": "Afisha.uz: Волшебный мир Бухарского кукольного музея",
+          "url": "https://www.afisha.uz/ru/tourism/2025/10/20/museum-bukhara",
+          "date": "2025-10-20"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Current Time xabariga ko'ra bino bo'yicha nizo bor edi — hozir ochiqligi tekshirilsin."
+    },
+    {
+      "id": "bux-blacksmith-workshop",
+      "cityId": "bukhara",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Temirchilik muzeyi va ustaxonasi",
+        "ru": "Музей-мастерская кузнеца",
+        "en": "Blacksmith Museum & Workshop"
+      },
+      "tagline": {
+        "uz": "Buxoro pichog'i qanday tug'ilishini ko'ring",
+        "ru": "Как куют бухарские ножи",
+        "en": "Watch Bukhara knives being forged"
+      },
+      "description": {
+        "uz": "Savdo gumbazlari yaqinidagi temirchilik ustaxonasida an'anaviy pichoq va qaychilar yasaladi. Taxminan bir soatlik master-klassda o'zingiz pichoq tig'ini zarb qilishingiz mumkin.",
+        "ru": "В кузнице у торговых куполов куют традиционные ножи и ножницы. На часовом мастер-классе можно самому выковать клинок ножа.",
+        "en": "A forge near the trading domes making traditional knives and scissors. A roughly one-hour class lets you forge a knife blade yourself."
+      },
+      "address": "Haqiqat ko'chasi",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wanderlog: Blacksmith museum and workshop",
+          "url": "https://wanderlog.com/place/details/10215270/blacksmith-museum-and-workshop"
+        },
+        {
+          "title": "Freetour: Master class of blacksmith — knife making in Bukhara",
+          "url": "https://www.freetour.com/bukhara/master-class-of-blacksmith-knife-making-in-bukhara"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Wanderlog 39.774325, 64.417089 ko'rsatadi — ishonchli manba emas, OSM bilan tasdiqlash kerak."
+    },
+    {
+      "id": "bux-suzani-workshop-toshev",
+      "cityId": "bukhara",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Suzana ustaxonasi (Toshevlar)",
+        "ru": "Мастерская сюзане Тошевых",
+        "en": "Toshev Suzani Workshop"
+      },
+      "tagline": {
+        "uz": "Yuzlab qo'l kashtalari va 2 soatlik dars",
+        "ru": "Сотни вышивок и двухчасовой урок",
+        "en": "Hundreds of embroideries and a 2-hour class"
+      },
+      "description": {
+        "uz": "Lyabi-hovuz janubidagi tor ko'chadagi oilaviy ustaxonada qo'lda tikilgan suzanalar ko'rsatiladi va sotiladi. Sayyohlar uchun ikki soatlik kashtachilik master-klassi o'tkaziladi.",
+        "ru": "Семейная мастерская в переулке к югу от Ляби-Хауза, где показывают и продают вышитые вручную сюзане. Для туристов проводят двухчасовой мастер-класс.",
+        "en": "A family workshop in a lane south of Lyabi-Hauz showing and selling hand-embroidered suzanis, with two-hour embroidery classes for visitors."
+      },
+      "address": "Lyabi-hovuzdan 100 m janubda, 'Sultan' mehmonxonasi yonidagi tor ko'cha",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Suzane workshop of Rakhimjon Toshev",
+          "url": "https://www.advantour.com/uzbekistan/bukhara/toshev-suzane-workshop.htm"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Faqat bitta manba; ishlayotgani tekshirilsin."
+    },
+    {
+      "id": "bux-fine-arts-museum",
+      "cityId": "bukhara",
+      "category": "museum",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Buxoro tasviriy san'at muzeyi",
+        "ru": "Бухарский музей изобразительных искусств",
+        "en": "Bukhara Museum of Fine Arts"
+      },
+      "tagline": {
+        "uz": "Savdo gumbazlari orasidagi rasmlar to'plami",
+        "ru": "Живопись в двух шагах от торговых куполов",
+        "en": "Paintings a step from the trading domes"
+      },
+      "description": {
+        "uz": "Eski shahar markazidagi muzeyda an'anaviy hunarmandchilikdan tortib XX asr va zamonaviy o'zbek rassomlari asarlarigacha namoyish etiladi. Gavjum ko'chadan dam olish uchun yaxshi joy.",
+        "ru": "Музей в центре старого города: от традиционных ремёсел до работ узбекских художников XX века и современности. Хорошая пауза от людных улиц.",
+        "en": "A museum in the old-town centre showing everything from traditional crafts to 20th-century and contemporary Uzbek painting. A good break from busy streets."
+      },
+      "address": "Bahovaddin Naqshband ko'chasi, 23",
+      "lat": 39.7723313,
+      "lng": 64.4171429,
+      "coordsSource": "osm",
+      "interests": [
+        "art",
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Squarespace article: 7 hidden gems in Bukhara",
+          "url": "https://dalmatian-wolf-8tx3.squarespace.com/articles/exploring-bukhara7-unique-spots-to-experience"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-tim-abdullakhan",
+      "cityId": "bukhara",
+      "category": "bazaar",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abdullaxon timi",
+        "ru": "Тим Абдуллахана",
+        "en": "Tim Abdullah Khan"
+      },
+      "tagline": {
+        "uz": "Ipak va gilamlar sotiladigan XVI asr savdo yo'lagi",
+        "ru": "Крытый пассаж XVI века с шёлком и коврами",
+        "en": "16th-century covered arcade of silk and carpets"
+      },
+      "description": {
+        "uz": "1577-yilda qurilgan yopiq savdo rastasi, gumbaz ostida yorug' tushadigan yo'laklar. Hozir gilam, ipak mato va hunarmandlar do'konlari joylashgan; ichida kichik kafe ham bor.",
+        "ru": "Крытый торговый пассаж 1577 года с куполом и световыми проёмами. Сегодня здесь лавки ковров, шёлка и ремесленников, внутри есть небольшое кафе.",
+        "en": "A covered trading hall built in 1577, lit through its dome. Today it holds carpet, silk and craft stalls, plus a small café inside."
+      },
+      "address": "Haqiqat ko'chasi",
+      "lat": 39.774,
+      "lng": 64.413,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "shopping",
+        "craft",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Tim Abdullah Khan",
+          "url": "https://en.wikipedia.org/wiki/Tim_Abdullah_Khan"
+        },
+        {
+          "title": "Tour Central Asia: Best places for coffee and tea in Bukhara",
+          "url": "https://tourcentralasia.com/uzbekistan/bukhara/best-cafes-bukhara-coffee-tea/"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-gastro-street-olim-khojaev",
+      "cityId": "bukhara",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2025-12",
+      "name": {
+        "uz": "Olim Xo'jayev mahallasidagi gastronomik ko'cha",
+        "ru": "Гастрономическая улица в махалле Олим Ходжаев",
+        "en": "Olim Khojaev Food Street"
+      },
+      "tagline": {
+        "uz": "Kechayu kunduz ishlaydigan yangi taomlar ko'chasi",
+        "ru": "Новая круглосуточная улица кафе",
+        "en": "New round-the-clock street of eateries"
+      },
+      "description": {
+        "uz": "2025-yil oxirida ochilgan, 24/7 ishlaydigan ko'cha: binolarning birinchi qavatida kafe, restoran va ko'cha taomlari nuqtalari. Yangi yoritish, piyodalar yo'lagi va ko'kalamzorlashtirish qilingan.",
+        "ru": "Улица, открытая в конце 2025 года и работающая круглосуточно: на первых этажах — кафе, рестораны и стрит-фуд. Сделаны новое освещение, пешеходная дорожка и озеленение.",
+        "en": "A street opened at the end of 2025 that runs 24/7, with cafés, restaurants and street food on the ground floors, plus new lighting, a footpath and planting."
+      },
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "00:00-24:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Gov.uz (Buxoro viloyati): Buxoroda zamonaviy gastronomik ko'cha faoliyati yo'lga qo'yildi",
+          "url": "https://gov.uz/oz/buxoro/news/view/115283",
+          "date": "2025-12-29"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Ko'cha nomi va aniq joyi manbada yo'q (faqat mahalla nomi) — koordinata va nom aniqlansin."
+    },
+    {
+      "id": "bux-donuts-and-coffee",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": "2022-12",
+      "name": {
+        "uz": "Donuts and Coffee",
+        "ru": "Donuts and Coffee",
+        "en": "Donuts and Coffee"
+      },
+      "tagline": {
+        "uz": "Eski shahardagi oilaviy donut va qahva kafesi",
+        "ru": "Семейная кофейня с пончиками в старом городе",
+        "en": "Family donut-and-coffee spot in the old town"
+      },
+      "description": {
+        "uz": "Mehmonxona qabulxonasidan boshlangan kichik oilaviy kafe: har tong qo'lda pishiriladigan donutlar va yaxshi qahva. Shovqinsiz, orqa tomonda kichik terassa bor.",
+        "ru": "Небольшое семейное кафе, начинавшееся в холле гестхауса: пончики пекут вручную каждое утро, хороший кофе. Тихо, есть маленькая терраса сзади.",
+        "en": "A small family café that started in a guesthouse lobby, with donuts made by hand every morning and good coffee. Quiet, with a small back terrace."
+      },
+      "address": "Sarrafon ko'chasi, 4",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 1,
+      "priceNote": "flat white 30 000, donut 20 000 so'm (Megan Starr, 2026-11)",
+      "hours": "09:30-22:00",
+      "instagram": "@donuts_coffee_bukhara",
+      "telegram": "@donutscoffeebukhara",
+      "website": null,
+      "sources": [
+        {
+          "title": "Afisha.uz: Donuts and Coffee — уютный уголок Бухары",
+          "url": "https://www.afisha.uz/ru/tourism/2025/11/28/donuts-and-coffee-bukhara",
+          "date": "2025-11-28"
+        },
+        {
+          "title": "Megan Starr: 5 must-visit teahouses, coffee shops and cafes in Bukhara",
+          "url": "https://www.meganstarr.com/teahouses-cafes-bukhara/",
+          "date": "2026-11-25"
+        }
+      ],
+      "confidence": "high",
+      "notes": "OSM da topilmadi."
+    },
+    {
+      "id": "bux-coffeefi",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "coffeeFi",
+        "ru": "coffeeFi",
+        "en": "coffeeFi"
+      },
+      "tagline": {
+        "uz": "Chor Minor ro'parasidagi kichik qahva kioski",
+        "ru": "Кофейный киоск напротив Чор-Минора",
+        "en": "Tiny coffee kiosk facing Chor Minor"
+      },
+      "description": {
+        "uz": "Chor Minor oldidagi egasi o'zi tayyorlaydigan kichik kiosk. Ziyorat oldidan yoki keyin muzdek latte ichish uchun qulay.",
+        "ru": "Маленький киоск прямо перед Чор-Минором, где кофе варит сам владелец. Удобно взять айс-латте до или после осмотра.",
+        "en": "A little owner-run kiosk right in front of Chor Minor, handy for an iced latte before or after a visit."
+      },
+      "address": "Mehtar Anbar ko'chasi, 159 (Chor Minor oldi)",
+      "lat": 39.7745923,
+      "lng": 64.4273787,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": 1,
+      "priceNote": "iced latte (double) 50 000 so'm (Megan Starr, 2026-11)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 5 must-visit teahouses, coffee shops and cafes in Bukhara",
+          "url": "https://www.meganstarr.com/teahouses-cafes-bukhara/",
+          "date": "2026-11-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-magic-house",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Magic House",
+        "ru": "Magic House",
+        "en": "Magic House"
+      },
+      "tagline": {
+        "uz": "Gilamlar bilan bezalgan oilaviy palov va qahva joyi",
+        "ru": "Семейное кафе с пловом и коврами",
+        "en": "Family plov-and-coffee café wrapped in carpets"
+      },
+      "description": {
+        "uz": "Oilaviy kichik kafe-restoran: palov va qahvaga ixtisoslashgan, bir xonasi devordan shiftgacha gilamlar bilan qoplangan.",
+        "ru": "Небольшое семейное кафе, специализирующееся на плове и кофе; одна из комнат от пола до потолка увешана коврами.",
+        "en": "A small family café-restaurant focused on plov and coffee, with one room hung floor to ceiling with carpets."
+      },
+      "address": "Bahovaddin Naqshband ko'chasi, 106",
+      "lat": 39.7728963,
+      "lng": 64.4218002,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": "09:30-19:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 5 must-visit teahouses, coffee shops and cafes in Bukhara",
+          "url": "https://www.meganstarr.com/teahouses-cafes-bukhara/",
+          "date": "2026-11-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-pavillon-kalon",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Pavillon Kalon tomidagi choyxona",
+        "ru": "Чайная на крыше Pavillon Kalon",
+        "en": "Pavillon Kalon Rooftop Tea Room"
+      },
+      "tagline": {
+        "uz": "Poi Kalon manzarali tom choyxonasi",
+        "ru": "Чай с видом на Пои-Калян",
+        "en": "Rooftop tea with a view of Po-i-Kalyan"
+      },
+      "description": {
+        "uz": "Hunarmandchilik do'koni ustidagi tom choyxonasi; keng choy menyusi va yumshoq divanlar. Deraza yonidagi joylar kam — erta kelish tavsiya etiladi.",
+        "ru": "Чайная на крыше над магазином текстиля и ремёсел: большое чайное меню и диваны. Мест у окна мало, лучше приходить пораньше.",
+        "en": "A rooftop tea room above a textile and craft boutique, with a long tea menu and sofas. Window seats are few, so come early."
+      },
+      "address": "Poi Kalon ansambli yonida",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "food",
+        "shopping"
+      ],
+      "priceLevel": 2,
+      "priceNote": "choy 15 000–50 000 so'm (Megan Starr, 2026-11)",
+      "hours": "10:00-21:00",
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 5 must-visit teahouses, coffee shops and cafes in Bukhara",
+          "url": "https://www.meganstarr.com/teahouses-cafes-bukhara/",
+          "date": "2026-11-25"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Koordinata topilmadi; Poi Kalon bazada bor — yonidagi kafe sifatida."
+    },
+    {
+      "id": "bux-lampa-aladdina",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Lampa Aladdina Coffee",
+        "ru": "Кофейня «Лампа Аладдина»",
+        "en": "Lampa Aladdina Coffee"
+      },
+      "tagline": {
+        "uz": "Sayfiddin karvonsaroyi ichidagi qahvaxona",
+        "ru": "Кофейня внутри караван-сарая",
+        "en": "Coffee inside an old caravanserai"
+      },
+      "description": {
+        "uz": "Lyabi-hovuz yaqinidagi tarixiy karvonsaroy hovlisiga joylashgan kichik qahvaxona. Gavjum ko'chadan bir qadam ichkarida sokin muhit.",
+        "ru": "Небольшая кофейня во дворе исторического караван-сарая у Ляби-Хауза. В шаге от людной улицы — тихо и спокойно.",
+        "en": "A small coffee spot in the courtyard of a historic caravanserai near Lyabi-Hauz, a calm step away from the busy street."
+      },
+      "address": "Bahovaddin Naqshband ko'chasi (Sayfiddin karvonsaroyi)",
+      "lat": 39.7724836,
+      "lng": 64.4198652,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Tour Central Asia: Best places for coffee and tea in Bukhara",
+          "url": "https://tourcentralasia.com/uzbekistan/bukhara/best-cafes-bukhara-coffee-tea/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Manba sahifasi 403 qaytardi; ma'lumot qidiruv natijasidan. Qayta tasdiqlash kerak."
+    },
+    {
+      "id": "bux-silk-road-tea-house",
+      "cityId": "bukhara",
+      "category": "cafe",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Silk Road Tea House",
+        "ru": "Чайхана Silk Road",
+        "en": "Silk Road Tea House"
+      },
+      "tagline": {
+        "uz": "Ziravorli choy va bozor sovg'alari",
+        "ru": "Пряный чай и специи с собой",
+        "en": "Spiced teas and spices to take home"
+      },
+      "description": {
+        "uz": "2004-yildan beri ishlaydigan g'isht devorli choyxona: ziravorli choylar choynakda shirinliklar bilan beriladi, choy va ziravorlarni olib ketish ham mumkin.",
+        "ru": "Чайхана с кирпичными стенами, работающая с 2004 года: пряный чай подают в чайнике со сладостями, чай и специи можно купить с собой.",
+        "en": "A brick-walled tea house running since 2004, serving spiced tea by the pot with sweets; tea and spices are sold to take away."
+      },
+      "address": "Ikkinchi savdo gumbazi yaqinida (Haqiqat ko'chasi)",
+      "lat": 39.7750105,
+      "lng": 64.4162909,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "shopping"
+      ],
+      "priceLevel": 2,
+      "priceNote": "katta choynak + shirinliklar 70 000 so'm (Megan Starr, 2026-11)",
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Megan Starr: 5 must-visit teahouses, coffee shops and cafes in Bukhara",
+          "url": "https://www.meganstarr.com/teahouses-cafes-bukhara/",
+          "date": "2026-11-25"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Ish vaqti mavsumiy: 09:00-19:00 (apr–okt), 09:00-18:00 (noy–mart). Manzil manbada Halim Ibodov 5, OSMda Haqiqat 3."
+    },
+    {
+      "id": "bux-joy-chaikhana",
+      "cityId": "bukhara",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "JOY Chaikhana Lounge",
+        "ru": "JOY Chaikhana Lounge",
+        "en": "JOY Chaikhana Lounge"
+      },
+      "tagline": {
+        "uz": "Savdogar uyi-karvonsaroydagi choyxona-restoran",
+        "ru": "Ресторан в бывшем караван-сарае купца",
+        "en": "Restaurant in a former merchant's caravanserai"
+      },
+      "description": {
+        "uz": "Tarixiy karvonsaroy — savdogar G'ulomjon uyida ochilgan restoran; o'zbek va Yevropa taomlari beriladi.",
+        "ru": "Ресторан в историческом караван-сарае — бывшем доме купца Гуломжона; узбекская и европейская кухня.",
+        "en": "A restaurant in a historic caravanserai, once merchant Gulomjon's house, serving Uzbek and European dishes."
+      },
+      "address": "Sarrafon ko'chasi",
+      "lat": 39.7724014,
+      "lng": 64.4195437,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "architecture"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@joy.bukhara",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 6 ресторанов в старой Бухаре",
+          "url": "https://www.weproject.media/articles/detail/6-restoranov-v-staroy-bukhare-luchshie-mesta-dlya-uzhina/",
+          "date": "2025-01"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda 'Joy Gastro Restaurant' nomi bilan."
+    },
+    {
+      "id": "bux-temirs",
+      "cityId": "bukhara",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Temir's",
+        "ru": "Temir's",
+        "en": "Temir's"
+      },
+      "tagline": {
+        "uz": "Suvenirlar bilan bezalgan shinam restoran",
+        "ru": "Уютный ресторан с сувенирами на полках",
+        "en": "Cosy restaurant lined with souvenirs"
+      },
+      "description": {
+        "uz": "Asosiy yodgorliklarga piyoda yaqin, turistlar orasida mashhur restoran; javon va devorlari noyob suvenirlar bilan bezatilgan.",
+        "ru": "Ресторан в пешей доступности от главных памятников, популярный у туристов; на полках и стенах — эксклюзивные сувениры.",
+        "en": "A restaurant within walking distance of the main sights, popular with travellers, its shelves and walls decorated with unusual souvenirs."
+      },
+      "address": "Bahovaddin Naqshband ko'chasi, 2",
+      "lat": 39.7732001,
+      "lng": 64.418795,
+      "coordsSource": "osm",
+      "interests": [
+        "food"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@temirs_restaurant",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 6 ресторанов в старой Бухаре",
+          "url": "https://www.weproject.media/articles/detail/6-restoranov-v-staroy-bukhare-luchshie-mesta-dlya-uzhina/",
+          "date": "2025-01"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-chalet",
+      "cityId": "bukhara",
+      "category": "restaurant",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Chalet",
+        "ru": "Chalet",
+        "en": "Chalet"
+      },
+      "tagline": {
+        "uz": "Nodir Devonbegi madrasasi etagida jonli musiqa",
+        "ru": "Живая музыка у медресе Надир-Диван-беги",
+        "en": "Live music below Nadir Divan-Begi madrasa"
+      },
+      "description": {
+        "uz": "Nodir Devonbegi madrasasi yonidagi restoran: o'zbek va Yevropa taomlari, kechqurun jonli musiqa.",
+        "ru": "Ресторан у медресе Надир-Диван-беги: узбекская и европейская кухня, по вечерам живая музыка.",
+        "en": "A restaurant beside the Nadir Divan-Begi madrasa with Uzbek and European dishes and live music in the evenings."
+      },
+      "address": "Mehtar Anbar ko'chasi, 91/1",
+      "lat": 39.7732166,
+      "lng": 64.4220756,
+      "coordsSource": "osm",
+      "interests": [
+        "food",
+        "nightlife"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": "@chalet.bukhara",
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "WE Project: 6 ресторанов в старой Бухаре",
+          "url": "https://www.weproject.media/articles/detail/6-restoranov-v-staroy-bukhare-luchshie-mesta-dlya-uzhina/",
+          "date": "2025-01"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSMda ikkita 'Chalet' bor; Nodir Devonbegi yonidagisi tanlandi."
+    },
+    {
+      "id": "bux-gijduvan-ceramics-museum",
+      "cityId": "gijduvan",
+      "category": "workshop",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "G'ijduvon kulolchilik muzeyi (Narzullayevlar)",
+        "ru": "Музей гиждуванской керамики (Нарзуллаевы)",
+        "en": "Gijduvan Ceramics Museum (Narzullaev family)"
+      },
+      "tagline": {
+        "uz": "Kulollar sulolasi uyida jigarrang-sariq sopol",
+        "ru": "Охристая керамика в доме династии гончаров",
+        "en": "Ochre-glazed pottery in a potters' family home"
+      },
+      "description": {
+        "uz": "Bir necha avlod kulollar oilasining ustaxona-muzeyi: G'ijduvon uslubidagi sopol to'plami, ishlab chiqarish jarayoni va master-klasslar. Buxorodan taxminan 45 km.",
+        "ru": "Мастерская-музей потомственной семьи гончаров: коллекция керамики гиждуванской школы, показ процесса и мастер-классы. Около 45 км от Бухары.",
+        "en": "A workshop-museum run by a multi-generation family of potters, with a Gijduvan-style collection, live demonstrations and master classes. About 45 km from Bukhara."
+      },
+      "address": "Kimsan ko'chasi, G'ijduvon",
+      "lat": null,
+      "lng": null,
+      "coordsSource": "none",
+      "interests": [
+        "craft",
+        "shopping",
+        "art"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Advantour: Gijduvan Ceramics Museum",
+          "url": "https://www.advantour.com/uzbekistan/bukhara/gijduvan-ceramics-museum.htm"
+        },
+        {
+          "title": "Eurasia.travel: Gijduvan Ceramics Museum",
+          "url": "https://eurasia.travel/uzbekistan/gijduvan/gijduvan-ceramics-museum/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Uy raqami manbalarda farq qiladi (55 yoki 24). Koordinata topilmadi."
+    },
+    {
+      "id": "bux-gijduvani-complex",
+      "cityId": "gijduvan",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Abduxoliq G'ijduvoniy majmuasi va Ulug'bek madrasasi",
+        "ru": "Комплекс Абдулхалика Гиждувани и медресе Улугбека",
+        "en": "Abdulkhaliq Gijduvani Complex & Ulugbek Madrasa"
+      },
+      "tagline": {
+        "uz": "Birinchi pir ziyoratgohi va Ulug'bek madrasasi",
+        "ru": "Святыня первого пира и медресе Улугбека",
+        "en": "First pir's shrine beside an Ulugbek madrasa"
+      },
+      "description": {
+        "uz": "G'ijduvondagi «Yetti pir»ning birinchisi — Abduxoliq G'ijduvoniy maqbarasi atrofidagi majmua. Yonida Ulug'bek qurdirgan uchta madrasadan biri — XV asr madrasasi turadi.",
+        "ru": "Комплекс у гробницы Абдулхалика Гиждувани — первого из «Семи пиров». Рядом — медресе XV века, одно из трёх, построенных Улугбеком.",
+        "en": "The complex around the tomb of Abdulkhaliq Gijduvani, first of the Seven Pirs, next to a 15th-century madrasa — one of three built by Ulugbek."
+      },
+      "address": null,
+      "lat": 40.1033,
+      "lng": 64.6778,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Khoja Abdulkhalik Gijduvani Complex",
+          "url": "https://en.wikipedia.org/wiki/Khoja_Abdulkhalik_Gijduvani_Complex"
+        },
+        {
+          "title": "Wikipedia: Ulugbek Madrasah (Gijduvan)",
+          "url": "https://en.wikipedia.org/wiki/Ulugbek_Madrasah_(Gijduvan)"
+        },
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-vobkent-minaret",
+      "cityId": "vobkent",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Vobkent minorasi",
+        "ru": "Вабкентский минарет",
+        "en": "Vobkent Minaret"
+      },
+      "tagline": {
+        "uz": "Poi Kalonning «singlisi» — XII asr minorasi",
+        "ru": "XII век: «младший брат» минарета Калян",
+        "en": "12th-century cousin of the Kalyan Minaret"
+      },
+      "description": {
+        "uz": "Vobkent shahridagi XII asrga oid baland g'ishtin minora, bezak uslubi Buxoroning Kalon minorasini eslatadi. G'ijduvon yo'lida to'xtab ko'rish oson.",
+        "ru": "Высокий кирпичный минарет XII века в Вабкенте, по декору напоминающий бухарский минарет Калян. Удобно заехать по пути в Гиждуван.",
+        "en": "A tall 12th-century brick minaret in Vobkent whose decoration recalls Bukhara's Kalyan Minaret. An easy stop on the way to Gijduvan."
+      },
+      "address": null,
+      "lat": 40.01979,
+      "lng": 64.5177123,
+      "coordsSource": "osm",
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Traveldojo: Vobkent travel guide",
+          "url": "https://www.traveldojo.com/vobkent"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-mahmud-anjir-fagnavi",
+      "cityId": "vobkent",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Mahmud Anjir Fag'naviy ziyoratgohi",
+        "ru": "Святыня Ходжи Махмуда Анжира Фагнави",
+        "en": "Khoja Mahmud Anjir Fagnavi Shrine"
+      },
+      "tagline": {
+        "uz": "Hovuzli uchinchi pir ziyoratgohi",
+        "ru": "Святыня третьего пира с хаузом",
+        "en": "Third pir's shrine with a pond"
+      },
+      "description": {
+        "uz": "Duradgorlikdan so'fiylikka o'tgan Mahmud Anjir Fag'naviy dafn etilgan Anjirbog' qishlog'idagi ziyoratgoh; masjid va hovuz bor. «Yetti pir» yo'nalishining uchinchi manzili.",
+        "ru": "Святыня в селе Анжирбог, где похоронен Махмуд Анжир Фагнави — плотник, ставший суфием; есть мечеть и хауз. Третья точка маршрута «Семи пиров».",
+        "en": "A shrine in Anjirbog village where Mahmud Anjir Fagnavi, a carpenter turned Sufi, is buried, with a mosque and pond. Third stop on the Seven Pirs route."
+      },
+      "address": "Anjirbog' qishlog'i, Vobkent tumani",
+      "lat": 40.0641955,
+      "lng": 64.4882016,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Damda.uz: The mausoleum of Khoja Mahmud Fagnavi",
+          "url": "https://damda.uz/en/blog/the-mausoleum-khoja-mahmud-fagnavi-471"
+        },
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        }
+      ],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "bux-arif-revgari",
+      "cityId": "shofirkon",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Orif Revgariy ziyoratgohi",
+        "ru": "Святыня Ходжи Арифа Ревгари",
+        "en": "Khoja Arif Revgari Shrine"
+      },
+      "tagline": {
+        "uz": "Shofirkondagi ikkinchi pir maqbarasi",
+        "ru": "Мавзолей второго пира в Шафиркане",
+        "en": "Second pir's shrine in Shofirkon"
+      },
+      "description": {
+        "uz": "G'ijduvoniyning shogirdi, «Yetti pir»ning ikkinchisi Orif Revgariy Shofirkonda dafn etilgan. Ziyoratgoh yonida uning nomidagi jome masjidi bor.",
+        "ru": "В Шафиркане похоронен Ариф Ревгари — ученик Гиждувани и второй из «Семи пиров». Рядом со святыней — джума-мечеть его имени.",
+        "en": "Arif Revgari, a disciple of Gijduvani and second of the Seven Pirs, is buried in Shofirkon; a Friday mosque bearing his name stands by the shrine."
+      },
+      "address": "Mustaqillik ko'chasi, Shofirkon",
+      "lat": 40.122834,
+      "lng": 64.499696,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        },
+        {
+          "title": "Lyabi House blog: 7 pirs Bukhara",
+          "url": "https://lyabihouse.blogspot.com/2023/05/7-pirs-bukhara.html"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "OSM nuqtasi — uning nomidagi jome masjidi; maqbaraning aniq nuqtasi tekshirilsin."
+    },
+    {
+      "id": "bux-ali-romitani",
+      "cityId": "romitan",
+      "category": "mosque",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Xo'ja Ali Romitaniy (Azizon) ziyoratgohi",
+        "ru": "Святыня Ходжи Али Рамитани (Азизон)",
+        "en": "Khoja Ali Romitani (Azizon) Shrine"
+      },
+      "tagline": {
+        "uz": "To'rtinchi pir — Azizon ziyoratgohi",
+        "ru": "Четвёртый пир — святыня Азизон",
+        "en": "Fourth pir — the Azizon shrine"
+      },
+      "description": {
+        "uz": "Fag'naviyning shogirdi, «Azizon» nomi bilan mashhur Ali Romitaniy ziyoratgohi va masjidi. «Yetti pir» yo'nalishining to'rtinchi manzili.",
+        "ru": "Святыня и мечеть Али Рамитани, известного как «Азизон», ученика Фагнави. Четвёртая точка маршрута «Семи пиров».",
+        "en": "Shrine and mosque of Ali Romitani, known as 'Azizon', a disciple of Fagnavi, and the fourth stop on the Seven Pirs route."
+      },
+      "address": "Qalavroncha, Romitan tumani",
+      "lat": 39.9107021,
+      "lng": 64.2669603,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Eurasia.travel: Seven Pirs of Bukhara",
+          "url": "https://eurasia.travel/uzbekistan/bukhara/seven-pirs/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": null
+    },
+    {
+      "id": "bux-varakhsha",
+      "cityId": "jondor",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Varaxsha qadimiy shahri",
+        "ru": "Городище Варахша",
+        "en": "Varakhsha Ancient Site"
+      },
+      "tagline": {
+        "uz": "Cho'l chetidagi Buxoro hukmdorlarining qadimiy saroyi",
+        "ru": "Древний дворец бухархудатов на краю пустыни",
+        "en": "Ruined palace-city on the desert edge"
+      },
+      "description": {
+        "uz": "Buxorodan g'arbdagi cho'l chetida joylashgan, Buxorxudotlar saroyi bo'lgan qadimiy shahar xarobalari. Topilgan devoriy rasmlar muzeylarda saqlanadi; joyning o'zi cho'l manzarasi bilan ta'sirli.",
+        "ru": "Руины древнего города к западу от Бухары на краю пустыни, где стоял дворец бухархудатов. Найденные росписи хранятся в музеях, а само место впечатляет пустынным пейзажем.",
+        "en": "Ruins of an ancient city on the desert edge west of Bukhara, once the palace seat of the Bukhar Khudahs. Its murals are now in museums; the site itself impresses with its desert setting."
+      },
+      "address": null,
+      "lat": 39.86361111,
+      "lng": 64.07305556,
+      "coordsSource": "wikipedia",
+      "interests": [
+        "history",
+        "nature"
+      ],
+      "priceLevel": 0,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Wikipedia: Varakhsha",
+          "url": "https://en.wikipedia.org/wiki/Varakhsha"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Infratuzilma yo'q; transport va ochiqlik tekshirilsin. Jondor tumani."
+    },
+    {
+      "id": "bux-paykend",
+      "cityId": "qorakol",
+      "category": "monument",
+      "novelty": "hidden",
+      "openedAt": null,
+      "name": {
+        "uz": "Poykent qadimiy shahri va muzeyi",
+        "ru": "Городище Пайкенд и музей",
+        "en": "Paykend Ancient City & Museum"
+      },
+      "tagline": {
+        "uz": "Ipak yo'lining «Osiyo Pompeyi»",
+        "ru": "«Помпеи Азии» на Шёлковом пути",
+        "en": "Silk Road trading town, 'Pompeii of Asia'"
+      },
+      "description": {
+        "uz": "Buxorodan 40–60 km janubi-g'arbdagi qadimiy savdo shahri xarobalari: masjid va minora poydevori topilgan. Yonidagi muzeyda sopol, zargarlik va tangalar namoyish etiladi.",
+        "ru": "Руины древнего торгового города в 40–60 км к юго-западу от Бухары, с остатками мечети и минарета. В музее рядом — керамика, украшения и монеты.",
+        "en": "Ruins of an ancient trading city 40–60 km southwest of Bukhara with remains of a mosque and minaret. The adjacent museum shows ceramics, jewellery and coins."
+      },
+      "address": null,
+      "lat": 39.5860991,
+      "lng": 64.0078966,
+      "coordsSource": "osm",
+      "interests": [
+        "history"
+      ],
+      "priceLevel": null,
+      "priceNote": null,
+      "hours": null,
+      "instagram": null,
+      "telegram": null,
+      "website": null,
+      "sources": [
+        {
+          "title": "Uzbekistan.travel: The settlement of Paykend — Pompeii of Asia",
+          "url": "https://uzbekistan.travel/en/o/the-settlement-of-paykend-pompeii-of-asia"
+        },
+        {
+          "title": "Wikipedia: Paykend",
+          "url": "https://en.wikipedia.org/wiki/Paykend"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Muzey ish vaqti va narxi aniqlanmagan."
+    }
+  ]
+}
