@@ -42,12 +42,14 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Sessiya | `POST /auth/device`, `GET /me`, `PATCH /me` |
 | Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}`, `GET /places/{id}/reviews` |
 | Qoida | `GET /geofences?city=` |
+| SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
+| Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
 | Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` |
 | Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
 | Lenta | `GET /feed?city=`, `GET /posts/{id}`, `POST·DELETE /posts/{id}/like`, `POST /posts/{id}/report`, `DELETE /posts/{id}`; ochiq: `GET /s/{slug}` (HTML + OpenGraph), `GET /s/{slug}/card.png`; admin: `GET /admin/posts?status=reported`, `POST /admin/posts/{id}/hide·restore` |
-| Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30` |
+| Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30`, `POST·PATCH·DELETE /admin/services[/{id}]` |
 | Xizmat | `GET /healthz`, `GET /static/ph/{category}.svg` (rasm yo'q joylar uchun vaqtinchalik rasm), `GET /uploads/{file}` (yuklangan rasmlar) |
 
 Til: `Accept-Language: uz | ru | en` (yo'q bo'lsa `en`; matn topilmasa `en` → `uz`).
@@ -132,3 +134,10 @@ POST /publish → lentaga post + ochiq havola /s/{slug}  ·  GET /share-card →
   admin `restore` qiladi.
 - Push: kuniga bitta, faqat kamida 2 ta joyga "bordim" belgisi qo'yilgan bo'lsa.
 - Geofence orqali "Rasmga oling" eslatmasi — ilova tomonida (lokal bildirishnoma).
+
+## SOS ma'lumotlari haqida — muhim
+
+`seed/` dagi shifoxona, dorixona, politsiya, bankomat yozuvlari **o'ylab topilgan demo** (nomida "(demo)",
+API javobida `isDemo: true`). Favqulodda raqamlar (101, 102, 103, 104, 112) ham rasmiy manbadan tekshirilishi kerak.
+Productionga chiqishdan oldin bular haqiqiy, tekshirilgan ma'lumot bilan almashtirilishi **shart** — noto'g'ri
+manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'lsa ogohlantirish ko'rsatsin.

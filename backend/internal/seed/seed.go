@@ -55,7 +55,21 @@ type seedFile struct {
 		TaxiPerKm    int64             `json:"taxiPerKm"`
 		Emergency    map[string]string `json:"emergency"`
 	} `json:"city"`
-	Places []seedPlace `json:"places"`
+	Places   []seedPlace   `json:"places"`
+	Services []seedService `json:"services"`
+}
+
+type seedService struct {
+	ID      string            `json:"id"`
+	Kind    string            `json:"kind"`
+	Name    map[string]string `json:"name"`
+	Address map[string]string `json:"address"`
+	Lat     float64           `json:"lat"`
+	Lng     float64           `json:"lng"`
+	Phone   *string           `json:"phone"`
+	Hours   string            `json:"hours"`
+	Open24h bool              `json:"open24h"`
+	Accepts []string          `json:"accepts"`
 }
 
 type seedText struct {
@@ -124,6 +138,23 @@ func validate(sf seedFile) error {
 			return fmt.Errorf("%s: %w", p.ID, err)
 		}
 		seen[p.ID] = true
+	}
+	kinds := map[string]bool{"hospital": true, "pharmacy": true, "police": true, "embassy": true, "atm": true, "exchange": true}
+	for _, sv := range sf.Services {
+		switch {
+		case sv.ID == "" || seen[sv.ID]:
+			return fmt.Errorf("bo'sh yoki takror xizmat id: %q", sv.ID)
+		case !kinds[sv.Kind]:
+			return fmt.Errorf("%s: noma'lum xizmat turi %q", sv.ID, sv.Kind)
+		case sv.Name["uz"] == "":
+			return fmt.Errorf("%s: uz nom shart", sv.ID)
+		case !(domain.LatLng{Lat: sv.Lat, Lng: sv.Lng}).Valid() || sv.Lat == 0:
+			return fmt.Errorf("%s: koordinata noto'g'ri", sv.ID)
+		}
+		if _, err := hours(sv.Hours, nil); err != nil {
+			return fmt.Errorf("%s: %w", sv.ID, err)
+		}
+		seen[sv.ID] = true
 	}
 	return nil
 }
@@ -234,6 +265,26 @@ func load(ctx context.Context, tx pgx.Tx, sf seedFile) error {
 				VALUES ($1,$2,$3,$4,$5,'demo')`, p.ID, r.Code, r.Severity, r.Priority, txt); err != nil {
 				return err
 			}
+		}
+	}
+	for _, sv := range sf.Services {
+		h, _ := hours(sv.Hours, nil)
+		hj, _ := json.Marshal(h)
+		name, _ := json.Marshal(sv.Name)
+		addr, _ := json.Marshal(sv.Address)
+		if sv.Address == nil {
+			addr = []byte("{}")
+		}
+		if sv.Accepts == nil {
+			sv.Accepts = []string{}
+		}
+		if _, err := tx.Exec(ctx, `INSERT INTO city_services (id, city_id, kind, name, address, lat, lng, phone, hours, open_24h, accepts, source)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'demo')
+			ON CONFLICT (id) DO UPDATE SET city_id = EXCLUDED.city_id, kind = EXCLUDED.kind, name = EXCLUDED.name,
+			  address = EXCLUDED.address, lat = EXCLUDED.lat, lng = EXCLUDED.lng, phone = EXCLUDED.phone, hours = EXCLUDED.hours,
+			  open_24h = EXCLUDED.open_24h, accepts = EXCLUDED.accepts, updated_at = now()`,
+			sv.ID, c.ID, sv.Kind, name, addr, sv.Lat, sv.Lng, sv.Phone, hj, sv.Open24h, sv.Accepts); err != nil {
+			return fmt.Errorf("service %s: %w", sv.ID, err)
 		}
 	}
 	return nil

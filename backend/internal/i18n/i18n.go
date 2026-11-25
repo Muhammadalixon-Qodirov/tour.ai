@@ -131,6 +131,12 @@ var messages = map[string]map[string]string{
 	"post_not_found":         {"uz": "Post topilmadi", "ru": "Публикация не найдена", "en": "Post not found"},
 	"post_hidden":            {"uz": "Post shikoyatlar sababli yashirilgan va moderator tekshiruvida", "ru": "Публикация скрыта из-за жалоб и проверяется модератором", "en": "The post is hidden after reports and is under review"},
 
+	"sos.lost_documents": {
+		"uz": "Hujjat yo'qolsa: 1) eng yaqin politsiyaga ariza bering va ma'lumotnoma oling; 2) mamlakatingiz elchixonasi yoki konsulligiga murojaat qiling; 3) mehmonxonaga xabar bering — ro'yxatdan o'tish ma'lumotlari ularda bor.",
+		"ru": "Если потеряли документы: 1) подайте заявление в ближайшую полицию и получите справку; 2) обратитесь в посольство или консульство своей страны; 3) сообщите в гостиницу — у неё есть данные о вашей регистрации.",
+		"en": "If you lose your documents: 1) report it at the nearest police station and get a certificate; 2) contact your country's embassy or consulate; 3) tell your hotel — they hold your registration details.",
+	},
+
 	// geofence
 	"geofence_headline": {"uz": "Siz {0} hududidasiz", "ru": "Вы находитесь: {0}", "en": "You are at {0}"},
 }

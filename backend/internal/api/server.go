@@ -59,6 +59,9 @@ func (s *Server) Handler() http.Handler {
 	pub("GET /api/v1/places/{id}", s.getPlace)
 	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
 	pub("GET /api/v1/geofences", s.geofences)
+	pub("GET /api/v1/services", s.listServices)
+	pub("GET /api/v1/cities/{id}/emergency", s.emergency)
+	mux.Handle("GET /api/v1/cities/{id}/offline-pack", s.rateIP("offline", 30, http.HandlerFunc(s.offlinePack)))
 
 	mux.Handle("POST /api/v1/trips", s.requireUser(s.rate("trips", 6, http.HandlerFunc(s.createTrip))))
 	user("GET /api/v1/trips", s.listTrips)
@@ -110,6 +113,9 @@ func (s *Server) Handler() http.Handler {
 	mux.Handle("POST /api/v1/admin/places/{id}/images", s.requireAdmin(s.rate("admin-upload", 30, http.HandlerFunc(s.adminUploadImage))))
 	adm("GET /api/v1/admin/analytics/novelty", s.adminNovelty)
 	adm("GET /api/v1/admin/posts", s.adminPosts)
+	adm("POST /api/v1/admin/services", s.adminCreateService)
+	adm("PATCH /api/v1/admin/services/{id}", s.adminPatchService)
+	adm("DELETE /api/v1/admin/services/{id}", s.adminDeleteService)
 	adm("POST /api/v1/admin/posts/{id}/hide", s.adminPostStatus("hidden"))
 	adm("POST /api/v1/admin/posts/{id}/restore", s.adminPostStatus("visible"))
 

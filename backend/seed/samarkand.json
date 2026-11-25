@@ -1,218 +1,900 @@
 {
   "city": {
     "id": "samarkand",
-    "name": {"uz": "Samarqand", "ru": "Самарканд", "en": "Samarkand"},
-    "center": {"lat": 39.6542, "lng": 66.9597},
+    "name": {
+      "uz": "Samarqand",
+      "ru": "Самарканд",
+      "en": "Samarkand"
+    },
+    "center": {
+      "lat": 39.6542,
+      "lng": 66.9597
+    },
     "taxiBaseFare": 10000,
     "taxiPerKm": 3000,
-    "emergency": {"fire": "101", "police": "102", "ambulance": "103", "gas": "104", "unified": "112"}
+    "emergency": {
+      "fire": "101",
+      "police": "102",
+      "ambulance": "103",
+      "gas": "104",
+      "unified": "112"
+    }
   },
   "places": [
     {
-      "id": "registan", "category": "monument", "novelty": "iconic", "lat": 39.6547, "lng": 66.9758,
-      "interests": ["history", "architecture"], "visitMin": 75, "priceLevel": 1, "hours": "08:00-19:00",
-      "rating": 4.9, "reviews": 2500, "wheelchair": true, "payCard": true, "geofenceRadiusM": 150,
+      "id": "registan",
+      "category": "monument",
+      "novelty": "iconic",
+      "lat": 39.6547,
+      "lng": 66.9758,
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "visitMin": 75,
+      "priceLevel": 1,
+      "hours": "08:00-19:00",
+      "rating": 4.9,
+      "reviews": 2500,
+      "wheelchair": true,
+      "payCard": true,
+      "geofenceRadiusM": 150,
       "text": {
-        "uz": {"name": "Registon maydoni", "tagline": "Uchta madrasali bosh maydon", "description": "Samarqandning yuragi: Ulug'bek, Sherdor va Tillakori madrasalari bir maydonda.",
-               "history": "XV–XVII asrlarda qurilgan uchta madrasa shaharning bosh maydonini tashkil qiladi.", "facts": ["Ulug'bek madrasasi 1417–1420 yillarda qurilgan.", "Tillakori madrasasi ichidagi masjid gumbazi oltin bilan bezatilgan."]},
-        "ru": {"name": "Площадь Регистан", "tagline": "Главная площадь с тремя медресе", "description": "Сердце Самарканда: медресе Улугбека, Шердор и Тилля-Кари на одной площади.",
-               "history": "Три медресе XV–XVII веков образуют главную площадь города.", "facts": ["Медресе Улугбека построено в 1417–1420 годах.", "Купол мечети в медресе Тилля-Кари украшен золотом."]},
-        "en": {"name": "Registan Square", "tagline": "Main square framed by three madrasas", "description": "The heart of Samarkand: the Ulugh Beg, Sher-Dor and Tilya-Kori madrasas on one square.",
-               "history": "Three madrasas built between the 15th and 17th centuries form the city's main square.", "facts": ["The Ulugh Beg Madrasa was built in 1417–1420.", "The mosque dome inside Tilya-Kori Madrasa is decorated with gold."]}
+        "uz": {
+          "name": "Registon maydoni",
+          "tagline": "Uchta madrasali bosh maydon",
+          "description": "Samarqandning yuragi: Ulug'bek, Sherdor va Tillakori madrasalari bir maydonda.",
+          "history": "XV–XVII asrlarda qurilgan uchta madrasa shaharning bosh maydonini tashkil qiladi.",
+          "facts": [
+            "Ulug'bek madrasasi 1417–1420 yillarda qurilgan.",
+            "Tillakori madrasasi ichidagi masjid gumbazi oltin bilan bezatilgan."
+          ]
+        },
+        "ru": {
+          "name": "Площадь Регистан",
+          "tagline": "Главная площадь с тремя медресе",
+          "description": "Сердце Самарканда: медресе Улугбека, Шердор и Тилля-Кари на одной площади.",
+          "history": "Три медресе XV–XVII веков образуют главную площадь города.",
+          "facts": [
+            "Медресе Улугбека построено в 1417–1420 годах.",
+            "Купол мечети в медресе Тилля-Кари украшен золотом."
+          ]
+        },
+        "en": {
+          "name": "Registan Square",
+          "tagline": "Main square framed by three madrasas",
+          "description": "The heart of Samarkand: the Ulugh Beg, Sher-Dor and Tilya-Kori madrasas on one square.",
+          "history": "Three madrasas built between the 15th and 17th centuries form the city's main square.",
+          "facts": [
+            "The Ulugh Beg Madrasa was built in 1417–1420.",
+            "The mosque dome inside Tilya-Kori Madrasa is decorated with gold."
+          ]
+        }
       },
       "rules": [
-        {"code": "ticket_required", "severity": "info", "priority": 2, "text": {"uz": "Madrasalarga kirish chipta bilan.", "ru": "Вход в медресе по билету.", "en": "Entry to the madrasas requires a ticket."}},
-        {"code": "no_drone", "severity": "forbidden", "priority": 1, "text": {"uz": "Dron uchirish ruxsatsiz taqiqlangan.", "ru": "Запуск дронов без разрешения запрещён.", "en": "Flying drones without a permit is prohibited."}}
+        {
+          "code": "ticket_required",
+          "severity": "info",
+          "priority": 2,
+          "text": {
+            "uz": "Madrasalarga kirish chipta bilan.",
+            "ru": "Вход в медресе по билету.",
+            "en": "Entry to the madrasas requires a ticket."
+          }
+        },
+        {
+          "code": "no_drone",
+          "severity": "forbidden",
+          "priority": 1,
+          "text": {
+            "uz": "Dron uchirish ruxsatsiz taqiqlangan.",
+            "ru": "Запуск дронов без разрешения запрещён.",
+            "en": "Flying drones without a permit is prohibited."
+          }
+        }
       ]
     },
     {
-      "id": "gur-emir", "category": "monument", "novelty": "iconic", "lat": 39.6484, "lng": 66.9691,
-      "interests": ["history", "architecture"], "visitMin": 45, "priceLevel": 1, "hours": "08:00-19:00",
-      "rating": 4.8, "reviews": 1500, "payCard": true,
+      "id": "gur-emir",
+      "category": "monument",
+      "novelty": "iconic",
+      "lat": 39.6484,
+      "lng": 66.9691,
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "08:00-19:00",
+      "rating": 4.8,
+      "reviews": 1500,
+      "payCard": true,
       "text": {
-        "uz": {"name": "Go'ri Amir maqbarasi", "tagline": "Amir Temur maqbarasi", "description": "Feruza gumbazli maqbara, Temuriylar sulolasining oilaviy qabristoni.",
-               "history": "XV asr boshida qurilgan maqbarada Amir Temur va uning avlodlari dafn etilgan.", "facts": ["Qovurg'ali feruza gumbaz Samarqandning ramzlaridan biri.", "Maqbarada Mirzo Ulug'bek ham dafn etilgan."]},
-        "ru": {"name": "Мавзолей Гур-Эмир", "tagline": "Мавзолей Амира Темура", "description": "Мавзолей с бирюзовым куполом — усыпальница династии Тимуридов.",
-               "history": "В мавзолее начала XV века похоронены Амир Темур и его потомки.", "facts": ["Ребристый бирюзовый купол — один из символов Самарканда.", "Здесь же похоронен Мирзо Улугбек."]},
-        "en": {"name": "Gur-e-Amir Mausoleum", "tagline": "Tomb of Amir Timur", "description": "A turquoise-domed mausoleum, the family tomb of the Timurid dynasty.",
-               "history": "Built in the early 15th century, it holds the graves of Amir Timur and his descendants.", "facts": ["Its ribbed turquoise dome is a symbol of Samarkand.", "Ulugh Beg is also buried here."]}
+        "uz": {
+          "name": "Go'ri Amir maqbarasi",
+          "tagline": "Amir Temur maqbarasi",
+          "description": "Feruza gumbazli maqbara, Temuriylar sulolasining oilaviy qabristoni.",
+          "history": "XV asr boshida qurilgan maqbarada Amir Temur va uning avlodlari dafn etilgan.",
+          "facts": [
+            "Qovurg'ali feruza gumbaz Samarqandning ramzlaridan biri.",
+            "Maqbarada Mirzo Ulug'bek ham dafn etilgan."
+          ]
+        },
+        "ru": {
+          "name": "Мавзолей Гур-Эмир",
+          "tagline": "Мавзолей Амира Темура",
+          "description": "Мавзолей с бирюзовым куполом — усыпальница династии Тимуридов.",
+          "history": "В мавзолее начала XV века похоронены Амир Темур и его потомки.",
+          "facts": [
+            "Ребристый бирюзовый купол — один из символов Самарканда.",
+            "Здесь же похоронен Мирзо Улугбек."
+          ]
+        },
+        "en": {
+          "name": "Gur-e-Amir Mausoleum",
+          "tagline": "Tomb of Amir Timur",
+          "description": "A turquoise-domed mausoleum, the family tomb of the Timurid dynasty.",
+          "history": "Built in the early 15th century, it holds the graves of Amir Timur and his descendants.",
+          "facts": [
+            "Its ribbed turquoise dome is a symbol of Samarkand.",
+            "Ulugh Beg is also buried here."
+          ]
+        }
       },
       "rules": [
-        {"code": "dress_code", "severity": "warn", "priority": 2, "text": {"uz": "Yelka va tizzalar yopiq bo'lsin.", "ru": "Плечи и колени должны быть закрыты.", "en": "Cover shoulders and knees."}},
-        {"code": "quiet", "severity": "info", "priority": 1, "text": {"uz": "Maqbarada ovozni past tuting.", "ru": "В мавзолее соблюдайте тишину.", "en": "Keep your voice low inside the tomb."}}
+        {
+          "code": "dress_code",
+          "severity": "warn",
+          "priority": 2,
+          "text": {
+            "uz": "Yelka va tizzalar yopiq bo'lsin.",
+            "ru": "Плечи и колени должны быть закрыты.",
+            "en": "Cover shoulders and knees."
+          }
+        },
+        {
+          "code": "quiet",
+          "severity": "info",
+          "priority": 1,
+          "text": {
+            "uz": "Maqbarada ovozni past tuting.",
+            "ru": "В мавзолее соблюдайте тишину.",
+            "en": "Keep your voice low inside the tomb."
+          }
+        }
       ]
     },
     {
-      "id": "bibi-khanym", "category": "mosque", "novelty": "iconic", "lat": 39.6608, "lng": 66.9794,
-      "interests": ["history", "architecture"], "visitMin": 45, "priceLevel": 1, "hours": "08:00-19:00",
-      "rating": 4.7, "reviews": 1100,
+      "id": "bibi-khanym",
+      "category": "mosque",
+      "novelty": "iconic",
+      "lat": 39.6608,
+      "lng": 66.9794,
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "08:00-19:00",
+      "rating": 4.7,
+      "reviews": 1100,
       "text": {
-        "uz": {"name": "Bibixonim masjidi", "tagline": "Temur davrining ulkan jome masjidi", "description": "O'z davrida Markaziy Osiyodagi eng katta masjidlardan biri.",
-               "history": "Masjid 1399–1404 yillarda Amir Temurning Hindiston yurishidan keyin qurilgan.", "facts": ["Hovlida ulkan marmar Qur'on lavhi turadi.", "Bino XX asrda qisman qayta tiklangan."]},
-        "ru": {"name": "Мечеть Биби-Ханым", "tagline": "Огромная соборная мечеть эпохи Тимура", "description": "В своё время одна из крупнейших мечетей Центральной Азии.",
-               "history": "Мечеть построена в 1399–1404 годах после индийского похода Тимура.", "facts": ["Во дворе стоит огромная мраморная подставка для Корана.", "Здание частично восстановлено в XX веке."]},
-        "en": {"name": "Bibi-Khanym Mosque", "tagline": "Timur's colossal congregational mosque", "description": "Once one of the largest mosques in Central Asia.",
-               "history": "Built in 1399–1404 after Timur's campaign in India.", "facts": ["A giant marble Quran stand sits in the courtyard.", "The building was partly restored in the 20th century."]}
+        "uz": {
+          "name": "Bibixonim masjidi",
+          "tagline": "Temur davrining ulkan jome masjidi",
+          "description": "O'z davrida Markaziy Osiyodagi eng katta masjidlardan biri.",
+          "history": "Masjid 1399–1404 yillarda Amir Temurning Hindiston yurishidan keyin qurilgan.",
+          "facts": [
+            "Hovlida ulkan marmar Qur'on lavhi turadi.",
+            "Bino XX asrda qisman qayta tiklangan."
+          ]
+        },
+        "ru": {
+          "name": "Мечеть Биби-Ханым",
+          "tagline": "Огромная соборная мечеть эпохи Тимура",
+          "description": "В своё время одна из крупнейших мечетей Центральной Азии.",
+          "history": "Мечеть построена в 1399–1404 годах после индийского похода Тимура.",
+          "facts": [
+            "Во дворе стоит огромная мраморная подставка для Корана.",
+            "Здание частично восстановлено в XX веке."
+          ]
+        },
+        "en": {
+          "name": "Bibi-Khanym Mosque",
+          "tagline": "Timur's colossal congregational mosque",
+          "description": "Once one of the largest mosques in Central Asia.",
+          "history": "Built in 1399–1404 after Timur's campaign in India.",
+          "facts": [
+            "A giant marble Quran stand sits in the courtyard.",
+            "The building was partly restored in the 20th century."
+          ]
+        }
       },
       "rules": [
-        {"code": "dress_code", "severity": "warn", "priority": 2, "text": {"uz": "Ayollar ro'mol o'rashi tavsiya etiladi; yelka va tizzalar yopiq.", "ru": "Женщинам рекомендуется покрыть голову; плечи и колени закрыты.", "en": "Women are advised to cover their hair; shoulders and knees covered."}},
-        {"code": "no_flash", "severity": "info", "priority": 1, "text": {"uz": "Ichkarida chaqnoqli suratga olmang.", "ru": "Не используйте вспышку внутри.", "en": "No flash photography inside."}}
+        {
+          "code": "dress_code",
+          "severity": "warn",
+          "priority": 2,
+          "text": {
+            "uz": "Ayollar ro'mol o'rashi tavsiya etiladi; yelka va tizzalar yopiq.",
+            "ru": "Женщинам рекомендуется покрыть голову; плечи и колени закрыты.",
+            "en": "Women are advised to cover their hair; shoulders and knees covered."
+          }
+        },
+        {
+          "code": "no_flash",
+          "severity": "info",
+          "priority": 1,
+          "text": {
+            "uz": "Ichkarida chaqnoqli suratga olmang.",
+            "ru": "Не используйте вспышку внутри.",
+            "en": "No flash photography inside."
+          }
+        }
       ]
     },
     {
-      "id": "shah-i-zinda", "category": "monument", "novelty": "iconic", "lat": 39.6630, "lng": 66.9873,
-      "interests": ["history", "architecture"], "visitMin": 60, "priceLevel": 1, "hours": "07:00-19:00",
-      "rating": 4.9, "reviews": 1800, "geofenceRadiusM": 120,
+      "id": "shah-i-zinda",
+      "category": "monument",
+      "novelty": "iconic",
+      "lat": 39.663,
+      "lng": 66.9873,
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "visitMin": 60,
+      "priceLevel": 1,
+      "hours": "07:00-19:00",
+      "rating": 4.9,
+      "reviews": 1800,
+      "geofenceRadiusM": 120,
       "text": {
-        "uz": {"name": "Shohi Zinda", "tagline": "Maqbaralar ko'chasi", "description": "Moviy koshinli maqbaralar tizilgan muqaddas majmua.",
-               "history": "XI–XIX asrlarga oid maqbaralar majmuasi; asosiy qismi XIV–XV asrlarda qurilgan.", "facts": ["Majmua nomi \"Tirik shoh\" degan ma'noni beradi.", "Ziyoratchilar zinapoyalarni sanab chiqishi an'anaga aylangan."]},
-        "ru": {"name": "Шахи-Зинда", "tagline": "Улица мавзолеев", "description": "Священный ансамбль мавзолеев с синей изразцовой отделкой.",
-               "history": "Ансамбль XI–XIX веков; основная часть построена в XIV–XV веках.", "facts": ["Название означает «Живой царь».", "Паломники по традиции считают ступени лестницы."]},
-        "en": {"name": "Shah-i-Zinda", "tagline": "Avenue of mausoleums", "description": "A sacred ensemble of mausoleums clad in blue tilework.",
-               "history": "An ensemble from the 11th–19th centuries; most of it dates from the 14th–15th centuries.", "facts": ["The name means \"The Living King\".", "Pilgrims traditionally count the steps of the staircase."]}
+        "uz": {
+          "name": "Shohi Zinda",
+          "tagline": "Maqbaralar ko'chasi",
+          "description": "Moviy koshinli maqbaralar tizilgan muqaddas majmua.",
+          "history": "XI–XIX asrlarga oid maqbaralar majmuasi; asosiy qismi XIV–XV asrlarda qurilgan.",
+          "facts": [
+            "Majmua nomi \"Tirik shoh\" degan ma'noni beradi.",
+            "Ziyoratchilar zinapoyalarni sanab chiqishi an'anaga aylangan."
+          ]
+        },
+        "ru": {
+          "name": "Шахи-Зинда",
+          "tagline": "Улица мавзолеев",
+          "description": "Священный ансамбль мавзолеев с синей изразцовой отделкой.",
+          "history": "Ансамбль XI–XIX веков; основная часть построена в XIV–XV веках.",
+          "facts": [
+            "Название означает «Живой царь».",
+            "Паломники по традиции считают ступени лестницы."
+          ]
+        },
+        "en": {
+          "name": "Shah-i-Zinda",
+          "tagline": "Avenue of mausoleums",
+          "description": "A sacred ensemble of mausoleums clad in blue tilework.",
+          "history": "An ensemble from the 11th–19th centuries; most of it dates from the 14th–15th centuries.",
+          "facts": [
+            "The name means \"The Living King\".",
+            "Pilgrims traditionally count the steps of the staircase."
+          ]
+        }
       },
       "rules": [
-        {"code": "dress_code", "severity": "warn", "priority": 3, "text": {"uz": "Ziyoratgoh: yopiq kiyim, ayollarga ro'mol.", "ru": "Место паломничества: закрытая одежда, женщинам платок.", "en": "Pilgrimage site: modest clothing, headscarf for women."}},
-        {"code": "quiet", "severity": "warn", "priority": 2, "text": {"uz": "Ziyoratchilarni bezovta qilmang, ovozni past tuting.", "ru": "Не мешайте паломникам, говорите тихо.", "en": "Don't disturb pilgrims; keep quiet."}},
-        {"code": "no_drone", "severity": "forbidden", "priority": 1, "text": {"uz": "Dron uchirish taqiqlangan.", "ru": "Запуск дронов запрещён.", "en": "Drones are prohibited."}}
+        {
+          "code": "dress_code",
+          "severity": "warn",
+          "priority": 3,
+          "text": {
+            "uz": "Ziyoratgoh: yopiq kiyim, ayollarga ro'mol.",
+            "ru": "Место паломничества: закрытая одежда, женщинам платок.",
+            "en": "Pilgrimage site: modest clothing, headscarf for women."
+          }
+        },
+        {
+          "code": "quiet",
+          "severity": "warn",
+          "priority": 2,
+          "text": {
+            "uz": "Ziyoratchilarni bezovta qilmang, ovozni past tuting.",
+            "ru": "Не мешайте паломникам, говорите тихо.",
+            "en": "Don't disturb pilgrims; keep quiet."
+          }
+        },
+        {
+          "code": "no_drone",
+          "severity": "forbidden",
+          "priority": 1,
+          "text": {
+            "uz": "Dron uchirish taqiqlangan.",
+            "ru": "Запуск дронов запрещён.",
+            "en": "Drones are prohibited."
+          }
+        }
       ]
     },
     {
-      "id": "siab-bazaar", "category": "bazaar", "novelty": "iconic", "lat": 39.6617, "lng": 66.9806,
-      "interests": ["food", "shopping"], "visitMin": 45, "priceLevel": 1, "hours": "06:00-18:00",
-      "rating": 4.5, "reviews": 900, "cashOnly": true,
+      "id": "siab-bazaar",
+      "category": "bazaar",
+      "novelty": "iconic",
+      "lat": 39.6617,
+      "lng": 66.9806,
+      "interests": [
+        "food",
+        "shopping"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "06:00-18:00",
+      "rating": 4.5,
+      "reviews": 900,
+      "cashOnly": true,
       "text": {
-        "uz": {"name": "Siyob bozori", "tagline": "Shaharning eng katta dehqon bozori", "description": "Samarqand noni, quruq mevalar va ziravorlar bozori."},
-        "ru": {"name": "Сиабский базар", "tagline": "Крупнейший рынок города", "description": "Самаркандские лепёшки, сухофрукты и специи."},
-        "en": {"name": "Siab Bazaar", "tagline": "The city's biggest farmers' market", "description": "Samarkand bread, dried fruit and spices."}
+        "uz": {
+          "name": "Siyob bozori",
+          "tagline": "Shaharning eng katta dehqon bozori",
+          "description": "Samarqand noni, quruq mevalar va ziravorlar bozori."
+        },
+        "ru": {
+          "name": "Сиабский базар",
+          "tagline": "Крупнейший рынок города",
+          "description": "Самаркандские лепёшки, сухофрукты и специи."
+        },
+        "en": {
+          "name": "Siab Bazaar",
+          "tagline": "The city's biggest farmers' market",
+          "description": "Samarkand bread, dried fruit and spices."
+        }
       }
     },
     {
-      "id": "ulugbek-observatory", "category": "museum", "novelty": "iconic", "lat": 39.6747, "lng": 67.0058,
-      "interests": ["history"], "visitMin": 45, "priceLevel": 1, "hours": "08:00-18:00",
-      "rating": 4.6, "reviews": 700, "wheelchair": true,
+      "id": "ulugbek-observatory",
+      "category": "museum",
+      "novelty": "iconic",
+      "lat": 39.6747,
+      "lng": 67.0058,
+      "interests": [
+        "history"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "08:00-18:00",
+      "rating": 4.6,
+      "reviews": 700,
+      "wheelchair": true,
       "text": {
-        "uz": {"name": "Ulug'bek rasadxonasi", "tagline": "XV asr rasadxonasi", "description": "Mirzo Ulug'bek qurdirgan rasadxona qoldiqlari va muzey.",
-               "history": "1420-yillarda qurilgan rasadxonada yulduzlar jadvali tuzilgan.", "facts": ["Ulkan sekstantning yer ostidagi qismi saqlanib qolgan.", "Ulug'bek jadvalida mingdan ortiq yulduz qayd etilgan."]},
-        "ru": {"name": "Обсерватория Улугбека", "tagline": "Обсерватория XV века", "description": "Остатки обсерватории Мирзо Улугбека и музей.",
-               "history": "Построена в 1420-х годах; здесь составлен звёздный каталог.", "facts": ["Сохранилась подземная часть огромного секстанта.", "В каталоге Улугбека более тысячи звёзд."]},
-        "en": {"name": "Ulugh Beg Observatory", "tagline": "15th-century observatory", "description": "Remains of Ulugh Beg's observatory and a museum.",
-               "history": "Built in the 1420s; a star catalogue was compiled here.", "facts": ["The underground part of a giant sextant survives.", "Ulugh Beg's catalogue lists over a thousand stars."]}
+        "uz": {
+          "name": "Ulug'bek rasadxonasi",
+          "tagline": "XV asr rasadxonasi",
+          "description": "Mirzo Ulug'bek qurdirgan rasadxona qoldiqlari va muzey.",
+          "history": "1420-yillarda qurilgan rasadxonada yulduzlar jadvali tuzilgan.",
+          "facts": [
+            "Ulkan sekstantning yer ostidagi qismi saqlanib qolgan.",
+            "Ulug'bek jadvalida mingdan ortiq yulduz qayd etilgan."
+          ]
+        },
+        "ru": {
+          "name": "Обсерватория Улугбека",
+          "tagline": "Обсерватория XV века",
+          "description": "Остатки обсерватории Мирзо Улугбека и музей.",
+          "history": "Построена в 1420-х годах; здесь составлен звёздный каталог.",
+          "facts": [
+            "Сохранилась подземная часть огромного секстанта.",
+            "В каталоге Улугбека более тысячи звёзд."
+          ]
+        },
+        "en": {
+          "name": "Ulugh Beg Observatory",
+          "tagline": "15th-century observatory",
+          "description": "Remains of Ulugh Beg's observatory and a museum.",
+          "history": "Built in the 1420s; a star catalogue was compiled here.",
+          "facts": [
+            "The underground part of a giant sextant survives.",
+            "Ulugh Beg's catalogue lists over a thousand stars."
+          ]
+        }
       }
     },
     {
-      "id": "afrosiyob-museum", "category": "museum", "novelty": "iconic", "lat": 39.6684, "lng": 66.9894,
-      "interests": ["history", "art"], "visitMin": 45, "priceLevel": 1, "hours": "09:00-17:00", "closed": [1],
-      "rating": 4.5, "reviews": 400,
+      "id": "afrosiyob-museum",
+      "category": "museum",
+      "novelty": "iconic",
+      "lat": 39.6684,
+      "lng": 66.9894,
+      "interests": [
+        "history",
+        "art"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "09:00-17:00",
+      "closed": [
+        1
+      ],
+      "rating": 4.5,
+      "reviews": 400,
       "text": {
-        "uz": {"name": "Afrosiyob muzeyi", "tagline": "Qadimiy Samarqand devoriy suratlari", "description": "Qadimiy shahar xarobalari ustidagi muzey, VII asr devoriy suratlari bilan."},
-        "ru": {"name": "Музей Афрасиаб", "tagline": "Фрески древнего Самарканда", "description": "Музей на городище с фресками VII века."},
-        "en": {"name": "Afrasiab Museum", "tagline": "Murals of ancient Samarkand", "description": "A museum on the ancient city site, with 7th-century murals."}
+        "uz": {
+          "name": "Afrosiyob muzeyi",
+          "tagline": "Qadimiy Samarqand devoriy suratlari",
+          "description": "Qadimiy shahar xarobalari ustidagi muzey, VII asr devoriy suratlari bilan."
+        },
+        "ru": {
+          "name": "Музей Афрасиаб",
+          "tagline": "Фрески древнего Самарканда",
+          "description": "Музей на городище с фресками VII века."
+        },
+        "en": {
+          "name": "Afrasiab Museum",
+          "tagline": "Murals of ancient Samarkand",
+          "description": "A museum on the ancient city site, with 7th-century murals."
+        }
       }
     },
     {
-      "id": "hazrat-khizr", "category": "mosque", "novelty": "hidden", "lat": 39.6609, "lng": 66.9860,
-      "interests": ["history", "architecture"], "visitMin": 30, "priceLevel": 0, "hours": "08:00-18:00",
-      "rating": 4.7, "reviews": 300,
+      "id": "hazrat-khizr",
+      "category": "mosque",
+      "novelty": "hidden",
+      "lat": 39.6609,
+      "lng": 66.986,
+      "interests": [
+        "history",
+        "architecture"
+      ],
+      "visitMin": 30,
+      "priceLevel": 0,
+      "hours": "08:00-18:00",
+      "rating": 4.7,
+      "reviews": 300,
       "text": {
-        "uz": {"name": "Hazrati Xizr masjidi", "tagline": "Tepalikdagi sokin masjid", "description": "Bibixonim yaqinidagi tepalikda, shaharga chiroyli manzara ochiladi."},
-        "ru": {"name": "Мечеть Хазрет-Хызр", "tagline": "Тихая мечеть на холме", "description": "На холме рядом с Биби-Ханым, с красивым видом на город."},
-        "en": {"name": "Hazrat Khizr Mosque", "tagline": "A quiet hilltop mosque", "description": "On a hill near Bibi-Khanym, with a fine view of the city."}
+        "uz": {
+          "name": "Hazrati Xizr masjidi",
+          "tagline": "Tepalikdagi sokin masjid",
+          "description": "Bibixonim yaqinidagi tepalikda, shaharga chiroyli manzara ochiladi."
+        },
+        "ru": {
+          "name": "Мечеть Хазрет-Хызр",
+          "tagline": "Тихая мечеть на холме",
+          "description": "На холме рядом с Биби-Ханым, с красивым видом на город."
+        },
+        "en": {
+          "name": "Hazrat Khizr Mosque",
+          "tagline": "A quiet hilltop mosque",
+          "description": "On a hill near Bibi-Khanym, with a fine view of the city."
+        }
       },
       "rules": [
-        {"code": "shoes_off", "severity": "warn", "priority": 2, "text": {"uz": "Namozxonaga oyoq kiyimsiz kiriladi.", "ru": "В молельный зал входят без обуви.", "en": "Remove shoes before entering the prayer hall."}},
-        {"code": "prayer_time_limit", "severity": "info", "priority": 1, "text": {"uz": "Namoz vaqtida tashrif cheklanadi.", "ru": "Во время намаза посещение ограничено.", "en": "Visits are limited during prayer times."}}
+        {
+          "code": "shoes_off",
+          "severity": "warn",
+          "priority": 2,
+          "text": {
+            "uz": "Namozxonaga oyoq kiyimsiz kiriladi.",
+            "ru": "В молельный зал входят без обуви.",
+            "en": "Remove shoes before entering the prayer hall."
+          }
+        },
+        {
+          "code": "prayer_time_limit",
+          "severity": "info",
+          "priority": 1,
+          "text": {
+            "uz": "Namoz vaqtida tashrif cheklanadi.",
+            "ru": "Во время намаза посещение ограничено.",
+            "en": "Visits are limited during prayer times."
+          }
+        }
       ]
     },
     {
-      "id": "konigil-paper", "category": "workshop", "novelty": "hidden", "lat": 39.6846, "lng": 67.0566,
-      "interests": ["craft", "art"], "visitMin": 60, "priceLevel": 1, "hours": "08:00-17:00",
-      "rating": 4.7, "reviews": 250, "familyFriendly": true,
+      "id": "konigil-paper",
+      "category": "workshop",
+      "novelty": "hidden",
+      "lat": 39.6846,
+      "lng": 67.0566,
+      "interests": [
+        "craft",
+        "art"
+      ],
+      "visitMin": 60,
+      "priceLevel": 1,
+      "hours": "08:00-17:00",
+      "rating": 4.7,
+      "reviews": 250,
+      "familyFriendly": true,
       "text": {
-        "uz": {"name": "Konigil qog'oz ustaxonasi", "tagline": "Samarqand qog'ozi qanday tayyorlanadi", "description": "Tut po'stlog'idan qo'lda qog'oz tayyorlash jarayonini ko'rish mumkin."},
-        "ru": {"name": "Бумажная мастерская Конигил", "tagline": "Как делают самаркандскую бумагу", "description": "Можно увидеть, как вручную делают бумагу из коры шелковицы."},
-        "en": {"name": "Konigil Paper Workshop", "tagline": "How Samarkand paper is made", "description": "Watch paper being made by hand from mulberry bark."}
+        "uz": {
+          "name": "Konigil qog'oz ustaxonasi",
+          "tagline": "Samarqand qog'ozi qanday tayyorlanadi",
+          "description": "Tut po'stlog'idan qo'lda qog'oz tayyorlash jarayonini ko'rish mumkin."
+        },
+        "ru": {
+          "name": "Бумажная мастерская Конигил",
+          "tagline": "Как делают самаркандскую бумагу",
+          "description": "Можно увидеть, как вручную делают бумагу из коры шелковицы."
+        },
+        "en": {
+          "name": "Konigil Paper Workshop",
+          "tagline": "How Samarkand paper is made",
+          "description": "Watch paper being made by hand from mulberry bark."
+        }
       }
     },
     {
-      "id": "sam-ceramics-demo", "category": "workshop", "novelty": "new", "openedAt": "2026-05-01", "lat": 39.6578, "lng": 66.9712,
-      "interests": ["craft", "art", "shopping"], "visitMin": 45, "priceLevel": 1, "hours": "10:00-18:00",
-      "rating": 4.6, "reviews": 30, "payCard": true,
+      "id": "sam-ceramics-demo",
+      "category": "workshop",
+      "novelty": "new",
+      "openedAt": "2026-05-01",
+      "lat": 39.6578,
+      "lng": 66.9712,
+      "interests": [
+        "craft",
+        "art",
+        "shopping"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "10:00-18:00",
+      "rating": 4.6,
+      "reviews": 30,
+      "payCard": true,
       "text": {
-        "uz": {"name": "Kulolchilik ustaxonasi (demo)", "tagline": "Usta bilan birga sopol yasang", "description": "Demo yozuv: kulolchilik ustaxonasi, mehmonlar o'zi ham loy bilan ishlab ko'radi."},
-        "ru": {"name": "Гончарная мастерская (демо)", "tagline": "Слепите пиалу вместе с мастером", "description": "Демо-запись: гончарная мастерская, где гости могут поработать с глиной."},
-        "en": {"name": "Pottery workshop (demo)", "tagline": "Throw a bowl with a master potter", "description": "Demo entry: a pottery studio where guests can try the wheel."}
+        "uz": {
+          "name": "Kulolchilik ustaxonasi (demo)",
+          "tagline": "Usta bilan birga sopol yasang",
+          "description": "Demo yozuv: kulolchilik ustaxonasi, mehmonlar o'zi ham loy bilan ishlab ko'radi."
+        },
+        "ru": {
+          "name": "Гончарная мастерская (демо)",
+          "tagline": "Слепите пиалу вместе с мастером",
+          "description": "Демо-запись: гончарная мастерская, где гости могут поработать с глиной."
+        },
+        "en": {
+          "name": "Pottery workshop (demo)",
+          "tagline": "Throw a bowl with a master potter",
+          "description": "Demo entry: a pottery studio where guests can try the wheel."
+        }
       }
     },
     {
-      "id": "sam-gallery-demo", "category": "gallery", "novelty": "new", "openedAt": "2026-03-15", "lat": 39.6522, "lng": 66.9655,
-      "interests": ["art"], "visitMin": 45, "priceLevel": 0, "hours": "11:00-20:00", "closed": [1],
-      "rating": 4.5, "reviews": 20, "wheelchair": true, "payCard": true,
+      "id": "sam-gallery-demo",
+      "category": "gallery",
+      "novelty": "new",
+      "openedAt": "2026-03-15",
+      "lat": 39.6522,
+      "lng": 66.9655,
+      "interests": [
+        "art"
+      ],
+      "visitMin": 45,
+      "priceLevel": 0,
+      "hours": "11:00-20:00",
+      "closed": [
+        1
+      ],
+      "rating": 4.5,
+      "reviews": 20,
+      "wheelchair": true,
+      "payCard": true,
       "text": {
-        "uz": {"name": "Zamonaviy san'at galereyasi (demo)", "tagline": "Yosh samarqandlik rassomlar", "description": "Demo yozuv: mahalliy yosh rassomlar asarlari ko'rgazmasi."},
-        "ru": {"name": "Галерея современного искусства (демо)", "tagline": "Молодые художники Самарканда", "description": "Демо-запись: выставка работ молодых местных художников."},
-        "en": {"name": "Contemporary art gallery (demo)", "tagline": "Young Samarkand artists", "description": "Demo entry: works by young local artists."}
+        "uz": {
+          "name": "Zamonaviy san'at galereyasi (demo)",
+          "tagline": "Yosh samarqandlik rassomlar",
+          "description": "Demo yozuv: mahalliy yosh rassomlar asarlari ko'rgazmasi."
+        },
+        "ru": {
+          "name": "Галерея современного искусства (демо)",
+          "tagline": "Молодые художники Самарканда",
+          "description": "Демо-запись: выставка работ молодых местных художников."
+        },
+        "en": {
+          "name": "Contemporary art gallery (demo)",
+          "tagline": "Young Samarkand artists",
+          "description": "Demo entry: works by young local artists."
+        }
       }
     },
     {
-      "id": "sam-silk-carpet-demo", "category": "workshop", "novelty": "hidden", "lat": 39.6595, "lng": 66.9835,
-      "interests": ["craft", "shopping"], "visitMin": 45, "priceLevel": 2, "hours": "09:00-18:00",
-      "rating": 4.6, "reviews": 60, "payCard": true,
+      "id": "sam-silk-carpet-demo",
+      "category": "workshop",
+      "novelty": "hidden",
+      "lat": 39.6595,
+      "lng": 66.9835,
+      "interests": [
+        "craft",
+        "shopping"
+      ],
+      "visitMin": 45,
+      "priceLevel": 2,
+      "hours": "09:00-18:00",
+      "rating": 4.6,
+      "reviews": 60,
+      "payCard": true,
       "text": {
-        "uz": {"name": "Ipak gilam ustaxonasi (demo)", "tagline": "Gilam to'qish jarayoni", "description": "Demo yozuv: ipak gilam qo'lda qanday to'qilishini ko'rsatadigan ustaxona."},
-        "ru": {"name": "Мастерская шёлковых ковров (демо)", "tagline": "Как ткут ковры", "description": "Демо-запись: мастерская, где показывают ручное ткачество шёлковых ковров."},
-        "en": {"name": "Silk carpet workshop (demo)", "tagline": "See carpets woven by hand", "description": "Demo entry: a workshop showing hand-woven silk carpets."}
+        "uz": {
+          "name": "Ipak gilam ustaxonasi (demo)",
+          "tagline": "Gilam to'qish jarayoni",
+          "description": "Demo yozuv: ipak gilam qo'lda qanday to'qilishini ko'rsatadigan ustaxona."
+        },
+        "ru": {
+          "name": "Мастерская шёлковых ковров (демо)",
+          "tagline": "Как ткут ковры",
+          "description": "Демо-запись: мастерская, где показывают ручное ткачество шёлковых ковров."
+        },
+        "en": {
+          "name": "Silk carpet workshop (demo)",
+          "tagline": "See carpets woven by hand",
+          "description": "Demo entry: a workshop showing hand-woven silk carpets."
+        }
       }
     },
     {
-      "id": "sam-garden-demo", "category": "park", "novelty": "new", "openedAt": "2026-06-01", "lat": 39.6450, "lng": 66.9580,
-      "interests": ["nature"], "visitMin": 45, "priceLevel": 0, "hours": "08:00-21:00",
-      "rating": 4.4, "reviews": 25, "wheelchair": true,
+      "id": "sam-garden-demo",
+      "category": "park",
+      "novelty": "new",
+      "openedAt": "2026-06-01",
+      "lat": 39.645,
+      "lng": 66.958,
+      "interests": [
+        "nature"
+      ],
+      "visitMin": 45,
+      "priceLevel": 0,
+      "hours": "08:00-21:00",
+      "rating": 4.4,
+      "reviews": 25,
+      "wheelchair": true,
       "text": {
-        "uz": {"name": "Yangi bog' (demo)", "tagline": "Salqin xiyobonlar va favvoralar", "description": "Demo yozuv: oilalar uchun yangi ochilgan bog'."},
-        "ru": {"name": "Новый сад (демо)", "tagline": "Тенистые аллеи и фонтаны", "description": "Демо-запись: недавно открытый сад для семей."},
-        "en": {"name": "New garden (demo)", "tagline": "Shady alleys and fountains", "description": "Demo entry: a newly opened family garden."}
+        "uz": {
+          "name": "Yangi bog' (demo)",
+          "tagline": "Salqin xiyobonlar va favvoralar",
+          "description": "Demo yozuv: oilalar uchun yangi ochilgan bog'."
+        },
+        "ru": {
+          "name": "Новый сад (демо)",
+          "tagline": "Тенистые аллеи и фонтаны",
+          "description": "Демо-запись: недавно открытый сад для семей."
+        },
+        "en": {
+          "name": "New garden (demo)",
+          "tagline": "Shady alleys and fountains",
+          "description": "Demo entry: a newly opened family garden."
+        }
       }
     },
     {
-      "id": "sam-viewpoint-demo", "category": "viewpoint", "novelty": "hidden", "lat": 39.6700, "lng": 66.9930,
-      "interests": ["nature", "architecture"], "visitMin": 30, "priceLevel": 0, "hours": "06:00-21:00",
-      "rating": 4.5, "reviews": 40,
+      "id": "sam-viewpoint-demo",
+      "category": "viewpoint",
+      "novelty": "hidden",
+      "lat": 39.67,
+      "lng": 66.993,
+      "interests": [
+        "nature",
+        "architecture"
+      ],
+      "visitMin": 30,
+      "priceLevel": 0,
+      "hours": "06:00-21:00",
+      "rating": 4.5,
+      "reviews": 40,
       "text": {
-        "uz": {"name": "Shahar manzarasi nuqtasi (demo)", "tagline": "Gumbazlar ustidan quyosh botishi", "description": "Demo yozuv: Afrosiyob tepaligidagi manzara nuqtasi."},
-        "ru": {"name": "Смотровая точка (демо)", "tagline": "Закат над куполами", "description": "Демо-запись: смотровая точка на холмах Афрасиаба."},
-        "en": {"name": "City viewpoint (demo)", "tagline": "Sunset over the domes", "description": "Demo entry: a viewpoint on the Afrasiab hills."}
+        "uz": {
+          "name": "Shahar manzarasi nuqtasi (demo)",
+          "tagline": "Gumbazlar ustidan quyosh botishi",
+          "description": "Demo yozuv: Afrosiyob tepaligidagi manzara nuqtasi."
+        },
+        "ru": {
+          "name": "Смотровая точка (демо)",
+          "tagline": "Закат над куполами",
+          "description": "Демо-запись: смотровая точка на холмах Афрасиаба."
+        },
+        "en": {
+          "name": "City viewpoint (demo)",
+          "tagline": "Sunset over the domes",
+          "description": "Demo entry: a viewpoint on the Afrasiab hills."
+        }
       }
     },
     {
-      "id": "sam-family-kitchen-demo", "category": "restaurant", "novelty": "new", "openedAt": "2026-02-20", "lat": 39.6560, "lng": 66.9740,
-      "interests": ["food"], "visitMin": 60, "priceLevel": 2, "hours": "11:00-22:00",
-      "rating": 4.6, "reviews": 50, "payCard": true,
+      "id": "sam-family-kitchen-demo",
+      "category": "restaurant",
+      "novelty": "new",
+      "openedAt": "2026-02-20",
+      "lat": 39.656,
+      "lng": 66.974,
+      "interests": [
+        "food"
+      ],
+      "visitMin": 60,
+      "priceLevel": 2,
+      "hours": "11:00-22:00",
+      "rating": 4.6,
+      "reviews": 50,
+      "payCard": true,
       "text": {
-        "uz": {"name": "Oilaviy oshxona (demo)", "tagline": "Uy sharoitidagi Samarqand oshi", "description": "Demo yozuv: oilaviy oshxona, osh va milliy taomlar."},
-        "ru": {"name": "Семейная кухня (демо)", "tagline": "Самаркандский плов по-домашнему", "description": "Демо-запись: семейная кухня, плов и национальные блюда."},
-        "en": {"name": "Family kitchen (demo)", "tagline": "Home-style Samarkand plov", "description": "Demo entry: a family kitchen serving plov and local dishes."}
+        "uz": {
+          "name": "Oilaviy oshxona (demo)",
+          "tagline": "Uy sharoitidagi Samarqand oshi",
+          "description": "Demo yozuv: oilaviy oshxona, osh va milliy taomlar."
+        },
+        "ru": {
+          "name": "Семейная кухня (демо)",
+          "tagline": "Самаркандский плов по-домашнему",
+          "description": "Демо-запись: семейная кухня, плов и национальные блюда."
+        },
+        "en": {
+          "name": "Family kitchen (demo)",
+          "tagline": "Home-style Samarkand plov",
+          "description": "Demo entry: a family kitchen serving plov and local dishes."
+        }
       }
     },
     {
-      "id": "sam-choyxona-demo", "category": "cafe", "novelty": "hidden", "lat": 39.6625, "lng": 66.9820,
-      "interests": ["food"], "visitMin": 45, "priceLevel": 1, "hours": "08:00-22:00",
-      "rating": 4.5, "reviews": 80, "cashOnly": true,
+      "id": "sam-choyxona-demo",
+      "category": "cafe",
+      "novelty": "hidden",
+      "lat": 39.6625,
+      "lng": 66.982,
+      "interests": [
+        "food"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "08:00-22:00",
+      "rating": 4.5,
+      "reviews": 80,
+      "cashOnly": true,
       "text": {
-        "uz": {"name": "Mahalla choyxonasi (demo)", "tagline": "Choy, somsa va suhbat", "description": "Demo yozuv: bozor yonidagi mahalla choyxonasi."},
-        "ru": {"name": "Махаллинская чайхана (демо)", "tagline": "Чай, самса и разговоры", "description": "Демо-запись: чайхана рядом с базаром."},
-        "en": {"name": "Neighbourhood teahouse (demo)", "tagline": "Tea, samsa and conversation", "description": "Demo entry: a neighbourhood teahouse near the bazaar."}
+        "uz": {
+          "name": "Mahalla choyxonasi (demo)",
+          "tagline": "Choy, somsa va suhbat",
+          "description": "Demo yozuv: bozor yonidagi mahalla choyxonasi."
+        },
+        "ru": {
+          "name": "Махаллинская чайхана (демо)",
+          "tagline": "Чай, самса и разговоры",
+          "description": "Демо-запись: чайхана рядом с базаром."
+        },
+        "en": {
+          "name": "Neighbourhood teahouse (demo)",
+          "tagline": "Tea, samsa and conversation",
+          "description": "Demo entry: a neighbourhood teahouse near the bazaar."
+        }
       }
     },
     {
-      "id": "sam-bakery-demo", "category": "cafe", "novelty": "hidden", "lat": 39.6500, "lng": 66.9700,
-      "interests": ["food"], "visitMin": 45, "priceLevel": 1, "hours": "07:00-20:00",
-      "rating": 4.4, "reviews": 45,
+      "id": "sam-bakery-demo",
+      "category": "cafe",
+      "novelty": "hidden",
+      "lat": 39.65,
+      "lng": 66.97,
+      "interests": [
+        "food"
+      ],
+      "visitMin": 45,
+      "priceLevel": 1,
+      "hours": "07:00-20:00",
+      "rating": 4.4,
+      "reviews": 45,
       "text": {
-        "uz": {"name": "Non va choy kafesi (demo)", "tagline": "Tandirdan issiq non", "description": "Demo yozuv: issiq non va choy bilan kichik kafe."},
-        "ru": {"name": "Кафе «Лепёшка и чай» (демо)", "tagline": "Горячие лепёшки из тандыра", "description": "Демо-запись: небольшое кафе с горячими лепёшками и чаем."},
-        "en": {"name": "Bread & tea café (demo)", "tagline": "Hot bread from the tandoor", "description": "Demo entry: a small café with hot bread and tea."}
+        "uz": {
+          "name": "Non va choy kafesi (demo)",
+          "tagline": "Tandirdan issiq non",
+          "description": "Demo yozuv: issiq non va choy bilan kichik kafe."
+        },
+        "ru": {
+          "name": "Кафе «Лепёшка и чай» (демо)",
+          "tagline": "Горячие лепёшки из тандыра",
+          "description": "Демо-запись: небольшое кафе с горячими лепёшками и чаем."
+        },
+        "en": {
+          "name": "Bread & tea café (demo)",
+          "tagline": "Hot bread from the tandoor",
+          "description": "Demo entry: a small café with hot bread and tea."
+        }
       }
+    }
+  ],
+  "services": [
+    {
+      "id": "sam-hospital-1",
+      "kind": "hospital",
+      "name": {
+        "uz": "Shahar shifoxonasi (demo)",
+        "ru": "Городская больница (демо)",
+        "en": "City hospital (demo)"
+      },
+      "lat": 39.659,
+      "lng": 66.955,
+      "open24h": true
+    },
+    {
+      "id": "sam-pharmacy-1",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "Dorixona — Registon yonida (demo)",
+        "ru": "Аптека у Регистана (демо)",
+        "en": "Pharmacy near Registan (demo)"
+      },
+      "lat": 39.656,
+      "lng": 66.9735,
+      "open24h": false,
+      "hours": "08:00-22:00"
+    },
+    {
+      "id": "sam-pharmacy-2",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "24 soatlik dorixona (demo)",
+        "ru": "Круглосуточная аптека (демо)",
+        "en": "24-hour pharmacy (demo)"
+      },
+      "lat": 39.652,
+      "lng": 66.962,
+      "open24h": true
+    },
+    {
+      "id": "sam-police-1",
+      "kind": "police",
+      "name": {
+        "uz": "Turistik politsiya posti (demo)",
+        "ru": "Пост туристической полиции (демо)",
+        "en": "Tourist police post (demo)"
+      },
+      "lat": 39.6551,
+      "lng": 66.9762,
+      "open24h": true
+    },
+    {
+      "id": "sam-atm-1",
+      "kind": "atm",
+      "name": {
+        "uz": "Bankomat — Registon (demo)",
+        "ru": "Банкомат — Регистан (демо)",
+        "en": "ATM — Registan (demo)"
+      },
+      "lat": 39.654,
+      "lng": 66.9745,
+      "open24h": true,
+      "accepts": [
+        "uzcard",
+        "humo",
+        "visa",
+        "mastercard"
+      ]
+    },
+    {
+      "id": "sam-atm-2",
+      "kind": "atm",
+      "name": {
+        "uz": "Bankomat — Siyob bozori (demo)",
+        "ru": "Банкомат — Сиабский базар (демо)",
+        "en": "ATM — Siab Bazaar (demo)"
+      },
+      "lat": 39.6612,
+      "lng": 66.98,
+      "open24h": false,
+      "hours": "08:00-20:00",
+      "accepts": [
+        "uzcard",
+        "humo"
+      ]
+    },
+    {
+      "id": "sam-exchange-1",
+      "kind": "exchange",
+      "name": {
+        "uz": "Valyuta ayirboshlash shoxobchasi (demo)",
+        "ru": "Пункт обмена валют (демо)",
+        "en": "Currency exchange (demo)"
+      },
+      "lat": 39.6535,
+      "lng": 66.97,
+      "open24h": false,
+      "hours": "09:00-18:00"
     }
   ]
 }
