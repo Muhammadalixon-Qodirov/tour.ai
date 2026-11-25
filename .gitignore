@@ -1,0 +1,10 @@
+# maxfiy sozlamalar
+.env
+*.env.local
+# build va lokal ma'lumot
+backend/bin/
+backend/data/
+# muharrir / tizim
+.idea/
+.vscode/
+.DS_Store
