@@ -193,12 +193,20 @@ func reasonText(st store.Stop, lang string) string {
 }
 
 func (s *Server) writeTrip(w http.ResponseWriter, r *http.Request, status int, t store.Trip) {
+	dto, err := s.buildTrip(r, t)
+	if err != nil {
+		s.internalError(w, r, err)
+		return
+	}
+	writeJSON(w, status, dto)
+}
+
+func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 	lang := langOf(r)
 	chain := i18n.Chain(lang)
 	city, err := s.store.City(r.Context(), t.CityID, chain)
 	if err != nil {
-		s.internalError(w, r, err)
-		return
+		return tripDTO{}, err
 	}
 	var ids []string
 	for _, d := range t.Days {
@@ -208,8 +216,7 @@ func (s *Server) writeTrip(w http.ResponseWriter, r *http.Request, status int, t
 	}
 	places, err := s.store.PlacesByIDs(r.Context(), ids, chain)
 	if err != nil {
-		s.internalError(w, r, err)
-		return
+		return tripDTO{}, err
 	}
 	out := tripDTO{ID: t.ID.String(), CityID: t.CityID, Status: t.Status, StartDate: t.StartDate.Format(time.DateOnly),
 		NoveltyShare: round2(t.NoveltyShare), Days: []tripDayDTO{}, Totals: tripTotals{EstimatedCost: domain.UZS(0)}}
@@ -250,7 +257,7 @@ func (s *Server) writeTrip(w http.ResponseWriter, r *http.Request, status int, t
 	} else {
 		out.Summary = i18n.T(lang, "trip_summary", strconv.Itoa(out.Totals.Places), strconv.Itoa(out.Totals.NewPlaces))
 	}
-	writeJSON(w, status, out)
+	return out, nil
 }
 
 func round2(f float64) float64 { return float64(int(f*100+0.5)) / 100 }

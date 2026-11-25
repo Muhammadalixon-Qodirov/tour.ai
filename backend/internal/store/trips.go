@@ -192,3 +192,15 @@ func (s *Store) Trips(ctx context.Context, userID string, limit int) ([]TripList
 	}
 	return out, rows.Err()
 }
+
+func (s *Store) SetStopStatus(ctx context.Context, tripID, stopID uuid.UUID, status string) error {
+	tag, err := s.DB.Exec(ctx, `UPDATE stops SET status = $3 WHERE trip_id = $1 AND id = $2`, tripID, stopID, status)
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrNotFound
+	}
+	_, err = s.DB.Exec(ctx, `UPDATE trips SET updated_at = now() WHERE id = $1`, tripID)
+	return err
+}

@@ -43,6 +43,7 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}`, `GET /places/{id}/reviews` |
 | Qoida | `GET /geofences?city=` |
 | Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
+| Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` |
 | Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30` |
 | Xizmat | `GET /healthz`, `GET /static/ph/{category}.svg` (rasm yo'q joylar uchun vaqtinchalik rasm), `GET /uploads/{file}` (yuklangan rasmlar) |
@@ -63,6 +64,7 @@ internal/
   api          router, middleware, handlerlar, DTO
   auth         JWT (HS256) sessiya tokenlari, argon2id parollar
   media        rasm yuklash: tekshirish, kichraytirish, EXIF/GPS ni o'chirish, saqlash
+  weather      Open-Meteo kunlik prognozi (kalitsiz, 1 soat kesh)
   i18n         tillar va foydalanuvchiga ko'rinadigan matnlar
   seed         seed yuklovchi
   platform     konfiguratsiya, DB ulanishi, migrator
@@ -97,3 +99,15 @@ draft ──submit──▶ pending ──publish──▶ published ──unpub
 - `PUT /rules` → `rulesVersion` oshadi, ilova geofence ni yangilaydi.
 - Har bir o'zgarish `admin_audit` jadvaliga yoziladi (kim, nima, oldin/keyin).
 - Yuklangan rasm qayta kodlanadi: EXIF/GPS o'chadi, uzun tomoni 1600 px gacha kichrayadi.
+
+## Qayta rejalash (`/replan`)
+
+| `reason` | Nima bo'ladi |
+|---|---|
+| `late` + `minutes` | qolgan joylar suriladi; ish vaqti yoki 21:00 ga sig'maganlari olib tashlanadi (avval mashhur, eng past balli; kunning yagona yangi joyi oxirgi navbatda) |
+| `tired` | qolgan joylarning yarmi qoladi — eng yaxshilari, yangi joy saqlanadi |
+| `weather` | Open-Meteo: ≥ 35°C yoki yomg'ir bo'lsa park/manzara/eko-ovul → yaqin muzey/galereya/ustaxona (yangi joy o'rniga yangi joy). Ob-havo yaxshi bo'lsa o'zgarishsiz |
+| `free_time` + `minutes` + `location` | 1.5 km ichida vaqtga sig'adigan ochiq joylar hozirdan boshlab qo'shiladi, qolgan reja keyinga suriladi |
+
+"Bordim" / "o'tkazib yubordim" deb belgilangan va vaqti o'tgan to'xtashlar o'zgarmaydi.
+Ob-havo servisiga faqat shahar koordinatasi (~1 km gacha yaxlitlangan) yuboriladi.

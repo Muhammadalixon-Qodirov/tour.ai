@@ -13,7 +13,8 @@ Bu hujjat **hozir quriladigan** backendning rejasi. Batafsil texnik qoidalar (st
 | 2 · Sessiya, katalog, qoidalar | ✅ tayyor |
 | 3 · Marshrut (asosiy) | ✅ tayyor — 500 tasodifiy profil testida invariantlar 100% |
 | 5 · Admin API | ✅ tayyor — login, moderatsiya, joy CRUD (3 til), rasm yuklash, publish/reject, qoidalar, audit, KPI. **"Yangi joy chop etildi → marshrutda chiqdi" testi o'tadi** |
-| 4, 6 – 10 | ⏳ navbatda |
+| 4 · Moslashuvchan marshrut | ✅ tayyor — kechikdim / charchadim / ob-havo (Open-Meteo) / bo'sh vaqt, to'xtash holati (bordim) |
+| 6 – 10 | ⏳ navbatda |
 
 Kod: [backend/](backend/) · ishga tushirish: [backend/README.md](backend/README.md).
 Rejadan ataylab chetga chiqishlar (PostGIS o'rniga `earthdistance`, Redis o'rniga xotiradagi limit va h.k.) README da yozilgan.

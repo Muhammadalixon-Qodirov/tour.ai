@@ -105,6 +105,22 @@ var messages = map[string]map[string]string{
 	"interest.shopping":     {"uz": "Xaridga", "ru": "покупки", "en": "shopping"},
 	"interest.nightlife":    {"uz": "Kechki hordiqqa", "ru": "вечерний отдых", "en": "evenings out"},
 
+	"reason.free_time": {"uz": "Bo'sh vaqtingiz uchun — yaqin atrofda", "ru": "На свободное время — совсем рядом", "en": "For your free time — close by"},
+
+	// qayta rejalash
+	"change.shifted":                {"uz": "Qolgan joylar {0} daqiqaga surildi", "ru": "Остальные места сдвинуты на {0} мин", "en": "Remaining stops moved by {0} min"},
+	"change.removed":                {"uz": "{0} olib tashlandi — vaqtga sig'madi", "ru": "{0} убрано — не хватает времени", "en": "{0} removed — not enough time"},
+	"change.removed_tired":          {"uz": "{0} olib tashlandi — dam olishingiz uchun", "ru": "{0} убрано — чтобы вы отдохнули", "en": "{0} removed so you can rest"},
+	"change.replaced_weather":       {"uz": "{0} o'rniga {1} — ob-havo sababli", "ru": "{1} вместо {0} — из-за погоды", "en": "{1} instead of {0} — because of the weather"},
+	"change.added":                  {"uz": "{0} qo'shildi — yaqin atrofda", "ru": "Добавлено: {0} — рядом с вами", "en": "{0} added — close by"},
+	"change.none_nearby":            {"uz": "Yaqin atrofda vaqtga sig'adigan joy topilmadi", "ru": "Поблизости нет мест, которые успеете посетить", "en": "Nothing nearby fits into that time"},
+	"change.weather_ok":             {"uz": "Ob-havo yaxshi (+{0}°C) — o'zgarish kerak emas", "ru": "Погода хорошая (+{0}°C) — менять ничего не нужно", "en": "The weather is fine (+{0}°C) — no changes needed"},
+	"change.weather_hot":            {"uz": "Jazirama (+{0}°C): ochiq joylar yopiq joylarga almashtirildi", "ru": "Жара (+{0}°C): открытые места заменены на крытые", "en": "Heat (+{0}°C): outdoor stops swapped for indoor ones"},
+	"change.weather_rain":           {"uz": "Yomg'ir kutilmoqda: ochiq joylar yopiq joylarga almashtirildi", "ru": "Ожидается дождь: открытые места заменены на крытые", "en": "Rain expected: outdoor stops swapped for indoor ones"},
+	"change.weather_indoor_already": {"uz": "Ob-havo noqulay, lekin marshrutingizdagi joylar yopiq — o'zgarish kerak emas", "ru": "Погода неважная, но все места в маршруте крытые — менять не нужно", "en": "The weather is poor, but your stops are indoors — no changes needed"},
+	"weather_unavailable":           {"uz": "Ob-havo ma'lumoti hozir mavjud emas", "ru": "Данные о погоде сейчас недоступны", "en": "Weather data is unavailable right now"},
+	"day_in_past":                   {"uz": "O'tib ketgan kunni qayta rejalab bo'lmaydi", "ru": "Нельзя перепланировать прошедший день", "en": "A past day can't be replanned"},
+
 	// geofence
 	"geofence_headline": {"uz": "Siz {0} hududidasiz", "ru": "Вы находитесь: {0}", "en": "You are at {0}"},
 }

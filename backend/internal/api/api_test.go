@@ -21,6 +21,7 @@ import (
 )
 
 var (
+	testAPI   *Server
 	testSrv   *httptest.Server
 	testDBURL string
 )
@@ -56,6 +57,8 @@ func TestMain(m *testing.M) {
 	cfg := platform.Config{TokenSecret: []byte("test-secret-test-secret-test-secret!"), PublicBaseURL: "http://test", UploadDir: uploads}
 	srv := NewServer(cfg, store.New(db))
 	srv.now = func() time.Time { return time.Date(2026, 11, 25, 10, 0, 0, 0, time.UTC) }
+	srv.weather = &fakeWeather{}
+	testAPI = srv
 	testSrv = httptest.NewServer(srv.Handler())
 	code := m.Run()
 	testSrv.Close()

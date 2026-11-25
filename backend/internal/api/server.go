@@ -20,6 +20,7 @@ import (
 	"yoldosh/internal/media"
 	"yoldosh/internal/platform"
 	"yoldosh/internal/store"
+	"yoldosh/internal/weather"
 )
 
 type Server struct {
@@ -28,12 +29,13 @@ type Server struct {
 	signer  *auth.Signer
 	limiter *Limiter
 	media   media.Store
+	weather weather.Source
 	now     func() time.Time
 }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
 	return &Server{cfg: cfg, store: st, signer: auth.NewSigner(cfg.TokenSecret), limiter: NewLimiter(),
-		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, now: time.Now}
+		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), now: time.Now}
 }
 
 func (s *Server) Handler() http.Handler {
@@ -62,6 +64,8 @@ func (s *Server) Handler() http.Handler {
 	user("POST /api/v1/trips/{id}/stops", s.addStop)
 	user("DELETE /api/v1/trips/{id}/stops/{stopId}", s.deleteStop)
 	user("POST /api/v1/trips/{id}/stops/{stopId}/swap", s.swapStop)
+	user("PATCH /api/v1/trips/{id}/stops/{stopId}", s.patchStop)
+	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
 
 	mux.HandleFunc("GET /uploads/{file}", s.serveUpload)
