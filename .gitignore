@@ -8,3 +8,6 @@ backend/data/
 .idea/
 .vscode/
 .DS_Store
+
+# tadqiqot hisoboti nusxasi (asosiysi DATA_SOURCES.md)
+reports/
