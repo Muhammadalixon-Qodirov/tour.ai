@@ -1,0 +1,196 @@
+{
+  "city": {
+    "id": "bukhara",
+    "name": {"uz": "Buxoro", "ru": "Бухара", "en": "Bukhara"},
+    "center": {"lat": 39.7747, "lng": 64.4286},
+    "taxiBaseFare": 8000,
+    "taxiPerKm": 2500,
+    "emergency": {"fire": "101", "police": "102", "ambulance": "103", "gas": "104", "unified": "112"}
+  },
+  "places": [
+    {
+      "id": "ark", "category": "monument", "novelty": "iconic", "lat": 39.7780, "lng": 64.4108,
+      "interests": ["history"], "visitMin": 60, "priceLevel": 1, "hours": "09:00-18:00",
+      "rating": 4.7, "reviews": 1500, "payCard": true, "geofenceRadiusM": 150,
+      "text": {
+        "uz": {"name": "Ark qal'asi", "tagline": "Buxoro amirlari qarorgohi", "description": "Shaharning eng qadimiy qal'asi, ichida muzeylar.",
+               "history": "Qal'a ko'p asrlar davomida Buxoro hukmdorlarining qarorgohi bo'lgan.", "facts": ["Qal'a sun'iy tepalik ustida joylashgan.", "Ichkarida taxt zali va masjid saqlangan."]},
+        "ru": {"name": "Крепость Арк", "tagline": "Резиденция бухарских эмиров", "description": "Древнейшая крепость города, внутри — музеи.",
+               "history": "Много веков крепость была резиденцией правителей Бухары.", "facts": ["Крепость стоит на искусственном холме.", "Внутри сохранились тронный зал и мечеть."]},
+        "en": {"name": "Ark Fortress", "tagline": "Seat of the Emirs of Bukhara", "description": "The city's oldest fortress, with museums inside.",
+               "history": "For centuries the fortress was the residence of Bukhara's rulers.", "facts": ["It stands on an artificial mound.", "A throne hall and a mosque survive inside."]}
+      },
+      "rules": [
+        {"code": "ticket_required", "severity": "info", "priority": 2, "text": {"uz": "Kirish chipta bilan.", "ru": "Вход по билету.", "en": "Entry requires a ticket."}},
+        {"code": "no_drone", "severity": "forbidden", "priority": 1, "text": {"uz": "Dron uchirish taqiqlangan.", "ru": "Запуск дронов запрещён.", "en": "Drones are prohibited."}}
+      ]
+    },
+    {
+      "id": "poi-kalyan", "category": "mosque", "novelty": "iconic", "lat": 39.7757, "lng": 64.4148,
+      "interests": ["history", "architecture"], "visitMin": 45, "priceLevel": 1, "hours": "07:00-20:00",
+      "rating": 4.9, "reviews": 2000, "geofenceRadiusM": 120,
+      "text": {
+        "uz": {"name": "Poi Kalon majmuasi", "tagline": "Kalon minorasi va masjidi", "description": "Buxoroning ramzi: Kalon minorasi, Kalon masjidi va Mir Arab madrasasi.",
+               "history": "Kalon minorasi 1127 yilda qurilgan va asrlar davomida shaharning eng baland binosi bo'lgan.", "facts": ["Minora balandligi taxminan 46 metr.", "Rivoyatga ko'ra, Chingizxon minorani buzmaslikni buyurgan."]},
+        "ru": {"name": "Комплекс Пои-Калян", "tagline": "Минарет и мечеть Калян", "description": "Символ Бухары: минарет Калян, мечеть Калян и медресе Мири-Араб.",
+               "history": "Минарет Калян построен в 1127 году и веками был самым высоким зданием города.", "facts": ["Высота минарета около 46 метров.", "По легенде, Чингисхан приказал не разрушать минарет."]},
+        "en": {"name": "Po-i-Kalyan Complex", "tagline": "Kalyan Minaret and Mosque", "description": "Bukhara's emblem: the Kalyan Minaret, Kalyan Mosque and Mir-i-Arab Madrasa.",
+               "history": "The Kalyan Minaret was built in 1127 and was the city's tallest building for centuries.", "facts": ["The minaret is about 46 metres tall.", "Legend says Genghis Khan ordered it to be spared."]}
+      },
+      "rules": [
+        {"code": "dress_code", "severity": "warn", "priority": 2, "text": {"uz": "Masjidga yopiq kiyimda kiring; ayollarga ro'mol.", "ru": "В мечеть — в закрытой одежде; женщинам платок.", "en": "Modest clothing in the mosque; headscarf for women."}},
+        {"code": "prayer_time_limit", "severity": "warn", "priority": 1, "text": {"uz": "Juma namozi vaqtida masjidga turistlar kirmaydi.", "ru": "Во время пятничного намаза туристы в мечеть не допускаются.", "en": "No tourist entry during Friday prayers."}}
+      ]
+    },
+    {
+      "id": "lyabi-hauz", "category": "monument", "novelty": "iconic", "lat": 39.7739, "lng": 64.4204,
+      "interests": ["history", "architecture", "food"], "visitMin": 45, "priceLevel": 0, "hours": "00:00-24:00",
+      "rating": 4.7, "reviews": 1300, "wheelchair": true,
+      "text": {
+        "uz": {"name": "Labi Hovuz", "tagline": "Tut daraxtlari soyasidagi hovuz", "description": "Madrasalar bilan o'ralgan hovuz — kechki sayr va choyxonalar joyi.",
+               "history": "XVII asr boshida qurilgan majmua: hovuz, Ko'kaldosh madrasasi va Nodir Devonbegi binolari.", "facts": ["Hovuz atrofidagi tut daraxtlari asrlar oshgan.", "Bu yerda Xo'ja Nasriddin haykali turadi."]},
+        "ru": {"name": "Ляби-Хауз", "tagline": "Пруд в тени шелковиц", "description": "Пруд в окружении медресе — место вечерних прогулок и чайхан.",
+               "history": "Ансамбль начала XVII века: пруд, медресе Кукельдаш и постройки Надир-Диванбеги.", "facts": ["Шелковицы вокруг пруда — многовековые.", "Здесь стоит памятник Ходже Насреддину."]},
+        "en": {"name": "Lyabi-Hauz", "tagline": "A pool in the shade of mulberry trees", "description": "A pool framed by madrasas — the place for evening walks and teahouses.",
+               "history": "An early 17th-century ensemble: the pool, the Kukeldash Madrasa and the Nadir Divan-Beghi buildings.", "facts": ["The mulberry trees around the pool are centuries old.", "A statue of Khoja Nasreddin stands here."]}
+      }
+    },
+    {
+      "id": "chor-minor", "category": "monument", "novelty": "iconic", "lat": 39.7780, "lng": 64.4290,
+      "interests": ["architecture"], "visitMin": 20, "priceLevel": 0, "hours": "08:00-19:00",
+      "rating": 4.6, "reviews": 700,
+      "text": {
+        "uz": {"name": "Chor Minor", "tagline": "To'rt minorali darvozaxona", "description": "Mahalla ichidagi to'rt minorali kichik bino."},
+        "ru": {"name": "Чор-Минор", "tagline": "Привратное здание с четырьмя минаретами", "description": "Небольшое здание с четырьмя башенками в жилом квартале."},
+        "en": {"name": "Chor Minor", "tagline": "Gatehouse with four minarets", "description": "A small four-towered building tucked into a residential quarter."}
+      }
+    },
+    {
+      "id": "samanid-mausoleum", "category": "monument", "novelty": "iconic", "lat": 39.7768, "lng": 64.4013,
+      "interests": ["history", "architecture"], "visitMin": 30, "priceLevel": 0, "hours": "08:00-19:00",
+      "rating": 4.8, "reviews": 900, "wheelchair": true,
+      "text": {
+        "uz": {"name": "Somoniylar maqbarasi", "tagline": "Pishgan g'ishtdan to'qilgan maqbara", "description": "Markaziy Osiyodagi eng qadimiy saqlangan maqbaralardan biri.",
+               "history": "IX–X asrlarga oid maqbara Somoniylar sulolasi davrida qurilgan.", "facts": ["Devorlar g'ishtdan to'qilgandek naqshlangan.", "Bino uzoq vaqt qum ostida qolib, yaxshi saqlangan."]},
+        "ru": {"name": "Мавзолей Саманидов", "tagline": "Мавзолей из узорного кирпича", "description": "Один из древнейших сохранившихся мавзолеев Центральной Азии.",
+               "history": "Мавзолей IX–X веков построен при династии Саманидов.", "facts": ["Кирпичная кладка образует узор, похожий на плетение.", "Здание долго было засыпано песком и хорошо сохранилось."]},
+        "en": {"name": "Samanid Mausoleum", "tagline": "A tomb woven from brick", "description": "One of the oldest surviving mausoleums in Central Asia.",
+               "history": "Built in the 9th–10th centuries under the Samanid dynasty.", "facts": ["Its brickwork forms a basket-weave pattern.", "It was buried in sand for a long time, which preserved it."]}
+      }
+    },
+    {
+      "id": "bolo-hauz", "category": "mosque", "novelty": "iconic", "lat": 39.7790, "lng": 64.4060,
+      "interests": ["history", "architecture"], "visitMin": 30, "priceLevel": 0, "hours": "07:00-19:00",
+      "rating": 4.7, "reviews": 600,
+      "text": {
+        "uz": {"name": "Bolo Hovuz masjidi", "tagline": "Yog'och ustunli ayvon", "description": "Ark qarshisidagi masjid, baland yog'och ustunlari bilan mashhur."},
+        "ru": {"name": "Мечеть Боло-Хауз", "tagline": "Айван на деревянных колоннах", "description": "Мечеть напротив Арка, известная высокими деревянными колоннами."},
+        "en": {"name": "Bolo Hauz Mosque", "tagline": "A porch on wooden columns", "description": "The mosque opposite the Ark, known for its tall wooden columns."}
+      },
+      "rules": [
+        {"code": "shoes_off", "severity": "warn", "priority": 2, "text": {"uz": "Namozxonaga oyoq kiyimsiz kiriladi.", "ru": "В молельный зал входят без обуви.", "en": "Remove shoes before entering the prayer hall."}},
+        {"code": "dress_code", "severity": "warn", "priority": 1, "text": {"uz": "Yelka va tizzalar yopiq bo'lsin.", "ru": "Плечи и колени должны быть закрыты.", "en": "Cover shoulders and knees."}}
+      ]
+    },
+    {
+      "id": "toki-zargaron", "category": "bazaar", "novelty": "iconic", "lat": 39.7757, "lng": 64.4170,
+      "interests": ["shopping", "craft"], "visitMin": 40, "priceLevel": 2, "hours": "09:00-19:00",
+      "rating": 4.5, "reviews": 500,
+      "text": {
+        "uz": {"name": "Toqi Zargaron", "tagline": "Zargarlar gumbazli bozori", "description": "XVI asr gumbazli savdo rastasi, bugun hunarmandlar do'konlari."},
+        "ru": {"name": "Токи-Заргарон", "tagline": "Купол ювелиров", "description": "Купольный торговый ряд XVI века, сегодня — лавки ремесленников."},
+        "en": {"name": "Toki Zargaron", "tagline": "The jewellers' domed bazaar", "description": "A 16th-century domed trading arcade, now full of craft shops."}
+      }
+    },
+    {
+      "id": "sitorai-mokhi-khosa", "category": "museum", "novelty": "iconic", "lat": 39.8085, "lng": 64.4375,
+      "interests": ["history", "architecture"], "visitMin": 75, "priceLevel": 1, "hours": "09:00-17:00",
+      "rating": 4.6, "reviews": 600,
+      "text": {
+        "uz": {"name": "Sitorai Mohi Xosa", "tagline": "Amirning yozgi saroyi", "description": "Sharq va Yevropa uslublari aralashgan saroy, shahardan tashqarida."},
+        "ru": {"name": "Ситораи Мохи-Хоса", "tagline": "Летний дворец эмира", "description": "Загородный дворец в смешении восточного и европейского стилей."},
+        "en": {"name": "Sitorai Mokhi-Khosa", "tagline": "The Emir's summer palace", "description": "An out-of-town palace mixing Eastern and European styles."}
+      }
+    },
+    {
+      "id": "magoki-attori", "category": "mosque", "novelty": "hidden", "lat": 39.7742, "lng": 64.4197,
+      "interests": ["history", "architecture"], "visitMin": 25, "priceLevel": 0, "hours": "09:00-18:00",
+      "rating": 4.6, "reviews": 300,
+      "text": {
+        "uz": {"name": "Mag'oki Attori", "tagline": "Yer ostida qolgan qadimiy masjid", "description": "Ko'cha sathidan pastda joylashgan qadimiy masjid; ichida gilamlar muzeyi."},
+        "ru": {"name": "Магоки-Аттари", "tagline": "Древняя мечеть ниже уровня улицы", "description": "Древняя мечеть ниже уровня улицы; внутри музей ковров."},
+        "en": {"name": "Magoki-Attari", "tagline": "An ancient mosque below street level", "description": "An ancient mosque sunk below street level, now a carpet museum."}
+      }
+    },
+    {
+      "id": "bux-suzani-demo", "category": "workshop", "novelty": "new", "openedAt": "2026-04-10", "lat": 39.7748, "lng": 64.4185,
+      "interests": ["craft", "art", "shopping"], "visitMin": 45, "priceLevel": 1, "hours": "09:00-18:00",
+      "rating": 4.7, "reviews": 25, "payCard": true,
+      "text": {
+        "uz": {"name": "Suzana ustaxonasi (demo)", "tagline": "Ipak bilan kashta tikish", "description": "Demo yozuv: so'zana tikish ustaxonasi, qisqa mahorat darsi bilan."},
+        "ru": {"name": "Мастерская сюзане (демо)", "tagline": "Вышивка шёлком", "description": "Демо-запись: мастерская сюзане с коротким мастер-классом."},
+        "en": {"name": "Suzani workshop (demo)", "tagline": "Silk embroidery", "description": "Demo entry: a suzani embroidery workshop with a short class."}
+      }
+    },
+    {
+      "id": "bux-gallery-demo", "category": "gallery", "novelty": "new", "openedAt": "2026-07-01", "lat": 39.7735, "lng": 64.4230,
+      "interests": ["art"], "visitMin": 45, "priceLevel": 0, "hours": "10:00-19:00", "closed": [1],
+      "rating": 4.5, "reviews": 15, "wheelchair": true,
+      "text": {
+        "uz": {"name": "Zamonaviy san'at galereyasi (demo)", "tagline": "Eski karvonsaroydagi yangi galereya", "description": "Demo yozuv: tarixiy binoda ochilgan zamonaviy san'at galereyasi."},
+        "ru": {"name": "Галерея современного искусства (демо)", "tagline": "Новая галерея в старом караван-сарае", "description": "Демо-запись: галерея современного искусства в историческом здании."},
+        "en": {"name": "Contemporary art gallery (demo)", "tagline": "A new gallery in an old caravanserai", "description": "Demo entry: a contemporary art gallery in a historic building."}
+      }
+    },
+    {
+      "id": "bux-puppet-demo", "category": "workshop", "novelty": "hidden", "lat": 39.7762, "lng": 64.4220,
+      "interests": ["craft", "art"], "visitMin": 40, "priceLevel": 1, "hours": "10:00-18:00",
+      "rating": 4.6, "reviews": 70,
+      "text": {
+        "uz": {"name": "Qo'g'irchoq ustaxonasi (demo)", "tagline": "Milliy qo'g'irchoqlar", "description": "Demo yozuv: qo'lda yasalgan milliy qo'g'irchoqlar ustaxonasi."},
+        "ru": {"name": "Кукольная мастерская (демо)", "tagline": "Национальные куклы", "description": "Демо-запись: мастерская кукол ручной работы."},
+        "en": {"name": "Puppet workshop (demo)", "tagline": "Traditional puppets", "description": "Demo entry: a workshop of hand-made traditional puppets."}
+      }
+    },
+    {
+      "id": "bux-garden-demo", "category": "park", "novelty": "hidden", "lat": 39.7700, "lng": 64.4300,
+      "interests": ["nature"], "visitMin": 45, "priceLevel": 0, "hours": "07:00-21:00",
+      "rating": 4.3, "reviews": 40, "wheelchair": true,
+      "text": {
+        "uz": {"name": "Sokin bog' (demo)", "tagline": "Eski shahar yonidagi yashil burchak", "description": "Demo yozuv: dam olish uchun sokin bog'."},
+        "ru": {"name": "Тихий сад (демо)", "tagline": "Зелёный уголок у старого города", "description": "Демо-запись: тихий сад для отдыха."},
+        "en": {"name": "Quiet garden (demo)", "tagline": "A green corner by the old town", "description": "Demo entry: a quiet garden to rest in."}
+      }
+    },
+    {
+      "id": "bux-blacksmith-demo", "category": "workshop", "novelty": "hidden", "lat": 39.7752, "lng": 64.4160,
+      "interests": ["craft"], "visitMin": 30, "priceLevel": 1, "hours": "09:00-18:00",
+      "rating": 4.5, "reviews": 50,
+      "text": {
+        "uz": {"name": "Temirchi ustaxonasi (demo)", "tagline": "Buxoro pichoqlari va qaychilari", "description": "Demo yozuv: an'anaviy temirchilik ustaxonasi."},
+        "ru": {"name": "Кузнечная мастерская (демо)", "tagline": "Бухарские ножи и ножницы", "description": "Демо-запись: традиционная кузница."},
+        "en": {"name": "Blacksmith workshop (demo)", "tagline": "Bukhara knives and scissors", "description": "Demo entry: a traditional blacksmith's workshop."}
+      }
+    },
+    {
+      "id": "bux-family-kitchen-demo", "category": "restaurant", "novelty": "new", "openedAt": "2026-01-15", "lat": 39.7730, "lng": 64.4215,
+      "interests": ["food"], "visitMin": 60, "priceLevel": 2, "hours": "11:00-22:00",
+      "rating": 4.6, "reviews": 40, "payCard": true,
+      "text": {
+        "uz": {"name": "Oilaviy oshxona (demo)", "tagline": "Buxorocha osh va milliy taomlar", "description": "Demo yozuv: hovlili oilaviy oshxona."},
+        "ru": {"name": "Семейная кухня (демо)", "tagline": "Бухарский плов и национальные блюда", "description": "Демо-запись: семейная кухня во дворике."},
+        "en": {"name": "Family kitchen (demo)", "tagline": "Bukhara-style plov and local dishes", "description": "Demo entry: a family kitchen in a courtyard."}
+      }
+    },
+    {
+      "id": "bux-choyxona-demo", "category": "cafe", "novelty": "hidden", "lat": 39.7760, "lng": 64.4130,
+      "interests": ["food"], "visitMin": 45, "priceLevel": 1, "hours": "08:00-22:00",
+      "rating": 4.5, "reviews": 90, "cashOnly": true,
+      "text": {
+        "uz": {"name": "Hovuz bo'yidagi choyxona (demo)", "tagline": "Ko'k choy va shirinliklar", "description": "Demo yozuv: an'anaviy choyxona."},
+        "ru": {"name": "Чайхана у хауза (демо)", "tagline": "Зелёный чай и сладости", "description": "Демо-запись: традиционная чайхана."},
+        "en": {"name": "Teahouse by the pool (demo)", "tagline": "Green tea and sweets", "description": "Demo entry: a traditional teahouse."}
+      }
+    }
+  ]
+}

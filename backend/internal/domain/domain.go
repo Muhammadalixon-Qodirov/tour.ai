@@ -1,0 +1,130 @@
+// Package domain: sof tiplar va qoidalar. Hech qanday infratuzilma paketini import qilmaydi.
+package domain
+
+import (
+	"fmt"
+	"math"
+	"slices"
+)
+
+type Novelty string
+
+const (
+	NoveltyIconic Novelty = "iconic"
+	NoveltyNew    Novelty = "new"
+	NoveltyHidden Novelty = "hidden"
+)
+
+func (n Novelty) Valid() bool { return n == NoveltyIconic || n == NoveltyNew || n == NoveltyHidden }
+
+// IsNovel — yangi yoki kam tanilgan joy.
+func (n Novelty) IsNovel() bool { return n == NoveltyNew || n == NoveltyHidden }
+
+var Interests = []string{"history", "food", "nature", "craft", "art", "architecture", "shopping", "nightlife"}
+
+var Categories = []string{"monument", "museum", "mosque", "bazaar", "workshop", "gallery",
+	"restaurant", "cafe", "park", "viewpoint", "ecovillage"}
+
+func ValidInterest(s string) bool { return slices.Contains(Interests, s) }
+func ValidCategory(s string) bool { return slices.Contains(Categories, s) }
+
+// IsMealCategory — ovqatlanish joyi (marshrutda `meal` to'xtashi bo'ladi).
+func IsMealCategory(c string) bool { return c == "restaurant" || c == "cafe" }
+
+// IsOutdoorCategory — ob-havoga sezgir joylar.
+func IsOutdoorCategory(c string) bool { return c == "park" || c == "viewpoint" || c == "ecovillage" }
+
+// CategoryInterests — kategoriya qaysi qiziqishlarga tabiiy mos keladi.
+var CategoryInterests = map[string][]string{
+	"monument":   {"history", "architecture"},
+	"museum":     {"history", "art"},
+	"mosque":     {"history", "architecture"},
+	"bazaar":     {"food", "shopping", "craft"},
+	"workshop":   {"craft", "art", "shopping"},
+	"gallery":    {"art"},
+	"restaurant": {"food"},
+	"cafe":       {"food", "nightlife"},
+	"park":       {"nature"},
+	"viewpoint":  {"nature", "architecture"},
+	"ecovillage": {"nature", "craft", "food"},
+}
+
+type LatLng struct {
+	Lat float64 `json:"lat"`
+	Lng float64 `json:"lng"`
+}
+
+func (p LatLng) Valid() bool { return p.Lat >= -90 && p.Lat <= 90 && p.Lng >= -180 && p.Lng <= 180 }
+
+type Money struct {
+	Amount   int64  `json:"amount"`
+	Currency string `json:"currency"`
+}
+
+func UZS(amount int64) Money { return Money{Amount: amount, Currency: "UZS"} }
+
+type Image struct {
+	URL      string `json:"url"`
+	Blurhash string `json:"blurhash,omitempty"`
+	Credit   string `json:"credit,omitempty"`
+}
+
+// DistanceM — ikki nuqta orasidagi to'g'ri chiziq masofasi (haversine), metrda.
+func DistanceM(a, b LatLng) float64 {
+	const r = 6371000.0
+	rad := math.Pi / 180
+	dLat := (b.Lat - a.Lat) * rad
+	dLng := (b.Lng - a.Lng) * rad
+	h := math.Sin(dLat/2)*math.Sin(dLat/2) +
+		math.Cos(a.Lat*rad)*math.Cos(b.Lat*rad)*math.Sin(dLng/2)*math.Sin(dLng/2)
+	return 2 * r * math.Asin(math.Min(1, math.Sqrt(h)))
+}
+
+// OpeningHours — bitta kun oynasi. Day: 0 = yakshanba ... 6 = shanba (Go time.Weekday bilan bir xil).
+type OpeningHours struct {
+	Day   int    `json:"day"`
+	Open  string `json:"open"`
+	Close string `json:"close"`
+}
+
+// ParseHHMM "09:30" → 570.
+func ParseHHMM(s string) (int, error) {
+	var h, m int
+	if _, err := fmt.Sscanf(s, "%d:%d", &h, &m); err != nil || h < 0 || h > 24 || m < 0 || m > 59 {
+		return 0, fmt.Errorf("noto'g'ri vaqt %q", s)
+	}
+	return h*60 + m, nil
+}
+
+// FormatHHMM 570 → "09:30".
+func FormatHHMM(min int) string {
+	if min < 0 {
+		min = 0
+	}
+	return fmt.Sprintf("%02d:%02d", min/60, min%60)
+}
+
+// DayWindow — berilgan hafta kunidagi ish vaqti (daqiqada). Jadval bo'sh bo'lsa joy har doim ochiq deb olinadi.
+func DayWindow(hours []OpeningHours, weekday int) (open, close int, ok bool) {
+	if len(hours) == 0 {
+		return 0, 24 * 60, true
+	}
+	for _, h := range hours {
+		if h.Day != weekday {
+			continue
+		}
+		o, err1 := ParseHHMM(h.Open)
+		c, err2 := ParseHHMM(h.Close)
+		if err1 != nil || err2 != nil || c <= o {
+			continue
+		}
+		return o, c, true
+	}
+	return 0, 0, false
+}
+
+// IsOpenAt — joy shu daqiqada ochiqmi.
+func IsOpenAt(hours []OpeningHours, weekday, minute int) bool {
+	o, c, ok := DayWindow(hours, weekday)
+	return ok && minute >= o && minute < c
+}

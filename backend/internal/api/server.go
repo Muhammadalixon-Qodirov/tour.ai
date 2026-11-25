@@ -1,0 +1,291 @@
+// Package api — HTTP qatlami: router, middleware, handlerlar. Biznes mantiq planner/domain da.
+package api
+
+import (
+	"context"
+	"encoding/json"
+	"errors"
+	"log/slog"
+	"net"
+	"net/http"
+	"runtime/debug"
+	"slices"
+	"strings"
+	"time"
+
+	"github.com/google/uuid"
+
+	"yoldosh/internal/auth"
+	"yoldosh/internal/i18n"
+	"yoldosh/internal/media"
+	"yoldosh/internal/platform"
+	"yoldosh/internal/store"
+)
+
+type Server struct {
+	cfg     platform.Config
+	store   *store.Store
+	signer  *auth.Signer
+	limiter *Limiter
+	media   media.Store
+	now     func() time.Time
+}
+
+func NewServer(cfg platform.Config, st *store.Store) *Server {
+	return &Server{cfg: cfg, store: st, signer: auth.NewSigner(cfg.TokenSecret), limiter: NewLimiter(),
+		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, now: time.Now}
+}
+
+func (s *Server) Handler() http.Handler {
+	mux := http.NewServeMux()
+	pub := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.rate("general", 120, h)) }
+	user := func(pattern string, h http.HandlerFunc) {
+		mux.Handle(pattern, s.requireUser(s.rate("general", 120, h)))
+	}
+
+	mux.HandleFunc("GET /healthz", s.health)
+	mux.HandleFunc("GET /static/ph/{file}", s.placeholder)
+
+	mux.Handle("POST /api/v1/auth/device", s.rateIP("auth", 30, http.HandlerFunc(s.authDevice)))
+	user("GET /api/v1/me", s.getMe)
+	user("PATCH /api/v1/me", s.patchMe)
+
+	pub("GET /api/v1/cities", s.listCities)
+	pub("GET /api/v1/places", s.listPlaces)
+	pub("GET /api/v1/places/{id}", s.getPlace)
+	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
+	pub("GET /api/v1/geofences", s.geofences)
+
+	mux.Handle("POST /api/v1/trips", s.requireUser(s.rate("trips", 6, http.HandlerFunc(s.createTrip))))
+	user("GET /api/v1/trips", s.listTrips)
+	user("GET /api/v1/trips/{id}", s.getTrip)
+	user("POST /api/v1/trips/{id}/stops", s.addStop)
+	user("DELETE /api/v1/trips/{id}/stops/{stopId}", s.deleteStop)
+	user("POST /api/v1/trips/{id}/stops/{stopId}/swap", s.swapStop)
+	user("POST /api/v1/visits", s.addVisit)
+
+	mux.HandleFunc("GET /uploads/{file}", s.serveUpload)
+	adm := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.requireAdmin(s.rate("admin", 300, h))) }
+	mux.Handle("POST /api/v1/admin/auth/login", s.rateIP("admin-login", 10, http.HandlerFunc(s.adminLogin)))
+	adm("GET /api/v1/admin/me", s.adminMe)
+	adm("GET /api/v1/admin/places", s.adminListPlaces)
+	adm("POST /api/v1/admin/places", s.adminCreatePlace)
+	adm("GET /api/v1/admin/places/{id}", s.adminGetPlace)
+	adm("PATCH /api/v1/admin/places/{id}", s.adminPatchPlace)
+	adm("POST /api/v1/admin/places/{id}/submit", s.changeStatus("pending", "draft", "rejected"))
+	adm("POST /api/v1/admin/places/{id}/publish", s.changeStatus("published", "draft", "pending", "rejected"))
+	adm("POST /api/v1/admin/places/{id}/reject", s.changeStatus("rejected", "draft", "pending"))
+	adm("POST /api/v1/admin/places/{id}/unpublish", s.changeStatus("draft", "published"))
+	adm("PUT /api/v1/admin/places/{id}/rules", s.adminPutRules)
+	mux.Handle("POST /api/v1/admin/places/{id}/images", s.requireAdmin(s.rate("admin-upload", 30, http.HandlerFunc(s.adminUploadImage))))
+	adm("GET /api/v1/admin/analytics/novelty", s.adminNovelty)
+
+	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
+		writeError(w, r, http.StatusNotFound, "not_found", false)
+	})
+
+	return s.recoverer(s.logRequests(s.cors(s.withLang(mux))))
+}
+
+func (s *Server) health(w http.ResponseWriter, r *http.Request) {
+	ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
+	defer cancel()
+	if err := s.store.DB.Ping(ctx); err != nil {
+		writeJSON(w, http.StatusServiceUnavailable, map[string]string{"status": "db_down"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// ---------- kontekst ----------
+
+type ctxKey int
+
+const (
+	keyLang ctxKey = iota
+	keyUser
+	keyRole
+	keyReqID
+)
+
+func langOf(r *http.Request) string {
+	if l, ok := r.Context().Value(keyLang).(string); ok {
+		return l
+	}
+	return "en"
+}
+
+func userOf(r *http.Request) string {
+	u, _ := r.Context().Value(keyUser).(string)
+	return u
+}
+
+// ---------- middleware ----------
+
+func (s *Server) withLang(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		lang := i18n.FromHeader(r.Header.Get("Accept-Language"))
+		w.Header().Add("Vary", "Accept-Language")
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), keyLang, lang)))
+	})
+}
+
+func (s *Server) requireUser(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h := r.Header.Get("Authorization")
+		tok, ok := strings.CutPrefix(h, "Bearer ")
+		if !ok || tok == "" {
+			writeError(w, r, http.StatusUnauthorized, "unauthorized", false)
+			return
+		}
+		c, err := s.signer.Verify(tok)
+		if err != nil {
+			writeError(w, r, http.StatusUnauthorized, "unauthorized", false)
+			return
+		}
+		ctx := context.WithValue(r.Context(), keyUser, c.Subject)
+		ctx = context.WithValue(ctx, keyRole, c.Role)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+func (s *Server) rate(bucket string, perMin int, next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		key := userOf(r)
+		if key == "" {
+			key = clientIP(r)
+		}
+		if wait, ok := s.limiter.Allow(bucket+":"+key, perMin); !ok {
+			w.Header().Set("Retry-After", wait)
+			writeError(w, r, http.StatusTooManyRequests, "rate_limited", true)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (s *Server) rateIP(bucket string, perMin int, next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if wait, ok := s.limiter.Allow(bucket+":"+clientIP(r), perMin); !ok {
+			w.Header().Set("Retry-After", wait)
+			writeError(w, r, http.StatusTooManyRequests, "rate_limited", true)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
+func clientIP(r *http.Request) string {
+	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		return r.RemoteAddr
+	}
+	return host
+}
+
+func (s *Server) cors(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if o := r.Header.Get("Origin"); o != "" && slices.Contains(s.cfg.CORSOrigins, o) {
+			w.Header().Set("Access-Control-Allow-Origin", o)
+			w.Header().Add("Vary", "Origin")
+			w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept-Language, If-None-Match")
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
+			w.Header().Set("Access-Control-Max-Age", "600")
+		}
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
+type statusRecorder struct {
+	http.ResponseWriter
+	status int
+}
+
+func (r *statusRecorder) WriteHeader(code int) { r.status = code; r.ResponseWriter.WriteHeader(code) }
+
+// Unwrap — http.ResponseController (Flush, SSE) ichki writer ga yetib borishi uchun.
+func (r *statusRecorder) Unwrap() http.ResponseWriter { return r.ResponseWriter }
+
+func (s *Server) logRequests(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		id := r.Header.Get("X-Request-Id")
+		if id == "" || len(id) > 64 {
+			id = uuid.NewString()
+		}
+		w.Header().Set("X-Request-Id", id)
+		rec := &statusRecorder{ResponseWriter: w, status: 200}
+		next.ServeHTTP(rec, r.WithContext(context.WithValue(r.Context(), keyReqID, id)))
+		// Koordinatalar loglarga yozilmaydi: faqat yo'l, so'rov parametrlarisiz.
+		slog.Info("http", "method", r.Method, "path", r.URL.Path, "status", rec.status,
+			"ms", time.Since(start).Milliseconds(), "req", id)
+	})
+}
+
+func (s *Server) recoverer(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if v := recover(); v != nil {
+				if v == http.ErrAbortHandler {
+					panic(v)
+				}
+				slog.Error("panic", "err", v, "stack", string(debug.Stack()))
+				writeError(w, r, http.StatusInternalServerError, "internal", true)
+			}
+		}()
+		next.ServeHTTP(w, r)
+	})
+}
+
+// ---------- javob yordamchilari ----------
+
+func writeJSON(w http.ResponseWriter, status int, v any) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(status)
+	_ = json.NewEncoder(w).Encode(v)
+}
+
+type apiError struct {
+	Code      string            `json:"code"`
+	Message   string            `json:"message"`
+	Retryable bool              `json:"retryable"`
+	Fields    map[string]string `json:"fields,omitempty"`
+}
+
+func writeError(w http.ResponseWriter, r *http.Request, status int, code string, retryable bool) {
+	writeJSON(w, status, map[string]apiError{"error": {Code: code, Message: i18n.T(langOf(r), code), Retryable: retryable}})
+}
+
+// fieldErrors — validatsiya xatolari (maydon → sabab, ingliz tilida, dasturchi uchun).
+type fieldErrors map[string]string
+
+func (f fieldErrors) add(field, msg string) { f[field] = msg }
+
+func writeValidation(w http.ResponseWriter, r *http.Request, f fieldErrors) {
+	writeJSON(w, http.StatusBadRequest, map[string]apiError{"error": {
+		Code: "validation_failed", Message: i18n.T(langOf(r), "validation_failed"), Fields: f}})
+}
+
+func (s *Server) internalError(w http.ResponseWriter, r *http.Request, err error) {
+	id, _ := r.Context().Value(keyReqID).(string)
+	slog.Error("internal", "err", err, "path", r.URL.Path, "req", id)
+	writeError(w, r, http.StatusInternalServerError, "internal", true)
+}
+
+// decodeJSON — tana hajmi cheklangan, noma'lum maydonlar rad etiladi.
+func decodeJSON(w http.ResponseWriter, r *http.Request, dst any) bool {
+	r.Body = http.MaxBytesReader(w, r.Body, 64<<10)
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(dst); err != nil {
+		writeValidation(w, r, fieldErrors{"body": err.Error()})
+		return false
+	}
+	return true
+}
+
+func isNotFound(err error) bool { return errors.Is(err, store.ErrNotFound) }

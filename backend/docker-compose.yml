@@ -1,0 +1,22 @@
+# Docker bo'lsa: docker compose up -d --build
+# Demo ma'lumot: docker compose run --rm --entrypoint /app/seed api /app/seed
+services:
+  db:
+    image: postgres:18            # rasmiy image: cube va earthdistance kengaytmalari bor
+    environment: { POSTGRES_DB: yoldosh, POSTGRES_USER: yoldosh, POSTGRES_PASSWORD: yoldosh }
+    ports: ["5433:5432"]
+    volumes: ["pgdata:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "yoldosh"]
+      interval: 3s
+      retries: 20
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgres://yoldosh:yoldosh@db:5432/yoldosh?sslmode=disable
+      TOKEN_SECRET: ${TOKEN_SECRET}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+    depends_on: { db: { condition: service_healthy } }
+    ports: ["8080:8080"]
+volumes: { pgdata: {} }
