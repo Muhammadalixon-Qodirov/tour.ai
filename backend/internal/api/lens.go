@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"sort"
 	"strconv"
@@ -300,6 +301,9 @@ func (s *Server) lensPrices(ctx context.Context, id pricing.Identified, lang str
 	out.Online = lensOnlineDTO{Query: query, Markets: []lensMarketDTO{}}
 	var all []int64
 	for i, r := range results {
+		if r.Err != nil {
+			slog.Warn("lens: market xatosi", "market", r.Market.ID, "err", r.Err)
+		}
 		m := lensMarketDTO{ID: r.Market.ID, Name: r.Market.Name, SearchURL: r.Market.SearchURL(query), Error: r.Err != nil,
 			Listings: []lensListingDTO{}}
 		ls := matched[i]

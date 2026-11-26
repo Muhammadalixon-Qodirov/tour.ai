@@ -42,6 +42,7 @@ services:
       CLEANER_KEY: ${CLEANER_KEY:-}
       LENS_VISION_MODEL: ${LENS_VISION_MODEL:-}
       MARKET_PROXY: ${MARKET_PROXY:-}
+      STT_RELAY_SOCKET: ${STT_RELAY_SOCKET:-}
       AI_MODEL: ${AI_MODEL:-}
       AI_EFFORT: ${AI_EFFORT:-}
       # X-Forwarded-For ga ishoniladigan proksilar (IP yoki CIDR, vergul bilan): host nginx konteynerga docker
@@ -52,7 +53,7 @@ services:
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       MAIL_FROM: ${MAIL_FROM:-Safar <noreply@e-investment.uz>}
-    volumes: ["uploads:/app/data/uploads"]
+    volumes: ["uploads:/app/data/uploads", "stt_sock:/run/stt"]
     ports: ["127.0.0.1:${API_PORT:-8130}:8080"]   # faqat lokal: tashqariga nginx yoki Caddy orqali
     depends_on:
       db: { condition: service_healthy }
@@ -77,6 +78,26 @@ services:
       - ./secrets/market_proxy_key:/secrets/market_proxy_key:ro
       - ./secrets/market_proxy_known_hosts:/secrets/market_proxy_known_hosts:ro
 
+  # STT relay: serverdagi o'zbekcha Kotib modeli (teskari SSH tunnellar, xostning 127.0.0.1:8093 / 7009) uchun ko'prik.
+  # API konteyneri xostning lokal portlariga yeta olmaydi (firewall) — relay xost tarmog'ida ishlaydi va API bilan
+  # unix-socket orqali gaplashadi. Yoqish: COMPOSE_PROFILES ga sttrelay, STT_RELAY_SOCKET=/run/stt/stt.sock.
+  stt-relay:
+    profiles: ["sttrelay"]
+    build:
+      context: ./stt-relay
+      dockerfile_inline: |
+        FROM alpine:3.20
+        RUN apk add --no-cache python3 ffmpeg
+        COPY relay.py /app/relay.py
+        CMD ["python3", "-u", "/app/relay.py"]
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      STT_SOCKET: /run/stt/stt.sock
+    volumes:
+      - stt_sock:/run/stt
+    logging: *logging
+
   caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)
     image: caddy:2
     profiles: ["caddy"]
@@ -93,6 +114,7 @@ services:
     logging: *logging
 
 volumes:
+  stt_sock:
   pgdata: {}
   uploads: {}
   caddy_data: {}

@@ -16,6 +16,7 @@ import (
 	"time"
 	"yoldosh/internal/assistant"
 	"yoldosh/internal/pricing"
+	"yoldosh/internal/speech"
 
 	"github.com/google/uuid"
 
@@ -45,6 +46,7 @@ type Server struct {
 	ai      assistant.Model // nil — kalit yo'q, Fallback
 	lens    *pricing.Groq   // nil — kalit yo'q (/lens/identify 503)
 	markets *pricing.Searcher
+	stt     *speech.STT // nil — STT yo'q (503)
 	// Lens vision va joy moslash natijalari keshi (rasm xeshi + joylashuv), 6 soat
 	lensCache *lensMemo
 }
@@ -64,6 +66,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
 	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
 	s.markets = pricing.NewSearcher(cfg.MarketProxy)
+	s.stt = speech.New(cfg.STTRelaySocket, cfg.GroqKey)
 	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
 	if s.ai != nil {
 		slog.Info("AI yordamchi yoqildi", "model", s.ai.Name())
@@ -132,6 +135,7 @@ func (s *Server) Handler() http.Handler {
 	user("POST /api/v1/trips/{id}/stops/{stopId}/move", s.moveStop)
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
+	mux.Handle("POST /api/v1/speech/stt", s.requireUser(s.rate("stt", 20, http.HandlerFunc(s.speechSTT))))
 	mux.Handle("POST /api/v1/lens/identify", s.requireUser(s.rate("lens", 10, http.HandlerFunc(s.lensIdentify))))
 	mux.Handle("POST /api/v1/guide/chat", s.requireUser(s.rate("guide-chat", 15, http.HandlerFunc(s.guideChat))))
 	user("GET /api/v1/guide/conversations", s.listConversations)
