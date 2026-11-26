@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"slices"
+	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -33,6 +35,7 @@ type guideReq struct {
 	Message        string         `json:"message"`
 	PlaceID        string         `json:"placeId"`
 	CityID         string         `json:"cityId"`
+	TripID         string         `json:"tripId"` // "Rejam haqida so'rash": marshrut egasi tekshiriladi
 	Location       *domain.LatLng `json:"location"`
 }
 
@@ -57,6 +60,14 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 		}
 		conv = id
 	}
+	var tripID uuid.UUID
+	if req.TripID != "" {
+		id, err := uuid.Parse(req.TripID)
+		if err != nil {
+			fe.add("tripId", "uuid")
+		}
+		tripID = id
+	}
 	if len(fe) > 0 {
 		writeValidation(w, r, fe)
 		return
@@ -64,6 +75,25 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	uid := userOf(r)
 	lang := langOf(r)
+	var tripInfo *assistant.TripInfo
+	if req.TripID != "" {
+		t, err := s.store.Trip(ctx, tripID, uid)
+		if isNotFound(err) {
+			writeError(w, r, http.StatusNotFound, "trip_not_found", false)
+			return
+		}
+		if err != nil {
+			s.internalError(w, r, err)
+			return
+		}
+		if tripInfo, err = s.guideTrip(r, t); err != nil {
+			s.internalError(w, r, err)
+			return
+		}
+		if req.CityID == "" {
+			req.CityID = t.CityID
+		}
+	}
 
 	// suhbat tarixi (faqat o'z suhbati), seq bo'yicha qat'iy tartibda
 	var history []assistant.Turn
@@ -88,7 +118,7 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	areq := assistant.Request{Message: req.Message, History: history, Lang: lang, CityID: req.CityID, PlaceID: req.PlaceID,
-		LangGuessed: r.Header.Get("Accept-Language") == ""}
+		LangGuessed: r.Header.Get("Accept-Language") == "", Trip: tripInfo}
 	if areq.LangGuessed { // joy nomlari ham savol tilida chiqsin
 		lang = assistant.DetectLang(req.Message, lang)
 		areq.Lang = lang
@@ -126,7 +156,17 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// yozish qoidalari: javob tili (savol tili) bo'yicha "taxminan"; "—", "≈", "~" foydalanuvchiga yetmaydi
+	ansLang := assistant.DetectLang(req.Message, langOr(lang))
+	rawEmit := emit
+	emit, flushText := assistant.SanitizeEmit(ansLang, rawEmit)
+
 	tools := assistant.NewTools(s.store, lang, s.now)
+	tools.Weather = s.weather
+	if tripInfo != nil {
+		tools.Trip = tripInfo
+		tools.Preload(tripInfo.Places)
+	}
 	mode := "fallback"
 	var answer string
 	var err error
@@ -146,6 +186,8 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 			emit("delta", map[string]string{"text": answer})
 		}
 	}
+	flushText()
+	answer = assistant.Sanitize(answer, ansLang)
 	if err != nil && answer == "" {
 		if stream {
 			emit("error", map[string]any{"code": "internal", "retryable": true})
@@ -161,11 +203,12 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	// apostrof turlari (' ʻ ‘ ’ `) va katta-kichik harf farqi kartochka moslashiga xalaqit bermasin
 	normQ := strings.NewReplacer("ʻ", "'", "‘", "'", "’", "'", "`", "'", "ʼ", "'", "*", "")
 	low := strings.ToLower(normQ.Replace(answer))
+	mentioned := func(p store.Place) bool { return strings.Contains(low, strings.ToLower(normQ.Replace(p.Name))) }
 	for _, p := range tools.FoundOrdered() {
 		if len(cards) == 6 {
 			break
 		}
-		if mode == "fallback" || strings.Contains(low, strings.ToLower(normQ.Replace(p.Name))) {
+		if mode == "fallback" && !tools.Preloaded(p.ID) || mentioned(p) {
 			cards = append(cards, s.summaryDTO(p, tashkentLoc()))
 			ids = append(ids, p.ID)
 		}
@@ -174,6 +217,11 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 		cards = []placeSummaryDTO{}
 	}
 	emit("places", map[string]any{"places": cards})
+	// manbalar: tilga olingan joylar tarixi, narxlar, yo'llar, ob-havo (bo'lsa)
+	sources := tools.SourcesFor(func(id string) bool { return slices.Contains(ids, id) })
+	if len(sources) > 0 {
+		emit("sources", map[string]any{"sources": sources})
+	}
 
 	msgID := uuid.Must(uuid.NewV7())
 	if err := s.saveGuideTurn(context.WithoutCancel(ctx), conv, uid, isNew, req, answer, mode, msgID, ids); err != nil {
@@ -186,6 +234,7 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	}
 	done["text"] = answer
 	done["places"] = cards
+	done["sources"] = sources
 	writeJSON(w, http.StatusOK, done)
 }
 
@@ -433,4 +482,70 @@ func (s *Server) deleteConversation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)
+}
+
+// guideTrip — marshrutning AI uchun ixcham ko'rinishi (Trip javobidan: nomlar, vaqtlar, narxlar so'ralgan tilda).
+func (s *Server) guideTrip(r *http.Request, t store.Trip) (*assistant.TripInfo, error) {
+	dto, err := s.buildTrip(r, t)
+	if err != nil {
+		return nil, err
+	}
+	ti := &assistant.TripInfo{ID: dto.ID, CityID: dto.CityID, Title: dto.Title, StartDate: dto.StartDate,
+		StartLabel: dto.Prefs.StartLabel, StartKind: dto.Prefs.StartKind}
+	leg := func(tr *domain.Transit) string {
+		if tr == nil {
+			return ""
+		}
+		out := tr.Mode + " " + strconv.Itoa(tr.DurationMin) + " min"
+		if tr.Fare != nil {
+			out += ", " + strconv.FormatInt(tr.Fare.Amount, 10) + " UZS (whole car)"
+		}
+		return out
+	}
+	var ids []string
+	for _, d := range dto.Days {
+		td := assistant.TripDay{Day: d.Index + 1, Date: d.Date, CostUZS: d.EstimatedCost.Amount, Stops: []assistant.TripStop{}}
+		if dt, err := time.Parse(time.DateOnly, d.Date); err == nil {
+			td.Weekday = dt.Weekday().String()[:3]
+		}
+		if d.StartLeg != nil {
+			td.Start = leg(d.StartLeg)
+		}
+		for i, st := range d.Stops {
+			x := assistant.TripStop{Arrive: st.ArriveAt, Kind: string(st.Kind), Minutes: st.DurationMin, Status: st.Status, Reason: st.Reason}
+			if i > 0 || d.StartLeg == nil {
+				x.Getting = leg(st.TransitFromPrev)
+			}
+			if st.Place != nil {
+				x.Name, x.PlaceID, x.Category = st.Place.Name, st.Place.ID, st.Place.Category
+				x.New = st.Place.Novelty != domain.NoveltyIconic && !st.Place.IsPartner
+				ids = append(ids, st.Place.ID)
+			}
+			td.Stops = append(td.Stops, x)
+		}
+		ti.Days = append(ti.Days, td)
+	}
+	extra := map[string]any{"total_cost_per_person_uzs": dto.Totals.EstimatedCost.Amount, "places": dto.Totals.Places,
+		"little_known_places": dto.Totals.NewPlaces, "walking_m": dto.Totals.WalkingM, "interests": dto.Prefs.Interests,
+		"pace": dto.Prefs.Pace, "preparation_done": dto.Prep}
+	if dto.Prefs.BudgetPerDay != nil {
+		extra["budget_per_day_uzs"] = *dto.Prefs.BudgetPerDay
+	}
+	if dto.Arrival != nil {
+		extra["arrival"] = dto.Arrival
+		if dto.Totals.ArrivalCost != nil {
+			extra["arrival_cost_per_person_uzs"] = dto.Totals.ArrivalCost.Amount
+		}
+	}
+	ti.Extra = extra
+	places, err := s.store.PlacesByIDs(r.Context(), ids, i18n.Chain(langOf(r)))
+	if err != nil {
+		return nil, err
+	}
+	for _, id := range ids {
+		if p, ok := places[id]; ok {
+			ti.Places = append(ti.Places, p)
+		}
+	}
+	return ti, nil
 }

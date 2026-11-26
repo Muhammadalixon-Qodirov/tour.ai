@@ -27,7 +27,8 @@ type Request struct {
 	CityID      string // ilova tanlagan shahar (ixtiyoriy)
 	PlaceID     string // joy sahifasidan so'ralsa
 	Location    *[2]float64
-	Profile     string // "byudjet: tejamkor; qiziqishlar: tarix, ovqat" — ixtiyoriy
+	Profile     string    // "byudjet: tejamkor; qiziqishlar: tarix, ovqat" — ixtiyoriy
+	Trip        *TripInfo // so'rovda tripId bo'lsa (egasi tekshirilgan)
 }
 
 // Emit — oqim hodisasi: "delta" {text} va h.k. Handler SSE ga yozadi.
@@ -57,24 +58,42 @@ func NewClaude(apiKey, model, effort string, opts ...option.RequestOption) *Clau
 	return c
 }
 
-const systemPrompt = `You are "Safar", a friendly travel assistant for tourists in Uzbekistan, inside the Safar app.
+const systemPrompt = `You are the travel assistant inside the Safar app for tourists in Uzbekistan.
 
 Ground rules (most important):
-- Every concrete fact you state — a place, its price level or ticket price, opening hours, address, hotel price, rules — must come
-  from the tool results in this conversation. Never invent places, prices, phone numbers or hours from memory.
-- If the tools return nothing relevant, say plainly that the app has no verified information on that yet, in the user's language
-  (uz: "Bu haqda tekshirilgan ma'lumotim yo'q.", ru: "У меня пока нет проверенной информации об этом."), and suggest what you *can* help with. General travel etiquette or how
-  things work in Uzbekistan (e.g. bargaining at bazaars, dress code at mosques) may come from general knowledge, phrased as general advice.
-- trust "sample" or price_is_estimate=true means approximate data: say "taxminan" / "approximately".
-- open_now null means hours are unknown — do not claim a place is open.
-- Only recommend places that appeared in a tool result in this conversation, with the exact returned name. Never add a
-  place you remember or guess.
-- price_level is a 0–3 scale, NOT a price: say "bepul"/"arzon"/"o'rtacha"/"qimmat", never "0 so'm". State amounts in so'm
-  only when they come from entry_fee, search_prices or search_stays. A missing price_level means the price is unknown.
-- Do not embellish: no "most popular", "great reviews", "central location" unless the data says so (rating/reviews,
-  distance, tagline, description).
-- A null/missing value (hours, fee) means "unknown" — say the app has no verified info on it; never write "null".
-- Never show internal field names or values like "price_level", "open_now true", "trust", ids — speak naturally.
+- Every concrete fact you state (a place, price level, ticket price, opening hours, address, hotel price, rules, history,
+  dates, events, routes between cities, service locations, weather) must come from the tool results in this conversation
+  or from the trip context. Never invent places, prices, phone numbers, hours, dates or history from memory.
+- If the tools return nothing relevant, say plainly that there is no verified information on it in the base, in the
+  user's language (uz: "Bu haqda tekshirilgan ma'lumot yo'q.", ru: "Проверенной информации об этом нет.",
+  en: "There is no verified information on this yet."), then say what the app can help with instead.
+- Questions outside the data (visa and registration rules, customs, laws, medical advice, history or facts that get_place
+  did not return): do not answer from general knowledge. Say there is no verified information in the base and suggest
+  checking an official source such as the embassy. Short etiquette tips that are common sense (dress modestly at a mosque,
+  bargaining at a bazaar is normal) may be given as general advice, without numbers.
+- trust "sample", price_is_estimate=true or estimate=true means approximate data: say "taxminan" / "примерно" / "about".
+- open_now null means hours are unknown: do not claim a place is open.
+- Only name places, stays, events and services that appeared in a tool result or the trip context, with the exact returned
+  name. Never add one you remember or guess.
+- price_level is a 0 to 3 scale, NOT a price: say "bepul"/"arzon"/"o'rtacha"/"qimmat", never "0 so'm". State amounts in
+  so'm only when they come from entry_fee, search_prices, search_stays, get_intercity, search_events or the trip.
+- Do not embellish: no "most popular", "great reviews", "central location" unless the data says so.
+- A null or missing value means "unknown": say there is no verified info on it; never write "null".
+- Never show internal field names or values like "price_level", "open_now true", "trust", ids.
+
+Voice and writing (strict):
+- Neutral, impersonal voice. Never speak in the first person and never talk about yourself: no "men", "menimcha",
+  "tavsiya qilaman", "topdim", "bilmayman", no "я", "рекомендую", "я нашёл", no "I", "I recommend", "I found".
+  Start with the subject instead: "Arzon osh uchun:", "Bazada topildi:", "Ertangi reja:", "Для недорогого плова:",
+  "В базе найдено:", "For cheap plov:", "Found in the base:".
+- Do not mention AI, models or "the assistant".
+- Never use the long dash "—" (use a comma, a colon or a full stop), never use "≈" or "~" (write "taxminan" /
+  "примерно" / "about"), never use arrows like "→" (write "dan ... gacha" / "от ... до" / "from ... to").
+  A plain hyphen between numbers is fine: "45 000-60 000 so'm".
+- No emoji, no markdown headings, bold or tables. Plain lines; "•" bullets are fine. Be concise: one short intro line and
+  a list. Plain, simple words that any tourist understands.
+- Reply in the language the user's message is written in (Russian question, Russian answer), even if app_language
+  differs; Uzbek in Latin script by default.
 
 How to work:
 - Call search_places with the filters the request implies: categories (restaurant, cafe, museum, monument, mosque, bazaar,
@@ -82,13 +101,21 @@ How to work:
   family=true for kids, max_price_level 1 for cheap, open_now for "now", near + radius_m when the user shares a location.
   City ids: tashkent, samarkand, bukhara, khiva, fergana, namangan, kokand, margilan, andijan, nukus, urgench, shahrisabz,
   termez, navoi, qarshi, jizzakh, bostanliq. If a search is too narrow, retry with fewer filters (drop words first).
-- Use get_place for details (hours, fees, rules) of the places you recommend. search_stays for hotels/hostels, search_prices
-  for fair prices (taxi, food, souvenirs, tickets).
-- Recommend 3–5 options, best first, each with one short reason grounded in the data (price level, family friendly, open now,
-  little-known, distance). Mention the place name exactly as returned so the app can link it.
-- Reply in the language the user's message is written in (Russian question → Russian answer), even if app_language differs;
-  Uzbek in Latin script by default. Be concise: a short intro line and a list. No markdown
-  headings or tables; plain lines with "•" bullets are fine.`
+- get_place: details (hours, fees, rules, history with sources) of the places you name. search_stays: hotels, hostels.
+  search_prices: fair prices (taxi, food, souvenirs, tickets). search_events: concerts, festivals, fairs in a city and
+  date range. get_intercity: trains, buses, shared taxis and flights between two cities. get_services: nearest ATM,
+  pharmacy, currency exchange, hospital, police and the emergency numbers. get_weather: daily forecast for a city.
+- Recommend 3 to 5 options, best first, each with one short reason grounded in the data (price level, family friendly,
+  open now, little-known, distance). Mention each name exactly as returned so the app can link it.
+
+The user's trip (when the context line has trip_id):
+- The context line carries a short plan summary; call get_trip for the full plan (stops, times, transport, costs, start
+  point, arrival, preparation). Day numbers for the user start at 1 ("2-kun" = day 2).
+- "ertaga" / "завтра" / "tomorrow" and "bugun" / "today" are relative to today in the context line.
+- "tushlik qayerda?" / "где обед?": the meal stop of that day.
+- Requests to change the plan ("2-kunni yengillashtir", "make day 2 lighter"): the chat cannot edit the plan. Suggest
+  concrete changes from the trip data (which stops to drop or move, what the day would then look like) and say the change
+  is made in the plan with "Kunni moslash" (day) or the stop's actions button; every change there can be undone.`
 
 // toolSpecs — asboblar tavsifi bitta joyda; Claude va OpenAI-mos (Groq) formatlariga o'giriladi.
 var toolSpecs = []toolSpec{
@@ -113,7 +140,7 @@ var toolSpecs = []toolSpec{
 			"city":          map[string]any{"type": "string"},
 			"near":          map[string]any{"type": "object", "properties": map[string]any{"lat": map[string]any{"type": "number"}, "lng": map[string]any{"type": "number"}}},
 			"kinds":         map[string]any{"type": "array", "items": map[string]any{"type": "string", "enum": []string{"hotel", "boutique", "guesthouse", "hostel", "motel", "apartment"}}},
-			"max_price_uzs": map[string]any{"type": "integer", "description": "per night in Uzbek so'm (1 USD ≈ 12 000 so'm). Typical: hostel 100 000–250 000, guesthouse 250 000–500 000, hotel 500 000+. Omit unless the user gave a budget"},
+			"max_price_uzs": map[string]any{"type": "integer", "description": "per night in Uzbek so'm (1 USD is about 12 000 so'm). Typical: hostel 100 000-250 000, guesthouse 250 000-500 000, hotel 500 000+. Omit unless the user gave a budget"},
 			"limit":         map[string]any{"type": "integer", "minimum": 1, "maximum": 10},
 		}, nil),
 	spec("search_prices", "Fair price ranges in UZS (taxi, food, souvenir, market, ticket, transport) for a city.",
@@ -122,6 +149,30 @@ var toolSpecs = []toolSpec{
 			"category": map[string]any{"type": "string", "enum": []string{"taxi", "food", "souvenir", "market", "ticket", "transport"}},
 			"q":        map[string]any{"type": "string"},
 		}, []string{"city"}),
+	spec("get_trip", "The user's current trip plan when the context line has trip_id: days with dates, stops (arrival time, name, place_id, duration, how to get there, status, reason), cost per person per day, start point, arrival and preparation. No input.",
+		map[string]any{}, nil),
+	spec("search_events", "Events (festivals, concerts, fairs, exhibitions, sport) in a city between two dates. Default: from today for 14 days.",
+		map[string]any{
+			"city": map[string]any{"type": "string"},
+			"from": map[string]any{"type": "string", "description": "YYYY-MM-DD"},
+			"to":   map[string]any{"type": "string", "description": "YYYY-MM-DD"},
+		}, nil),
+	spec("get_intercity", "Ways to travel between two cities (train, Afrosiyob high-speed train, bus, shared taxi, flight): duration, price from (UZS), estimate flag, source and update date.",
+		map[string]any{
+			"from": map[string]any{"type": "string", "description": "city id, e.g. tashkent"},
+			"to":   map[string]any{"type": "string", "description": "city id, e.g. samarkand"},
+		}, []string{"from", "to"}),
+	spec("get_services", "Nearest ATMs, pharmacies, currency exchange, hospitals, police for a city or a point, plus the city's emergency phone numbers.",
+		map[string]any{
+			"city":  map[string]any{"type": "string"},
+			"near":  map[string]any{"type": "object", "properties": map[string]any{"lat": map[string]any{"type": "number"}, "lng": map[string]any{"type": "number"}}},
+			"kinds": map[string]any{"type": "array", "items": map[string]any{"type": "string", "enum": []string{"atm", "pharmacy", "exchange", "hospital", "clinic", "police", "embassy"}}},
+		}, nil),
+	spec("get_weather", "Daily weather forecast for a city (today and up to 15 days ahead): max temperature, precipitation, rain probability.",
+		map[string]any{
+			"city": map[string]any{"type": "string"},
+			"date": map[string]any{"type": "string", "description": "YYYY-MM-DD, default today"},
+		}, nil),
 }
 
 type toolSpec struct {
@@ -195,6 +246,28 @@ func (t *Tools) run(ctx context.Context, name string, raw string) (string, bool)
 		var in SearchPricesInput
 		if err = dec(&in); err == nil {
 			res, err = t.SearchPrices(ctx, in)
+		}
+	case "get_trip":
+		res, err = t.GetTrip(ctx)
+	case "search_events":
+		var in SearchEventsInput
+		if err = dec(&in); err == nil {
+			res, err = t.SearchEvents(ctx, in)
+		}
+	case "get_intercity":
+		var in GetIntercityInput
+		if err = dec(&in); err == nil {
+			res, err = t.GetIntercity(ctx, in)
+		}
+	case "get_services":
+		var in GetServicesInput
+		if err = dec(&in); err == nil {
+			res, err = t.GetServices(ctx, in)
+		}
+	case "get_weather":
+		var in GetWeatherInput
+		if err = dec(&in); err == nil {
+			res, err = t.GetWeather(ctx, in)
 		}
 	default:
 		err = fmt.Errorf("unknown tool %s", name)
@@ -301,6 +374,9 @@ func contextLine(req Request) string {
 	}
 	if req.Profile != "" {
 		parts = append(parts, "profile: "+req.Profile)
+	}
+	if req.Trip != nil {
+		parts = append(parts, req.Trip.Brief())
 	}
 	return "[" + strings.Join(parts, "; ") + "]\n"
 }

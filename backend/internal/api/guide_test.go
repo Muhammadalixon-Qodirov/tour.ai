@@ -46,7 +46,7 @@ func TestGuideFallback(t *testing.T) {
 	// bazada yo'q narsa — to'qimaydi
 	var none guideResp
 	c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "salom", "conversationId": res.ConversationID}, &none)
-	if !strings.Contains(none.Text, "tekshirilgan ma'lumotim yo'q") || none.ConversationID != res.ConversationID {
+	if !strings.Contains(none.Text, "tekshirilgan ma'lumot yo'q") || none.ConversationID != res.ConversationID {
 		t.Fatalf("bo'sh javob: %+v", none)
 	}
 	var conv struct {
@@ -74,7 +74,7 @@ func fakeAnthropic(t *testing.T) (*httptest.Server, *atomic.Int32) {
 			Tools []map[string]any `json:"tools"`
 		}
 		json.NewDecoder(r.Body).Decode(&body)
-		if len(body.Tools) != 4 || body.Tools[0]["eager_input_streaming"] != true {
+		if len(body.Tools) != 9 || body.Tools[0]["eager_input_streaming"] != true {
 			t.Errorf("asboblar: %+v", body.Tools)
 		}
 		w.Header().Set("Content-Type", "text/event-stream")
@@ -98,9 +98,11 @@ func fakeAnthropic(t *testing.T) (*httptest.Server, *atomic.Int32) {
 				rest := raw[i+8:]
 				name = rest[:strings.Index(rest, `"`)]
 			}
-			txt, _ := json.Marshal("Tavsiyam: " + name)
+			txt, _ := json.Marshal("Bazada topildi: " + name + " —")
+			tail, _ := json.Marshal(" ~5 daqiqa piyoda")
 			send("content_block_start", `{"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}`)
 			send("content_block_delta", `{"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":`+string(txt)+`}}`)
+			send("content_block_delta", `{"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":`+string(tail)+`}}`)
 			send("content_block_stop", `{"type":"content_block_stop","index":0}`)
 			send("message_delta", `{"type":"message_delta","delta":{"stop_reason":"end_turn"},"usage":{"output_tokens":5}}`)
 		}
@@ -155,6 +157,16 @@ func TestGuideAI(t *testing.T) {
 	if !strings.Contains(events["done"][0], `"mode":"ai"`) {
 		t.Fatalf("done: %v", events["done"])
 	}
+	// oqimdagi bo'laklar yozish qoidalari bo'yicha tozalangan ("—" bo'laklar orasida bo'lingan)
+	var streamed strings.Builder
+	for _, d := range events["delta"] {
+		var x struct{ Text string }
+		json.Unmarshal([]byte(d), &x)
+		streamed.WriteString(x.Text)
+	}
+	if got := streamed.String(); strings.ContainsAny(got, "—~") || !strings.Contains(got, ", taxminan 5 daqiqa") {
+		t.Fatalf("tozalanmagan oqim: %q", got)
+	}
 }
 
 // fakeGroq — OpenAI-mos oqim: 1-so'rovda asbob chaqiradi, 2-so'rovda birinchi topilgan joy nomini aytadi.
@@ -170,7 +182,7 @@ func TestGuideGroq(t *testing.T) {
 			Tools []any `json:"tools"`
 		}
 		json.NewDecoder(r.Body).Decode(&body)
-		if len(body.Tools) != 4 || r.Header.Get("Authorization") != "Bearer test-groq" {
+		if len(body.Tools) != 9 || r.Header.Get("Authorization") != "Bearer test-groq" {
 			t.Errorf("so'rov: %d tools, auth %q", len(body.Tools), r.Header.Get("Authorization"))
 		}
 		w.Header().Set("Content-Type", "text/event-stream")
@@ -293,5 +305,83 @@ func TestGroqKeyFailover(t *testing.T) {
 	}
 	if strings.Join(seen, ",") != "Bearer key-a,Bearer key-b,Bearer key-b" {
 		t.Fatalf("kalitlar tartibi: %v", seen)
+	}
+}
+
+// "Rejam haqida so'rash": tripId bilan savol (fallback) shu marshrutdan javob beradi; begona marshrut 404.
+func TestGuideTripContext(t *testing.T) {
+	testAPI.limiter = NewLimiter()
+	old := testAPI.ai
+	testAPI.ai = nil
+	defer func() { testAPI.ai = old }()
+	c := newClient(t, "guide-trip-0001")
+	var tr tripDTO
+	if code := c.do("POST", "/api/v1/trips", map[string]any{"cityId": "samarkand", "startDate": "2026-12-02", "days": 2,
+		"interests": []string{"history", "food"}, "startLocation": map[string]float64{"lat": 39.655, "lng": 66.975},
+		"startLabel": "Hotel Bibikhanum", "startKind": "stay"}, &tr); code != 201 {
+		t.Fatalf("trip: %d", code)
+	}
+	var res struct {
+		guideResp
+		Sources []map[string]string `json:"sources"`
+	}
+	if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "2-kun rejasi qanday?", "tripId": tr.ID}, &res); code != 200 {
+		t.Fatalf("chat: %d", code)
+	}
+	day := tr.Days[1]
+	if !strings.Contains(res.Text, "2-kun") || !strings.Contains(res.Text, day.Stops[0].Place.Name) || len(res.Places) == 0 {
+		t.Fatalf("reja javobi: %+v", res)
+	}
+	for _, p := range res.Places {
+		if !strings.Contains(res.Text, p.Name) || p.Cover.URL == "" {
+			t.Fatalf("kartochka javobda yo'q: %+v", p)
+		}
+	}
+	// AI uchun kontekst: qisqa xulosa va get_trip
+	var owner string
+	testAPI.store.DB.QueryRow(context.Background(), `SELECT user_id FROM trips WHERE id = $1`, tr.ID).Scan(&owner)
+	full, _ := testAPI.store.Trip(context.Background(), uuid.MustParse(tr.ID), owner)
+	req := httptest.NewRequest("GET", "/", nil)
+	req.Header.Set("Accept-Language", "uz")
+	ti, err := testAPI.guideTrip(req, full)
+	if err != nil || len(ti.Days) != 2 || ti.StartLabel != "Hotel Bibikhanum" || ti.Days[0].Start == "" ||
+		!strings.Contains(ti.Brief(), "day 2") || !strings.Contains(ti.Brief(), "trip_id="+tr.ID) {
+		t.Fatalf("trip info: %v %+v", err, ti)
+	}
+	other := newClient(t, "guide-trip-0002")
+	if code := other.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "ertaga nima bor?", "tripId": tr.ID}, nil); code != 404 {
+		t.Fatalf("begona marshrut: %d", code)
+	}
+	if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "x", "tripId": "abc"}, nil); code != 400 {
+		t.Fatalf("noto'g'ri tripId: %d", code)
+	}
+}
+
+// Asboblar: tadbirlar, shaharlararo yo'l, xizmatlar, joy tarixi manbalari.
+func TestAssistantTools(t *testing.T) {
+	ctx := context.Background()
+	tools := assistant.NewTools(testAPI.store, "uz", testAPI.now)
+	r, err := tools.GetIntercity(ctx, assistant.GetIntercityInput{From: "Toshkent", To: "samarkand"})
+	if err != nil || r.(map[string]any)["count"].(int) == 0 {
+		t.Fatalf("intercity: %v %+v", err, r)
+	}
+	sv, err := tools.GetServices(ctx, assistant.GetServicesInput{City: "samarkand", Kinds: []string{"pharmacy"}})
+	if err != nil || len(sv.(map[string]any)["emergency_numbers"].([]map[string]string)) == 0 {
+		t.Fatalf("services: %v %+v", err, sv)
+	}
+	if _, err := tools.SearchEvents(ctx, assistant.SearchEventsInput{City: "samarkand"}); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := tools.GetPlace(ctx, assistant.GetPlaceInput{ID: "registan"}); err != nil {
+		t.Fatal(err)
+	}
+	// joy tarixi manbalari faqat joy javobda tilga olinsa
+	with, without := tools.SourcesFor(func(string) bool { return true }), tools.SourcesFor(func(string) bool { return false })
+	if len(without) == 0 || len(with) < len(without) {
+		t.Fatalf("manbalar: %d / %d", len(with), len(without))
+	}
+	w, _ := tools.GetWeather(ctx, assistant.GetWeatherInput{City: "samarkand"})
+	if w.(map[string]string)["error"] == "" {
+		t.Fatalf("ob-havo manbasiz: %+v", w)
 	}
 }

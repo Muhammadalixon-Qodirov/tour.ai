@@ -14,6 +14,7 @@ import (
 	"yoldosh/internal/domain"
 	"yoldosh/internal/i18n"
 	"yoldosh/internal/store"
+	"yoldosh/internal/weather"
 )
 
 var tashkent = func() *time.Location {
@@ -26,12 +27,16 @@ var tashkent = func() *time.Location {
 
 // Tools — asboblar bazaga murojaat qiladi. Found — javobda ko'rsatish uchun topilgan joylar (id → joy).
 type Tools struct {
-	Store *store.Store
-	Lang  string
-	Now   func() time.Time
-	Found map[string]store.Place
-	Debug func(tool, input string) // ixtiyoriy: asbob chaqiruvlarini kuzatish (cmd/guide-try)
-	order []string
+	Store   *store.Store
+	Lang    string
+	Now     func() time.Time
+	Found   map[string]store.Place
+	Debug   func(tool, input string) // ixtiyoriy: asbob chaqiruvlarini kuzatish (cmd/guide-try)
+	Trip    *TripInfo                // so'rovdagi marshrut (egasi tekshirilgan); get_trip shuni qaytaradi
+	Weather weather.Source           // nil — get_weather "unavailable"
+	order   []string
+	preload map[string]bool // marshrutdan oldindan qo'shilgan joylar: faqat javobda tilga olinsa kartochka
+	sources []Source
 }
 
 func NewTools(st *store.Store, lang string, now func() time.Time) *Tools {
@@ -176,7 +181,17 @@ func (t *Tools) GetPlace(ctx context.Context, in GetPlaceInput) (any, error) {
 	if r := []rune(desc); len(r) > 400 { // token tejash
 		desc = string(r[:400]) + "…"
 	}
-	return map[string]any{"place": t.brief(p), "description": desc, "address": p.Address, "opening_hours": hours,
+	var history map[string]any
+	if p.HistorySummary != nil && *p.HistorySummary != "" {
+		srcs := parseSources(p.Sources)
+		titles := make([]string, 0, len(srcs))
+		for _, sr := range srcs {
+			titles = append(titles, sr.Title)
+			t.addSource(sr, p.ID)
+		}
+		history = map[string]any{"summary": *p.HistorySummary, "facts": p.HistoryFacts, "sources": titles}
+	}
+	return map[string]any{"place": t.brief(p), "description": desc, "history": history, "address": p.Address, "opening_hours": hours,
 		"hours_note": p.HoursNote, "entry_fee": json.RawMessage(nonEmptyJSON(p.EntryFee)), "fee_note": p.FeeNote,
 		"crowd": p.Crowd, "best_time": p.BestTime, "rules": rs, "visit_minutes": p.VisitMin, "card": p.PayCard, "cash_only": p.CashOnly}, nil
 }
@@ -239,7 +254,7 @@ func (t *Tools) SearchStays(ctx context.Context, in SearchStaysInput) (any, erro
 		if list, err = t.Store.Stays(ctx, f); err != nil {
 			return nil, err
 		}
-		note = "nothing under max_price_uzs; these are the nearest/best options without the price limit — compare prices yourself"
+		note = "nothing under max_price_uzs; these are the nearest/best options without the price limit; compare prices yourself"
 	}
 	out := []stayBrief{}
 	for _, v := range list {
@@ -272,6 +287,7 @@ func (t *Tools) SearchPrices(ctx context.Context, in SearchPricesInput) (any, er
 		return nil, err
 	}
 	type price struct {
+		Source  string `json:"source,omitempty"`
 		Name    string `json:"name"`
 		Unit    string `json:"unit"`
 		Min     int64  `json:"fair_min_uzs"`
@@ -285,8 +301,13 @@ func (t *Tools) SearchPrices(ctx context.Context, in SearchPricesInput) (any, er
 			break
 		}
 		lo, hi, _, upd := p.Range()
-		out = append(out, price{Name: i18n.Pick(p.Name, t.Lang), Unit: i18n.Pick(p.Unit, t.Lang), Min: lo, Max: hi, Tourist: p.Tourist,
-			Updated: upd.Format("2006-01-02")})
+		x := price{Name: i18n.Pick(p.Name, t.Lang), Unit: i18n.Pick(p.Unit, t.Lang), Min: lo, Max: hi, Tourist: p.Tourist,
+			Updated: upd.Format("2006-01-02")}
+		if sr, ok := sourceFromURL(p.SourceURL, p.SourceYear); ok {
+			x.Source = sr.Title
+			t.addSource(sr, "")
+		}
+		out = append(out, x)
 	}
 	return map[string]any{"count": len(out), "prices": out}, nil
 }
