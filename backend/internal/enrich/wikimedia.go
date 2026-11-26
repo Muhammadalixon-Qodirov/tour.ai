@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -27,7 +28,7 @@ type Wiki struct {
 }
 
 func NewWiki(ua string) *Wiki {
-	return &Wiki{HC: &http.Client{Timeout: 30 * time.Second}, UserAgent: ua, Delay: 120 * time.Millisecond}
+	return &Wiki{HC: &http.Client{Timeout: 30 * time.Second}, UserAgent: ua, Delay: 400 * time.Millisecond}
 }
 
 func (w *Wiki) getJSON(ctx context.Context, u string, v any) error {
@@ -52,11 +53,18 @@ func (w *Wiki) getJSON(ctx context.Context, u string, v any) error {
 		}
 		body, _ := io.ReadAll(io.LimitReader(resp.Body, 8<<20))
 		resp.Body.Close()
-		if (resp.StatusCode == 429 || resp.StatusCode >= 500) && attempt < 3 {
+		if (resp.StatusCode == 429 || resp.StatusCode >= 500) && attempt < 6 {
+			// Wikimedia: Retry-After ga amal qilamiz (≤ 5 daq), bo'lmasa 15, 30, 60 ... s; keyingi so'rovlar ham sekinlashadi
+			wait := time.Duration(15<<attempt) * time.Second
+			if n, err := strconv.Atoi(resp.Header.Get("Retry-After")); err == nil && n > 0 {
+				wait = time.Duration(n) * time.Second
+			}
+			wait = min(wait, 5*time.Minute)
+			w.Delay = max(w.Delay, 1*time.Second)
 			select {
 			case <-ctx.Done():
 				return ctx.Err()
-			case <-time.After(time.Duration(attempt+1) * 5 * time.Second):
+			case <-time.After(wait):
 			}
 			continue
 		}
@@ -81,8 +89,8 @@ type Entity struct {
 // Entities — 50 tagacha QID bitta so'rovda.
 func (w *Wiki) Entities(ctx context.Context, ids []string) (map[string]Entity, error) {
 	out := map[string]Entity{}
-	for i := 0; i < len(ids); i += 50 {
-		chunk := ids[i:min(i+50, len(ids))]
+	for i := 0; i < len(ids); i += 25 {
+		chunk := ids[i:min(i+25, len(ids))]
 		u := "https://www.wikidata.org/w/api.php?action=wbgetentities&props=claims%7Csitelinks&format=json&ids=" +
 			url.QueryEscape(strings.Join(chunk, "|"))
 		var d struct {
