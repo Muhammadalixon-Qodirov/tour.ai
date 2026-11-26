@@ -42,6 +42,7 @@ services:
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       CLEANER_KEY: ${CLEANER_KEY:-}
+      BOT_KEY: ${BOT_KEY:-}
       LENS_VISION_MODEL: ${LENS_VISION_MODEL:-}
       MARKET_PROXY: ${MARKET_PROXY:-}
       MARKET_FETCH_URL: ${MARKET_FETCH_URL:-}
@@ -125,6 +126,19 @@ services:
     environment:
       MARKET_PROXY_SOCKS: ${MARKET_PROXY_SOCKS:-market-proxy:1080}
     depends_on: ["market-proxy"]
+    logging: *logging
+
+  # Telegram crowdsourcing boti: foydalanuvchilar yangi joyni botga yuboradi -> admin navbati.
+  # Yoqish: COMPOSE_PROFILES ga tgbot, TELEGRAM_BOT_TOKEN (@BotFather) va BOT_KEY (asosiy serverdagi bilan bir xil).
+  tgbot:
+    profiles: ["tgbot"]
+    build: ../backend
+    restart: unless-stopped
+    entrypoint: ["/app/bin/tgbot"]
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      BACKEND_URL: ${TGBOT_BACKEND_URL:-https://${DOMAIN}}
+      BOT_KEY: ${BOT_KEY:-}
     logging: *logging
 
   caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)

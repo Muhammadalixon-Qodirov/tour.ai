@@ -301,6 +301,10 @@ Instagram/Telegramda ko'rgan joyini yuboradi; scraping o'rniga), **tadqiqot nomz
 3. **Qaror** — ishonch ≥ 0.8 va manba ishonchli (Wikidata/OSM) → avtomatik chop etiladi (`trust=public`,
    `source=wikidata`); aks holda admin navbati. Foydalanuvchi taklifi **hech qachon** tekshiruvsiz chiqmaydi;
    tasdiqlangach `trust=community`.
+Crowdsourcing bot (Telegram): `cmd/tgbot` — foydalanuvchi botga joylashuv + nom (+ rasm) yuboradi,
+`POST /internal/suggest` (X-Bot-Key) orqali admin navbatiga tushadi (source=user, hech qachon avto-nashr emas).
+Yoqish: `deploy/.env` da `TELEGRAM_BOT_TOKEN`, `BOT_KEY` va `COMPOSE_PROFILES` ga `tgbot`.
+
 4. Wikidata/OSM joylari "ommaviy import" (`source=osm` filtri ikkalasini oladi): ro'yxatda jamoa tekshirganlardan
    keyin, rejalashtirgichda ×0.75. Rasmlar avtomatik olinmaydi (Commons litsenziyalari har xil).
 

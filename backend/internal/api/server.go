@@ -198,6 +198,7 @@ func (s *Server) Handler() http.Handler {
 	adm("GET /api/v1/admin/analytics/novelty", s.adminNovelty)
 	adm("GET /api/v1/admin/posts", s.adminPosts)
 	// Ichki AI tozalovchi (X-Cleaner-Key; CLEANER_KEY o'rnatilmagan bo'lsa o'chiq)
+	mux.Handle("POST /api/v1/internal/suggest", s.requireBot(s.botSuggest))
 	mux.Handle("GET /api/v1/internal/clean/pending", s.requireCleaner(s.cleanPending))
 	mux.Handle("POST /api/v1/internal/clean/results", s.requireCleaner(s.cleanResults))
 	adm("GET /api/v1/admin/integrations/uzum", s.adminUzumStatus)

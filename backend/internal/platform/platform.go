@@ -38,6 +38,7 @@ type Config struct {
 	UzumBearer      string // Uzum anonim Bearer token (eskiradi; bo'sh — Uzum o'chiq)
 	MarketFetchURL  string // market-fetch yordamchisi (curl, brauzer izi); bo'sh bo'lsa MarketProxy
 	MarketProxy     string // market qidiruvi uchun HTTP proksi (O'zbekistondagi server); bo'sh — to'g'ridan-to'g'ri
+	BotKey          string // Telegram crowdsourcing boti kaliti (bo'sh — /internal/suggest o'chiq)
 	CleanerKey      string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
 	AIModel         string // standart claude-opus-5-5
 	AIEffort        string // low | medium | high (standart low — suhbat tez bo'lsin)
@@ -71,6 +72,7 @@ func LoadConfig() (Config, error) {
 		AnthropicKey:    os.Getenv("ANTHROPIC_API_KEY"),
 		GroqKey:         os.Getenv("GROQ_API_KEY"),
 		CleanerKey:      os.Getenv("CLEANER_KEY"),
+		BotKey:          os.Getenv("BOT_KEY"),
 		LensVisionModel: os.Getenv("LENS_VISION_MODEL"),
 		MarketProxy:     os.Getenv("MARKET_PROXY"),
 		MarketFetchURL:  os.Getenv("MARKET_FETCH_URL"),
