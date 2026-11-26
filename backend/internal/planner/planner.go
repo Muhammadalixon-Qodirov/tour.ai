@@ -441,7 +441,13 @@ func (pl *planner) planDay(d int, group []Candidate) domain.PlanDay {
 	if len(group) == 0 {
 		return day
 	}
-	ordered := nearestOrder(group, group[0].Loc)
+	// Boshlanish nuqtasi (mehmonxona, joylashuv) bo'lsa kun undan eng yaqin joydan boshlanadi; aks holda guruh boshidan
+	// (ilova planner.ts bilan bir xil).
+	from := group[0].Loc
+	if pl.p.Start != nil {
+		from = *pl.p.Start
+	}
+	ordered := nearestOrder(group, from)
 	day.Stops = pl.schedule(ordered, wd)
 	day.Stops = pl.fitBudget(day.Stops, wd)
 	if dayNovel(day) == 0 {

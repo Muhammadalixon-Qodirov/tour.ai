@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/google/uuid"
 
@@ -32,6 +33,8 @@ type tripReq struct {
 	IsResident    *bool          `json:"isResident,omitempty"`   // kirish narxi mahalliy tarifda; yo'q bo'lsa profildan
 	GroupSize     *int           `json:"groupSize,omitempty"`    // taksi shu songa bo'linadi
 	StartLocation *domain.LatLng `json:"startLocation,omitempty"`
+	StartLabel    string         `json:"startLabel,omitempty"` // "Hotel Bibikhanum", "Mening joylashuvim" (≤ 80 belgi)
+	StartKind     string         `json:"startKind,omitempty"`  // stay | location | station | airport | custom
 	Constraints   struct {
 		Wheelchair bool `json:"wheelchair"`
 		WithKids   bool `json:"withKids"`
@@ -40,6 +43,9 @@ type tripReq struct {
 }
 
 const maxTripDays = 7
+
+// startKinds — boshlanish nuqtasi turi (UI matni uchun: "Mehmonxonadan 12 daq piyoda").
+var startKinds = []string{"stay", "location", "station", "airport", "custom"}
 
 // Birinchi kun boshlanishi mumkin bo'lgan oraliq (startTime): 20:00 da kun tugaydi, 18:00 dan keyin joy sig'maydi.
 const (
@@ -100,6 +106,13 @@ func (req *tripReq) validate(now time.Time) (time.Time, fieldErrors) {
 	}
 	if req.StartLocation != nil && !req.StartLocation.Valid() {
 		fe.add("startLocation", "invalid coordinates")
+	}
+	req.StartLabel = strings.Join(strings.Fields(req.StartLabel), " ")
+	if utf8.RuneCountInString(req.StartLabel) > 80 {
+		fe.add("startLabel", "0..80 chars")
+	}
+	if req.StartKind != "" && !slices.Contains(startKinds, req.StartKind) {
+		fe.add("startKind", strings.Join(startKinds, " | "))
 	}
 	if req.BudgetPerDay != nil && (*req.BudgetPerDay < 0 || *req.BudgetPerDay > 100_000_000) {
 		fe.add("budgetPerDay", "0..100000000 (UZS) or null")
@@ -182,6 +195,8 @@ type tripDayDTO struct {
 	Title         string       `json:"title"`
 	Stops         []stopDTO    `json:"stops"`
 	EstimatedCost domain.Money `json:"estimatedCost"` // kishi boshiga: kirish + tushlik + taksi ulushi
+	// StartLeg — boshlanish nuqtasidan (prefs.startLocation) kunning birinchi to'xtashigacha; startLocation yo'q bo'lsa null.
+	StartLeg *domain.Transit `json:"startLeg"`
 }
 
 type stopDTO struct {
@@ -264,7 +279,7 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 	}
 	for _, d := range t.Days {
 		dd := tripDayDTO{Index: d.Index, Date: d.Date.Format(time.DateOnly), Title: i18n.T(lang, "day_title", strconv.Itoa(d.Index+1)),
-			Stops: []stopDTO{}, EstimatedCost: domain.UZS(0)}
+			Stops: []stopDTO{}, EstimatedCost: domain.UZS(0), StartLeg: startLeg(req, d.Stops, byID, city)}
 		for _, st := range d.Stops {
 			sd := stopDTO{ID: st.ID.String(), Kind: st.Kind, ArriveAt: domain.FormatHHMM(st.ArriveMin), DurationMin: st.DurationMin,
 				Reason: reasonText(st, lang), TransitFromPrev: st.Transit, Status: st.Status, Rating: st.Rating}
@@ -297,6 +312,24 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 		out.Summary = i18n.T(lang, "trip_summary", strconv.Itoa(out.Totals.Places), strconv.Itoa(out.Totals.NewPlaces))
 	}
 	return out, nil
+}
+
+// startLeg — boshlanish nuqtasidan birinchi to'xtashgacha. Rejalashtirgich birinchi to'xtashning transitFromPrev iga
+// aynan shu yo'lni yozadi (kun boshlanish nuqtasidan boshlanadi); u bo'lmasa (eski yozuv) qayta hisoblanadi.
+func startLeg(req tripReq, stops []store.Stop, byID map[string]planner.Candidate, city store.City) *domain.Transit {
+	if req.StartLocation == nil || len(stops) == 0 {
+		return nil
+	}
+	if tr := stops[0].Transit; tr != nil {
+		x := *tr
+		return &x
+	}
+	c, ok := byID[stops[0].PlaceID]
+	if !ok {
+		return nil
+	}
+	tr := planner.TransitBetween(*req.StartLocation, c.Loc, plannerCity(city, 0))
+	return &tr
 }
 
 func round2(f float64) float64 { return float64(int(f*100+0.5)) / 100 }
