@@ -78,13 +78,13 @@ func TestLensPrice(t *testing.T) {
 	g.BaseURL = groq.URL
 	fake := func(id string, ls ...pricing.Listing) pricing.Market {
 		return pricing.Market{ID: id, Name: strings.ToUpper(id), SearchURL: func(q string) string { return "https://" + id + "/?q=" + q },
-			Fetch: func(ctx context.Context, hc *http.Client, q string) ([]pricing.Listing, error) { return ls, nil }}
+			Fetch: func(ctx context.Context, g pricing.Getter, q string) ([]pricing.Listing, error) { return ls, nil }}
 	}
 	broken := pricing.Market{ID: "down", Name: "DOWN", SearchURL: func(string) string { return "" },
-		Fetch: func(context.Context, *http.Client, string) ([]pricing.Listing, error) {
+		Fetch: func(context.Context, pricing.Getter, string) ([]pricing.Listing, error) {
 			return nil, fmt.Errorf("timeout")
 		}}
-	sr := pricing.NewSearcher()
+	sr := pricing.NewSearcher("", "")
 	sr.Markets = []pricing.Market{
 		fake("m1", pricing.Listing{Market: "m1", Title: "iPhone 13 128GB", Price: 7_000_000}, pricing.Listing{Market: "m1", Title: "iPhone 13 128 Midnight", Price: 7_400_000},
 			pricing.Listing{Market: "m1", Title: "iPhone 13 chexol", Price: 50_000}),
@@ -189,9 +189,9 @@ func TestLensLandmark(t *testing.T) {
 	g.BaseURL = srv.URL
 	oldL, oldM := testAPI.lens, testAPI.markets
 	testAPI.lens = g
-	sr := pricing.NewSearcher()
+	sr := pricing.NewSearcher("", "")
 	sr.Markets = []pricing.Market{{ID: "m1", Name: "M1", SearchURL: func(q string) string { return "https://m1/?q=" + q },
-		Fetch: func(context.Context, *http.Client, string) ([]pricing.Listing, error) {
+		Fetch: func(context.Context, pricing.Getter, string) ([]pricing.Listing, error) {
 			return []pricing.Listing{{Market: "m1", Title: "Do'ppi", Price: 150_000}}, nil
 		}}}
 	testAPI.markets = sr
