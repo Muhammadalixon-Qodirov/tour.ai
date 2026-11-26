@@ -23,7 +23,7 @@ func (n Novelty) IsNovel() bool { return n == NoveltyNew || n == NoveltyHidden }
 var Interests = []string{"history", "food", "nature", "craft", "art", "architecture", "shopping", "nightlife"}
 
 var Categories = []string{"monument", "museum", "mosque", "bazaar", "workshop", "gallery",
-	"restaurant", "cafe", "park", "viewpoint", "ecovillage", "theatre"}
+	"restaurant", "cafe", "park", "viewpoint", "ecovillage", "theatre", "hotel"}
 
 func ValidInterest(s string) bool { return slices.Contains(Interests, s) }
 func ValidCategory(s string) bool { return slices.Contains(Categories, s) }
@@ -33,6 +33,9 @@ func IsMealCategory(c string) bool { return c == "restaurant" || c == "cafe" }
 
 // IsOutdoorCategory — ob-havoga sezgir joylar.
 func IsOutdoorCategory(c string) bool { return c == "park" || c == "viewpoint" || c == "ecovillage" }
+
+// IsLodging — tunab qolish joyi (mehmonxona). Marshrutda diqqatga sazovor joy emas, joylashish.
+func IsLodging(c string) bool { return c == "hotel" }
 
 // CategoryInterests — kategoriya qaysi qiziqishlarga tabiiy mos keladi.
 var CategoryInterests = map[string][]string{
@@ -48,6 +51,7 @@ var CategoryInterests = map[string][]string{
 	"viewpoint":  {"nature", "architecture"},
 	"ecovillage": {"nature", "craft", "food"},
 	"theatre":    {"art", "nightlife"},
+	"hotel":      {}, // mehmonxona qiziqishga bog'lanmaydi (joylashish turi)
 }
 
 type LatLng struct {

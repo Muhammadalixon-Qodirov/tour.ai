@@ -54,6 +54,11 @@ var osmRules = []struct {
 	{"tourism", "theme_park", "park", 0.85},
 	{"tourism", "artwork", "monument", 0.6},
 	{"tourism", "attraction", "monument", 0.5},
+	{"tourism", "hotel", "hotel", 0.95},
+	{"tourism", "hostel", "hotel", 0.9},
+	{"tourism", "guest_house", "hotel", 0.9},
+	{"tourism", "motel", "hotel", 0.85},
+	{"tourism", "apartment", "hotel", 0.7},
 	{"amenity", "restaurant", "restaurant", 0.95},
 	{"amenity", "cafe", "cafe", 0.95},
 	{"amenity", "fast_food", "cafe", 0.7},
@@ -153,6 +158,7 @@ var keywords = []struct {
 	{"park", []string{"bog'", "bogi", "park", "парк", "сад", "garden", "xiyobon", "хиёбон", "bulvar", "бульвар", "сквер"}},
 	{"viewpoint", []string{"tepalik", "смотров", "viewpoint", "manzara", "обзор", "panorama", "панорам", "tower"}},
 	{"ecovillage", []string{"eko qishloq", "ekoqishloq", "eco village", "ecovillage", "eco lodge", "эко дерев", "экодерев", "agroturizm", "агротур", "yurt", "юрт", "o'tov", "glamping", "кемпинг", "camping", "dacha", "qishloq turizm"}},
+	{"hotel", []string{"mehmonxona", "mehmonxonasi", "гостиниц", "hotel", "отель", "hostel", "хостел", "guest house", "guesthouse", "mehmon uyi", "pansionat", "пансионат"}},
 }
 
 // norm — kichik harf, apostroflar (' ʻ ʼ `) olib tashlanadi, ortiqcha bo'shliq bitta.
@@ -375,4 +381,5 @@ var CategoryLabel = map[string]map[string]string{
 	"viewpoint":  {"uz": "Manzara nuqtasi", "ru": "Смотровая площадка", "en": "Viewpoint"},
 	"ecovillage": {"uz": "Eko-qishloq", "ru": "Эко-деревня", "en": "Eco-village"},
 	"theatre":    {"uz": "Teatr", "ru": "Театр", "en": "Theatre"},
+	"hotel":      {"uz": "Mehmonxona", "ru": "Гостиница", "en": "Hotel"},
 }
