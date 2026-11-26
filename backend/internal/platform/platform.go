@@ -35,6 +35,7 @@ type Config struct {
 	LensVisionModel string // "Adolatli narx" rasm tanish modeli (Groq; standart qwen/qwen3.8-27b)
 	STTKotibURL     string // serverdagi Kotib STT (stt-kotib), masalan http://stt-kotib:8000
 	STTRelaySocket  string // stt-relay unix-socket (serverdagi o'zbekcha Kotib STT); bo'sh — faqat Groq Whisper
+	UzumBearer      string // Uzum anonim Bearer token (eskiradi; bo'sh — Uzum o'chiq)
 	MarketFetchURL  string // market-fetch yordamchisi (curl, brauzer izi); bo'sh bo'lsa MarketProxy
 	MarketProxy     string // market qidiruvi uchun HTTP proksi (O'zbekistondagi server); bo'sh — to'g'ridan-to'g'ri
 	CleanerKey      string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
@@ -73,6 +74,7 @@ func LoadConfig() (Config, error) {
 		LensVisionModel: os.Getenv("LENS_VISION_MODEL"),
 		MarketProxy:     os.Getenv("MARKET_PROXY"),
 		MarketFetchURL:  os.Getenv("MARKET_FETCH_URL"),
+		UzumBearer:      os.Getenv("UZUM_BEARER"),
 		STTRelaySocket:  os.Getenv("STT_RELAY_SOCKET"),
 		STTKotibURL:     os.Getenv("STT_KOTIB_URL"),
 		AIModel:         os.Getenv("AI_MODEL"),

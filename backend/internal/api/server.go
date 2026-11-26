@@ -10,6 +10,7 @@ import (
 	"net"
 	"net/http"
 	"net/netip"
+	"os"
 	"runtime/debug"
 	"slices"
 	"strings"
@@ -66,6 +67,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
 	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
 	s.markets = pricing.NewSearcher(cfg.MarketProxy, cfg.MarketFetchURL)
+	pricing.SetUzum(cfg.UzumBearer, os.Getenv("UZUM_CLIENT_NAME"), os.Getenv("UZUM_CLIENT_VERSION"))
 	s.stt = speech.New(cfg.STTRelaySocket, cfg.STTKotibURL, cfg.GroqKey)
 	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
 	if s.ai != nil {

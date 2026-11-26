@@ -45,6 +45,8 @@ services:
       LENS_VISION_MODEL: ${LENS_VISION_MODEL:-}
       MARKET_PROXY: ${MARKET_PROXY:-}
       MARKET_FETCH_URL: ${MARKET_FETCH_URL:-}
+      # Uzum anonim Bearer token (brauzer DevTools dan; ~12 soatda eskiradi). Bo'sh — Uzum o'chiq.
+      UZUM_BEARER: ${UZUM_BEARER:-}
       STT_RELAY_SOCKET: ${STT_RELAY_SOCKET:-}
       STT_KOTIB_URL: ${STT_KOTIB_URL:-}
       AI_MODEL: ${AI_MODEL:-}
