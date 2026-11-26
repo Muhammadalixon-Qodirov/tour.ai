@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -230,5 +231,31 @@ func TestTripEditingAndOwnership(t *testing.T) {
 	other := newClient(t, "other-device-0001")
 	if code := other.do("GET", "/api/v1/trips/"+tr.ID, nil, &e); code != 404 {
 		t.Fatalf("boshqa foydalanuvchi marshrutni ko'rdi: %d", code)
+	}
+}
+
+func TestCORS(t *testing.T) {
+	origin := "https://safar-wine.vercel.app"
+	testAPI.cfg.CORSOrigins = []string{origin}
+	defer func() { testAPI.cfg.CORSOrigins = nil }()
+	req, _ := http.NewRequest("OPTIONS", testSrv.URL+"/api/v1/trips", nil)
+	req.Header.Set("Origin", origin)
+	req.Header.Set("Access-Control-Request-Method", "POST")
+	req.Header.Set("Access-Control-Request-Headers", "authorization, content-type")
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	resp.Body.Close()
+	if resp.StatusCode != 204 || resp.Header.Get("Access-Control-Allow-Origin") != origin ||
+		!strings.Contains(resp.Header.Get("Access-Control-Allow-Headers"), "Authorization") {
+		t.Fatalf("preflight: %d %v", resp.StatusCode, resp.Header)
+	}
+	req, _ = http.NewRequest("GET", testSrv.URL+"/api/v1/cities", nil)
+	req.Header.Set("Origin", "https://evil.example")
+	resp, _ = http.DefaultClient.Do(req)
+	resp.Body.Close()
+	if resp.Header.Get("Access-Control-Allow-Origin") != "" {
+		t.Fatal("ruxsatsiz origin ga CORS berildi")
 	}
 }
