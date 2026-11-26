@@ -3,6 +3,8 @@
 #   curl -fsSL https://raw.githubusercontent.com/Muhammadalixon-Qodirov/tour.ai/main/deploy/setup.sh | bash
 #   yoki: bash /opt/yoldosh/deploy/setup.sh [--firewall]
 set -euo pipefail
+# .env ni bash bilan "source" qilmaymiz (qiymatlarda <, ', probel bo'lishi mumkin) — faqat o'qiymiz.
+envget() { grep -E "^$1=" "${2:-.env}" | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
 REPO=https://github.com/Muhammadalixon-Qodirov/tour.ai.git
 DIR=/opt/yoldosh
 FIREWALL=${1:-}
@@ -49,7 +51,7 @@ EXPO_ACCESS_TOKEN=
 ENV
   chmod 600 .env
 fi
-set -a; . ./.env; set +a
+SERVER_IP=$(envget SERVER_IP); DOMAIN=$(envget DOMAIN); API_PORT=$(envget API_PORT)
 
 if [ "$FIREWALL" = "--firewall" ]; then
   log "UFW: SSH, 80, 443"
