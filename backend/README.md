@@ -39,7 +39,7 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 
 | Guruh | Endpoint |
 |---|---|
-| Sessiya | `POST /auth/device` (anonim), `GET /me`, `PATCH /me` (`lang, displayName, interests, companion, pace, budget, isResident`), `DELETE /me` (hisobni o'chirish) |
+| Sessiya | `POST /auth/device` (anonim), `GET /me`, `PATCH /me` (`lang, displayName, interests, companion, pace, budget, isResident, analyticsOptOut`), `DELETE /me` (hisobni o'chirish) |
 | Kirish | `POST /auth/email/start` `{email}` → 6 xonali kod emailga · `POST /auth/email/verify` `{email, code, deviceId?}` · `POST /auth/google` `{idToken, deviceId?}` · `POST /auth/refresh` `{refreshToken}` · `POST /auth/logout` `{refreshToken}` · `POST /auth/logout-all` |
 | Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}` (`hoursNote, entryFee{local,foreigner,note,source}, feeNote, crowd{level,bestTime}, rules[].source, images[].credit/license/sourceUrl`, `nearbyPrices`), `GET /places/{id}/reviews` |
 | Narx | `GET /prices?city=&category=&q=` → `PriceItem[]`, `POST /prices/reports` (token ixtiyoriy) `{priceItemId?, cityId?, name?, category?, paid: {amount}, buyer?, location?}` → `201 {id, status: approved\|pending, priceItem?}` |
@@ -56,6 +56,11 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
 | Lenta | `GET /feed?city=`, `GET /posts/{id}`, `POST·DELETE /posts/{id}/like`, `POST /posts/{id}/report`, `DELETE /posts/{id}`; ochiq: `GET /s/{slug}` (HTML + OpenGraph), `GET /s/{slug}/card.png`; admin: `GET /admin/posts?status=reported`, `POST /admin/posts/{id}/hide·restore` |
 | Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30`, `POST·PATCH·DELETE /admin/services[/{id}]` |
+| Hamkor takliflari | `GET /offers?slot=&city=&from=&to=&date=&days=&resident=&trip=` → 0 yoki 1 ta `Offer` · `POST /offers/{id}/impressions` `{count?}` · `GET /r/{clickId}` (bosish → hamkorga 302, sub-id bilan) · hamkor: `POST /partners/conversions`, `GET /partner/me/stats`, `POST /partner/codes/redeem` (`X-Partner-Key` yoki `partner` roli) |
+| Yo'l va safar | `GET /routes/intercity?from=&to=` · `PATCH /trips/{id}` `{arrival?, prep?}` (yo'l narxi `totals.estimatedCost` va `totals.arrivalCost` da) |
+| Lens Story | `POST /stories` `{placeId, location?}` · `POST /stories/{shareId}/shared` → `{code?, reason?}` · `GET /me/codes[?include=all]` · `GET /s/p/{placeId}?ref=` (`/api/v1` ostida) |
+| Insights | `GET /insights/summary`, `GET /insights/export?format=csv` (`insights` roli, hudud bilan; K = 50) · `PATCH /me {analyticsOptOut}` |
+| Admin (daromad) | faqat `admin`: `GET·POST·PATCH /admin/partners[/{id}]`, `GET·POST·DELETE /admin/partners/{id}/keys[/{keyId}]`, `GET·POST·PATCH /admin/offers[/{id}]`, `PUT /admin/users/{id\|email}/role` |
 | Xizmat | `GET /healthz`, `GET /static/places/{file}.jpg` (katalog rasmlari, binar ichida), `GET /static/ph/{category\|city\|event\|stay}.svg` (rasm yo'q bo'lsa), `GET /uploads/{file}` (yuklangan rasmlar) |
 
 Til: `Accept-Language: uz | ru | en` (yo'q bo'lsa `en`; matn topilmasa `en` → `uz`).
@@ -124,6 +129,21 @@ make seed        # idempotent: qayta yuklaydi
   `ALIASES`, `LUNCH`, `FRIDAY_PRAYER` jadvallarida.
 - `seed/sos_*.json` dagi shifoxona, dorixona va h.k. **o'ylab topilgan demo** (pastda). Shaharda OSM xizmatlari
   bo'lsa (`osm-import` dan keyin) seed demo xizmatlarni qayta qo'shmaydi.
+
+## Daromad funksiyalari
+
+To'liq kelishuv: frontend repo `docs/MONETIZATION.md`, shakllar: [../API_CONTRACT.md](../API_CONTRACT.md) §10.
+
+- `seed/monetization.json` — namuna hamkorlar (`sample: true`, UI "Namuna hamkor"), takliflar va shaharlararo yo'nalishlar.
+  Yo'nalish raqamlari sayt (`web/src/lib/monetization/intercity.ts`) bilan aynan bir xil, manba va sana bilan; mashina va
+  Toshkent orqali qatorlar `internal/seed/monetization.go` da shu formula bilan hisoblanadi. Seed idempotent
+  (yo'nalishlar to'liq qayta yoziladi, hamkor va takliflar id bo'yicha yangilanadi).
+- Taklif tanlash: slot, shahar, yo'nalish, transport turi (eng tez = samolyot yoki Afrosiyob, qaysi tezroq), sana oynasi,
+  kunlar, rezidentlik. Bir nechta mos kelsa eng yuqori `priority` dan biri kontekst bo'yicha barqaror aylantiriladi.
+- Bosish: `clickId` HMAC bilan imzolangan (`TOKEN_SECRET` dan), bazaga faqat bosilganda yoziladi; IP saqlanmaydi.
+  Hamkor sotuvni `clickId` = redirectdagi `sub_id` bilan xabar qiladi.
+- Hamkor kaliti `spk_...`, bazada sha256 xeshi; admin `POST /admin/partners/{id}/keys` bilan beradi (bir marta ko'rinadi).
+- Insights: K = 50 dan kichik har kesim `null` + `reason: "below_k"`; `analyticsOptOut` foydalanuvchilar safarlari kirmaydi.
 
 ## Admin: joy hayot sikli
 

@@ -28,6 +28,8 @@ services:
       DATABASE_URL: postgres://yoldosh:${DB_PASSWORD}@db:5432/yoldosh?sslmode=disable
       TOKEN_SECRET: ${TOKEN_SECRET:?TOKEN_SECRET kerak}
       PUBLIC_BASE_URL: https://${DOMAIN}
+      # Sayt: story havolasi (/s/p/...), kod QR matni, joy sahifasi va namuna hamkor sahifasiga yo'naltirish
+      WEB_BASE_URL: ${WEB_BASE_URL:-https://safar.e-investment.uz}
       CORS_ORIGINS: ${CORS_ORIGINS:-}
       EXPO_PUSH_ENABLED: ${EXPO_PUSH_ENABLED:-false}
       EXPO_ACCESS_TOKEN: ${EXPO_ACCESS_TOKEN:-}

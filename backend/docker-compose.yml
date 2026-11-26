@@ -16,6 +16,7 @@ services:
       DATABASE_URL: postgres://yoldosh:yoldosh@db:5432/yoldosh?sslmode=disable
       TOKEN_SECRET: ${TOKEN_SECRET}
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      WEB_BASE_URL: ${WEB_BASE_URL:-http://localhost:3000}
       CORS_ORIGINS: ${CORS_ORIGINS:-}
     depends_on: { db: { condition: service_healthy } }
     ports: ["8080:8080"]

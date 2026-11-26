@@ -153,6 +153,8 @@ type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinat
   "id": "u_...", "lang": "uz",
   "interests": ["history", "food"], "companion": "couple", "pace": "balanced", "budget": 2,
   "isResident": true, // O'zbekiston rezidenti: kirish narxi mahalliy tarifda; null = aytilmagan. PATCH /me da ham
+  "analyticsOptOut": false, // true: safarlari Safar Insights statistikasiga kirmaydi. PATCH /me { analyticsOptOut } (§10)
+  "role": "tourist",        // tourist | partner | insights (admin beradi, §10); partner bo'lsa "partnerId" ham
   "stats": { "placesVisited": 7, "newPlacesVisited": 3, "points": 240 },
   "badges": [{ "code": "bukhara_explorer", "title": "Buxoro kashfiyotchisi", "earnedAt": "..." }]
 }
@@ -301,6 +303,7 @@ ko'pchilik "ha" degan joy ball oladi (+4 × ulush), ko'pchilik "yo'q" degani chi
 | `POST /trips/{id}/stops/{stopId}/swap` | shunga o'xshash boshqa joy taklifi → `{ alternatives: PlaceSummary[] }` (o'zgartirmaydi) |
 | `PATCH /trips/{id}/stops/{stopId}` | `{ status?, rating?: 1–5 }` yoki `{ placeId }` (joyni almashtirish: o'rin va stop `id` saqlanadi, holat `upcoming`) → `Trip`. `rating` `visits` ga ham yoziladi (joy reytingi shundan). Band joy → `409 place_already_in_trip` |
 | `POST /trips/{id}/stops/{stopId}/move` | `{ dayIndex?, position? }` — boshqa kunga yoki kun ichida `position` ga (0 dan; yo'q = oxiriga); yoki `{ step: -1 \| 1 }` — bir pog'ona yuqoriga/pastga (chetda bo'lsa `400`). Boshqa kunga ko'chgan to'xtash `upcoming` bo'ladi. Ikkala kun vaqtlari qayta hisoblanadi → `Trip` |
+| `PATCH /trips/{id}` | `{ arrival?: Arrival \| null, prep?: PrepState \| null }` — "Qanday borasiz?" va "Safarga tayyorgarlik" (§10.3). `null` tozalaydi, `prep` to'liq almashtiriladi → `Trip` |
 | `POST /trips/{id}/replan` | `{ reason: "late" \| "tired" \| "weather" \| "free_time", minutes?: number, location?: LatLng }` → yangilangan `Trip` + `changes: string[]` |
 | `POST /visits` | `{ placeId, tripId?, rating?: 1–5, comment? }` → `{ pointsEarned, badge? }` |
 
@@ -431,3 +434,96 @@ type PriceItem = {
 - **Oflayn:** `GET /cities/{id}/offline-pack` → shahar bo'yicha bitta JSON (joylar, qoidalar, geofence, narxlar) + rasm URL ro'yxati; `ETag` bilan.
 - **Mock:** frontend `EXPO_PUBLIC_API_URL` bo'sh bo'lsa mock rejimda ishlaydi — shu kontraktdagi shakllar bilan aynan bir xil.
 - **Versiya:** buzuvchi o'zgarish = `/api/v2`. Yangi ixtiyoriy maydon qo'shish buzuvchi emas.
+
+---
+
+## 10. Daromad funksiyalari (to'liq kelishuv: frontend repo `docs/MONETIZATION.md`)
+
+Qat'iy qoidalar: hamkor doim `partner` + `sample` bilan qaytadi (UI "Hamkor" / "Namuna hamkor" deb yozadi), taklif ixtiyoriy va
+faqat tanlovga mos kelganda chiqadi (har slotga 0 yoki 1 ta), statistika anonim, `K = 50` dan kichik kesim ko'rsatilmaydi,
+foydalanuvchi statistikadan chiqa oladi. Demo hamkorlar va takliflar `sample: true` (seed: `seed/monetization.json`).
+
+### 10.1 Takliflar va bosishlar
+
+```ts
+type OfferSlot = "transport.cheapest" | "transport.fastest" | "transport.comfort" | "transport.bus"
+  | "stay" | "food" | "event" | "prep.esim" | "prep.insurance" | "prep.sim";
+type Offer = { id; partner: { id; name; logo? }; slot; title; body?; cta; url /* {PUBLIC_BASE_URL}/r/{clickId} */; priceFrom?: Money; sample: boolean };
+```
+
+| Endpoint | Tavsif |
+|---|---|
+| `GET /offers?slot=&city=&from=&to=&date=&days=&resident=&trip=` | token ixtiyoriy → `Offer[]` (0 yoki 1). `transport.*`: `to` bo'lmasa `city`; `from`/`to` bo'yicha tanlangan variantning transport turi aniqlanadi (cheapest = poyezd, fastest = samolyot yoki Afrosiyob, qaysi tezroq, comfort = mashina, bus = avtobus) va faqat shu turdagi hamkor chiqadi; yo'nalish noma'lum bo'lsa `[]`. `date` standart bugun, `days` 1–60 (standart 1), `resident` standart `false`. `title`/`cta` dagi `{d}` = `days`; kunlik narx (sug'urta) `days` ga ko'paytiriladi. Bir nechta mos kelsa eng yuqori `priority` dan biri kontekst (slot, shahar, yo'nalish, sana) bo'yicha barqaror aylantiriladi. `trip` — bosishni safarga bog'lash uchun |
+| `POST /offers/{id}/impressions` | `{ count?: 1–50 }` (tana bo'sh yoki `{}` = 1) → `204`. Anonim kunlik yig'ma, daqiqasiga 60 ta. Yo'q taklif `404 offer_not_found` |
+| `GET /r/{clickId}` (ildizda, `/api/v1/r/...` ham) | `clickId` imzolangan (HMAC): taklif, foydalanuvchi, safar, vaqt; 30 kun amal qiladi. Bosish yoziladi va hamkor havolasiga `302` (`{subId}` o'rniga yoki `sub_id=` bilan, `utm_source=safar`). Namuna yoki havolasiz taklif → `{WEB_BASE_URL}/{lang}/partner?sample=1&offer={id}`; buzilgan/eskirgan → `{WEB_BASE_URL}/{lang}` |
+| `POST /partners/conversions` (faqat hamkor kaliti) | `{ clickId /* sub_id */, amount, currency?: "UZS", externalId }` → `201`; shu `externalId` qayta kelsa `200 { …, duplicate: true }` (ikki marta sanalmaydi). Boshqa hamkorning bosishi `404 click_not_found` |
+| `GET /partner/me/stats?from=&to=` (kalit yoki `partner` roli) | standart oxirgi 30 kun, eng ko'pi 366 → `{ partner: { id, name, sample }, from, to, impressions, clicks, conversions, amount: Money /* UZS */, amounts: Money[], codesIssued, codesRedeemed, months: [{ month: "YYYY-MM", …shu maydonlar }], offers: [{ offerId, … }] }` |
+
+**Hamkor autentifikatsiyasi:** `X-Partner-Key: spk_...` yoki `Authorization: Bearer spk_...` (kalit bazada faqat sha256 xeshi),
+yoki `partner` rolidagi foydalanuvchi tokeni (hamkor kabineti). Hamkor yoki kalit o'chirilsa `401`.
+
+### 10.2 Shaharlararo yo'nalishlar
+
+`GET /routes/intercity?from=&to=` → `IntercityRoute[]` (shu tartibda; bir xil shahar yoki noma'lum juft `[]`):
+
+```ts
+type IntercityRoute = { mode: "train" | "afrosiyob" | "plane" | "car" | "bus"; durationMin: number;
+  priceFrom?: Money /* kishi boshiga; car — mashina uchun; manba narx bermasa yo'q */; source: string; sourceUrl?: string;
+  updatedAt: "YYYY-MM-DD"; estimate?: true /* Safar hisobi, e'lon qilingan raqam emas */; via?: "tashkent" };
+```
+
+Raqamlar sayt `web/src/lib/monetization/intercity.ts` bilan aynan bir xil (manba va sana bilan); mashina: yo'l masofasi,
+~75 km/soat, ~1 200 so'm/km; to'g'ridan-to'g'ri yo'nalish bo'lmasa Toshkent orqali (vaqtlar + 60 daqiqa, narx ikkala bo'lak ma'lum bo'lsa).
+
+### 10.3 Safar: `arrival` va `prep`
+
+`Trip` ga qo'shiladi: `arrival: { from, mode, choice?: "cheapest" | "fastest" | "comfort" | "bus", priceFrom?: number } | null`,
+`prep: { [route | transport | esim | sim | insurance | currency]: "done" | "skipped" }` (bo'sh = `{}`).
+Yo'l narxi (bir tomonga, kishi boshiga; mashina `groupSize` yoki `companion` bo'yicha odamlar soniga bo'linib 1 000 so'mgacha
+yaxlitlanadi) `totals.estimatedCost` ga qo'shiladi va alohida `totals.arrivalCost` da. Narx serverdagi yo'nalishdan olinadi;
+`arrival.priceFrom` — mijozning oflayn nusxasi, saqlanadi va qaytadi. `from` safar shahri bo'lsa yoki bu juftda shunday transport bo'lmasa `400`.
+
+### 10.4 Lens Story va chegirma kodlari
+
+| Endpoint | Tavsif |
+|---|---|
+| `POST /stories` | `{ placeId, location?: LatLng }` → `201 { shareId, shareUrl }`; `shareUrl = {WEB_BASE_URL}/s/p/{placeId}?ref={shareId}`. Joylashuv ~10 m gacha yaxlitlanadi |
+| `POST /stories/{shareId}/shared` | tana ixtiyoriy `{ location? }` → `{ code?: DiscountCode, reason?: "not_on_site" \| "no_partner" \| "recent" }`. Joyda = joylashuv joydan 300 m ichida yoki bugungi marshrutda shu joy `current`/`visited`. Joydan 1.5 km ichida story hamkori bo'lishi kerak. Bir hamkor bir foydalanuvchiga 7 kunda 1 ta kod (`recent` — o'sha kod qaytadi), kod 7 kun amal qiladi. Boshqaning story si `404 story_not_found` |
+| `GET /me/codes` | amaldagi kodlar (ishlatilmagan, muddati o'tmagan); `?include=all` — oxirgi 30 kundagi hammasi (`usedAt` bilan) |
+| `POST /partner/codes/redeem` (kalit yoki `partner` roli) | `{ value }` (yozilgan kod, QR matni, kichik harf yoki bo'sh joy bilan ham) → `{ status: "ok" \| "used" \| "expired" \| "not_found", discountPct?, partner?, sample? }`. Hamkor faqat o'z kodini ko'radi, boshqasiniki `not_found` |
+| `GET /api/v1/s/p/{placeId}?ref=` | story havolasi hisobi: `ref` sanaladi va `{WEB_BASE_URL}/{lang}/places/{placeId}?ref=` ga `302` (sayt `/s/p/...` shu yerga so'raydi). Ildizdagi `/s/p/` yo'q: `/s/{slug}/card.png` bilan to'qnashadi |
+
+```ts
+type DiscountCode = { id; value: "SF-XXXX-XXXX"; partner: { id; name }; discountPct; expiresAt; qrPayload /* {WEB_BASE_URL}/c/{value} */;
+  placeId?; issuedAt; usedAt?; sample };
+```
+
+### 10.5 Safar Insights (`role: insights`, hududlar bilan cheklangan)
+
+| Endpoint | Tavsif |
+|---|---|
+| `GET /insights/summary?region=&from=&to=` | `region` — ruxsat etilgan shahar (bittasi bo'lsa ixtiyoriy; boshqasi `403 insights_region_forbidden`); standart oxirgi 30 kun, eng ko'pi 366 |
+| `GET /insights/export?region=&from=&to=&format=csv` | saytdagi `toCsv` bilan bir xil qatorlar (`section,key,label,count,share`), yashirilgan katak bo'sh |
+
+```ts
+type Share = { key; count: number | null; share: number | null; reason?: "below_k"; label?: string /* joy nomi */ };
+type InsightsSummary = { region; from; to; k: 50; sample: false; trips; tripsPrev; change /* 0.12 = +12 % */;
+  avgBudgetPerPerson /* so'm, kishi boshiga kuniga */; avgDays; topPlaces: Share[] /* 8 tagacha */; transport: Share[];
+  companion: Share[]; interests: Share[] /* 6 tagacha */; residency: Share[];
+  gapNoStay: { plans; share; cheapestStay; reason? }; withheld: { [field]: "below_k" } };
+```
+
+Manba: `status = ready` safarlar, `start_date` oralig'ida; `analyticsOptOut = true` foydalanuvchilarniki kirmaydi (anonim
+qurilmalar ham sanaladi). Faqat shahar, sana, kunlar, odamlar, `budgetPerDay`, qiziqishlar, `companion`, `isResident`,
+`arrival.mode` va rejadagi joylar o'qiladi. Har kesim: jami yoki kesim `< 50` bo'lsa `null` + `reason: "below_k"`.
+"Talab bor, taklif yo'q": 2+ kunlik byudjetli rejalar, eng arzon turar joy (2 kishilik, odam soniga 2 tagacha bo'linadi)
+kunlik byudjetning 40% iga sig'maydi; bunday rejalar `0 < n < 50` bo'lsa `plans` ham `share` ham `null`.
+
+### 10.6 Admin (faqat `role: admin`, moderator `403`)
+
+| Endpoint | Tavsif |
+|---|---|
+| `GET /admin/partners` · `POST /admin/partners` · `PATCH /admin/partners/{id}` | `{ id?, name, cityId?, location?, discountPct? /* story chegirmasi, location bilan */, website?, active, sample }` |
+| `GET` · `POST /admin/partners/{id}/keys` · `DELETE /admin/partners/{id}/keys/{keyId}` | API kaliti: `POST` → `201 { id, key /* faqat shu javobda */, prefix, createdAt }` |
+| `GET /admin/offers?partner=` · `POST /admin/offers` · `PATCH /admin/offers/{id}` | `{ id?, partnerId, slot, cityId?, routeFrom?, routeTo?, mode?, validFrom?, validTo?, daysMin?, daysMax?, resident?, title, body?, cta /* {uz,ru,en} */, priceFrom?, priceUnit: "trip" \| "day", linkTemplate? /* {subId} {offerId} */, priority, active, sample }`. Jonli (sample emas) taklifga `linkTemplate` majburiy. `PATCH` da `null` maydonni tozalaydi |
+| `PUT /admin/users/{id \| email}/role` | `{ role: "tourist" \| "partner" \| "insights", partnerId?, regions?: string[] }` |

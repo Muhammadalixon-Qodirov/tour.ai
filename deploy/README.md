@@ -54,6 +54,12 @@ katalogda yo'q eski seed joylari `draft` ga o'tadi; OSM xizmatlari bor shaharga 
 cd /opt/yoldosh/deploy && docker compose run --rm --entrypoint /app/bin/seed api /app/seed
 ```
 
+Daromad funksiyalari (`0010_monetization.sql`): migratsiya API ishga tushganda qo'llanadi; namuna hamkorlar, takliflar va
+shaharlararo yo'nalishlar `seed/monetization.json` dan yuqoridagi seed buyrug'i bilan yuklanadi. Yangi o'zgaruvchi
+`WEB_BASE_URL` (standart `https://safar.e-investment.uz`): story havolasi, kod QR matni va saytga yo'naltirishlar shu manzilda.
+Bosish havolalari `https://<DOMAIN>/r/{clickId}` (API domenida, nginx hammasini API ga uzatadi).
+Haqiqiy hamkor, kalit va rollar admin API orqali (faqat `admin` roli): `API_CONTRACT.md` §10.6.
+
 `.env` da `TRUSTED_PROXIES=127.0.0.1,172.16.0.0/12,<sayt serveri IP>` bo'lsin: aks holda sayt proksisi orqali kelgan
 hamma foydalanuvchi IP limitlarida bitta mijoz hisoblanadi.
 
