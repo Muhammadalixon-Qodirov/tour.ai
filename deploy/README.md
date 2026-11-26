@@ -54,6 +54,9 @@ katalogda yo'q eski seed joylari `draft` ga o'tadi; OSM xizmatlari bor shaharga 
 cd /opt/yoldosh/deploy && docker compose run --rm --entrypoint /app/bin/seed api /app/seed
 ```
 
+Shahar muqovalari (`0014_city_covers.sql`): rasmlar binar ichida (`backend/static/cities`, `/static/cities/{id}.jpg`), muallif va litsenziya
+`seed/city_covers.json` da; yuqoridagi seed buyrug'i ularni yozadi (OSM importi ustiga yozmaydi).
+
 Daromad funksiyalari (`0010_monetization.sql`): migratsiya API ishga tushganda qo'llanadi; namuna hamkorlar, takliflar va
 shaharlararo yo'nalishlar `seed/monetization.json` dan yuqoridagi seed buyrug'i bilan yuklanadi. Yangi o'zgaruvchi
 `WEB_BASE_URL` (standart `https://safar.e-investment.uz`): story havolasi, kod QR matni va saytga yo'naltirishlar shu manzilda.

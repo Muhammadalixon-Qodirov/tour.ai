@@ -19,6 +19,7 @@ import (
 	"yoldosh/internal/platform"
 	"yoldosh/internal/seed"
 	"yoldosh/internal/store"
+	"yoldosh/static"
 )
 
 var (
@@ -59,6 +60,7 @@ func TestMain(m *testing.M) {
 	srv := NewServer(cfg, store.New(db))
 	srv.now = func() time.Time { return time.Date(2026, 11, 25, 10, 0, 0, 0, time.UTC) }
 	srv.weather = &fakeWeather{}
+	srv.SetCityImages(static.Cities())
 	testAPI = srv
 	testSrv = httptest.NewServer(srv.Handler())
 	code := m.Run()
@@ -120,6 +122,19 @@ func TestCitiesAndLanguages(t *testing.T) {
 		var cities []cityDTO
 		if code := c.do("GET", "/api/v1/cities", nil, &cities); code != 200 || len(cities) != 4 {
 			t.Fatalf("%s: code=%d len=%d", lang, code, len(cities))
+		}
+		for _, city := range cities { // muqova seed/city_covers.json dan: haqiqiy surat + muallif va litsenziya
+			cv := city.Cover
+			if !strings.HasPrefix(cv.URL, "http://test/static/cities/") || cv.Credit == "" || cv.License == "" || cv.SourceURL == "" {
+				t.Fatalf("%s: %s muqovasi to'liq emas: %+v", lang, city.ID, cv)
+			}
+			if lang == "uz" {
+				resp, err := http.Get(testSrv.URL + strings.TrimPrefix(cv.URL, "http://test"))
+				if err != nil || resp.StatusCode != 200 || resp.Header.Get("Content-Type") != "image/jpeg" {
+					t.Fatalf("%s muqova rasmi berilmadi: %v %v", city.ID, err, resp)
+				}
+				resp.Body.Close()
+			}
 		}
 		var p placeDTO
 		c.do("GET", "/api/v1/places/registan", nil, &p)

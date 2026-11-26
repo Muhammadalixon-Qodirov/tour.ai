@@ -31,6 +31,10 @@ type City struct {
 	Name           string
 	Country        string
 	CoverURL       *string
+	CoverCredit    string // muallif; bo'sh bo'lsa noma'lum
+	CoverLicense   string
+	CoverSourceURL string
+	CoverSource    string
 	Center         domain.LatLng
 	Timezone       string
 	TaxiBase       int64
@@ -41,7 +45,9 @@ type City struct {
 }
 
 const citySelect = `
-SELECT c.id, ci.name, c.country, c.cover_url, c.lat, c.lng, c.timezone, c.taxi_base_fare, c.taxi_per_km, c.emergency,
+SELECT c.id, ci.name, c.country, c.cover_url,
+  coalesce(c.cover_credit, ''), coalesce(c.cover_license, ''), coalesce(c.cover_source_url, ''), coalesce(c.cover_source, ''),
+  c.lat, c.lng, c.timezone, c.taxi_base_fare, c.taxi_per_km, c.emergency,
   (SELECT count(*) FROM places p WHERE p.city_id = c.id AND p.status = 'published'),
   (SELECT count(*) FROM places p WHERE p.city_id = c.id AND p.status = 'published' AND p.novelty IN ('new','hidden'))
 FROM cities c
@@ -51,7 +57,8 @@ CROSS JOIN LATERAL (
 
 func scanCity(row pgx.Row) (City, error) {
 	var c City
-	err := row.Scan(&c.ID, &c.Name, &c.Country, &c.CoverURL, &c.Center.Lat, &c.Center.Lng, &c.Timezone,
+	err := row.Scan(&c.ID, &c.Name, &c.Country, &c.CoverURL, &c.CoverCredit, &c.CoverLicense, &c.CoverSourceURL, &c.CoverSource,
+		&c.Center.Lat, &c.Center.Lng, &c.Timezone,
 		&c.TaxiBase, &c.TaxiPerKm, &c.Emergency, &c.PlacesCount, &c.NewPlacesCount)
 	return c, err
 }

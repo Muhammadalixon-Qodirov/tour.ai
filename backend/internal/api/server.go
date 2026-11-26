@@ -39,12 +39,16 @@ type Server struct {
 	mailer  mail.Sender
 	google  auth.GoogleVerifier
 	images  fs.FS // katalog rasmlari (/static/places/{file}); nil bo'lsa 404
+	cityImg fs.FS // shahar muqovalari (/static/cities/{file}); nil bo'lsa 404
 	now     func() time.Time
 	ai      assistant.Model // nil — kalit yo'q, Fallback
 }
 
 // SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
 func (s *Server) SetImages(f fs.FS) { s.images = f }
+
+// SetCityImages — shahar muqovalari manbasi (cmd/api binar ichidagi static.Cities() ni beradi).
+func (s *Server) SetCityImages(f fs.FS) { s.cityImg = f }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
 	if cfg.WebBaseURL == "" {
@@ -81,6 +85,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /healthz", s.health)
 	mux.HandleFunc("GET /static/ph/{file}", s.placeholder)
 	mux.HandleFunc("GET /static/places/{file}", s.placeImage)
+	mux.HandleFunc("GET /static/cities/{file}", s.cityImage)
 
 	mux.Handle("POST /api/v1/auth/device", s.rateIP("auth", 30, http.HandlerFunc(s.authDevice)))
 	mux.Handle("POST /api/v1/auth/email/start", s.rateIP("email-start", 5, http.HandlerFunc(s.emailStart)))

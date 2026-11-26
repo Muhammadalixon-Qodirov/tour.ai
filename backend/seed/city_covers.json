@@ -1,0 +1,339 @@
+{
+ "_about": "Shahar muqovalari: Wikimedia Commons, 1600 px JPEG (static/cities). seed LoadDir kataloglardan keyin yuklaydi; OSM va nomzodlar importi bu ustunlarga tegmaydi.",
+ "covers": [
+  {
+   "cityId": "andijan",
+   "file": "cities/andijan.jpg",
+   "subject": "Devonaboy jome masjidi",
+   "credit": "Petar Milošević",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Devonaboy_Jome_Mosque,_Andijan,_Uzbekistan.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "aydarkul",
+   "file": "cities/aydarkul.jpg",
+   "subject": "Aydarko'l qirg'og'i",
+   "credit": "Arina Pan",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9A%D0%B0%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%BA%D0%B0_%D0%BD%D0%B0_%D0%90%D0%B9%D0%B4%D0%B0%D1%80%D0%BA%D1%83%D0%BB%D0%B5.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "bostanliq",
+   "file": "cities/bostanliq.jpg",
+   "subject": "Chorvoq suv ombori va tog'lar",
+   "credit": "Arina Pan",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9B%D0%B5%D1%82%D0%BE_%D0%BD%D0%B0_%D0%A7%D0%B0%D1%80%D0%B2%D0%B0%D0%BA%D1%81%D0%BA%D0%BE%D0%BC_%D0%B2%D0%BE%D0%B4%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B8%D0%BB%D0%B8%D1%89%D0%B5.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "boysun",
+   "file": "cities/boysun.jpg",
+   "subject": "Xo'ja Gurgur ota, Boysun tog'lari",
+   "credit": "Humoyun Mehridinov",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khoja_Gur_Gur_Ota_55.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Boysun tumani tog' manzarasi (shahar markazidan tashqarida)"
+  },
+  {
+   "cityId": "bukhara",
+   "file": "cities/bukhara.jpg",
+   "subject": "Buxoro Arki devori",
+   "credit": "Petar Milošević",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ark_of_Bukhara_(%D0%A6%D0%B8%D1%82%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C_%D0%90%D1%80%D0%BA._Buxoro_arki).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "dahbed",
+   "file": "cities/dahbed.jpg",
+   "subject": "Maxdumi A'zam majmuasi",
+   "credit": "Шухрат Саъдиев",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Makhdumi_Azam_Mausoleum_11.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "ellikqala",
+   "file": "cities/ellikqala.jpg",
+   "subject": "Ayozqal'a qal'asi",
+   "credit": "Bernard Gagnon",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ayaz-Kala-2.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Ellikqal'a tumani yodgorligi"
+  },
+  {
+   "cityId": "fergana",
+   "file": "cities/fergana.jpg",
+   "subject": "Ahmad al-Farg'oniy haykali, al-Farg'oniy bog'i",
+   "credit": "Fau33z",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ahmad_Al-Farg%27oniy_haykali.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "gijduvan",
+   "file": "cities/gijduvan.jpg",
+   "subject": "Xoja Abduxoliq G'ijduvoniy majmuasi",
+   "credit": "Umid1108",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khoja_Abdulkhaliq_Ghiduvani_complex1.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "jizzakh",
+   "file": "cities/jizzakh.jpg",
+   "subject": "Jizzax viloyati hokimligi binosi va bog'i",
+   "credit": "Solijon Solayev",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jizzax_viloyati_hokimligi_(63665).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "jondor",
+   "file": "cities/jondor.jpg",
+   "subject": "Varaxsha qadimiy shahri xarobalari",
+   "credit": "Umid1108",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Varahsha4.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Jondor tumani yodgorligi (shahardan taxminan 17 km); shaharning o'z surati Commons da yo'q"
+  },
+  {
+   "cityId": "khiva",
+   "file": "cities/khiva.jpg",
+   "subject": "Kalta Minor minoras va Ko'hna Ark, Ichan Qal'a",
+   "credit": "Bosinus (German Wikipedia)",
+   "license": "CC BY-SA 3.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xiva_kalta_minor.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "kogon",
+   "file": "cities/kogon.jpg",
+   "subject": "Buxoro amirining Kogondagi saroyi",
+   "credit": "SAKRI",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buxoro_amirining_saroyi,_Buxoro_viloyati,_Kogon_shahri,Temir_Yulchi_MFY.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "kokand",
+   "file": "cities/kokand.jpg",
+   "subject": "Xudoyorxon O'rdasi",
+   "credit": "Petar Milošević",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khudayar_Khan_Palace,_Kokand,_Uzbekistan_(%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%A5%D1%83%D0%B4%D0%BE%D1%8F%D1%80-%D1%85%D0%B0%D0%BD%D0%B0,_%D0%9A%D0%BE%D0%BA%D0%B0%D0%BD%D0%B4,_%D0%A3%D0%B7%D0%B1%D0%B5%D0%BA%D0%B8%D1%81%D1%82%D0%B0%D0%BD).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "langar",
+   "file": "cities/langar.jpg",
+   "subject": "Langar qishlog'idagi Langar ota masjidi va tepaliklar",
+   "credit": "German Stimban",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langar_mosque.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "margilan",
+   "file": "cities/margilan.jpg",
+   "subject": "Yodgorlik ipak fabrikasi: atlas iplari",
+   "credit": "Enric",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:032_F%C3%A0brica_de_seda_Yodgorlik,_Imom_Zahiriddin_Ko%27chasi_138_(Marguilan),_teixint_al_teler.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "moynaq",
+   "file": "cities/moynaq.jpg",
+   "subject": "Kemalar qabristoni, qurigan Orol tubi",
+   "credit": "Koshkinhome",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aral_Sea_Moynaq_Karakalpakstan_Uzbekistan_September_2025_Ph_Khusen_Rustamov-_28.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "namangan",
+   "file": "cities/namangan.jpg",
+   "subject": "Mulla Qirg'iz madrasasi",
+   "credit": "Usmonov Gayrat",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mulla_qirg%27iz_madrasasi_(1910-1912).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "navoi",
+   "file": "cities/navoi.jpg",
+   "subject": "Raboti Malik karvonsaroyi peshtoqi",
+   "credit": "Bgag",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rabati_Malik_caravanserai_02.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Navoiy shahri yaqinidagi (Karmana tumani, taxminan 20 km) eng taniqli yodgorlik"
+  },
+  {
+   "cityId": "nukus",
+   "file": "cities/nukus.jpg",
+   "subject": "I. V. Savitskiy nomidagi Qoraqalpog'iston davlat san'at muzeyi",
+   "credit": "Ayzadarich",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Karakalpakstan_State_Museum_of_Art_named_after_I.V._Savitsky_(cropped).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "nurata",
+   "file": "cities/nurata.jpg",
+   "subject": "Nurota Chashma majmuasi",
+   "credit": "MarjonaKhidirova",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nurota_fountain_complex_1.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "oqsoy",
+   "file": "cities/oqsoy.jpg",
+   "subject": "Oqsoy qishlog'i va Zarafshon tizmasi etagi (yuqoridan)",
+   "credit": "Carpodacus",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aksay_village_(Nurobod_district).jpg",
+   "source": "Wikimedia Commons",
+   "note": "2017 yilgi surat; koordinatasi Hazrati Dovud g'ori hududiga mos"
+  },
+  {
+   "cityId": "parkent",
+   "file": "cities/parkent.jpg",
+   "subject": "Fizika-Quyosh instituti (Quyosh pechi) tepasidan Chotqol tog'lari",
+   "credit": "Panpanchik",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Physics-Solar_Research_Institute.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Parkent tumani, Quyosh pechi hududi"
+  },
+  {
+   "cityId": "qarshi",
+   "file": "cities/qarshi.jpg",
+   "subject": "Odina masjidi",
+   "credit": "Mrjavokh1r",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adina_mosque.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "qorakol",
+   "file": "cities/qorakol.jpg",
+   "subject": "Poykent qadimiy shahri xarobalari",
+   "credit": "Umid1108",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paikend2.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Qorako'l tumani yodgorligi (shahar markazidan tashqarida)"
+  },
+  {
+   "cityId": "rishtan",
+   "file": "cities/rishtan.jpg",
+   "subject": "Rishton kulolchiligi: Rustam Usmonov uy-muzeyi",
+   "credit": "Марат Сафаров",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D0%BC_%D0%A0%D1%83%D1%81%D1%82%D0%B0%D0%BC%D0%B0_%D0%A3%D1%81%D0%BC%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0_%D0%B2_%D0%A0%D0%B8%D1%88%D1%82%D0%B0%D0%BD%D0%B5_%D0%B2_2011_%D0%B3%D0%BE%D0%B4%D1%83_(5).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "romitan",
+   "file": "cities/romitan.jpg",
+   "subject": "Varaxsha qadimiy shahri xarobalari",
+   "credit": "Umid1108",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Varahsha3.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Romitan shahrining sifatli surati Commons da yo'q; Buxoro vohasidagi eng yaqin yodgorlik (taxminan 28 km, Jondor bilan chegarada)"
+  },
+  {
+   "cityId": "samarkand",
+   "file": "cities/samarkand.jpg",
+   "subject": "Registon maydoni",
+   "credit": "Bernard Gagnon",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Registan_01.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "shahrisabz",
+   "file": "cities/shahrisabz.jpg",
+   "subject": "Oqsaroy saroyi qoldiqlari",
+   "credit": "SAKRI",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oq_Saroy_majmuasi,_Qashqadaryo_viloyati,_Shahrisabz,_O%60rda_MFY,_Shahrisabz_Tarixiy_markazi._2.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "shofirkon",
+   "file": "cities/shofirkon.jpg",
+   "subject": "Vardonze qadimiy shahri xarobalari",
+   "credit": "Marat Nadjibaev",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vardonze_6.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Shofirkon tumani yodgorligi (shahar markazidan tashqarida)"
+  },
+  {
+   "cityId": "tashkent",
+   "file": "cities/tashkent.jpg",
+   "subject": "Hazrati Imom majmuasi: Baroqxon madrasasi",
+   "credit": "Bgag",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barak-Khan_Madrasa.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "termez",
+   "file": "cities/termez.jpg",
+   "subject": "Qoratepa buddaviylik yodgorligi: stupa",
+   "credit": "Iaa2023",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Qoratepa_yodgorligi._Stupa._03.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "urgench",
+   "file": "cities/urgench.jpg",
+   "subject": "Muhammad al-Xorazmiy haykali",
+   "credit": "Adam Harangozó",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Statue_of_Muhammad_ibn_Musa_al-Khwarizmi_in_Urgench_(2).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "urgut",
+   "file": "cities/urgut.jpg",
+   "subject": "Chor Chinor bog'idan tog'lar ko'rinishi",
+   "credit": "Екатерина Борисова",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%A3%D1%80%D0%B3%D1%83%D1%82,_%D0%A7%D0%BE%D1%80-%D0%A7%D0%B8%D0%BD%D0%BE%D1%80,_%D0%B2%D0%B8%D0%B4_%D0%BE%D1%82_%D0%BF%D1%80%D1%83%D0%B4%D0%B0_%D0%BD%D0%B0_%D0%B3%D0%BE%D1%80%D1%8B_02.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "cityId": "vobkent",
+   "file": "cities/vobkent.jpg",
+   "subject": "Vobkent minorasi (1198-1199)",
+   "credit": "FineCreatures",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vabkent_Minaret_Full_View.jpg",
+   "source": "Wikimedia Commons",
+   "note": "Asl surat vertikal; muqova uchun yuqori qismi gorizontal kesib olingan"
+  },
+  {
+   "cityId": "zaamin",
+   "file": "cities/zaamin.jpg",
+   "subject": "Zomin milliy bog'i: archa va tog'lar",
+   "credit": "26D",
+   "license": "CC BY-SA 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B0%D0%B0%D0%BC%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BD%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

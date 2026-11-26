@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"io/fs"
 	"net/http"
 	"path"
 	"regexp"
@@ -49,14 +50,18 @@ func writeCached(w http.ResponseWriter, r *http.Request, v any) {
 var imageName = regexp.MustCompile(`^[a-z0-9_]+\.jpg$`)
 
 // placeImage — binar ichidagi katalog rasmlari (/static/places/{file}). Fayl nomi o'zgarmaydi → uzoq kesh.
-func (s *Server) placeImage(w http.ResponseWriter, r *http.Request) {
+func (s *Server) placeImage(w http.ResponseWriter, r *http.Request) { serveImage(w, r, s.images) }
+
+func (s *Server) cityImage(w http.ResponseWriter, r *http.Request) { serveImage(w, r, s.cityImg) }
+
+func serveImage(w http.ResponseWriter, r *http.Request, files fs.FS) {
 	name := r.PathValue("file")
-	if s.images == nil || !imageName.MatchString(name) {
+	if files == nil || !imageName.MatchString(name) {
 		http.NotFound(w, r)
 		return
 	}
 	w.Header().Set("Cache-Control", "public, max-age=604800")
-	http.ServeFileFS(w, r, s.images, path.Clean(name))
+	http.ServeFileFS(w, r, files, path.Clean(name))
 }
 
 // ---------- narxlar ----------

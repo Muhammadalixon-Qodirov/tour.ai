@@ -231,7 +231,8 @@ func (s *Server) listCities(w http.ResponseWriter, r *http.Request) {
 		}
 		cover := domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/city.svg"}
 		if c.CoverURL != nil && *c.CoverURL != "" {
-			cover = s.absImage(domain.Image{URL: *c.CoverURL})
+			cover = s.absImage(domain.Image{URL: *c.CoverURL, Credit: c.CoverCredit, License: c.CoverLicense,
+				SourceURL: c.CoverSourceURL, Source: c.CoverSource})
 		}
 		out = append(out, cityDTO{ID: c.ID, Name: c.Name, Country: c.Country, Cover: cover, Center: c.Center,
 			PlacesCount: c.PlacesCount, NewPlacesCount: c.NewPlacesCount})

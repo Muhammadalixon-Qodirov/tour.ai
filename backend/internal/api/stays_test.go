@@ -87,6 +87,12 @@ func TestOSMImportAndStays(t *testing.T) {
 	if after.PricePerNight.Min.Amount != 950000 || after.PricePerNight.Estimated {
 		t.Fatalf("qayta import qo'lda kiritilgan narxni o'chirdi: %+v", after.PricePerNight)
 	}
+	// Shahar muqovasi (seed/city_covers.json) OSM importidan keyin ham saqlanadi
+	var coverURL, coverCredit string
+	if err := db.QueryRow(context.Background(), `SELECT cover_url, coalesce(cover_credit, '') FROM cities WHERE id = 'samarkand'`).
+		Scan(&coverURL, &coverCredit); err != nil || coverURL != "/static/cities/samarkand.jpg" || coverCredit == "" {
+		t.Fatalf("OSM importi shahar muqovasini o'zgartirdi: %q %q %v", coverURL, coverCredit, err)
+	}
 
 	// OSM kafe: ish vaqti o'qilgan, ommaviy import joyi
 	var p placeDTO

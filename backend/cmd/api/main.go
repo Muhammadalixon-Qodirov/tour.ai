@@ -46,6 +46,7 @@ func run() error {
 
 	apiSrv := api.NewServer(cfg, store.New(db))
 	apiSrv.SetImages(static.Places())
+	apiSrv.SetCityImages(static.Cities())
 	if os.Getenv("EXPO_PUSH_ENABLED") == "true" {
 		go apiSrv.RunNudger(ctx, api.NewExpoPush(os.Getenv("EXPO_ACCESS_TOKEN")), 5*time.Minute)
 		slog.Info("kechki eslatmalar yoqildi")
