@@ -332,8 +332,9 @@ ko'pchilik "ha" degan joy ball oladi (+4 × ulush), ko'pchilik "yo'q" degani chi
 | maydon | tur | izoh |
 |---|---|---|
 | `image` | fayl (JPEG, ≤ 2 MB, uzun tomoni ≤ 1600 px — frontend siqadi) | |
-| `mode` | `landmark \| price \| translate` | |
-| `lat`, `lng` | son, ixtiyoriy | tanishni keskin aniqlashtiradi |
+| `mode` | `auto \| landmark \| price \| translate` | `auto` (standart, `mode` yo'q bo'lsa): server rasm turini o'zi aniqlab `landmark` yoki `price` shaklini qaytaradi. `translate` hali yo'q (501) |
+| `lat`, `lng` | son, ixtiyoriy, ikkalasi birga | joy tanishda faqat 1.5 km ichidagi joylar ko'riladi, 300 m ichidagisi ustun |
+| `placeId` | string, ixtiyoriy (`mode=landmark`) | "Qaysi biri?" ro'yxatidan tanlangan joy: rasm kerak emas |
 | `quotedPrice` | son, ixtiyoriy (`mode=price`) | sotuvchi aytgan narx |
 
 Javob — `mode` ga qarab uchta shakldan biri (`kind` diskriminator):
@@ -385,7 +386,41 @@ type PriceResult = {
 //   }
 // fairRange — 15–85 persentil (namuna < 5 bo'lsa min–max); quotedPrice berilsa verdict + overpayRatio.
 // Xatolar: 422 lens_not_recognized · 503 lens_busy (AI limitda, retryable) · 501 lens_mode_not_supported
-// (landmark/translate hali yo'q). Javob odatda 5–15 s.
+// (translate hali yo'q). Javob odatda 5–15 s.
+//
+// mode=landmark va mode=auto (backend, 2026-11-26):
+//   So'rov: image (yoki placeId), lat?, lng? (ikkalasi birga), mode=landmark | auto (mode yo'q = auto).
+//   Vision modeli (LENS_VISION_MODEL) faqat nom va tur taxmin qiladi; taxmin bazadagi joylar bilan moslanadi
+//   (uz/ru/en nomlar, taxalluslar, kategoriya, tavsifda tilga olingan majmua qismlari). lat/lng berilsa faqat 1.5 km
+//   ichidagi joylar ko'riladi, 300 m ichidagisi kuchli ustun. confidence = nom mosligi x model ishonchi x masofa.
+//   Natijadagi hamma matn BAZADAN: title = joy nomi (so'rov tilida), subtitle = "Kategoriya · tagline",
+//   summary = tarixning dastlabki 3 gapi, facts = tarix faktlari, sources = tarix manbalari.
+//   LandmarkResult ga qo'shimcha maydonlar:
+//     placeId: string | null           — null bo'lsa "Aniq emas, qaysi biri?" (confidence < 0.5)
+//     historyVerified: boolean         — false: tekshirilgan tarix yo'q
+//     conversationId: string | null    — joyga bog'langan yo'riqchi suhbati (placeId bo'lsa doim bor). POST /guide/chat
+//                                        ga shu conversationId bilan yuborilsa placeId yubormasa ham joy konteksti saqlanadi
+//     place?: PlaceSummary             — kartochka uchun (cover, distanceM, ...)
+//     candidates: (PlaceSummary & { placeId, title, subtitle? })[]   — faqat placeId null bo'lsa to'ladi, ≤ 5 ta:
+//                                        avval nomi mos kelganlar, keyin (lat/lng bo'lsa) yaqin joylar, distanceM bilan
+//   Tarixi tekshirilmagan joy (qaror): 422 emas, joyning o'zi qaytadi: summary = "Bu joy haqida tekshirilgan tarix yo'q.",
+//   facts = [], historyVerified = false, sources = [joyning o'z ma'lumot manbasi: tadqiqotdagi joylashuv manbasi,
+//   OpenStreetMap obyekti yoki Wikidata]. Bunday manba ham bo'lmasa 422 no_verified_info. Shunday qilib placeId bo'lsa
+//   sources hech qachon bo'sh emas.
+//   Hech narsa mos kelmasa 200: { kind: "landmark", confidence < 0.5, placeId: null, conversationId: null,
+//     title: "Aniq emas, qaysi biri?", summary: maslahat, facts: [], sources: [], followUps: [], candidates }.
+//   Ro'yxatdan tanlangan joy: mode=landmark&placeId=<id> (rasm kerak emas, AI chaqirilmaydi) → to'liq LandmarkResult
+//     (confidence 1). Yo'q joy 404 place_not_found. placeId boshqa rejimda 400.
+//   followUps: 3 ta qisqa savol so'rov tilida ("Kim va qachon qurdirgan?", "Kirish narxi qancha?" yoki "Hozir ochiqmi?",
+//     "Yaqin atrofda yana nima bor?"). audioUrl hali yo'q.
+//   mode=auto: bitta vision chaqiruvi rasm turini aniqlaydi: joy → LandmarkResult, buyum/taom/suvenir → PriceResult
+//     (quotedPrice ishlaydi), menyu/yozuv → 501 lens_mode_not_supported (tarjima hali yo'q), boshqa → 422 lens_not_recognized.
+//   Kesh: vision natijasi rasm sha256 bo'yicha, joy moslash natijasi rasm + joylashuv (3 xona, taxminan 100 m) bo'yicha,
+//     6 soat. Har so'rovda yangi suhbat ochiladi.
+//   Xatolar: 400 validation_failed (lat/lng faqat bittasi, noto'g'ri placeId) · 404 place_not_found · 422 lens_not_recognized
+//     (rasmda joy yo'q) · 422 no_verified_info · 503 lens_busy · 503 lens_unavailable (GROQ_API_KEY yo'q) · 429 rate_limited
+//     (10/daq) · 501 lens_mode_not_supported (translate yoki noma'lum rejim). Hamma xato xabari uz/ru/en.
+//   mode=translate: hali yo'q (501), TranslateResult shakli o'zgarmagan.
 
 type TranslateResult = {
   kind: "translate";

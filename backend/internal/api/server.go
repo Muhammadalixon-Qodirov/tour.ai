@@ -45,6 +45,8 @@ type Server struct {
 	ai      assistant.Model // nil — kalit yo'q, Fallback
 	lens    *pricing.Groq   // nil — kalit yo'q (/lens/identify 503)
 	markets *pricing.Searcher
+	// Lens vision va joy moslash natijalari keshi (rasm xeshi + joylashuv), 6 soat
+	lensCache *lensMemo
 }
 
 // SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
@@ -58,7 +60,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 		cfg.WebBaseURL = platform.DefaultWebBaseURL
 	}
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
-		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
+		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now, lensCache: newLensMemo()}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
 	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
 	s.markets = pricing.NewSearcher(cfg.MarketProxy)

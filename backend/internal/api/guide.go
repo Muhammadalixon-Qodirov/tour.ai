@@ -99,14 +99,22 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	var history []assistant.Turn
 	isNew := true
 	if req.ConversationID != "" {
-		var owner string
-		err := s.store.DB.QueryRow(ctx, `SELECT user_id FROM guide_conversations WHERE id = $1`, conv).Scan(&owner)
+		var owner, convPlace, convCity string
+		err := s.store.DB.QueryRow(ctx, `SELECT user_id, coalesce(place_id, ''), coalesce(city_id, '') FROM guide_conversations
+			WHERE id = $1`, conv).Scan(&owner, &convPlace, &convCity)
 		switch {
 		case err == nil && owner != uid:
 			writeError(w, r, http.StatusNotFound, "conversation_not_found", false)
 			return
 		case err == nil:
 			isNew = false
+			// Lens'dan boshlangan suhbat joyga bog'langan: placeId yuborilmasa ham joy konteksti saqlanadi
+			if req.PlaceID == "" && convPlace != "" {
+				req.PlaceID = convPlace
+				if req.CityID == "" {
+					req.CityID = convCity
+				}
+			}
 			history, err = s.guideHistory(ctx, conv, lang)
 			if err != nil {
 				s.internalError(w, r, err)
@@ -359,6 +367,7 @@ type conversationDTO struct {
 	LastText     string    `json:"lastText"`
 	MessageCount int       `json:"messageCount"`
 	CityID       *string   `json:"cityId"`
+	PlaceID      *string   `json:"placeId"` // Lens'dan boshlangan suhbat joyi
 	CreatedAt    time.Time `json:"createdAt"`
 	UpdatedAt    time.Time `json:"updatedAt"`
 }
@@ -370,7 +379,7 @@ func (s *Server) listConversations(w http.ResponseWriter, r *http.Request) {
 		writeValidation(w, r, fieldErrors{"cursor": "invalid"})
 		return
 	}
-	rows, err := s.store.DB.Query(r.Context(), `SELECT id, title, last_text, message_count, city_id, created_at, updated_at
+	rows, err := s.store.DB.Query(r.Context(), `SELECT id, title, last_text, message_count, city_id, place_id, created_at, updated_at
 		FROM guide_conversations WHERE user_id = $1 ORDER BY updated_at DESC, id DESC LIMIT 30 OFFSET $2`, userOf(r), off)
 	if err != nil {
 		s.internalError(w, r, err)
@@ -380,7 +389,7 @@ func (s *Server) listConversations(w http.ResponseWriter, r *http.Request) {
 	items := []conversationDTO{}
 	for rows.Next() {
 		var c conversationDTO
-		if err := rows.Scan(&c.ID, &c.Title, &c.LastText, &c.MessageCount, &c.CityID, &c.CreatedAt, &c.UpdatedAt); err != nil {
+		if err := rows.Scan(&c.ID, &c.Title, &c.LastText, &c.MessageCount, &c.CityID, &c.PlaceID, &c.CreatedAt, &c.UpdatedAt); err != nil {
 			s.internalError(w, r, err)
 			return
 		}
@@ -402,9 +411,9 @@ func (s *Server) getConversation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var c conversationDTO
-	err = s.store.DB.QueryRow(ctx, `SELECT id, title, last_text, message_count, city_id, created_at, updated_at
+	err = s.store.DB.QueryRow(ctx, `SELECT id, title, last_text, message_count, city_id, place_id, created_at, updated_at
 		FROM guide_conversations WHERE id = $1 AND user_id = $2`, id, userOf(r)).
-		Scan(&c.ID, &c.Title, &c.LastText, &c.MessageCount, &c.CityID, &c.CreatedAt, &c.UpdatedAt)
+		Scan(&c.ID, &c.Title, &c.LastText, &c.MessageCount, &c.CityID, &c.PlaceID, &c.CreatedAt, &c.UpdatedAt)
 	if errors.Is(err, pgx.ErrNoRows) {
 		writeError(w, r, http.StatusNotFound, "conversation_not_found", false)
 		return

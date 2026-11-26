@@ -100,6 +100,14 @@ var messages = map[string]map[string]string{
 	"rate_limited":              {"uz": "So'rovlar juda ko'p. Birozdan keyin urinib ko'ring", "ru": "Слишком много запросов. Попробуйте чуть позже", "en": "Too many requests. Try again shortly"},
 	"internal":                  {"uz": "Serverda xatolik. Qayta urinib ko'ring", "ru": "Ошибка сервера. Попробуйте ещё раз", "en": "Server error. Please try again"},
 
+	// Lens (POST /lens/identify)
+	"lens_unavailable":        {"uz": "Rasm orqali tanish hozir ishlamayapti. Keyinroq urinib ko'ring", "ru": "Распознавание по фото сейчас недоступно. Попробуйте позже", "en": "Photo recognition is unavailable right now. Try again later"},
+	"lens_busy":               {"uz": "So'rovlar ko'p. Bir necha soniyadan keyin qayta urinib ko'ring", "ru": "Слишком много запросов. Повторите через несколько секунд", "en": "Too many requests. Try again in a few seconds"},
+	"lens_not_recognized":     {"uz": "Rasmdagi narsani tanib bo'lmadi. Yaqinroqdan va yorug'roq joyda suratga oling", "ru": "Не удалось распознать объект на фото. Снимите ближе и при хорошем свете", "en": "Couldn't recognize what's in the photo. Take it closer and in better light"},
+	"lens_mode_not_supported": {"uz": "Bu rejim qo'llab-quvvatlanmaydi. auto, landmark yoki price tanlang", "ru": "Этот режим не поддерживается. Выберите auto, landmark или price", "en": "This mode isn't supported. Use auto, landmark or price"},
+	"no_verified_info":        {"uz": "Bu joy haqida tekshirilgan ma'lumot yo'q", "ru": "Проверенной информации об этом месте нет", "en": "There is no verified information about this place"},
+	"conversation_not_found":  {"uz": "Suhbat topilmadi", "ru": "Разговор не найден", "en": "Conversation not found"},
+
 	// marshrut
 	"trip_title":   {"uz": "{0} · {1} kun", "ru": "{0} · {1} дн.", "en": "{0} · {1} days"},
 	"trip_title_1": {"uz": "{0} · 1 kun", "ru": "{0} · 1 день", "en": "{0} · 1 day"},

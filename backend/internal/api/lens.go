@@ -16,10 +16,11 @@ import (
 	"yoldosh/internal/pricing"
 )
 
-// POST /lens/identify (multipart: image, mode=price, quotedPrice?) — "Adolatli narx":
-// rasmdagi buyum AI bilan aniqlanadi → O'zbekiston onlayn marketlarida (OLX, Texnomart, Asaxiy, Olcha, Idea) qidiriladi
-// → mos kelmagan takliflar (aksessuar, boshqa model) ajratiladi → o'rtacha narx va oraliq.
-// mode=landmark | translate hozircha qo'llab-quvvatlanmaydi (501).
+// POST /lens/identify (multipart: image, mode=auto|price|landmark, quotedPrice?, lat?, lng?, placeId?).
+// mode=price — "Adolatli narx": rasmdagi buyum AI bilan aniqlanadi → O'zbekiston onlayn marketlarida (OLX, Texnomart,
+// Asaxiy, Olcha, Idea) qidiriladi → mos kelmagan takliflar (aksessuar, boshqa model) ajratiladi → o'rtacha narx va oraliq.
+// mode=landmark — rasmdagi joy bazadagi joy bilan moslanadi (lens_landmark.go). mode=translate hali yo'q (501); auto rasmni matn deb topsa ham 501.
+// mode=auto (standart) — bitta vision chaqiruvi rasm turini aniqlaydi va tegishli rejimga o'tadi.
 
 type lensListingDTO struct {
 	Title string       `json:"title"`
@@ -111,14 +112,50 @@ func (s *Server) lensIdentify(w http.ResponseWriter, r *http.Request) {
 	}
 	mode := r.FormValue("mode")
 	if mode == "" {
-		mode = "price"
+		mode = "auto"
 	}
-	if mode != "price" {
+	if mode != "auto" && mode != "price" && mode != "landmark" { // translate hali yo'q (501)
 		writeError(w, r, http.StatusNotImplemented, "lens_mode_not_supported", false)
 		return
 	}
 	if s.lens == nil {
 		writeError(w, r, http.StatusServiceUnavailable, "lens_unavailable", true)
+		return
+	}
+	fe := fieldErrors{}
+	var loc *domain.LatLng
+	latS, lngS := strings.TrimSpace(r.FormValue("lat")), strings.TrimSpace(r.FormValue("lng"))
+	if latS != "" || lngS != "" {
+		lat, err1 := strconv.ParseFloat(latS, 64)
+		lng, err2 := strconv.ParseFloat(lngS, 64)
+		ll := domain.LatLng{Lat: lat, Lng: lng}
+		if err1 != nil || err2 != nil || !ll.Valid() || lat == 0 && lng == 0 {
+			fe.add("lat", "lat and lng together, degrees")
+		} else {
+			loc = &ll
+		}
+	}
+	var quoted *int64
+	if v := strings.TrimSpace(r.FormValue("quotedPrice")); v != "" {
+		n, err := strconv.ParseInt(strings.ReplaceAll(v, " ", ""), 10, 64)
+		if err != nil || n <= 0 {
+			fe.add("quotedPrice", "so'm, > 0")
+		} else {
+			quoted = &n
+		}
+	}
+	placeID := strings.TrimSpace(r.FormValue("placeId"))
+	if placeID != "" && mode != "landmark" {
+		fe.add("placeId", "only with mode=landmark")
+	}
+	if len(fe) > 0 {
+		writeValidation(w, r, fe)
+		return
+	}
+	lang := langOf(r)
+	// "Aniq emas, qaysi biri?" dan tanlangan joy: rasm va AI kerak emas, natija bazadan
+	if placeID != "" {
+		s.lensLandmarkPlace(w, r, placeID, loc, 1, lang)
 		return
 	}
 	f, _, err := r.FormFile("image")
@@ -137,29 +174,58 @@ func (s *Server) lensIdentify(w http.ResponseWriter, r *http.Request) {
 		writeValidation(w, r, fieldErrors{"image": "jpeg | png | webp"})
 		return
 	}
-	var quoted *int64
-	if v := strings.TrimSpace(r.FormValue("quotedPrice")); v != "" {
-		n, err := strconv.ParseInt(strings.ReplaceAll(v, " ", ""), 10, 64)
-		if err != nil || n <= 0 {
-			writeValidation(w, r, fieldErrors{"quotedPrice": "so'm, > 0"})
-			return
-		}
-		quoted = &n
-	}
 	_ = http.NewResponseController(w).SetWriteDeadline(time.Now().Add(90 * time.Second))
 	ctx, cancel := context.WithTimeout(r.Context(), 80*time.Second)
 	defer cancel()
-	lang := langOf(r)
+	hash := imageHash(img)
 
-	id, err := s.lens.Identify(ctx, img, mime)
+	switch mode {
+	case "price":
+		id, err := s.lens.Identify(ctx, img, mime)
+		if s.lensFailed(w, r, err) {
+			return
+		}
+		s.lensPrice(ctx, w, r, id, quoted, lang)
+	case "landmark":
+		v, err := s.lensVision(ctx, "landmark|"+hash, func() (any, error) { return s.lens.IdentifyLandmark(ctx, img, mime) })
+		if s.lensFailed(w, r, err) {
+			return
+		}
+		s.lensLandmark(ctx, w, r, hash, v.(pricing.LandmarkVision), loc, lang)
+	default: // auto: bitta vision chaqiruvi turini aniqlaydi, keyin tegishli rejim
+		v, err := s.lensVision(ctx, "auto|"+hash, func() (any, error) { return s.lens.Classify(ctx, img, mime) })
+		if s.lensFailed(w, r, err) {
+			return
+		}
+		av := v.(pricing.AutoVision)
+		switch av.Kind {
+		case "landmark":
+			s.lensLandmark(ctx, w, r, hash, av.Landmark, loc, lang)
+		case "price":
+			s.lensPrice(ctx, w, r, av.Item, quoted, lang)
+		case "translate": // menyu yoki yozuv: tarjima rejimi hali yo'q
+			writeError(w, r, http.StatusNotImplemented, "lens_mode_not_supported", false)
+		default:
+			writeError(w, r, http.StatusUnprocessableEntity, "lens_not_recognized", false)
+		}
+	}
+}
+
+// lensFailed — vision xatosi: limit (503 lens_busy) yoki ichki xato. true bo'lsa javob yozilgan.
+func (s *Server) lensFailed(w http.ResponseWriter, r *http.Request, err error) bool {
 	if errors.Is(err, pricing.ErrBusy) {
 		writeError(w, r, http.StatusServiceUnavailable, "lens_busy", true)
-		return
+		return true
 	}
 	if err != nil {
 		s.internalError(w, r, err)
-		return
+		return true
 	}
+	return false
+}
+
+// lensPrice — mode=price: aniqlangan buyum bo'yicha onlayn narxlar, verdict va maslahat.
+func (s *Server) lensPrice(ctx context.Context, w http.ResponseWriter, r *http.Request, id pricing.Identified, quoted *int64, lang string) {
 	if id.Confidence < 0.3 || id.Query == "" {
 		writeError(w, r, http.StatusUnprocessableEntity, "lens_not_recognized", false)
 		return
