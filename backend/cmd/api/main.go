@@ -14,6 +14,7 @@ import (
 
 	"yoldosh/internal/api"
 	"yoldosh/internal/discover"
+	"yoldosh/internal/osmimport"
 	"yoldosh/internal/platform"
 	"yoldosh/internal/store"
 	"yoldosh/static"
@@ -62,6 +63,15 @@ func run() error {
 		}
 		go discover.Schedule(ctx, db, slog.Default(), 2*time.Minute, every)
 		slog.Info("joy topish yoqildi", "every", every)
+	}
+	// OpenStreetMap haftalik yangilash (yangi kafe/muzey/bozorlar): OSM_REFRESH_EVERY (masalan 168h). Bo'sh — o'chiq.
+	if v := os.Getenv("OSM_REFRESH_EVERY"); v != "" {
+		every, err := time.ParseDuration(v)
+		if err != nil || every < 24*time.Hour {
+			return errors.New("OSM_REFRESH_EVERY: kamida 24h (masalan 168h)")
+		}
+		go osmimport.Schedule(ctx, db, slog.Default(), 10*time.Minute, every)
+		slog.Info("OSM yangilash yoqildi", "every", every)
 	}
 	srv := &http.Server{
 		Addr:              cfg.Addr,

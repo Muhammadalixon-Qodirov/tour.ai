@@ -8,34 +8,12 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"os"
-	"strconv"
-	"time"
 
 	"yoldosh/internal/osmimport"
 	"yoldosh/internal/platform"
 )
-
-// usdRate — Markaziy bank kursi (narx bahosini so'mga o'tkazish uchun).
-func usdRate() float64 {
-	c := http.Client{Timeout: 10 * time.Second}
-	resp, err := c.Get("https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/")
-	if err != nil {
-		return 0
-	}
-	defer resp.Body.Close()
-	var body []struct {
-		Rate string `json:"Rate"`
-	}
-	if json.NewDecoder(resp.Body).Decode(&body) != nil || len(body) == 0 {
-		return 0
-	}
-	r, _ := strconv.ParseFloat(body[0].Rate, 64)
-	return r
-}
 
 func main() {
 	if len(os.Args) < 2 {
@@ -54,7 +32,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
-	rate := usdRate()
+	rate := osmimport.USDRate(ctx)
 	fmt.Printf("USD kursi (CBU): %.2f\n", rate)
 	rep, err := osmimport.Load(ctx, db, os.Args[1], rate)
 	if err != nil {

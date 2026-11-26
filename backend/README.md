@@ -289,7 +289,7 @@ turistik joymi (junk ajratish), to'g'ri kategoriya, qisqa uz/ru/en tavsif (faqat
 ## Yangi joylarni avtomatik topish (`internal/discover`)
 
 Manbalar (hammasi qonuniy, bazada saqlash mumkin): **Wikidata** (CC0, har 24 soatda — `DISCOVERY_EVERY`),
-**OpenStreetMap** (ODbL, haftalik — `deploy/osm-refresh.sh`), **foydalanuvchi takliflari** (`POST /places/suggest` —
+**OpenStreetMap** (ODbL, haftalik — API o'zi, `OSM_REFRESH_EVERY=168h`; qo'lda: `deploy/osm-refresh.sh`), **foydalanuvchi takliflari** (`POST /places/suggest` —
 Instagram/Telegramda ko'rgan joyini yuboradi; scraping o'rniga), **tadqiqot nomzodlari** (`seed/candidates`).
 
 1. **Kategoriya** — `discover.Classify`: OSM teglari (`amenity=marketplace` → bazaar, `craft=*` → workshop,

@@ -61,19 +61,24 @@ type Report struct {
 }
 
 func Load(ctx context.Context, db *pgxpool.Pool, path string, usdRate float64) (Report, error) {
-	rep := Report{PerCity: map[string]int{}}
 	raw, err := os.ReadFile(path)
 	if err != nil {
-		return rep, err
+		return Report{PerCity: map[string]int{}}, err
 	}
 	var pois []POI
 	if err := json.Unmarshal(raw, &pois); err != nil {
-		return rep, err
+		return Report{PerCity: map[string]int{}}, err
 	}
+	return LoadPOIs(ctx, db, pois, usdRate)
+}
+
+// LoadPOIs — ajratilgan POI larni bazaga yozadi (upsert; takroran xavfsiz).
+func LoadPOIs(ctx context.Context, db *pgxpool.Pool, pois []POI, usdRate float64) (Report, error) {
+	rep := Report{PerCity: map[string]int{}}
 	if usdRate <= 0 {
 		usdRate = 12000
 	}
-	err = pgx.BeginFunc(ctx, db, func(tx pgx.Tx) error {
+	err := pgx.BeginFunc(ctx, db, func(tx pgx.Tx) error {
 		cities, err := ensureCities(ctx, tx)
 		if err != nil {
 			return err

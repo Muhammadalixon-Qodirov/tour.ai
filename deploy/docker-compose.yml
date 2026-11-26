@@ -37,6 +37,8 @@ services:
       APP_NAME: ${APP_NAME:-Safar}
       # Yangi joylarni avtomatik topish (Wikidata, CC0): har 24 soatda. Bo'sh qiymat — o'chiq.
       DISCOVERY_EVERY: ${DISCOVERY_EVERY-24h}
+      # OpenStreetMap yangilash (yangi kafe, muzey, bozorlar): haftada bir. Bo'sh qiymat — o'chiq.
+      OSM_REFRESH_EVERY: ${OSM_REFRESH_EVERY-168h}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       CLEANER_KEY: ${CLEANER_KEY:-}
