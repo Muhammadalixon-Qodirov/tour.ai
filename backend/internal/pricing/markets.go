@@ -268,8 +268,17 @@ type Searcher struct {
 	cache   map[string]cacheEntry
 }
 
-func NewSearcher() *Searcher {
-	return &Searcher{HC: &http.Client{Timeout: 8 * time.Second}, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
+// NewSearcher — proxyURL bo'sh bo'lmasa (masalan "http://10.0.0.5:3128") market so'rovlari o'sha proksi orqali
+// ketadi: O'zbekiston marketlarining ko'pchiligi xorijiy datacenter IP larini bloklaydi, shuning uchun qidiruvni
+// O'zbekistondagi o'z serveringiz orqali yuborish mumkin.
+func NewSearcher(proxyURL ...string) *Searcher {
+	hc := &http.Client{Timeout: 8 * time.Second}
+	if len(proxyURL) > 0 && strings.TrimSpace(proxyURL[0]) != "" {
+		if u, err := url.Parse(strings.TrimSpace(proxyURL[0])); err == nil && u.Host != "" {
+			hc.Transport = &http.Transport{Proxy: http.ProxyURL(u), MaxIdleConnsPerHost: 4, IdleConnTimeout: 60 * time.Second}
+		}
+	}
+	return &Searcher{HC: hc, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
 }
 
 // Search — barcha marketlarda parallel qidiruv (har biri ≤ 8 s); bitta market ishlamasa qolganlari qaytadi.

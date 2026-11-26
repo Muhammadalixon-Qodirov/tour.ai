@@ -61,7 +61,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
 	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
-	s.markets = pricing.NewSearcher()
+	s.markets = pricing.NewSearcher(cfg.MarketProxy)
 	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
 	if s.ai != nil {
 		slog.Info("AI yordamchi yoqildi", "model", s.ai.Name())

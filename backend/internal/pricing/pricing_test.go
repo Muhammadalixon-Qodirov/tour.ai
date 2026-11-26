@@ -5,6 +5,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+	"net/http"
 	"testing"
 )
 
@@ -60,5 +61,20 @@ func TestShrink(t *testing.T) {
 	// rasm emas — asl holicha
 	if b, m := shrink([]byte("not an image"), "image/jpeg"); string(b) != "not an image" || m != "image/jpeg" {
 		t.Fatal("dekod bo'lmasa asl qaytishi kerak")
+	}
+}
+
+func TestSearcherProxy(t *testing.T) {
+	if s := NewSearcher(); s.HC.Transport != nil {
+		t.Fatal("proksisiz — standart transport")
+	}
+	s := NewSearcher("http://10.0.0.5:3128")
+	tr, ok := s.HC.Transport.(*http.Transport)
+	if !ok || tr.Proxy == nil {
+		t.Fatal("proksi o'rnatilmadi")
+	}
+	req, _ := http.NewRequest("GET", "https://www.olx.uz/", nil)
+	if u, _ := tr.Proxy(req); u == nil || u.Host != "10.0.0.5:3128" {
+		t.Fatalf("proksi manzili: %v", u)
 	}
 }
