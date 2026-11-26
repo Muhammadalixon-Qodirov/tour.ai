@@ -30,11 +30,12 @@ type Config struct {
 	UploadDir     string
 
 	// AI yordamchi (POST /guide/chat). Kalit bo'sh — bazadan qoidaga asoslangan qidiruv.
-	AnthropicKey string
-	GroqKey      string // Anthropic kaliti bo'lmasa Groq (openai/gpt-oss-120b)
-	CleanerKey   string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
-	AIModel      string // standart claude-opus-5-5
-	AIEffort     string // low | medium | high (standart low — suhbat tez bo'lsin)
+	AnthropicKey    string
+	GroqKey         string // Anthropic kaliti bo'lmasa Groq (openai/gpt-oss-120b)
+	LensVisionModel string // "Adolatli narx" rasm tanish modeli (Groq; standart qwen/qwen3.8-27b)
+	CleanerKey      string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
+	AIModel         string // standart claude-opus-5-5
+	AIEffort        string // low | medium | high (standart low — suhbat tez bo'lsin)
 
 	GoogleClientIDs []string // web, android, ios OAuth client id lar (maxfiy emas)
 	SMTPHost        string
@@ -55,19 +56,20 @@ const DefaultWebBaseURL = "https://safar.e-investment.uz"
 
 func LoadConfig() (Config, error) {
 	c := Config{
-		Addr:          env("ADDR", ":8080"),
-		DatabaseURL:   os.Getenv("DATABASE_URL"),
-		TokenSecret:   []byte(os.Getenv("TOKEN_SECRET")),
-		PublicBaseURL: strings.TrimRight(env("PUBLIC_BASE_URL", "http://localhost:8080"), "/"),
-		AIBaseURL:     os.Getenv("AI_BASE_URL"),
-		AIKey:         os.Getenv("AI_INTERNAL_KEY"),
-		UploadDir:     env("UPLOAD_DIR", "data/uploads"),
-		AnthropicKey:  os.Getenv("ANTHROPIC_API_KEY"),
-		GroqKey:       os.Getenv("GROQ_API_KEY"),
-		CleanerKey:    os.Getenv("CLEANER_KEY"),
-		AIModel:       os.Getenv("AI_MODEL"),
-		AIEffort:      os.Getenv("AI_EFFORT"),
-		WebBaseURL:    strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),
+		Addr:            env("ADDR", ":8080"),
+		DatabaseURL:     os.Getenv("DATABASE_URL"),
+		TokenSecret:     []byte(os.Getenv("TOKEN_SECRET")),
+		PublicBaseURL:   strings.TrimRight(env("PUBLIC_BASE_URL", "http://localhost:8080"), "/"),
+		AIBaseURL:       os.Getenv("AI_BASE_URL"),
+		AIKey:           os.Getenv("AI_INTERNAL_KEY"),
+		UploadDir:       env("UPLOAD_DIR", "data/uploads"),
+		AnthropicKey:    os.Getenv("ANTHROPIC_API_KEY"),
+		GroqKey:         os.Getenv("GROQ_API_KEY"),
+		CleanerKey:      os.Getenv("CLEANER_KEY"),
+		LensVisionModel: os.Getenv("LENS_VISION_MODEL"),
+		AIModel:         os.Getenv("AI_MODEL"),
+		AIEffort:        os.Getenv("AI_EFFORT"),
+		WebBaseURL:      strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),
 	}
 	if v := os.Getenv("CORS_ORIGINS"); v != "" {
 		for _, o := range strings.Split(v, ",") {

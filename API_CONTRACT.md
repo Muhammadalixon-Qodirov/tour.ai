@@ -370,6 +370,23 @@ type PriceResult = {
   sampleSize: number;            // nechta kuzatuv asosida
 };
 
+// mode=price — backend (2026-11): rasm Groq vision bilan tanilib, O'zbekiston onlayn marketlarida (OLX, Texnomart,
+// Asaxiy, Olcha, Idea) qidiriladi; aksessuar/boshqa model AI bilan ajratiladi; o'rtacha va oraliq hisoblanadi.
+// PriceResult ga qo'shimcha maydonlar:
+//   found: boolean                 — onlayn narx topildimi (false bo'lsa fairRange yo'q, tip — maslahat)
+//   itemNames: {uz, ru, en}        — buyum nomi uch tilda
+//   itemCategory: string           — electronics | phone | clothing | souvenir | handicraft | ...
+//   online: {
+//     query: string;               — marketlarda qidirilgan so'rov
+//     average?, lowest?, highest?: Money;
+//     marketsCount: number;        — narx topilgan marketlar soni
+//     markets: { id, name, searchUrl, found, median?: Money, error?: boolean,
+//                listings: { title, price: Money, url, used? }[] }[]   — har marketdan eng arzon 3 tasi
+//   }
+// fairRange — 15–85 persentil (namuna < 5 bo'lsa min–max); quotedPrice berilsa verdict + overpayRatio.
+// Xatolar: 422 lens_not_recognized · 503 lens_busy (AI limitda, retryable) · 501 lens_mode_not_supported
+// (landmark/translate hali yo'q). Javob odatda 5–15 s.
+
 type TranslateResult = {
   kind: "translate";
   detectedLang: string;

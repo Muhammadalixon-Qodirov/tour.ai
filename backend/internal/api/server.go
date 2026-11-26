@@ -15,6 +15,7 @@ import (
 	"strings"
 	"time"
 	"yoldosh/internal/assistant"
+	"yoldosh/internal/pricing"
 
 	"github.com/google/uuid"
 
@@ -42,6 +43,8 @@ type Server struct {
 	cityImg fs.FS // shahar muqovalari (/static/cities/{file}); nil bo'lsa 404
 	now     func() time.Time
 	ai      assistant.Model // nil — kalit yo'q, Fallback
+	lens    *pricing.Groq   // nil — kalit yo'q (/lens/identify 503)
+	markets *pricing.Searcher
 }
 
 // SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
@@ -57,6 +60,8 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
+	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
+	s.markets = pricing.NewSearcher()
 	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
 	if s.ai != nil {
 		slog.Info("AI yordamchi yoqildi", "model", s.ai.Name())
@@ -125,6 +130,7 @@ func (s *Server) Handler() http.Handler {
 	user("POST /api/v1/trips/{id}/stops/{stopId}/move", s.moveStop)
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
+	mux.Handle("POST /api/v1/lens/identify", s.requireUser(s.rate("lens", 10, http.HandlerFunc(s.lensIdentify))))
 	mux.Handle("POST /api/v1/guide/chat", s.requireUser(s.rate("guide-chat", 15, http.HandlerFunc(s.guideChat))))
 	user("GET /api/v1/guide/conversations", s.listConversations)
 	user("GET /api/v1/guide/conversations/{id}", s.getConversation)
