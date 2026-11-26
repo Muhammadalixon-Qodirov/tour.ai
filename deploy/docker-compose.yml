@@ -39,6 +39,7 @@ services:
       DISCOVERY_EVERY: ${DISCOVERY_EVERY-24h}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       AI_MODEL: ${AI_MODEL:-}
+      AI_EFFORT: ${AI_EFFORT:-}
       # X-Forwarded-For ga ishoniladigan proksilar (IP yoki CIDR, vergul bilan): host nginx konteynerga docker
       # tarmog'i shlyuzidan keladi (172.16.0.0/12), Caddy profili ham shu tarmoqda; + sayt (Next.js) serveri IP si.
       TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}

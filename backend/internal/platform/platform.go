@@ -29,6 +29,11 @@ type Config struct {
 	AIKey         string
 	UploadDir     string
 
+	// AI yordamchi (POST /guide/chat). Kalit bo'sh — bazadan qoidaga asoslangan qidiruv.
+	AnthropicKey string
+	AIModel      string // standart claude-opus-5-5
+	AIEffort     string // low | medium | high (standart low — suhbat tez bo'lsin)
+
 	GoogleClientIDs []string // web, android, ios OAuth client id lar (maxfiy emas)
 	SMTPHost        string
 	SMTPPort        int
@@ -55,6 +60,9 @@ func LoadConfig() (Config, error) {
 		AIBaseURL:     os.Getenv("AI_BASE_URL"),
 		AIKey:         os.Getenv("AI_INTERNAL_KEY"),
 		UploadDir:     env("UPLOAD_DIR", "data/uploads"),
+		AnthropicKey:  os.Getenv("ANTHROPIC_API_KEY"),
+		AIModel:       os.Getenv("AI_MODEL"),
+		AIEffort:      os.Getenv("AI_EFFORT"),
 		WebBaseURL:    strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),
 	}
 	if v := os.Getenv("CORS_ORIGINS"); v != "" {

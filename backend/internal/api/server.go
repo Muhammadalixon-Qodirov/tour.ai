@@ -14,6 +14,7 @@ import (
 	"slices"
 	"strings"
 	"time"
+	"yoldosh/internal/assistant"
 
 	"github.com/google/uuid"
 
@@ -39,6 +40,7 @@ type Server struct {
 	google  auth.GoogleVerifier
 	images  fs.FS // katalog rasmlari (/static/places/{file}); nil bo'lsa 404
 	now     func() time.Time
+	ai      *assistant.Claude // nil — kalit yo'q, Fallback
 }
 
 // SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
@@ -51,6 +53,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
+	s.ai = assistant.NewClaude(cfg.AnthropicKey, cfg.AIModel, cfg.AIEffort)
 	s.google = auth.NewGoogleJWKS(cfg.GoogleClientIDs)
 	switch {
 	case cfg.SMTPHost != "":
@@ -113,6 +116,8 @@ func (s *Server) Handler() http.Handler {
 	user("POST /api/v1/trips/{id}/stops/{stopId}/move", s.moveStop)
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
+	mux.Handle("POST /api/v1/guide/chat", s.requireUser(s.rate("guide-chat", 15, http.HandlerFunc(s.guideChat))))
+	user("GET /api/v1/guide/conversations/{id}", s.getConversation)
 	mux.Handle("POST /api/v1/places/suggest", s.requireUser(s.rate("suggest", 5, http.HandlerFunc(s.suggestPlace))))
 	user("GET /api/v1/me/saved", s.listSaved)
 	user("PUT /api/v1/me/saved/{placeId}", s.setSaved(true))

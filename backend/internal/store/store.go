@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 	"time"
 
@@ -159,7 +160,10 @@ type PlaceFilter struct {
 	Near       *domain.LatLng
 	RadiusM    float64
 	Wheelchair bool
-	Source     string // "" | curated (OSM dan tashqari) | osm
+	Source     string   // "" | curated (OSM dan tashqari) | osm
+	Family     bool     // bolalar bilan qulay
+	MaxPrice   *int     // narx darajasi 0..3 dan oshmasin
+	Words      []string // nom/tagline/tavsifda so'z boshidan qidiruv (har biri — YOKI): "osh" "Toshkent" ga tushmaydi
 	Limit      int
 	Offset     int
 }
@@ -194,6 +198,25 @@ func (s *Store) ListPlaces(ctx context.Context, f PlaceFilter, langs []string) (
 	}
 	if f.Wheelchair {
 		where = append(where, "p.wheelchair")
+	}
+	if f.Family {
+		where = append(where, "p.family_friendly")
+	}
+	if f.MaxPrice != nil {
+		where = append(where, "p.price_level <= "+arg(*f.MaxPrice))
+	}
+	if len(f.Words) > 0 {
+		var pats []string
+		for _, w := range f.Words {
+			if w = strings.TrimSpace(w); w != "" {
+				pats = append(pats, `\m`+regexp.QuoteMeta(strings.ToLower(w)))
+			}
+		}
+		if len(pats) > 0 {
+			re := arg(strings.Join(pats, "|"))
+			where = append(where, "EXISTS (SELECT 1 FROM place_i18n w WHERE w.place_id = p.id AND (lower(w.name) ~ "+re+
+				" OR lower(w.tagline) ~ "+re+" OR lower(coalesce(w.description, '')) ~ "+re+"))")
+		}
 	}
 	dist := "NULL::float8"
 	switch f.Source {

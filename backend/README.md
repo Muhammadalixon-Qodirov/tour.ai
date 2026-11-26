@@ -52,6 +52,7 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Marshrut | `POST /trips` (`days` 1..7, `budgetPerDay`, `isResident` (yo'q bo'lsa profildan), `groupSize`), `GET /trips`, `GET /trips/{id}` (javobda `prefs`), `DELETE /trips/{id}`, `POST /trips/{id}/stops` `{dayIndex, placeId, after?}`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` (takliflar), `POST /trips/{id}/stops/{stopId}/move` `{dayIndex?, position?}` yoki `{step: -1\|1}` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`, `rating: 1..5`, yoki `placeId` — almashtirish), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` (3 ta baho yig'ilgach joy reytingi haqiqiy baholardan hisoblanadi) |
+| AI yordamchi | `POST /guide/chat` `{message, conversationId?, cityId?, placeId?, location?}` — `Accept: text/event-stream` bo'lsa SSE (`delta` {text} → `places` {places: PlaceSummary[]} → `done` {conversationId, messageId, mode: ai\|fallback}), `?stream=false` — bitta JSON `{text, places, conversationId, mode}` (15/daq) · `GET /guide/conversations/{id}` |
 | Joy taklif qilish | `POST /places/suggest` `{name, location, category?, note?, instagram?, telegram?, website?}` → `202 {id, status: queued\|duplicate\|out_of_area, placeId?, suggestedCategory, confidence}` (5/daq) |
 | Joy topish (admin) | `GET /admin/discoveries?status=queued\|published\|duplicate\|rejected\|out_of_area&source=wikidata\|osm\|user\|research&city=` · `POST /admin/discoveries/{id}/approve` `{category?, cityId?, name?}` · `POST /admin/discoveries/{id}/reject` · `POST /admin/discoveries/run` (Wikidata, fonda) |
 | Saqlangan joylar | `GET /me/saved`, `PUT /me/saved/{placeId}`, `DELETE /me/saved/{placeId}` |
@@ -225,6 +226,16 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - Guruh safari: umumiy marshrut a'zolar istaklaridan tuziladi — qiziqishlar (ko'p uchraganlari), eng kichik byudjet,
   eng sokin temp; ko'pchilik "ha" degan joy ustun, yarmi yoki ko'pi "yo'q" degan joy chiqariladi. Marshrutni barcha a'zolar
   ko'radi va tahrirlaydi; kundalik — har kimning o'ziniki.
+
+## AI yordamchi (`internal/assistant`)
+
+- `ANTHROPIC_API_KEY` bo'lsa: Claude (`AI_MODEL`, standart `claude-opus-5-5`; `AI_EFFORT` standart `low`) 4 ta asbob bilan
+  ishlaydi — `search_places` (shahar, kategoriya, taom so'zlari, bolalar bilan, narx darajasi, hozir ochiq, yaqin atrof),
+  `get_place`, `search_stays`, `search_prices`. **Har bir fakt asbob natijasidan**: bazada yo'q bo'lsa "Bu haqda tekshirilgan
+  ma'lumotim yo'q" deydi. Foydalanuvchi profili (byudjet, qiziqishlar) kontekstga qo'shiladi.
+- Kalit yo'q yoki model ishlamasa — `mode: fallback`: savoldan shahar, joy turi (`discover.Classify`), "bolalar", "arzon",
+  "hozir ochiq", "kam tanilgan", taom nomlari ajratiladi va bazadan qidiriladi.
+- Suhbat `guide_messages` da (faqat matn, 12 ta oxirgi xabar kontekstga).
 
 ## Yangi joylarni avtomatik topish (`internal/discover`)
 
