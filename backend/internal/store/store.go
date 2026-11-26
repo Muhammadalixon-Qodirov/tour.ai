@@ -146,6 +146,9 @@ func placeDest(p *Place) []any {
 		&p.Aliases, &p.Trust, &p.VerifiedAt, &p.Crowd, &p.BestTime, &p.HoursTrust, &p.Source}
 }
 
+// BulkSources — avtomatik ommaviy importlar (OSM, Wikidata): jamoa tekshirgan joylardan keyin, rejada ×0.75.
+const BulkSources = "('osm','wikidata')"
+
 type PlaceFilter struct {
 	City       string
 	Category   string
@@ -195,12 +198,12 @@ func (s *Store) ListPlaces(ctx context.Context, f PlaceFilter, langs []string) (
 	dist := "NULL::float8"
 	switch f.Source {
 	case "curated":
-		where = append(where, "p.source <> 'osm'")
+		where = append(where, "p.source NOT IN "+BulkSources)
 	case "osm":
-		where = append(where, "p.source = 'osm'")
+		where = append(where, "p.source IN "+BulkSources)
 	}
 	// Jamoa tekshirgan joylar har doim OSM ommaviy importidan oldin.
-	order := "CASE WHEN p.source = 'osm' THEN 1 ELSE 0 END, CASE p.novelty WHEN 'iconic' THEN 1 ELSE 0 END, p.rating DESC, p.id"
+	order := "CASE WHEN p.source IN " + BulkSources + " THEN 1 ELSE 0 END, CASE p.novelty WHEN 'iconic' THEN 1 ELSE 0 END, p.rating DESC, p.id"
 	if f.Near != nil {
 		pt := "ll_to_earth(" + arg(f.Near.Lat) + ", " + arg(f.Near.Lng) + ")"
 		dist = "earth_distance(" + pt + ", ll_to_earth(p.lat, p.lng))"
@@ -266,7 +269,7 @@ func (s *Store) PlacesByIDs(ctx context.Context, ids []string, langs []string) (
 // Candidates — rejalashtirgich uchun shahardagi barcha chop etilgan joylar (matnsiz).
 func (s *Store) Candidates(ctx context.Context, cityID string) ([]planner.Candidate, float64, error) {
 	rows, err := s.DB.Query(ctx, `SELECT id, category, novelty, is_partner, interests, lat, lng, rating::float8, reviews_count,
-		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly, source = 'osm', COALESCE(crowd, 'medium'),
+		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly, source IN `+BulkSources+`, COALESCE(crowd, 'medium'),
 		(entry_fee->'local'->>'amount')::bigint, (entry_fee->'foreigner'->>'amount')::bigint
 		FROM places WHERE city_id = $1 AND status = 'published' ORDER BY id`, cityID)
 	if err != nil {

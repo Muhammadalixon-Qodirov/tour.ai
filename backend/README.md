@@ -51,7 +51,9 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
 | Marshrut | `POST /trips` (`days` 1..7, `budgetPerDay`, `isResident` (yo'q bo'lsa profildan), `groupSize`), `GET /trips`, `GET /trips/{id}` (javobda `prefs`), `DELETE /trips/{id}`, `POST /trips/{id}/stops` `{dayIndex, placeId, after?}`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` (takliflar), `POST /trips/{id}/stops/{stopId}/move` `{dayIndex?, position?}` yoki `{step: -1\|1}` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`, `rating: 1..5`, yoki `placeId` — almashtirish), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
-| Baho | `POST /visits` |
+| Baho | `POST /visits` (3 ta baho yig'ilgach joy reytingi haqiqiy baholardan hisoblanadi) |
+| Joy taklif qilish | `POST /places/suggest` `{name, location, category?, note?, instagram?, telegram?, website?}` → `202 {id, status: queued\|duplicate\|out_of_area, placeId?, suggestedCategory, confidence}` (5/daq) |
+| Joy topish (admin) | `GET /admin/discoveries?status=queued\|published\|duplicate\|rejected\|out_of_area&source=wikidata\|osm\|user\|research&city=` · `POST /admin/discoveries/{id}/approve` `{category?, cityId?, name?}` · `POST /admin/discoveries/{id}/reject` · `POST /admin/discoveries/run` (Wikidata, fonda) |
 | Saqlangan joylar | `GET /me/saved`, `PUT /me/saved/{placeId}`, `DELETE /me/saved/{placeId}` |
 | Guruh safari | `POST /groups` `{name, cityId?}` → `inviteCode` · `POST /groups/join` `{inviteCode}` · `GET /groups`, `GET /groups/{id}` (a'zolar, ovozlar) · `PATCH /groups/{id}/me` `{interests, budget, pace}` · `POST /groups/{id}/votes` `{placeId, vote: 1\|-1\|0}` · `POST /groups/{id}/trip` `{startDate, days}` · `DELETE /groups/{id}/members/me` |
 | Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
@@ -223,6 +225,30 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - Guruh safari: umumiy marshrut a'zolar istaklaridan tuziladi — qiziqishlar (ko'p uchraganlari), eng kichik byudjet,
   eng sokin temp; ko'pchilik "ha" degan joy ustun, yarmi yoki ko'pi "yo'q" degan joy chiqariladi. Marshrutni barcha a'zolar
   ko'radi va tahrirlaydi; kundalik — har kimning o'ziniki.
+
+## Yangi joylarni avtomatik topish (`internal/discover`)
+
+Manbalar (hammasi qonuniy, bazada saqlash mumkin): **Wikidata** (CC0, har 24 soatda — `DISCOVERY_EVERY`),
+**OpenStreetMap** (ODbL, haftalik — `deploy/osm-refresh.sh`), **foydalanuvchi takliflari** (`POST /places/suggest` —
+Instagram/Telegramda ko'rgan joyini yuboradi; scraping o'rniga), **tadqiqot nomzodlari** (`seed/candidates`).
+
+1. **Kategoriya** — `discover.Classify`: OSM teglari (`amenity=marketplace` → bazaar, `craft=*` → workshop,
+   `place_of_worship+muslim` → mosque ...), Wikidata klasslari (Q33506 muzey, Q132834 madrasa ...) va nomdagi
+   uz/ru/en kalit so'zlar (choyxona → cafe, kulolchilik → workshop, teatr → theatre ...). Bir nechta manba bir xil
+   desa ishonch oshadi, qarama-qarshi bo'lsa kamayadi; sabablari `reasons` da (`osm:amenity=cafe`, `name:muzey`).
+2. **Takror** — bir xil Wikidata/OSM id yoki 150–350 m ichida o'xshash nom (umumiy so'zlarsiz: "madrasasi",
+   "Медресе" solishtirilmaydi; tahrir masofasi ≤15%). Takror topilsa mavjud joyga Wikidata id bog'lanadi.
+3. **Qaror** — ishonch ≥ 0.8 va manba ishonchli (Wikidata/OSM) → avtomatik chop etiladi (`trust=public`,
+   `source=wikidata`); aks holda admin navbati. Foydalanuvchi taklifi **hech qachon** tekshiruvsiz chiqmaydi;
+   tasdiqlangach `trust=community`.
+4. Wikidata/OSM joylari "ommaviy import" (`source=osm` filtri ikkalasini oladi): ro'yxatda jamoa tekshirganlardan
+   keyin, rejalashtirgichda ×0.75. Rasmlar avtomatik olinmaydi (Commons litsenziyalari har xil).
+
+```sh
+go run ./cmd/discover wikidata --dry-run   # nima qo'shilishini ko'rish
+go run ./cmd/discover research             # tadqiqot nomzodlarini tekshirib chop etish
+go run ./cmd/discover stats
+```
 
 ## OpenStreetMap importi
 

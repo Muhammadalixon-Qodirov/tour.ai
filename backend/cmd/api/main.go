@@ -13,6 +13,7 @@ import (
 	_ "time/tzdata" // vaqt zonalari binar ichida (konteynerda tzdata bo'lmasa ham ishlaydi)
 
 	"yoldosh/internal/api"
+	"yoldosh/internal/discover"
 	"yoldosh/internal/platform"
 	"yoldosh/internal/store"
 	"yoldosh/static"
@@ -48,6 +49,18 @@ func run() error {
 	if os.Getenv("EXPO_PUSH_ENABLED") == "true" {
 		go apiSrv.RunNudger(ctx, api.NewExpoPush(os.Getenv("EXPO_ACCESS_TOKEN")), 5*time.Minute)
 		slog.Info("kechki eslatmalar yoqildi")
+	}
+	// Yangi joylarni avtomatik topish: Wikidata (CC0) dan har DISCOVERY_EVERY da (masalan 24h). Bo'sh — o'chiq.
+	if v := os.Getenv("DISCOVERY_EVERY"); v != "" {
+		every, err := time.ParseDuration(v)
+		if err != nil || every < time.Hour {
+			return errors.New("DISCOVERY_EVERY: kamida 1h (masalan 24h)")
+		}
+		if ua := os.Getenv("DISCOVERY_USER_AGENT"); ua != "" {
+			discover.UserAgent = ua
+		}
+		go discover.Schedule(ctx, db, slog.Default(), 2*time.Minute, every)
+		slog.Info("joy topish yoqildi", "every", every)
 	}
 	srv := &http.Server{
 		Addr:              cfg.Addr,

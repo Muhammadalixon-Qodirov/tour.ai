@@ -31,7 +31,7 @@ var (
 	foodRe    = regexp.MustCompile(`^(restaurant|cafe)$`)
 	sightRe   = regexp.MustCompile(`^(museum|attraction|viewpoint|gallery|theme_park|zoo)$`)
 	serviceRe = regexp.MustCompile(`^(hospital|clinic|pharmacy|police|atm|bureau_de_change|fuel|charging_station|embassy)$`)
-	keepTag   = regexp.MustCompile(`^(name(:uz|:ru|:en)?|alt_name|old_name|opening_hours|phone|contact:.*|website|stars|cuisine|addr:.*|wheelchair|payment:.*|historic|tourism|amenity|wikidata|wikipedia|fee|operator|brand|fuel:.*|internet_access|rooms|beds|check_in|check_out|heritage|start_date|description(:uz|:ru|:en)?|healthcare|emergency|religion)$`)
+	keepTag   = regexp.MustCompile(`^(name(:uz|:ru|:en)?|alt_name|old_name|opening_hours|phone|contact:.*|website|stars|cuisine|addr:.*|wheelchair|payment:.*|historic|tourism|amenity|wikidata|wikipedia|fee|operator|brand|fuel:.*|internet_access|rooms|beds|check_in|check_out|heritage|start_date|leisure|craft|shop|building|artwork_type|description(:uz|:ru|:en)?|healthcare|emergency|religion)$`)
 )
 
 // classify — obyekt qaysi guruhga tushadi (bo'sh — kerak emas).
@@ -46,8 +46,17 @@ func classify(t osm.Tags) (group, kind string) {
 		return "sight", m["tourism"]
 	case m["historic"] != "" && m["name"] != "":
 		return "sight", "historic:" + m["historic"]
-	case m["amenity"] == "theatre" && m["name"] != "":
-		return "sight", "theatre"
+	case (m["amenity"] == "theatre" || m["amenity"] == "concert_hall" || m["amenity"] == "arts_centre") && m["name"] != "":
+		return "sight", m["amenity"]
+	case m["amenity"] == "marketplace" && m["name"] != "":
+		return "sight", "marketplace"
+	case m["craft"] != "" && m["name"] != "":
+		return "sight", "craft:" + m["craft"]
+	case (m["leisure"] == "park" || m["leisure"] == "garden") && m["name"] != "":
+		return "sight", "leisure:" + m["leisure"]
+	// masjidlar: faqat tarixiy/mashhurlari (har mahalla masjidi katalogga kerak emas)
+	case m["amenity"] == "place_of_worship" && m["name"] != "" && (m["wikidata"] != "" || m["wikipedia"] != "" || m["heritage"] != ""):
+		return "sight", "place_of_worship"
 	case serviceRe.MatchString(m["amenity"]):
 		return "service", m["amenity"]
 	case m["office"] == "diplomatic":

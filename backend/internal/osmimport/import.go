@@ -8,11 +8,11 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"unicode"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
+	"yoldosh/internal/discover"
 	"yoldosh/internal/domain"
 )
 
@@ -182,43 +182,27 @@ func existingPlaces(ctx context.Context, tx pgx.Tx) ([]existingPlace, error) {
 		if err := rows.Scan(&e.loc.Lat, &e.loc.Lng, &e.name); err != nil {
 			return nil, err
 		}
-		e.name = norm(e.name)
 		out = append(out, e)
 	}
 	return out, rows.Err()
 }
 
-// norm — taqqoslash uchun: kichik harf, faqat harf/raqam, o'/g' apostroflarsiz.
-func norm(s string) string {
-	var b strings.Builder
-	for _, r := range strings.ToLower(s) {
-		if unicode.IsLetter(r) || unicode.IsDigit(r) {
-			b.WriteRune(r)
-		}
-	}
-	return b.String()
-}
-
-// dupOf — bazada (qo'lda yoki tadqiqot orqali kiritilgan) xuddi shu joy bormi: 150 m ichida va nomi o'xshash.
+// dupOf — bazada (qo'lda yoki tadqiqot orqali kiritilgan) xuddi shu joy bormi: 150 m ichida va nomi o'xshash
+// (umumiy so'zlar — "madrasasi", "masjid" — hisobga olinmaydi, discover.SameName).
 func dupOf(ex []existingPlace, p POI) bool {
 	loc := domain.LatLng{Lat: p.Lat, Lng: p.Lng}
-	names := []string{norm(p.Tags["name"]), norm(p.Tags["name:uz"]), norm(p.Tags["name:ru"]), norm(p.Tags["name:en"])}
+	names := []string{p.Tags["name"], p.Tags["name:uz"], p.Tags["name:ru"], p.Tags["name:en"]}
 	for _, e := range ex {
 		if domain.DistanceM(e.loc, loc) > 150 {
 			continue
 		}
 		for _, n := range names {
-			if len(n) >= 4 && len(e.name) >= 4 && (strings.Contains(e.name, n) || strings.Contains(n, e.name) || prefixMatch(n, e.name, 5)) {
+			if n != "" && discover.SameName(n, e.name) {
 				return true
 			}
 		}
 	}
 	return false
-}
-
-func prefixMatch(a, b string, n int) bool {
-	ra, rb := []rune(a), []rune(b)
-	return len(ra) >= n && len(rb) >= n && string(ra[:n]) == string(rb[:n])
 }
 
 func names(t map[string]string) map[string]string {
@@ -270,33 +254,34 @@ type catInfo struct {
 	visit    int
 }
 
+// placeCategory — umumiy klassifikator (discover.Classify): OSM teglari + nom (uz/ru/en kalit so'zlar).
 func placeCategory(p POI) (catInfo, bool) {
-	switch p.Kind {
-	case "restaurant":
-		return catInfo{"restaurant", [3]string{"Restoran", "Ресторан", "Restaurant"}, 60}, true
-	case "cafe":
-		return catInfo{"cafe", [3]string{"Kafe", "Кафе", "Café"}, 45}, true
-	case "museum":
-		return catInfo{"museum", [3]string{"Muzey", "Музей", "Museum"}, 60}, true
-	case "gallery":
-		return catInfo{"gallery", [3]string{"Galereya", "Галерея", "Gallery"}, 45}, true
-	case "viewpoint":
-		return catInfo{"viewpoint", [3]string{"Manzara nuqtasi", "Смотровая площадка", "Viewpoint"}, 30}, true
-	case "theme_park", "zoo":
-		return catInfo{"park", [3]string{"Bog' va dam olish maskani", "Парк", "Park"}, 90}, true
-	case "theatre":
-		return catInfo{"theatre", [3]string{"Teatr", "Театр", "Theatre"}, 120}, true
-	case "attraction":
-		return catInfo{"monument", [3]string{"Diqqatga sazovor joy", "Достопримечательность", "Attraction"}, 45}, true
+	tags := map[string]string{}
+	for k, v := range p.Tags {
+		tags[k] = v
 	}
-	if strings.HasPrefix(p.Kind, "historic:") {
-		switch strings.TrimPrefix(p.Kind, "historic:") {
-		case "memorial", "monument", "castle", "archaeological_site", "ruins", "building", "city_gate", "tomb", "fort",
-			"mosque", "madrasa", "mausoleum", "heritage", "yes", "citywalls", "manor", "church":
-			return catInfo{"monument", [3]string{"Tarixiy obida", "Исторический памятник", "Historic site"}, 40}, true
+	// eski extract fayllarida teg o'rniga faqat Kind bo'lishi mumkin
+	switch k := p.Kind; {
+	case strings.HasPrefix(k, "historic:"):
+		if tags["historic"] == "" {
+			tags["historic"] = strings.TrimPrefix(k, "historic:")
+		}
+	case k == "restaurant" || k == "cafe" || k == "theatre" || k == "marketplace" || k == "concert_hall" || k == "arts_centre" ||
+		k == "place_of_worship":
+		if tags["amenity"] == "" {
+			tags["amenity"] = k
+		}
+	case k == "museum" || k == "gallery" || k == "viewpoint" || k == "theme_park" || k == "zoo" || k == "attraction":
+		if tags["tourism"] == "" {
+			tags["tourism"] = k
 		}
 	}
-	return catInfo{}, false
+	res := discover.Classify(discover.Signals{Names: names(p.Tags), OSM: tags})
+	if res.Category == "" || res.Confidence < 0.5 {
+		return catInfo{}, false
+	}
+	l := discover.CategoryLabel[res.Category]
+	return catInfo{res.Category, [3]string{l["uz"], l["ru"], l["en"]}, discover.DefaultVisitMin(res.Category)}, true
 }
 
 func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
@@ -329,13 +314,17 @@ func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
 	}
 	id := idFor(p.OSM)
 	if _, err := tx.Exec(ctx, `INSERT INTO places (id, city_id, category, novelty, status, lat, lng, interests, price_level,
-		visit_duration_min, opening_hours, wheelchair, source, trust, osm_id, contacts, published_at)
-		VALUES ($1,$2,$3,$4,'published',$5,$6,$7,$8,$9,$10,$11,'osm','public',$12,$13,now())
+		visit_duration_min, opening_hours, wheelchair, source, trust, osm_id, contacts, published_at, wikidata)
+		VALUES ($1,$2,$3,$4,'published',$5,$6,$7,$8,$9,$10,$11,'osm','public',$12,$13,now(),
+		  (SELECT $14::text WHERE $14 <> '' AND NOT EXISTS (SELECT 1 FROM places WHERE wikidata = $14)))
 		ON CONFLICT (id) DO UPDATE SET city_id = EXCLUDED.city_id, lat = EXCLUDED.lat, lng = EXCLUDED.lng,
+		  category = CASE WHEN places.source = 'osm' THEN EXCLUDED.category ELSE places.category END,
+		  visit_duration_min = CASE WHEN places.source = 'osm' THEN EXCLUDED.visit_duration_min ELSE places.visit_duration_min END,
+		  interests = CASE WHEN places.source = 'osm' THEN EXCLUDED.interests ELSE places.interests END,
 		  opening_hours = CASE WHEN places.source = 'osm' THEN EXCLUDED.opening_hours ELSE places.opening_hours END,
 		  contacts = CASE WHEN places.source = 'osm' THEN EXCLUDED.contacts ELSE places.contacts END, updated_at = now()`,
 		id, city, ci.category, novelty, p.Lat, p.Lng, interests, priceLevel, ci.visit, hj, p.Tags["wheelchair"] == "yes",
-		p.OSM, cj); err != nil {
+		p.OSM, cj, p.Tags["wikidata"]); err != nil {
 		return err
 	}
 	tagline := ci.tag
