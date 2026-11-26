@@ -102,6 +102,7 @@ func (s *Server) Handler() http.Handler {
 	pub("GET /api/v1/places", s.listPlaces)
 	pub("GET /api/v1/places/{id}", s.getPlace)
 	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
+	mux.Handle("GET /api/v1/places/{id}/guide", s.optionalUser(s.rate("public", 600, http.HandlerFunc(s.placeGuide))))
 	mux.Handle("GET /api/v1/places/{id}/nearby", s.optionalUser(s.rate("public", 600, http.HandlerFunc(s.placeNearby))))
 	pub("GET /api/v1/geofences", s.geofences)
 	pub("GET /api/v1/prices", s.listPrices)

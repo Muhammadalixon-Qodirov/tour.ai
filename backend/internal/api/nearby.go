@@ -82,22 +82,37 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 			limit = n
 		}
 	}
-	budget := 0 // kirgan foydalanuvchining byudjeti (1 tejamkor .. 3 qulay)
-	if uid := userOf(r); uid != "" {
-		if u, err := s.store.User(ctx, uid); err == nil && u.Budget != nil {
-			budget = *u.Budget
-		}
-	}
-	city, err := s.store.City(ctx, origin.CityID, []string{"en"})
+	resp, err := s.nearbyData(ctx, origin, s.userBudget(r), limit, lang)
 	if err != nil {
 		s.internalError(w, r, err)
 		return
+	}
+	w.Header().Set("Cache-Control", "private, max-age=60")
+	writeJSON(w, http.StatusOK, resp)
+}
+
+// userBudget — kirgan foydalanuvchining byudjeti (1 tejamkor .. 3 qulay), bo'lmasa 0.
+func (s *Server) userBudget(r *http.Request) int {
+	if uid := userOf(r); uid != "" {
+		if u, err := s.store.User(r.Context(), uid); err == nil && u.Budget != nil {
+			return *u.Budget
+		}
+	}
+	return 0
+}
+
+// nearbyData — joy atrofidagi turar joy, ovqat, diqqatga sazovor joylar va xizmatlar (saralangan).
+func (s *Server) nearbyData(ctx context.Context, origin store.Place, budget, limit int, lang string) (nearbyResp, error) {
+	var resp nearbyResp
+	city, err := s.store.City(ctx, origin.CityID, []string{"en"})
+	if err != nil {
+		return resp, err
 	}
 	loc := tz(city.Timezone)
 	now := s.now().In(loc)
 	wd, minute := int(now.Weekday()), now.Hour()*60+now.Minute()
 
-	resp := nearbyResp{Origin: map[string]any{"placeId": origin.ID, "name": origin.Name, "location": origin.Loc},
+	resp = nearbyResp{Origin: map[string]any{"placeId": origin.ID, "name": origin.Name, "location": origin.Loc},
 		Stays: []nearbyStay{}, Food: []nearbyPlace{}, Sights: []nearbyPlace{}, Services: map[string]nearbyService{},
 		Attribution: "© OpenStreetMap contributors"}
 
@@ -107,16 +122,14 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 		stays, err = s.store.Stays(ctx, store.StayFilter{Near: &origin.Loc, RadiusM: 5000, Limit: 60})
 	}
 	if err != nil {
-		s.internalError(w, r, err)
-		return
+		return resp, err
 	}
 	resp.Stays = rankStays(s, stays, budget, limit, lang)
 
 	// ---- Ovqatlanish: 1.5 km, ochiq va tanlangan joylar ustun ----
 	food, err := s.nearPlaces(ctx, origin, []string{"restaurant", "cafe"}, 1500, limit, lang)
 	if err != nil {
-		s.internalError(w, r, err)
-		return
+		return resp, err
 	}
 	resp.Food = rankPlaces(s, food, origin.ID, limit, lang, func(p store.Place) (float64, string) {
 		score, why := decay(*p.DistanceM, 500), "closest"
@@ -142,8 +155,7 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 	sights, err := s.nearPlaces(ctx, origin, []string{"monument", "museum", "mosque", "gallery", "workshop", "park", "viewpoint",
 		"bazaar", "theatre", "ecovillage"}, 2000, limit, lang)
 	if err != nil {
-		s.internalError(w, r, err)
-		return
+		return resp, err
 	}
 	resp.Sights = rankPlaces(s, sights, origin.ID, limit, lang, func(p store.Place) (float64, string) {
 		score, why := decay(*p.DistanceM, 700), "near"
@@ -164,14 +176,12 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		if err != nil {
-			s.internalError(w, r, err)
-			return
+			return resp, err
 		}
 		d := *sv.DistanceM
 		resp.Services[kind] = nearbyService{s.serviceDTO(sv, lang, loc), nearbyItem{WalkMin: walkMin(d), Reason: nearbyWhy("closest", lang)}}
 	}
-	w.Header().Set("Cache-Control", "private, max-age=60")
-	writeJSON(w, http.StatusOK, resp)
+	return resp, nil
 }
 
 // nearPlaces — radius ichida kam bo'lsa (limit dan kam) radiusni 3 baravar kengaytiradi.

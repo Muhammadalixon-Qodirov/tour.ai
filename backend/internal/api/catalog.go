@@ -74,6 +74,7 @@ type placeDTO struct {
 	Payment         paymentDTO            `json:"payment"`
 	GeofenceRadiusM int                   `json:"geofenceRadiusM"`
 	NearbyPrices    []priceItemDTO        `json:"nearbyPrices"`
+	Navigation      navigationDTO         `json:"navigation"` // "Qanday boraman?" — Yandex/2GIS/Google havolalari
 }
 
 // entryFeeDTO — kirish narxi: mahalliy (rezident) va chet ellik tarifi; noma'lum tarif yo'q (0 = bepul).
@@ -381,6 +382,7 @@ func (s *Server) getPlace(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	d := s.placeDetailDTO(r, p, rules[p.ID], lang)
+	d.Navigation = navigationFor(p.Name, p.Loc)
 	prices, err := s.store.Prices(r.Context(), store.PriceFilter{City: p.CityID})
 	if err != nil {
 		s.internalError(w, r, err)
