@@ -65,7 +65,9 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
-	pub := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.rate("general", 120, h)) }
+	// Ochiq (anonim) endpointlar IP bo'yicha cheklanadi. Web sayt (Vercel SSR) ko'p tashrif buyuruvchining so'rovini
+	// bitta IP dan yuboradi — shuning uchun limit kengroq. Kirgan foydalanuvchilar o'z limitida (120/daq).
+	pub := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.rate("public", 600, h)) }
 	user := func(pattern string, h http.HandlerFunc) {
 		mux.Handle(pattern, s.requireUser(s.rate("general", 120, h)))
 	}
@@ -89,7 +91,7 @@ func (s *Server) Handler() http.Handler {
 	pub("GET /api/v1/places", s.listPlaces)
 	pub("GET /api/v1/places/{id}", s.getPlace)
 	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
-	mux.Handle("GET /api/v1/places/{id}/nearby", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.placeNearby))))
+	mux.Handle("GET /api/v1/places/{id}/nearby", s.optionalUser(s.rate("public", 600, http.HandlerFunc(s.placeNearby))))
 	pub("GET /api/v1/geofences", s.geofences)
 	pub("GET /api/v1/prices", s.listPrices)
 	mux.Handle("POST /api/v1/prices/reports", s.optionalUser(s.rate("price-report", 10, http.HandlerFunc(s.reportPrice))))
@@ -138,8 +140,8 @@ func (s *Server) Handler() http.Handler {
 	user("POST /api/v1/me/push-token", s.setPushToken)
 
 	// lenta
-	mux.Handle("GET /api/v1/feed", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.feed))))
-	mux.Handle("GET /api/v1/posts/{id}", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.getPost))))
+	mux.Handle("GET /api/v1/feed", s.optionalUser(s.rate("public", 600, http.HandlerFunc(s.feed))))
+	mux.Handle("GET /api/v1/posts/{id}", s.optionalUser(s.rate("public", 600, http.HandlerFunc(s.getPost))))
 	user("POST /api/v1/posts/{id}/like", s.likePost(true))
 	user("DELETE /api/v1/posts/{id}/like", s.likePost(false))
 	mux.Handle("POST /api/v1/posts/{id}/report", s.requireUser(s.rate("report", 10, http.HandlerFunc(s.reportPost))))
