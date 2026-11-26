@@ -36,7 +36,8 @@ type placeSummaryDTO struct {
 	IsOpenNow        *bool          `json:"isOpenNow,omitempty"`
 	Crowd            *crowdDTO      `json:"crowd,omitempty"`
 	IsPartner        bool           `json:"isPartner"`
-	Trust            string         `json:"trust"` // official | public | community | sample (sample — demo, UI da belgilansin)
+	Trust            string         `json:"trust"`  // official | public | community | sample (sample — demo, UI da belgilansin)
+	Source           string         `json:"source"` // osm = OpenStreetMap ommaviy importi; boshqasi jamoa tekshirgan
 	DistanceM        *int           `json:"distanceM,omitempty"`
 }
 
@@ -163,7 +164,7 @@ func (s *Server) summaryDTO(p store.Place, loc *time.Location) placeSummaryDTO {
 	d := placeSummaryDTO{
 		ID: p.ID, CityID: p.CityID, Name: p.Name, Tagline: p.Tagline, Category: p.Category, Novelty: p.Novelty,
 		Cover: s.coverOf(p), Location: p.Loc, Rating: p.Rating, ReviewsCount: p.Reviews, PriceLevel: p.PriceLevel,
-		VisitDurationMin: p.VisitMin, IsPartner: p.IsPartner, Trust: p.Trust,
+		VisitDurationMin: p.VisitMin, IsPartner: p.IsPartner, Trust: p.Trust, Source: p.Source,
 	}
 	if p.OpenedAt != nil {
 		v := p.OpenedAt.Format(time.DateOnly)
@@ -275,7 +276,10 @@ func (s *Server) listPlaces(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query()
 	fe := fieldErrors{}
 	f := store.PlaceFilter{City: q.Get("city"), Category: q.Get("category"), Novelty: q.Get("novelty"),
-		Interest: q.Get("interest"), Q: strings.TrimSpace(q.Get("q")), Limit: 20}
+		Interest: q.Get("interest"), Q: strings.TrimSpace(q.Get("q")), Source: q.Get("source"), Limit: 20}
+	if f.Source != "" && f.Source != "curated" && f.Source != "osm" {
+		fe.add("source", "curated | osm")
+	}
 	if f.Category != "" && !domain.ValidCategory(f.Category) {
 		fe.add("category", "unknown category")
 	}

@@ -113,6 +113,7 @@ type Place struct {
 	Crowd           *string
 	BestTime        *string
 	HoursTrust      *string // ish vaqti ishonch darajasi; nil = Trust
+	Source          string  // research | demo | manual | osm | ...
 	DistanceM       *float64
 
 	// faqat batafsil so'rovda
@@ -130,7 +131,7 @@ type Place struct {
 const placeCols = `p.id, p.city_id, t.name, t.tagline, p.category, p.novelty, p.opened_at, p.images, p.lat, p.lng,
   p.rating::float8, p.reviews_count, p.price_level, p.visit_duration_min, p.opening_hours, p.is_partner, p.interests,
   p.wheelchair, p.family_friendly, p.easy_walk, p.pay_card, p.cash_only, p.geofence_radius_m, p.rules_version, p.status,
-  p.aliases, p.trust, p.verified_at, p.crowd, t.best_time, p.hours_trust`
+  p.aliases, p.trust, p.verified_at, p.crowd, t.best_time, p.hours_trust, p.source`
 
 // placeText — $1 = til zanjiri.
 const placeText = `CROSS JOIN LATERAL (
@@ -142,7 +143,7 @@ func placeDest(p *Place) []any {
 	return []any{&p.ID, &p.CityID, &p.Name, &p.Tagline, &p.Category, &p.Novelty, &p.OpenedAt, &p.Images,
 		&p.Loc.Lat, &p.Loc.Lng, &p.Rating, &p.Reviews, &p.PriceLevel, &p.VisitMin, &p.Hours, &p.IsPartner, &p.Interests,
 		&p.Wheelchair, &p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.GeofenceRadiusM, &p.RulesVersion, &p.Status,
-		&p.Aliases, &p.Trust, &p.VerifiedAt, &p.Crowd, &p.BestTime, &p.HoursTrust}
+		&p.Aliases, &p.Trust, &p.VerifiedAt, &p.Crowd, &p.BestTime, &p.HoursTrust, &p.Source}
 }
 
 type PlaceFilter struct {
@@ -154,6 +155,7 @@ type PlaceFilter struct {
 	Near       *domain.LatLng
 	RadiusM    float64
 	Wheelchair bool
+	Source     string // "" | curated (OSM dan tashqari) | osm
 	Limit      int
 	Offset     int
 }
@@ -187,7 +189,14 @@ func (s *Store) ListPlaces(ctx context.Context, f PlaceFilter, langs []string) (
 		where = append(where, "p.wheelchair")
 	}
 	dist := "NULL::float8"
-	order := "CASE p.novelty WHEN 'iconic' THEN 1 ELSE 0 END, p.rating DESC, p.id"
+	switch f.Source {
+	case "curated":
+		where = append(where, "p.source <> 'osm'")
+	case "osm":
+		where = append(where, "p.source = 'osm'")
+	}
+	// Jamoa tekshirgan joylar har doim OSM ommaviy importidan oldin.
+	order := "CASE WHEN p.source = 'osm' THEN 1 ELSE 0 END, CASE p.novelty WHEN 'iconic' THEN 1 ELSE 0 END, p.rating DESC, p.id"
 	if f.Near != nil {
 		pt := "ll_to_earth(" + arg(f.Near.Lat) + ", " + arg(f.Near.Lng) + ")"
 		dist = "earth_distance(" + pt + ", ll_to_earth(p.lat, p.lng))"

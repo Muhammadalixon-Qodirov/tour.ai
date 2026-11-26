@@ -167,7 +167,7 @@ type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinat
 | Endpoint | Tavsif |
 |---|---|
 | `GET /cities` | `[{ id, name, country, cover, center: LatLng, placesCount, newPlacesCount }]` |
-| `GET /places` | filtrlar: `city`, `category`, `novelty`, `interest`, `q`, `near=lat,lng`, `radiusM`, `openNow`, `wheelchair` → `PlaceSummary[]` (sahifalangan) |
+| `GET /places` | filtrlar: `city`, `category`, `novelty`, `interest`, `q`, `near=lat,lng`, `radiusM`, `openNow`, `wheelchair`, `source=curated|osm` → `PlaceSummary[]` (sahifalangan; jamoa tekshirgan joylar har doim OSM importidan oldin; har bir joyda `source`: `osm` = OpenStreetMap ommaviy importi) |
 | `GET /places/{id}` | to'liq `Place` |
 | `GET /places/{id}/reviews` | `[{ id, author, rating, text, createdAt }]` |
 | `GET /events` | filtrlar: `city`, `from`, `to` (`YYYY-MM-DD` shahar vaqti yoki RFC 3339) → `Event[]`, `startsAt` bo'yicha. O'tib ketgan (`endsAt < hozir`) tadbirlar hech qachon qaytmaydi. `interest` hali yo'q |
