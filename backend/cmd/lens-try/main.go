@@ -54,6 +54,7 @@ func main() {
 		check(err)
 	}
 	fmt.Printf("BUYUM: %v | so'rov=%q alt=%q | %s | ishonch %.2f\n", id.Item, id.Query, id.AltQuery, id.Category, id.Confidence)
+	pricing.SetUzum(os.Getenv("UZUM_BEARER"), "", "")
 	res := pricing.NewSearcher(os.Getenv("MARKET_PROXY"), os.Getenv("MARKET_FETCH_URL")).Search(ctx, id.Query)
 	var flat []pricing.Listing
 	for _, r := range res {

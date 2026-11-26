@@ -50,7 +50,11 @@ func (c *Client) Get(ctx context.Context, u, accept string) ([]byte, error) {
 }
 
 func (c *Client) PostJSON(ctx context.Context, u string, body []byte, headers map[string]string) ([]byte, error) {
-	return c.do(ctx, "POST", u, "application/json", body, headers)
+	h := map[string]string{"Content-Type": "application/json"}
+	for k, v := range headers {
+		h[k] = v
+	}
+	return c.do(ctx, "POST", u, "application/json", body, h)
 }
 
 const userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"

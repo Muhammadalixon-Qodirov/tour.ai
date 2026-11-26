@@ -2,9 +2,13 @@ package pricing
 
 import (
 	"bytes"
+	"context"
 	"image"
 	"image/color"
 	"image/png"
+	"net/http"
+	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -72,5 +76,45 @@ func TestSearcherModes(t *testing.T) {
 	}
 	if s := NewSearcher("", "http://market-fetch:8890"); s.fallback == nil {
 		t.Fatal("fetch — fallback bo'lishi kerak")
+	}
+}
+
+func TestUzumParse(t *testing.T) {
+	SetUzum("Bearer tok123", "", "")
+	if !UzumReady() {
+		t.Fatal("token o'rnatilmadi")
+	}
+	var gotAuth, gotCT string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotAuth, gotCT = r.Header.Get("Authorization"), r.Header.Get("Content-Type")
+		w.Write([]byte(`{"data":{"makeSearch":{"total":2,"items":[
+			{"catalogCard":{"minSellPrice":10990000,"discovery":{"title":"iPhone 15 Pro","productId":2948956}}},
+			{"catalogCard":{"minSellPrice":10990000,"discovery":{"title":"iPhone 15 Pro","productId":2948956}}},
+			{"catalogCard":{"minSellPrice":0,"discovery":{"title":"Aksessuar","id":1}}}
+		]}}}`))
+	}))
+	defer srv.Close()
+	// Client -> fake server
+	m := uzumMarket()
+	c := &Client{do: func(ctx context.Context, method, u, accept string, body []byte, h map[string]string) ([]byte, error) {
+		return httpDo(ctx, srv.Client(), method, srv.URL, accept, body, h)
+	}}
+	ls, err := m.Fetch(context.Background(), c, "iphone 15 pro")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ls) != 1 || ls[0].Price != 10990000 || ls[0].Market != "uzum" || ls[0].Title != "iPhone 15 Pro" {
+		t.Fatalf("natija (takror va narxsiz tashlanishi kerak): %+v", ls)
+	}
+	if !strings.Contains(ls[0].URL, "2948956") {
+		t.Fatalf("url: %s", ls[0].URL)
+	}
+	if gotAuth != "Bearer tok123" || gotCT != "application/json" {
+		t.Fatalf("sarlavhalar: %q %q", gotAuth, gotCT)
+	}
+	// token bo'sh — Uzum o'tkazib yuboriladi
+	SetUzum("", "", "")
+	if ls, err := m.Fetch(context.Background(), c, "x"); err != nil || ls != nil {
+		t.Fatalf("tokensiz: %v %v", ls, err)
 	}
 }
