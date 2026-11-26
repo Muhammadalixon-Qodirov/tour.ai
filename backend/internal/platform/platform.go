@@ -33,6 +33,7 @@ type Config struct {
 	AnthropicKey    string
 	GroqKey         string // Anthropic kaliti bo'lmasa Groq (openai/gpt-oss-120b)
 	LensVisionModel string // "Adolatli narx" rasm tanish modeli (Groq; standart qwen/qwen3.8-27b)
+	STTKotibURL     string // serverdagi Kotib STT (stt-kotib), masalan http://stt-kotib:8000
 	STTRelaySocket  string // stt-relay unix-socket (serverdagi o'zbekcha Kotib STT); bo'sh — faqat Groq Whisper
 	MarketProxy     string // market qidiruvi uchun HTTP proksi (O'zbekistondagi server); bo'sh — to'g'ridan-to'g'ri
 	CleanerKey      string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
@@ -71,6 +72,7 @@ func LoadConfig() (Config, error) {
 		LensVisionModel: os.Getenv("LENS_VISION_MODEL"),
 		MarketProxy:     os.Getenv("MARKET_PROXY"),
 		STTRelaySocket:  os.Getenv("STT_RELAY_SOCKET"),
+		STTKotibURL:     os.Getenv("STT_KOTIB_URL"),
 		AIModel:         os.Getenv("AI_MODEL"),
 		AIEffort:        os.Getenv("AI_EFFORT"),
 		WebBaseURL:      strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),

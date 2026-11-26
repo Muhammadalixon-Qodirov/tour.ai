@@ -43,6 +43,7 @@ services:
       LENS_VISION_MODEL: ${LENS_VISION_MODEL:-}
       MARKET_PROXY: ${MARKET_PROXY:-}
       STT_RELAY_SOCKET: ${STT_RELAY_SOCKET:-}
+      STT_KOTIB_URL: ${STT_KOTIB_URL:-}
       AI_MODEL: ${AI_MODEL:-}
       AI_EFFORT: ${AI_EFFORT:-}
       # X-Forwarded-For ga ishoniladigan proksilar (IP yoki CIDR, vergul bilan): host nginx konteynerga docker
@@ -96,6 +97,18 @@ services:
       STT_SOCKET: /run/stt/stt.sock
     volumes:
       - stt_sock:/run/stt
+    logging: *logging
+
+  # Kotib — o'zbekcha STT serverning o'zida (CPU, faster-whisper int8). GPU kompyuter o'chiq bo'lsa ham ishlaydi.
+  # Yoqish: COMPOSE_PROFILES ga sttkotib, STT_KOTIB_URL=http://stt-kotib:8000. Birinchi build ~3 GB model yuklaydi.
+  stt-kotib:
+    profiles: ["sttkotib"]
+    build: ./stt-kotib
+    restart: unless-stopped
+    cpus: 4
+    mem_limit: 3g
+    environment:
+      KOTIB_THREADS: "4"
     logging: *logging
 
   caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)

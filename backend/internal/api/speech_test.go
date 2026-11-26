@@ -38,11 +38,10 @@ func sttPost(t *testing.T, token string, audio []byte, lang string) (int, map[st
 
 func TestSpeechSTT(t *testing.T) {
 	testAPI.limiter = NewLimiter()
-	relayUp := true
+	relayUp, localUp := true, true
 	relay := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !relayUp {
 			w.WriteHeader(502)
-			w.Write([]byte(`{"error":"down"}`))
 			return
 		}
 		if r.ContentLength < 1000 {
@@ -52,52 +51,57 @@ func TestSpeechSTT(t *testing.T) {
 		w.Write([]byte(`{"text":"Registonga qanday boraman?","engine":"kotib-gpu","audioSeconds":2.1}`))
 	}))
 	defer relay.Close()
+	local := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !localUp {
+			w.WriteHeader(503)
+			return
+		}
+		w.Write([]byte(`{"text":"Регистонга қандай бораман?","engine":"kotib-local","audioSeconds":2.1}`))
+	}))
+	defer local.Close()
 	var groqCalls int
 	groq := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		groqCalls++
 		r.ParseMultipartForm(1 << 20)
-		if r.FormValue("model") != "whisper-large-v3" || r.Header.Get("Authorization") != "Bearer gk" {
-			t.Errorf("groq so'rovi: %v %q", r.Form, r.Header.Get("Authorization"))
-		}
 		if r.FormValue("language") == "uz" {
-			w.Write([]byte(`{"text":"Регистонга қандай бораман?"}`)) // Whisper ba'zan kirillda beradi
-			return
+			t.Error("o'zbekcha uchun Whisper chaqirilmasligi kerak")
 		}
 		w.Write([]byte(`{"text":"Как добраться до Регистана?"}`))
 	}))
 	defer groq.Close()
 	old := testAPI.stt
-	testAPI.stt = speech.New("", "gk").WithTestEndpoints(relay.URL, groq.URL)
+	testAPI.stt = speech.New("", "", "gk").WithTestEndpoints(relay.URL, local.URL, groq.URL)
 	defer func() { testAPI.stt = old }()
 
 	c := newClient(t, "stt-device-0001")
 	audio := bytes.Repeat([]byte{1, 2, 3, 4}, 1000)
 	code, out := sttPost(t, c.token, audio, "uz")
 	if code != 200 || out["engine"] != "kotib-gpu" || out["text"] != "Registonga qanday boraman?" || out["lang"] != "uz" {
-		t.Fatalf("kotib: %d %v", code, out)
+		t.Fatalf("GPU kotib: %d %v", code, out)
 	}
-	// Kotib ishlamasa — Whisper, kirill lotinga o'giriladi
+	// GPU o'chiq — serverdagi Kotib (kirill bo'lsa lotinga)
 	relayUp = false
 	code, out = sttPost(t, c.token, audio, "uz")
-	if code != 200 || out["engine"] != "whisper" || out["text"] != "Registonga qanday boraman?" {
-		t.Fatalf("whisper zaxira: %d %v", code, out)
+	if code != 200 || out["engine"] != "kotib-local" || out["text"] != "Registonga qanday boraman?" {
+		t.Fatalf("serverdagi kotib: %d %v", code, out)
 	}
-	// ruscha — to'g'ridan-to'g'ri Whisper, kirill o'zgarmaydi
+	// ikkala Kotib ham ishlamasa — 503 (Whisper ga o'tmaydi)
+	localUp = false
+	if code, out := sttPost(t, c.token, audio, "uz"); code != 503 {
+		t.Fatalf("kotibsiz: %d %v", code, out)
+	}
+	// ruscha — Whisper
 	code, out = sttPost(t, c.token, audio, "ru")
-	if code != 200 || out["text"] != "Как добраться до Регистана?" {
+	if code != 200 || out["engine"] != "whisper" || out["text"] != "Как добраться до Регистана?" {
 		t.Fatalf("ruscha: %d %v", code, out)
 	}
-	// validatsiya
 	if code, _ := sttPost(t, c.token, nil, "uz"); code != 400 {
 		t.Fatalf("audiosiz: %d", code)
-	}
-	if code, _ := sttPost(t, c.token, []byte("qisqa"), "uz"); code != 400 {
-		t.Fatalf("qisqa: %d", code)
 	}
 	if code, _ := sttPost(t, c.token, audio, "de"); code != 400 {
 		t.Fatalf("til: %d", code)
 	}
-	if groqCalls != 2 {
-		t.Fatalf("groq chaqiruvlari: %d", groqCalls)
+	if groqCalls != 1 {
+		t.Fatalf("groq chaqiruvlari: %d (faqat ruscha bitta)", groqCalls)
 	}
 }

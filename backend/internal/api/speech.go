@@ -13,7 +13,7 @@ import (
 )
 
 // POST /speech/stt (multipart: audio, lang?) — ovozni matnga aylantirish.
-// O'zbekcha: serverdagi Kotib modeli (eng aniq), ishlamasa Groq Whisper. Ruscha/inglizcha: Whisper.
+// O'zbekcha: faqat Kotib (GPU, ishlamasa serverdagi CPU Kotib). Ruscha/inglizcha: Groq Whisper.
 // Javob: {text, lang, engine}. Audio saqlanmaydi.
 func (s *Server) speechSTT(w http.ResponseWriter, r *http.Request) {
 	if s.stt == nil {

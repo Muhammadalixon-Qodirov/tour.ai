@@ -1,8 +1,10 @@
-// Package speech — ovozni matnga aylantirish (STT). Tartib:
-//  1. Serverdagi o'zbekcha Kotib modeli (stt-relay orqali, unix-socket): eng aniq (WER ~13 %), tinish belgilari bilan.
-//  2. Groq Whisper (whisper-large-v3): Kotib ishlamasa yoki til o'zbekcha bo'lmasa.
+// Package speech — ovozni matnga aylantirish (STT).
 //
-// O'zbekcha natija kirill yozuvida kelsa lotinga o'giriladi.
+// O'zbekcha — faqat Kotib modeli (o'zbekcha uchun eng aniq, WER ~13 %, tinish belgilari bilan):
+//  1. GPU Kotib (stt-relay orqali, unix-socket; GPU kompyuter yoqiq bo'lsa, eng tez);
+//  2. serverning o'zidagi Kotib (stt-kotib xizmati, CPU).
+//
+// Ruscha va inglizcha — Groq Whisper (Kotib faqat o'zbekcha). Kirill o'zbekcha natija lotinga o'giriladi.
 package speech
 
 import (
@@ -28,6 +30,7 @@ type Result struct {
 
 type STT struct {
 	relay     *http.Client // nil — relay yo'q
+	kotibURL  string       // serverdagi Kotib (stt-kotib), bo'sh — yo'q
 	groqKeys  []string
 	groqURL   string
 	hc        *http.Client
@@ -36,10 +39,10 @@ type STT struct {
 	GroqModel string
 }
 
-// New — relaySocket bo'sh bo'lsa faqat Groq; groqKeys bo'sh bo'lsa faqat relay. Ikkalasi bo'sh — nil.
-func New(relaySocket, groqKeys string) *STT {
+// New — hech bir dvigatel sozlanmagan bo'lsa nil.
+func New(relaySocket, kotibURL, groqKeys string) *STT {
 	s := &STT{groqURL: "https://api.groq.com/openai/v1/audio/transcriptions", GroqModel: "whisper-large-v3",
-		hc: &http.Client{Timeout: 60 * time.Second}, RelayURL: "http://relay"}
+		hc: &http.Client{Timeout: 100 * time.Second}, RelayURL: "http://relay", kotibURL: strings.TrimRight(kotibURL, "/")}
 	for _, k := range strings.Split(groqKeys, ",") {
 		if k = strings.TrimSpace(k); k != "" {
 			s.groqKeys = append(s.groqKeys, k)
@@ -52,14 +55,17 @@ func New(relaySocket, groqKeys string) *STT {
 				return d.DialContext(ctx, "unix", relaySocket)
 			}}}
 	}
-	if s.relay == nil && len(s.groqKeys) == 0 {
+	if s.relay == nil && s.kotibURL == "" && len(s.groqKeys) == 0 {
 		return nil
 	}
 	return s
 }
 
-// WithTestEndpoints — testlar uchun: relay va Groq manzillari.
-func (s *STT) WithTestEndpoints(relayURL, groqURL string) *STT {
+// WithTestEndpoints — testlar uchun: relay, serverdagi Kotib va Groq manzillari.
+func (s *STT) WithTestEndpoints(relayURL, kotibURL, groqURL string) *STT {
+	if kotibURL != "" {
+		s.kotibURL = kotibURL
+	}
 	if relayURL != "" {
 		s.relay, s.RelayURL = &http.Client{Timeout: 10 * time.Second}, relayURL
 	}
@@ -75,22 +81,35 @@ var ErrUnavailable = errors.New("stt unavailable")
 // ErrBadAudio — audio o'qilmadi yoki juda qisqa.
 var ErrBadAudio = errors.New("bad audio")
 
-// Transcribe — lang: uz | ru | en. O'zbekcha uchun avval Kotib.
+// Transcribe — lang: uz | ru | en. O'zbekcha faqat Kotib (Whisper ishlatilmaydi).
 func (s *STT) Transcribe(ctx context.Context, audio []byte, filename, lang string) (Result, error) {
 	var errs []string
-	if s.relay != nil && lang == "uz" {
-		r, err := s.viaRelay(ctx, audio)
-		if err == nil && strings.TrimSpace(r.Text) != "" {
-			r.Lang = lang
-			r.Text = Clean(r.Text, lang)
-			return r, nil
+	if lang == "uz" {
+		if s.relay != nil { // GPU Kotib
+			r, err := s.viaRelay(ctx, audio)
+			if err == nil && strings.TrimSpace(r.Text) != "" {
+				r.Lang, r.Text = lang, Clean(r.Text, lang)
+				return r, nil
+			}
+			if errors.Is(err, ErrBadAudio) {
+				return Result{}, err
+			}
+			if err != nil {
+				errs = append(errs, err.Error())
+			}
 		}
-		if errors.Is(err, ErrBadAudio) {
-			return Result{}, err
-		}
-		if err != nil {
+		if s.kotibURL != "" { // serverdagi Kotib (CPU)
+			r, err := s.viaKotib(ctx, audio)
+			if err == nil {
+				r.Lang, r.Text = lang, Clean(r.Text, lang)
+				return r, nil
+			}
+			if errors.Is(err, ErrBadAudio) {
+				return Result{}, err
+			}
 			errs = append(errs, err.Error())
 		}
+		return Result{}, fmt.Errorf("%w: %s", ErrUnavailable, strings.Join(errs, "; "))
 	}
 	if len(s.groqKeys) > 0 {
 		text, err := s.viaGroq(ctx, audio, filename, lang)
@@ -100,6 +119,28 @@ func (s *STT) Transcribe(ctx context.Context, audio []byte, filename, lang strin
 		errs = append(errs, err.Error())
 	}
 	return Result{}, fmt.Errorf("%w: %s", ErrUnavailable, strings.Join(errs, "; "))
+}
+
+func (s *STT) viaKotib(ctx context.Context, audio []byte) (Result, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, s.kotibURL+"/transcribe?lang=uz", bytes.NewReader(audio))
+	if err != nil {
+		return Result{}, err
+	}
+	req.Header.Set("Content-Type", "application/octet-stream")
+	resp, err := s.hc.Do(req)
+	if err != nil {
+		return Result{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	if resp.StatusCode == 400 {
+		return Result{}, fmt.Errorf("%w: %.200s", ErrBadAudio, body)
+	}
+	if resp.StatusCode != 200 {
+		return Result{}, fmt.Errorf("kotib %d: %.200s", resp.StatusCode, body)
+	}
+	var r Result
+	return r, json.Unmarshal(body, &r)
 }
 
 func (s *STT) viaRelay(ctx context.Context, audio []byte) (Result, error) {
