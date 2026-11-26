@@ -35,7 +35,7 @@ func TestPlaceGuide(t *testing.T) {
 	var g2 placeGuideDTO
 	c.do("GET", "/api/v1/places/registan/guide?from=41.3111,69.2797", nil, &g2)
 	if g2.GetThere.FromCityID == nil || *g2.GetThere.FromCityID != "tashkent" || len(g2.GetThere.Intercity) == 0 ||
-		!strings.Contains(strings.Join(g2.Summary, "\n"), "dan:") {
+		!strings.Contains(strings.Join(g2.Summary, "\n"), "Toshkentdan:") {
 		t.Fatalf("shaharlararo: %+v / %v", g2.GetThere, g2.Summary)
 	}
 	// from siz — havolalar bor, taxmin yo'q

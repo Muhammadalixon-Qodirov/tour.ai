@@ -277,19 +277,22 @@ var guideText = map[string]map[string]string{
 	"noFrom": {"uz": "Borish: \"Qanday boraman?\" tugmasi Yandex xaritada yo'lni ochadi (avtobus, piyoda, taksi).",
 		"ru": "Как добраться: кнопка «Как доехать?» откроет маршрут в Яндекс Картах (автобус, пешком, такси).",
 		"en": "Getting there: the \"Directions\" button opens the route in Yandex Maps (bus, walk, taxi)."},
-	"intercity": {"uz": "%s dan: %s.", "ru": "Из %s: %s.", "en": "From %s: %s."},
+	"intercity": {"uz": "%sdan: %s.", "ru": "Из %s: %s.", "en": "From %s: %s."},
 	"food":      {"uz": "Yaqinda ovqatlanish: %s (%d daq piyoda).", "ru": "Поесть рядом: %s (%d мин пешком).", "en": "Eat nearby: %s (%d min walk)."},
 	"meal":      {"uz": "Odatiy narx: %s ≈ %s so'm.", "ru": "Обычная цена: %s ≈ %s сум.", "en": "Typical price: %s ≈ %s UZS."},
 	"stay":      {"uz": "Tunash: %s — %s.", "ru": "Ночлег: %s — %s.", "en": "Stay: %s — %s."},
 	"perNight":  {"uz": "%s so'm/kecha", "ru": "%s сум/ночь", "en": "%s UZS/night"},
 	"approx":    {"uz": "≈", "ru": "≈", "en": "≈"},
+	"hm":        {"uz": "%d soat %02d daq", "ru": "%d ч %02d мин", "en": "%dh %02dm"},
+	"from":      {"uz": "%s so'mdan", "ru": "от %s сум", "en": "from %s UZS"},
 	"rule":      {"uz": "Eslatma: %s", "ru": "Важно: %s", "en": "Note: %s"},
 }
 
 var modeName = map[string]map[string]string{
 	"train": {"uz": "poyezd", "ru": "поезд", "en": "train"}, "bus": {"uz": "avtobus", "ru": "автобус", "en": "bus"},
 	"shared_taxi": {"uz": "shahar-aro taksi", "ru": "междугороднее такси", "en": "shared taxi"},
-	"flight":      {"uz": "samolyot", "ru": "самолёт", "en": "flight"}, "car": {"uz": "mashinada", "ru": "на машине", "en": "by car"},
+	"flight":      {"uz": "samolyot", "ru": "самолёт", "en": "flight"}, "plane": {"uz": "samolyot", "ru": "самолёт", "en": "flight"},
+	"afrosiyob": {"uz": "Afrosiyob tezyurar poyezdi", "ru": "скоростной поезд Afrosiyob", "en": "Afrosiyob high-speed train"}, "car": {"uz": "mashinada", "ru": "на машине", "en": "by car"},
 }
 
 // sum — 45000 → "45 000"
@@ -350,9 +353,9 @@ func guideSummary(g placeGuideDTO, cityName map[string]string, lang string) []st
 			if o == "" {
 				o = x.Mode
 			}
-			o += fmt.Sprintf(" %d:%02d", x.DurationMin/60, x.DurationMin%60)
+			o += " " + t("hm", x.DurationMin/60, x.DurationMin%60)
 			if x.PriceFrom != nil {
-				o += " · " + sum(x.PriceFrom.Amount) + "+"
+				o += ", " + t("from", sum(x.PriceFrom.Amount))
 			}
 			opts = append(opts, o)
 		}
