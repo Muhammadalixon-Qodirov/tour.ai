@@ -58,6 +58,25 @@ services:
       db: { condition: service_healthy }
     logging: *logging
 
+  # Market proksi: narx qidiruvi O'zbekistondagi server IP si orqali ketadi (OLX, Asaxiy, Olcha xorijiy IP ni bloklaydi).
+  # Cheklangan SSH kalit (faqat market manzillariga yo'naltirish, shell yo'q). Yoqish: COMPOSE_PROFILES=marketproxy,
+  # MARKET_PROXY=socks5://market-proxy:1080, secrets/market_proxy_key va secrets/market_proxy_known_hosts.
+  market-proxy:
+    profiles: ["marketproxy"]
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM alpine:3.20
+        RUN apk add --no-cache openssh-client
+    restart: unless-stopped
+    command: ["ssh", "-N", "-D", "0.0.0.0:1080", "-p", "${MARKET_PROXY_SSH_PORT:-22}", "-i", "/secrets/market_proxy_key",
+      "-o", "IdentitiesOnly=yes", "-o", "UserKnownHostsFile=/secrets/market_proxy_known_hosts", "-o", "StrictHostKeyChecking=yes",
+      "-o", "ExitOnForwardFailure=yes", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
+      "${MARKET_PROXY_SSH:-user@host}"]
+    volumes:
+      - ./secrets/market_proxy_key:/secrets/market_proxy_key:ro
+      - ./secrets/market_proxy_known_hosts:/secrets/market_proxy_known_hosts:ro
+
   caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)
     image: caddy:2
     profiles: ["caddy"]

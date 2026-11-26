@@ -19,3 +19,6 @@ deploy/.seeded
 # Google OAuth fayllari (client secret bor!)
 client_secret_*.json
 *.apps.googleusercontent.com.json
+
+# market proksi kalitlari va boshqa sirlar
+deploy/secrets/

@@ -262,6 +262,7 @@ type cacheEntry struct {
 // Searcher — marketlarda parallel qidiradi, natijani keshlaydi.
 type Searcher struct {
 	HC      *http.Client
+	direct  *http.Client // proksi ishlamasa — to'g'ridan-to'g'ri (nil — proksi yo'q)
 	Markets []Market
 	TTL     time.Duration
 	mu      sync.Mutex
@@ -276,6 +277,7 @@ func NewSearcher(proxyURL ...string) *Searcher {
 	if len(proxyURL) > 0 && strings.TrimSpace(proxyURL[0]) != "" {
 		if u, err := url.Parse(strings.TrimSpace(proxyURL[0])); err == nil && u.Host != "" {
 			hc.Transport = &http.Transport{Proxy: http.ProxyURL(u), MaxIdleConnsPerHost: 4, IdleConnTimeout: 60 * time.Second}
+			return &Searcher{HC: hc, direct: &http.Client{Timeout: 8 * time.Second}, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
 		}
 	}
 	return &Searcher{HC: hc, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
@@ -297,6 +299,11 @@ func (s *Searcher) Search(ctx context.Context, q string) []MarketResult {
 		go func(i int, m Market) {
 			defer wg.Done()
 			ls, err := m.Fetch(ctx, s.HC, q)
+			if err != nil && s.direct != nil && ctx.Err() == nil { // proksi uzilgan bo'lishi mumkin — to'g'ridan-to'g'ri
+				if ls2, err2 := m.Fetch(ctx, s.direct, q); err2 == nil {
+					ls, err = ls2, nil
+				}
+			}
 			res[i] = MarketResult{Market: m, Listings: ls, Err: err}
 		}(i, m)
 	}
