@@ -32,6 +32,7 @@ type Config struct {
 	// AI yordamchi (POST /guide/chat). Kalit bo'sh — bazadan qoidaga asoslangan qidiruv.
 	AnthropicKey string
 	GroqKey      string // Anthropic kaliti bo'lmasa Groq (openai/gpt-oss-120b)
+	CleanerKey   string // ichki AI tozalovchi ishchi uchun kalit (bo'sh — /internal/clean/* o'chiq)
 	AIModel      string // standart claude-opus-5-5
 	AIEffort     string // low | medium | high (standart low — suhbat tez bo'lsin)
 
@@ -63,6 +64,7 @@ func LoadConfig() (Config, error) {
 		UploadDir:     env("UPLOAD_DIR", "data/uploads"),
 		AnthropicKey:  os.Getenv("ANTHROPIC_API_KEY"),
 		GroqKey:       os.Getenv("GROQ_API_KEY"),
+		CleanerKey:    os.Getenv("CLEANER_KEY"),
 		AIModel:       os.Getenv("AI_MODEL"),
 		AIEffort:      os.Getenv("AI_EFFORT"),
 		WebBaseURL:    strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),

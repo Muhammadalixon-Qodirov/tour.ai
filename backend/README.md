@@ -244,6 +244,18 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - `GROQ_API_KEY` da bir nechta kalit vergul bilan: so'rovlar navbat bilan taqsimlanadi, kalit limitga urilsa (429) yoki
   ishlamasa keyingisiga, hammasi band bo'lsa `gpt-oss-20b` ga o'tadi.
 
+## AI ma'lumot tozalovchi (`internal/cleaner`, `cmd/cleaner`)
+
+Ichki tarmoqdagi AI server (Ollama/llama.cpp/vLLM/LM Studio — OpenAI-mos) topilgan joylarni tozalaydi: haqiqiy
+turistik joymi (junk ajratish), to'g'ri kategoriya, qisqa uz/ru/en tavsif (faqat mavjud faktlardan). Fakt o'zgarmaydi.
+
+- **Faqat chiquvchi ulanish:** `cleaner` ishchisi AI serverda turadi, asosiy serverga o'zi qo'ng'iroq qiladi
+  (`GET /internal/clean/pending` → modeli bilan tozalaydi → `POST /internal/clean/results`). AI serverga port ochish shart emas.
+- Himoya: `X-Cleaner-Key` = `CLEANER_KEY`; kalit o'rnatilmagan bo'lsa endpointlar o'chiq (404).
+- Qaror: ishonch ≥ 0.8 va manba ishonchli (wikidata/osm/research) → avto-nashr; aks holda admin navbati. Foydalanuvchi
+  taklifi hech qachon avto-nashr emas. Model tavsiyasi `discoveries.data->'ai'` da saqlanadi (admin ko'radi).
+- Ishga tushirish va sozlash: [../deploy/CLEANER.md](../deploy/CLEANER.md).
+
 ## Yangi joylarni avtomatik topish (`internal/discover`)
 
 Manbalar (hammasi qonuniy, bazada saqlash mumkin): **Wikidata** (CC0, har 24 soatda — `DISCOVERY_EVERY`),
