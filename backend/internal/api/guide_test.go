@@ -154,3 +154,54 @@ func TestGuideAI(t *testing.T) {
 		t.Fatalf("done: %v", events["done"])
 	}
 }
+
+// fakeGroq — OpenAI-mos oqim: 1-so'rovda asbob chaqiradi, 2-so'rovda birinchi topilgan joy nomini aytadi.
+func TestGuideGroq(t *testing.T) {
+	testAPI.limiter = NewLimiter()
+	var calls atomic.Int32
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		n := calls.Add(1)
+		var body struct {
+			Messages []struct {
+				Role, Content string
+			} `json:"messages"`
+			Tools []any `json:"tools"`
+		}
+		json.NewDecoder(r.Body).Decode(&body)
+		if len(body.Tools) != 4 || r.Header.Get("Authorization") != "Bearer test-groq" {
+			t.Errorf("so'rov: %d tools, auth %q", len(body.Tools), r.Header.Get("Authorization"))
+		}
+		w.Header().Set("Content-Type", "text/event-stream")
+		send := func(s string) { fmt.Fprintf(w, "data: %s\n\n", s) }
+		if n == 1 {
+			send(`{"choices":[{"index":0,"delta":{"reasoning":"thinking..."}}]}`)
+			send(`{"choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"id":"call_1","type":"function","function":{"name":"search_places","arguments":"{\"city\":\"Samarkand\","}}]}}]}`)
+			send(`{"choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"\"categories\":[\"museum\"]}"}}]}}]}`)
+			send(`{"choices":[{"index":0,"delta":{},"finish_reason":"tool_calls"}]}`)
+		} else {
+			last := body.Messages[len(body.Messages)-1]
+			name := ""
+			if i := strings.Index(last.Content, `"name":"`); last.Role == "tool" && i >= 0 {
+				rest := last.Content[i+8:]
+				name = rest[:strings.Index(rest, `"`)]
+			}
+			txt, _ := json.Marshal("Tavsiyam: " + name)
+			send(`{"choices":[{"index":0,"delta":{"content":` + string(txt) + `}}]}`)
+			send(`{"choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}`)
+		}
+		send("[DONE]")
+	}))
+	defer srv.Close()
+	old := testAPI.ai
+	testAPI.ai = assistant.NewGroq("test-groq", "").WithBaseURL(srv.URL)
+	defer func() { testAPI.ai = old }()
+	c := newClient(t, "guide-device-0004")
+	var res guideResp
+	if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "Samarqanddagi muzeylar"}, &res); code != 200 {
+		t.Fatalf("chat: %d", code)
+	}
+	if res.Mode != "ai" || calls.Load() != 2 || len(res.Places) != 1 || res.Places[0].Category != "museum" ||
+		!strings.Contains(res.Text, res.Places[0].Name) || strings.Contains(res.Text, "thinking") {
+		t.Fatalf("groq javobi: %+v", res)
+	}
+}

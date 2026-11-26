@@ -113,6 +113,7 @@ func (t *Tools) SearchPlaces(ctx context.Context, in SearchPlacesInput) (any, er
 	if limit <= 0 || limit > 15 {
 		limit = 8
 	}
+	in.City = NormCity(in.City)
 	f := store.PlaceFilter{City: in.City, Words: in.Words, Family: in.Family, Wheelchair: in.Wheelchair, MaxPrice: in.MaxPriceLevel,
 		Near: in.Near, RadiusM: in.RadiusM, Limit: 60}
 	for _, c := range in.Categories {
@@ -207,6 +208,7 @@ func (t *Tools) SearchStays(ctx context.Context, in SearchStaysInput) (any, erro
 	if limit <= 0 || limit > 10 {
 		limit = 6
 	}
+	in.City = NormCity(in.City)
 	f := store.StayFilter{City: in.City, Near: in.Near, MaxPrice: in.MaxPriceUZS, Limit: limit}
 	if f.Near != nil {
 		f.RadiusM = 3000
@@ -245,7 +247,7 @@ type SearchPricesInput struct {
 }
 
 func (t *Tools) SearchPrices(ctx context.Context, in SearchPricesInput) (any, error) {
-	list, err := t.Store.Prices(ctx, store.PriceFilter{City: in.City, Category: in.Category, Q: strings.TrimSpace(in.Q)})
+	list, err := t.Store.Prices(ctx, store.PriceFilter{City: NormCity(in.City), Category: in.Category, Q: strings.TrimSpace(in.Q)})
 	if err != nil {
 		return nil, err
 	}
@@ -267,4 +269,32 @@ func (t *Tools) SearchPrices(ctx context.Context, in SearchPricesInput) (any, er
 			Updated: upd.Format("2006-01-02")})
 	}
 	return map[string]any{"count": len(out), "prices": out}, nil
+}
+
+// NormCity — model "Samarkand", "Samarqand", "Самарканд" yuborishi mumkin → "samarkand".
+func NormCity(c string) string {
+	c = strings.ToLower(strings.TrimSpace(c))
+	if c == "" {
+		return ""
+	}
+	if _, ok := cityWords[c]; ok {
+		return c
+	}
+	for id, ws := range map[string][]string{"urgench": {"urganch", "ургенч", "urgench"}, "navoi": {"navoiy", "навои", "navoi"},
+		"qarshi": {"qarshi", "карши", "karshi"}, "jizzakh": {"jizzax", "джизак", "jizzakh"}} {
+		for _, w := range ws {
+			if strings.HasPrefix(c, w) {
+				return id
+			}
+		}
+	}
+	c = strings.NewReplacer("ʻ", "'", "’", "'").Replace(c)
+	for id, ws := range cityWords {
+		for _, w := range ws {
+			if strings.HasPrefix(c, w) {
+				return id
+			}
+		}
+	}
+	return c
 }

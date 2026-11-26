@@ -40,7 +40,7 @@ type Server struct {
 	google  auth.GoogleVerifier
 	images  fs.FS // katalog rasmlari (/static/places/{file}); nil bo'lsa 404
 	now     func() time.Time
-	ai      *assistant.Claude // nil — kalit yo'q, Fallback
+	ai      assistant.Model // nil — kalit yo'q, Fallback
 }
 
 // SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
@@ -53,7 +53,10 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
-	s.ai = assistant.NewClaude(cfg.AnthropicKey, cfg.AIModel, cfg.AIEffort)
+	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
+	if s.ai != nil {
+		slog.Info("AI yordamchi yoqildi", "model", s.ai.Name())
+	}
 	s.google = auth.NewGoogleJWKS(cfg.GoogleClientIDs)
 	switch {
 	case cfg.SMTPHost != "":

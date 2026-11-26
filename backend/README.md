@@ -233,6 +233,8 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
   ishlaydi — `search_places` (shahar, kategoriya, taom so'zlari, bolalar bilan, narx darajasi, hozir ochiq, yaqin atrof),
   `get_place`, `search_stays`, `search_prices`. **Har bir fakt asbob natijasidan**: bazada yo'q bo'lsa "Bu haqda tekshirilgan
   ma'lumotim yo'q" deydi. Foydalanuvchi profili (byudjet, qiziqishlar) kontekstga qo'shiladi.
+- `ANTHROPIC_API_KEY` bo'lmasa, `GROQ_API_KEY` bilan Groq (`openai/gpt-oss-120b`, OpenAI-mos API) — xuddi shu asboblar va qoidalar.
+  Terminalda sinash: `GROQ_API_KEY=... go run ./cmd/guide-try "Samarqandda arzon osh"`.
 - Kalit yo'q yoki model ishlamasa — `mode: fallback`: savoldan shahar, joy turi (`discover.Classify`), "bolalar", "arzon",
   "hozir ochiq", "kam tanilgan", taom nomlari ajratiladi va bazadan qidiriladi.
 - Suhbat `guide_messages` da (faqat matn, 12 ta oxirgi xabar kontekstga).

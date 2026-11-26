@@ -81,8 +81,9 @@ How to work:
 - Reply in the user's language (uz/ru/en; default Uzbek, Latin script). Be concise: a short intro line and a list. No markdown
   headings or tables; plain lines with "•" bullets are fine.`
 
-var tools = []anthropic.ToolUnionParam{
-	tool("search_places", "Search published places (sights, restaurants, cafes, bazaars, workshops...) in the Safar database. Returns brief cards with price_level (0 free..3 expensive), family_friendly, open_now (null = unknown hours), rating, distance.",
+// toolSpecs — asboblar tavsifi bitta joyda; Claude va OpenAI-mos (Groq) formatlariga o'giriladi.
+var toolSpecs = []toolSpec{
+	spec("search_places", "Search published places (sights, restaurants, cafes, bazaars, workshops...) in the Safar database. Returns brief cards with price_level (0 free..3 expensive), family_friendly, open_now (null = unknown hours), rating, distance.",
 		map[string]any{
 			"city":            map[string]any{"type": "string", "description": "city id, e.g. samarkand"},
 			"categories":      map[string]any{"type": "array", "items": map[string]any{"type": "string"}},
@@ -96,9 +97,9 @@ var tools = []anthropic.ToolUnionParam{
 			"radius_m":        map[string]any{"type": "number"},
 			"limit":           map[string]any{"type": "integer", "minimum": 1, "maximum": 15},
 		}, nil),
-	tool("get_place", "Full details of one place by id: description, address, opening hours, entry fee, rules, best time, crowd.",
+	spec("get_place", "Full details of one place by id: description, address, opening hours, entry fee, rules, best time, crowd.",
 		map[string]any{"id": map[string]any{"type": "string"}}, []string{"id"}),
-	tool("search_stays", "Search hotels, hostels and guesthouses. Prices in UZS per night; price_is_estimate=true means approximate.",
+	spec("search_stays", "Search hotels, hostels and guesthouses. Prices in UZS per night; price_is_estimate=true means approximate.",
 		map[string]any{
 			"city":          map[string]any{"type": "string"},
 			"near":          map[string]any{"type": "object", "properties": map[string]any{"lat": map[string]any{"type": "number"}, "lng": map[string]any{"type": "number"}}},
@@ -106,7 +107,7 @@ var tools = []anthropic.ToolUnionParam{
 			"max_price_uzs": map[string]any{"type": "integer"},
 			"limit":         map[string]any{"type": "integer", "minimum": 1, "maximum": 10},
 		}, nil),
-	tool("search_prices", "Fair price ranges in UZS (taxi, food, souvenir, market, ticket, transport) for a city.",
+	spec("search_prices", "Fair price ranges in UZS (taxi, food, souvenir, market, ticket, transport) for a city.",
 		map[string]any{
 			"city":     map[string]any{"type": "string"},
 			"category": map[string]any{"type": "string", "enum": []string{"taxi", "food", "souvenir", "market", "ticket", "transport"}},
@@ -114,11 +115,44 @@ var tools = []anthropic.ToolUnionParam{
 		}, []string{"city"}),
 }
 
-func tool(name, desc string, props map[string]any, required []string) anthropic.ToolUnionParam {
-	// Oqimli so'rov + o'z asboblarimiz: eager_input_streaming. Kirish qat'iy json.Unmarshal bilan tekshiriladi (run).
-	t := anthropic.ToolParam{Name: name, Description: anthropic.String(desc), EagerInputStreaming: anthropic.Bool(true),
-		InputSchema: anthropic.ToolInputSchemaParam{Properties: props, Required: required}}
-	return anthropic.ToolUnionParam{OfTool: &t}
+type toolSpec struct {
+	Name, Desc string
+	Props      map[string]any
+	Required   []string
+}
+
+func spec(name, desc string, props map[string]any, required []string) toolSpec {
+	return toolSpec{name, desc, props, required}
+}
+
+// claudeTools — oqimli so'rov + o'z asboblarimiz: eager_input_streaming. Kirish qat'iy tekshiriladi (run).
+var claudeTools = func() []anthropic.ToolUnionParam {
+	var out []anthropic.ToolUnionParam
+	for _, ts := range toolSpecs {
+		t := anthropic.ToolParam{Name: ts.Name, Description: anthropic.String(ts.Desc), EagerInputStreaming: anthropic.Bool(true),
+			InputSchema: anthropic.ToolInputSchemaParam{Properties: ts.Props, Required: ts.Required}}
+		out = append(out, anthropic.ToolUnionParam{OfTool: &t})
+	}
+	return out
+}()
+
+// Model — javob beruvchi til modeli (Claude yoki Groq). nil — Fallback.
+type Model interface {
+	Answer(ctx context.Context, req Request, t *Tools, emit Emit) (string, error)
+	Name() string
+}
+
+func (c *Claude) Name() string { return c.model }
+
+// New — sozlamaga qarab model: Anthropic kaliti bo'lsa Claude, aks holda Groq kaliti bo'lsa Groq, bo'lmasa nil.
+func New(anthropicKey, groqKey, model, effort string) Model {
+	if c := NewClaude(anthropicKey, model, effort); c != nil {
+		return c
+	}
+	if g := NewGroq(groqKey, model); g != nil {
+		return g
+	}
+	return nil
 }
 
 func (t *Tools) run(ctx context.Context, name string, raw string) (string, bool) {
@@ -181,7 +215,7 @@ func (c *Claude) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (
 		Model:     anthropic.Model(c.model),
 		MaxTokens: 4000,
 		System:    []anthropic.TextBlockParam{{Text: systemPrompt, CacheControl: anthropic.NewCacheControlEphemeralParam()}},
-		Tools:     tools,
+		Tools:     claudeTools,
 	}
 	if c.effort != "" {
 		params.OutputConfig = anthropic.OutputConfigParam{Effort: c.effort}
