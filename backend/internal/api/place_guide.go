@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 
+	"yoldosh/internal/assistant"
 	"yoldosh/internal/domain"
 	"yoldosh/internal/i18n"
 	"yoldosh/internal/store"
@@ -252,6 +253,9 @@ func (s *Server) placeGuide(w http.ResponseWriter, r *http.Request) {
 		g.FoodPrices = append(g.FoodPrices, priceDTO(x, lang))
 	}
 	g.Summary = guideSummary(g, cityName, lang)
+	for i, line := range g.Summary { // bazadagi erkin matnlar (qoida, izoh) ham "≈", "~", "—" siz
+		g.Summary[i] = assistant.Sanitize(line, langOr(lang))
+	}
 	w.Header().Set("Cache-Control", "private, max-age=60")
 	writeJSON(w, http.StatusOK, g)
 }
@@ -270,19 +274,19 @@ var guideText = map[string]map[string]string{
 	"closedToday": {"uz": "Bugun dam olish kuni.", "ru": "Сегодня выходной.", "en": "Closed today."},
 	"hoursUnknown": {"uz": "Ish vaqti haqida tekshirilgan ma'lumot yo'q.", "ru": "Нет проверенных данных о часах работы.",
 		"en": "Opening hours not verified yet."},
-	"duration": {"uz": "Ko'rish uchun ~%d daqiqa kerak.", "ru": "На осмотр нужно ~%d мин.", "en": "Plan ~%d min for the visit."},
+	"duration": {"uz": "Ko'rish uchun taxminan %d daqiqa kerak.", "ru": "На осмотр нужно примерно %d мин.", "en": "Plan about %d min for the visit."},
 	"walk":     {"uz": "Piyoda %d daqiqa", "ru": "Пешком %d мин", "en": "%d min on foot"},
-	"taxi":     {"uz": "taksi ≈ %s–%s so'm (%d daq)", "ru": "такси ≈ %s–%s сум (%d мин)", "en": "taxi ≈ %s–%s UZS (%d min)"},
-	"taxiOnly": {"uz": "Taksi ≈ %s–%s so'm (%d daq).", "ru": "Такси ≈ %s–%s сум (%d мин).", "en": "Taxi ≈ %s–%s UZS (%d min)."},
+	"taxi":     {"uz": "taksi taxminan %s–%s so'm (%d daq)", "ru": "такси примерно %s–%s сум (%d мин)", "en": "taxi about %s–%s UZS (%d min)"},
+	"taxiOnly": {"uz": "Taksi taxminan %s–%s so'm (%d daq).", "ru": "Такси примерно %s–%s сум (%d мин).", "en": "Taxi about %s–%s UZS (%d min)."},
 	"noFrom": {"uz": "Borish: \"Qanday boraman?\" tugmasi Yandex xaritada yo'lni ochadi (avtobus, piyoda, taksi).",
 		"ru": "Как добраться: кнопка «Как доехать?» откроет маршрут в Яндекс Картах (автобус, пешком, такси).",
 		"en": "Getting there: the \"Directions\" button opens the route in Yandex Maps (bus, walk, taxi)."},
 	"intercity": {"uz": "%sdan: %s.", "ru": "Из %s: %s.", "en": "From %s: %s."},
 	"food":      {"uz": "Yaqinda ovqatlanish: %s (%d daq piyoda).", "ru": "Поесть рядом: %s (%d мин пешком).", "en": "Eat nearby: %s (%d min walk)."},
-	"meal":      {"uz": "Odatiy narx: %s ≈ %s so'm.", "ru": "Обычная цена: %s ≈ %s сум.", "en": "Typical price: %s ≈ %s UZS."},
-	"stay":      {"uz": "Tunash: %s — %s.", "ru": "Ночлег: %s — %s.", "en": "Stay: %s — %s."},
+	"meal":      {"uz": "Odatiy narx: %s, %s so'm.", "ru": "Обычная цена: %s, %s сум.", "en": "Typical price: %s, %s UZS."},
+	"stay":      {"uz": "Tunash: %s, %s.", "ru": "Ночлег: %s, %s.", "en": "Stay: %s, %s."},
 	"perNight":  {"uz": "%s so'm/kecha", "ru": "%s сум/ночь", "en": "%s UZS/night"},
-	"approx":    {"uz": "≈", "ru": "≈", "en": "≈"},
+	"approx":    {"uz": "taxminan", "ru": "примерно", "en": "about"},
 	"hm":        {"uz": "%d soat %02d daq", "ru": "%d ч %02d мин", "en": "%dh %02dm"},
 	"from":      {"uz": "%s so'mdan", "ru": "от %s сум", "en": "from %s UZS"},
 	"rule":      {"uz": "Eslatma: %s", "ru": "Важно: %s", "en": "Note: %s"},
@@ -400,7 +404,7 @@ func guideSummary(g placeGuideDTO, cityName map[string]string, lang string) []st
 	if cheap != nil {
 		price := t("perNight", sum(cheap.PricePerNight.Min.Amount))
 		if cheap.PricePerNight.Estimated {
-			price = "≈ " + price
+			price = t("approx") + " " + price
 		}
 		out = append(out, t("stay", cheap.Name, price))
 	}

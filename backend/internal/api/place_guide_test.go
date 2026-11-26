@@ -28,8 +28,27 @@ func TestPlaceGuide(t *testing.T) {
 		t.Fatalf("summary/atrof: %v / %d stays / %d food", g.Summary, len(g.Stays), len(g.Food))
 	}
 	joined := strings.Join(g.Summary, "\n")
-	if !strings.Contains(joined, "Piyoda") || !strings.Contains(joined, "taksi ≈") || !strings.Contains(joined, "so'm") {
+	if !strings.Contains(joined, "Piyoda") || !strings.Contains(joined, "taksi taxminan") || !strings.Contains(joined, "so'm") {
 		t.Fatalf("sodda tushuntirish: %s", joined)
+	}
+	if strings.ContainsAny(joined, "≈~—") {
+		t.Fatalf("taqiqlangan belgi: %s", joined)
+	}
+	// ru: narx izohi va xizmat nomlari ruscha, summary da "примерно"
+	var gr placeGuideDTO
+	(&client{t: t, lang: "ru"}).do("GET", "/api/v1/places/registan/guide?from=39.6600,66.9650", nil, &gr)
+	for _, st := range gr.Stays {
+		if n := st.PricePerNight.Note; n != nil && strings.Contains(*n, "narx") {
+			t.Fatalf("ru izoh o'zbekcha: %q", *n)
+		}
+	}
+	if !strings.Contains(strings.Join(gr.Summary, "\n"), "примерно") || strings.ContainsAny(strings.Join(gr.Summary, ""), "≈~—") {
+		t.Fatalf("ru summary: %v", gr.Summary)
+	}
+	for kind, sv := range g.Services {
+		if sv.Name == "Pharmacy" || sv.Name == "ATM" || sv.Name == "" {
+			t.Fatalf("uz xizmat nomi umumiy (%s): %q", kind, sv.Name)
+		}
 	}
 	// boshqa shahardan (Toshkent → Samarqand): poyezd/avtobus variantlari
 	var g2 placeGuideDTO

@@ -36,7 +36,9 @@ type serviceDTO struct {
 }
 
 func (s *Server) serviceDTO(v store.Service, lang string, loc *time.Location) serviceDTO {
-	d := serviceDTO{ID: v.ID, CityID: v.CityID, Kind: v.Kind, Name: i18n.Pick(v.Name, lang), Address: i18n.Pick(v.Address, lang),
+	addr := i18n.Pick(v.Address, lang)
+	// OSM nomi ko'pincha umumiy ("Pharmacy") va tilga mos emas: unda tur nomi + manzil
+	d := serviceDTO{ID: v.ID, CityID: v.CityID, Kind: v.Kind, Name: i18n.ServiceName(v.Kind, i18n.Pick(v.Name, lang), addr, lang), Address: addr,
 		Location: v.Loc, Phone: v.Phone, Open24h: v.Open24h, Hours: v.Hours, Accepts: nonNil(v.Accepts), IsDemo: v.Source == "demo"}
 	if d.Hours == nil {
 		d.Hours = []domain.OpeningHours{}
@@ -129,21 +131,11 @@ type emergencyNumber struct {
 	Label  string `json:"label"`
 }
 
-var emergencyLabels = map[string]map[string]string{
-	"unified":            {"uz": "Yagona favqulodda xizmat", "ru": "Единая служба экстренной помощи", "en": "Emergency (all services)"},
-	"ambulance":          {"uz": "Tez yordam", "ru": "Скорая помощь", "en": "Ambulance"},
-	"police":             {"uz": "Politsiya", "ru": "Полиция", "en": "Police"},
-	"fire":               {"uz": "Yong'in xizmati", "ru": "Пожарная служба", "en": "Fire service"},
-	"gas":                {"uz": "Gaz avariya xizmati", "ru": "Аварийная газовая служба", "en": "Gas emergency"},
-	"emergency_ministry": {"uz": "Favqulodda vaziyatlar vazirligi", "ru": "МЧС", "en": "Ministry of Emergency Situations"},
-	"tourist_hotline":    {"uz": "Turistlar uchun call-markaz (24/7, uz/ru/en)", "ru": "Колл-центр для туристов (24/7, uz/ru/en)", "en": "Tourist hotline (24/7, English)"},
-}
-
 func emergencyNumbers(c store.City, lang string) []emergencyNumber {
 	out := []emergencyNumber{}
-	for _, k := range []string{"unified", "tourist_hotline", "ambulance", "police", "fire", "gas", "emergency_ministry"} {
+	for _, k := range i18n.EmergencyKinds {
 		if n, ok := c.Emergency[k]; ok && n != "" {
-			out = append(out, emergencyNumber{Kind: k, Number: n, Label: i18n.Pick(emergencyLabels[k], lang)})
+			out = append(out, emergencyNumber{Kind: k, Number: n, Label: i18n.EmergencyLabel(k, lang)})
 		}
 	}
 	return out

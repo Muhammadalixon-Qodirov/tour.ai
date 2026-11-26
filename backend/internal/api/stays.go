@@ -69,7 +69,7 @@ func (s *Server) stayDTO(v store.Stay, lang string) stayDTO {
 	} else {
 		d.Cover = domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/" + v.Kind + ".svg"}
 	}
-	p := stayPriceDTO{Trust: v.PriceTrust, Note: v.PriceNote, Estimated: v.PriceTrust != nil && *v.PriceTrust == "estimate",
+	p := stayPriceDTO{Trust: v.PriceTrust, Note: stayPriceNote(v, lang), Estimated: v.PriceTrust != nil && *v.PriceTrust == "estimate",
 		Source: sourceOf(v.PriceSource, nil)}
 	if v.PriceMin != nil {
 		m := domain.UZS(*v.PriceMin)
@@ -268,4 +268,36 @@ func (s *Server) adminPatchStay(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, saved)
+}
+
+// osmEstimateNote — OSM importi yozadigan izoh (osmimport): turi va yulduzi bo'yicha taxmin.
+const osmEstimateNote = "Taxminiy narx: turi va yulduzi bo'yicha. Aniq narxni joyning o'zidan so'rang"
+
+var stayNoteText = map[string]map[string]string{
+	"estimate": {"uz": "Taxminiy narx: turi va yulduzi bo'yicha. Aniq narxni joyning o'zidan so'rang.",
+		"ru": "Примерная цена: по типу и звёздности. Точную цену уточните в самом месте.",
+		"en": "Estimated price based on type and stars. Ask the property for the exact price."},
+}
+
+// stayPriceNote — narx izohi so'ralgan tilda. Bazadagi izoh bitta tilda (o'zbekcha) yoziladi: taniqli izohlar
+// tarjima qilinadi; boshqa tilga tarjimasi yo'q erkin izoh ru/en da ko'rsatilmaydi (taxminiy narxda umumiy izoh).
+func stayPriceNote(v store.Stay, lang string) *string {
+	estimated := v.PriceTrust != nil && *v.PriceTrust == "estimate"
+	note := ""
+	if v.PriceNote != nil {
+		note = strings.TrimSpace(*v.PriceNote)
+	}
+	switch {
+	case strings.TrimRight(note, ".") == osmEstimateNote, note == "" && estimated:
+		t := i18n.Pick(stayNoteText["estimate"], lang)
+		return &t
+	case note == "":
+		return nil
+	case lang == "uz" || lang == "":
+		return &note
+	case estimated:
+		t := i18n.Pick(stayNoteText["estimate"], lang)
+		return &t
+	}
+	return nil
 }

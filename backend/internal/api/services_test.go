@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"testing"
+
+	"yoldosh/internal/i18n"
 )
 
 func TestServicesAndEmergency(t *testing.T) {
@@ -114,5 +116,20 @@ func TestOfflinePack(t *testing.T) {
 	}
 	if code := a.do("DELETE", "/api/v1/admin/services/"+id, nil, nil); code != 204 {
 		t.Fatalf("delete: %d", code)
+	}
+}
+
+func TestServiceDisplayName(t *testing.T) {
+	cases := []struct{ kind, name, addr, lang, want string }{
+		{"pharmacy", "Pharmacy", "Navoiy ko'chasi, 12", "uz", "Dorixona · Navoiy ko'chasi, 12"},
+		{"pharmacy", "Аптека", "", "en", "Pharmacy"},
+		{"atm", "", "Registon ko'chasi", "ru", "Банкомат · Registon ko'chasi"},
+		{"atm", "Kapitalbank", "", "uz", "Kapitalbank"},
+		{"exchange", "Dorixona", "", "uz", "Valyuta ayirboshlash"},
+	}
+	for _, c := range cases {
+		if got := i18n.ServiceName(c.kind, c.name, c.addr, c.lang); got != c.want {
+			t.Errorf("%+v: %q", c, got)
+		}
 	}
 }
