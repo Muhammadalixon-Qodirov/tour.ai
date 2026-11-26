@@ -39,7 +39,8 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 
 | Guruh | Endpoint |
 |---|---|
-| Sessiya | `POST /auth/device`, `GET /me`, `PATCH /me` |
+| Sessiya | `POST /auth/device` (anonim), `GET /me`, `PATCH /me`, `DELETE /me` (hisobni o'chirish) |
+| Kirish | `POST /auth/email/start` `{email}` → 6 xonali kod emailga · `POST /auth/email/verify` `{email, code, deviceId?}` · `POST /auth/google` `{idToken, deviceId?}` · `POST /auth/refresh` `{refreshToken}` · `POST /auth/logout` `{refreshToken}` · `POST /auth/logout-all` |
 | Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}`, `GET /places/{id}/reviews` |
 | Qoida | `GET /geofences?city=` |
 | SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
@@ -141,3 +142,15 @@ POST /publish → lentaga post + ochiq havola /s/{slug}  ·  GET /share-card →
 API javobida `isDemo: true`). Favqulodda raqamlar (101, 102, 103, 104, 112) ham rasmiy manbadan tekshirilishi kerak.
 Productionga chiqishdan oldin bular haqiqiy, tekshirilgan ma'lumot bilan almashtirilishi **shart** — noto'g'ri
 manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'lsa ogohlantirish ko'rsatsin.
+
+## Kirish (auth)
+
+- Ilova login siz ishlaydi: `POST /auth/device` → anonim token (30 kun).
+- Google yoki email kod bilan kirganda javob: `{token (1 soat), refreshToken (60 kun), user, isNewUser}`.
+  So'rovda anonim token `Authorization: Bearer` da yuborilsa — anonim marshrutlar, kundalik, postlar hisobga ko'chadi.
+- `token` muddati tugasa → `POST /auth/refresh`; har safar **yangi** refreshToken qaytadi (eskisi bekor).
+  Eski refreshToken qayta ishlatilsa (o'g'irlik belgisi) foydalanuvchining barcha sessiyalari yopiladi.
+- Email kod: 10 daqiqa amal qiladi, 5 ta noto'g'ri urinishdan keyin bloklanadi, bitta emailga 10 daqiqada ≤ 3 ta kod.
+- Google: frontend Google Sign-In dan **ID token** oladi va `POST /auth/google` ga yuboradi; backend uni Google ning
+  ochiq kalitlari bilan tekshiradi (`aud` = `GOOGLE_CLIENT_IDS`). Faqat Google tasdiqlagan email hisobga bog'lanadi.
+- Sozlanmagan bo'lsa: `503 google_unavailable` / `503 email_unavailable`.

@@ -79,6 +79,12 @@ var messages = map[string]map[string]string{
 	"invalid_status_transition": {"uz": "Joyning hozirgi holatida bu amalni bajarib bo'lmaydi", "ru": "Это действие недоступно в текущем статусе места", "en": "This action isn't allowed in the place's current status"},
 	"image_unsupported":         {"uz": "Faqat JPEG yoki PNG rasm yuklang", "ru": "Загрузите изображение JPEG или PNG", "en": "Upload a JPEG or PNG image"},
 	"image_too_large":           {"uz": "Rasm juda katta (8 MB gacha, 8000 px gacha)", "ru": "Изображение слишком большое (до 8 МБ, до 8000 px)", "en": "Image is too large (up to 8 MB and 8000 px)"},
+	"code_invalid":              {"uz": "Kod noto'g'ri yoki muddati o'tgan", "ru": "Неверный или просроченный код", "en": "The code is wrong or has expired"},
+	"code_locked":               {"uz": "Juda ko'p noto'g'ri urinish. Yangi kod so'rang", "ru": "Слишком много попыток. Запросите новый код", "en": "Too many attempts. Request a new code"},
+	"email_unavailable":         {"uz": "Hozir email yuborib bo'lmadi. Keyinroq urinib ko'ring yoki Google orqali kiring", "ru": "Не удалось отправить письмо. Попробуйте позже или войдите через Google", "en": "We couldn't send the email. Try again later or sign in with Google"},
+	"google_unavailable":        {"uz": "Google orqali kirish hozircha sozlanmagan", "ru": "Вход через Google пока не настроен", "en": "Google sign-in isn't set up yet"},
+	"google_token_invalid":      {"uz": "Google orqali kirib bo'lmadi. Qayta urinib ko'ring", "ru": "Не удалось войти через Google. Попробуйте ещё раз", "en": "Google sign-in failed. Please try again"},
+	"refresh_invalid":           {"uz": "Sessiya tugagan, qayta kiring", "ru": "Сессия истекла, войдите снова", "en": "Your session has ended, please sign in again"},
 	"rate_limited":              {"uz": "So'rovlar juda ko'p. Birozdan keyin urinib ko'ring", "ru": "Слишком много запросов. Попробуйте чуть позже", "en": "Too many requests. Try again shortly"},
 	"internal":                  {"uz": "Serverda xatolik. Qayta urinib ko'ring", "ru": "Ошибка сервера. Попробуйте ещё раз", "en": "Server error. Please try again"},
 

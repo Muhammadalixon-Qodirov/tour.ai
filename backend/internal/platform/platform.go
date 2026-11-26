@@ -26,6 +26,14 @@ type Config struct {
 	AIBaseURL     string
 	AIKey         string
 	UploadDir     string
+
+	GoogleClientIDs []string // web, android, ios OAuth client id lar (maxfiy emas)
+	SMTPHost        string
+	SMTPPort        int
+	SMTPUser        string
+	SMTPPassword    string
+	MailFrom        string // "Yo'ldosh AI <noreply@domen.uz>"
+	MailDevLog      bool   // faqat lokal: xat yuborilmaydi, kod logga yoziladi
 }
 
 func LoadConfig() (Config, error) {
@@ -45,6 +53,16 @@ func LoadConfig() (Config, error) {
 			}
 		}
 	}
+	c.GoogleClientIDs = splitList(os.Getenv("GOOGLE_CLIENT_IDS"))
+	c.SMTPHost, c.SMTPUser, c.SMTPPassword = os.Getenv("SMTP_HOST"), os.Getenv("SMTP_USER"), os.Getenv("SMTP_PASSWORD")
+	c.SMTPPort = 587
+	if v := os.Getenv("SMTP_PORT"); v != "" {
+		if _, err := fmt.Sscanf(v, "%d", &c.SMTPPort); err != nil {
+			return c, fmt.Errorf("SMTP_PORT noto'g'ri")
+		}
+	}
+	c.MailFrom = env("MAIL_FROM", "Yo'ldosh AI <noreply@e-investment.uz>")
+	c.MailDevLog = os.Getenv("MAIL_DEV_LOG") == "true"
 	if c.DatabaseURL == "" {
 		return c, fmt.Errorf("DATABASE_URL o'rnatilmagan")
 	}
@@ -52,6 +70,16 @@ func LoadConfig() (Config, error) {
 		return c, fmt.Errorf("TOKEN_SECRET kamida 32 belgi bo'lishi kerak")
 	}
 	return c, nil
+}
+
+func splitList(v string) []string {
+	var out []string
+	for _, x := range strings.Split(v, ",") {
+		if x = strings.TrimSpace(x); x != "" {
+			out = append(out, x)
+		}
+	}
+	return out
 }
 
 func env(k, def string) string {

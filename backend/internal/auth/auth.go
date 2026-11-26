@@ -36,11 +36,18 @@ const AdminTokenTTL = 12 * time.Hour
 
 func IsAdminRole(role string) bool { return role == "moderator" || role == "admin" }
 
+// AccountTokenTTL — ro'yxatdan o'tgan hisob uchun qisqa muddatli kirish tokeni (refresh token bilan yangilanadi).
+const AccountTokenTTL = time.Hour
+
 func (s *Signer) Issue(userID, role string, now time.Time) (string, time.Time, error) {
 	ttl := TokenTTL
 	if IsAdminRole(role) {
 		ttl = AdminTokenTTL
 	}
+	return s.IssueTTL(userID, role, now, ttl)
+}
+
+func (s *Signer) IssueTTL(userID, role string, now time.Time, ttl time.Duration) (string, time.Time, error) {
 	exp := now.Add(ttl)
 	tok := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		Role: role,

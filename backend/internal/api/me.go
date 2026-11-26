@@ -57,27 +57,43 @@ func (s *Server) authDevice(w http.ResponseWriter, r *http.Request) {
 }
 
 type meDTO struct {
-	ID          string   `json:"id"`
-	Lang        string   `json:"lang"`
-	DisplayName *string  `json:"displayName,omitempty"`
-	Interests   []string `json:"interests"`
-	Companion   *string  `json:"companion,omitempty"`
-	Pace        *string  `json:"pace,omitempty"`
-	Budget      *int     `json:"budget,omitempty"`
-	Stats       struct {
+	ID            string   `json:"id"`
+	Lang          string   `json:"lang"`
+	IsRegistered  bool     `json:"isRegistered"`
+	Email         *string  `json:"email,omitempty"`
+	AuthProviders []string `json:"authProviders"` // "google", "email"
+	AvatarURL     *string  `json:"avatarUrl,omitempty"`
+	DisplayName   *string  `json:"displayName,omitempty"`
+	Interests     []string `json:"interests"`
+	Companion     *string  `json:"companion,omitempty"`
+	Pace          *string  `json:"pace,omitempty"`
+	Budget        *int     `json:"budget,omitempty"`
+	Stats         struct {
 		PlacesVisited    int `json:"placesVisited"`
 		NewPlacesVisited int `json:"newPlacesVisited"`
 	} `json:"stats"`
 }
 
-func (s *Server) writeMe(w http.ResponseWriter, r *http.Request, u store.User) {
-	d := meDTO{ID: u.ID, Lang: u.Lang, DisplayName: u.DisplayName, Interests: u.Interests,
-		Companion: u.Companion, Pace: u.Pace, Budget: u.Budget}
+func (s *Server) meFor(r *http.Request, u store.User) (meDTO, error) {
+	d := meDTO{ID: u.ID, Lang: u.Lang, IsRegistered: u.IsRegistered(), Email: u.Email, AvatarURL: u.AvatarURL,
+		DisplayName: u.DisplayName, Interests: u.Interests, Companion: u.Companion, Pace: u.Pace, Budget: u.Budget,
+		AuthProviders: []string{}}
+	if u.GoogleSub != nil {
+		d.AuthProviders = append(d.AuthProviders, "google")
+	}
+	if u.Email != nil && u.EmailVerified {
+		d.AuthProviders = append(d.AuthProviders, "email")
+	}
 	if d.Interests == nil {
 		d.Interests = []string{}
 	}
 	var err error
 	d.Stats.PlacesVisited, d.Stats.NewPlacesVisited, err = s.store.UserStats(r.Context(), u.ID)
+	return d, err
+}
+
+func (s *Server) writeMe(w http.ResponseWriter, r *http.Request, u store.User) {
+	d, err := s.meFor(r, u)
 	if err != nil {
 		s.internalError(w, r, err)
 		return

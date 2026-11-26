@@ -18,6 +18,7 @@ import (
 	"yoldosh/internal/auth"
 	"yoldosh/internal/diary"
 	"yoldosh/internal/i18n"
+	"yoldosh/internal/mail"
 	"yoldosh/internal/media"
 	"yoldosh/internal/platform"
 	"yoldosh/internal/store"
@@ -32,6 +33,8 @@ type Server struct {
 	media   media.Store
 	weather weather.Source
 	story   diary.Writer
+	mailer  mail.Sender
+	google  auth.GoogleVerifier
 	now     func() time.Time
 }
 
@@ -39,6 +42,15 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
+	s.google = auth.NewGoogleJWKS(cfg.GoogleClientIDs)
+	switch {
+	case cfg.SMTPHost != "":
+		s.mailer = mail.SMTP{Host: cfg.SMTPHost, Port: cfg.SMTPPort, User: cfg.SMTPUser, Password: cfg.SMTPPassword, From: cfg.MailFrom}
+	case cfg.MailDevLog:
+		s.mailer = mail.DevLog{}
+	default:
+		s.mailer = mail.SMTP{} // sozlanmagan: /auth/email/start 503 qaytaradi
+	}
 	return s
 }
 
@@ -53,6 +65,13 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /static/ph/{file}", s.placeholder)
 
 	mux.Handle("POST /api/v1/auth/device", s.rateIP("auth", 30, http.HandlerFunc(s.authDevice)))
+	mux.Handle("POST /api/v1/auth/email/start", s.rateIP("email-start", 5, http.HandlerFunc(s.emailStart)))
+	mux.Handle("POST /api/v1/auth/email/verify", s.rateIP("email-verify", 10, http.HandlerFunc(s.emailVerify)))
+	mux.Handle("POST /api/v1/auth/google", s.rateIP("auth-google", 20, http.HandlerFunc(s.googleLogin)))
+	mux.Handle("POST /api/v1/auth/refresh", s.rateIP("auth-refresh", 30, http.HandlerFunc(s.refreshSession)))
+	mux.Handle("POST /api/v1/auth/logout", s.rateIP("auth-refresh", 30, http.HandlerFunc(s.logout)))
+	user("POST /api/v1/auth/logout-all", s.logoutAll)
+	user("DELETE /api/v1/me", s.deleteMe)
 	user("GET /api/v1/me", s.getMe)
 	user("PATCH /api/v1/me", s.patchMe)
 
@@ -181,6 +200,10 @@ func (s *Server) requireUser(next http.Handler) http.Handler {
 		}
 		c, err := s.signer.Verify(tok)
 		if err != nil {
+			writeError(w, r, http.StatusUnauthorized, "unauthorized", false)
+			return
+		}
+		if ok, err := s.store.UserExists(r.Context(), c.Subject); err != nil || !ok {
 			writeError(w, r, http.StatusUnauthorized, "unauthorized", false)
 			return
 		}

@@ -318,14 +318,18 @@ func (s *Store) GeofencePlaces(ctx context.Context, cityID string, langs []strin
 // ---------- Foydalanuvchilar ----------
 
 type User struct {
-	ID          string
-	Lang        string
-	Role        string
-	Interests   []string
-	Companion   *string
-	Pace        *string
-	Budget      *int
-	DisplayName *string
+	ID            string
+	Lang          string
+	Role          string
+	Interests     []string
+	Companion     *string
+	Pace          *string
+	Budget        *int
+	DisplayName   *string
+	Email         *string
+	EmailVerified bool
+	GoogleSub     *string
+	AvatarURL     *string
 }
 
 // DeviceSession — qurilma bo'yicha foydalanuvchini topadi yoki yaratadi.
@@ -333,10 +337,23 @@ func (s *Store) DeviceSession(ctx context.Context, deviceID, platform, lang stri
 	var u User
 	err := pgx.BeginFunc(ctx, s.DB, func(tx pgx.Tx) error {
 		var userID string
-		err := tx.QueryRow(ctx, `UPDATE devices SET last_seen_at = now(), platform = $2 WHERE id = $1 RETURNING user_id`,
-			deviceID, platform).Scan(&userID)
-		if errors.Is(err, pgx.ErrNoRows) {
-			userID = "u_" + uuid.Must(uuid.NewV7()).String()
+		var registered bool
+		err := tx.QueryRow(ctx, `UPDATE devices d SET last_seen_at = now(), platform = $2 FROM users u
+			WHERE d.id = $1 AND u.id = d.user_id RETURNING d.user_id, (u.email IS NOT NULL OR u.google_sub IS NOT NULL)`,
+			deviceID, platform).Scan(&userID, &registered)
+		if err == nil && registered {
+			// Qurilma ro'yxatdan o'tgan hisobga bog'langan: faqat deviceId bilan hisobga kirib bo'lmaydi
+			// (hisobga refresh token yoki qayta login orqali kiriladi). Qurilma yangi anonim sessiyaga o'tadi.
+			userID = NewUserID()
+			if _, err := tx.Exec(ctx, `INSERT INTO users (id, lang) VALUES ($1, $2)`, userID, lang); err != nil {
+				return err
+			}
+			_, err = tx.Exec(ctx, `UPDATE devices SET user_id = $2 WHERE id = $1`, deviceID, userID)
+			if err != nil {
+				return err
+			}
+		} else if errors.Is(err, pgx.ErrNoRows) {
+			userID = NewUserID()
 			if _, err := tx.Exec(ctx, `INSERT INTO users (id, lang) VALUES ($1, $2)`, userID, lang); err != nil {
 				return err
 			}
@@ -357,9 +374,15 @@ type querier interface {
 }
 
 func getUser(ctx context.Context, q querier, id string) (User, error) {
+	return getUserWhere(ctx, q, "id = $1", id)
+}
+
+func getUserWhere(ctx context.Context, q querier, where string, arg any) (User, error) {
 	var u User
-	err := q.QueryRow(ctx, `SELECT id, lang, role, interests, companion, pace, budget, display_name FROM users WHERE id = $1`, id).
-		Scan(&u.ID, &u.Lang, &u.Role, &u.Interests, &u.Companion, &u.Pace, &u.Budget, &u.DisplayName)
+	err := q.QueryRow(ctx, `SELECT id, lang, role, interests, companion, pace, budget, display_name, email, email_verified,
+		google_sub, avatar_url FROM users WHERE `+where, arg).
+		Scan(&u.ID, &u.Lang, &u.Role, &u.Interests, &u.Companion, &u.Pace, &u.Budget, &u.DisplayName, &u.Email,
+			&u.EmailVerified, &u.GoogleSub, &u.AvatarURL)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return u, ErrNotFound
 	}
