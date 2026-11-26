@@ -166,7 +166,7 @@ type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinat
 
 | Endpoint | Tavsif |
 |---|---|
-| `GET /cities` | `[{ id, name, country, cover, center: LatLng, placesCount, newPlacesCount }]` |
+| `GET /cities` | `[{ id, name, country, cover, center: LatLng, placesCount, newPlacesCount }]`. `cover` — haqiqiy surat `/static/cities/{id}.jpg` (1600 px) + `credit`, `license`, `sourceUrl`, `source` (Wikimedia Commons; backend `seed/city_covers.json`); muqovasi yo'q shahar uchun `/static/ph/city.svg` |
 | `GET /places` | filtrlar: `city`, `category`, `novelty`, `interest`, `q`, `near=lat,lng`, `radiusM`, `openNow`, `wheelchair`, `source=curated|osm` → `PlaceSummary[]` (sahifalangan; jamoa tekshirgan joylar har doim OSM importidan oldin; har bir joyda `source`: `osm` = OpenStreetMap ommaviy importi) |
 | `GET /places/{id}` | to'liq `Place` |
 | `GET /places/{id}/reviews` | `[{ id, author, rating, text, createdAt }]` |
