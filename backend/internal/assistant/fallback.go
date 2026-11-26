@@ -144,7 +144,7 @@ func Fallback(ctx context.Context, req Request, t *Tools) (string, error) {
 		// faqat foydalanuvchi so'ragan mezonlar (+ hozir ochiq) — har joyga bir xil belgilar yopishmasin
 		var why []string
 		if in.MaxPriceLevel != nil {
-			if p.PriceLevel == 0 && p.Category != "restaurant" && p.Category != "cafe" {
+			if p.PriceLevel != nil && *p.PriceLevel == 0 {
 				why = append(why, tr("free", lang))
 			} else {
 				why = append(why, tr("cheap", lang))

@@ -78,7 +78,7 @@ type placeBrief struct {
 	City       string   `json:"city"`
 	Category   string   `json:"category"`
 	Tagline    string   `json:"tagline,omitempty"`
-	PriceLevel int      `json:"price_level"` // 0 bepul .. 3 qimmat
+	PriceLevel *int     `json:"price_level,omitempty"` // 0 bepul .. 3 qimmat; yo'q — noma'lum
 	Rating     *float64 `json:"rating,omitempty"`
 	Reviews    int      `json:"reviews,omitempty"`
 	Family     bool     `json:"family_friendly"`
@@ -90,8 +90,11 @@ type placeBrief struct {
 }
 
 func (t *Tools) brief(p store.Place) placeBrief {
-	b := placeBrief{ID: p.ID, Name: p.Name, City: p.CityID, Category: p.Category, Tagline: p.Tagline, PriceLevel: p.PriceLevel,
+	b := placeBrief{ID: p.ID, Name: p.Name, City: p.CityID, Category: p.Category, Tagline: p.Tagline,
 		Reviews: p.Reviews, Family: p.FamilyFriendly, Wheelchair: p.Wheelchair, Novelty: string(p.Novelty), Trust: p.Trust}
+	if pl := p.PriceLevel; pl > 0 || !domain.IsMealCategory(p.Category) { // ovqat joyida 0 — "noma'lum", bepul emas
+		b.PriceLevel = &pl
+	}
 	if p.Reviews > 0 || p.Rating > 0 {
 		r := p.Rating
 		b.Rating = &r
@@ -110,8 +113,8 @@ func (t *Tools) brief(p store.Place) placeBrief {
 
 func (t *Tools) SearchPlaces(ctx context.Context, in SearchPlacesInput) (any, error) {
 	limit := in.Limit
-	if limit <= 0 || limit > 15 {
-		limit = 8
+	if limit <= 0 || limit > 10 {
+		limit = 6 // token tejash: odatda 3-5 tasi tavsiya qilinadi
 	}
 	in.City = NormCity(in.City)
 	f := store.PlaceFilter{City: in.City, Words: in.Words, Family: in.Family, Wheelchair: in.Wheelchair, MaxPrice: in.MaxPriceLevel,
@@ -168,7 +171,11 @@ func (t *Tools) GetPlace(ctx context.Context, in GetPlaceInput) (any, error) {
 	for _, h := range p.Hours {
 		hours = append(hours, fmt.Sprintf("%s %s-%s", days[h.Day%7], h.Open, h.Close))
 	}
-	return map[string]any{"place": t.brief(p), "description": p.Description, "address": p.Address, "opening_hours": hours,
+	desc := p.Description
+	if r := []rune(desc); len(r) > 400 { // token tejash
+		desc = string(r[:400]) + "…"
+	}
+	return map[string]any{"place": t.brief(p), "description": desc, "address": p.Address, "opening_hours": hours,
 		"hours_note": p.HoursNote, "entry_fee": json.RawMessage(nonEmptyJSON(p.EntryFee)), "fee_note": p.FeeNote,
 		"crowd": p.Crowd, "best_time": p.BestTime, "rules": rs, "visit_minutes": p.VisitMin, "card": p.PayCard, "cash_only": p.CashOnly}, nil
 }

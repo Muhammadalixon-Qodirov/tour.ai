@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -16,6 +17,7 @@ import (
 // fakt faqat asbob natijalaridan, matn bo'laklari emit("delta") orqali.
 type Groq struct {
 	key, model, baseURL string
+	backup              string // limit (429) tugasa — alohida limitli kichikroq model
 	hc                  *http.Client
 }
 
@@ -29,7 +31,11 @@ func NewGroq(key, model string) *Groq {
 	if model == "" || strings.HasPrefix(model, "claude") {
 		model = "openai/gpt-oss-120b"
 	}
-	return &Groq{key: key, model: model, baseURL: groqBaseURL, hc: &http.Client{Timeout: 90 * time.Second}}
+	g := &Groq{key: key, model: model, baseURL: groqBaseURL, hc: &http.Client{Timeout: 90 * time.Second}}
+	if model == "openai/gpt-oss-120b" {
+		g.backup = "openai/gpt-oss-20b"
+	}
+	return g
 }
 
 // WithBaseURL — testlar uchun.
@@ -116,10 +122,15 @@ func (g *Groq) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (st
 
 // stream — bitta so'rov: matn bo'laklarini onText ga beradi, asbob chaqiruvlarini (index bo'yicha) yig'adi.
 func (g *Groq) stream(ctx context.Context, msgs []oaMessage, onText func(string)) (string, []oaToolCall, string, error) {
-	body, _ := json.Marshal(map[string]any{"model": g.model, "messages": msgs, "tools": openAITools, "stream": true,
-		"temperature": 0.3, "max_completion_tokens": 3000})
+	model := g.model
 	var resp *http.Response
 	for attempt := 0; ; attempt++ {
+		payload := map[string]any{"model": model, "messages": msgs, "tools": openAITools, "stream": true,
+			"temperature": 0.2, "max_completion_tokens": 1500}
+		if strings.HasPrefix(model, "openai/gpt-oss") {
+			payload["reasoning_effort"] = "low" // fikrlash tokenlari kam — tez va limitga sig'adi
+		}
+		body, _ := json.Marshal(payload)
 		hreq, err := http.NewRequestWithContext(ctx, http.MethodPost, g.baseURL+"/chat/completions", bytes.NewReader(body))
 		if err != nil {
 			return "", nil, "", err
@@ -130,12 +141,22 @@ func (g *Groq) stream(ctx context.Context, msgs []oaMessage, onText func(string)
 		if err != nil {
 			return "", nil, "", err
 		}
-		if (resp.StatusCode == 429 || resp.StatusCode >= 500) && attempt < 1 {
+		if (resp.StatusCode == 429 || resp.StatusCode >= 500) && attempt < 3 {
+			// Groq bepul tarif: daqiqasiga token limiti. "try again in 1.9s" / Retry-After ni kutamiz (≤ 8 s),
+			// ikkinchi 429 da alohida limitli zaxira modelga o'tamiz.
+			wait := retryAfter(resp)
 			resp.Body.Close()
+			if resp.StatusCode == 429 && attempt >= 1 && g.backup != "" && model != g.backup {
+				model = g.backup
+				continue
+			}
+			if wait > 8*time.Second {
+				return "", nil, "", fmt.Errorf("groq: limit, %s kutish kerak", wait)
+			}
 			select {
 			case <-ctx.Done():
 				return "", nil, "", ctx.Err()
-			case <-time.After(2 * time.Second):
+			case <-time.After(wait):
 			}
 			continue
 		}
@@ -222,4 +243,14 @@ func (g *Groq) stream(ctx context.Context, msgs []oaMessage, onText func(string)
 		out = append(out, *c)
 	}
 	return text.String(), out, finish, nil
+}
+
+// retryAfter — Retry-After sarlavhasi (soniya) yoki 1 s.
+func retryAfter(resp *http.Response) time.Duration {
+	if v := resp.Header.Get("Retry-After"); v != "" {
+		if f, err := strconv.ParseFloat(v, 64); err == nil && f >= 0 {
+			return time.Duration(f*1000)*time.Millisecond + 200*time.Millisecond
+		}
+	}
+	return time.Second
 }
