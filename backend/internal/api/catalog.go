@@ -32,6 +32,7 @@ type placeSummaryDTO struct {
 	VisitDurationMin int            `json:"visitDurationMin"`
 	IsOpenNow        *bool          `json:"isOpenNow,omitempty"`
 	IsPartner        bool           `json:"isPartner"`
+	Trust            string         `json:"trust"` // official | public | community | sample (sample — demo, UI da belgilansin)
 	DistanceM        *int           `json:"distanceM,omitempty"`
 }
 
@@ -39,6 +40,7 @@ type ruleDTO struct {
 	Code       string  `json:"code"`
 	Severity   string  `json:"severity"`
 	Text       string  `json:"text"`
+	Trust      string  `json:"trust"`
 	VerifiedBy *string `json:"verifiedBy,omitempty"`
 	VerifiedAt *string `json:"verifiedAt,omitempty"`
 }
@@ -46,6 +48,8 @@ type ruleDTO struct {
 type placeDTO struct {
 	placeSummaryDTO
 	Description     string                `json:"description"`
+	Aliases         []string              `json:"aliases"`
+	VerifiedAt      *string               `json:"verifiedAt,omitempty"`
 	Images          []domain.Image        `json:"images"`
 	Address         string                `json:"address"`
 	OpeningHours    []domain.OpeningHours `json:"openingHours"`
@@ -59,6 +63,7 @@ type placeDTO struct {
 }
 
 type historyDTO struct {
+	Trust   string   `json:"trust"`
 	Summary string   `json:"summary"`
 	Facts   []string `json:"facts"`
 	Sources any      `json:"sources"`
@@ -92,7 +97,7 @@ func (s *Server) summaryDTO(p store.Place, loc *time.Location) placeSummaryDTO {
 	d := placeSummaryDTO{
 		ID: p.ID, CityID: p.CityID, Name: p.Name, Tagline: p.Tagline, Category: p.Category, Novelty: p.Novelty,
 		Cover: s.coverOf(p), Location: p.Loc, Rating: p.Rating, ReviewsCount: p.Reviews, PriceLevel: p.PriceLevel,
-		VisitDurationMin: p.VisitMin, IsPartner: p.IsPartner,
+		VisitDurationMin: p.VisitMin, IsPartner: p.IsPartner, Trust: p.Trust,
 	}
 	if p.OpenedAt != nil {
 		v := p.OpenedAt.Format(time.DateOnly)
@@ -112,7 +117,7 @@ func (s *Server) summaryDTO(p store.Place, loc *time.Location) placeSummaryDTO {
 func rulesDTO(rules []store.Rule, lang string) []ruleDTO {
 	out := make([]ruleDTO, 0, len(rules))
 	for _, r := range rules {
-		d := ruleDTO{Code: r.Code, Severity: r.Severity, Text: i18n.Pick(r.Text, lang), VerifiedBy: r.VerifiedBy}
+		d := ruleDTO{Code: r.Code, Severity: r.Severity, Text: i18n.Pick(r.Text, lang), Trust: r.Trust, VerifiedBy: r.VerifiedBy}
 		if r.VerifiedAt != nil {
 			v := r.VerifiedAt.UTC().Format(time.RFC3339)
 			d.VerifiedAt = &v
@@ -308,7 +313,7 @@ func (s *Server) getPlace(w http.ResponseWriter, r *http.Request) {
 func (s *Server) placeDetailDTO(r *http.Request, p store.Place, rules []store.Rule, lang string) placeDTO {
 	d := placeDTO{
 		placeSummaryDTO: s.summaryDTO(p, s.cityZones(r)(p.CityID)),
-		Description:     p.Description, Images: p.Images, Address: p.Address, OpeningHours: p.Hours,
+		Description:     p.Description, Aliases: nonNil(p.Aliases), Images: p.Images, Address: p.Address, OpeningHours: p.Hours,
 		Rules:           rulesDTO(rules, lang),
 		Accessibility:   accessibilityDTO{p.Wheelchair, p.FamilyFriendly, p.EasyWalk},
 		Payment:         paymentDTO{p.PayCard, p.CashOnly},
@@ -323,8 +328,16 @@ func (s *Server) placeDetailDTO(r *http.Request, p store.Place, rules []store.Ru
 	if len(p.EntryFee) > 0 && string(p.EntryFee) != "null" {
 		d.EntryFee = p.EntryFee
 	}
+	if p.VerifiedAt != nil {
+		v := p.VerifiedAt.UTC().Format(time.RFC3339)
+		d.VerifiedAt = &v
+	}
 	if p.HistorySummary != nil && *p.HistorySummary != "" {
-		d.History = &historyDTO{Summary: *p.HistorySummary, Facts: p.HistoryFacts, Sources: p.Sources}
+		trust := p.Trust
+		if p.HistoryTrust != nil {
+			trust = *p.HistoryTrust
+		}
+		d.History = &historyDTO{Trust: trust, Summary: *p.HistorySummary, Facts: p.HistoryFacts, Sources: p.Sources}
 		if d.History.Facts == nil {
 			d.History.Facts = []string{}
 		}
@@ -411,7 +424,7 @@ func (s *Server) placeholder(w http.ResponseWriter, r *http.Request) {
 	}
 	colors := map[string]string{"monument": "#b5651d", "museum": "#6d4c8d", "mosque": "#1f7a8c", "bazaar": "#c27a06",
 		"workshop": "#8a5a2b", "gallery": "#c93f7a", "restaurant": "#b03a2e", "cafe": "#7b5e3b", "park": "#3a8f3a",
-		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "city": "#0f8f7e"}
+		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "theatre": "#8e3b6a", "city": "#0f8f7e"}
 	w.Header().Set("Content-Type", "image/svg+xml")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	fmt.Fprintf(w, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" fill="%s"/>`+

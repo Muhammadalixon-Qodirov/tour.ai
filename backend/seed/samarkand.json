@@ -235,7 +235,8 @@
             "en": "No flash photography inside."
           }
         }
-      ]
+      ],
+      "fridayPrayer": "12:00-14:00"
     },
     {
       "id": "shah-i-zinda",
@@ -350,7 +351,12 @@
           "tagline": "The city's biggest farmers' market",
           "description": "Samarkand bread, dried fruit and spices."
         }
-      }
+      },
+      "aliases": [
+        "Siyob",
+        "Сиаб",
+        "Siab"
+      ]
     },
     {
       "id": "ulugbek-observatory",
@@ -434,7 +440,8 @@
           "tagline": "Murals of ancient Samarkand",
           "description": "A museum on the ancient city site, with 7th-century murals."
         }
-      }
+      },
+      "lunch": "13:00-14:00"
     },
     {
       "id": "hazrat-khizr",
@@ -489,7 +496,8 @@
             "en": "Visits are limited during prayer times."
           }
         }
-      ]
+      ],
+      "fridayPrayer": "12:00-14:00"
     },
     {
       "id": "konigil-paper",

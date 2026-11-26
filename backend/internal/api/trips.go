@@ -91,50 +91,11 @@ func (s *Server) createTrip(w http.ResponseWriter, r *http.Request) {
 		writeValidation(w, r, fe)
 		return
 	}
+	t, ok := s.planAndSave(w, r, req, req.prefs(start), start)
+	if !ok {
+		return
+	}
 	ctx := r.Context()
-	city, err := s.store.City(ctx, req.CityID, i18n.Chain(langOf(r)))
-	if isNotFound(err) {
-		writeError(w, r, http.StatusNotFound, "city_not_found", false)
-		return
-	}
-	if err != nil {
-		s.internalError(w, r, err)
-		return
-	}
-	cands, avg, err := s.store.Candidates(ctx, city.ID)
-	if err != nil {
-		s.internalError(w, r, err)
-		return
-	}
-	days, err := planner.Plan(req.prefs(start), plannerCity(city, avg), cands)
-	if errors.Is(err, planner.ErrImpossible) {
-		writeError(w, r, http.StatusUnprocessableEntity, "route_impossible", false)
-		return
-	}
-	if err != nil {
-		s.internalError(w, r, err)
-		return
-	}
-	if v := domain.Validate(days); len(v) > 0 {
-		// Shahar bazasida yangi joy yetarli bo'lmasa bo'lishi mumkin — marshrut baribir beriladi, lekin kuzatiladi.
-		slog.Warn("trip invariants", "city", city.ID, "violations", v)
-	}
-
-	prefsJSON, _ := json.Marshal(req)
-	share, _ := domain.NoveltyShare(days)
-	t := &store.Trip{ID: uuid.Must(uuid.NewV7()), UserID: userOf(r), CityID: city.ID, Status: "ready",
-		StartDate: start, Prefs: prefsJSON, NoveltyShare: share, Planner: "fallback"}
-	for _, d := range days {
-		td := store.TripDay{Index: d.Index, Date: start.AddDate(0, 0, d.Index)}
-		for _, ps := range d.Stops {
-			td.Stops = append(td.Stops, store.Stop{ID: uuid.Must(uuid.NewV7()), Status: "upcoming", PlanStop: ps})
-		}
-		t.Days = append(t.Days, td)
-	}
-	if err := s.store.CreateTrip(ctx, t); err != nil {
-		s.internalError(w, r, err)
-		return
-	}
 	full, err := s.store.Trip(ctx, t.ID, t.UserID)
 	if err != nil {
 		s.internalError(w, r, err)
@@ -533,4 +494,53 @@ func (s *Server) swapStop(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"alternatives": out})
+}
+
+// planAndSave — marshrutni tuzadi va saqlaydi (oddiy va guruh marshruti uchun umumiy).
+func (s *Server) planAndSave(w http.ResponseWriter, r *http.Request, req tripReq, prefs planner.Prefs, start time.Time) (*store.Trip, bool) {
+	ctx := r.Context()
+	city, err := s.store.City(ctx, req.CityID, i18n.Chain(langOf(r)))
+	if isNotFound(err) {
+		writeError(w, r, http.StatusNotFound, "city_not_found", false)
+		return nil, false
+	}
+	if err != nil {
+		s.internalError(w, r, err)
+		return nil, false
+	}
+	cands, avg, err := s.store.Candidates(ctx, city.ID)
+	if err != nil {
+		s.internalError(w, r, err)
+		return nil, false
+	}
+	days, err := planner.Plan(prefs, plannerCity(city, avg), cands)
+	if errors.Is(err, planner.ErrImpossible) {
+		writeError(w, r, http.StatusUnprocessableEntity, "route_impossible", false)
+		return nil, false
+	}
+	if err != nil {
+		s.internalError(w, r, err)
+		return nil, false
+	}
+	if v := domain.Validate(days); len(v) > 0 {
+		// Shahar bazasida yangi joy yetarli bo'lmasa bo'lishi mumkin — marshrut baribir beriladi, lekin kuzatiladi.
+		slog.Warn("trip invariants", "city", city.ID, "violations", v)
+	}
+
+	prefsJSON, _ := json.Marshal(req)
+	share, _ := domain.NoveltyShare(days)
+	t := &store.Trip{ID: uuid.Must(uuid.NewV7()), UserID: userOf(r), CityID: city.ID, Status: "ready",
+		StartDate: start, Prefs: prefsJSON, NoveltyShare: share, Planner: "fallback"}
+	for _, d := range days {
+		td := store.TripDay{Index: d.Index, Date: start.AddDate(0, 0, d.Index)}
+		for _, ps := range d.Stops {
+			td.Stops = append(td.Stops, store.Stop{ID: uuid.Must(uuid.NewV7()), Status: "upcoming", PlanStop: ps})
+		}
+		t.Days = append(t.Days, td)
+	}
+	if err := s.store.CreateTrip(ctx, t); err != nil {
+		s.internalError(w, r, err)
+		return nil, false
+	}
+	return t, true
 }

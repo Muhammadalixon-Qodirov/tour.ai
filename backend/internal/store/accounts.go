@@ -183,6 +183,15 @@ func mergeUsers(ctx context.Context, tx pgx.Tx, from, into string) error {
 		   WHERE user_id = $1 ON CONFLICT DO NOTHING`,
 		`INSERT INTO notification_log (user_id, kind, day, sent_at) SELECT $2, kind, day, sent_at FROM notification_log
 		   WHERE user_id = $1 ON CONFLICT DO NOTHING`,
+		`INSERT INTO saved_places (user_id, place_id, created_at) SELECT $2, place_id, created_at FROM saved_places
+		   WHERE user_id = $1 ON CONFLICT DO NOTHING`,
+		`UPDATE groups SET owner_id = $2 WHERE owner_id = $1`,
+		`INSERT INTO group_members (group_id, user_id, role, budget, interests, pace, joined_at)
+		   SELECT group_id, $2, role, budget, interests, pace, joined_at FROM group_members WHERE user_id = $1
+		   ON CONFLICT (group_id, user_id) DO UPDATE SET role = CASE WHEN EXCLUDED.role = 'owner' THEN 'owner' ELSE group_members.role END`,
+		`INSERT INTO group_votes (group_id, user_id, place_id, vote, created_at) SELECT group_id, $2, place_id, vote, created_at
+		   FROM group_votes WHERE user_id = $1 ON CONFLICT DO NOTHING`,
+		`UPDATE users u SET is_resident = COALESCE(u.is_resident, a.is_resident) FROM users a WHERE u.id = $2 AND a.id = $1`,
 		`UPDATE users u SET interests = CASE WHEN cardinality(u.interests) = 0 THEN a.interests ELSE u.interests END,
 		   companion = COALESCE(u.companion, a.companion), pace = COALESCE(u.pace, a.pace), budget = COALESCE(u.budget, a.budget),
 		   display_name = COALESCE(u.display_name, a.display_name)

@@ -163,6 +163,12 @@
             "en": "No tourist entry during Friday prayers."
           }
         }
+      ],
+      "fridayPrayer": "12:00-14:00",
+      "aliases": [
+        "Minorai Kalon",
+        "Kalon minorasi",
+        "Калян"
       ]
     },
     {
@@ -349,7 +355,8 @@
             "en": "Cover shoulders and knees."
           }
         }
-      ]
+      ],
+      "fridayPrayer": "12:00-14:00"
     },
     {
       "id": "toki-zargaron",
@@ -448,7 +455,8 @@
           "tagline": "An ancient mosque below street level",
           "description": "An ancient mosque sunk below street level, now a carpet museum."
         }
-      }
+      },
+      "fridayPrayer": "12:00-14:00"
     },
     {
       "id": "bux-suzani-demo",

@@ -196,17 +196,21 @@ type placeInput struct {
 	IsPartner        *bool                      `json:"isPartner"`
 	Images           *[]domain.Image            `json:"images"`
 	Contacts         *map[string]string         `json:"contacts"`
+	Aliases          *[]string                  `json:"aliases"`
+	Trust            *string                    `json:"trust"`
+	VerifiedAt       *time.Time                 `json:"verifiedAt"`
 	Texts            map[string]*placeTextInput `json:"texts"`
 }
 
 type placeTextInput struct {
-	Name        *string          `json:"name"`
-	Tagline     *string          `json:"tagline"`
-	Description *string          `json:"description"`
-	Address     *string          `json:"address"`
-	History     *string          `json:"history"` // "" = tozalash
-	Facts       *[]string        `json:"facts"`
-	Sources     *json.RawMessage `json:"sources"`
+	Name         *string          `json:"name"`
+	Tagline      *string          `json:"tagline"`
+	Description  *string          `json:"description"`
+	Address      *string          `json:"address"`
+	History      *string          `json:"history"` // "" = tozalash
+	HistoryTrust *string          `json:"historyTrust"`
+	Facts        *[]string        `json:"facts"`
+	Sources      *json.RawMessage `json:"sources"`
 }
 
 func set[T any](dst *T, v *T) {
@@ -252,6 +256,12 @@ func (in placeInput) apply(p *store.PlaceRecord, texts map[string]store.PlaceTex
 	set(&p.IsPartner, in.IsPartner)
 	set(&p.Images, in.Images)
 	set(&p.Contacts, in.Contacts)
+	set(&p.Aliases, in.Aliases)
+	set(&p.Trust, in.Trust)
+	if in.VerifiedAt != nil {
+		v := *in.VerifiedAt
+		p.VerifiedAt = &v
+	}
 	for lang, ti := range in.Texts {
 		if ti == nil {
 			delete(texts, lang)
@@ -270,10 +280,16 @@ func (in placeInput) apply(p *store.PlaceRecord, texts map[string]store.PlaceTex
 			}
 		}
 		set(&t.Facts, ti.Facts)
+		if ti.HistoryTrust != nil {
+			v := *ti.HistoryTrust
+			t.HistoryTrust = &v
+		}
 		set(&t.Sources, ti.Sources)
 		texts[lang] = t
 	}
 }
+
+var trustLevels = []string{"official", "public", "community", "sample"}
 
 var ruleCodes = []string{"no_flash", "no_photo", "photo_fee", "dress_code", "shoes_off", "quiet",
 	"no_drone", "no_food", "no_smoking", "no_pets", "ticket_required", "prayer_time_limit"}
@@ -321,6 +337,27 @@ func (s *Server) validatePlace(r *http.Request, p store.PlaceRecord, texts map[s
 			break
 		}
 		days[h.Day] = true
+		for _, b := range h.Breaks {
+			f, e1 := domain.ParseHHMM(b.From)
+			t, e2 := domain.ParseHHMM(b.To)
+			if e1 != nil || e2 != nil || f < o || t > c || t <= f ||
+				b.Reason != "" && !slices.Contains([]string{"lunch", "prayer", "other"}, b.Reason) {
+				fe.add("openingHours.breaks", "within open..close, from < to, reason lunch | prayer | other")
+				break
+			}
+		}
+	}
+	if !slices.Contains(trustLevels, p.Trust) {
+		fe.add("trust", strings.Join(trustLevels, " | "))
+	}
+	if len(p.Aliases) > 10 {
+		fe.add("aliases", "max 10")
+	}
+	for _, a := range p.Aliases {
+		if !runeLen(strings.TrimSpace(a), 2, 80) {
+			fe.add("aliases", "2..80 chars each")
+			break
+		}
 	}
 	if len(p.EntryFee) > 0 && string(p.EntryFee) != "null" {
 		var obj map[string]any
@@ -361,6 +398,8 @@ func (s *Server) validatePlace(r *http.Request, p store.PlaceRecord, texts map[s
 			fe.add(k+".history", "max 3000 chars")
 		case len(t.Facts) > 10:
 			fe.add(k+".facts", "max 10")
+		case t.HistoryTrust != nil && !slices.Contains(trustLevels, *t.HistoryTrust):
+			fe.add(k+".historyTrust", strings.Join(trustLevels, " | "))
 		}
 	}
 	return fe
@@ -402,7 +441,7 @@ func (s *Server) adminCreatePlace(w http.ResponseWriter, r *http.Request) {
 	}
 	p := store.PlaceRecord{Status: "draft", Novelty: domain.NoveltyNew, GeofenceRadiusM: 80, VisitMin: 45,
 		FamilyFriendly: true, EasyWalk: true, Interests: []string{}, Images: []domain.Image{}, Source: "manual",
-		Contacts: map[string]string{}}
+		Contacts: map[string]string{}, Aliases: []string{}, Trust: "public"}
 	texts := map[string]store.PlaceText{}
 	in.apply(&p, texts)
 	fe := s.validatePlace(r, p, texts)
@@ -534,6 +573,8 @@ func (s *Server) adminPutRules(w http.ResponseWriter, r *http.Request) {
 			fe.add(k+".code", strings.Join(ruleCodes, " | "))
 		case x.Severity != "info" && x.Severity != "warn" && x.Severity != "forbidden":
 			fe.add(k+".severity", "info | warn | forbidden")
+		case x.Trust != "" && !slices.Contains(trustLevels, x.Trust):
+			fe.add(k+".trust", strings.Join(trustLevels, " | "))
 		case x.Priority < 0 || x.Priority > 100:
 			fe.add(k+".priority", "0..100")
 		case !runeLen(strings.TrimSpace(x.Text["uz"]), 3, 200):

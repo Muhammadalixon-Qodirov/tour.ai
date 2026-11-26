@@ -23,6 +23,7 @@ type Trip struct {
 	NoveltyShare float64
 	Planner      string
 	CreatedAt    time.Time
+	GroupID      *uuid.UUID
 	Days         []TripDay
 }
 
@@ -110,9 +111,9 @@ func (s *Store) ReplaceDayStops(ctx context.Context, tripID uuid.UUID, day int, 
 // Trip — foydalanuvchining marshruti (boshqa foydalanuvchiniki bo'lsa ErrNotFound).
 func (s *Store) Trip(ctx context.Context, id uuid.UUID, userID string) (Trip, error) {
 	var t Trip
-	err := s.DB.QueryRow(ctx, `SELECT id, user_id, city_id, status, start_date, prefs, summary, novelty_share, planner, created_at
-		FROM trips WHERE id = $1 AND user_id = $2`, id, userID).
-		Scan(&t.ID, &t.UserID, &t.CityID, &t.Status, &t.StartDate, &t.Prefs, &t.Summary, &t.NoveltyShare, &t.Planner, &t.CreatedAt)
+	err := s.DB.QueryRow(ctx, `SELECT id, user_id, city_id, status, start_date, prefs, summary, novelty_share, planner, created_at, group_id
+		FROM trips WHERE id = $1 AND (user_id = $2 OR group_id IN (SELECT group_id FROM group_members WHERE user_id = $2))`, id, userID).
+		Scan(&t.ID, &t.UserID, &t.CityID, &t.Status, &t.StartDate, &t.Prefs, &t.Summary, &t.NoveltyShare, &t.Planner, &t.CreatedAt, &t.GroupID)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return t, ErrNotFound
 	}
@@ -177,7 +178,8 @@ type TripListItem struct {
 func (s *Store) Trips(ctx context.Context, userID string, limit int) ([]TripListItem, error) {
 	rows, err := s.DB.Query(ctx, `SELECT t.id, t.city_id, t.status, t.start_date,
 		(SELECT count(*) FROM trip_days d WHERE d.trip_id = t.id), t.novelty_share, t.created_at
-		FROM trips t WHERE t.user_id = $1 ORDER BY t.created_at DESC LIMIT $2`, userID, limit)
+		FROM trips t WHERE t.user_id = $1 OR t.group_id IN (SELECT group_id FROM group_members WHERE user_id = $1)
+		ORDER BY t.created_at DESC LIMIT $2`, userID, limit)
 	if err != nil {
 		return nil, err
 	}

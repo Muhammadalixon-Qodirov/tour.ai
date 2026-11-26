@@ -107,6 +107,9 @@ type Place struct {
 	GeofenceRadiusM int
 	RulesVersion    int
 	Status          string
+	Aliases         []string
+	Trust           string
+	VerifiedAt      *time.Time
 	DistanceM       *float64
 
 	// faqat batafsil so'rovda
@@ -114,24 +117,27 @@ type Place struct {
 	Address        string
 	HistorySummary *string
 	HistoryFacts   []string
+	HistoryTrust   *string
 	Sources        json.RawMessage
 	EntryFee       json.RawMessage
 }
 
 const placeCols = `p.id, p.city_id, t.name, t.tagline, p.category, p.novelty, p.opened_at, p.images, p.lat, p.lng,
   p.rating::float8, p.reviews_count, p.price_level, p.visit_duration_min, p.opening_hours, p.is_partner, p.interests,
-  p.wheelchair, p.family_friendly, p.easy_walk, p.pay_card, p.cash_only, p.geofence_radius_m, p.rules_version, p.status`
+  p.wheelchair, p.family_friendly, p.easy_walk, p.pay_card, p.cash_only, p.geofence_radius_m, p.rules_version, p.status,
+  p.aliases, p.trust, p.verified_at`
 
 // placeText — $1 = til zanjiri.
 const placeText = `CROSS JOIN LATERAL (
-  SELECT name, tagline, description, address, history_summary, history_facts, sources
+  SELECT name, tagline, description, address, history_summary, history_facts, history_trust, sources
   FROM place_i18n i WHERE i.place_id = p.id AND i.lang = ANY($1::text[])
   ORDER BY array_position($1::text[], i.lang) LIMIT 1) t`
 
 func placeDest(p *Place) []any {
 	return []any{&p.ID, &p.CityID, &p.Name, &p.Tagline, &p.Category, &p.Novelty, &p.OpenedAt, &p.Images,
 		&p.Loc.Lat, &p.Loc.Lng, &p.Rating, &p.Reviews, &p.PriceLevel, &p.VisitMin, &p.Hours, &p.IsPartner, &p.Interests,
-		&p.Wheelchair, &p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.GeofenceRadiusM, &p.RulesVersion, &p.Status}
+		&p.Wheelchair, &p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.GeofenceRadiusM, &p.RulesVersion, &p.Status,
+		&p.Aliases, &p.Trust, &p.VerifiedAt}
 }
 
 type PlaceFilter struct {
@@ -169,7 +175,8 @@ func (s *Store) ListPlaces(ctx context.Context, f PlaceFilter, langs []string) (
 	}
 	if f.Q != "" {
 		where = append(where, "EXISTS (SELECT 1 FROM place_i18n q WHERE q.place_id = p.id AND (q.name ILIKE "+
-			arg("%"+escapeLike(f.Q)+"%")+" OR q.tagline ILIKE $"+fmt.Sprint(len(args))+"))")
+			arg("%"+escapeLike(f.Q)+"%")+" OR q.tagline ILIKE $"+fmt.Sprint(len(args))+")"+
+			" OR EXISTS (SELECT 1 FROM unnest(p.aliases) al WHERE al ILIKE $"+fmt.Sprint(len(args))+"))")
 	}
 	if f.Wheelchair {
 		where = append(where, "p.wheelchair")
@@ -210,8 +217,8 @@ func escapeLike(s string) string {
 // Place — bitta joy. published bo'lmasa ham qaytaradi (admin uchun); chaqiruvchi status ni tekshiradi.
 func (s *Store) Place(ctx context.Context, id string, langs []string) (Place, error) {
 	var p Place
-	dest := append(placeDest(&p), &p.Description, &p.Address, &p.HistorySummary, &p.HistoryFacts, &p.Sources, &p.EntryFee)
-	err := s.DB.QueryRow(ctx, `SELECT `+placeCols+`, t.description, t.address, t.history_summary, t.history_facts, t.sources, p.entry_fee
+	dest := append(placeDest(&p), &p.Description, &p.Address, &p.HistorySummary, &p.HistoryFacts, &p.HistoryTrust, &p.Sources, &p.EntryFee)
+	err := s.DB.QueryRow(ctx, `SELECT `+placeCols+`, t.description, t.address, t.history_summary, t.history_facts, t.history_trust, t.sources, p.entry_fee
 		FROM places p `+placeText+` WHERE p.id = $2`, langs, id).Scan(dest...)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return p, ErrNotFound
@@ -273,11 +280,12 @@ type Rule struct {
 	Text       map[string]string
 	VerifiedBy *string
 	VerifiedAt *time.Time
+	Trust      string
 }
 
 // Rules — joylar qoidalari: forbidden > warn > info, keyin priority.
 func (s *Store) Rules(ctx context.Context, placeIDs []string) (map[string][]Rule, error) {
-	rows, err := s.DB.Query(ctx, `SELECT place_id, code, severity, priority, text, verified_by, verified_at
+	rows, err := s.DB.Query(ctx, `SELECT place_id, code, severity, priority, text, verified_by, verified_at, trust
 		FROM place_rules WHERE place_id = ANY($1::text[])
 		ORDER BY place_id, CASE severity WHEN 'forbidden' THEN 0 WHEN 'warn' THEN 1 ELSE 2 END, priority DESC, id`, placeIDs)
 	if err != nil {
@@ -287,7 +295,7 @@ func (s *Store) Rules(ctx context.Context, placeIDs []string) (map[string][]Rule
 	out := map[string][]Rule{}
 	for rows.Next() {
 		var r Rule
-		if err := rows.Scan(&r.PlaceID, &r.Code, &r.Severity, &r.Priority, &r.Text, &r.VerifiedBy, &r.VerifiedAt); err != nil {
+		if err := rows.Scan(&r.PlaceID, &r.Code, &r.Severity, &r.Priority, &r.Text, &r.VerifiedBy, &r.VerifiedAt, &r.Trust); err != nil {
 			return nil, err
 		}
 		out[r.PlaceID] = append(out[r.PlaceID], r)
@@ -330,6 +338,7 @@ type User struct {
 	EmailVerified bool
 	GoogleSub     *string
 	AvatarURL     *string
+	IsResident    *bool
 }
 
 // DeviceSession — qurilma bo'yicha foydalanuvchini topadi yoki yaratadi.
@@ -380,9 +389,9 @@ func getUser(ctx context.Context, q querier, id string) (User, error) {
 func getUserWhere(ctx context.Context, q querier, where string, arg any) (User, error) {
 	var u User
 	err := q.QueryRow(ctx, `SELECT id, lang, role, interests, companion, pace, budget, display_name, email, email_verified,
-		google_sub, avatar_url FROM users WHERE `+where, arg).
+		google_sub, avatar_url, is_resident FROM users WHERE `+where, arg).
 		Scan(&u.ID, &u.Lang, &u.Role, &u.Interests, &u.Companion, &u.Pace, &u.Budget, &u.DisplayName, &u.Email,
-			&u.EmailVerified, &u.GoogleSub, &u.AvatarURL)
+			&u.EmailVerified, &u.GoogleSub, &u.AvatarURL, &u.IsResident)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return u, ErrNotFound
 	}
@@ -398,13 +407,15 @@ type UserPatch struct {
 	Pace        *string
 	Budget      *int
 	DisplayName *string
+	IsResident  *bool
 }
 
 func (s *Store) UpdateUser(ctx context.Context, id string, p UserPatch) (User, error) {
 	_, err := s.DB.Exec(ctx, `UPDATE users SET
 		lang = COALESCE($2, lang), interests = COALESCE($3, interests), companion = COALESCE($4, companion),
-		pace = COALESCE($5, pace), budget = COALESCE($6, budget), display_name = COALESCE($7, display_name)
-		WHERE id = $1`, id, p.Lang, p.Interests, p.Companion, p.Pace, p.Budget, p.DisplayName)
+		pace = COALESCE($5, pace), budget = COALESCE($6, budget), display_name = COALESCE($7, display_name),
+		is_resident = COALESCE($8, is_resident)
+		WHERE id = $1`, id, p.Lang, p.Interests, p.Companion, p.Pace, p.Budget, p.DisplayName, p.IsResident)
 	if err != nil {
 		return User{}, err
 	}

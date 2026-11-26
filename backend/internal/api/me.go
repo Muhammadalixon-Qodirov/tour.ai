@@ -63,6 +63,7 @@ type meDTO struct {
 	Email         *string  `json:"email,omitempty"`
 	AuthProviders []string `json:"authProviders"` // "google", "email"
 	AvatarURL     *string  `json:"avatarUrl,omitempty"`
+	IsResident    *bool    `json:"isResident"` // O'zbekiston rezidenti: kirish narxi shunga qarab ko'rsatiladi
 	DisplayName   *string  `json:"displayName,omitempty"`
 	Interests     []string `json:"interests"`
 	Companion     *string  `json:"companion,omitempty"`
@@ -75,7 +76,7 @@ type meDTO struct {
 }
 
 func (s *Server) meFor(r *http.Request, u store.User) (meDTO, error) {
-	d := meDTO{ID: u.ID, Lang: u.Lang, IsRegistered: u.IsRegistered(), Email: u.Email, AvatarURL: u.AvatarURL,
+	d := meDTO{ID: u.ID, Lang: u.Lang, IsRegistered: u.IsRegistered(), Email: u.Email, AvatarURL: u.AvatarURL, IsResident: u.IsResident,
 		DisplayName: u.DisplayName, Interests: u.Interests, Companion: u.Companion, Pace: u.Pace, Budget: u.Budget,
 		AuthProviders: []string{}}
 	if u.GoogleSub != nil {
@@ -121,6 +122,7 @@ type mePatch struct {
 	Companion   *string   `json:"companion"`
 	Pace        *string   `json:"pace"`
 	Budget      *int      `json:"budget"`
+	IsResident  *bool     `json:"isResident"`
 }
 
 var (
@@ -173,7 +175,7 @@ func (s *Server) patchMe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	u, err := s.store.UpdateUser(r.Context(), userOf(r), store.UserPatch{Lang: p.Lang, Interests: p.Interests,
-		Companion: p.Companion, Pace: p.Pace, Budget: p.Budget, DisplayName: p.DisplayName})
+		Companion: p.Companion, Pace: p.Pace, Budget: p.Budget, DisplayName: p.DisplayName, IsResident: p.IsResident})
 	if err != nil {
 		s.internalError(w, r, err)
 		return

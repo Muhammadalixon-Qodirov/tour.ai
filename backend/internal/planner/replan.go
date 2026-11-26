@@ -62,8 +62,8 @@ func (r *Replanner) RetimeFrom(stops []domain.PlanStop, wd, from int, pos *domai
 			out[i].Transit = &tr
 			arrive += tr.DurationMin
 		}
-		if o, _, ok := domain.DayWindow(c.Hours, wd); ok {
-			arrive = max(arrive, o)
+		if start, _ := domain.FitVisit(c.Hours, wd, arrive, out[i].DurationMin); start > arrive {
+			arrive = start
 		}
 		out[i].ArriveMin = arrive
 		t = arrive + out[i].DurationMin
@@ -193,7 +193,7 @@ func (r *Replanner) Tired(stops []domain.PlanStop, fixed, wd, now int, loc *doma
 	return out, append(changes, more...)
 }
 
-var indoorCategories = []string{"museum", "gallery", "workshop", "mosque", "bazaar"}
+var indoorCategories = []string{"museum", "gallery", "workshop", "mosque", "bazaar", "theatre"}
 
 // Weather — yomon ob-havoda ochiq havodagi joylar yaqin yopiq joylarga almashtiriladi.
 // Yangi joyning o'rniga iloji boricha yangi joy qo'yiladi (kvota saqlansin).

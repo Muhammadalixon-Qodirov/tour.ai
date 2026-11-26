@@ -66,3 +66,26 @@ func TestDistance(t *testing.T) {
 		t.Fatalf("masofa %v", d)
 	}
 }
+
+func TestBreaks(t *testing.T) {
+	// dushanba 09:00–18:00, tushlik 13:00–14:00; juma namozi 12:00–14:00
+	h := []OpeningHours{
+		{Day: 1, Open: "09:00", Close: "18:00", Breaks: []Break{{From: "13:00", To: "14:00", Reason: "lunch"}}},
+		{Day: 5, Open: "09:00", Close: "18:00", Breaks: []Break{{From: "12:00", To: "14:00", Reason: "prayer"}}},
+	}
+	if IsOpenAt(h, 1, 13*60+30) || !IsOpenAt(h, 1, 14*60) || IsOpenAt(h, 5, 12*60+10) {
+		t.Fatal("tanaffus hisobga olinmadi")
+	}
+	if s, ok := FitVisit(h, 1, 12*60+30, 60); !ok || s != 14*60 {
+		t.Fatalf("tushlikka to'g'ri kelgan tashrif surilishi kerak: %d %v", s, ok)
+	}
+	if s, ok := FitVisit(h, 1, 8*60, 45); !ok || s != 9*60 {
+		t.Fatalf("ochilishgacha kutish: %d", s)
+	}
+	if _, ok := FitVisit(h, 1, 17*60+30, 60); ok {
+		t.Fatal("yopilishdan keyin tugaydigan tashrif sig'masligi kerak")
+	}
+	if _, ok := FitVisit(h, 3, 10*60, 30); ok {
+		t.Fatal("jadvalda yo'q kun — yopiq")
+	}
+}

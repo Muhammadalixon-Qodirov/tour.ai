@@ -48,6 +48,8 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` |
+| Saqlangan joylar | `GET /me/saved`, `PUT /me/saved/{placeId}`, `DELETE /me/saved/{placeId}` |
+| Guruh safari | `POST /groups` `{name, cityId?}` → `inviteCode` · `POST /groups/join` `{inviteCode}` · `GET /groups`, `GET /groups/{id}` (a'zolar, ovozlar) · `PATCH /groups/{id}/me` `{interests, budget, pace}` · `POST /groups/{id}/votes` `{placeId, vote: 1\|-1\|0}` · `POST /groups/{id}/trip` `{startDate, days}` · `DELETE /groups/{id}/members/me` |
 | Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
 | Lenta | `GET /feed?city=`, `GET /posts/{id}`, `POST·DELETE /posts/{id}/like`, `POST /posts/{id}/report`, `DELETE /posts/{id}`; ochiq: `GET /s/{slug}` (HTML + OpenGraph), `GET /s/{slug}/card.png`; admin: `GET /admin/posts?status=reported`, `POST /admin/posts/{id}/hide·restore` |
 | Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30`, `POST·PATCH·DELETE /admin/services[/{id}]` |
@@ -154,3 +156,16 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - Google: frontend Google Sign-In dan **ID token** oladi va `POST /auth/google` ga yuboradi; backend uni Google ning
   ochiq kalitlari bilan tekshiradi (`aud` = `GOOGLE_CLIENT_IDS`). Faqat Google tasdiqlagan email hisobga bog'lanadi.
 - Sozlanmagan bo'lsa: `503 google_unavailable` / `503 email_unavailable`.
+
+## Ma'lumot sifati va qo'shimcha maydonlar
+
+- `trust`: `official` (obyekt ma'muriyati, gov.uz) · `public` (ochiq manba) · `community` (foydalanuvchi) · `sample` (demo).
+  Joyda, qoidada (`rules[].trust`) va tarixda (`history.trust`). Demo seed — `sample`; UI buni belgilashi kerak.
+- `aliases`: mahalliy nomlar ("Chorsu", "Kalon minorasi") — `GET /places?q=` ular bo'yicha ham qidiradi.
+- `openingHours[].breaks`: `[{from, to, reason: lunch|prayer|other}]` — "hozir ochiq" va rejalashtirgich tanaffusni hisobga oladi
+  (masjidlarda juma 12:00–14:00).
+- `isResident` (`PATCH /me`): kirish narxini (`entryFee.local` / `entryFee.foreigner`) to'g'ri ko'rsatish uchun.
+- `theatre` kategoriyasi.
+- Guruh safari: umumiy marshrut a'zolar istaklaridan tuziladi — qiziqishlar (ko'p uchraganlari), eng kichik byudjet,
+  eng sokin temp; ko'pchilik "ha" degan joy ustun, yarmi yoki ko'pi "yo'q" degan joy chiqariladi. Marshrutni barcha a'zolar
+  ko'radi va tahrirlaydi; kundalik — har kimning o'ziniki.

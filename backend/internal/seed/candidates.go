@@ -240,8 +240,8 @@ func upsertCandidate(ctx context.Context, tx pgx.Tx, p candPlace, isNew bool) er
 	}
 	if isNew {
 		if _, err := tx.Exec(ctx, `INSERT INTO places (id, city_id, category, novelty, opened_at, status, lat, lng, interests,
-			price_level, visit_duration_min, opening_hours, source, contacts, research)
-			VALUES ($1,$2,$3,$4,$5::date,'pending',$6,$7,$8,$9,$10,$11,'research',$12,$13)`,
+			price_level, visit_duration_min, opening_hours, source, contacts, research, trust)
+			VALUES ($1,$2,$3,$4,$5::date,'pending',$6,$7,$8,$9,$10,$11,'research',$12,$13,'public')`,
 			p.ID, p.CityID, p.Category, p.Novelty, opened, *p.Lat, *p.Lng, interests, price, visit, hj, cj, research); err != nil {
 			return err
 		}

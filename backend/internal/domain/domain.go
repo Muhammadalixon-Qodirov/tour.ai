@@ -23,7 +23,7 @@ func (n Novelty) IsNovel() bool { return n == NoveltyNew || n == NoveltyHidden }
 var Interests = []string{"history", "food", "nature", "craft", "art", "architecture", "shopping", "nightlife"}
 
 var Categories = []string{"monument", "museum", "mosque", "bazaar", "workshop", "gallery",
-	"restaurant", "cafe", "park", "viewpoint", "ecovillage"}
+	"restaurant", "cafe", "park", "viewpoint", "ecovillage", "theatre"}
 
 func ValidInterest(s string) bool { return slices.Contains(Interests, s) }
 func ValidCategory(s string) bool { return slices.Contains(Categories, s) }
@@ -47,6 +47,7 @@ var CategoryInterests = map[string][]string{
 	"park":       {"nature"},
 	"viewpoint":  {"nature", "architecture"},
 	"ecovillage": {"nature", "craft", "food"},
+	"theatre":    {"art", "nightlife"},
 }
 
 type LatLng struct {
@@ -81,10 +82,18 @@ func DistanceM(a, b LatLng) float64 {
 }
 
 // OpeningHours — bitta kun oynasi. Day: 0 = yakshanba ... 6 = shanba (Go time.Weekday bilan bir xil).
+// Breaks — shu kun ichidagi tanaffuslar (tushlik, juma namozi), joy bu vaqtda yopiq.
 type OpeningHours struct {
-	Day   int    `json:"day"`
-	Open  string `json:"open"`
-	Close string `json:"close"`
+	Day    int     `json:"day"`
+	Open   string  `json:"open"`
+	Close  string  `json:"close"`
+	Breaks []Break `json:"breaks,omitempty"`
+}
+
+type Break struct {
+	From   string `json:"from"`
+	To     string `json:"to"`
+	Reason string `json:"reason,omitempty"` // lunch | prayer | other
 }
 
 // ParseHHMM "09:30" → 570.
@@ -123,8 +132,54 @@ func DayWindow(hours []OpeningHours, weekday int) (open, close int, ok bool) {
 	return 0, 0, false
 }
 
-// IsOpenAt — joy shu daqiqada ochiqmi.
+// dayBreaks — shu kungi tanaffuslar (daqiqada, tartiblangan emas).
+func dayBreaks(hours []OpeningHours, weekday int) [][2]int {
+	var out [][2]int
+	for _, h := range hours {
+		if h.Day != weekday {
+			continue
+		}
+		for _, b := range h.Breaks {
+			f, err1 := ParseHHMM(b.From)
+			t, err2 := ParseHHMM(b.To)
+			if err1 == nil && err2 == nil && t > f {
+				out = append(out, [2]int{f, t})
+			}
+		}
+	}
+	return out
+}
+
+// IsOpenAt — joy shu daqiqada ochiqmi (tanaffuslar hisobga olinadi).
 func IsOpenAt(hours []OpeningHours, weekday, minute int) bool {
 	o, c, ok := DayWindow(hours, weekday)
-	return ok && minute >= o && minute < c
+	if !ok || minute < o || minute >= c {
+		return false
+	}
+	for _, b := range dayBreaks(hours, weekday) {
+		if minute >= b[0] && minute < b[1] {
+			return false
+		}
+	}
+	return true
+}
+
+// FitVisit — tashrifni ish vaqti va tanaffuslarga moslaydi: kelish vaqtini ochilishgacha yoki tanaffus
+// oxirigacha suradi. ok=false — shu kuni yopilishgacha sig'maydi.
+func FitVisit(hours []OpeningHours, weekday, arrive, dur int) (start int, ok bool) {
+	o, c, open := DayWindow(hours, weekday)
+	if !open {
+		return arrive, false
+	}
+	start = max(arrive, o)
+	breaks := dayBreaks(hours, weekday)
+	for moved := true; moved; {
+		moved = false
+		for _, b := range breaks {
+			if start < b[1] && start+dur > b[0] {
+				start, moved = b[1], true
+			}
+		}
+	}
+	return start, start+dur <= c
 }

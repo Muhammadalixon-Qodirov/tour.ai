@@ -91,7 +91,10 @@ type seedPlace struct {
 	Interests       []string            `json:"interests"`
 	VisitMin        int                 `json:"visitMin"`
 	PriceLevel      int                 `json:"priceLevel"`
-	Hours           string              `json:"hours"`  // "09:00-18:00" har kuni
+	Hours           string              `json:"hours"`        // "09:00-18:00" har kuni
+	Lunch           string              `json:"lunch"`        // "13:00-14:00" — har kungi tanaffus
+	FridayPrayer    string              `json:"fridayPrayer"` // "12:00-14:00" — juma kuni yopiq
+	Aliases         []string            `json:"aliases"`
 	Closed          []int               `json:"closed"` // dam olish kunlari (0 = yakshanba)
 	Rating          float64             `json:"rating"`
 	Reviews         int                 `json:"reviews"`
@@ -207,7 +210,23 @@ func load(ctx context.Context, tx pgx.Tx, sf seedFile) error {
 	sources, _ := json.Marshal([]map[string]string{{"title": "Ochiq manbalar (demo — tekshirilishi kerak)"}})
 	for _, p := range sf.Places {
 		h, _ := hours(p.Hours, p.Closed)
+		addBreak := func(spec, reason string, onlyDay int) {
+			f, t, ok := strings.Cut(spec, "-")
+			if !ok {
+				return
+			}
+			for i := range h {
+				if onlyDay < 0 || h[i].Day == onlyDay {
+					h[i].Breaks = append(h[i].Breaks, domain.Break{From: f, To: t, Reason: reason})
+				}
+			}
+		}
+		addBreak(p.Lunch, "lunch", -1)
+		addBreak(p.FridayPrayer, "prayer", 5)
 		hj, _ := json.Marshal(h)
+		if p.Aliases == nil {
+			p.Aliases = []string{}
+		}
 		if p.GeofenceRadiusM == 0 {
 			p.GeofenceRadiusM = 80
 		}
@@ -219,17 +238,17 @@ func load(ctx context.Context, tx pgx.Tx, sf seedFile) error {
 		}
 		if _, err := tx.Exec(ctx, `INSERT INTO places (id, city_id, category, novelty, opened_at, status, lat, lng,
 			geofence_radius_m, interests, price_level, visit_duration_min, opening_hours, wheelchair, family_friendly, easy_walk,
-			pay_card, cash_only, is_partner, rating, reviews_count, source, published_at)
-			VALUES ($1,$2,$3,$4,$5,'published',$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,'demo',now())
+			pay_card, cash_only, is_partner, rating, reviews_count, source, published_at, aliases, trust)
+			VALUES ($1,$2,$3,$4,$5,'published',$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,'demo',now(),$21,'sample')
 			ON CONFLICT (id) DO UPDATE SET city_id = EXCLUDED.city_id, category = EXCLUDED.category, novelty = EXCLUDED.novelty,
 			  opened_at = EXCLUDED.opened_at, lat = EXCLUDED.lat, lng = EXCLUDED.lng, geofence_radius_m = EXCLUDED.geofence_radius_m,
 			  interests = EXCLUDED.interests, price_level = EXCLUDED.price_level, visit_duration_min = EXCLUDED.visit_duration_min,
 			  opening_hours = EXCLUDED.opening_hours, wheelchair = EXCLUDED.wheelchair, family_friendly = EXCLUDED.family_friendly,
 			  easy_walk = EXCLUDED.easy_walk, pay_card = EXCLUDED.pay_card, cash_only = EXCLUDED.cash_only,
-			  is_partner = EXCLUDED.is_partner, updated_at = now()`,
+			  is_partner = EXCLUDED.is_partner, aliases = EXCLUDED.aliases, updated_at = now()`,
 			p.ID, c.ID, p.Category, p.Novelty, p.OpenedAt, p.Lat, p.Lng, p.GeofenceRadiusM, p.Interests, p.PriceLevel, p.VisitMin,
 			hj, p.Wheelchair, orTrue(p.FamilyFriendly), orTrue(p.EasyWalk), p.PayCard, p.CashOnly, p.IsPartner,
-			p.Rating, p.Reviews); err != nil {
+			p.Rating, p.Reviews, p.Aliases); err != nil {
 			return fmt.Errorf("place %s: %w", p.ID, err)
 		}
 		for lang, t := range p.Text {
@@ -248,10 +267,11 @@ func load(ctx context.Context, tx pgx.Tx, sf seedFile) error {
 				src = sources
 			}
 			if _, err := tx.Exec(ctx, `INSERT INTO place_i18n (place_id, lang, name, tagline, description, address,
-				history_summary, history_facts, sources) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+				history_summary, history_facts, sources, history_trust) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,
+				CASE WHEN $7::text IS NULL THEN NULL ELSE 'sample' END)
 				ON CONFLICT (place_id, lang) DO UPDATE SET name = EXCLUDED.name, tagline = EXCLUDED.tagline,
 				  description = EXCLUDED.description, address = EXCLUDED.address, history_summary = EXCLUDED.history_summary,
-				  history_facts = EXCLUDED.history_facts, sources = EXCLUDED.sources`,
+				  history_facts = EXCLUDED.history_facts, sources = EXCLUDED.sources, history_trust = EXCLUDED.history_trust`,
 				p.ID, lang, t.Name, t.Tagline, t.Description, t.Address, hist, t.Facts, src); err != nil {
 				return err
 			}
@@ -261,8 +281,8 @@ func load(ctx context.Context, tx pgx.Tx, sf seedFile) error {
 		}
 		for _, r := range p.Rules {
 			txt, _ := json.Marshal(r.Text)
-			if _, err := tx.Exec(ctx, `INSERT INTO place_rules (place_id, code, severity, priority, text, verified_by)
-				VALUES ($1,$2,$3,$4,$5,'demo')`, p.ID, r.Code, r.Severity, r.Priority, txt); err != nil {
+			if _, err := tx.Exec(ctx, `INSERT INTO place_rules (place_id, code, severity, priority, text, verified_by, trust)
+				VALUES ($1,$2,$3,$4,$5,'demo','sample')`, p.ID, r.Code, r.Severity, r.Priority, txt); err != nil {
 				return err
 			}
 		}

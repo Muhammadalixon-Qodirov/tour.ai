@@ -89,6 +89,9 @@ func (s *Server) uploadDiaryPhoto(w http.ResponseWriter, r *http.Request) {
 	defer f.Close()
 
 	t, err := s.store.Trip(r.Context(), tripID, userOf(r))
+	if err == nil && t.UserID != userOf(r) {
+		err = store.ErrNotFound
+	}
 	if isNotFound(err) {
 		writeError(w, r, http.StatusNotFound, "trip_not_found", false)
 		return
@@ -180,6 +183,10 @@ func (s *Server) dayPhotos(w http.ResponseWriter, r *http.Request) {
 func (s *Server) loadTripDay(w http.ResponseWriter, r *http.Request) (store.Trip, int, bool) {
 	t, ok := s.loadTrip(w, r)
 	if !ok {
+		return t, 0, false
+	}
+	if t.UserID != userOf(r) { // guruh a'zosi umumiy marshrutni ko'radi, lekin kundalik — egasiniki
+		writeError(w, r, http.StatusNotFound, "trip_not_found", false)
 		return t, 0, false
 	}
 	day, err := strconv.Atoi(r.PathValue("idx"))

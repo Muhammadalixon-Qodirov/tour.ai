@@ -57,6 +57,8 @@ type Prefs struct {
 	Start      *domain.LatLng
 	Wheelchair bool
 	WithKids   bool
+	Boost      map[string]float64 // guruh ovozlari: 0..1 (ko'pchilik yoqtirgan joy ustun)
+	Exclude    map[string]bool    // guruh ko'pchiligi rad etgan joylar
 }
 
 type City struct {
@@ -118,7 +120,7 @@ func newPlanner(p Prefs, city City, cands []Candidate) *planner {
 	}
 	pl := &planner{p: p, city: city, byID: map[string]Candidate{}, score: map[string]float64{}, used: map[string]bool{}}
 	for _, c := range cands {
-		if p.Wheelchair && !c.Wheelchair || p.WithKids && !c.FamilyFriendly {
+		if p.Wheelchair && !c.Wheelchair || p.WithKids && !c.FamilyFriendly || p.Exclude[c.ID] {
 			continue
 		}
 		if c.VisitMin <= 0 {
@@ -174,7 +176,7 @@ func Score(c Candidate, p Prefs, cityAvg float64) float64 {
 	if p.Budget > 0 && c.PriceLevel > p.Budget {
 		budget = 0.6
 	}
-	return interest * quality * novelty * budget
+	return interest * quality * novelty * budget * (1 + p.Boost[c.ID])
 }
 
 func matchesInterest(c Candidate, interest string) bool {
@@ -372,14 +374,11 @@ func (pl *planner) scheduleNew(order []Candidate, wd int) []domain.PlanStop {
 			tr = &x
 			arrive += x.DurationMin
 		}
-		o, cl, ok := domain.DayWindow(c.Hours, wd)
-		if !ok {
+		start, ok := domain.FitVisit(c.Hours, wd, arrive, c.VisitMin)
+		if !ok || start+c.VisitMin > DayEndMin {
 			continue
 		}
-		arrive = max(arrive, o)
-		if arrive+c.VisitMin > min(cl, DayEndMin) {
-			continue
-		}
+		arrive = start
 		stops = append(stops, pl.stopFor(c, domain.KindPlace, arrive, c.VisitMin, tr))
 		t, pos, first = arrive+c.VisitMin, c.Loc, false
 	}
@@ -551,11 +550,11 @@ func Retime(stops []domain.PlanStop, wd int, start *domain.LatLng, city City, by
 			out[i].Transit = &tr
 			arrive += tr.DurationMin
 		}
-		if o, _, ok := domain.DayWindow(c.Hours, wd); ok {
-			arrive = max(arrive, o)
-		}
 		if out[i].DurationMin <= 0 {
 			out[i].DurationMin = c.VisitMin
+		}
+		if start, _ := domain.FitVisit(c.Hours, wd, arrive, out[i].DurationMin); start > arrive {
+			arrive = start
 		}
 		out[i].ArriveMin = arrive
 		t, pos, hasPos = arrive+out[i].DurationMin, c.Loc, true

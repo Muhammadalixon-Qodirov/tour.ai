@@ -93,6 +93,17 @@ func (s *Server) Handler() http.Handler {
 	user("PATCH /api/v1/trips/{id}/stops/{stopId}", s.patchStop)
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
+	user("GET /api/v1/me/saved", s.listSaved)
+	user("PUT /api/v1/me/saved/{placeId}", s.setSaved(true))
+	user("DELETE /api/v1/me/saved/{placeId}", s.setSaved(false))
+	user("POST /api/v1/groups", s.createGroup)
+	user("GET /api/v1/groups", s.listGroups)
+	mux.Handle("POST /api/v1/groups/join", s.requireUser(s.rate("group-join", 10, http.HandlerFunc(s.joinGroup))))
+	user("GET /api/v1/groups/{id}", s.getGroup)
+	user("PATCH /api/v1/groups/{id}/me", s.patchGroupMe)
+	user("POST /api/v1/groups/{id}/votes", s.voteGroup)
+	user("DELETE /api/v1/groups/{id}/members/me", s.leaveGroup)
+	mux.Handle("POST /api/v1/groups/{id}/trip", s.requireUser(s.rate("trips", 6, http.HandlerFunc(s.groupTrip))))
 
 	// sayohat kundaligi
 	mux.Handle("POST /api/v1/diary/photos", s.requireUser(s.rate("photos", 60, http.HandlerFunc(s.uploadDiaryPhoto))))
