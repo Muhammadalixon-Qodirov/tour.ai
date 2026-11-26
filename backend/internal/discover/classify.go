@@ -78,10 +78,19 @@ var osmRules = []struct {
 	{"leisure", "park", "park", 0.85},
 	{"leisure", "garden", "park", 0.8},
 	{"leisure", "nature_reserve", "park", 0.6},
+	// craft: faqat turistik hunarlar (fotograf, matbaa, avtoservis emas) — tekshiruv pastda (touristCraft)
 	{"craft", "*", "workshop", 0.85},
 	{"shop", "craft", "workshop", 0.6},
 	{"shop", "art", "gallery", 0.55},
 }
+
+// touristCraft — sayyoh ko'rishi, xarid qilishi yoki master-klassga borishi mumkin bo'lgan hunarlar.
+var touristCraft = map[string]bool{"pottery": true, "ceramic": true, "ceramics": true, "carpet_weaver": true, "weaver": true,
+	"jeweller": true, "jewellery": true, "blacksmith": true, "embroiderer": true, "woodcarver": true, "wood_carver": true,
+	"wood_carving": true, "sculptor": true, "glassblower": true, "handicraft": true, "silk": true,
+	"cutler": true, "knifemaker": true, "luthier": true, "musical_instrument": true, "saddler": true, "leather": true,
+	"metal_engraver": true, "engraver": true, "goldsmith": true, "silversmith": true, "calligrapher": true,
+	"paper_maker": true, "tile_maker": true, "basket_maker": true, "felt": true, "textile": true, "dyer": true}
 
 // wdRules — Wikidata "instance of" klasslari.
 var wdRules = map[string]struct {
@@ -137,8 +146,10 @@ var keywords = []struct {
 	{"restaurant", []string{"restoran", "ресторан", "restaurant", "oshxona", "ошхона", "osh markazi", "плов", "palov", "osh", "kabob", "шашлык", "milliy taomlar"}},
 	{"theatre", []string{"teatr", "театр", "theatre", "theater", "filarmoniya", "филармон", "opera", "опер", "konsert", "концерт"}},
 	{"gallery", []string{"galereya", "галерея", "gallery", "ko'rgazma", "выставк", "art center", "art-center", "san'at markazi"}},
-	{"workshop", []string{"ustaxona", "мастерская", "workshop", "kulolchilik", "керамик", "ceramic", "kulol", "ipak", "silk", "шелк",
-		"gilam", "ковр", "carpet", "atelier", "hunarmand", "ремесл", "craft", "suzana", "сюзане", "zardo'zi", "pichoq", "ножи"}},
+	{"workshop", []string{"kulolchilik", "kulol", "керамик", "ceramic", "pottery", "гончар", "ipakchilik", "ipak fabrika", "silk", "шелков",
+		"gilam", "ковр", "carpet", "hunarmand", "ремесл", "handicraft", "suzana", "сюзане", "zardo'z", "zardoz", "золотошв",
+		"misgar", "чеканк", "kandakor", "ganchkor", "ганч", "yog'och o'ymakor", "резьб", "woodcarv", "pichoqchilik", "ножевых дел",
+		"miniatura", "миниатюр", "qog'oz fabrika", "бумажн мельниц", "paper mill"}},
 	{"park", []string{"bog'", "bogi", "park", "парк", "сад", "garden", "xiyobon", "хиёбон", "bulvar", "бульвар", "сквер"}},
 	{"viewpoint", []string{"tepalik", "смотров", "viewpoint", "manzara", "обзор", "panorama", "панорам", "tower"}},
 	{"ecovillage", []string{"eko qishloq", "ekoqishloq", "eco village", "ecovillage", "eco lodge", "эко дерев", "экодерев", "agroturizm", "агротур", "yurt", "юрт", "o'tov", "glamping", "кемпинг", "camping", "dacha", "qishloq turizm"}},
@@ -174,7 +185,8 @@ func hasWord(text, w string) bool {
 
 // exclude — "supermarket", "avtosalon" kabi turistik bo'lmagan narsalar kalit so'zga tushib qolmasin.
 var exclude = []string{"supermarket", "супермаркет", "minimarket", "hypermarket", "гипермаркет", "avto", "авто", "apteka", "аптека",
-	"bank", "банк", "maktab", "школ", "school", "kasalxona", "больниц", "hospital", "zavod", "завод", "ofis", "офис"}
+	"bank", "банк", "maktab", "школ", "school", "kasalxona", "больниц", "hospital", "zavod", "завод", "ofis", "офис",
+	"строительн", "стройматер", "qurilish", "stroy", "mebel", "мебел", "запчаст", "ehtiyot qism", "telefon", "телефон", "ta'mir", "ремонт"}
 
 // Classify — signallar bo'yicha kategoriya. Kuchli manbalar (OSM teg, Wikidata klass) nomdan ustun,
 // bir nechta manba bir kategoriyani aytsa ishonch oshadi, qarama-qarshi bo'lsa kamayadi.
@@ -183,6 +195,9 @@ func Classify(s Signals) Result {
 	for _, r := range osmRules {
 		v, ok := s.OSM[r.key]
 		if !ok || v == "" || v == "no" || (r.val != "*" && v != r.val) {
+			continue
+		}
+		if r.key == "craft" && !touristCraft[v] {
 			continue
 		}
 		// diniy bino: faqat musulmon masjidi "mosque"; boshqalar tarixiy obida sifatida
@@ -216,6 +231,9 @@ func Classify(s Signals) Result {
 		}
 	}
 	excluded := slices.ContainsFunc(exclude, func(w string) bool { return hasWord(nameText, w) })
+	if excluded { // "Qurilish mollari bozori", "Avto bozor", "Telefon ta'mirlash ustaxonasi" — teg bo'lsa ham turistik emas
+		votes = slices.DeleteFunc(votes, func(v vote) bool { return v.cat == "bazaar" || v.cat == "workshop" })
+	}
 	if !excluded {
 		for _, k := range keywords {
 			for _, w := range k.words {

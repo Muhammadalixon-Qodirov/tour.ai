@@ -97,3 +97,26 @@ func TestSameName(t *testing.T) {
 		}
 	}
 }
+
+func TestCraftFilter(t *testing.T) {
+	if r := Classify(Signals{OSM: map[string]string{"craft": "photographer"}, Names: map[string]string{"uz": "Zokir Art Photo"}}); r.Category == "workshop" && r.Confidence >= 0.5 {
+		t.Fatalf("fotograf hunarmand emas: %+v", r)
+	}
+	if r := Classify(Signals{OSM: map[string]string{"craft": "car_repair"}, Names: map[string]string{"uz": "Service"}}); r.Category != "" {
+		t.Fatalf("avtoservis: %+v", r)
+	}
+	if r := Classify(Signals{OSM: map[string]string{"craft": "carpet_weaver"}, Names: map[string]string{"uz": "Bukhara Carpets"}}); r.Category != "workshop" || r.Confidence < AutoPublish {
+		t.Fatalf("gilam: %+v", r)
+	}
+}
+
+func TestExcludedMarkets(t *testing.T) {
+	for _, n := range []string{"Рынок строительных материалов", "Avto bozor", "Qurilish mollari bozori"} {
+		if r := Classify(Signals{OSM: map[string]string{"amenity": "marketplace"}, Names: map[string]string{"uz": n}}); r.Category == "bazaar" {
+			t.Errorf("%s turistik bozor emas: %+v", n, r)
+		}
+	}
+	if r := Classify(Signals{OSM: map[string]string{"amenity": "marketplace"}, Names: map[string]string{"uz": "Chorsu bozori"}}); r.Category != "bazaar" {
+		t.Errorf("Chorsu: %+v", r)
+	}
+}

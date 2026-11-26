@@ -56,6 +56,7 @@ var Cities = []City{
 
 type Report struct {
 	Places, PlacesSkippedDup, Stays, Services, DemoServicesRemoved, OutOfArea int
+	PlacesRetired                                                             int // OSM dan o'chgan yoki endi mos kelmaydigan joylar yashirildi
 	PerCity                                                                   map[string]int
 }
 
@@ -86,6 +87,7 @@ func Load(ctx context.Context, db *pgxpool.Pool, path string, usdRate float64) (
 			return err
 		}
 		rep.DemoServicesRemoved = int(tag.RowsAffected())
+		var seen []string
 		for _, p := range pois {
 			city := nearestCity(cities, p.Lat, p.Lng)
 			if city == "" {
@@ -103,9 +105,14 @@ func Load(ctx context.Context, db *pgxpool.Pool, path string, usdRate float64) (
 					rep.PlacesSkippedDup++
 					continue
 				}
-				if err := upsertPlace(ctx, tx, p, city); err != nil {
+				ok, err := upsertPlace(ctx, tx, p, city)
+				if err != nil {
 					return fmt.Errorf("%s: %w", p.OSM, err)
 				}
+				if !ok {
+					continue
+				}
+				seen = append(seen, idFor(p.OSM))
 				rep.Places++
 			case "service":
 				if err := upsertService(ctx, tx, p, city); err != nil {
@@ -116,6 +123,17 @@ func Load(ctx context.Context, db *pgxpool.Pool, path string, usdRate float64) (
 				continue
 			}
 			rep.PerCity[city]++
+		}
+		// Bu safar kelmagan OSM joylari (OSM da yopilgan/o'chirilgan, endi turistik deb hisoblanmaydi yoki qo'lda
+		// kiritilgan joyning takrori bo'lib qolgan) yashiriladi. Kichik/test fayl bilan hammasini o'chirib yubormaslik uchun
+		// faqat to'liq import (≥ 1000 joy) da.
+		if len(seen) >= 1000 {
+			tag, err := tx.Exec(ctx, `UPDATE places SET status = 'draft', updated_at = now()
+				WHERE source = 'osm' AND status = 'published' AND id <> ALL($1)`, seen)
+			if err != nil {
+				return err
+			}
+			rep.PlacesRetired = int(tag.RowsAffected())
 		}
 		return nil
 	})
@@ -284,14 +302,14 @@ func placeCategory(p POI) (catInfo, bool) {
 	return catInfo{res.Category, [3]string{l["uz"], l["ru"], l["en"]}, discover.DefaultVisitMin(res.Category)}, true
 }
 
-func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
+func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) (bool, error) {
 	ci, ok := placeCategory(p)
 	if !ok {
-		return nil
+		return false, nil
 	}
 	nm := names(p.Tags)
 	if nm["uz"] == "" {
-		return nil
+		return false, nil
 	}
 	// Yangilik darajasi: Vikipediya/Wikidata/meros belgisi bor obidalar — mashhur; boshqa obidalar — kam tanilgan;
 	// ovqat joylari — oddiy (yangilik kvotasiga ta'sir qilmaydi, chunki ular `meal` to'xtashi).
@@ -317,7 +335,8 @@ func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
 		visit_duration_min, opening_hours, wheelchair, source, trust, osm_id, contacts, published_at, wikidata)
 		VALUES ($1,$2,$3,$4,'published',$5,$6,$7,$8,$9,$10,$11,'osm','public',$12,$13,now(),
 		  (SELECT $14::text WHERE $14 <> '' AND NOT EXISTS (SELECT 1 FROM places WHERE wikidata = $14)))
-		ON CONFLICT (id) DO UPDATE SET city_id = EXCLUDED.city_id, lat = EXCLUDED.lat, lng = EXCLUDED.lng,
+		ON CONFLICT (id) DO UPDATE SET city_id = EXCLUDED.city_id,
+		  status = CASE WHEN places.source = 'osm' AND places.status = 'draft' THEN 'published' ELSE places.status END, lat = EXCLUDED.lat, lng = EXCLUDED.lng,
 		  category = CASE WHEN places.source = 'osm' THEN EXCLUDED.category ELSE places.category END,
 		  visit_duration_min = CASE WHEN places.source = 'osm' THEN EXCLUDED.visit_duration_min ELSE places.visit_duration_min END,
 		  interests = CASE WHEN places.source = 'osm' THEN EXCLUDED.interests ELSE places.interests END,
@@ -325,7 +344,7 @@ func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
 		  contacts = CASE WHEN places.source = 'osm' THEN EXCLUDED.contacts ELSE places.contacts END, updated_at = now()`,
 		id, city, ci.category, novelty, p.Lat, p.Lng, interests, priceLevel, ci.visit, hj, p.Tags["wheelchair"] == "yes",
 		p.OSM, cj, p.Tags["wikidata"]); err != nil {
-		return err
+		return false, err
 	}
 	tagline := ci.tag
 	if c := p.Tags["cuisine"]; c != "" && (ci.category == "restaurant" || ci.category == "cafe") {
@@ -343,10 +362,10 @@ func upsertPlace(ctx context.Context, tx pgx.Tx, p POI, city string) error {
 			ON CONFLICT (place_id, lang) DO UPDATE SET name = EXCLUDED.name, tagline = EXCLUDED.tagline, address = EXCLUDED.address`,
 			id, lang, nm[lang], tagline[i], desc, addr,
 			`[{"title":"OpenStreetMap","url":"https://www.openstreetmap.org/`+p.OSM+`"}]`); err != nil {
-			return err
+			return false, err
 		}
 	}
-	return nil
+	return true, nil
 }
 
 // ---------- Turar joy ----------
