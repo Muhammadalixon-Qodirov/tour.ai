@@ -10,28 +10,38 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
 // Groq — OpenAI-mos Chat Completions API (https://api.groq.com/openai/v1). Asboblar va oqim Claude bilan bir xil:
 // fakt faqat asbob natijalaridan, matn bo'laklari emit("delta") orqali.
 type Groq struct {
-	key, model, baseURL string
-	backup              string // limit (429) tugasa — alohida limitli kichikroq model
-	hc                  *http.Client
+	keys           []string // bir nechta kalit: navbat bilan, biri limitga urilsa keyingisi
+	model, baseURL string
+	backup         string // hamma kalit limitda bo'lsa — alohida limitli kichikroq model
+	next           atomic.Uint32
+	hc             *http.Client
 }
 
 const groqBaseURL = "https://api.groq.com/openai/v1"
 
-// NewGroq — kalit bo'sh bo'lsa nil. model bo'sh — openai/gpt-oss-120b (Groq da asbob chaqira oladigan eng kuchli model).
-func NewGroq(key, model string) *Groq {
-	if strings.TrimSpace(key) == "" {
+// NewGroq — keys: bitta yoki vergul bilan bir nechta kalit; bo'sh bo'lsa nil.
+// model bo'sh — openai/gpt-oss-120b (Groq da asbob chaqira oladigan eng kuchli model).
+func NewGroq(keys, model string) *Groq {
+	var ks []string
+	for _, k := range strings.Split(keys, ",") {
+		if k = strings.TrimSpace(k); k != "" {
+			ks = append(ks, k)
+		}
+	}
+	if len(ks) == 0 {
 		return nil
 	}
 	if model == "" || strings.HasPrefix(model, "claude") {
 		model = "openai/gpt-oss-120b"
 	}
-	g := &Groq{key: key, model: model, baseURL: groqBaseURL, hc: &http.Client{Timeout: 90 * time.Second}}
+	g := &Groq{keys: ks, model: model, baseURL: groqBaseURL, hc: &http.Client{Timeout: 90 * time.Second}}
 	if model == "openai/gpt-oss-120b" {
 		g.backup = "openai/gpt-oss-20b"
 	}
@@ -122,12 +132,26 @@ func (g *Groq) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (st
 
 // stream — bitta so'rov: matn bo'laklarini onText ga beradi, asbob chaqiruvlarini (index bo'yicha) yig'adi.
 func (g *Groq) stream(ctx context.Context, msgs []oaMessage, onText func(string)) (string, []oaToolCall, string, error) {
-	model := g.model
+	// urinishlar: har bir kalit asosiy model bilan (navbatdagi kalitdan boshlab), keyin zaxira model bilan
+	type try struct{ key, model string }
+	start := int(g.next.Add(1)-1) % len(g.keys)
+	var tries []try
+	for _, m := range []string{g.model, g.backup} {
+		if m == "" {
+			continue
+		}
+		for i := range g.keys {
+			tries = append(tries, try{g.keys[(start+i)%len(g.keys)], m})
+		}
+	}
 	var resp *http.Response
-	for attempt := 0; ; attempt++ {
-		payload := map[string]any{"model": model, "messages": msgs, "tools": openAITools, "stream": true,
+	var lastErr error
+	waited := false
+	for i := 0; i < len(tries); i++ {
+		t := tries[i]
+		payload := map[string]any{"model": t.model, "messages": msgs, "tools": openAITools, "stream": true,
 			"temperature": 0.2, "max_completion_tokens": 1500}
-		if strings.HasPrefix(model, "openai/gpt-oss") {
+		if strings.HasPrefix(t.model, "openai/gpt-oss") {
 			payload["reasoning_effort"] = "low" // fikrlash tokenlari kam — tez va limitga sig'adi
 		}
 		body, _ := json.Marshal(payload)
@@ -135,32 +159,41 @@ func (g *Groq) stream(ctx context.Context, msgs []oaMessage, onText func(string)
 		if err != nil {
 			return "", nil, "", err
 		}
-		hreq.Header.Set("Authorization", "Bearer "+g.key)
+		hreq.Header.Set("Authorization", "Bearer "+t.key)
 		hreq.Header.Set("Content-Type", "application/json")
-		resp, err = g.hc.Do(hreq)
+		r, err := g.hc.Do(hreq)
 		if err != nil {
-			return "", nil, "", err
-		}
-		if (resp.StatusCode == 429 || resp.StatusCode >= 500) && attempt < 3 {
-			// Groq bepul tarif: daqiqasiga token limiti. "try again in 1.9s" / Retry-After ni kutamiz (≤ 8 s),
-			// ikkinchi 429 da alohida limitli zaxira modelga o'tamiz.
-			wait := retryAfter(resp)
-			resp.Body.Close()
-			if resp.StatusCode == 429 && attempt >= 1 && g.backup != "" && model != g.backup {
-				model = g.backup
-				continue
-			}
-			if wait > 8*time.Second {
-				return "", nil, "", fmt.Errorf("groq: limit, %s kutish kerak", wait)
-			}
-			select {
-			case <-ctx.Done():
-				return "", nil, "", ctx.Err()
-			case <-time.After(wait):
-			}
+			lastErr = err
 			continue
 		}
-		break
+		if r.StatusCode == 200 {
+			resp = r
+			break
+		}
+		b, _ := io.ReadAll(io.LimitReader(r.Body, 300))
+		r.Body.Close()
+		lastErr = fmt.Errorf("groq %d: %s", r.StatusCode, b)
+		switch {
+		case r.StatusCode == 429 || r.StatusCode == 401 || r.StatusCode == 403 || r.StatusCode >= 500:
+			// bu kalit/model hozir ishlamaydi — keyingisi. Hammasi tugasa bir marta qisqa kutib qaytadan.
+			if i == len(tries)-1 && !waited && r.StatusCode == 429 {
+				if wait := retryAfter(r); wait <= 8*time.Second {
+					waited = true
+					select {
+					case <-ctx.Done():
+						return "", nil, "", ctx.Err()
+					case <-time.After(wait):
+					}
+					i = -1
+				}
+			}
+			continue
+		default:
+			return "", nil, "", lastErr // 400 va h.k. — so'rov xato, boshqa kalit yordam bermaydi
+		}
+	}
+	if resp == nil {
+		return "", nil, "", lastErr
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
