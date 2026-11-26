@@ -153,13 +153,16 @@ func (s *Store) DeleteService(ctx context.Context, adminID, id string) error {
 
 // OfflineVersion — oflayn paket versiyasi: joylar, qoidalar va xizmatlarning oxirgi o'zgarishi va soni.
 func (s *Store) OfflineVersion(ctx context.Context, cityID string) (string, error) {
-	var places, services int
+	var places, services, prices int
 	var pmax, smax *time.Time
 	err := s.DB.QueryRow(ctx, `SELECT
 		(SELECT count(*) FROM places WHERE city_id = $1 AND status = 'published'),
 		(SELECT max(updated_at) FROM places WHERE city_id = $1),
 		(SELECT count(*) FROM city_services WHERE city_id = $1),
-		(SELECT max(updated_at) FROM city_services WHERE city_id = $1)`, cityID).Scan(&places, &pmax, &services, &smax)
+		(SELECT max(updated_at) FROM city_services WHERE city_id = $1),
+		(SELECT count(*) FROM price_items WHERE city_id = $1) +
+		(SELECT count(*) FROM price_reports r JOIN price_items i ON i.id = r.price_item_id WHERE i.city_id = $1 AND r.status = 'approved')`,
+		cityID).Scan(&places, &pmax, &services, &smax, &prices)
 	if err != nil {
 		return "", err
 	}
@@ -169,5 +172,5 @@ func (s *Store) OfflineVersion(ctx context.Context, cityID string) (string, erro
 		}
 		return t.UnixNano()
 	}
-	return fmt.Sprintf("%d.%d.%d.%d", places, ts(pmax), services, ts(smax)), nil
+	return fmt.Sprintf("%d.%d.%d.%d.%d", places, ts(pmax), services, ts(smax), prices), nil
 }

@@ -36,6 +36,7 @@ type TripDay struct {
 type Stop struct {
 	ID     uuid.UUID
 	Status string
+	Rating *int // tashrifdan keyingi baho 1-5
 	domain.PlanStop
 }
 
@@ -85,9 +86,9 @@ func insertStops(ctx context.Context, tx pgx.Tx, tripID uuid.UUID, day int, stop
 			status = "upcoming"
 		}
 		if _, err := tx.Exec(ctx, `INSERT INTO stops (id, trip_id, day_idx, position, kind, place_id, arrive_min, duration_min,
-			reason_code, reason_arg, reason_text, transit, status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+			reason_code, reason_arg, reason_text, transit, status, rating) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
 			st.ID, tripID, day, pos, st.Kind, st.PlaceID, st.ArriveMin, st.DurationMin,
-			st.ReasonCode, st.ReasonArg, reasonText, transit, status); err != nil {
+			st.ReasonCode, st.ReasonArg, reasonText, transit, status, st.Rating); err != nil {
 			return err
 		}
 	}
@@ -138,7 +139,7 @@ func (s *Store) Trip(ctx context.Context, id uuid.UUID, userID string) (Trip, er
 	}
 
 	rows, err = s.DB.Query(ctx, `SELECT s.id, s.day_idx, s.kind, s.place_id, p.novelty, p.is_partner, s.arrive_min, s.duration_min,
-		s.reason_code, s.reason_arg, COALESCE(s.reason_text, ''), s.transit, s.status
+		s.reason_code, s.reason_arg, COALESCE(s.reason_text, ''), s.transit, s.status, s.rating
 		FROM stops s JOIN places p ON p.id = s.place_id WHERE s.trip_id = $1 ORDER BY s.day_idx, s.position`, id)
 	if err != nil {
 		return t, err
@@ -149,7 +150,7 @@ func (s *Store) Trip(ctx context.Context, id uuid.UUID, userID string) (Trip, er
 		var day int
 		var transit []byte
 		if err := rows.Scan(&st.ID, &day, &st.Kind, &st.PlaceID, &st.Novelty, &st.IsPartner, &st.ArriveMin, &st.DurationMin,
-			&st.ReasonCode, &st.ReasonArg, &st.ReasonText, &transit, &st.Status); err != nil {
+			&st.ReasonCode, &st.ReasonArg, &st.ReasonText, &transit, &st.Status, &st.Rating); err != nil {
 			return t, err
 		}
 		if len(transit) > 0 {
@@ -205,4 +206,31 @@ func (s *Store) SetStopStatus(ctx context.Context, tripID, stopID uuid.UUID, sta
 	}
 	_, err = s.DB.Exec(ctx, `UPDATE trips SET updated_at = now() WHERE id = $1`, tripID)
 	return err
+}
+
+// DeleteTrip — marshrutni o'chiradi (kunlar, to'xtashlar, kundalik rasmlari va hikoyalari, ulardan chiqqan postlar
+// CASCADE bilan). Diskdan o'chirish uchun rasm fayl nomlarini qaytaradi.
+func (s *Store) DeleteTrip(ctx context.Context, id uuid.UUID, userID string) ([]string, error) {
+	var files []string
+	err := pgx.BeginFunc(ctx, s.DB, func(tx pgx.Tx) error {
+		rows, err := tx.Query(ctx, `SELECT file_name FROM diary_photos WHERE trip_id = $1 AND user_id = $2`, id, userID)
+		if err != nil {
+			return err
+		}
+		for rows.Next() {
+			var f string
+			if err := rows.Scan(&f); err != nil {
+				rows.Close()
+				return err
+			}
+			files = append(files, f)
+		}
+		rows.Close()
+		tag, err := tx.Exec(ctx, `DELETE FROM trips WHERE id = $1 AND user_id = $2`, id, userID)
+		if err == nil && tag.RowsAffected() == 0 {
+			return ErrNotFound
+		}
+		return err
+	})
+	return files, err
 }

@@ -47,6 +47,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Hazrati Imom majmuasi",
@@ -217,6 +220,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekistondagi Islom sivilizatsiyasi markazi",
@@ -385,6 +391,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ko'kaldosh madrasasi",
@@ -531,6 +540,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Shayxontohur majmuasi",
@@ -654,6 +666,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yunusxon maqbarasi",
@@ -800,6 +815,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Zangi ota majmuasi",
@@ -943,6 +961,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Abulqosim madrasasi",
@@ -1052,6 +1073,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Minor masjidi",
@@ -1205,6 +1229,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Temuriylar tarixi davlat muzeyi",
@@ -1346,6 +1373,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekiston tarixi davlat muzeyi",
@@ -1496,6 +1526,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Amaliy san'at muzeyi (Polovsov uyi)",
@@ -1631,6 +1664,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Temir yo'l texnikasi muzeyi",
@@ -1758,6 +1794,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Kosmonavtlar metro bekati",
@@ -1899,6 +1938,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Alisher Navoiy nomidagi Katta teatr",
@@ -2052,6 +2094,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Knyaz Romanov saroyi",
@@ -2164,6 +2209,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"Jasorat\" yodgorligi",
@@ -2283,6 +2331,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Qatag'on qurbonlari xotirasi muzeyi",
@@ -2415,6 +2466,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Toshkent teleminorasi",
@@ -2545,6 +2599,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Tashkent City bog'i",
@@ -2684,6 +2741,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Magic City",
@@ -2821,6 +2881,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yangi O'zbekiston bog'i",
@@ -2966,6 +3029,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Amir Temur xiyoboni",
@@ -3091,6 +3157,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Sayilgoh ko'chasi (Brodvey)",
@@ -3193,6 +3262,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mustaqillik maydoni",
@@ -3329,6 +3401,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Toshkent hayvonot bog'i",
@@ -3474,6 +3549,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Rusanov nomidagi Botanika bog'i",
@@ -3589,6 +3667,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yapon bog'i",
@@ -3733,6 +3814,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Bobur nomidagi Markaziy ekopark",
@@ -3864,6 +3948,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Navro'z bog'i",
@@ -4002,6 +4089,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Tashkent City planetariysi",
@@ -4109,6 +4199,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Zamonaviy san'at markazi (CCA Tashkent)",
@@ -4258,6 +4351,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Qichqiriq kanali sayilgohi",
@@ -4397,6 +4493,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chorsu bozori",
@@ -4529,6 +4628,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Oloy bozori",
@@ -4649,6 +4751,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yangiobod bozori",
@@ -4761,6 +4866,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mirobod bozori",
@@ -4873,6 +4981,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Besh Qozon palov markazi",
@@ -4966,6 +5077,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Caravan restorani",
@@ -5046,6 +5160,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekiston tasviriy san'at galereyasi",
@@ -5178,6 +5295,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Toshkent fotografiya uyi",
@@ -5276,6 +5396,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Bonum Factum galereyasi",
@@ -5367,6 +5490,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Rahimovlar kulolchilik ustaxonasi",
@@ -5496,6 +5622,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Human House",
@@ -5599,6 +5728,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Toshkent davlat sirki",
@@ -5757,6 +5889,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Humo Arena",
@@ -5876,6 +6011,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"Ilhom\" teatri",
@@ -6032,6 +6170,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbek Milliy akademik drama teatri",
@@ -6183,6 +6324,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekiston davlat konservatoriyasi",
@@ -6334,6 +6478,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Muqimiy nomidagi musiqali teatr",
@@ -6474,6 +6621,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Alisher Navoiy nomidagi kino saroyi (Panorama)",
@@ -6601,6 +6751,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xalqlar do'stligi saroyi",
@@ -6740,6 +6893,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekiston davlat tabiat muzeyi",
@@ -6872,6 +7028,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Geologiya muzeyi",
@@ -7016,6 +7175,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Olimpiya shon-shuhrati muzeyi",
@@ -7148,6 +7310,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'zbekiston davlat san'at muzeyi",
@@ -7275,6 +7440,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Alisher Navoiy nomidagi Davlat adabiyot muzeyi",
@@ -7393,6 +7561,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "O'rol Tansiqboyev uy-muzeyi",
@@ -7529,6 +7700,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Shokolad muzeyi",
@@ -7641,6 +7815,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Palov muzeyi",
@@ -7761,6 +7938,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Badiiy akademiyaning Markaziy ko'rgazmalar zali",
@@ -7888,6 +8068,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "G'alaba bog'i",
@@ -8028,6 +8211,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Alisher Navoiy nomidagi O'zbekiston Milliy bog'i",
@@ -8145,6 +8331,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"Anhor Lokomotiv\" bog'i",
@@ -8291,6 +8480,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Muqaddas Uspeniye sobori",
@@ -8408,6 +8600,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Iso Masihning Muqaddas Qalbi katolik sobori",
@@ -8526,6 +8721,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Aleksandr Nevskiy cherkovi",
@@ -8643,6 +8841,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Evangel-lyuteran cherkovi (Kirxa)",
@@ -8765,6 +8966,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xo'ja Ahror Valiy (Jome) masjidi",
@@ -8920,6 +9124,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Shayx Zayniddin bobo maqbarasi",
@@ -9051,6 +9258,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ming o'rik shahristoni",
@@ -9171,6 +9381,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Toshkent kurantlari",
@@ -9285,6 +9498,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"O'zbekiston\" mehmonxonasi",
@@ -9394,6 +9610,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"O'zbekiston\" xalqaro anjumanlar saroyi",
@@ -9496,6 +9715,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "From 1 Oct 2026 (was 1,700). Transfer within one hour: 1,500, then free."
   },
   {
@@ -9517,6 +9737,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Day pass bus+metro 13,500 (travelto Oct 2026). Airport is served by city bus at the same fare."
   },
   {
@@ -9538,6 +9759,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Published caps Oct 2026, before demand surge. Also in kursiv Sep 2026."
   },
   {
@@ -9559,6 +9781,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "spot.uz test (13 Oct 2026, city not named): 3.1 km Comfort 15,500-28,500 across apps."
   },
   {
@@ -9579,7 +9802,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_train_samarkand",
@@ -9600,6 +9824,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Slower Sharq train seat 200,060 (kursiv.media, Sep 2026)."
   },
   {
@@ -9620,7 +9845,8 @@
    "source": "https://www.spot.uz/oz/2026/01/16/afrosiyob/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_bus_samarkand",
@@ -9640,7 +9866,8 @@
    "source": "https://travelto.ru/blog/blogskolko-stoit-proezd-v-uzbekistane/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_plov",
@@ -9661,6 +9888,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Besh Qozon 42,000-46,000, Plov City 38,000-40,000, Chorsu 45,000 (weproject Apr 2025); city average 35,744 in plov centres, Dec 2024 (stat agency)."
   },
   {
@@ -9681,7 +9909,8 @@
    "source": "https://www.weproject.media/articles/detail/chto-mozhno-pokushat-v-tashkente-za-50-000-sum-luchshie-mesta-i-blyuda/",
    "year": 2025,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_lagman",
@@ -9702,6 +9931,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "20,000-40,000 sputnik8 Oct 2026; 45,000-49,000 at Diyar (weproject)."
   },
   {
@@ -9723,6 +9953,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Per piece at Oloy bazaar 6,000-8,000."
   },
   {
@@ -9744,6 +9975,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Plov City 17,000-20,000 (weproject 2025)."
   },
   {
@@ -9764,7 +9996,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_non",
@@ -9784,7 +10017,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_lunch",
@@ -9804,7 +10038,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_dinner",
@@ -9824,7 +10059,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_dried_fruit",
@@ -9844,7 +10080,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_nuts",
@@ -9864,7 +10101,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_halva",
@@ -9884,7 +10122,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_zira",
@@ -9904,7 +10143,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_fruit",
@@ -9924,7 +10164,8 @@
    "source": "https://www.sputnik8.com/ru/tashkent/pages/tseny-v-tashkente-v-2026-eda-taksi-zhilyo-razvlecheniya",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_sim",
@@ -9945,6 +10186,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Beeline add-on for Hello plans: 10 GB for 30 days 50,000 (beeline.uz)."
   },
   {
@@ -9966,6 +10208,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Simple 40,000-60,000; handmade from 150,000."
   },
   {
@@ -9986,7 +10229,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_lagan",
@@ -10006,7 +10250,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_piala",
@@ -10026,7 +10271,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_silk_scarf",
@@ -10046,7 +10292,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_chapan",
@@ -10066,7 +10313,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-tashkenta/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_icc_local",
@@ -10089,6 +10337,7 @@
    "placeIds": [
     "islamic-civilization-center"
    ],
+   "trust": "sample",
    "note": "Children 7-17: 25,000-50,000; under 7 free."
   },
   {
@@ -10112,6 +10361,7 @@
    "placeIds": [
     "islamic-civilization-center"
    ],
+   "trust": "sample",
    "note": "anhor: individual 45-50 USD (converted at about 11,800 UZS/USD, no UZS price published); oxusroad.com 2026 gives 425,000."
   },
   {
@@ -10134,7 +10384,8 @@
    "updatedAt": "2026-11-26",
    "placeIds": [
     "state-history-museum"
-   ]
+   ],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_applied_arts",
@@ -10156,7 +10407,8 @@
    "updatedAt": "2026-11-26",
    "placeIds": [
     "applied-arts-museum"
-   ]
+   ],
+   "trust": "sample"
   },
   {
    "id": "p_tashkent_amir_temur_museum",
@@ -10179,6 +10431,7 @@
    "placeIds": [
     "amir-timur-museum"
    ],
+   "trust": "sample",
    "note": "Weak: visitor reviews (Yandex, Wanderlog) also say 25,000 for foreigners, undated; one 2026 blog says about 14 USD."
   },
   {
@@ -10202,6 +10455,7 @@
    "placeIds": [
     "tashkent-tv-tower"
    ],
+   "trust": "sample",
    "note": "100,000 forum Feb 2026; 40,000 audiala.com 2025."
   }
  ],
@@ -10504,36 +10758,25 @@
   {
    "id": "s_topchan-hostel",
    "kind": "hostel",
-   "name": "Topchan Hostel",
+   "name": {
+    "uz": "Topchan Hostel",
+    "ru": "Topchan Hostel",
+    "en": "Topchan Hostel"
+   },
    "lat": 41.28121,
    "lng": 69.29496,
-   "address": {
-    "uz": "Toshkent, 8-Mart ko'chasi 104 (Yashil bozor yaqinida)",
-    "en": "104 8-Mart St, near Zeleniy Bazar, Tashkent",
-    "ru": "Ташкент, ул. 8 Марта, 104 (у Зелёного базара)"
-   },
-   "pricePerNight": 348000,
+   "address": "Toshkent, 8-Mart ko'chasi 104 (Yashil bozor yaqinida)",
+   "priceMin": 348000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/tashkent/Topchan.mhd2229278.ksp",
    "rating": 3.6,
    "ratingSource": "https://www.momondo.com/hotels/tashkent/Topchan.mhd2229278.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Bepul avtoturargoh",
-     "en": "Free parking",
-     "ru": "Бесплатная парковка"
-    },
-    {
-     "uz": "Kir yuvish xizmati",
-     "en": "Laundry",
-     "ru": "Прачечная"
-    }
+    "wifi",
+    "parking",
+    "laundry"
    ],
-   "note": "Typical nightly rate per momondo (29 USD); cheapest room for 2 Dec 2026 was 22 USD (1 twin bed). Rating 7.2 from 2 107 reviews.",
+   "trust": "public",
    "image": {
     "file": "r_s_topchan_hostel.jpg",
     "credit": "Trip.com",
@@ -10545,47 +10788,27 @@
   {
    "id": "s_old-tashkent-hotel-spa",
    "kind": "hotel",
-   "name": "Old Tashkent Hotel & Spa",
+   "name": {
+    "uz": "Old Tashkent Hotel & Spa",
+    "ru": "Old Tashkent Hotel & Spa",
+    "en": "Old Tashkent Hotel & Spa"
+   },
    "lat": 41.28622,
    "lng": 69.24532,
-   "address": {
-    "uz": "Toshkent, Yusuf Hamadoniy ko'chasi 89b",
-    "en": "89b Yusuf Hamadoniy St, Tashkent",
-    "ru": "Ташкент, ул. Юсуфа Хамадони, 89б"
-   },
-   "pricePerNight": 576000,
+   "address": "Toshkent, Yusuf Hamadoniy ko'chasi 89b",
+   "priceMin": 576000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/tashkent",
    "rating": 4.5,
    "ratingSource": "https://www.momondo.com/hotels/tashkent",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Spa",
-     "en": "Spa",
-     "ru": "Спа"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    }
+    "wifi",
+    "breakfast",
+    "pool",
+    "spa",
+    "restaurant"
    ],
-   "opened": "2022",
-   "note": "Price from momondo Tashkent list (late Nov 2026 search); Trip.com shows average from 72 USD. Opened 2022, renovated 2024 (Trip.com).",
+   "trust": "public",
    "image": {
     "file": "r_s_old_tashkent_hotel_spa.jpg",
     "credit": "Trip.com",
@@ -10597,42 +10820,26 @@
   {
    "id": "s_bristol-hotel-tashkent",
    "kind": "boutique",
-   "name": "Bristol Hotel Tashkent",
+   "name": {
+    "uz": "Bristol Hotel Tashkent",
+    "ru": "Bristol Hotel Tashkent",
+    "en": "Bristol Hotel Tashkent"
+   },
    "lat": 41.28531,
    "lng": 69.24415,
-   "address": {
-    "uz": "Toshkent, Imom at-Termiziy ko'chasi 22",
-    "en": "22 Imam at-Termiziy St, Tashkent",
-    "ru": "Ташкент, ул. Имама ат-Термизи, 22"
-   },
-   "pricePerNight": 732000,
+   "address": "Toshkent, Imom at-Termiziy ko'chasi 22",
+   "priceMin": 732000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/tashkent",
    "rating": 4.7,
    "ratingSource": "https://www.momondo.com/hotels/tashkent",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    }
+    "wifi",
+    "breakfast",
+    "ac",
+    "restaurant"
    ],
-   "opened": "2022",
-   "note": "21 rooms; opened 2022, renovated 2025 (Trip.com). Amenities partly general for the category; check on booking.",
+   "trust": "public",
    "image": {
     "file": "r_s_bristol_hotel_tashkent.jpg",
     "credit": "Trip.com",
@@ -10644,56 +10851,28 @@
   {
    "id": "s_ichan-qala-hotel",
    "kind": "hotel",
-   "name": "Ichan Qal'a Premium Class Hotel",
+   "name": {
+    "uz": "Ichan Qal'a Premium Class Hotel",
+    "ru": "Ichan Qal'a Premium Class Hotel",
+    "en": "Ichan Qal'a Premium Class Hotel"
+   },
    "lat": 41.29276,
    "lng": 69.2573,
-   "address": {
-    "uz": "Toshkent, Tafakkur ko'chasi",
-    "en": "Tafakkur St, Tashkent",
-    "ru": "Ташкент, ул. Тафаккур"
-   },
-   "pricePerNight": 1452000,
+   "address": "Toshkent, Tafakkur ko'chasi",
+   "priceMin": 1452000,
+   "priceTrust": "sample",
    "priceSource": "https://momondo.com/hotels/tashkent/Ichan-Qala-Premium-Class-Hotel.mhd519474.ksp",
    "rating": 4.5,
    "ratingSource": "https://momondo.com/hotels/tashkent/Ichan-Qala-Premium-Class-Hotel.mhd519474.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    },
-    {
-     "uz": "Xonaga xizmat",
-     "en": "Room service",
-     "ru": "Обслуживание номеров"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "restaurant",
+    "bar",
+    "room_service"
    ],
-   "note": "Average rate 121 USD (momondo); cheapest standard double for 1 Dec 2026 was 71 USD. House number given as 68 (momondo) and 24 (Trip.com). Rating 9.0 from 2 115 reviews.",
+   "trust": "public",
    "image": {
     "file": "r_s_ichan_qala_hotel.jpg",
     "credit": "Trip.com",
@@ -10705,56 +10884,29 @@
   {
    "id": "s_radisson-blu-tashkent",
    "kind": "hotel",
-   "name": "Radisson Blu Hotel Tashkent",
+   "name": {
+    "uz": "Radisson Blu Hotel Tashkent",
+    "ru": "Radisson Blu Hotel Tashkent",
+    "en": "Radisson Blu Hotel Tashkent"
+   },
    "lat": 41.33449,
    "lng": 69.28526,
-   "address": {
-    "uz": "Toshkent, Amir Temur shoh ko'chasi 88",
-    "en": "88 Amir Temur Ave, Tashkent",
-    "ru": "Ташкент, пр. Амира Темура, 88"
-   },
-   "pricePerNight": 1440000,
+   "address": "Toshkent, Amir Temur shoh ko'chasi 88",
+   "priceMin": 1440000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/tashkent/Radisson-Blu-Hotel-Tashkent.mhd38236.ksp",
    "rating": 4.2,
    "ratingSource": "https://www.momondo.com/hotels/tashkent/Radisson-Blu-Hotel-Tashkent.mhd38236.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    },
-    {
-     "uz": "Xonaga xizmat",
-     "en": "Room service",
-     "ru": "Обслуживание номеров"
-    },
-    {
-     "uz": "Choy va qahva jihozi",
-     "en": "Tea and coffee maker",
-     "ru": "Чайник и кофе"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "restaurant",
+    "bar",
+    "room_service",
+    "tea_coffee"
    ],
-   "note": "Average 120 USD, deals from 84 USD (momondo). Rating 8.4 from 747 reviews.",
+   "trust": "public",
    "image": {
     "file": "r_s_radisson_blu_tashkent.jpg",
     "credit": "Trip.com",
@@ -10766,51 +10918,28 @@
   {
    "id": "s_hyatt-regency-tashkent",
    "kind": "hotel",
-   "name": "Hyatt Regency Tashkent",
+   "name": {
+    "uz": "Hyatt Regency Tashkent",
+    "ru": "Hyatt Regency Tashkent",
+    "en": "Hyatt Regency Tashkent"
+   },
    "lat": 41.31653,
    "lng": 69.27766,
-   "address": {
-    "uz": "Toshkent, Navoiy shoh ko'chasi 1A",
-    "en": "1A Navoi Ave, Tashkent",
-    "ru": "Ташкент, пр. Навои, 1А"
-   },
-   "pricePerNight": 2808000,
+   "address": "Toshkent, Navoiy shoh ko'chasi 1A",
+   "priceMin": 2808000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/tashkent/Hyatt-Regency-Tashkent.mhd2652111.ksp",
    "rating": 4.5,
    "ratingSource": "https://www.momondo.com/hotels/tashkent/Hyatt-Regency-Tashkent.mhd2652111.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Spa",
-     "en": "Spa",
-     "ru": "Спа"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "spa",
+    "restaurant",
+    "bar"
    ],
-   "note": "Average about 234 USD, from 144 USD (momondo); KAYAK weekday average 209 USD. Rating 8.9 from about 1 115 reviews. Amenities from Trip.com/KAYAK descriptions, partly general.",
+   "trust": "public",
    "image": {
     "file": "r_s_hyatt_regency_tashkent.jpg",
     "credit": "Trip.com",
@@ -10822,51 +10951,28 @@
   {
    "id": "s_hilton-tashkent-city",
    "kind": "hotel",
-   "name": "Hilton Tashkent City",
+   "name": {
+    "uz": "Hilton Tashkent City",
+    "ru": "Hilton Tashkent City",
+    "en": "Hilton Tashkent City"
+   },
    "lat": 41.31401,
    "lng": 69.2491,
-   "address": {
-    "uz": "Toshkent, Uqchi ko'chasi 1, Tashkent City",
-    "en": "1 Uqchi St, Tashkent City",
-    "ru": "Ташкент, ул. Укчи, 1, Tashkent City"
-   },
-   "pricePerNight": 2808000,
+   "address": "Toshkent, Uqchi ko'chasi 1, Tashkent City",
+   "priceMin": 2808000,
+   "priceTrust": "sample",
    "priceSource": "https://www.trip.com/hotels/tashkent-hotel-detail-46277689/hilton-tashkent-city/",
    "rating": 4.6,
    "ratingSource": "https://www.trip.com/hotels/tashkent-hotel-detail-46277689/hilton-tashkent-city/",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Spa",
-     "en": "Spa",
-     "ru": "Спа"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "spa",
+    "restaurant",
+    "bar"
    ],
-   "note": "Rates 228 to 247 USD on Trip.com and 234 USD on momondo search snippets. 258 rooms. Amenities general for the hotel class, verify.",
+   "trust": "public",
    "image": {
     "file": "r_s_hilton_tashkent_city.jpg",
     "credit": "Trip.com",

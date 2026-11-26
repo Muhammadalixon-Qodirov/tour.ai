@@ -162,7 +162,7 @@ func TestAdminPublishAppearsInTrip(t *testing.T) {
 	var kpi struct {
 		Cities []store.NoveltyKPI `json:"cities"`
 	}
-	if code := a.do("GET", "/api/v1/admin/analytics/novelty", nil, &kpi); code != 200 || len(kpi.Cities) != 2 {
+	if code := a.do("GET", "/api/v1/admin/analytics/novelty", nil, &kpi); code != 200 || len(kpi.Cities) != 4 {
 		t.Fatalf("analytics: %d", code)
 	}
 }

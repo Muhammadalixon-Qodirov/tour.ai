@@ -94,7 +94,7 @@ func TestReplan(t *testing.T) {
 	// bo'sh vaqt: Registon yonida 2 soat
 	tr = mkTrip(t, c, base)
 	res = replan(t, c, tr.ID, map[string]any{"reason": "free_time", "minutes": 120, "location": map[string]float64{"lat": 39.6547, "lng": 66.9758}}, 200)
-	if !contains(res.Changes, "qo'shildi") || res.Days[0].Stops[0].Reason != "Bo'sh vaqtingiz uchun — yaqin atrofda" {
+	if !contains(res.Changes, "qo'shildi") || res.Days[0].Stops[0].Reason != "Bo'sh vaqtingiz uchun, yaqin atrofda" {
 		t.Fatalf("free_time: %v", res.Changes)
 	}
 

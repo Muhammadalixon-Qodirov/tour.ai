@@ -64,10 +64,14 @@ type Money struct {
 
 func UZS(amount int64) Money { return Money{Amount: amount, Currency: "UZS"} }
 
+// Image — rasm. URL "/static/..." bilan boshlansa API uni PUBLIC_BASE_URL bilan to'liq manzilga aylantiradi.
 type Image struct {
-	URL      string `json:"url"`
-	Blurhash string `json:"blurhash,omitempty"`
-	Credit   string `json:"credit,omitempty"`
+	URL       string `json:"url"`
+	Blurhash  string `json:"blurhash,omitempty"`
+	Credit    string `json:"credit,omitempty"`    // muallif yoki sayt
+	License   string `json:"license,omitempty"`   // "CC BY-SA 4.0"; noma'lum bo'lsa bo'sh
+	SourceURL string `json:"sourceUrl,omitempty"` // rasm olingan sahifa
+	Source    string `json:"source,omitempty"`    // "Wikimedia Commons", "afisha.uz"
 }
 
 // DistanceM — ikki nuqta orasidagi to'g'ri chiziq masofasi (haversine), metrda.
@@ -182,4 +186,26 @@ func FitVisit(hours []OpeningHours, weekday, arrive, dur int) (start int, ok boo
 		}
 	}
 	return start, start+dur <= c
+}
+
+// FairRange — adolatli narx oralig'i. Kuzatuvlar 5 tadan kam bo'lsa tadqiqot (ochiq manba) oralig'i qoladi;
+// 5 ta va ko'p bo'lsa oraliq kuzatuvlar va tadqiqot chegaralari birgalikdagi 20- va 80-protsentil
+// (bitta g'alati kuzatuv oraliqni buzmaydi). obs o'sish tartibida bo'lishi shart emas.
+func FairRange(baseMin, baseMax int64, obs []int64) (lo, hi int64) {
+	if len(obs) < MinPriceSample {
+		return baseMin, baseMax
+	}
+	all := append(slices.Clone(obs), baseMin, baseMax)
+	slices.Sort(all)
+	at := func(q float64) int64 { return all[int(math.Round(q*float64(len(all)-1)))] }
+	return at(0.2), at(0.8)
+}
+
+// MinPriceSample — oraliqni kuzatuvlardan hisoblash uchun eng kam tasdiqlangan kuzatuv.
+const MinPriceSample = 5
+
+// PlausiblePrice — kuzatuv avtomatik tasdiqlanadimi: tadqiqot oralig'ining yarmidan ikki baravarigacha.
+// Undan tashqaridagi (masalan turistga aytilgan 3 baravar narx) moderatsiyaga tushadi.
+func PlausiblePrice(baseMin, baseMax, paid int64) bool {
+	return paid*2 >= baseMin && paid <= baseMax*2
 }

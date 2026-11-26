@@ -48,6 +48,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Registon",
@@ -187,6 +190,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Go'ri Amir maqbarasi",
@@ -338,6 +344,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Shohi Zinda majmuasi",
@@ -478,6 +487,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Bibixonim masjidi",
@@ -551,6 +563,7 @@
      "source": "general etiquette for mosques and shrines in Uzbekistan"
     }
    ],
+   "fridayPrayer": "12:00-14:00",
    "feeForeigner": 65000,
    "historySources": [
     {
@@ -608,6 +621,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ulug'bek rasadxonasi",
@@ -720,6 +736,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Siyob bozori",
@@ -770,6 +789,11 @@
      },
      "source": "general etiquette at bazaars in Uzbekistan"
     }
+   ],
+   "aliases": [
+    "Siyob",
+    "Сиаб",
+    "Siab"
    ],
    "feeLocal": 0,
    "feeForeigner": 0,
@@ -829,6 +853,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Konigil \"Meros\" qog'oz ustaxonasi",
@@ -937,6 +964,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Afrosiyob muzeyi",
@@ -996,6 +1026,7 @@
      "source": "general rule in museums of Uzbekistan"
     }
    ],
+   "lunch": "13:00-14:00",
    "feeLocal": 10000,
    "historySources": [
     {
@@ -1053,6 +1084,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Hazrati Xizr masjidi",
@@ -1126,6 +1160,7 @@
      "source": "general etiquette for mosques and shrines in Uzbekistan"
     }
    ],
+   "fridayPrayer": "12:00-14:00",
    "historySources": [
     {
      "title": "Wikipedia: Hazrat Khizr Mosque",
@@ -1175,6 +1210,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"Aiesha\" kashta va libos ustaxonasi",
@@ -1238,6 +1276,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Samarqand Osh markazi No1",
@@ -1304,6 +1345,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Oshqand osh markazi",
@@ -1371,6 +1415,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xo'ja Doniyor maqbarasi",
@@ -1508,6 +1555,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Imom Buxoriy yodgorlik majmuasi",
@@ -1660,6 +1710,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ishratxona maqbarasi",
@@ -1766,6 +1819,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Oqsaroy maqbarasi",
@@ -1868,6 +1924,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xo'ja Abdi Darun majmuasi",
@@ -1992,6 +2051,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ruhobod maqbarasi",
@@ -2104,6 +2166,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xovrenko vino zavodi va vino muzeyi",
@@ -2203,6 +2268,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Samarqand viloyat o'lkashunoslik muzeyi",
@@ -2317,6 +2385,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Boqiy shahar",
@@ -2426,6 +2497,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Silk Road Samarkand turistik majmuasi",
@@ -2550,6 +2624,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Urgut bozori",
@@ -2633,6 +2710,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chorchinor bog'i",
@@ -2745,6 +2825,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Universitet xiyoboni va eski rus shahri",
@@ -2847,6 +2930,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Amir Temur haykali (Samarqand)",
@@ -2914,6 +3000,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Imom Moturidiy majmuasi",
@@ -3038,6 +3127,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xo'ja Ahrori Vali majmuasi",
@@ -3161,6 +3253,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Abdi Berun majmuasi",
@@ -3280,6 +3375,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Avliyo Aleksiy sobori",
@@ -3391,6 +3489,9 @@
    "payCard": true,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "\"Hujum\" ipak gilam ustaxonasi",
@@ -3472,6 +3573,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Hazrati Dovud g'ori",
@@ -3602,6 +3706,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Afrosiyob shaharchasi",
@@ -3702,6 +3809,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Second ride within transfer window 1,000; regional decision of 15 Apr 2025 set 2,000 card / 3,000 cash."
   },
   {
@@ -3723,6 +3831,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Consistent with Yandex Go Samarkand caps (Start 4,100 min + 1,020/km + 450/min), voyage.uz Oct 2026."
   },
   {
@@ -3744,6 +3853,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Computed from published Yandex Go caps (Start/Comfort, 5 km, 15 min). Tram route 1 from the station costs 2,000 (travelcostcalculator)."
   },
   {
@@ -3765,6 +3875,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Computed from Yandex Go caps (8 km, 20 min). Pre-booked transfers ask 14-25 USD (vc.ru 2025 review), not a meter fare."
   },
   {
@@ -3786,6 +3897,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Fares from 1 Feb 2026. Slower Sharq train seat 200,060 (kursiv.media, Sep 2026)."
   },
   {
@@ -3807,6 +3919,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "2025 fares (t-j.ru May 2025 Sharq; otello.ru Afrosiyob converted from RUB). All these trains +15% from 1 Feb 2026, so 2026 fares are higher."
   },
   {
@@ -3827,7 +3940,8 @@
    "source": "https://travelto.ru/blog/blogskolko-stoit-proezd-v-uzbekistane/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_shared_taxi_tashkent",
@@ -3848,6 +3962,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Source labels this a 2026 estimate."
   },
   {
@@ -3869,6 +3984,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "30,500 = Samarqand region average in plov centres, Dec 2024 (stat agency via afisha.uz). 35,000-50,000 in chaikhanas (travelcostcalculator 2026 est.); 52,000 at Samarqand Osh Markazi (tonkosti.ru, Apr 2025, converted from RUB)."
   },
   {
@@ -3890,6 +4006,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Weak: converted from \"2-3 pieces from 2,000 KZT\" at the article's own ticket rate (about 24.7 UZS per KZT), Apr 2026."
   },
   {
@@ -3911,6 +4028,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Source labels this a 2026 estimate."
   },
   {
@@ -3932,6 +4050,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "travelcostcalculator gives 5,000-8,000 for a regular non; large Samarkand non costs more."
   },
   {
@@ -3952,7 +4071,8 @@
    "source": "https://www.sputnik8.com/ru/samarkand/pages/gastronomicheskiy-gid-po-samarkandu-chto-poprobovat-i-gde-poest",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_dinner",
@@ -3972,7 +4092,8 @@
    "source": "https://www.sputnik8.com/ru/samarkand/pages/gastronomicheskiy-gid-po-samarkandu-chto-poprobovat-i-gde-poest",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_dried_fruit",
@@ -3992,7 +4113,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_nuts",
@@ -4013,6 +4135,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Text cites about 100,000 per kg for almonds at Siab bazaar."
   },
   {
@@ -4034,6 +4157,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "A few pieces at Siab bazaar about 10,000."
   },
   {
@@ -4054,7 +4178,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_tea",
@@ -4074,7 +4199,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_sim",
@@ -4094,7 +4220,8 @@
    "source": "https://uz.kursiv.media/en/2026-09-04/uzbekistan-travel-cost-budget-2026/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_paper_notebook",
@@ -4114,7 +4241,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_miniature",
@@ -4134,7 +4262,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_suzani",
@@ -4155,6 +4284,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "tonkosti.ru: shops in the centre can be 2-3 times dearer; travelto notes a tourist markup in Registan shops."
   },
   {
@@ -4175,7 +4305,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_ceramic_plate",
@@ -4195,7 +4326,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_silk_scarf",
@@ -4215,7 +4347,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_doppi",
@@ -4235,7 +4368,8 @@
    "source": "https://travelto.ru/blog/chto-privezti-iz-samarkanda/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_carpet_small",
@@ -4256,6 +4390,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Only a lower bound (\"from 1,500,000\"); large silk carpets priced 2,400-27,200 USD."
   },
   {
@@ -4279,6 +4414,7 @@
    "placeIds": [
     "registan"
    ],
+   "trust": "sample",
    "note": "Same 100,000 in saigatours (Jul 2025), hostelworld 2026, eurasia.travel forum (Dec 2025-Feb 2026). Locals pay less; no official local fee found."
   },
   {
@@ -4302,6 +4438,7 @@
    "placeIds": [
     "gur-emir"
    ],
+   "trust": "sample",
    "note": "75,000 in four forum posts Dec 2025-Apr 2026 and kursiv Sep 2026; saigatours Jul 2025 says 65,000."
   },
   {
@@ -4325,6 +4462,7 @@
    "placeIds": [
     "shah-i-zinda"
    ],
+   "trust": "sample",
    "note": "80,000 in kursiv Sep 2026, hostelworld 2026, forum Feb 2026; 50,000 in 2025 posts."
   },
   {
@@ -4347,7 +4485,8 @@
    "updatedAt": "2026-11-26",
    "placeIds": [
     "bibi-khanym"
-   ]
+   ],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_ulugbek",
@@ -4370,6 +4509,7 @@
    "placeIds": [
     "ulugbek-observatory"
    ],
+   "trust": "sample",
    "note": "75,000 hostelworld 2026 and forum; 40,000 saigatours Jul 2025."
   },
   {
@@ -4392,7 +4532,8 @@
    "updatedAt": "2026-11-26",
    "placeIds": [
     "khoja-doniyor"
-   ]
+   ],
+   "trust": "sample"
   },
   {
    "id": "p_samarkand_konigil",
@@ -4415,6 +4556,7 @@
    "placeIds": [
     "konigil-meros"
    ],
+   "trust": "sample",
    "note": "15,000 hostelworld 2026 and forum Dec 2025; 25,000 otello.ru 2025."
   }
  ],
@@ -4503,119 +4645,74 @@
   {
    "id": "s_manija-hostel",
    "kind": "hostel",
-   "name": "Manija Hostel",
+   "name": {
+    "uz": "Manija Hostel",
+    "ru": "Manija Hostel",
+    "en": "Manija Hostel"
+   },
    "lat": 39.68032,
    "lng": 66.93726,
-   "address": {
-    "uz": "Samarqand, Rudakiy ko'chasi 139",
-    "en": "139 Rudakiy St, Samarkand",
-    "ru": "Самарканд, ул. Рудаки, 139"
-   },
-   "pricePerNight": 132000,
+   "address": "Samarqand, Rudakiy ko'chasi 139",
+   "priceMin": 132000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/hostels-in-samarqand-22481.ksp",
    "rating": 4.2,
    "ratingSource": "https://www.momondo.com/hotels/hostels-in-samarqand-22481.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Umumiy oshxona",
-     "en": "Shared kitchen",
-     "ru": "Общая кухня"
-    }
+    "wifi",
+    "kitchen"
    ],
-   "note": "11 USD is the lowest listed rate (likely a bed or basic room, not a double); another momondo snippet shows 17 USD and rating 8.6. OSM point 'Манижа' on Rudakiy St. Amenities typical for hostels, not verified."
+   "trust": "public"
   },
   {
    "id": "s_bb-bahodir",
    "kind": "guesthouse",
-   "name": "B&B Bahodir",
+   "name": {
+    "uz": "B&B Bahodir",
+    "ru": "B&B Bahodir",
+    "en": "B&B Bahodir"
+   },
    "lat": 39.65625,
    "lng": 66.97926,
-   "address": {
-    "uz": "Samarqand, Mulokandov ko'chasi 132 (Registon yaqini)",
-    "en": "132 Mulokandov St, near Registan, Samarkand",
-    "ru": "Самарканд, ул. Мулокандова, 132 (у Регистана)"
-   },
-   "pricePerNight": 372000,
+   "address": "Samarqand, Mulokandov ko'chasi 132 (Registon yaqini)",
+   "priceMin": 372000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/B-B-Bahodir.mhd2162425.ksp",
    "rating": 4.2,
    "ratingSource": "https://www.momondo.com/hotels/samarqand/B-B-Bahodir.mhd2162425.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Xonada hammom",
-     "en": "Private bathroom",
-     "ru": "Своя ванная"
-    },
-    {
-     "uz": "Ayvon yoki hovli",
-     "en": "Terrace or courtyard",
-     "ru": "Терраса или двор"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    },
-    {
-     "uz": "Kir yuvish xizmati",
-     "en": "Laundry",
-     "ru": "Прачечная"
-    }
+    "wifi",
+    "private_bathroom",
+    "courtyard",
+    "ac",
+    "laundry"
    ],
-   "note": "Double room 31 USD for 1 Dec 2026; typical 27 USD (momondo). Rating 8.3 from 1 029 reviews. OSM node 'B&B Bahodir hotel'."
+   "trust": "public"
   },
   {
    "id": "s_jahongir-guest-house",
    "kind": "guesthouse",
-   "name": "Jahongir B&B",
+   "name": {
+    "uz": "Jahongir B&B",
+    "ru": "Jahongir B&B",
+    "en": "Jahongir B&B"
+   },
    "lat": 39.65974,
    "lng": 66.987,
-   "address": {
-    "uz": "Samarqand, Chiroqchi ko'chasi 4",
-    "en": "4 Chirokchi St, Samarkand",
-    "ru": "Самарканд, ул. Чирокчи, 4"
-   },
-   "pricePerNight": 636000,
+   "address": "Samarqand, Chiroqchi ko'chasi 4",
+   "priceMin": 636000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/Jahongir-Hotel.mhd633321.ksp",
    "rating": 4.5,
    "ratingSource": "https://www.momondo.com/hotels/samarqand/Jahongir-Hotel.mhd633321.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Xonada hammom",
-     "en": "Private bathroom",
-     "ru": "Своя ванная"
-    },
-    {
-     "uz": "Ayvon yoki hovli",
-     "en": "Terrace or courtyard",
-     "ru": "Терраса или двор"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    },
-    {
-     "uz": "Sauna",
-     "en": "Sauna",
-     "ru": "Сауна"
-    }
+    "wifi",
+    "private_bathroom",
+    "courtyard",
+    "ac",
+    "sauna"
    ],
-   "note": "Typical 53 to 59 USD (momondo); Trip.com average from 49 USD. Rating 9.1 from 2 029 reviews. Coordinates: Chiroqchi street (OSM way), house not mapped, approximate.",
+   "trust": "public",
    "image": {
     "file": "r_s_jahongir_guest_house.jpg",
     "credit": "Trip.com",
@@ -4627,46 +4724,27 @@
   {
    "id": "s_bibikhanum-hotel",
    "kind": "hotel",
-   "name": "Bibikhanum Hotel",
+   "name": {
+    "uz": "Bibikhanum Hotel",
+    "ru": "Bibikhanum Hotel",
+    "en": "Bibikhanum Hotel"
+   },
    "lat": 39.66006,
    "lng": 66.98015,
-   "address": {
-    "uz": "Samarqand, Toshkent ko'chasi 10",
-    "en": "10 Tashkent St, Samarkand",
-    "ru": "Самарканд, ул. Ташкентская, 10"
-   },
-   "pricePerNight": 888000,
+   "address": "Samarqand, Toshkent ko'chasi 10",
+   "priceMin": 888000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/Bibikhanum-Hotel.mhd2393028.ksp",
    "rating": 4.5,
    "ratingSource": "https://www.momondo.com/hotels/samarqand/Bibikhanum-Hotel.mhd2393028.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    },
-    {
-     "uz": "Xonaga xizmat",
-     "en": "Room service",
-     "ru": "Обслуживание номеров"
-    },
-    {
-     "uz": "Bepul avtoturargoh",
-     "en": "Free parking",
-     "ru": "Бесплатная парковка"
-    }
+    "wifi",
+    "restaurant",
+    "bar",
+    "room_service",
+    "parking"
    ],
-   "note": "Average 74 USD; standard room 62 USD for 2 Dec 2026 (momondo). Rating 9.0 from 1 912 reviews. Faces Bibi-Khanym mosque.",
+   "trust": "public",
    "image": {
     "file": "r_s_bibikhanum_hotel.jpg",
     "credit": "Trip.com",
@@ -4678,39 +4756,24 @@
   {
    "id": "s_hotel-city-samarkand",
    "kind": "hotel",
-   "name": "Hotel City Samarkand",
+   "name": {
+    "uz": "Hotel City Samarkand",
+    "ru": "Hotel City Samarkand",
+    "en": "Hotel City Samarkand"
+   },
    "lat": 39.64294,
    "lng": 66.96016,
-   "address": {
-    "uz": "Samarqand, Universitet bulvari",
-    "en": "University Blvd, Samarkand",
-    "ru": "Самарканд, Университетский бульвар"
-   },
-   "pricePerNight": 852000,
+   "address": "Samarqand, Universitet bulvari",
+   "priceMin": 852000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/City-Hotel.mhd457301.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    }
+    "wifi",
+    "breakfast",
+    "restaurant",
+    "ac"
    ],
-   "note": "3-star; 71 to 96 USD across providers (momondo). Rating not captured. Amenities general for the class, verify.",
+   "trust": "public",
    "image": {
     "file": "r_s_hotel_city_samarkand.jpg",
     "credit": "momondo / Expedia Group",
@@ -4722,56 +4785,28 @@
   {
    "id": "s_movenpick-samarkand",
    "kind": "hotel",
-   "name": "Mövenpick Samarkand",
+   "name": {
+    "uz": "Mövenpick Samarkand",
+    "ru": "Mövenpick Samarkand",
+    "en": "Mövenpick Samarkand"
+   },
    "lat": 39.65005,
    "lng": 66.96267,
-   "address": {
-    "uz": "Samarqand, Shohruh ko'chasi 53",
-    "en": "53 Shokhrukh St, Samarkand",
-    "ru": "Самарканд, ул. Шахрух, 53"
-   },
-   "pricePerNight": 924000,
+   "address": "Samarqand, Shohruh ko'chasi 53",
+   "priceMin": 924000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/Registan-Plaza.mhd140599.ksp",
    "rating": 4.5,
    "ratingSource": "https://www.momondo.com/hotels/samarqand/Registan-Plaza.mhd140599.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    },
-    {
-     "uz": "Bepul avtoturargoh",
-     "en": "Free parking",
-     "ru": "Бесплатная парковка"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "restaurant",
+    "bar",
+    "parking"
    ],
-   "note": "Former Registan Plaza. Standard double 77 USD for 1 Dec 2026, typical 66 USD (momondo). Rating 8.9 from 623 reviews; Trip.com 9.2.",
+   "trust": "public",
    "image": {
     "file": "r_s_movenpick_samarkand.jpg",
     "credit": "Trip.com",
@@ -4783,56 +4818,28 @@
   {
    "id": "s_silk-road-by-minyoun",
    "kind": "hotel",
-   "name": "Silk Road by Minyoun",
+   "name": {
+    "uz": "Silk Road by Minyoun",
+    "ru": "Silk Road by Minyoun",
+    "en": "Silk Road by Minyoun"
+   },
    "lat": 39.65796,
    "lng": 67.06777,
-   "address": {
-    "uz": "Samarqand, Konigil, Silk Road Samarkand majmuasi",
-    "en": "Konigil, Silk Road Samarkand complex",
-    "ru": "Конигил, комплекс Silk Road Samarkand"
-   },
-   "pricePerNight": 756000,
+   "address": "Samarqand, Konigil, Silk Road Samarkand majmuasi",
+   "priceMin": 756000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand/Silk-Road-by-Minyoun.mhd8976795.ksp",
    "rating": 4.6,
    "ratingSource": "https://www.momondo.com/hotels/samarqand/Silk-Road-by-Minyoun.mhd8976795.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    },
-    {
-     "uz": "Choy va qahva jihozi",
-     "en": "Tea and coffee maker",
-     "ru": "Чайник и кофе"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "restaurant",
+    "bar",
+    "tea_coffee"
    ],
-   "note": "About 10 km from the old centre, taxi needed. Typical 63 USD (momondo FAQ); double for 2 Dec 2026 was 109 USD. Rating 9.2 from 308 reviews.",
+   "trust": "public",
    "image": {
     "file": "r_s_silk_road_by_minyoun.jpg",
     "credit": "Trip.com",
@@ -4844,51 +4851,28 @@
   {
    "id": "s_hilton-samarkand-regency",
    "kind": "hotel",
-   "name": "Hilton Samarkand Regency",
+   "name": {
+    "uz": "Hilton Samarkand Regency",
+    "ru": "Hilton Samarkand Regency",
+    "en": "Hilton Samarkand Regency"
+   },
    "lat": 39.6599,
    "lng": 67.05945,
-   "address": {
-    "uz": "Samarqand, Konigil, Silk Road Samarkand majmuasi",
-    "en": "Konigil, Silk Road Samarkand complex",
-    "ru": "Конигил, комплекс Silk Road Samarkand"
-   },
-   "pricePerNight": 1020000,
+   "address": "Samarqand, Konigil, Silk Road Samarkand majmuasi",
+   "priceMin": 1020000,
+   "priceTrust": "sample",
    "priceSource": "https://www.momondo.com/hotels/samarqand",
    "rating": 4.8,
    "ratingSource": "https://www.momondo.com/hotels/samarqand",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    },
-    {
-     "uz": "Fitnes zal",
-     "en": "Fitness centre",
-     "ru": "Фитнес-центр"
-    },
-    {
-     "uz": "Spa",
-     "en": "Spa",
-     "ru": "Спа"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    },
-    {
-     "uz": "Bar",
-     "en": "Bar",
-     "ru": "Бар"
-    }
+    "wifi",
+    "pool",
+    "gym",
+    "spa",
+    "restaurant",
+    "bar"
    ],
-   "note": "85 USD on the momondo Samarkand list (late Nov 2026); other sites show 89 to 218 USD by season. City tax about 4.87 USD per person per night (Priceline). Amenities general for the class.",
+   "trust": "public",
    "image": {
     "file": "r_s_hilton_samarkand_regency.jpg",
     "credit": "Trip.com",

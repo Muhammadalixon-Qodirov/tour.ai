@@ -19,24 +19,30 @@ func TestResidentAliasesTrustBreaks(t *testing.T) {
 		t.Fatalf("mahalliy nom bo'yicha qidiruv: %+v", res.Items)
 	}
 
+	// Tadqiqot katalogi: joy, tarix va qoida ochiq manbadan (public), ish vaqti va kirish narxi namuna (sample).
 	var p placeDTO
 	c.do("GET", "/api/v1/places/registan", nil, &p)
-	if p.Trust != "sample" || p.History == nil || p.History.Trust != "sample" || p.Rules[0].Trust != "sample" {
-		t.Fatalf("demo ma'lumot sample deb belgilanishi kerak: %s %+v", p.Trust, p.History)
+	if p.Trust != "public" || p.History == nil || p.History.Trust != "public" || p.Rules[0].Trust != "public" ||
+		p.HoursTrust != "sample" || p.EntryFee == nil || p.EntryFee.Trust != "sample" {
+		t.Fatalf("ishonch darajasi: %s %+v hours=%s", p.Trust, p.History, p.HoursTrust)
 	}
-	c.do("GET", "/api/v1/places/poi-kalyan", nil, &p)
+	c.do("GET", "/api/v1/places/magoki-attori", nil, &p)
 	friday := false
 	for _, h := range p.OpeningHours {
 		friday = friday || h.Day == 5 && len(h.Breaks) == 1 && h.Breaks[0].Reason == "prayer"
 	}
-	if !friday || !slices.Contains(p.Aliases, "Kalon minorasi") {
-		t.Fatalf("juma tanaffusi / aliases: %+v %v", p.OpeningHours, p.Aliases)
+	if !friday {
+		t.Fatalf("juma tanaffusi: %+v", p.OpeningHours)
+	}
+	c.do("GET", "/api/v1/places/kalon-minaret", nil, &p)
+	if !slices.Contains(p.Aliases, "Kalon minorasi") {
+		t.Fatalf("aliases: %v", p.Aliases)
 	}
 
 	// Juma kuni marshrutda namoz tanaffusiga (12:00–14:00) masjid tashrifi tushmaydi.
 	tr := mkTrip(t, c, map[string]any{"cityId": "bukhara", "startDate": "2026-12-04", "days": 1, "interests": []string{"history", "architecture"}, "pace": "active"})
 	for _, s := range tr.Days[0].Stops {
-		if s.Place.ID == "poi-kalyan" || s.Place.ID == "bolo-hauz" || s.Place.ID == "magoki-attori" {
+		if s.Place.ID == "kalon-mosque" || s.Place.ID == "bolo-hauz" || s.Place.ID == "magoki-attori" {
 			st := hhmm(t, s.ArriveAt)
 			if st < 14*60 && st+s.DurationMin > 12*60 {
 				t.Fatalf("%s namoz vaqtiga to'g'ri keldi: %s", s.Place.ID, s.ArriveAt)

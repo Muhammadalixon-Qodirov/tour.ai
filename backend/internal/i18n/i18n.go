@@ -73,6 +73,7 @@ var messages = map[string]map[string]string{
 	"trip_not_found":            {"uz": "Marshrut topilmadi", "ru": "Маршрут не найден", "en": "Trip not found"},
 	"stop_not_found":            {"uz": "To'xtash joyi topilmadi", "ru": "Остановка не найдена", "en": "Stop not found"},
 	"route_impossible":          {"uz": "Bu sozlamalar bilan marshrut tuzib bo'lmadi. Qiziqishlar yoki cheklovlarni o'zgartirib ko'ring", "ru": "Не удалось построить маршрут с этими настройками. Измените интересы или ограничения", "en": "We couldn't build a route with these settings. Try changing interests or constraints"},
+	"price_item_not_found":      {"uz": "Narx bandi topilmadi", "ru": "Позиция цены не найдена", "en": "Price item not found"},
 	"place_already_in_trip":     {"uz": "Bu joy marshrutda allaqachon bor", "ru": "Это место уже есть в маршруте", "en": "This place is already in the trip"},
 	"invalid_credentials":       {"uz": "Email yoki parol noto'g'ri", "ru": "Неверный email или пароль", "en": "Wrong email or password"},
 	"place_id_taken":            {"uz": "Bu ID band", "ru": "Этот ID уже занят", "en": "This ID is already taken"},
@@ -94,10 +95,10 @@ var messages = map[string]map[string]string{
 	// marshrut
 	"trip_title":   {"uz": "{0} · {1} kun", "ru": "{0} · {1} дн.", "en": "{0} · {1} days"},
 	"trip_title_1": {"uz": "{0} · 1 kun", "ru": "{0} · 1 день", "en": "{0} · 1 day"},
-	"trip_summary": {"uz": "{0} ta joy, shundan {1} tasi yangi yoki kam tanilgan.", "ru": "{0} мест, из них {1} — новые или малоизвестные.", "en": "{0} places, {1} of them new or little-known."},
+	"trip_summary": {"uz": "{0} ta joy, shundan {1} tasi yangi yoki kam tanilgan.", "ru": "{0} мест, из них {1} новые или малоизвестные.", "en": "{0} places, {1} of them new or little-known."},
 	"day_title":    {"uz": "{0}-kun", "ru": "День {0}", "en": "Day {0}"},
 
-	"reason.new":        {"uz": "Yaqinda ochilgan — hali kam odam biladi", "ru": "Недавно открылось — о нём пока мало кто знает", "en": "Recently opened — few people know it yet"},
+	"reason.new":        {"uz": "Yaqinda ochilgan, hali kam odam biladi", "ru": "Недавно открылось, о нём пока мало кто знает", "en": "Recently opened, few people know it yet"},
 	"reason.hidden":     {"uz": "Kam tanilgan, lekin e'tiborga loyiq joy", "ru": "Малоизвестное, но стоящее внимания место", "en": "Little-known but worth your time"},
 	"reason.top_rated":  {"uz": "Shaharning eng mashhur joylaridan biri", "ru": "Одно из самых известных мест города", "en": "One of the city's best-known sights"},
 	"reason.meal":       {"uz": "Yo'lingiz ustida tushlik uchun qulay joy", "ru": "Удобное место для обеда по пути", "en": "A convenient lunch stop on your way"},
@@ -114,36 +115,36 @@ var messages = map[string]map[string]string{
 	"interest.shopping":     {"uz": "Xaridga", "ru": "покупки", "en": "shopping"},
 	"interest.nightlife":    {"uz": "Kechki hordiqqa", "ru": "вечерний отдых", "en": "evenings out"},
 
-	"reason.free_time": {"uz": "Bo'sh vaqtingiz uchun — yaqin atrofda", "ru": "На свободное время — совсем рядом", "en": "For your free time — close by"},
+	"reason.free_time": {"uz": "Bo'sh vaqtingiz uchun, yaqin atrofda", "ru": "На свободное время, совсем рядом", "en": "For your free time, close by"},
 
 	// qayta rejalash
 	"change.shifted":                {"uz": "Qolgan joylar {0} daqiqaga surildi", "ru": "Остальные места сдвинуты на {0} мин", "en": "Remaining stops moved by {0} min"},
-	"change.removed":                {"uz": "{0} olib tashlandi — vaqtga sig'madi", "ru": "{0} убрано — не хватает времени", "en": "{0} removed — not enough time"},
-	"change.removed_tired":          {"uz": "{0} olib tashlandi — dam olishingiz uchun", "ru": "{0} убрано — чтобы вы отдохнули", "en": "{0} removed so you can rest"},
-	"change.replaced_weather":       {"uz": "{0} o'rniga {1} — ob-havo sababli", "ru": "{1} вместо {0} — из-за погоды", "en": "{1} instead of {0} — because of the weather"},
-	"change.added":                  {"uz": "{0} qo'shildi — yaqin atrofda", "ru": "Добавлено: {0} — рядом с вами", "en": "{0} added — close by"},
+	"change.removed":                {"uz": "{0} olib tashlandi: vaqtga sig'madi", "ru": "{0} убрано: не хватает времени", "en": "{0} removed: not enough time"},
+	"change.removed_tired":          {"uz": "{0} olib tashlandi, dam olishingiz uchun", "ru": "{0} убрано, чтобы вы отдохнули", "en": "{0} removed so you can rest"},
+	"change.replaced_weather":       {"uz": "{0} o'rniga {1}, ob-havo sababli", "ru": "{1} вместо {0} из-за погоды", "en": "{1} instead of {0} because of the weather"},
+	"change.added":                  {"uz": "{0} qo'shildi, yaqin atrofda", "ru": "Добавлено рядом с вами: {0}", "en": "{0} added, close by"},
 	"change.none_nearby":            {"uz": "Yaqin atrofda vaqtga sig'adigan joy topilmadi", "ru": "Поблизости нет мест, которые успеете посетить", "en": "Nothing nearby fits into that time"},
-	"change.weather_ok":             {"uz": "Ob-havo yaxshi (+{0}°C) — o'zgarish kerak emas", "ru": "Погода хорошая (+{0}°C) — менять ничего не нужно", "en": "The weather is fine (+{0}°C) — no changes needed"},
+	"change.weather_ok":             {"uz": "Ob-havo yaxshi (+{0}°C), o'zgarish kerak emas", "ru": "Погода хорошая (+{0}°C), менять ничего не нужно", "en": "The weather is fine (+{0}°C), no changes needed"},
 	"change.weather_hot":            {"uz": "Jazirama (+{0}°C): ochiq joylar yopiq joylarga almashtirildi", "ru": "Жара (+{0}°C): открытые места заменены на крытые", "en": "Heat (+{0}°C): outdoor stops swapped for indoor ones"},
 	"change.weather_rain":           {"uz": "Yomg'ir kutilmoqda: ochiq joylar yopiq joylarga almashtirildi", "ru": "Ожидается дождь: открытые места заменены на крытые", "en": "Rain expected: outdoor stops swapped for indoor ones"},
-	"change.weather_indoor_already": {"uz": "Ob-havo noqulay, lekin marshrutingizdagi joylar yopiq — o'zgarish kerak emas", "ru": "Погода неважная, но все места в маршруте крытые — менять не нужно", "en": "The weather is poor, but your stops are indoors — no changes needed"},
+	"change.weather_indoor_already": {"uz": "Ob-havo noqulay, lekin marshrutingizdagi joylar yopiq. O'zgarish kerak emas", "ru": "Погода неважная, но все места в маршруте крытые. Менять не нужно", "en": "The weather is poor, but your stops are indoors. No changes needed"},
 	"weather_unavailable":           {"uz": "Ob-havo ma'lumoti hozir mavjud emas", "ru": "Данные о погоде сейчас недоступны", "en": "Weather data is unavailable right now"},
 	"day_in_past":                   {"uz": "O'tib ketgan kunni qayta rejalab bo'lmaydi", "ru": "Нельзя перепланировать прошедший день", "en": "A past day can't be replanned"},
 
 	// kundalik va lenta
 	"diary_not_found":        {"uz": "Hikoya topilmadi", "ru": "История не найдена", "en": "Story not found"},
-	"diary_day_not_started":  {"uz": "Bu kun hali boshlanmagan — hikoya kun o'tgandan keyin yoziladi", "ru": "Этот день ещё не начался — история пишется после него", "en": "This day hasn't started yet — the story is written afterwards"},
+	"diary_day_not_started":  {"uz": "Bu kun hali boshlanmagan. Hikoya kun o'tgandan keyin yoziladi", "ru": "Этот день ещё не начался. История пишется после него", "en": "This day hasn't started yet. The story is written afterwards"},
 	"diary_nothing_visited":  {"uz": "Hikoya uchun bu kunda borilgan joy yo'q", "ru": "В этот день нет посещённых мест для истории", "en": "No visited places that day to write a story about"},
-	"diary_regenerate_limit": {"uz": "Qayta yozish limiti tugadi — matnni o'zingiz tahrirlashingiz mumkin", "ru": "Лимит перегенерации исчерпан — можно отредактировать текст вручную", "en": "Regeneration limit reached — you can still edit the text yourself"},
+	"diary_regenerate_limit": {"uz": "Qayta yozish limiti tugadi. Matnni o'zingiz tahrirlashingiz mumkin", "ru": "Лимит перегенерации исчерпан. Можно отредактировать текст вручную", "en": "Regeneration limit reached. You can still edit the text yourself"},
 	"too_many_photos":        {"uz": "Bir kunga 30 tagacha rasm yuklash mumkin", "ru": "Можно загрузить до 30 фото за день", "en": "Up to 30 photos per day"},
 	"content_rejected":       {"uz": "Postda havolalar bo'lmasligi kerak", "ru": "В публикации не должно быть ссылок", "en": "Posts can't contain links"},
 	"post_not_found":         {"uz": "Post topilmadi", "ru": "Публикация не найдена", "en": "Post not found"},
 	"post_hidden":            {"uz": "Post shikoyatlar sababli yashirilgan va moderator tekshiruvida", "ru": "Публикация скрыта из-за жалоб и проверяется модератором", "en": "The post is hidden after reports and is under review"},
 
 	"sos.lost_documents": {
-		"uz": "Hujjat yo'qolsa: 1) eng yaqin politsiyaga ariza bering va ma'lumotnoma oling; 2) mamlakatingiz elchixonasi yoki konsulligiga murojaat qiling; 3) mehmonxonaga xabar bering — ro'yxatdan o'tish ma'lumotlari ularda bor.",
-		"ru": "Если потеряли документы: 1) подайте заявление в ближайшую полицию и получите справку; 2) обратитесь в посольство или консульство своей страны; 3) сообщите в гостиницу — у неё есть данные о вашей регистрации.",
-		"en": "If you lose your documents: 1) report it at the nearest police station and get a certificate; 2) contact your country's embassy or consulate; 3) tell your hotel — they hold your registration details.",
+		"uz": "Hujjat yo'qolsa: 1) eng yaqin politsiyaga ariza bering va ma'lumotnoma oling; 2) mamlakatingiz elchixonasi yoki konsulligiga murojaat qiling; 3) mehmonxonaga xabar bering, ro'yxatdan o'tish ma'lumotlari ularda bor.",
+		"ru": "Если потеряли документы: 1) подайте заявление в ближайшую полицию и получите справку; 2) обратитесь в посольство или консульство своей страны; 3) сообщите в гостиницу, у неё есть данные о вашей регистрации.",
+		"en": "If you lose your documents: 1) report it at the nearest police station and get a certificate; 2) contact your country's embassy or consulate; 3) tell your hotel, they hold your registration details.",
 	},
 
 	// geofence

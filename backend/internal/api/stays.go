@@ -22,6 +22,7 @@ type stayPriceDTO struct {
 	Trust     *string       `json:"trust"`
 	Note      *string       `json:"note,omitempty"`
 	UpdatedAt *string       `json:"updatedAt,omitempty"`
+	Source    *sourceDTO    `json:"source,omitempty"` // narx qayerdan olingan (tadqiqot yozuvlari)
 }
 
 type stayDTO struct {
@@ -34,7 +35,8 @@ type stayDTO struct {
 	Location      domain.LatLng     `json:"location"`
 	Address       string            `json:"address"`
 	Stars         *int              `json:"stars"`
-	Rating        *float64          `json:"rating"`
+	Rating        *float64          `json:"rating"`                 // 5 ballik
+	RatingSource  *sourceDTO        `json:"ratingSource,omitempty"` // reyting manbasi
 	ReviewsCount  int               `json:"reviewsCount"`
 	PricePerNight stayPriceDTO      `json:"pricePerNight"`
 	FairPrice     bool              `json:"fairPrice"`
@@ -54,23 +56,21 @@ type stayDTO struct {
 }
 
 func (s *Server) stayDTO(v store.Stay, lang string) stayDTO {
-	d := stayDTO{ID: v.ID, CityID: v.CityID, Name: i18n.Pick(v.Name, lang), Kind: v.Kind, Images: v.Images, Location: v.Loc,
+	d := stayDTO{ID: v.ID, CityID: v.CityID, Name: i18n.Pick(v.Name, lang), Kind: v.Kind, Images: s.absImages(v.Images), Location: v.Loc,
 		Address: v.Address, Stars: v.Stars, Rating: v.Rating, ReviewsCount: v.ReviewsCount, FairPrice: v.FairPrice,
 		Verified: v.Verified, IsPartner: v.IsPartner, Amenities: nonNil(v.Amenities), Contacts: v.Contacts, CheckIn: v.CheckIn,
 		CheckOut: v.CheckOut, Wheelchair: v.Wheelchair, EMehmon: v.EMehmon, BookingURL: v.BookingURL, AgodaURL: v.AgodaURL,
-		Trust: v.Trust}
-	if d.Images == nil {
-		d.Images = []domain.Image{}
-	}
+		Trust: v.Trust, RatingSource: sourceOf(v.RatingSource, nil)}
 	if d.Contacts == nil {
 		d.Contacts = map[string]string{}
 	}
-	if len(v.Images) > 0 {
-		d.Cover = v.Images[0]
+	if len(d.Images) > 0 {
+		d.Cover = d.Images[0]
 	} else {
 		d.Cover = domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/" + v.Kind + ".svg"}
 	}
-	p := stayPriceDTO{Trust: v.PriceTrust, Note: v.PriceNote, Estimated: v.PriceTrust != nil && *v.PriceTrust == "estimate"}
+	p := stayPriceDTO{Trust: v.PriceTrust, Note: v.PriceNote, Estimated: v.PriceTrust != nil && *v.PriceTrust == "estimate",
+		Source: sourceOf(v.PriceSource, nil)}
 	if v.PriceMin != nil {
 		m := domain.UZS(*v.PriceMin)
 		p.Min = &m

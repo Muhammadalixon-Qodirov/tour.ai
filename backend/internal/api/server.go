@@ -5,9 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io/fs"
 	"log/slog"
 	"net"
 	"net/http"
+	"net/netip"
 	"runtime/debug"
 	"slices"
 	"strings"
@@ -35,8 +37,12 @@ type Server struct {
 	story   diary.Writer
 	mailer  mail.Sender
 	google  auth.GoogleVerifier
+	images  fs.FS // katalog rasmlari (/static/places/{file}); nil bo'lsa 404
 	now     func() time.Time
 }
+
+// SetImages — katalog rasmlari manbasi (cmd/api binar ichidagi static.Places() ni beradi).
+func (s *Server) SetImages(f fs.FS) { s.images = f }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
@@ -63,6 +69,7 @@ func (s *Server) Handler() http.Handler {
 
 	mux.HandleFunc("GET /healthz", s.health)
 	mux.HandleFunc("GET /static/ph/{file}", s.placeholder)
+	mux.HandleFunc("GET /static/places/{file}", s.placeImage)
 
 	mux.Handle("POST /api/v1/auth/device", s.rateIP("auth", 30, http.HandlerFunc(s.authDevice)))
 	mux.Handle("POST /api/v1/auth/email/start", s.rateIP("email-start", 5, http.HandlerFunc(s.emailStart)))
@@ -80,6 +87,9 @@ func (s *Server) Handler() http.Handler {
 	pub("GET /api/v1/places/{id}", s.getPlace)
 	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
 	pub("GET /api/v1/geofences", s.geofences)
+	pub("GET /api/v1/prices", s.listPrices)
+	mux.Handle("POST /api/v1/prices/reports", s.optionalUser(s.rate("price-report", 10, http.HandlerFunc(s.reportPrice))))
+	pub("GET /api/v1/events", s.listEvents)
 	pub("GET /api/v1/services", s.listServices)
 	pub("GET /api/v1/stays", s.listStays)
 	pub("GET /api/v1/stays/{id}", s.getStay)
@@ -89,10 +99,12 @@ func (s *Server) Handler() http.Handler {
 	mux.Handle("POST /api/v1/trips", s.requireUser(s.rate("trips", 6, http.HandlerFunc(s.createTrip))))
 	user("GET /api/v1/trips", s.listTrips)
 	user("GET /api/v1/trips/{id}", s.getTrip)
+	user("DELETE /api/v1/trips/{id}", s.deleteTrip)
 	user("POST /api/v1/trips/{id}/stops", s.addStop)
 	user("DELETE /api/v1/trips/{id}/stops/{stopId}", s.deleteStop)
 	user("POST /api/v1/trips/{id}/stops/{stopId}/swap", s.swapStop)
 	user("PATCH /api/v1/trips/{id}/stops/{stopId}", s.patchStop)
+	user("POST /api/v1/trips/{id}/stops/{stopId}/move", s.moveStop)
 	mux.Handle("POST /api/v1/trips/{id}/replan", s.requireUser(s.rate("replan", 20, http.HandlerFunc(s.replanTrip))))
 	user("POST /api/v1/visits", s.addVisit)
 	user("GET /api/v1/me/saved", s.listSaved)
@@ -232,7 +244,7 @@ func (s *Server) rate(bucket string, perMin int, next http.Handler) http.Handler
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		key := userOf(r)
 		if key == "" {
-			key = clientIP(r)
+			key = s.clientIP(r)
 		}
 		if wait, ok := s.limiter.Allow(bucket+":"+key, perMin); !ok {
 			w.Header().Set("Retry-After", wait)
@@ -245,7 +257,7 @@ func (s *Server) rate(bucket string, perMin int, next http.Handler) http.Handler
 
 func (s *Server) rateIP(bucket string, perMin int, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if wait, ok := s.limiter.Allow(bucket+":"+clientIP(r), perMin); !ok {
+		if wait, ok := s.limiter.Allow(bucket+":"+s.clientIP(r), perMin); !ok {
 			w.Header().Set("Retry-After", wait)
 			writeError(w, r, http.StatusTooManyRequests, "rate_limited", true)
 			return
@@ -254,12 +266,46 @@ func (s *Server) rateIP(bucket string, perMin int, next http.Handler) http.Handl
 	})
 }
 
-func clientIP(r *http.Request) string {
+// clientIP — limit kaliti. So'rov ishonchli proksidan (TRUSTED_PROXIES) kelsa X-Forwarded-For o'ngdan chapga
+// o'qiladi va birinchi ishonchsiz manzil olinadi: mijoz o'zi yozgan chap qismi bilan limitni aldab bo'lmaydi.
+// Aks holda RemoteAddr.
+func (s *Server) clientIP(r *http.Request) string {
 	host, _, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {
-		return r.RemoteAddr
+		host = r.RemoteAddr
+	}
+	if !s.trusted(host) {
+		return host
+	}
+	hops := strings.Split(strings.Join(r.Header.Values("X-Forwarded-For"), ","), ",")
+	for i := len(hops) - 1; i >= 0; i-- {
+		h := strings.TrimSpace(hops[i])
+		if h == "" {
+			continue
+		}
+		if _, err := netip.ParseAddr(h); err != nil {
+			break // buzilgan sarlavha: oxirgi ishonchli hop qoladi
+		}
+		if !s.trusted(h) {
+			return h
+		}
+		host = h
 	}
 	return host
+}
+
+func (s *Server) trusted(ip string) bool {
+	a, err := netip.ParseAddr(ip)
+	if err != nil {
+		return false
+	}
+	a = a.Unmap()
+	for _, p := range s.cfg.TrustedProxies {
+		if p.Contains(a) {
+			return true
+		}
+	}
+	return false
 }
 
 func (s *Server) cors(next http.Handler) http.Handler {

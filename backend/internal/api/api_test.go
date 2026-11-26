@@ -118,7 +118,7 @@ func TestCitiesAndLanguages(t *testing.T) {
 	for _, lang := range []string{"uz", "ru", "en"} {
 		c.lang = lang
 		var cities []cityDTO
-		if code := c.do("GET", "/api/v1/cities", nil, &cities); code != 200 || len(cities) != 2 {
+		if code := c.do("GET", "/api/v1/cities", nil, &cities); code != 200 || len(cities) != 4 {
 			t.Fatalf("%s: code=%d len=%d", lang, code, len(cities))
 		}
 		var p placeDTO
@@ -206,14 +206,14 @@ func TestTripEditingAndOwnership(t *testing.T) {
 	first := tr.Days[0].Stops[0]
 
 	var added tripDTO
-	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops", map[string]any{"dayIndex": 0, "placeId": "sitorai-mokhi-khosa", "after": first.ID}, &added); code != 200 {
+	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops", map[string]any{"dayIndex": 0, "placeId": "sitorai-mohi-xosa", "after": first.ID}, &added); code != 200 {
 		t.Fatalf("add: %d", code)
 	}
-	if added.Days[0].Stops[1].Place.ID != "sitorai-mokhi-khosa" || len(added.Days[0].Stops) != len(tr.Days[0].Stops)+1 {
+	if added.Days[0].Stops[1].Place.ID != "sitorai-mohi-xosa" || len(added.Days[0].Stops) != len(tr.Days[0].Stops)+1 {
 		t.Fatalf("qo'shilgan joy noto'g'ri o'rinda")
 	}
 	var e struct{ Error apiError }
-	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops", map[string]any{"dayIndex": 0, "placeId": "sitorai-mokhi-khosa"}, &e); code != 409 {
+	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops", map[string]any{"dayIndex": 0, "placeId": "sitorai-mohi-xosa"}, &e); code != 409 {
 		t.Fatalf("takror: %d", code)
 	}
 	var deleted tripDTO
@@ -221,7 +221,7 @@ func TestTripEditingAndOwnership(t *testing.T) {
 		t.Fatalf("delete: %d", code)
 	}
 	var swap struct{ Alternatives []placeSummaryDTO }
-	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops/"+deleted.Days[0].Stops[0].ID+"/swap", nil, &swap); code != 200 || len(swap.Alternatives) == 0 {
+	if code := c.do("POST", "/api/v1/trips/"+tr.ID+"/stops/"+deleted.Days[0].Stops[1].ID+"/swap", nil, &swap); code != 200 || len(swap.Alternatives) == 0 {
 		t.Fatalf("swap: %d %d", code, len(swap.Alternatives))
 	}
 	if swap.Alternatives[0].Novelty == "iconic" {

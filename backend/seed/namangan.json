@@ -47,6 +47,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mulla Qirg'iz madrasasi",
@@ -213,6 +216,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Xo'ja Amin maqbarasi (Xo'jamni kabri)",
@@ -365,6 +371,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Ota Valixon to'ra masjidi",
@@ -534,6 +543,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mulla Bozor Oxund majmuasi",
@@ -700,6 +712,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Namangan viloyati tarixi va madaniyati davlat muzeyi",
@@ -837,6 +852,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Bobur nomidagi madaniyat va istirohat bog'i",
@@ -974,6 +992,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Afsonalar vodiysi bog'i",
@@ -1102,6 +1123,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yusufxon o'g'li Qosimxon jome masjidi",
@@ -1244,6 +1268,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chorsu bozori",
@@ -1343,6 +1370,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mikoil Arxangel cherkovi",
@@ -1450,6 +1480,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Yoshlar bog'i (Davlatobod)",
@@ -1565,6 +1598,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Devona buva maqbarasi",
@@ -1708,6 +1744,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Axsikent arxeologik yodgorligi",
@@ -1852,6 +1891,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Qadimgi Pop (Balandtepa) va Munchoqtepa",
@@ -1977,6 +2019,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chust bozori va pichoqchilar",
@@ -2106,6 +2151,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chodak qishlog'i",
@@ -2222,6 +2270,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Nanay qishlog'i",
@@ -2348,6 +2399,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Sulton Uvays Qaraniy ziyoratgohi (Baliqliko'l)",
@@ -2508,6 +2562,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Kosonsoy jome masjidi",
@@ -2673,6 +2730,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Is'hoqxon To'ra Ibrat yodgorlik majmuasi",
@@ -2815,6 +2875,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Pop milliy tabiat bog'i",
@@ -2934,6 +2997,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Alisher Navoiy nomidagi Namangan viloyat musiqali drama teatri",
@@ -3077,6 +3143,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Nodim Namangoniy maqbarasi",
@@ -3193,6 +3262,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Chortoq sanatoriyasi",
@@ -3318,6 +3390,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "Mavlono Lutfulloh majmuasi (Chust)",
@@ -3459,6 +3534,9 @@
    "payCard": false,
    "geofenceRadiusM": 120,
    "source": "open_data",
+   "trust": "public",
+   "hoursTrust": "sample",
+   "feeTrust": "sample",
    "text": {
     "uz": {
      "name": "G'ova qishlog'i",
@@ -3584,6 +3662,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Namangan regional hokim decision of 24 Mar 2025, effective 1 Apr 2025."
   },
   {
@@ -3605,6 +3684,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Official cap, hokim decision Mar 2025. About 35 km to Chust gives roughly 9,000."
   },
   {
@@ -3626,6 +3706,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Official cap, hokim decision Mar 2025. About 35 km to Chust gives roughly 14,000."
   },
   {
@@ -3646,7 +3727,8 @@
    "source": "https://api-portal.gov.uz/uploads/46/2025/05/13/e5689415-fa10-4dff-0e93-ffd1190fd958_media_.pdf",
    "year": 2025,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_namangan_taxi_city",
@@ -3667,6 +3749,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Weak: converted from USD (start 0.4 USD + 0.1 USD/km; 5 km ride about 0.9 USD). No UZS source found."
   },
   {
@@ -3688,6 +3771,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Aggregator figure; no railway tariff published in news."
   },
   {
@@ -3709,6 +3793,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Forum answers."
   },
   {
@@ -3730,6 +3815,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "gobytaxi 2026 calculator gives about 29 USD (about 340,000)."
   },
   {
@@ -3751,6 +3837,7 @@
    "year": 2025,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "22,200 = Namangan region plov-centre average Dec 2024, the cheapest in the country (stat agency); 35,000 at a Namangan plov place (weproject.media Apr 2026)."
   },
   {
@@ -3771,7 +3858,8 @@
    "source": "https://www.weproject.media/articles/detail/gastrotur-po-ferganskoy-doline-marshrut-dlya-tekh-kto-tsenit-khoroshuyu-edu/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_namangan_sim",
@@ -3791,7 +3879,8 @@
    "source": "https://uz.kursiv.media/en/2026-09-04/uzbekistan-travel-cost-budget-2026/",
    "year": 2026,
    "updatedAt": "2026-11-26",
-   "placeIds": []
+   "placeIds": [],
+   "trust": "sample"
   },
   {
    "id": "p_namangan_dried_fruit",
@@ -3812,6 +3901,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Country-wide guide, no Namangan-specific source."
   },
   {
@@ -3833,6 +3923,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Country-wide guide."
   },
   {
@@ -3854,6 +3945,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Country-wide guide."
   },
   {
@@ -3875,6 +3967,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Few OLX listings, Nov 2026 (one seller in Chust at 200,000)."
   },
   {
@@ -3896,6 +3989,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Two OLX listings, Nov 2026; handmade doppi from about 180,000 (travelto)."
   },
   {
@@ -3917,6 +4011,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Fergana valley craft."
   },
   {
@@ -3938,6 +4033,7 @@
    "year": 2026,
    "updatedAt": "2026-11-26",
    "placeIds": [],
+   "trust": "sample",
    "note": "Fergana valley craft."
   }
  ],
@@ -4005,36 +4101,25 @@
   {
    "id": "s_leore-hotel",
    "kind": "hotel",
-   "name": "Leore Hotel",
+   "name": {
+    "uz": "Leore Hotel",
+    "ru": "Leore Hotel",
+    "en": "Leore Hotel"
+   },
    "lat": 41.01097,
    "lng": 71.6714,
-   "address": {
-    "uz": "Namangan, Obihayot, Hamroh ko'chasi 77",
-    "en": "77 Hamroh St, Obi Hayot, Namangan",
-    "ru": "Наманган, Обихаёт, ул. Хамрох, 77"
-   },
-   "pricePerNight": 460000,
+   "address": "Namangan, Obihayot, Hamroh ko'chasi 77",
+   "priceMin": 460000,
+   "priceTrust": "sample",
    "priceSource": "https://www.booking.com/budget/city/uz/namangan.html",
    "rating": 4.8,
    "ratingSource": "https://www.booking.com/budget/city/uz/namangan.html",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    }
+    "wifi",
+    "ac",
+    "breakfast"
    ],
-   "note": "From 38.33 USD (Booking.com budget list, 2 adults, 1 night). Rating 9.5 from 50 reviews. Coordinates: Hamroh street (OSM), approximate. Amenities general, verify.",
+   "trust": "public",
    "image": {
     "file": "r_s_leore_hotel.jpg",
     "credit": "Trip.com",
@@ -4046,36 +4131,25 @@
   {
    "id": "s_zafar-plaza",
    "kind": "hotel",
-   "name": "Zafar Plaza Hotel",
+   "name": {
+    "uz": "Zafar Plaza Hotel",
+    "ru": "Zafar Plaza Hotel",
+    "en": "Zafar Plaza Hotel"
+   },
    "lat": 41.00885,
    "lng": 71.58868,
-   "address": {
-    "uz": "Namangan, Kosonsoy ko'chasi 26",
-    "en": "26 Kosonsoy St, Namangan",
-    "ru": "Наманган, ул. Косонсой, 26"
-   },
-   "pricePerNight": 624000,
+   "address": "Namangan, Kosonsoy ko'chasi 26",
+   "priceMin": 624000,
+   "priceTrust": "sample",
    "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "rating": 4.4,
    "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    }
+    "wifi",
+    "ac",
+    "breakfast"
    ],
-   "note": "From 52 USD (KAYAK, late Nov 2026). Rating 8.8 from 14 reviews. Coordinates: Kosonsoy street (OSM), house not mapped, approximate.",
+   "trust": "public",
    "image": {
     "file": "r_s_zafar_plaza.jpg",
     "credit": "Trip.com",
@@ -4087,36 +4161,25 @@
   {
    "id": "s_buyuk-ipak-yoli",
    "kind": "hotel",
-   "name": "Buyuk Ipak Yo'li Hotel",
+   "name": {
+    "uz": "Buyuk Ipak Yo'li Hotel",
+    "ru": "Buyuk Ipak Yo'li Hotel",
+    "en": "Buyuk Ipak Yo'li Hotel"
+   },
    "lat": 40.99675,
    "lng": 71.59605,
-   "address": {
-    "uz": "Namangan, Islom Karimov ko'chasi 17a",
-    "en": "17a Islam Karimov St, Namangan",
-    "ru": "Наманган, ул. Ислама Каримова, 17а"
-   },
-   "pricePerNight": 840000,
+   "address": "Namangan, Islom Karimov ko'chasi 17a",
+   "priceMin": 840000,
+   "priceTrust": "sample",
    "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "rating": 4.2,
    "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Yopiq basseyn",
-     "en": "Indoor pool",
-     "ru": "Крытый бассейн"
-    },
-    {
-     "uz": "Restoran",
-     "en": "Restaurant",
-     "ru": "Ресторан"
-    }
+    "wifi",
+    "pool",
+    "restaurant"
    ],
-   "note": "From 70 USD (KAYAK). Rating 8.5 from 42 reviews. Indoor pool per Hotels.com; listed as hostel on some sites. Coordinates: Islom Karimov street (OSM), approximate.",
+   "trust": "public",
    "image": {
     "file": "r_s_buyuk_ipak_yoli.jpg",
     "credit": "Trip.com",
@@ -4128,42 +4191,26 @@
   {
    "id": "s_imran-palace",
    "kind": "hotel",
-   "name": "Imran Palace Hotel",
+   "name": {
+    "uz": "Imran Palace Hotel",
+    "ru": "Imran Palace Hotel",
+    "en": "Imran Palace Hotel"
+   },
    "lat": 41.0,
    "lng": 71.60303,
-   "address": {
-    "uz": "Namangan, Do'stlik shoh ko'chasi 21",
-    "en": "21 Dostlik Ave, Namangan",
-    "ru": "Наманган, пр. Дустлик, 21"
-   },
-   "pricePerNight": 852000,
+   "address": "Namangan, Do'stlik shoh ko'chasi 21",
+   "priceMin": 852000,
+   "priceTrust": "sample",
    "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "rating": 4.5,
    "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    },
-    {
-     "uz": "Bepul avtoturargoh",
-     "en": "Free parking",
-     "ru": "Бесплатная парковка"
-    },
-    {
-     "uz": "Aeroport transferi (pullik)",
-     "en": "Airport shuttle (paid)",
-     "ru": "Трансфер из аэропорта (платно)"
-    }
+    "wifi",
+    "breakfast",
+    "parking",
+    "transfer"
    ],
-   "opened": "2026",
-   "note": "From 71 USD (KAYAK); Trip.com from 47 USD. Rating 8.9 from 23 reviews. Opened 2026, 51 rooms, halal breakfast (Trip.com).",
+   "trust": "public",
    "image": {
     "file": "r_s_imran_palace.jpg",
     "credit": "Trip.com",
@@ -4175,42 +4222,26 @@
   {
    "id": "s_akhsikent-hotel",
    "kind": "hotel",
-   "name": "Akhsikent Hotel",
+   "name": {
+    "uz": "Akhsikent Hotel",
+    "ru": "Akhsikent Hotel",
+    "en": "Akhsikent Hotel"
+   },
    "lat": 41.01978,
    "lng": 71.63222,
-   "address": {
-    "uz": "Namangan, Shimoliy aylanma yo'l 46",
-    "en": "46 Shimoliy Aylanma Rd, Namangan",
-    "ru": "Наманган, Северная кольцевая дорога, 46"
-   },
-   "pricePerNight": 852000,
+   "address": "Namangan, Shimoliy aylanma yo'l 46",
+   "priceMin": 852000,
+   "priceTrust": "sample",
    "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "rating": 4.0,
    "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Nonushta",
-     "en": "Breakfast",
-     "ru": "Завтрак"
-    },
-    {
-     "uz": "Sauna",
-     "en": "Sauna",
-     "ru": "Сауна"
-    },
-    {
-     "uz": "Ochiq basseyn",
-     "en": "Outdoor pool",
-     "ru": "Открытый бассейн"
-    }
+    "wifi",
+    "breakfast",
+    "sauna",
+    "pool"
    ],
-   "opened": "2020",
-   "note": "From 71 USD (KAYAK). Rating 8.0 from 44 reviews. 76 rooms, opened 2020, sauna and seasonal outdoor pool (Trip.com).",
+   "trust": "public",
    "image": {
     "file": "r_s_akhsikent_hotel.jpg",
     "credit": "Trip.com",
@@ -4222,29 +4253,22 @@
   {
    "id": "s_oydin-plaza",
    "kind": "hotel",
-   "name": "Oydin Plaza Hotel",
+   "name": {
+    "uz": "Oydin Plaza Hotel",
+    "ru": "Oydin Plaza Hotel",
+    "en": "Oydin Plaza Hotel"
+   },
    "lat": 40.99865,
    "lng": 71.64459,
-   "address": {
-    "uz": "Namangan, Amir Temur ko'chasi 105",
-    "en": "105 Amir Temur St, Namangan",
-    "ru": "Наманган, ул. Амира Темура, 105"
-   },
-   "pricePerNight": 924000,
+   "address": "Namangan, Amir Temur ko'chasi 105",
+   "priceMin": 924000,
+   "priceTrust": "sample",
    "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
    "amenities": [
-    {
-     "uz": "Bepul Wi-Fi",
-     "en": "Free Wi-Fi",
-     "ru": "Бесплатный Wi-Fi"
-    },
-    {
-     "uz": "Konditsioner",
-     "en": "Air conditioning",
-     "ru": "Кондиционер"
-    }
+    "wifi",
+    "ac"
    ],
-   "note": "From 77 USD (KAYAK search snippet). Only 1 Trip.com review, so no rating given. Amenities minimal, verify.",
+   "trust": "public",
    "image": {
     "file": "r_s_oydin_plaza.jpg",
     "credit": "Trip.com",

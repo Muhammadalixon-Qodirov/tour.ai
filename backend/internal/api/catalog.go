@@ -1,7 +1,9 @@
 package api
 
 import (
+	"cmp"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"html"
 	"net/http"
@@ -32,9 +34,15 @@ type placeSummaryDTO struct {
 	PriceLevel       int            `json:"priceLevel"`
 	VisitDurationMin int            `json:"visitDurationMin"`
 	IsOpenNow        *bool          `json:"isOpenNow,omitempty"`
+	Crowd            *crowdDTO      `json:"crowd,omitempty"`
 	IsPartner        bool           `json:"isPartner"`
 	Trust            string         `json:"trust"` // official | public | community | sample (sample — demo, UI da belgilansin)
 	DistanceM        *int           `json:"distanceM,omitempty"`
+}
+
+type crowdDTO struct {
+	Level    string  `json:"level"`
+	BestTime *string `json:"bestTime,omitempty"`
 }
 
 type ruleDTO struct {
@@ -44,6 +52,7 @@ type ruleDTO struct {
 	Trust      string  `json:"trust"`
 	VerifiedBy *string `json:"verifiedBy,omitempty"`
 	VerifiedAt *string `json:"verifiedAt,omitempty"`
+	Source     *string `json:"source,omitempty"` // URL yoki "general etiquette ..."
 }
 
 type placeDTO struct {
@@ -54,13 +63,52 @@ type placeDTO struct {
 	Images          []domain.Image        `json:"images"`
 	Address         string                `json:"address"`
 	OpeningHours    []domain.OpeningHours `json:"openingHours"`
-	EntryFee        any                   `json:"entryFee,omitempty"`
+	HoursTrust      string                `json:"hoursTrust"` // ish vaqti ishonch darajasi (sample — namuna)
+	HoursNote       *string               `json:"hoursNote,omitempty"`
+	EntryFee        *entryFeeDTO          `json:"entryFee,omitempty"`
+	FeeNote         *string               `json:"feeNote,omitempty"`
 	Rules           []ruleDTO             `json:"rules"`
 	History         *historyDTO           `json:"history,omitempty"`
 	Accessibility   accessibilityDTO      `json:"accessibility"`
 	Payment         paymentDTO            `json:"payment"`
 	GeofenceRadiusM int                   `json:"geofenceRadiusM"`
-	NearbyPrices    []any                 `json:"nearbyPrices"` // narx moduli keyingi bosqichda
+	NearbyPrices    []priceItemDTO        `json:"nearbyPrices"`
+}
+
+// entryFeeDTO — kirish narxi: mahalliy (rezident) va chet ellik tarifi; noma'lum tarif yo'q (0 = bepul).
+type entryFeeDTO struct {
+	Local     *domain.Money `json:"local,omitempty"`
+	Foreigner *domain.Money `json:"foreigner,omitempty"`
+	Note      *string       `json:"note,omitempty"`
+	Source    *sourceDTO    `json:"source,omitempty"`
+	Trust     string        `json:"trust"` // official | public | community | sample
+}
+
+type sourceDTO struct {
+	Title string `json:"title"`
+	URL   string `json:"url,omitempty"`
+}
+
+// sourceOf — URL dan manba: sarlavha = sayt nomi (+ yil).
+func sourceOf(url *string, year *int) *sourceDTO {
+	if url == nil || *url == "" {
+		return nil
+	}
+	title := *url
+	if after, ok := strings.CutPrefix(title, "https://"); ok {
+		title = after
+	} else if after, ok := strings.CutPrefix(title, "http://"); ok {
+		title = after
+	}
+	title, _, _ = strings.Cut(title, "/")
+	title = strings.TrimPrefix(title, "www.")
+	if year != nil && *year > 0 {
+		title += ", " + strconv.Itoa(*year)
+	}
+	if !strings.HasPrefix(*url, "http") {
+		return &sourceDTO{Title: *url} // "general etiquette ..." kabi matnli manba
+	}
+	return &sourceDTO{Title: title, URL: *url}
 }
 
 type historyDTO struct {
@@ -83,9 +131,26 @@ type paymentDTO struct {
 
 func (s *Server) coverOf(p store.Place) domain.Image {
 	if len(p.Images) > 0 && p.Images[0].URL != "" {
-		return p.Images[0]
+		return s.absImage(p.Images[0])
 	}
 	return domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/" + p.Category + ".svg"}
+}
+
+// absImage — bazadagi nisbiy "/static/..." manzilni PUBLIC_BASE_URL bilan to'liq manzilga aylantiradi
+// (domen almashsa bazani o'zgartirish shart emas).
+func (s *Server) absImage(im domain.Image) domain.Image {
+	if strings.HasPrefix(im.URL, "/") {
+		im.URL = s.cfg.PublicBaseURL + im.URL
+	}
+	return im
+}
+
+func (s *Server) absImages(in []domain.Image) []domain.Image {
+	out := make([]domain.Image, 0, len(in))
+	for _, im := range in {
+		out = append(out, s.absImage(im))
+	}
+	return out
 }
 
 // openNow — shahar vaqt zonasida hozir ochiqmi.
@@ -112,13 +177,16 @@ func (s *Server) summaryDTO(p store.Place, loc *time.Location) placeSummaryDTO {
 		v := int(*p.DistanceM)
 		d.DistanceM = &v
 	}
+	if p.Crowd != nil {
+		d.Crowd = &crowdDTO{Level: *p.Crowd, BestTime: p.BestTime}
+	}
 	return d
 }
 
 func rulesDTO(rules []store.Rule, lang string) []ruleDTO {
 	out := make([]ruleDTO, 0, len(rules))
 	for _, r := range rules {
-		d := ruleDTO{Code: r.Code, Severity: r.Severity, Text: i18n.Pick(r.Text, lang), Trust: r.Trust, VerifiedBy: r.VerifiedBy}
+		d := ruleDTO{Code: r.Code, Severity: r.Severity, Text: i18n.Pick(r.Text, lang), Trust: r.Trust, VerifiedBy: r.VerifiedBy, Source: r.Source}
 		if r.VerifiedAt != nil {
 			v := r.VerifiedAt.UTC().Format(time.RFC3339)
 			d.VerifiedAt = &v
@@ -162,13 +230,12 @@ func (s *Server) listCities(w http.ResponseWriter, r *http.Request) {
 		}
 		cover := domain.Image{URL: s.cfg.PublicBaseURL + "/static/ph/city.svg"}
 		if c.CoverURL != nil && *c.CoverURL != "" {
-			cover = domain.Image{URL: *c.CoverURL}
+			cover = s.absImage(domain.Image{URL: *c.CoverURL})
 		}
 		out = append(out, cityDTO{ID: c.ID, Name: c.Name, Country: c.Country, Cover: cover, Center: c.Center,
 			PlacesCount: c.PlacesCount, NewPlacesCount: c.NewPlacesCount})
 	}
-	w.Header().Set("Cache-Control", "public, max-age=60")
-	writeJSON(w, http.StatusOK, out)
+	writeCached(w, r, out)
 }
 
 type page[T any] struct {
@@ -273,7 +340,7 @@ func (s *Server) listPlaces(w http.ResponseWriter, r *http.Request) {
 	if len(places) == f.Limit {
 		next = encodeCursor(f.Offset + f.Limit)
 	}
-	writeJSON(w, http.StatusOK, page[placeSummaryDTO]{Items: items, NextCursor: next})
+	writeCached(w, r, page[placeSummaryDTO]{Items: items, NextCursor: next})
 }
 
 // cityZones — shahar id → vaqt zonasi (so'rov davomida keshlanadi).
@@ -308,26 +375,51 @@ func (s *Server) getPlace(w http.ResponseWriter, r *http.Request) {
 		s.internalError(w, r, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, s.placeDetailDTO(r, p, rules[p.ID], lang))
+	d := s.placeDetailDTO(r, p, rules[p.ID], lang)
+	prices, err := s.store.Prices(r.Context(), store.PriceFilter{City: p.CityID})
+	if err != nil {
+		s.internalError(w, r, err)
+		return
+	}
+	for _, x := range nearbyPrices(p, prices) {
+		d.NearbyPrices = append(d.NearbyPrices, priceDTO(x, lang))
+	}
+	writeCached(w, r, d)
 }
 
 func (s *Server) placeDetailDTO(r *http.Request, p store.Place, rules []store.Rule, lang string) placeDTO {
 	d := placeDTO{
 		placeSummaryDTO: s.summaryDTO(p, s.cityZones(r)(p.CityID)),
-		Description:     p.Description, Aliases: nonNil(p.Aliases), Images: p.Images, Address: p.Address, OpeningHours: p.Hours,
+		Description:     p.Description, Aliases: nonNil(p.Aliases), Images: s.absImages(p.Images), Address: p.Address, OpeningHours: p.Hours,
+		HoursNote: p.HoursNote, FeeNote: p.FeeNote,
 		Rules:           rulesDTO(rules, lang),
 		Accessibility:   accessibilityDTO{p.Wheelchair, p.FamilyFriendly, p.EasyWalk},
 		Payment:         paymentDTO{p.PayCard, p.CashOnly},
-		GeofenceRadiusM: p.GeofenceRadiusM, NearbyPrices: []any{},
-	}
-	if d.Images == nil {
-		d.Images = []domain.Image{}
+		GeofenceRadiusM: p.GeofenceRadiusM, NearbyPrices: []priceItemDTO{},
 	}
 	if d.OpeningHours == nil {
 		d.OpeningHours = []domain.OpeningHours{}
 	}
+	d.HoursTrust = p.Trust
+	if p.HoursTrust != nil {
+		d.HoursTrust = *p.HoursTrust
+	}
 	if len(p.EntryFee) > 0 && string(p.EntryFee) != "null" {
-		d.EntryFee = p.EntryFee
+		var fee struct {
+			Local     *domain.Money `json:"local"`
+			Foreigner *domain.Money `json:"foreigner"`
+			Note      *string       `json:"note"`
+			Source    *string       `json:"source"`
+			Year      *int          `json:"year"`
+			Trust     string        `json:"trust"`
+		}
+		if json.Unmarshal(p.EntryFee, &fee) == nil && (fee.Local != nil || fee.Foreigner != nil) {
+			d.EntryFee = &entryFeeDTO{Local: fee.Local, Foreigner: fee.Foreigner, Note: p.FeeNote, Source: sourceOf(fee.Source, fee.Year),
+				Trust: cmp.Or(fee.Trust, p.Trust)}
+			if d.EntryFee.Note == nil {
+				d.EntryFee.Note = fee.Note
+			}
+		}
 	}
 	if p.VerifiedAt != nil {
 		v := p.VerifiedAt.UTC().Format(time.RFC3339)
@@ -412,20 +504,19 @@ func (s *Server) geofences(w http.ResponseWriter, r *http.Request) {
 		out = append(out, geofenceDTO{PlaceID: p.ID, Name: p.Name, Center: p.Loc, RadiusM: p.GeofenceRadiusM,
 			Headline: i18n.T(lang, "geofence_headline", p.Name), TopRules: rulesDTO(top, lang), Version: p.RulesVersion})
 	}
-	w.Header().Set("Cache-Control", "public, max-age=60")
-	writeJSON(w, http.StatusOK, out)
+	writeCached(w, r, out)
 }
 
 // placeholder — rasm hali yo'q joylar uchun kategoriya rangidagi oddiy SVG.
 func (s *Server) placeholder(w http.ResponseWriter, r *http.Request) {
 	name, ok := strings.CutSuffix(r.PathValue("file"), ".svg")
-	if !ok || !(domain.ValidCategory(name) || name == "city" || slices.Contains(stayKinds, name)) {
+	if !ok || !(domain.ValidCategory(name) || name == "city" || name == "event" || slices.Contains(stayKinds, name)) {
 		http.NotFound(w, r)
 		return
 	}
 	colors := map[string]string{"monument": "#b5651d", "museum": "#6d4c8d", "mosque": "#1f7a8c", "bazaar": "#c27a06",
 		"workshop": "#8a5a2b", "gallery": "#c93f7a", "restaurant": "#b03a2e", "cafe": "#7b5e3b", "park": "#3a8f3a",
-		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "theatre": "#8e3b6a", "city": "#0f8f7e",
+		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "theatre": "#8e3b6a", "city": "#0f8f7e", "event": "#a8551f",
 		"hotel": "#2b5c8a", "boutique": "#7a4b8c", "guesthouse": "#a0602a", "hostel": "#3a7d5c", "motel": "#6b6b6b", "apartment": "#466b8f"}
 	w.Header().Set("Content-Type", "image/svg+xml")
 	w.Header().Set("Cache-Control", "public, max-age=86400")

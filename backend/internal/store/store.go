@@ -110,6 +110,9 @@ type Place struct {
 	Aliases         []string
 	Trust           string
 	VerifiedAt      *time.Time
+	Crowd           *string
+	BestTime        *string
+	HoursTrust      *string // ish vaqti ishonch darajasi; nil = Trust
 	DistanceM       *float64
 
 	// faqat batafsil so'rovda
@@ -120,16 +123,18 @@ type Place struct {
 	HistoryTrust   *string
 	Sources        json.RawMessage
 	EntryFee       json.RawMessage
+	HoursNote      *string
+	FeeNote        *string
 }
 
 const placeCols = `p.id, p.city_id, t.name, t.tagline, p.category, p.novelty, p.opened_at, p.images, p.lat, p.lng,
   p.rating::float8, p.reviews_count, p.price_level, p.visit_duration_min, p.opening_hours, p.is_partner, p.interests,
   p.wheelchair, p.family_friendly, p.easy_walk, p.pay_card, p.cash_only, p.geofence_radius_m, p.rules_version, p.status,
-  p.aliases, p.trust, p.verified_at`
+  p.aliases, p.trust, p.verified_at, p.crowd, t.best_time, p.hours_trust`
 
 // placeText — $1 = til zanjiri.
 const placeText = `CROSS JOIN LATERAL (
-  SELECT name, tagline, description, address, history_summary, history_facts, history_trust, sources
+  SELECT name, tagline, description, address, history_summary, history_facts, history_trust, sources, best_time, hours_note, fee_note
   FROM place_i18n i WHERE i.place_id = p.id AND i.lang = ANY($1::text[])
   ORDER BY array_position($1::text[], i.lang) LIMIT 1) t`
 
@@ -137,7 +142,7 @@ func placeDest(p *Place) []any {
 	return []any{&p.ID, &p.CityID, &p.Name, &p.Tagline, &p.Category, &p.Novelty, &p.OpenedAt, &p.Images,
 		&p.Loc.Lat, &p.Loc.Lng, &p.Rating, &p.Reviews, &p.PriceLevel, &p.VisitMin, &p.Hours, &p.IsPartner, &p.Interests,
 		&p.Wheelchair, &p.FamilyFriendly, &p.EasyWalk, &p.PayCard, &p.CashOnly, &p.GeofenceRadiusM, &p.RulesVersion, &p.Status,
-		&p.Aliases, &p.Trust, &p.VerifiedAt}
+		&p.Aliases, &p.Trust, &p.VerifiedAt, &p.Crowd, &p.BestTime, &p.HoursTrust}
 }
 
 type PlaceFilter struct {
@@ -217,8 +222,10 @@ func escapeLike(s string) string {
 // Place — bitta joy. published bo'lmasa ham qaytaradi (admin uchun); chaqiruvchi status ni tekshiradi.
 func (s *Store) Place(ctx context.Context, id string, langs []string) (Place, error) {
 	var p Place
-	dest := append(placeDest(&p), &p.Description, &p.Address, &p.HistorySummary, &p.HistoryFacts, &p.HistoryTrust, &p.Sources, &p.EntryFee)
-	err := s.DB.QueryRow(ctx, `SELECT `+placeCols+`, t.description, t.address, t.history_summary, t.history_facts, t.history_trust, t.sources, p.entry_fee
+	dest := append(placeDest(&p), &p.Description, &p.Address, &p.HistorySummary, &p.HistoryFacts, &p.HistoryTrust, &p.Sources, &p.EntryFee,
+		&p.HoursNote, &p.FeeNote)
+	err := s.DB.QueryRow(ctx, `SELECT `+placeCols+`, t.description, t.address, t.history_summary, t.history_facts, t.history_trust, t.sources, p.entry_fee,
+		t.hours_note, t.fee_note
 		FROM places p `+placeText+` WHERE p.id = $2`, langs, id).Scan(dest...)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return p, ErrNotFound
@@ -246,7 +253,8 @@ func (s *Store) PlacesByIDs(ctx context.Context, ids []string, langs []string) (
 // Candidates — rejalashtirgich uchun shahardagi barcha chop etilgan joylar (matnsiz).
 func (s *Store) Candidates(ctx context.Context, cityID string) ([]planner.Candidate, float64, error) {
 	rows, err := s.DB.Query(ctx, `SELECT id, category, novelty, is_partner, interests, lat, lng, rating::float8, reviews_count,
-		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly, source = 'osm'
+		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly, source = 'osm', COALESCE(crowd, 'medium'),
+		(entry_fee->'local'->>'amount')::bigint, (entry_fee->'foreigner'->>'amount')::bigint
 		FROM places WHERE city_id = $1 AND status = 'published' ORDER BY id`, cityID)
 	if err != nil {
 		return nil, 0, err
@@ -257,7 +265,8 @@ func (s *Store) Candidates(ctx context.Context, cityID string) ([]planner.Candid
 	for rows.Next() {
 		var c planner.Candidate
 		if err := rows.Scan(&c.ID, &c.Category, &c.Novelty, &c.IsPartner, &c.Interests, &c.Loc.Lat, &c.Loc.Lng,
-			&c.Rating, &c.Reviews, &c.VisitMin, &c.Hours, &c.PriceLevel, &c.Wheelchair, &c.FamilyFriendly, &c.Bulk); err != nil {
+			&c.Rating, &c.Reviews, &c.VisitMin, &c.Hours, &c.PriceLevel, &c.Wheelchair, &c.FamilyFriendly, &c.Bulk, &c.Crowd,
+			&c.FeeLocal, &c.FeeForeigner); err != nil {
 			return nil, 0, err
 		}
 		sum += c.Rating
@@ -281,11 +290,12 @@ type Rule struct {
 	VerifiedBy *string
 	VerifiedAt *time.Time
 	Trust      string
+	Source     *string
 }
 
 // Rules — joylar qoidalari: forbidden > warn > info, keyin priority.
 func (s *Store) Rules(ctx context.Context, placeIDs []string) (map[string][]Rule, error) {
-	rows, err := s.DB.Query(ctx, `SELECT place_id, code, severity, priority, text, verified_by, verified_at, trust
+	rows, err := s.DB.Query(ctx, `SELECT place_id, code, severity, priority, text, verified_by, verified_at, trust, source
 		FROM place_rules WHERE place_id = ANY($1::text[])
 		ORDER BY place_id, CASE severity WHEN 'forbidden' THEN 0 WHEN 'warn' THEN 1 ELSE 2 END, priority DESC, id`, placeIDs)
 	if err != nil {
@@ -295,7 +305,7 @@ func (s *Store) Rules(ctx context.Context, placeIDs []string) (map[string][]Rule
 	out := map[string][]Rule{}
 	for rows.Next() {
 		var r Rule
-		if err := rows.Scan(&r.PlaceID, &r.Code, &r.Severity, &r.Priority, &r.Text, &r.VerifiedBy, &r.VerifiedAt, &r.Trust); err != nil {
+		if err := rows.Scan(&r.PlaceID, &r.Code, &r.Severity, &r.Priority, &r.Text, &r.VerifiedBy, &r.VerifiedAt, &r.Trust, &r.Source); err != nil {
 			return nil, err
 		}
 		out[r.PlaceID] = append(out[r.PlaceID], r)

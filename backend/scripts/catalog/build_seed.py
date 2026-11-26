@@ -12,6 +12,10 @@ Natija (qayta ishga tushirsa ustidan yoziladi):
 Birlashtirish qoidalari research/convert.py bilan bir xil (ilova va sayt shu natijani ko'radi):
 fayllar tartibi, enrich_* patchlari, tashkent_photos_fix, `replaces`, tekshiruvlar, Booking reytingi / 2.
 Convert.py tashlab yuboradigan manbalar (narx, ish vaqti, qoida, tadbir, mehmonxona manbasi) shu yerda saqlanadi.
+
+Format internal/seed/seed.go bilan bir xil (upstream: aliases, lunch, fridayPrayer, ishonch darajasi):
+  joy: trust = public (ochiq manba), hoursTrust = feeTrust = sample (ish vaqti va kirish narxi namuna);
+  narx: trust = sample; turar joy: trust = public, priceTrust = sample, nom {uz,ru,en}, manzil matn, qulaylik kodlari.
 """
 import json, os, re, shutil, sys
 
@@ -61,6 +65,24 @@ TICKET_PLACES = {
     'p_tashkent_icc_local': ['islamic-civilization-center'], 'p_tashkent_icc_foreign': ['islamic-civilization-center'],
     'p_tashkent_history_museum': ['state-history-museum'], 'p_tashkent_applied_arts': ['applied-arts-museum'],
     'p_tashkent_amir_temur_museum': ['amir-timur-museum'], 'p_tashkent_tv_tower': ['tashkent-tv-tower'],
+}
+
+
+# Tadqiqotda yo'q, jamoa qo'lda kiritgan (avvalgi seed/*.json dan): mahalliy nomlar va tanaffuslar.
+ALIASES = {
+    'kalon-minaret': ['Minorai Kalon', 'Kalon minorasi', 'Калян'],
+    'siab-bazaar': ['Siyob', 'Сиаб', 'Siab'],
+}
+LUNCH = {'afrasiab-museum': '13:00-14:00'}
+FRIDAY_PRAYER = {k: '12:00-14:00' for k in ('kalon-mosque', 'bolo-hauz', 'magoki-attori', 'bibi-khanym', 'hazrat-khizr')}
+
+# Turar joy qulayliklari: tadqiqot matni (en) -> stays.amenities kodi (0008 lug'ati + kengaytma).
+AMENITY = {
+    'Free Wi-Fi': 'wifi', 'Breakfast': 'breakfast', 'Air conditioning': 'ac', 'Free parking': 'parking',
+    'Airport shuttle (paid)': 'transfer', 'Terrace or courtyard': 'courtyard', 'Shared kitchen': 'kitchen',
+    'Private bathroom': 'private_bathroom', 'Laundry': 'laundry', 'Outdoor pool': 'pool', 'Indoor pool': 'pool',
+    'Spa': 'spa', 'Sauna': 'sauna', 'Hammam': 'hammam', 'Restaurant': 'restaurant', 'Bar': 'bar',
+    'Fitness centre': 'gym', 'Room service': 'room_service', 'Tea and coffee maker': 'tea_coffee',
 }
 
 
@@ -223,9 +245,16 @@ def main():
                 'payCard': cash is False,  # noma'lum bo'lsa karta bor deb aytilmaydi
                 'geofenceRadiusM': 120,
                 'source': 'open_data',
+                'trust': 'public', 'hoursTrust': 'sample', 'feeTrust': 'sample',
                 'text': text,
                 'rules': rules,
             }
+            if pid in ALIASES:
+                p['aliases'] = ALIASES[pid]
+            if pid in LUNCH:
+                p['lunch'] = LUNCH[pid]
+            if pid in FRIDAY_PRAYER:
+                p['fridayPrayer'] = FRIDAY_PRAYER[pid]
             if fee_l is not None:
                 p['feeLocal'] = fee_l
             if fee_f is not None:
@@ -260,7 +289,7 @@ def main():
             item = {'id': x['id'], 'category': x['category'], 'name': loc(x['name']), 'unit': loc(x['unit']),
                     'min': int(x['min']), 'max': int(x.get('max') or x['min']),
                     'source': x.get('source'), 'year': x.get('year'), 'updatedAt': RESEARCH_DATE,
-                    'placeIds': TICKET_PLACES.get(x['id'], [])}
+                    'placeIds': TICKET_PLACES.get(x['id'], []), 'trust': 'sample'}
             if isinstance(x.get('tourist'), (int, float)):
                 item['tourist'] = int(x['tourist'])
             if clean(x.get('note')):
@@ -294,13 +323,22 @@ def main():
             continue
         if x.get('cityId') not in stays:
             continue
-        st = {'id': x['id'], 'kind': x.get('kind') or 'hotel', 'name': clean(x['name']), 'lat': lo['lat'], 'lng': lo['lng'],
-              'address': loc(x.get('address')), 'pricePerNight': int(x['pricePerNight']), 'priceSource': x.get('priceSource'),
+        name = clean(x['name'])
+        addr = loc(x.get('address')) or {}
+        amen = []
+        for a in x.get('amenities') or []:
+            t = (loc(a) or {}).get('en')
+            if t and t not in AMENITY:
+                sys.exit(f"{x['id']}: qulaylik {t!r} AMENITY lug'atida yo'q")
+            if t and AMENITY[t] not in amen:
+                amen.append(AMENITY[t])
+        st = {'id': x['id'], 'kind': x.get('kind') or 'hotel', 'name': {'uz': name, 'ru': name, 'en': name},
+              'lat': lo['lat'], 'lng': lo['lng'], 'address': addr.get('uz') or addr.get('en'),
+              # Tadqiqot bitta "dan" narxini beradi (2 kishi, oddiy xona, kecha); yuqori chegara noma'lum.
+              'priceMin': int(x['pricePerNight']), 'priceTrust': 'sample', 'priceSource': x.get('priceSource'),
               # Booking uslubidagi reyting 10 ballik; ilova 5 ballik yulduz ko'rsatadi (convert.py bilan bir xil).
               'rating': round(x['rating'] / 2 if x['rating'] > 5 else x['rating'], 1) if isinstance(x.get('rating'), (int, float)) else None,
-              'ratingSource': x.get('ratingSource'),
-              'amenities': [loc(a) for a in x.get('amenities') or [] if loc(a)], 'opened': x.get('opened'),
-              'note': clean(x.get('note'))}
+              'ratingSource': x.get('ratingSource'), 'amenities': amen, 'trust': 'public'}
         im = photo(x['id'], x.get('image'))
         if im:
             st['image'] = im

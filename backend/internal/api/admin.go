@@ -375,7 +375,8 @@ func (s *Server) validatePlace(r *http.Request, p store.PlaceRecord, texts map[s
 		fe.add("images", "max 20")
 	}
 	for _, img := range p.Images {
-		if !strings.HasPrefix(img.URL, "https://") && !strings.HasPrefix(img.URL, s.cfg.PublicBaseURL+"/") {
+		if !strings.HasPrefix(img.URL, "https://") && !strings.HasPrefix(img.URL, s.cfg.PublicBaseURL+"/") &&
+			!strings.HasPrefix(img.URL, "/static/places/") { // katalog seed rasmlari nisbiy saqlanadi
 			fe.add("images", "https URLs only")
 			break
 		}

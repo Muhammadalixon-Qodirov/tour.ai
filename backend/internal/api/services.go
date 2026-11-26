@@ -245,7 +245,7 @@ func (s *Server) offlinePack(w http.ResponseWriter, r *http.Request) {
 		d := s.placeDetailDTO(r, p, rules[id], lang)
 		d.IsOpenNow = nil // oflaynda vaqt o'tadi — ilova o'zi hisoblaydi (openingHours bor)
 		places = append(places, d)
-		for _, img := range p.Images {
+		for _, img := range d.Images {
 			images = append(images, img.URL)
 		}
 		if top := rules[id]; len(top) > 0 {
@@ -266,7 +266,17 @@ func (s *Server) offlinePack(w http.ResponseWriter, r *http.Request) {
 		d := s.serviceDTO(v, lang, nil)
 		services = append(services, d)
 	}
+	priceItems, err := s.store.Prices(ctx, store.PriceFilter{City: city.ID})
+	if err != nil {
+		s.internalError(w, r, err)
+		return
+	}
+	prices := make([]priceItemDTO, 0, len(priceItems))
+	for _, x := range priceItems {
+		prices = append(prices, priceDTO(x, lang))
+	}
 	pack := map[string]any{
+		"prices":  prices,
 		"version": etag[1 : len(etag)-1], "generatedAt": s.now().UTC().Format(time.RFC3339), "lang": lang,
 		"city":   map[string]any{"id": city.ID, "name": city.Name, "center": city.Center, "timezone": city.Timezone},
 		"places": places, "geofences": geofences, "services": services,

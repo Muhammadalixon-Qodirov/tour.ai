@@ -1,7 +1,13 @@
 // Package planner — deterministik marshrut rejalashtirgichi.
 //
-// Nomzodlar → ball → kunlarga bo'lish (yangi joy "langar"lari bilan) → tartib (eng yaqin qo'shni + 2-opt)
-// → vaqt jadvali va transport → yangilik kvotasini tuzatish. AI ga bog'liq emas: AI ishlamasa ham shu natija beriladi.
+// Ilova va saytdagi rejalashtirgich (mobile/src/mock/planner.ts) bilan bir xil qoidalar:
+// shahar markazidan 18 km ichidagi joylar → ball (qiziqish, reyting, yangilik, olomon) − 0.35/km →
+// yangilik kvotasi (kuniga kamida 1, jami kamida 1/3; Hamkor kvotaga kirmaydi) → qolgani mashhur joylar (+2.5) →
+// eng yaqin qo'shni zanjiri bo'yicha kunlarga bo'lish → ikkinchi joydan keyin tushlik → 09:00 dan 20:00 gacha
+// jadval (ish vaqti va tanaffuslar hisobga olinadi, vaqtlar 5 daqiqaga yaxlitlanadi) → kishi boshiga kunlik byudjetga
+// sig'dirish (eng qimmat mashhur joy birinchi tushadi). Jamoa tanlagan joylar OSM importidan ustun; guruh ovozlari
+// (Boost/Exclude) ballga qo'shiladi yoki joyni chiqaradi.
+// AI ga bog'liq emas: AI ishlamasa ham shu natija beriladi.
 package planner
 
 import (
@@ -17,16 +23,24 @@ import (
 var ErrImpossible = errors.New("route_impossible")
 
 const (
-	DayStartMin   = 9 * 60     // 09:00
-	DayEndMin     = 20 * 60    // 20:00 — oxirgi joy shu vaqtgacha tugashi kerak
-	LunchFromMin  = 12*60 + 30 // 12:30
-	LunchUntilMin = 15 * 60    // tushlik shu vaqtdan kech boshlanmaydi
-	WalkMaxM      = 1200.0     // to'g'ri chiziq bo'yicha; undan uzoq — taksi
-	walkMPerMin   = 80.0
-	taxiKmPerHour = 22.0
-	taxiPickupMin = 4
-	detourFactor  = 1.3 // ko'cha yo'li to'g'ri chiziqdan uzunroq
-	bayesM        = 20.0
+	DayStartMin = 9 * 60  // 09:00
+	DayEndMin   = 20 * 60 // 20:00 — oxirgi joy shu vaqtgacha tugashi kerak
+
+	ReachM             = 18000.0   // kunlik marshrut shahar markazidan shu radiusda
+	KmPenalty          = 0.35      // markazdan har km uchun ball kamayadi
+	LandmarkBonus      = 2.5       // kvotadan keyingi joylarda mashhur joy ustun
+	BulkPenalty        = 2.0       // OSM importi (jamoa tanlamagan): bitta qiziqish mosligicha past
+	BoostWeight        = 4.0       // guruh ovozi (0..1) ball qo'shadi
+	TargetNoveltyShare = 1.0 / 3.0 // generatsiyada maqsad (kontrakt minimumi domain.MinNoveltyShare = 0.25)
+	MealCost           = 60000     // tushlik, kishi boshiga, so'm (byudjet hisobi)
+
+	WalkMaxM    = 1300.0 // ko'cha masofasi; undan uzoq — taksi
+	roadFactor  = 1.35   // ko'cha yo'li to'g'ri chiziqdan uzunroq
+	walkMPerMin = 75.0
+	bayesM      = 20.0
+
+	defaultTaxiBase  = 6000
+	defaultTaxiPerKm = 2500
 )
 
 type Candidate struct {
@@ -43,11 +57,29 @@ type Candidate struct {
 	PriceLevel     int
 	Wheelchair     bool
 	FamilyFriendly bool
-	Bulk           bool // ommaviy importdan (OSM), jamoa tanlamagan — reytingda pastroq
+	Bulk           bool   // ommaviy importdan (OSM), jamoa tanlamagan — reytingda pastroq
+	Crowd          string // low | medium | high
+	FeeLocal       *int64 // kirish narxi, so'm (nil = noma'lum)
+	FeeForeigner   *int64
 }
 
 func (c Candidate) IsMeal() bool  { return domain.IsMealCategory(c.Category) }
 func (c Candidate) isNovel() bool { return c.Novelty.IsNovel() && !c.IsPartner }
+
+// isFood — rejalashtirishda tushlik joyi (ilovadagidek bozor ham shu yerda).
+func (c Candidate) isFood() bool { return c.IsMeal() || c.Category == "bazaar" }
+
+// Fee — kirish narxi: rezident uchun mahalliy tarif, aks holda chet ellik tarifi; noma'lum bo'lsa 0.
+func (c Candidate) Fee(resident bool) int64 {
+	f := c.FeeForeigner
+	if resident {
+		f = c.FeeLocal
+	}
+	if f == nil {
+		return 0
+	}
+	return *f
+}
 
 type Prefs struct {
 	Days       int
@@ -60,6 +92,10 @@ type Prefs struct {
 	WithKids   bool
 	Boost      map[string]float64 // guruh ovozlari: 0..1 (ko'pchilik yoqtirgan joy ustun)
 	Exclude    map[string]bool    // guruh ko'pchiligi rad etgan joylar
+
+	BudgetPerDay int64 // kishi boshiga kuniga, so'm; 0 = cheklovsiz
+	IsResident   bool  // kirish narxi mahalliy tarifda
+	GroupSize    int   // taksi shu songa bo'linadi; 0 = 1
 }
 
 type City struct {
@@ -81,6 +117,22 @@ func SightsPerDay(pace string) int {
 	}
 }
 
+// GroupSizeFor — taksi ulushi uchun odamlar soni (ilovadagi groupSizeFor bilan bir xil).
+func GroupSizeFor(groupSize int, companion string) int {
+	if groupSize > 0 {
+		return groupSize
+	}
+	switch companion {
+	case "couple":
+		return 2
+	case "family":
+		return 3
+	case "friends":
+		return 4
+	}
+	return 1
+}
+
 // Plan — to'liq marshrut tuzadi.
 func Plan(p Prefs, city City, cands []Candidate) ([]domain.PlanDay, error) {
 	if p.Days < 1 {
@@ -90,9 +142,10 @@ func Plan(p Prefs, city City, cands []Candidate) ([]domain.PlanDay, error) {
 	if len(pl.sights) == 0 || len(pl.sights) < p.Days {
 		return nil, ErrImpossible
 	}
+	groups := pl.split()
 	days := make([]domain.PlanDay, p.Days)
 	for d := range p.Days {
-		days[d] = pl.planDay(d)
+		days[d] = pl.planDay(d, groups[d])
 	}
 	pl.enforceShare(days)
 	total := 0
@@ -111,7 +164,7 @@ type planner struct {
 	sights []Candidate
 	meals  []Candidate
 	byID   map[string]Candidate
-	score  map[string]float64
+	score  map[string]float64 // tanlash bali (ilovadagi score)
 	used   map[string]bool
 }
 
@@ -121,15 +174,19 @@ func newPlanner(p Prefs, city City, cands []Candidate) *planner {
 	}
 	pl := &planner{p: p, city: city, byID: map[string]Candidate{}, score: map[string]float64{}, used: map[string]bool{}}
 	for _, c := range cands {
-		if p.Wheelchair && !c.Wheelchair || p.WithKids && !c.FamilyFriendly || p.Exclude[c.ID] {
-			continue
-		}
 		if c.VisitMin <= 0 {
 			c.VisitMin = 45
 		}
-		pl.byID[c.ID] = c
-		pl.score[c.ID] = Score(c, p, city.AvgRating)
-		if c.IsMeal() {
+		pl.byID[c.ID] = c // foydalanuvchi qo'shgan uzoq joylar ham Retime da topilsin
+		if p.Wheelchair && !c.Wheelchair || p.WithKids && !c.FamilyFriendly || p.Exclude[c.ID] {
+			continue
+		}
+		// Uzoq viloyat joylari (Namangan tog'lari, Imom Buxoriy) kunlik rejaga kirmaydi, qo'shimcha sifatida taklif qilinadi.
+		if domain.DistanceM(city.Center, c.Loc) > ReachM || !pl.openOnSomeDay(c) {
+			continue
+		}
+		pl.score[c.ID] = PickScore(c, p.Interests) + p.Boost[c.ID]*BoostWeight
+		if c.isFood() {
 			pl.meals = append(pl.meals, c)
 		} else {
 			pl.sights = append(pl.sights, c)
@@ -149,8 +206,47 @@ func newPlanner(p Prefs, city City, cands []Candidate) *planner {
 	return pl
 }
 
-// Score — qiziqish mosligi × sifat (Bayes reyting) × yangilik bonusi × byudjet mosligi.
+func (pl *planner) openOnSomeDay(c Candidate) bool {
+	for d := range min(pl.p.Days, 7) {
+		if openLongEnough(c, pl.weekday(d)) {
+			return true
+		}
+	}
+	return false
+}
+
+// PickScore — ilovadagi score(): qiziqish mosligi ×2, reyting (noma'lum = 4.5), yangilik +0.6 (Hamkor emas),
+// olomon (kam +0.3, ko'p −0.3). Jamoa tanlagan joylar OSM importidan ustun (−BulkPenalty).
 // Hamkorlik ball QO'SHMAYDI.
+func PickScore(c Candidate, interests []string) float64 {
+	match := 0
+	for _, i := range c.Interests {
+		if slices.Contains(interests, i) {
+			match++
+		}
+	}
+	rating := c.Rating
+	if rating <= 0 {
+		rating = 4.5
+	}
+	v := float64(match)*2 + (rating-4)*2
+	if c.isNovel() {
+		v += 0.6
+	}
+	switch c.Crowd {
+	case "low":
+		v += 0.3
+	case "high":
+		v -= 0.3
+	}
+	if c.Bulk {
+		v -= BulkPenalty
+	}
+	return v
+}
+
+// Score — qiziqish mosligi × sifat (Bayes reyting) × yangilik bonusi × byudjet mosligi (0..~1.25).
+// Qayta rejalash va muqobil joylar shu shkalada ishlaydi. Hamkorlik ball QO'SHMAYDI.
 func Score(c Candidate, p Prefs, cityAvg float64) float64 {
 	interest := 0.7
 	if len(p.Interests) > 0 {
@@ -202,114 +298,116 @@ func (pl *planner) weekday(day int) int {
 // openLongEnough — joy shu kuni ochiq va tashrif uchun yetarli vaqt bor.
 func openLongEnough(c Candidate, weekday int) bool {
 	o, cl, ok := domain.DayWindow(c.Hours, weekday)
-	return ok && cl-max(o, DayStartMin) >= c.VisitMin && o < DayEndMin
+	return ok && min(cl, DayEndMin)-max(o, DayStartMin) >= c.VisitMin
 }
 
-func (pl *planner) planDay(d int) domain.PlanDay {
-	wd := pl.weekday(d)
-	target := SightsPerDay(pl.p.Pace)
-	anchors := 1
-	if target >= 4 {
-		anchors = 2
-	}
+// near — markazdan uzoqlik jarimasi bilan ball.
+func (pl *planner) near(c Candidate) float64 {
+	return pl.score[c.ID] - domain.DistanceM(pl.city.Center, c.Loc)/1000*KmPenalty
+}
 
-	// Muvozanat: "mashhur + yangi". Yangi joylar kunning yarmidan oshmaydi (kamida 1 ta), qolgani mashhur joylar.
-	maxNovel := max(1, target/2)
+// split — joylarni tanlaydi va kunlarga bo'ladi (ilovadagi planTrip bilan bir xil tartib).
+func (pl *planner) split() [][]Candidate {
+	days := pl.p.Days
+	want := min(len(pl.sights), days*SightsPerDay(pl.p.Pace))
 
-	var chosen []Candidate
-	var centroid domain.LatLng
-	novel := 0
-	const (
-		anyKind = iota
-		onlyNovel
-		onlyIconic
-	)
-	pick := func(mode int) bool {
-		best, bestVal := -1, -1.0
-		for i, c := range pl.sights {
-			if pl.used[c.ID] || containsID(chosen, c.ID) || !openLongEnough(c, wd) {
-				continue
-			}
-			switch {
-			case mode == onlyNovel && !c.isNovel(),
-				mode == onlyIconic && c.isNovel(),
-				mode == anyKind && c.isNovel() && novel >= maxNovel:
-				continue
-			}
-			val := pl.score[c.ID]
-			if len(chosen) > 0 {
-				val /= 1 + domain.DistanceM(centroid, c.Loc)/2500
-			}
-			if val > bestVal {
-				best, bestVal = i, val
-			}
-		}
-		if best < 0 {
-			return false
-		}
-		c := pl.sights[best]
-		chosen = append(chosen, c)
+	// 1) Yangilik kvotasi: kuniga kamida bitta va jami kamida 1/3.
+	quota := max(days, int(math.Ceil(float64(want)/3)))
+	var novel, rest []Candidate
+	for _, c := range pl.sights {
 		if c.isNovel() {
-			novel++
+			novel = append(novel, c)
+		} else {
+			rest = append(rest, c)
 		}
-		centroid = mean(chosen)
-		return true
 	}
-	// 1) eng yaxshi yangi joy — kun "langari", klaster markazi shu atrofda
-	pick(onlyNovel)
-	// 2) kamida bitta mashhur joy (bo'lsa)
-	if target > 1 {
-		pick(onlyIconic)
+	byKey := func(s []Candidate, key func(Candidate) float64) {
+		sort.SliceStable(s, func(i, j int) bool {
+			ki, kj := key(s[i]), key(s[j])
+			if ki != kj {
+				return ki > kj
+			}
+			return s[i].ID < s[j].ID
+		})
 	}
-	for len(chosen) < target {
-		if novel < min(anchors, maxNovel) && pick(onlyNovel) {
-			continue
+	byKey(novel, pl.near)
+	novel = novel[:min(len(novel), quota)]
+	// 2) Qolgani: avval shaharning mashhur joylari (Registonsiz Samarqand — shaxsiy reja emas, buzilgan reja).
+	for _, c := range pl.sights {
+		if c.isNovel() && !containsID(novel, c.ID) {
+			rest = append(rest, c)
 		}
-		if !pick(anyKind) {
-			// mashhur joylar tugasa, cheklovni yumshatib yangi joy bilan to'ldiramiz
-			if !pick(onlyNovel) {
+	}
+	byKey(rest, func(c Candidate) float64 {
+		v := pl.near(c)
+		if c.Novelty == domain.NoveltyIconic {
+			v += LandmarkBonus
+		}
+		return v
+	})
+	chosen := append(slices.Clone(novel), rest[:min(len(rest), want-len(novel))]...)
+
+	// 3) Geografik bo'lish: eng yaqin qo'shni zanjiri, keyin teng bo'laklarga.
+	chain := nearestOrder(chosen, pl.start())
+	groups := make([][]Candidate, days)
+	for i, c := range chain {
+		d := min(days-1, i*days/len(chain))
+		groups[d] = append(groups[d], c)
+	}
+	// 4) Tuzatish: har kunda kamida bitta yangi joy; ≥ 2 joyli kunda kamida bitta mashhur joy.
+	swapInto := func(want func(Candidate) bool, need func([]Candidate) bool) {
+		for di, day := range groups {
+			if len(day) == 0 || !need(day) {
+				continue
+			}
+			for dj, donor := range groups {
+				if dj == di {
+					continue
+				}
+				var give []int
+				for k, c := range donor {
+					if want(c) {
+						give = append(give, k)
+					}
+				}
+				if len(give) < 2 {
+					continue
+				}
+				g := give[1]
+				last := len(day) - 1
+				groups[dj][g], groups[di][last] = groups[di][last], groups[dj][g]
 				break
 			}
 		}
 	}
-
-	order := pl.orderRoute(chosen)
-	stops := pl.scheduleNew(order, wd)
-	day := domain.PlanDay{Index: d, Stops: stops}
-	if dayNovel(day) == 0 {
-		pl.replaceWithNovel(&day, wd)
+	countIf := func(day []Candidate, f func(Candidate) bool) int {
+		n := 0
+		for _, c := range day {
+			if f(c) {
+				n++
+			}
+		}
+		return n
 	}
-	for _, s := range day.Stops {
-		pl.used[s.PlaceID] = true
-	}
-	return day
+	isNovel := func(c Candidate) bool { return c.isNovel() }
+	isIconic := func(c Candidate) bool { return !c.isNovel() }
+	swapInto(isNovel, func(d []Candidate) bool { return countIf(d, isNovel) == 0 })
+	swapInto(isIconic, func(d []Candidate) bool { return len(d) >= 2 && countIf(d, isIconic) == 0 && countIf(d, isNovel) >= 2 })
+	return groups
 }
 
 func containsID(cs []Candidate, id string) bool {
 	return slices.ContainsFunc(cs, func(c Candidate) bool { return c.ID == id })
 }
 
-func mean(cs []Candidate) domain.LatLng {
-	var m domain.LatLng
-	for _, c := range cs {
-		m.Lat += c.Loc.Lat
-		m.Lng += c.Loc.Lng
-	}
-	n := float64(len(cs))
-	return domain.LatLng{Lat: m.Lat / n, Lng: m.Lng / n}
-}
-
-// orderRoute — boshlanish nuqtasidan eng yaqin qo'shni, keyin 2-opt bilan yo'lni qisqartirish.
-func (pl *planner) orderRoute(cs []Candidate) []Candidate {
-	if len(cs) <= 1 {
-		return cs
-	}
+// nearestOrder — `from` nuqtadan eng yaqin qo'shni tartibi.
+func nearestOrder(cs []Candidate, from domain.LatLng) []Candidate {
 	rest := slices.Clone(cs)
-	var out []Candidate
-	pos := pl.start()
+	out := make([]Candidate, 0, len(cs))
+	pos := from
 	for len(rest) > 0 {
 		bi := 0
-		for i := range rest {
+		for i := 1; i < len(rest); i++ {
 			if domain.DistanceM(pos, rest[i].Loc) < domain.DistanceM(pos, rest[bi].Loc) {
 				bi = i
 			}
@@ -318,94 +416,130 @@ func (pl *planner) orderRoute(cs []Candidate) []Candidate {
 		pos = rest[bi].Loc
 		rest = slices.Delete(rest, bi, bi+1)
 	}
-	start := pl.start()
-	pathLen := func(r []Candidate) float64 {
-		total, p := 0.0, start
-		for _, c := range r {
-			total += domain.DistanceM(p, c.Loc)
-			p = c.Loc
-		}
-		return total
-	}
-	for improved := true; improved; {
-		improved = false
-		for i := 0; i < len(out)-1; i++ {
-			for j := i + 1; j < len(out); j++ {
-				cand := slices.Clone(out)
-				slices.Reverse(cand[i : j+1])
-				if pathLen(cand) < pathLen(out)-1 {
-					out, improved = cand, true
-				}
-			}
-		}
-	}
 	return out
 }
 
-// scheduleNew — vaqt jadvali: ish vaqtiga sig'maydigan joy tashlab ketiladi, 12:30 dan keyin tushlik qo'yiladi.
-func (pl *planner) scheduleNew(order []Candidate, wd int) []domain.PlanStop {
+func roundUp5(m int) int { return (m + 4) / 5 * 5 }
+
+func (pl *planner) planDay(d int, group []Candidate) domain.PlanDay {
+	wd := pl.weekday(d)
+	day := domain.PlanDay{Index: d}
+	if len(group) == 0 {
+		return day
+	}
+	ordered := nearestOrder(group, group[0].Loc)
+	day.Stops = pl.schedule(ordered, wd)
+	day.Stops = pl.fitBudget(day.Stops, wd)
+	if dayNovel(day) == 0 {
+		pl.replaceWith(&day, wd, true)
+	}
+	if places, iconic := dayCounts(day); places >= 2 && iconic == 0 {
+		pl.replaceWith(&day, wd, false)
+	}
+	for _, s := range day.Stops {
+		pl.used[s.PlaceID] = true
+	}
+	return day
+}
+
+// schedule — vaqt jadvali: ish vaqti yoki 20:00 ga sig'maydigan joy tashlab ketiladi; ikkinchi joydan keyin
+// (bitta joy bo'lsa undan keyin) eng yaqin ochiq ovqatlanish joyida tushlik.
+func (pl *planner) schedule(order []Candidate, wd int) []domain.PlanStop {
 	var stops []domain.PlanStop
 	t := DayStartMin
 	pos := pl.start()
-	first := true
-	lunch := false
-	usedMeal := map[string]bool{}
-
+	first := pl.p.Start == nil
+	sights, lunch := 0, false
 	addMeal := func() {
-		m, ok := pl.nearestMeal(pos, wd, t, usedMeal)
-		if !ok {
-			return
-		}
-		tr := pl.Transit(pos, m.Loc)
-		arrive := t + tr.DurationMin
-		dur := max(45, m.VisitMin)
-		if !domain.IsOpenAt(m.Hours, wd, arrive) || arrive+dur > DayEndMin {
-			return
-		}
-		stops = append(stops, pl.stopFor(m, domain.KindMeal, arrive, dur, &tr))
-		usedMeal[m.ID] = true
 		lunch = true
-		t, pos, first = arrive+dur, m.Loc, false
-	}
-
-	for _, c := range order {
-		if !lunch && t >= LunchFromMin && t <= LunchUntilMin {
-			addMeal()
+		meals := slices.Clone(pl.meals)
+		sort.SliceStable(meals, func(i, j int) bool { return domain.DistanceM(pos, meals[i].Loc) < domain.DistanceM(pos, meals[j].Loc) })
+		for _, m := range meals {
+			if pl.used[m.ID] {
+				continue
+			}
+			tr := pl.Transit(pos, m.Loc)
+			arrive := roundUp5(t + tr.DurationMin)
+			if !domain.IsOpenAt(m.Hours, wd, arrive) {
+				continue
+			}
+			start, ok := domain.FitVisit(m.Hours, wd, arrive, m.VisitMin)
+			if !ok || start+m.VisitMin > DayEndMin {
+				continue
+			}
+			arrive = start
+			stops = append(stops, pl.stopFor(m, domain.KindMeal, arrive, m.VisitMin, &tr))
+			pl.used[m.ID] = true
+			t, pos = arrive+m.VisitMin, m.Loc
+			return
 		}
+	}
+	for _, c := range order {
 		var tr *domain.Transit
 		arrive := t
-		if !first || pl.p.Start != nil {
+		if !first {
 			x := pl.Transit(pos, c.Loc)
 			tr = &x
 			arrive += x.DurationMin
 		}
-		start, ok := domain.FitVisit(c.Hours, wd, arrive, c.VisitMin)
+		start, ok := domain.FitVisit(c.Hours, wd, roundUp5(arrive), c.VisitMin)
 		if !ok || start+c.VisitMin > DayEndMin {
 			continue
 		}
 		arrive = start
 		stops = append(stops, pl.stopFor(c, domain.KindPlace, arrive, c.VisitMin, tr))
 		t, pos, first = arrive+c.VisitMin, c.Loc, false
-	}
-	if !lunch && t >= LunchFromMin-60 && t <= LunchUntilMin {
-		addMeal()
+		if sights++; sights == min(2, len(order)) && !lunch {
+			addMeal()
+		}
 	}
 	return stops
 }
 
-func (pl *planner) nearestMeal(pos domain.LatLng, wd, t int, exclude map[string]bool) (Candidate, bool) {
-	var best Candidate
-	bestVal := -1.0
-	for _, m := range pl.meals {
-		if exclude[m.ID] || pl.used[m.ID] || !domain.IsOpenAt(m.Hours, wd, t+15) {
-			continue
-		}
-		val := pl.score[m.ID] / (1 + domain.DistanceM(pos, m.Loc)/1500)
-		if val > bestVal {
-			best, bestVal = m, val
-		}
+// StopCost — bir kishining to'xtashdagi xarajati: kirish + tushlik + taksi ulushi (1 000 so'mgacha yaxlitlangan).
+func StopCost(s domain.PlanStop, c Candidate, p Prefs) int64 {
+	cost := c.Fee(p.IsResident)
+	if s.Kind == domain.KindMeal {
+		cost += MealCost
 	}
-	return best, bestVal >= 0
+	if s.Transit != nil && s.Transit.Fare != nil {
+		g := int64(max(1, p.GroupSize))
+		cost += int64(math.Round(float64(s.Transit.Fare.Amount)/float64(g)/1000)) * 1000
+	}
+	return cost
+}
+
+// DayCost — kunning kishi boshiga xarajati.
+func DayCost(stops []domain.PlanStop, byID map[string]Candidate, p Prefs) int64 {
+	var total int64
+	for _, s := range stops {
+		total += StopCost(s, byID[s.PlaceID], p)
+	}
+	return total
+}
+
+// fitBudget — kun byudjetga sig'guncha eng qimmat MASHHUR joy olib tashlanadi. Yangi va kam tanilgan joylar
+// pul uchun olib tashlanmaydi (kvota saqlanadi).
+func (pl *planner) fitBudget(stops []domain.PlanStop, wd int) []domain.PlanStop {
+	if pl.p.BudgetPerDay <= 0 {
+		return stops
+	}
+	for DayCost(stops, pl.byID, pl.p) > pl.p.BudgetPerDay && len(stops) > 2 {
+		victim, cost := -1, int64(0)
+		for i, s := range stops {
+			if s.Kind != domain.KindPlace || s.Novelty != domain.NoveltyIconic {
+				continue
+			}
+			if c := StopCost(s, pl.byID[s.PlaceID], pl.p); c > cost {
+				victim, cost = i, c
+			}
+		}
+		if victim < 0 {
+			break
+		}
+		stops = Retime(slices.Delete(slices.Clone(stops), victim, victim+1), wd, pl.p.Start, pl.city, pl.byID)
+	}
+	return stops
 }
 
 func (pl *planner) stopFor(c Candidate, kind domain.StopKind, arrive, dur int, tr *domain.Transit) domain.PlanStop {
@@ -438,18 +572,26 @@ func (pl *planner) Transit(a, b domain.LatLng) domain.Transit {
 	return TransitBetween(a, b, pl.city)
 }
 
+// TransitBetween — ilovadagi transitBetween: ko'cha masofasi = to'g'ri chiziq × 1.35; 1.3 km gacha piyoda
+// (75 m/daqiqa), undan uzoq — shahar taksi tarifi (yo'lga chiqish + km), 1 000 so'mgacha yaxlitlanadi.
+// Shahar ichida ~21 km/soat, 12 km dan keyin ~55 km/soat, + 4 daqiqa kutish.
 func TransitBetween(a, b domain.LatLng, city City) domain.Transit {
-	straight := domain.DistanceM(a, b)
-	road := straight * detourFactor
-	if straight < WalkMaxM {
-		return domain.Transit{Mode: "walk", DistanceM: int(math.Round(road)), DurationMin: int(math.Ceil(road / walkMPerMin))}
+	road := math.Round(domain.DistanceM(a, b)*roadFactor/10) * 10
+	if road < WalkMaxM {
+		return domain.Transit{Mode: "walk", DistanceM: int(road), DurationMin: max(2, int(math.Round(road/walkMPerMin)))}
 	}
 	km := road / 1000
-	fare := city.TaxiBase + int64(math.Ceil(km))*city.TaxiPerKm
-	fare = (fare + 999) / 1000 * 1000
-	m := domain.UZS(fare)
-	return domain.Transit{Mode: "taxi", DistanceM: int(math.Round(road)),
-		DurationMin: int(math.Ceil(km/taxiKmPerHour*60)) + taxiPickupMin, Fare: &m}
+	base, perKm := city.TaxiBase, city.TaxiPerKm
+	if base <= 0 && perKm <= 0 {
+		base, perKm = defaultTaxiBase, defaultTaxiPerKm
+	}
+	fare := int64(math.Round((float64(base)+km*float64(perKm))/1000)) * 1000
+	minutes := km/0.35 + 4
+	if km > 12 {
+		minutes = 12/0.35 + (km-12)/0.92 + 4
+	}
+	m := domain.UZS(max(fare, 1000))
+	return domain.Transit{Mode: "taxi", DistanceM: int(road), DurationMin: int(math.Round(minutes)), Fare: &m}
 }
 
 func dayNovel(d domain.PlanDay) int {
@@ -462,32 +604,63 @@ func dayNovel(d domain.PlanDay) int {
 	return n
 }
 
+func dayCounts(d domain.PlanDay) (places, iconic int) {
+	for _, s := range d.Stops {
+		if s.Kind == domain.KindPlace {
+			places++
+			if !s.CountsForNovelty() {
+				iconic++
+			}
+		}
+	}
+	return
+}
+
 // replaceWithNovel — kundagi eng past balli mashhur joyni eng yaqin mos yangi joyga almashtiradi.
 func (pl *planner) replaceWithNovel(day *domain.PlanDay, wd int) bool {
+	return pl.replaceWith(day, wd, true)
+}
+
+// replaceWith — wantNovel: eng past balli mashhur joy → eng yaqin yangi joy; aks holda eng past balli
+// yangi joy (kunning yagona yangi joyi emas) → eng yaqin mashhur joy. Vaqtga sig'magan almashtirish qabul qilinmaydi.
+func (pl *planner) replaceWith(day *domain.PlanDay, wd int, wantNovel bool) bool {
+	novel := dayNovel(*day)
 	worst, worstScore := -1, math.MaxFloat64
 	for i, s := range day.Stops {
-		if s.Kind == domain.KindPlace && !s.CountsForNovelty() && pl.score[s.PlaceID] < worstScore {
-			worst, worstScore = i, pl.score[s.PlaceID]
+		if s.Kind != domain.KindPlace || s.CountsForNovelty() == wantNovel || (!wantNovel && novel <= 1) {
+			continue
+		}
+		if sc := pl.score[s.PlaceID]; sc < worstScore {
+			worst, worstScore = i, sc
 		}
 	}
 	if worst < 0 {
 		return false
 	}
 	ref := pl.byID[day.Stops[worst].PlaceID].Loc
-	var best Candidate
-	bestD := math.MaxFloat64
-	for _, c := range pl.sights {
-		if !c.isNovel() || pl.used[c.ID] || inDay(*day, c.ID) || !openLongEnough(c, wd) {
+	alts := slices.Clone(pl.sights)
+	sort.SliceStable(alts, func(i, j int) bool { return domain.DistanceM(ref, alts[i].Loc) < domain.DistanceM(ref, alts[j].Loc) })
+	for _, c := range alts {
+		if c.isNovel() != wantNovel || pl.used[c.ID] || inDay(*day, c.ID) || !openLongEnough(c, wd) {
 			continue
 		}
-		if d := domain.DistanceM(ref, c.Loc); d < bestD {
-			best, bestD = c, d
+		stops := pl.Reschedule(day.Stops, worst, c, wd)
+		if fitsDay(stops, pl.byID, wd) {
+			day.Stops = stops
+			return true
 		}
 	}
-	if best.ID == "" {
-		return false
+	return false
+}
+
+// fitsDay — hamma to'xtash ish vaqti va 20:00 ichida.
+func fitsDay(stops []domain.PlanStop, byID map[string]Candidate, wd int) bool {
+	for _, s := range stops {
+		start, ok := domain.FitVisit(byID[s.PlaceID].Hours, wd, s.ArriveMin, s.DurationMin)
+		if !ok || start != s.ArriveMin || s.EndMin() > DayEndMin {
+			return false
+		}
 	}
-	day.Stops = pl.Reschedule(day.Stops, worst, best, wd)
 	return true
 }
 
@@ -502,25 +675,21 @@ func (pl *planner) Reschedule(stops []domain.PlanStop, i int, c Candidate, wd in
 	return Retime(out, wd, pl.p.Start, pl.city, pl.byID)
 }
 
-// enforceShare — umumiy ulush 25% dan past bo'lsa, eng kam yangi joyli kundan boshlab almashtiradi.
+// enforceShare — umumiy ulush 1/3 dan past bo'lsa, eng kam yangi joyli kundan boshlab almashtiradi.
+// Kunning yagona mashhur joyiga tegilmaydi (muvozanat: "mashhur + yangi").
 func (pl *planner) enforceShare(days []domain.PlanDay) {
 	for range 20 {
 		share, total := domain.NoveltyShare(days)
-		if total == 0 || share >= domain.MinNoveltyShare {
+		if total == 0 || share >= TargetNoveltyShare-1e-9 {
 			return
 		}
 		bi, bestRatio := -1, math.MaxFloat64
 		for i, d := range days {
-			places := 0
-			for _, s := range d.Stops {
-				if s.Kind == domain.KindPlace {
-					places++
-				}
-			}
-			if places == 0 {
+			places, iconic := dayCounts(d)
+			if iconic < 2 {
 				continue
 			}
-			if r := float64(dayNovel(d)) / float64(places); r < bestRatio && places > dayNovel(d) {
+			if r := float64(dayNovel(d)) / float64(places); r < bestRatio {
 				bi, bestRatio = i, r
 			}
 		}
@@ -555,6 +724,7 @@ func Retime(stops []domain.PlanStop, wd int, start *domain.LatLng, city City, by
 			out[i].Transit = &tr
 			arrive += tr.DurationMin
 		}
+		arrive = roundUp5(arrive)
 		if out[i].DurationMin <= 0 {
 			out[i].DurationMin = c.VisitMin
 		}

@@ -27,6 +27,7 @@ type Stay struct {
 	PriceTrust     *string           `json:"priceTrust"`
 	PriceNote      *string           `json:"priceNote"`
 	PriceUpdatedAt *time.Time        `json:"priceUpdatedAt"`
+	PriceSource    *string           `json:"priceSource"` // narx manbasi (URL), tadqiqot yozuvlarida
 	Amenities      []string          `json:"amenities"`
 	Contacts       map[string]string `json:"contacts"`
 	CheckIn        *string           `json:"checkIn"`
@@ -34,6 +35,7 @@ type Stay struct {
 	Wheelchair     *bool             `json:"wheelchair"`
 	EMehmon        *bool             `json:"emehmon"`
 	Rating         *float64          `json:"rating"`
+	RatingSource   *string           `json:"ratingSource"` // reyting manbasi (URL); reyting 5 ballik
 	ReviewsCount   int               `json:"reviewsCount"`
 	Images         []domain.Image    `json:"images"`
 	BookingURL     *string           `json:"bookingUrl"`
@@ -49,14 +51,15 @@ type Stay struct {
 
 const stayCols = `s.id, s.city_id, s.kind, s.status, s.name, s.lat, s.lng, s.address, s.stars, s.price_min, s.price_max, s.price_trust,
   s.price_note, s.price_updated_at, s.amenities, s.contacts, s.check_in, s.check_out, s.wheelchair, s.emehmon, s.rating::float8,
-  s.reviews_count, s.images, s.booking_url, s.agoda_url, s.is_partner, s.fair_price, s.verified, s.trust, s.source, s.updated_at`
+  s.reviews_count, s.images, s.booking_url, s.agoda_url, s.is_partner, s.fair_price, s.verified, s.trust, s.source, s.updated_at,
+  s.price_source, s.rating_source`
 
 func scanStay(row pgx.Row, extra ...any) (Stay, error) {
 	var v Stay
 	err := row.Scan(append([]any{&v.ID, &v.CityID, &v.Kind, &v.Status, &v.Name, &v.Loc.Lat, &v.Loc.Lng, &v.Address, &v.Stars,
 		&v.PriceMin, &v.PriceMax, &v.PriceTrust, &v.PriceNote, &v.PriceUpdatedAt, &v.Amenities, &v.Contacts, &v.CheckIn,
 		&v.CheckOut, &v.Wheelchair, &v.EMehmon, &v.Rating, &v.ReviewsCount, &v.Images, &v.BookingURL, &v.AgodaURL,
-		&v.IsPartner, &v.FairPrice, &v.Verified, &v.Trust, &v.Source, &v.UpdatedAt}, extra...)...)
+		&v.IsPartner, &v.FairPrice, &v.Verified, &v.Trust, &v.Source, &v.UpdatedAt, &v.PriceSource, &v.RatingSource}, extra...)...)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return v, ErrNotFound
 	}
@@ -144,7 +147,7 @@ func (s *Store) SaveStay(ctx context.Context, adminID string, v Stay, before any
 			price_updated_at = CASE WHEN price_min IS DISTINCT FROM $10 OR price_max IS DISTINCT FROM $11 THEN now() ELSE price_updated_at END,
 			amenities=$14, contacts=$15, check_in=$16, check_out=$17, wheelchair=$18, emehmon=$19, images=$20,
 			booking_url=$21, agoda_url=$22, is_partner=$23, fair_price=$24, verified=$25, trust=$26,
-			source = CASE WHEN source = 'open_data' THEN 'manual' ELSE source END, updated_at=now() WHERE id=$1`,
+			source = CASE WHEN source IN ('open_data','research') THEN 'manual' ELSE source END, updated_at=now() WHERE id=$1`,
 			v.ID, v.CityID, v.Kind, v.Status, name, v.Loc.Lat, v.Loc.Lng, v.Address, v.Stars, v.PriceMin, v.PriceMax, v.PriceTrust,
 			v.PriceNote, v.Amenities, contacts, v.CheckIn, v.CheckOut, v.Wheelchair, v.EMehmon, images, v.BookingURL, v.AgodaURL,
 			v.IsPartner, v.FairPrice, v.Verified, v.Trust)

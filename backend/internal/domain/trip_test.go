@@ -89,3 +89,16 @@ func TestBreaks(t *testing.T) {
 		t.Fatal("jadvalda yo'q kun — yopiq")
 	}
 }
+
+func TestFairRange(t *testing.T) {
+	if lo, hi := FairRange(9000, 12000, []int64{11000, 11000}); lo != 9000 || hi != 12000 {
+		t.Fatalf("kam kuzatuv: %d %d", lo, hi)
+	}
+	// bitta g'alati kuzatuv oraliqni buzmaydi
+	if lo, hi := FairRange(9000, 12000, []int64{10000, 10500, 11000, 11000, 90000, 10000}); lo != 10000 || hi != 12000 {
+		t.Fatalf("protsentil: %d %d", lo, hi)
+	}
+	if !PlausiblePrice(9000, 12000, 5000) || PlausiblePrice(9000, 12000, 30000) || PlausiblePrice(9000, 12000, 4000) {
+		t.Fatal("plausible")
+	}
+}

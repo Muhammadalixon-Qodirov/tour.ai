@@ -27,6 +27,9 @@ type tripReq struct {
 	Companion     string         `json:"companion,omitempty"`
 	Pace          string         `json:"pace,omitempty"`
 	Budget        int            `json:"budget,omitempty"`
+	BudgetPerDay  *int64         `json:"budgetPerDay,omitempty"` // kishi boshiga kuniga, so'm; null = cheklovsiz
+	IsResident    *bool          `json:"isResident,omitempty"`   // kirish narxi mahalliy tarifda; yo'q bo'lsa profildan
+	GroupSize     *int           `json:"groupSize,omitempty"`    // taksi shu songa bo'linadi
 	StartLocation *domain.LatLng `json:"startLocation,omitempty"`
 	Constraints   struct {
 		Wheelchair bool `json:"wheelchair"`
@@ -69,12 +72,28 @@ func (req *tripReq) validate(now time.Time) (time.Time, fieldErrors) {
 	if req.StartLocation != nil && !req.StartLocation.Valid() {
 		fe.add("startLocation", "invalid coordinates")
 	}
+	if req.BudgetPerDay != nil && (*req.BudgetPerDay < 0 || *req.BudgetPerDay > 100_000_000) {
+		fe.add("budgetPerDay", "0..100000000 (UZS) or null")
+	}
+	if req.GroupSize != nil && (*req.GroupSize < 1 || *req.GroupSize > 30) {
+		fe.add("groupSize", "1..30")
+	}
 	return start, fe
 }
 
 func (req tripReq) prefs(start time.Time) planner.Prefs {
-	return planner.Prefs{Days: req.Days, StartDate: start, Interests: req.Interests, Pace: req.Pace, Budget: req.Budget,
+	p := planner.Prefs{Days: req.Days, StartDate: start, Interests: req.Interests, Pace: req.Pace, Budget: req.Budget,
 		Start: req.StartLocation, Wheelchair: req.Constraints.Wheelchair, WithKids: req.Constraints.WithKids || req.Companion == "family"}
+	if req.BudgetPerDay != nil {
+		p.BudgetPerDay = *req.BudgetPerDay
+	}
+	p.IsResident = req.IsResident != nil && *req.IsResident
+	group := 0
+	if req.GroupSize != nil {
+		group = *req.GroupSize
+	}
+	p.GroupSize = planner.GroupSizeFor(group, req.Companion)
+	return p
 }
 
 func plannerCity(c store.City, avg float64) planner.City {
@@ -91,11 +110,17 @@ func (s *Server) createTrip(w http.ResponseWriter, r *http.Request) {
 		writeValidation(w, r, fe)
 		return
 	}
+	ctx := r.Context()
+	if req.IsResident == nil {
+		// So'rovda aytilmagan bo'lsa profildagi qiymat (PATCH /me {isResident}) ishlatiladi.
+		if u, err := s.store.User(ctx, userOf(r)); err == nil && u.IsResident != nil {
+			req.IsResident = u.IsResident
+		}
+	}
 	t, ok := s.planAndSave(w, r, req, req.prefs(start), start)
 	if !ok {
 		return
 	}
-	ctx := r.Context()
 	full, err := s.store.Trip(ctx, t.ID, t.UserID)
 	if err != nil {
 		s.internalError(w, r, err)
@@ -116,13 +141,15 @@ type tripDTO struct {
 	NoveltyShare float64      `json:"noveltyShare"`
 	Days         []tripDayDTO `json:"days"`
 	Totals       tripTotals   `json:"totals"`
+	Prefs        tripReq      `json:"prefs"` // POST /trips dagi sozlamalar (ko'rsatish va tahrirlash uchun)
 }
 
 type tripDayDTO struct {
-	Index int       `json:"index"`
-	Date  string    `json:"date"`
-	Title string    `json:"title"`
-	Stops []stopDTO `json:"stops"`
+	Index         int          `json:"index"`
+	Date          string       `json:"date"`
+	Title         string       `json:"title"`
+	Stops         []stopDTO    `json:"stops"`
+	EstimatedCost domain.Money `json:"estimatedCost"` // kishi boshiga: kirish + tushlik + taksi ulushi
 }
 
 type stopDTO struct {
@@ -134,13 +161,14 @@ type stopDTO struct {
 	Reason          string           `json:"reason"`
 	TransitFromPrev *domain.Transit  `json:"transitFromPrev,omitempty"`
 	Status          string           `json:"status"`
+	Rating          *int             `json:"rating,omitempty"` // tashrifdan keyingi baho 1-5
 }
 
 type tripTotals struct {
 	Places        int          `json:"places"`
 	NewPlaces     int          `json:"newPlaces"`
 	WalkingM      int          `json:"walkingM"`
-	EstimatedCost domain.Money `json:"estimatedCost"` // hozircha faqat taksi; kirish chiptalari narx moduli bilan qo'shiladi
+	EstimatedCost domain.Money `json:"estimatedCost"` // kishi boshiga, butun safar: kirish + tushlik + taksi ulushi
 }
 
 func reasonText(st store.Stop, lang string) string {
@@ -179,7 +207,21 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 	if err != nil {
 		return tripDTO{}, err
 	}
-	out := tripDTO{ID: t.ID.String(), CityID: t.CityID, Status: t.Status, StartDate: t.StartDate.Format(time.DateOnly),
+	var req tripReq
+	_ = json.Unmarshal(t.Prefs, &req)
+	if req.Interests == nil {
+		req.Interests = []string{}
+	}
+	prefs := req.prefs(t.StartDate)
+	cands, _, err := s.store.Candidates(r.Context(), t.CityID)
+	if err != nil {
+		return tripDTO{}, err
+	}
+	byID := make(map[string]planner.Candidate, len(cands))
+	for _, c := range cands {
+		byID[c.ID] = c
+	}
+	out := tripDTO{Prefs: req, ID: t.ID.String(), CityID: t.CityID, Status: t.Status, StartDate: t.StartDate.Format(time.DateOnly),
 		NoveltyShare: round2(t.NoveltyShare), Days: []tripDayDTO{}, Totals: tripTotals{EstimatedCost: domain.UZS(0)}}
 	if len(t.Days) == 1 {
 		out.Title = i18n.T(lang, "trip_title_1", city.Name)
@@ -187,10 +229,14 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 		out.Title = i18n.T(lang, "trip_title", city.Name, strconv.Itoa(len(t.Days)))
 	}
 	for _, d := range t.Days {
-		dd := tripDayDTO{Index: d.Index, Date: d.Date.Format(time.DateOnly), Title: i18n.T(lang, "day_title", strconv.Itoa(d.Index+1)), Stops: []stopDTO{}}
+		dd := tripDayDTO{Index: d.Index, Date: d.Date.Format(time.DateOnly), Title: i18n.T(lang, "day_title", strconv.Itoa(d.Index+1)),
+			Stops: []stopDTO{}, EstimatedCost: domain.UZS(0)}
 		for _, st := range d.Stops {
 			sd := stopDTO{ID: st.ID.String(), Kind: st.Kind, ArriveAt: domain.FormatHHMM(st.ArriveMin), DurationMin: st.DurationMin,
-				Reason: reasonText(st, lang), TransitFromPrev: st.Transit, Status: st.Status}
+				Reason: reasonText(st, lang), TransitFromPrev: st.Transit, Status: st.Status, Rating: st.Rating}
+			cost := planner.StopCost(st.PlanStop, byID[st.PlaceID], prefs)
+			dd.EstimatedCost.Amount += cost
+			out.Totals.EstimatedCost.Amount += cost
 			if p, ok := places[st.PlaceID]; ok {
 				ps := s.summaryDTO(p, nil)
 				sd.Place = &ps
@@ -201,13 +247,8 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 					out.Totals.NewPlaces++
 				}
 			}
-			if st.Transit != nil {
-				if st.Transit.Mode == "walk" {
-					out.Totals.WalkingM += st.Transit.DistanceM
-				}
-				if st.Transit.Fare != nil {
-					out.Totals.EstimatedCost.Amount += st.Transit.Fare.Amount
-				}
+			if st.Transit != nil && st.Transit.Mode == "walk" {
+				out.Totals.WalkingM += st.Transit.DistanceM
 			}
 			dd.Stops = append(dd.Stops, sd)
 		}
@@ -241,6 +282,30 @@ func (s *Server) loadTrip(w http.ResponseWriter, r *http.Request) (store.Trip, b
 		return t, false
 	}
 	return t, true
+}
+
+// deleteTrip — marshrutni o'chirish (kundalik rasmlari diskdan ham o'chadi). 204.
+func (s *Server) deleteTrip(w http.ResponseWriter, r *http.Request) {
+	id, err := uuid.Parse(r.PathValue("id"))
+	if err != nil {
+		writeError(w, r, http.StatusNotFound, "trip_not_found", false)
+		return
+	}
+	files, err := s.store.DeleteTrip(r.Context(), id, userOf(r))
+	if isNotFound(err) {
+		writeError(w, r, http.StatusNotFound, "trip_not_found", false)
+		return
+	}
+	if err != nil {
+		s.internalError(w, r, err)
+		return
+	}
+	for _, f := range files {
+		if err := s.media.Delete(f); err != nil {
+			slog.Warn("rasm o'chirilmadi", "file", f, "err", err)
+		}
+	}
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (s *Server) getTrip(w http.ResponseWriter, r *http.Request) {

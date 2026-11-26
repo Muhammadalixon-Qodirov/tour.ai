@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log/slog"
+	"net/netip"
 	"os"
 	"sort"
 	"strings"
@@ -35,6 +36,10 @@ type Config struct {
 	MailFrom        string // "Yo'ldosh AI <noreply@domen.uz>"
 	MailDevLog      bool   // faqat lokal: xat yuborilmaydi, kod logga yoziladi
 	AppName         string // foydalanuvchiga ko'rinadigan brend nomi (xatlarda)
+
+	// TrustedProxies — X-Forwarded-For ga ishoniladigan proksilar (nginx 127.0.0.1, sayt serveri IP si).
+	// Bo'sh bo'lsa sarlavha e'tiborsiz qoldiriladi va RemoteAddr ishlatiladi.
+	TrustedProxies []netip.Prefix
 }
 
 func LoadConfig() (Config, error) {
@@ -65,6 +70,13 @@ func LoadConfig() (Config, error) {
 	c.MailFrom = env("MAIL_FROM", "Safar <noreply@e-investment.uz>")
 	c.MailDevLog = os.Getenv("MAIL_DEV_LOG") == "true"
 	c.AppName = env("APP_NAME", "Safar")
+	for _, v := range splitList(os.Getenv("TRUSTED_PROXIES")) {
+		p, err := ParsePrefix(v)
+		if err != nil {
+			return c, fmt.Errorf("TRUSTED_PROXIES: %q noto'g'ri (IP yoki CIDR)", v)
+		}
+		c.TrustedProxies = append(c.TrustedProxies, p)
+	}
 	if c.DatabaseURL == "" {
 		return c, fmt.Errorf("DATABASE_URL o'rnatilmagan")
 	}
@@ -152,4 +164,16 @@ func Migrate(ctx context.Context, pool *pgxpool.Pool) error {
 		slog.Info("migratsiya qo'llandi", "version", name)
 	}
 	return nil
+}
+
+// ParsePrefix — "10.0.0.0/8" yoki bitta IP ("127.0.0.1" → /32).
+func ParsePrefix(v string) (netip.Prefix, error) {
+	if p, err := netip.ParsePrefix(v); err == nil {
+		return p.Masked(), nil
+	}
+	a, err := netip.ParseAddr(v)
+	if err != nil {
+		return netip.Prefix{}, err
+	}
+	return netip.PrefixFrom(a.Unmap(), a.Unmap().BitLen()), nil
 }
