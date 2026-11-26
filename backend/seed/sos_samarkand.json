@@ -1,0 +1,102 @@
+{
+  "cityId": "samarkand",
+  "services": [
+    {
+      "id": "sam-hospital-1",
+      "kind": "hospital",
+      "name": {
+        "uz": "Shahar shifoxonasi (demo)",
+        "ru": "Городская больница (демо)",
+        "en": "City hospital (demo)"
+      },
+      "lat": 39.659,
+      "lng": 66.955,
+      "open24h": true
+    },
+    {
+      "id": "sam-pharmacy-1",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "Dorixona — Registon yonida (demo)",
+        "ru": "Аптека у Регистана (демо)",
+        "en": "Pharmacy near Registan (demo)"
+      },
+      "lat": 39.656,
+      "lng": 66.9735,
+      "open24h": false,
+      "hours": "08:00-22:00"
+    },
+    {
+      "id": "sam-pharmacy-2",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "24 soatlik dorixona (demo)",
+        "ru": "Круглосуточная аптека (демо)",
+        "en": "24-hour pharmacy (demo)"
+      },
+      "lat": 39.652,
+      "lng": 66.962,
+      "open24h": true
+    },
+    {
+      "id": "sam-police-1",
+      "kind": "police",
+      "name": {
+        "uz": "Turistik politsiya posti (demo)",
+        "ru": "Пост туристической полиции (демо)",
+        "en": "Tourist police post (demo)"
+      },
+      "lat": 39.6551,
+      "lng": 66.9762,
+      "open24h": true
+    },
+    {
+      "id": "sam-atm-1",
+      "kind": "atm",
+      "name": {
+        "uz": "Bankomat — Registon (demo)",
+        "ru": "Банкомат — Регистан (демо)",
+        "en": "ATM — Registan (demo)"
+      },
+      "lat": 39.654,
+      "lng": 66.9745,
+      "open24h": true,
+      "accepts": [
+        "uzcard",
+        "humo",
+        "visa",
+        "mastercard"
+      ]
+    },
+    {
+      "id": "sam-atm-2",
+      "kind": "atm",
+      "name": {
+        "uz": "Bankomat — Siyob bozori (demo)",
+        "ru": "Банкомат — Сиабский базар (демо)",
+        "en": "ATM — Siab Bazaar (demo)"
+      },
+      "lat": 39.6612,
+      "lng": 66.98,
+      "open24h": false,
+      "hours": "08:00-20:00",
+      "accepts": [
+        "uzcard",
+        "humo"
+      ]
+    },
+    {
+      "id": "sam-exchange-1",
+      "kind": "exchange",
+      "name": {
+        "uz": "Valyuta ayirboshlash shoxobchasi (demo)",
+        "ru": "Пункт обмена валют (демо)",
+        "en": "Currency exchange (demo)"
+      },
+      "lat": 39.6535,
+      "lng": 66.97,
+      "open24h": false,
+      "hours": "09:00-18:00"
+    }
+  ]
+}

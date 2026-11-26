@@ -1,0 +1,85 @@
+{
+  "cityId": "bukhara",
+  "services": [
+    {
+      "id": "bux-hospital-1",
+      "kind": "hospital",
+      "name": {
+        "uz": "Viloyat shifoxonasi (demo)",
+        "ru": "Областная больница (демо)",
+        "en": "Regional hospital (demo)"
+      },
+      "lat": 39.768,
+      "lng": 64.435,
+      "open24h": true
+    },
+    {
+      "id": "bux-pharmacy-1",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "Dorixona — Labi Hovuz (demo)",
+        "ru": "Аптека — Ляби-Хауз (демо)",
+        "en": "Pharmacy — Lyabi-Hauz (demo)"
+      },
+      "lat": 39.7735,
+      "lng": 64.4225,
+      "open24h": false,
+      "hours": "08:00-22:00"
+    },
+    {
+      "id": "bux-pharmacy-2",
+      "kind": "pharmacy",
+      "name": {
+        "uz": "24 soatlik dorixona (demo)",
+        "ru": "Круглосуточная аптека (демо)",
+        "en": "24-hour pharmacy (demo)"
+      },
+      "lat": 39.771,
+      "lng": 64.43,
+      "open24h": true
+    },
+    {
+      "id": "bux-police-1",
+      "kind": "police",
+      "name": {
+        "uz": "Turistik politsiya posti (demo)",
+        "ru": "Пост туристической полиции (демо)",
+        "en": "Tourist police post (demo)"
+      },
+      "lat": 39.7745,
+      "lng": 64.419,
+      "open24h": true
+    },
+    {
+      "id": "bux-atm-1",
+      "kind": "atm",
+      "name": {
+        "uz": "Bankomat — Labi Hovuz (demo)",
+        "ru": "Банкомат — Ляби-Хауз (демо)",
+        "en": "ATM — Lyabi-Hauz (demo)"
+      },
+      "lat": 39.7738,
+      "lng": 64.4212,
+      "open24h": true,
+      "accepts": [
+        "uzcard",
+        "humo",
+        "visa",
+        "mastercard"
+      ]
+    },
+    {
+      "id": "bux-exchange-1",
+      "kind": "exchange",
+      "name": {
+        "uz": "Valyuta ayirboshlash shoxobchasi (demo)",
+        "ru": "Пункт обмена валют (демо)",
+        "en": "Currency exchange (demo)"
+      },
+      "lat": 39.7752,
+      "lng": 64.4165,
+      "open24h": false,
+      "hours": "09:00-18:00"
+    }
+  ]
+}

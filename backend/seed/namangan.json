@@ -1,0 +1,4257 @@
+{
+ "_generated": "scripts/catalog/build_seed.py — qo'lda tahrirlanmaydi, skriptni qayta ishga tushiring",
+ "city": {
+  "id": "namangan",
+  "name": {
+   "uz": "Namangan",
+   "ru": "Наманган",
+   "en": "Namangan"
+  },
+  "center": {
+   "lat": 40.99833,
+   "lng": 71.67257
+  },
+  "cover": "r_mulla_kyrgyz_madrasa.jpg",
+  "taxiBaseFare": 4600,
+  "taxiPerKm": 1600,
+  "emergency": {
+   "unified": "112",
+   "fire": "101",
+   "police": "102",
+   "ambulance": "103",
+   "gas": "104",
+   "emergency_ministry": "1050",
+   "tourist_hotline": "1173"
+  }
+ },
+ "places": [
+  {
+   "id": "mulla-kyrgyz-madrasa",
+   "category": "monument",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 41.00258,
+   "lng": 71.68113,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 40,
+   "priceLevel": 0,
+   "hours": "08:00-17:00",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Mulla Qirg'iz madrasasi",
+     "tagline": "1910-1912 yillar madrasasi, Chorsu yonida",
+     "description": "Rangli koshinli peshtoq va hujralar bilan o'ralgan besh burchakli hovli. Chorsu bozoridan piyoda bir necha daqiqa.",
+     "address": "Namangan, Usmon Kamolov 1-berk ko'chasi, Chorsu mahallasi",
+     "bestTime": "Ertalab, Chorsu bozori bilan birga",
+     "feeNote": "Kirish bepul.",
+     "history": "Madrasa 1910-1912 yillarda Mulla Qirg'iz Mashrabboy mablag'iga qurilgan. Peshtoqi ko'k, yashil, sariq va oq koshinlar bilan bezatilgan, rejasi yer shakliga moslab besh burchakli qilingan.",
+     "facts": [
+      "Rejada noto'g'ri besh burchakli bino, atrofi hujralar bilan o'ralgan.",
+      "Sovet davrida yopilgan, mustaqillikdan keyin tiklangan.",
+      "Yonidagi Ota Valixon to'ra masjidi ham shu usta loyihasi bilan bog'lanadi."
+     ]
+    },
+    "en": {
+     "name": "Mullah Kyrgyz Madrasa",
+     "tagline": "Madrasa of 1910-1912 by Chorsu bazaar",
+     "description": "A tiled portal and a five-sided courtyard ringed by student cells, a few minutes' walk from Chorsu bazaar.",
+     "address": "Usmon Kamolov 1st dead-end street, Chorsu mahalla, Namangan",
+     "bestTime": "Morning, together with Chorsu bazaar",
+     "feeNote": "Free entry.",
+     "history": "The madrasa was built in 1910-1912 with funds of Mulla Qirg'iz Mashrabboy. Its portal is faced with blue, green, yellow and white glazed tiles, and the plan follows the irregular plot as a pentagon.",
+     "facts": [
+      "The plan is an irregular pentagon surrounded by hujras.",
+      "Closed in the 1930s, restored after independence.",
+      "The nearby Ota Valixon to'ra mosque is attributed to the same builder."
+     ]
+    },
+    "ru": {
+     "name": "Медресе Мулла Киргиз",
+     "tagline": "Медресе 1910-1912 годов у базара Чорсу",
+     "description": "Портал с цветной облицовкой и пятиугольный двор с худжрами, в нескольких минутах ходьбы от базара Чорсу.",
+     "address": "Наманган, 1-й тупик ул. Усмона Камалова, махалля Чорсу",
+     "bestTime": "Утром, вместе с базаром Чорсу",
+     "feeNote": "Вход бесплатный.",
+     "history": "Медресе построено в 1910-1912 годах на средства Муллы Киргиза Машраббая. Портал облицован синими, зелёными, жёлтыми и белыми изразцами, план повторяет форму участка и имеет пять граней.",
+     "facts": [
+      "В плане неправильный пятигранник, окружённый худжрами.",
+      "Закрыто в 1930-х, восстановлено после независимости.",
+      "Соседнюю мечеть Ота Валихон тура связывают с тем же мастером."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ziyoratchilarni suratga olishdan oldin ruxsat so'rang.",
+      "en": "Ask before photographing pilgrims.",
+      "ru": "Спросите разрешения, прежде чем фотографировать паломников."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "Orexca: monuments of Namangan",
+     "url": "https://www.orexca.com/rus/uzbekistan/namangan/monuments_namangan.htm"
+    },
+    {
+     "title": "Sobirov, The history monuments of the city Namangan (cyberleninka)",
+     "url": "https://cyberleninka.ru/article/n/the-history-monuments-of-the-city-namangan"
+    },
+    {
+     "title": "Aviasales guide to Namangan",
+     "url": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane"
+    }
+   ],
+   "image": {
+    "file": "r_mulla_kyrgyz_madrasa.jpg",
+    "credit": "Jamshid Nurkulov",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMulla_Qirg%CA%BBiz_madrasasi_01.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Listed first among Namangan sights by uzbekistan.travel and most guides",
+    "locationSource": "https://www.openstreetmap.org/way/452349254",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location",
+     "history.summary",
+     "category"
+    ],
+    "unverified": [
+     "hours (single travel blog)",
+     "closure in 1930s (single source)",
+     "feeLocal unknown"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "khoja-amin-mausoleum",
+   "category": "monument",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 40.99913,
+   "lng": 71.68439,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 30,
+   "priceLevel": 0,
+   "hours": "09:00-18:00",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Xo'ja Amin maqbarasi (Xo'jamni kabri)",
+     "tagline": "XVIII asr maqbarasi, terrakota bezaklar",
+     "description": "Kesma terrakota va rangli sirli g'ishtli peshtoq, ichida ganch o'ymakorligi va Qur'on yozuvlari. Chorsu bozori yaqinida.",
+     "address": "Namangan, Ko'zagarlik ko'chasi, 49",
+     "bestTime": "Ish kunlari ertalab",
+     "hoursNote": "Dushanbadan jumagacha ochiq.",
+     "feeNote": "Kirish bepul; xodimlar o'zbek tilida qisqa ekskursiya qilishi mumkin.",
+     "history": "Maqbara XVIII asrning ikkinchi yarmida (V. L. Voronina bo'yicha 1750-yillarda) usta Muhammad Ibrohim ibn Abdurahim tomonidan qurilgan. Rivoyatga ko'ra, bu yerda Toshkentdagi Shayxontohur avlodi Amin Xo'ja dafn etilgan.",
+     "facts": [
+      "Usta ismi kirish ustida bo'rtma yozuv bilan saqlangan.",
+      "Gumbaz ostidagi baraban 12 qirrali yulduz shaklida.",
+      "Majmuadan faqat maqbara va masjidning bir qismi saqlangan."
+     ]
+    },
+    "en": {
+     "name": "Khoja Amin Mausoleum (Khodjamni Kabri)",
+     "tagline": "18th-century mausoleum with carved terracotta",
+     "description": "A portal of carved terracotta and glazed brick, with carved ganch and Quranic inscriptions inside. Close to Chorsu bazaar.",
+     "address": "49 Kuzagarlik street, Namangan",
+     "bestTime": "Weekday mornings",
+     "hoursNote": "Open Monday to Friday.",
+     "feeNote": "Free entry; staff may give a short tour in Uzbek.",
+     "history": "Built in the second half of the 18th century (the 1750s per V. L. Voronina) by master Muhammad Ibrahim, son of Abdurahim. Legend says Amin Khoja, a descendant of the Tashkent sheikh Shaykhantaur, is buried here.",
+     "facts": [
+      "The master's name is carved in relief above the entrance.",
+      "The drum under the dome is a twelve-pointed star.",
+      "Only the mausoleum and part of the mosque survive from the complex."
+     ]
+    },
+    "ru": {
+     "name": "Мавзолей Ходжа Амина (Ходжамны-Кабры)",
+     "tagline": "Мавзолей XVIII века с резной терракотой",
+     "description": "Портал из резной терракоты и глазурованного кирпича, внутри резной ганч и надписи из Корана. Рядом с базаром Чорсу.",
+     "address": "Наманган, ул. Кузагарлик, 49",
+     "bestTime": "В будни утром",
+     "hoursNote": "Открыто с понедельника по пятницу.",
+     "feeNote": "Вход бесплатный; сотрудники могут провести короткую экскурсию на узбекском.",
+     "history": "Построен во второй половине XVIII века (по В. Л. Ворониной в 1750-х) мастером Мухаммадом Ибрагимом, сыном Абдурахима. По преданию, здесь похоронен Амин-ходжа, потомок ташкентского шейха Шейхантаура.",
+     "facts": [
+      "Имя мастера вырезано рельефом над входом.",
+      "Барабан под куполом имеет форму двенадцатилучевой звезды.",
+      "От комплекса сохранились только мавзолей и часть мечети."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Yopiq kiyimda keling: yelka va tizza yopiq, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly: shoulders and knees covered, women cover their hair.",
+      "ru": "Скромная одежда: плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Ziyoratxona yoki masjid ichiga poyabzalsiz kiriladi.",
+      "en": "Shoes come off before entering the prayer room or mosque.",
+      "ru": "В зиярат-хану и мечеть входят без обуви."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Bu ziyoratgoh: ovozni past tuting, duo qilayotganlarga xalaqit bermang.",
+      "en": "This is a place of pilgrimage: keep quiet and do not disturb people praying.",
+      "ru": "Это место паломничества: говорите тихо и не мешайте молящимся."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ziyoratchilarni suratga olishdan oldin ruxsat so'rang.",
+      "en": "Ask before photographing pilgrims.",
+      "ru": "Спросите разрешения, прежде чем фотографировать паломников."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "ru.wikipedia: Мавзолей Ходжамны-Кабры",
+     "url": "https://ru.wikipedia.org/wiki/Мавзолей_Ходжамны-Кабры"
+    },
+    {
+     "title": "uzbekistan.travel: Mausoleum of Khoja Amin",
+     "url": "https://uzbekistan.travel/en/o/mausoleum-of-khoja-amin"
+    }
+   ],
+   "image": {
+    "file": "r_khoja_amin_mausoleum.jpg",
+    "credit": "Arina Pan",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A%D0%A3%D1%81%D1%8B%D0%BF%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0_%D0%A5%D0%BE%D0%B4%D0%B6%D0%B0_%D0%90%D0%BC%D0%B8%D0%BD%D0%B0_2.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Oldest surviving mausoleum of Namangan, on uzbekistan.travel top list",
+    "locationSource": "https://www.openstreetmap.org/way/624198255",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location",
+     "address",
+     "history.summary"
+    ],
+    "unverified": [
+     "hours (single travel blog)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "ota-valikhon-tura-mosque",
+   "category": "mosque",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.00576,
+   "lng": 71.69021,
+   "interests": [
+    "architecture",
+    "history"
+   ],
+   "visitMin": 25,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Ota Valixon to'ra masjidi",
+     "tagline": "XX asr boshi, katta qovurg'ali gumbaz",
+     "description": "Burchak minoralari bilan peshtoq va 13,9 metrlik qovurg'ali gumbazli g'isht bino. Mulla Qirg'iz madrasasidan taxminan 1 km shimoli-sharqda.",
+     "address": "Namangan, Uychi ko'chasi, Sumalak mahallasi",
+     "bestTime": "Peshindan keyin, namozlar oralig'ida",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, masjid namoz vaqtlariga qarab ochiladi.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor.",
+     "history": "Masjid XX asr boshida (ko'p manbalarda 1915) qurilgan. Rejasi to'g'ri to'rtburchak (27 x 19,6 m), markaziy zal katta qovurg'ali gumbaz bilan yopilgan.",
+     "facts": [
+      "Mulla Qirg'iz madrasasi bilan bir ko'chada joylashgan.",
+      "Tashqi g'isht devorlarida arabcha yozuvlar va yulduzsimon naqshlar bor."
+     ]
+    },
+    "en": {
+     "name": "Ota Valikhon Tura Mosque",
+     "tagline": "Early 20th century, large ribbed dome",
+     "description": "A brick building with a towered portal and a ribbed dome about 13.9 m across, roughly 1 km north-east of the Mullah Kyrgyz madrasa.",
+     "address": "Uychi street, Sumalak mahalla, Namangan",
+     "bestTime": "Afternoon, between prayers",
+     "hoursNote": "No official hours published; the mosque opens around prayer times.",
+     "feeNote": "Free entry; there is a donation box.",
+     "history": "Built in the early 20th century (most sources say 1915). The plan is rectangular (27 x 19.6 m) and the central hall is covered by a large ribbed dome.",
+     "facts": [
+      "Stands on the same street as the Mullah Kyrgyz madrasa.",
+      "The outer brickwork carries Arabic calligraphy and star-shaped carving."
+     ]
+    },
+    "ru": {
+     "name": "Мечеть Ота Валихон тура",
+     "tagline": "Начало XX века, большой ребристый купол",
+     "description": "Кирпичное здание с порталом и угловыми башенками и ребристым куполом около 13,9 м, примерно в 1 км к северо-востоку от медресе Мулла Киргиз.",
+     "address": "Наманган, ул. Уйчи, махалля Сумалак",
+     "bestTime": "Днём, между намазами",
+     "hoursNote": "Официальные часы не опубликованы, мечеть открыта по времени намаза.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований.",
+     "history": "Построена в начале XX века (чаще называют 1915 год). План прямоугольный (27 x 19,6 м), центральный зал перекрыт большим ребристым куполом.",
+     "facts": [
+      "Стоит на одной улице с медресе Мулла Киргиз.",
+      "На кирпичной кладке снаружи арабская каллиграфия и звёздчатый орнамент."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 6,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ovozni past tuting, namoz o'qiyotganlar oldidan o'tmang.",
+      "en": "Keep your voice low and do not walk in front of people praying.",
+      "ru": "Говорите тихо и не проходите перед молящимися."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Namoz o'qiyotgan odamlarni suratga olmang.",
+      "en": "Do not photograph people while they pray.",
+      "ru": "Не фотографируйте людей во время молитвы."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "Orexca: monuments of Namangan",
+     "url": "https://www.orexca.com/rus/uzbekistan/namangan/monuments_namangan.htm"
+    },
+    {
+     "title": "CESS 2024 paper on Ota Valixon to'ra mosque",
+     "url": "https://nomadit.co.uk/conference/cess2024/paper/86656"
+    }
+   ],
+   "image": {
+    "file": "r_ota_valikhon_tura_mosque.jpg",
+    "credit": "Komilkhuja",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AAtoullikhan_mosque.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Notable monument but rarely on tour itineraries; current use reported differently",
+    "locationSource": "https://www.openstreetmap.org/way/452347892",
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "construction year (1912, 1915 and 1918 all cited)",
+     "current use: OSM and uz.wikipedia say working mosque, the Commons photo caption says art gallery",
+     "photo identity (caption 'Atoullikhan mosque')"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "mulla-bozor-okhund-complex",
+   "category": "mosque",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.01129,
+   "lng": 71.67482,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 30,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Mulla Bozor Oxund majmuasi",
+     "tagline": "Namangansoy bo'yidagi ziyoratgoh va masjid",
+     "description": "Maqbara, jome masjidi va 16 metrlik minoradan iborat ziyoratgoh. Hozirgi binolar 1993-1994 yillarda qayta qurilgan.",
+     "address": "Namangan, Oxunboboyev ko'chasi, 3",
+     "bestTime": "Peshindan keyin, namozlar oralig'ida",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, masjid namoz vaqtlariga qarab ochiladi.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor.",
+     "history": "Mulla Bozor Oxund XVII asrda yashagan olim, ba'zi manbalarga ko'ra Boborahim Mashrabning ustozi bo'lgan. Uning qabri ziyoratgohga aylangan, hozirgi maqbara 1993 yilda qayta qurilgan.",
+     "facts": [
+      "Arxitektorlar: Abdujabbor Abdug'afforov va Odiljon Qodirov.",
+      "Majmua Labbaytog'a hududidagi Kurashxona joyida."
+     ]
+    },
+    "en": {
+     "name": "Mulla Bozor Okhund Complex",
+     "tagline": "Shrine and mosque on the Namangansoy bank",
+     "description": "A pilgrimage site with a mausoleum, a Friday mosque and a 16 m minaret. The present buildings date from a 1993-1994 rebuild.",
+     "address": "3 Okhunboboyev street, Namangan",
+     "bestTime": "Afternoon, between prayers",
+     "hoursNote": "No official hours published; the mosque opens around prayer times.",
+     "feeNote": "Free entry; there is a donation box.",
+     "history": "Mulla Bozor Okhund was a 17th-century scholar, said by some sources to have taught the poet Boborahim Mashrab. His grave became a shrine; the present mausoleum was rebuilt in 1993.",
+     "facts": [
+      "Architects: Abdujabbor Abdugafforov and Odiljon Qodirov.",
+      "It stands in the Kurashkhona area of Labbaytogha."
+     ]
+    },
+    "ru": {
+     "name": "Комплекс Мулла Бозор Охунд",
+     "tagline": "Святыня и мечеть на берегу Намангансая",
+     "description": "Место паломничества с мавзолеем, пятничной мечетью и минаретом высотой 16 м. Нынешние постройки возведены в 1993-1994 годах.",
+     "address": "Наманган, ул. Охунбобоева, 3",
+     "bestTime": "Днём, между намазами",
+     "hoursNote": "Официальные часы не опубликованы, мечеть открыта по времени намаза.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований.",
+     "history": "Мулла Бозор Охунд жил в XVII веке; по ряду источников, был наставником поэта Бабарахима Машраба. Его могила стала святыней, нынешний мавзолей перестроен в 1993 году.",
+     "facts": [
+      "Архитекторы: Абдужаббор Абдугаффоров и Одилжон Кодиров.",
+      "Находится в местности Курашхона района Лаббайтога."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 6,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ovozni past tuting, namoz o'qiyotganlar oldidan o'tmang.",
+      "en": "Keep your voice low and do not walk in front of people praying.",
+      "ru": "Говорите тихо и не проходите перед молящимися."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Namoz o'qiyotgan odamlarni suratga olmang.",
+      "en": "Do not photograph people while they pray.",
+      "ru": "Не фотографируйте людей во время молитвы."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "en.wikipedia: Mulla Bozor Okhund Pilgrimage Complex",
+     "url": "https://en.wikipedia.org/wiki/Mulla_Bozor_Okhund_Pilgrimage_Complex"
+    },
+    {
+     "title": "eurasia.travel: Mullo Bozor Ohund Mosque",
+     "url": "https://eurasia.travel/uzbekistan/namangan/mullo-bozor-ohund-mosque/"
+    }
+   ],
+   "image": {
+    "file": "r_mulla_bozor_okhund_complex.jpg",
+    "credit": "Komilkhuja",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMulla_Bozor_Oxund_maqbarasi-1.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Local pilgrimage site, not in typical top-10 lists",
+    "locationSource": "https://www.openstreetmap.org/way/452580366",
+    "verified": [
+     "name",
+     "location"
+    ],
+    "unverified": [
+     "biography of Mulla Bozor Okhund (sources disagree)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "namangan-regional-museum",
+   "category": "museum",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 40.99866,
+   "lng": 71.66881,
+   "interests": [
+    "history",
+    "art"
+   ],
+   "visitMin": 60,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Namangan viloyati tarixi va madaniyati davlat muzeyi",
+     "tagline": "1918 yilda tashkil etilgan viloyat muzeyi",
+     "description": "Uch qavatli binoda tabiat, arxeologiya (Axsikent topilmalari), etnografiya va viloyat tarixi zallari. Bobur bog'i yonida.",
+     "address": "Namangan, Nodim Namangoniy ko'chasi, 41",
+     "bestTime": "Ish kunlari, tushdan oldin",
+     "hoursNote": "Ish vaqti va dam olish kuni onlayn e'lon qilinmagan; borishdan oldin qo'ng'iroq qiling.",
+     "history": "Muzey 1918 yil 19 aprel dekreti bilan maktabdagi fizika kabineti sifatida boshlangan. 1988 yil 22 aprelda hozirgi binoda ochilgan, 2012 yildan Kosonsoy tuman tarixi muzeyi uning filiali.",
+     "facts": [
+      "1922 yilda 2000 ga yaqin, 1940 yilda 10 000 ga yaqin eksponat bo'lgan.",
+      "Ko'rgazma maydoni 1700 kv. m."
+     ]
+    },
+    "en": {
+     "name": "Namangan Regional Museum of History and Culture",
+     "tagline": "Regional museum founded in 1918",
+     "description": "Three floors of halls on nature, archaeology including Akhsikent finds, ethnography and regional history, next to Babur park.",
+     "address": "41 Nodim Namangoniy street, Namangan",
+     "bestTime": "Weekdays, before lunch",
+     "hoursNote": "Opening hours and day off are not published online; call before you go.",
+     "history": "The museum began under a decree of 19 April 1918 as a physics cabinet in a school. It opened in its present building on 22 April 1988, and since 2012 the Kosonsoy district history museum is its branch.",
+     "facts": [
+      "About 2,000 items by 1922 and about 10,000 by 1940.",
+      "Exhibition space is 1,700 square metres."
+     ]
+    },
+    "ru": {
+     "name": "Государственный музей истории и культуры Наманганской области",
+     "tagline": "Областной музей, основан в 1918 году",
+     "description": "Три этажа залов о природе, археологии (находки Ахсикента), этнографии и истории края, рядом с парком Бабура.",
+     "address": "Наманган, ул. Нодим Намангани, 41",
+     "bestTime": "В будни, до обеда",
+     "hoursNote": "Часы работы и выходной в сети не опубликованы, позвоните перед визитом.",
+     "history": "Музей начался по декрету от 19 апреля 1918 года как физический кабинет в школе. В нынешнем здании открыт 22 апреля 1988 года, с 2012 года его филиал Касансайский районный музей.",
+     "facts": [
+      "К 1922 году около 2000 экспонатов, к 1940 году около 10 000.",
+      "Экспозиционная площадь 1700 кв. м."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "ticket_required",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Kirish chiptasi kassada sotiladi, naqd pul olib yuring.",
+      "en": "Tickets are sold at the desk; bring cash.",
+      "ru": "Билеты продаются в кассе, возьмите наличные."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "no_flash",
+     "severity": "warn",
+     "priority": 3,
+     "text": {
+      "uz": "Zallarda chaqnoqli suratga olish taqiqlanadi.",
+      "en": "No flash photography in the halls.",
+      "ru": "Съёмка со вспышкой в залах запрещена."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "photo_fee",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Suratga olish uchun alohida to'lov so'ralishi mumkin.",
+      "en": "A separate photo fee may be charged.",
+      "ru": "За фотосъёмку может взиматься отдельная плата."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "no_food",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ekspozitsiya zallariga ovqat va ichimlik olib kirilmaydi.",
+      "en": "No food or drinks in the exhibition halls.",
+      "ru": "В залы экспозиции нельзя с едой и напитками."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "ru.wikipedia: Государственный музей истории и культуры Наманганской области",
+     "url": "https://ru.wikipedia.org/wiki/Государственный_музей_истории_и_культуры_Наманганской_области"
+    }
+   ],
+   "image": {
+    "file": "r_namangan_regional_museum.jpg",
+    "credit": "Q139555801",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A%D0%9D%D0%B0%D0%BC%D0%B0%D0%BD%D0%B3%D0%B0%D0%BD._%D0%93%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%B8_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B_%D0%9D%D0%B0%D0%BC%D0%B0%D0%BD%D0%B3%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%B8_%2804%29.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Main museum of the region",
+    "locationSource": "https://www.openstreetmap.org/relation/20804935",
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "address house number (OSM 41, Wikipedia 37)",
+     "hours and fee not found"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "babur-park",
+   "category": "park",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 40.99679,
+   "lng": 71.67197,
+   "interests": [
+    "nature",
+    "history"
+   ],
+   "visitMin": 60,
+   "priceLevel": 0,
+   "hours": "07:00-23:00",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "high",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Bobur nomidagi madaniyat va istirohat bog'i",
+     "tagline": "1884 yilda barpo etilgan shahar bog'i",
+     "description": "Chinorlar soyasidagi xiyobonlar, attraksionlar, ko'l va Xalqaro gullar festivalining asosiy maydoni.",
+     "address": "Namangan, Alisher Navoiy ko'chasi, markaz",
+     "bestTime": "May oxiri va iyun, gullar festivali; yozda kechqurun",
+     "hoursNote": "Har kuni ochiq. Gullar festivali paytida (may oxiri va iyun, 2026-yilda 12-iyulgacha) kechgacha gavjum.",
+     "feeNote": "Bog'ga kirish bepul, attraksionlar alohida to'lanadi.",
+     "history": "Bog' 1884 yilda uyezd boshlig'ining bog'i sifatida barpo etilgan, 1938 yilda Pushkin nomini olgan, 1991 yildan Bobur nomida. Namangan gullar bayrami 1961 yildan beri o'tkaziladi, 2019 yildan xalqaro maqomga ega.",
+     "facts": [
+      "Maydoni taxminan 14 gektar.",
+      "Birinchi gullar bayrami 1961 yil 24-27 avgustda bo'lgan.",
+      "2026 yil may oyida 65-Xalqaro gullar festivaliga tayyorgarlik ko'rilgan."
+     ]
+    },
+    "en": {
+     "name": "Babur Park",
+     "tagline": "City park laid out in 1884",
+     "description": "Shaded alleys under old plane trees, rides, a pond, and the main venue of the International Flower Festival.",
+     "address": "Alisher Navoi street, city centre, Namangan",
+     "bestTime": "Late May and June for the flower festival; summer evenings",
+     "hoursNote": "Open daily. During the flower festival (late May and June; in 2026 until 12 July) it is crowded until late.",
+     "feeNote": "Entry to the park is free; rides are paid separately.",
+     "history": "Laid out in 1884 as the garden of the district chief, named after Pushkin in 1938 and after Babur since 1991. The Namangan Flower Festival has been held since 1961 and became international in 2019.",
+     "facts": [
+      "Area about 14 hectares.",
+      "The first flower festival took place on 24-27 August 1961.",
+      "Preparations for the 65th International Flower Festival were under way in May 2026."
+     ]
+    },
+    "ru": {
+     "name": "Парк культуры и отдыха имени Бабура",
+     "tagline": "Городской парк, заложен в 1884 году",
+     "description": "Тенистые аллеи под старыми чинарами, аттракционы, пруд и главная площадка Международного фестиваля цветов.",
+     "address": "Наманган, ул. Алишера Навои, центр",
+     "bestTime": "Конец мая и июнь, фестиваль цветов; летом вечером",
+     "hoursNote": "Открыт ежедневно. Во время фестиваля цветов (конец мая и июнь, в 2026 году до 12 июля) многолюдно до позднего вечера.",
+     "feeNote": "Вход в парк бесплатный, аттракционы оплачиваются отдельно.",
+     "history": "Заложен в 1884 году как сад начальника уезда, в 1938 году назван именем Пушкина, с 1991 года носит имя Бабура. Праздник цветов проводится с 1961 года, с 2019 года имеет международный статус.",
+     "facts": [
+      "Площадь около 14 га.",
+      "Первый праздник цветов прошёл 24-27 августа 1961 года.",
+      "В мае 2026 года шла подготовка к 65-му Международному фестивалю цветов."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Bog'da faqat maxsus joylarda chekish mumkin.",
+      "en": "Smoking only in designated spots.",
+      "ru": "Курить можно только в отведённых местах."
+     },
+     "source": "general rules for public parks in Uzbekistan"
+    },
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 1,
+     "text": {
+      "uz": "Dron uchirish uchun oldindan ruxsat kerak.",
+      "en": "Flying a drone needs prior permission.",
+      "ru": "Для полёта дрона нужно заранее получить разрешение."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "ru.wikipedia: Наманган",
+     "url": "https://ru.wikipedia.org/wiki/Наманган"
+    },
+    {
+     "title": "en.wikipedia: Flower Festival in Uzbekistan",
+     "url": "https://en.wikipedia.org/wiki/Flower_Festival_in_Uzbekistan"
+    },
+    {
+     "title": "gov.uz Namangan: Z.M. Babur Recreation Park",
+     "url": "https://gov.uz/en/namangan/news/view/133425"
+    },
+    {
+     "title": "gov.uz Namangan, 7 May 2026",
+     "url": "https://gov.uz/ru/namangan/news/view/162728"
+    }
+   ],
+   "image": {
+    "file": "r_babur_park.jpg",
+    "credit": "Stephanieadams99",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ABobur_Park%2C_Namandan%2C_Uzbekistaan..jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Historic central park and flower festival venue",
+    "locationSource": "https://www.openstreetmap.org/way/399917916",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "hours and free entry (single travel blog)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "afsonalar-vodiysi-park",
+   "category": "park",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 41.00311,
+   "lng": 71.61779,
+   "interests": [
+    "nature",
+    "nightlife"
+   ],
+   "visitMin": 150,
+   "priceLevel": 0,
+   "hours": "08:00-24:00",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "high",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Afsonalar vodiysi bog'i",
+     "tagline": "155 ga bog', 92 metrlik charxpalak",
+     "description": "Attraksionlar, amerika tepaliklari, akvapark, favvoralar va 2024 yilda ishga tushgan 92 metrlik charxpalak. Shahar markazidan taxminan 5 km g'arbda.",
+     "address": "Namangan, Davlatobod tumani, 6-kichik nohiya",
+     "bestTime": "Yozda kechqurun, quyosh botishiga yaqin",
+     "hoursNote": "Har kuni ochiq. Ichidagi Afsona akvaparki 10:00 dan 22:00 gacha ishlaydi.",
+     "feeNote": "Bog'ga kirish bepul. Afsona akvaparki: kattalar (erkak) 150 000, kattalar (ayol) 100 000, 3-13 yoshli bolalar 75 000 so'm, 3 yoshgacha bepul.",
+     "history": "Bog' sobiq Mashrab bog'i o'rnida 155 gektar maydonda qurilgan. Charxpalak 2024 yil martida ishga tushgan: 54 kabina, bir vaqtda 216 kishi, bir aylanish taxminan 25 daqiqa.",
+     "facts": [
+      "Charxpalak balandligi 92 m, mamlakatdagi eng balandi deb e'lon qilingan.",
+      "Bog'da 68 metrlik megadrom va 25 ta attraksion bor.",
+      "Bog'ni \"Istiqlol bog'i\" MChJ boshqaradi."
+     ]
+    },
+    "en": {
+     "name": "Valley of Legends Park (Afsonalar Vodiysi)",
+     "tagline": "155-ha theme park with a 92 m Ferris wheel",
+     "description": "Rides, roller coasters, a water park, fountains and a 92 m Ferris wheel launched in 2024, about 5 km west of the centre.",
+     "address": "6th micro-district, Davlatobod district, Namangan",
+     "bestTime": "Summer evenings, close to sunset",
+     "hoursNote": "Open daily. The Afsona water park inside is open 10:00 to 22:00.",
+     "feeNote": "Park entry is free. Afsona water park: adult men 150,000, adult women 100,000, children 3-13 75,000 so'm, under 3 free.",
+     "history": "Built on 155 ha of the former Mashrab Park. The Ferris wheel started in March 2024: 54 cabins, 216 riders at a time, about 25 minutes per turn.",
+     "facts": [
+      "The wheel is 92 m tall, announced as the tallest in the country.",
+      "The park has a 68 m megadrome and 25 rides.",
+      "Operated by Istiqlol Bogi LLC."
+     ]
+    },
+    "ru": {
+     "name": "Парк «Долина легенд» (Афсоналар водийси)",
+     "tagline": "Парк на 155 га с колесом обозрения 92 м",
+     "description": "Аттракционы, американские горки, аквапарк, фонтаны и колесо обозрения высотой 92 м, запущенное в 2024 году, примерно в 5 км к западу от центра.",
+     "address": "Наманган, Давлатабадский район, 6-й микрорайон",
+     "bestTime": "Летом вечером, ближе к закату",
+     "hoursNote": "Открыт ежедневно. Аквапарк Afsona внутри работает с 10:00 до 22:00.",
+     "feeNote": "Вход в парк бесплатный. Аквапарк Afsona: мужчины 150 000, женщины 100 000, дети 3-13 лет 75 000 сумов, до 3 лет бесплатно.",
+     "history": "Построен на 155 га на месте бывшего парка Машраба. Колесо обозрения запущено в марте 2024 года: 54 кабины, 216 человек одновременно, оборот около 25 минут.",
+     "facts": [
+      "Высота колеса 92 м, оно названо самым высоким в стране.",
+      "В парке 68-метровый мегадром и 25 аттракционов.",
+      "Управляет ООО «Истиклол боги»."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Bog'da faqat maxsus joylarda chekish mumkin.",
+      "en": "Smoking only in designated spots.",
+      "ru": "Курить можно только в отведённых местах."
+     },
+     "source": "general rules for public parks in Uzbekistan"
+    },
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 1,
+     "text": {
+      "uz": "Dron uchirish uchun oldindan ruxsat kerak.",
+      "en": "Flying a drone needs prior permission.",
+      "ru": "Для полёта дрона нужно заранее получить разрешение."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "UzA, 3 March 2024: tallest Ferris wheel launched",
+     "url": "https://uza.uz/ru/posts/v-namangane-zapuscheno-samoe-vysokoe-v-nashey-strane-koleso-obozreniya_575191"
+    },
+    {
+     "title": "Kun.uz 2020: theme park being built",
+     "url": "https://kun.uz/en/news/2020/08/08/theme-park-for-15-thousand-people-being-built-in-namangan"
+    }
+   ],
+   "image": {
+    "file": "r_afsonalar_vodiysi_park.jpg",
+    "credit": "Komilkhuja",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AFerris_wheel_in_the_Valley_of_Legends_Park.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Largest leisure park of the city, regularly used for the flower festival",
+    "locationSource": "https://www.openstreetmap.org/relation/12794618",
+    "hoursSource": "https://www.goldenpages.uz/uz/company/?Id=120804",
+    "feeSource": "https://www.goldenpages.uz/uz/company/?Id=120803",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "hours and free entry (single travel blog); rides are paid separately"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "yusufkhon-qosimkhon-mosque",
+   "category": "mosque",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 40.9985,
+   "lng": 71.62367,
+   "interests": [
+    "architecture"
+   ],
+   "visitMin": 30,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Yusufxon o'g'li Qosimxon jome masjidi",
+     "tagline": "Afsonalar vodiysi yonidagi zamonaviy masjid",
+     "description": "Katta oynavand yuzalar va kubsimon shakllarga ega zamonaviy jome masjidi, Afsonalar vodiysi bog'i yonida.",
+     "address": "Namangan, G'alaba ko'chasi, 243, 6-kichik nohiya",
+     "bestTime": "Kechqurun, Afsonalar vodiysi bilan birga",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, masjid namoz vaqtlariga qarab ochiladi.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor."
+    },
+    "en": {
+     "name": "Yusufkhon ogli Qosimkhon Friday Mosque",
+     "tagline": "Modern mosque next to the Valley of Legends",
+     "description": "A modern Friday mosque of cubic volumes and wide glazing beside the Valley of Legends park.",
+     "address": "243 Galaba street, 6th micro-district, Namangan",
+     "bestTime": "Evening, together with Afsonalar vodiysi",
+     "hoursNote": "No official hours published; the mosque opens around prayer times.",
+     "feeNote": "Free entry; there is a donation box."
+    },
+    "ru": {
+     "name": "Пятничная мечеть Юсуфхон угли Косимхон",
+     "tagline": "Современная мечеть у «Долины легенд»",
+     "description": "Современная пятничная мечеть с кубическими объёмами и большим остеклением рядом с парком «Долина легенд».",
+     "address": "Наманган, ул. Галаба, 243, 6-й микрорайон",
+     "bestTime": "Вечером, вместе с Долиной легенд",
+     "hoursNote": "Официальные часы не опубликованы, мечеть открыта по времени намаза.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований."
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 6,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ovozni past tuting, namoz o'qiyotganlar oldidan o'tmang.",
+      "en": "Keep your voice low and do not walk in front of people praying.",
+      "ru": "Говорите тихо и не проходите перед молящимися."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Namoz o'qiyotgan odamlarni suratga olmang.",
+      "en": "Do not photograph people while they pray.",
+      "ru": "Не фотографируйте людей во время молитвы."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "image": {
+    "file": "r_yusufkhon_qosimkhon_mosque.jpg",
+    "credit": "Komilkhuja",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AThe_mosque_of_Yusufkhan_son_Qasimkhan.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Recent landmark (built 2021) rarely mentioned in travel guides",
+    "locationSource": "https://www.openstreetmap.org/node/8538292841",
+    "verified": [
+     "name",
+     "location"
+    ],
+    "unverified": [
+     "build year 2021, 15,000 capacity and DOME+Partners design (alluzbekistan.com only)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "chorsu-bazaar-namangan",
+   "category": "bazaar",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 41.00112,
+   "lng": 71.67955,
+   "interests": [
+    "food",
+    "shopping",
+    "craft"
+   ],
+   "visitMin": 60,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "high",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Chorsu bozori",
+     "tagline": "Eski shahar markazidagi dehqon bozori",
+     "description": "Meva, non, ziravor va Chust do'ppilari sotiladigan qadimiy savdo joyi. Mulla Qirg'iz madrasasi va Xo'ja Amin maqbarasi yonida.",
+     "address": "Namangan, Chorsu mahallasi",
+     "bestTime": "Ertalab, 8:00 dan 11:00 gacha",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan; savdo ertalabdan boshlanadi, kechqurun dehqonlar meva-sabzavot olib keladi.",
+     "feeNote": "Narxlar kelishiladi, savdolashish odatiy."
+    },
+    "en": {
+     "name": "Chorsu Bazaar",
+     "tagline": "Farmers' market in the old town",
+     "description": "Old trading square selling fruit, bread, spices and Chust skullcaps, beside the Mullah Kyrgyz madrasa and Khoja Amin mausoleum.",
+     "address": "Chorsu mahalla, Namangan",
+     "bestTime": "Morning, 8 to 11",
+     "hoursNote": "No official hours published; trading starts in the morning and farmers bring produce in the evening.",
+     "feeNote": "Prices are negotiated; bargaining is expected."
+    },
+    "ru": {
+     "name": "Базар Чорсу",
+     "tagline": "Дехканский базар в старом городе",
+     "description": "Старая торговая площадь: фрукты, лепёшки, специи, чустские тюбетейки. Рядом медресе Мулла Киргиз и мавзолей Ходжа Амина.",
+     "address": "Наманган, махалля Чорсу",
+     "bestTime": "Утром, с 8 до 11",
+     "hoursNote": "Официальные часы не опубликованы; торговля с утра, вечером фермеры привозят урожай.",
+     "feeNote": "Цены договорные, торг уместен."
+    }
+   },
+   "rules": [
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Sotuvchilarni suratga olishdan oldin ruxsat so'rang.",
+      "en": "Ask vendors before taking their photo.",
+      "ru": "Спросите продавцов, прежде чем их фотографировать."
+     },
+     "source": "general etiquette for bazaars in Uzbekistan"
+    },
+    {
+     "code": "no_smoking",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Yopiq rastalar va oziq-ovqat qatorlarida chekilmaydi.",
+      "en": "No smoking in covered halls and food rows.",
+      "ru": "В крытых рядах и продуктовых рядах не курят."
+     },
+     "source": "general etiquette for bazaars in Uzbekistan"
+    }
+   ],
+   "image": {
+    "file": "r_chorsu_bazaar_namangan.jpg",
+    "credit": "Quronboy1",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AChorsu_farmer%27s_market.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Historic central bazaar of Namangan",
+    "locationSource": "https://www.openstreetmap.org/way/625100490",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location"
+    ],
+    "unverified": [
+     "cashOnly (general practice, not sourced)",
+     "skullcap stalls (single travel blog)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "archangel-michael-church",
+   "category": "monument",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.01229,
+   "lng": 71.67193,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 20,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Mikoil Arxangel cherkovi",
+     "tagline": "XX asr boshidagi pravoslav cherkovi",
+     "description": "Shahar markazidan shimolroqdagi faol pravoslav cherkovi, Namanganning rus davri me'morchiligidan namuna.",
+     "address": "Namangan",
+     "bestTime": "Yakshanba ertalab, ibodat paytida",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, ibodat vaqtlarida ochiq.",
+     "feeNote": "Kirish bepul."
+    },
+    "en": {
+     "name": "Church of St. Archangel Michael",
+     "tagline": "Early 20th-century Orthodox church",
+     "description": "A working Orthodox church north of the centre, a reminder of Namangan's Russian-era architecture.",
+     "address": "Namangan",
+     "bestTime": "Sunday morning, during the service",
+     "hoursNote": "No official hours published; open during services.",
+     "feeNote": "Free entry."
+    },
+    "ru": {
+     "name": "Церковь Архистратига Михаила",
+     "tagline": "Православная церковь начала XX века",
+     "description": "Действующая православная церковь севернее центра, пример архитектуры русского периода Намангана.",
+     "address": "Наманган",
+     "bestTime": "В воскресенье утром, во время службы",
+     "hoursNote": "Официальные часы не опубликованы, открыто во время служб.",
+     "feeNote": "Вход бесплатный."
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 3,
+     "text": {
+      "uz": "Yopiq kiyimda keling, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly; women cover their hair.",
+      "ru": "Закрытая одежда, женщинам покрыть голову."
+     },
+     "source": "general etiquette for Orthodox churches"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ibodat paytida tinch turing, telefonni ovozsiz qiling.",
+      "en": "Keep quiet during services and silence your phone.",
+      "ru": "Во время службы соблюдайте тишину, выключите звук телефона."
+     },
+     "source": "general etiquette for Orthodox churches"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ibodat paytida suratga olish uchun ruxsat so'rang.",
+      "en": "Ask before photographing during a service.",
+      "ru": "Во время службы спросите разрешения на съёмку."
+     },
+     "source": "general etiquette for Orthodox churches"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "image": {
+    "file": "r_archangel_michael_church.jpg",
+    "credit": "Bobyrr",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AChurch_of_St._Archangel_Michael_in_Namangan_01-01.JPG",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Few tourists, not in standard lists",
+    "locationSource": "https://www.openstreetmap.org/way/443126086",
+    "verified": [
+     "name",
+     "location"
+    ],
+    "unverified": [
+     "construction date (early 20th century per ru.wikipedia history section only)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "yoshlar-bogi-davlatobod",
+   "category": "park",
+   "novelty": "new",
+   "openedAt": "2026-01-13",
+   "lat": 40.99843,
+   "lng": 71.59641,
+   "interests": [
+    "nature"
+   ],
+   "visitMin": 40,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Yoshlar bog'i (Davlatobod)",
+     "tagline": "Sobiq Kamolot xiyoboni o'rnida, 2026",
+     "description": "Yangilangan yoritish, sug'orish va ko'kalamzorlashtirilgan xiyobonlar, sahna ayvoni. Birinchi bosqich 2026 yil yanvarida ochilgan.",
+     "address": "Namangan, Davlatobod tumani, Porloq mahallasi",
+     "bestTime": "Yozda kechqurun",
+     "hoursNote": "Ochiq bog', rasmiy ish vaqti e'lon qilinmagan.",
+     "feeNote": "Kirish bepul.",
+     "history": "Park Davlatobod tumanidagi qarovsiz qolgan \"Kamolot\" xiyoboni o'rnida qayta qurildi. Ishlarga respublika byudjetidan 7,8 mlrd so'm ajratilgan, 75 ish o'rni yaratilgan.",
+     "facts": [
+      "Kelajakda to'liq rekonstruksiya va sport inshootlari rejalashtirilgan."
+     ]
+    },
+    "en": {
+     "name": "Youth Park (Davlatobod)",
+     "tagline": "Rebuilt on the former Kamolot alley, 2026",
+     "description": "Renewed lighting, irrigation, planted alleys and a covered stage. The first phase opened in January 2026.",
+     "address": "Porloq mahalla, Davlatobod district, Namangan",
+     "bestTime": "Summer evenings",
+     "hoursNote": "Open park; no official hours published.",
+     "feeNote": "Free entry.",
+     "history": "The park was rebuilt on the neglected Kamolot alley in Davlatobod district with 7.8 billion soums from the national budget; 75 jobs were created.",
+     "facts": [
+      "Full reconstruction and sports facilities are planned later."
+     ]
+    },
+    "ru": {
+     "name": "Парк молодёжи (Давлатабад)",
+     "tagline": "Обновлён на месте аллеи «Камолот», 2026",
+     "description": "Новое освещение, полив, озеленённые аллеи и крытая сцена. Первая очередь открыта в январе 2026 года.",
+     "address": "Наманган, Давлатабадский район, махалля Порлок",
+     "bestTime": "Летом вечером",
+     "hoursNote": "Открытый парк, официальные часы не опубликованы.",
+     "feeNote": "Вход бесплатный.",
+     "history": "Парк воссоздан на месте заброшенной аллеи «Камолот» в Давлатабадском районе; выделено 7,8 млрд сумов из республиканского бюджета, создано 75 рабочих мест.",
+     "facts": [
+      "Позже планируются полная реконструкция и спортивные объекты."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Bog'da faqat maxsus joylarda chekish mumkin.",
+      "en": "Smoking only in designated spots.",
+      "ru": "Курить можно только в отведённых местах."
+     },
+     "source": "general rules for public parks in Uzbekistan"
+    },
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 1,
+     "text": {
+      "uz": "Dron uchirish uchun oldindan ruxsat kerak.",
+      "en": "Flying a drone needs prior permission.",
+      "ru": "Для полёта дрона нужно заранее получить разрешение."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "UzA, 13 Jan 2026: Yoshlar bog'i zamonaviy qiyofada",
+     "url": "https://uza.uz/ar/posts/yoshlar-bogi-zamonaviy-qiyofada_806177"
+    }
+   ],
+   "image": {
+    "file": "r_yoshlar_bogi_davlatobod.jpg",
+    "credit": "UzA / Hotam Mamadaliyev",
+    "license": null,
+    "sourceUrl": "https://uza.uz/ar/posts/yoshlar-bogi-zamonaviy-qiyofada_806177",
+    "source": "uza.uz"
+   },
+   "research": {
+    "noveltyWhy": "First phase opened on the eve of Defenders' Day, UzA 13 Jan 2026 (https://uza.uz/ar/posts/yoshlar-bogi-zamonaviy-qiyofada_806177)",
+    "locationSource": "https://www.openstreetmap.org/way/291156436",
+    "verified": [
+     "openedAt (article date)"
+    ],
+    "unverified": [
+     "location: OSM 'Kamolot bog'i' assumed to be the rebuilt park",
+     "photo shows the opening ceremony on the park stage"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "devona-buva-mausoleum",
+   "category": "monument",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.00797,
+   "lng": 71.78767,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 20,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Devona buva maqbarasi",
+     "tagline": "1725-1750 yillar maqbarasi, Uychi tumani",
+     "description": "Fayziobod qishlog'idagi peshtoqli, gumbazli g'isht maqbara, ichi ganch o'ymakorligi bilan bezatilgan.",
+     "address": "Uychi tumani, Fayziobod qishlog'i",
+     "bestTime": "Ertalab, issiq tushmasdan oldin",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, odatda kunduzi ochiq.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor.",
+     "history": "Maqbara Toshkentda tug'ilib Fayziobodda yashagan Abdurahmon Xo'ji qabri ustiga qurilgan. U bolalarga savod o'rgatgan va tabib bo'lgan; qishloqqa jandada kelgani uchun \"Devona buva\" deb atalgan.",
+     "facts": [
+      "Bino 18,8 x 18,8 m kvadrat shaklida.",
+      "1979 yilda aholi kosmetik ta'mir qilgan, 2020 yildagi ta'mir sifatsiz deb tanqid qilingan."
+     ]
+    },
+    "en": {
+     "name": "Devona Buva Mausoleum",
+     "tagline": "Mausoleum of 1725-1750, Uychi district",
+     "description": "A domed brick mausoleum with a tall portal in Fayziobod village, with carved ganch inside.",
+     "address": "Fayziobod village, Uychi district",
+     "bestTime": "Morning, before the heat",
+     "hoursNote": "No official hours published; usually open in daytime.",
+     "feeNote": "Free entry; there is a donation box.",
+     "history": "Built over the grave of Abdurakhman Khodji, a Tashkent-born man who taught village children to read and practised medicine; he was called Devona Buva because he arrived in rags.",
+     "facts": [
+      "The building is 18.8 by 18.8 m.",
+      "Residents repaired it in 1979; a 2020 restoration was criticised as poor."
+     ]
+    },
+    "ru": {
+     "name": "Мавзолей Девона бува",
+     "tagline": "Мавзолей 1725-1750 годов, Уйчинский район",
+     "description": "Купольный кирпичный мавзолей с высоким порталом в селе Файзиабад, внутри резной ганч.",
+     "address": "Уйчинский район, село Файзиабад",
+     "bestTime": "Утром, до жары",
+     "hoursNote": "Официальные часы не опубликованы, обычно открыто днём.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований.",
+     "history": "Построен над могилой Абдурахмана Ходжи, уроженца Ташкента, который учил детей грамоте и лечил людей; его прозвали Девона бува, потому что он пришёл в село в лохмотьях.",
+     "facts": [
+      "Размер здания 18,8 на 18,8 м.",
+      "В 1979 году жители провели ремонт, реставрацию 2020 года критиковали."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Yopiq kiyimda keling: yelka va tizza yopiq, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly: shoulders and knees covered, women cover their hair.",
+      "ru": "Скромная одежда: плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Ziyoratxona yoki masjid ichiga poyabzalsiz kiriladi.",
+      "en": "Shoes come off before entering the prayer room or mosque.",
+      "ru": "В зиярат-хану и мечеть входят без обуви."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Bu ziyoratgoh: ovozni past tuting, duo qilayotganlarga xalaqit bermang.",
+      "en": "This is a place of pilgrimage: keep quiet and do not disturb people praying.",
+      "ru": "Это место паломничества: говорите тихо и не мешайте молящимся."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ziyoratchilarni suratga olishdan oldin ruxsat so'rang.",
+      "en": "Ask before photographing pilgrims.",
+      "ru": "Спросите разрешения, прежде чем фотографировать паломников."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "en.wikipedia: Mausoleum of Devona Buva",
+     "url": "https://en.wikipedia.org/wiki/Mausoleum_of_Devona_Buva"
+    },
+    {
+     "title": "meros.uz: Devonabuva maqbarasi",
+     "url": "https://meros.uz/object/devonabuva-maqbarasi"
+    }
+   ],
+   "image": {
+    "file": "r_devona_buva_mausoleum.jpg",
+    "credit": "meros.uz",
+    "license": null,
+    "sourceUrl": "https://meros.uz/object/devonabuva-maqbarasi",
+    "source": "meros.uz"
+   },
+   "research": {
+    "noveltyWhy": "Village shrine outside the city, almost no tourist coverage",
+    "locationSource": "https://en.wikipedia.org/wiki/Mausoleum_of_Devona_Buva",
+    "verified": [
+     "history.summary"
+    ],
+    "unverified": [
+     "location from Wikipedia coordinates only, not on OSM"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "akhsikent",
+   "category": "monument",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 40.88534,
+   "lng": 71.44733,
+   "interests": [
+    "history",
+    "nature"
+   ],
+   "visitMin": 90,
+   "priceLevel": 1,
+   "hours": "09:00-18:00",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Axsikent arxeologik yodgorligi",
+     "tagline": "Farg'onaning qadimiy poytaxti, Sirdaryo bo'yida",
+     "description": "Sirdaryo qirg'og'idagi 30 gektarlik qal'a xarobalari, ochiq osmon ostidagi muzey va qazishma joylari. Namangandan taxminan 22 km janubi-g'arbda.",
+     "address": "To'raqo'rg'on tumani, Sirdaryo o'ng qirg'og'i",
+     "bestTime": "Bahor va kuz, ertalab",
+     "hoursNote": "Dushanbadan jumagacha ochiq; Namangandan borish taxminan bir soat.",
+     "feeNote": "2026-yilgi qo'llanma kirishni bepul deydi; 2019-yilgi xabarda 2 000 so'm ko'rsatilgan. Joyida aniqlang.",
+     "history": "Axsikent miloddan avvalgi III asrdan ma'lum, IX-XII asrlarda gullagan. XV asrda Boburning otasi Umarshayx Mirzo shu yerda hukmronlik qilgan va 1494 yilda shu qal'ada halok bo'lgan. 1620 yildagi zilziladan keyin aholi Namanganga ko'chgan.",
+     "facts": [
+      "Bu yerda ishlab chiqarilgan po'lat Bag'dod va Damashqgacha mashhur bo'lgan.",
+      "1219 yilda Chingizxon lashkarboshisi Jebe tomonidan vayron qilingan.",
+      "2025 yil oktyabrida kirish darvozasi, minoralar va mudofaa devoridagi ochiq muzey qurib bitkazilgan."
+     ]
+    },
+    "en": {
+     "name": "Akhsikent (Akhsikath) archaeological site",
+     "tagline": "Ancient capital of Fergana on the Syr Darya",
+     "description": "Ruins of a 30-ha fortified city on the Syr Darya with an open-air museum and excavation areas, about 22 km south-west of Namangan.",
+     "address": "Right bank of the Syr Darya, Turakurgan district",
+     "bestTime": "Spring and autumn mornings",
+     "hoursNote": "Open Monday to Friday; about one hour from Namangan.",
+     "feeNote": "A 2026 guide lists entry as free; a 2019 report gave 2,000 so'm. Check on site.",
+     "history": "Known from the 3rd century BC and flourishing in the 9th-12th centuries. Babur's father Umar Shaikh Mirza ruled from here and died at the fortress in 1494. After the 1620 earthquake its people moved to Namangan.",
+     "facts": [
+      "Its crucible steel was known as far as Baghdad and Damascus.",
+      "Sacked in 1219 by Jebe, a commander of Genghis Khan.",
+      "By October 2025 entrance gates, towers and an open-air museum at the defensive wall were completed."
+     ]
+    },
+    "ru": {
+     "name": "Городище Ахсикент",
+     "tagline": "Древняя столица Ферганы на Сырдарье",
+     "description": "Руины укреплённого города площадью 30 га на берегу Сырдарьи, музей под открытым небом и раскопы, примерно в 22 км к юго-западу от Намангана.",
+     "address": "Туракурганский район, правый берег Сырдарьи",
+     "bestTime": "Весной и осенью, утром",
+     "hoursNote": "Открыто с понедельника по пятницу; около часа езды от Намангана.",
+     "feeNote": "Путеводитель 2026 года указывает бесплатный вход, в сообщении 2019 года 2 000 сумов. Уточните на месте.",
+     "history": "Известен с III века до н.э., расцвет в IX-XII веках. Отец Бабура Умаршейх Мирза правил отсюда и погиб в крепости в 1494 году. После землетрясения 1620 года жители переселились в Наманган.",
+     "facts": [
+      "Местная тигельная сталь была известна вплоть до Багдада и Дамаска.",
+      "Разорён в 1219 году Джебе, полководцем Чингисхана.",
+      "К октябрю 2025 года завершены входные ворота, башни и музей под открытым небом у крепостной стены."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 3,
+     "text": {
+      "uz": "Dron uchirish uchun oldindan ruxsat kerak.",
+      "en": "Flying a drone needs prior permission.",
+      "ru": "Для полёта дрона нужно заранее получить разрешение."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Qazishma joylariga kirmang, devorlarga chiqmang, topilmalarni olmang.",
+      "en": "Stay out of excavation pits, do not climb walls or pick up finds.",
+      "ru": "Не заходите в раскопы, не лезьте на стены и не берите находки."
+     },
+     "source": "general rules for archaeological sites in Uzbekistan"
+    },
+    {
+     "code": "ticket_required",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Yangi Axsi majmuasidagi muzeyga kirish shartlarini kassada so'rang.",
+      "en": "Ask at the desk about entry to the museum in the Yangi Axsi complex.",
+      "ru": "Условия входа в музей комплекса Янги Ахси уточните на кассе."
+     },
+     "source": "https://kun.uz/ru/news/2023/07/03/v-drevnem-axsikente-budut-postroyeny-chetyre-muzeya-pod-otkrytym-nebom"
+    }
+   ],
+   "feeLocal": 2000,
+   "feeForeigner": 10000,
+   "historySources": [
+    {
+     "title": "en.wikipedia: Akhsikath",
+     "url": "https://en.wikipedia.org/wiki/Akhsikath"
+    },
+    {
+     "title": "Kun.uz, 16 Apr 2019",
+     "url": "https://kun.uz/news/2019/04/16/mirziyoyev-tashrifidan-song-axsikent-turistik-markazga-aylanmoqda"
+    },
+    {
+     "title": "Uzbektourism press tour, 26 Oct 2025",
+     "url": "https://gov.uz/ru/uzbektourism/news/view/95832"
+    }
+   ],
+   "image": {
+    "file": "r_akhsikent.jpg",
+    "credit": "Jamshid Nurkulov",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Akhsikath_01.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Best-known archaeological site of the region, UNESCO tentative list",
+    "locationSource": "https://www.openstreetmap.org/node/7925045785",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "name",
+     "location",
+     "hours",
+     "history.summary"
+    ],
+    "unverified": [
+     "fees are from 2019 and likely changed"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "ancient-pap-munchoqtepa",
+   "category": "monument",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 40.84908,
+   "lng": 71.07703,
+   "interests": [
+    "history"
+   ],
+   "visitMin": 45,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Qadimgi Pop (Balandtepa) va Munchoqtepa",
+     "tagline": "I-VIII asrlar shahri va nekropoli",
+     "description": "Sirdaryo bo'yidagi qadimiy Pop shahri xarobalari va yer osti sag'analari topilgan Munchoqtepa nekropoli. Qazishma mavsumida faqat arxeologlar ruxsati bilan.",
+     "address": "Pop tumani, Sirdaryo qirg'og'i",
+     "bestTime": "Bahor va kuz, ertalab",
+     "hoursNote": "Ochiq yodgorlik, qo'riqchi va ish vaqti yo'q.",
+     "history": "Qadimgi Pop I-VIII asrlarda Ipak yo'lidagi shahar bo'lgan, 2008 yilda YUNESKO dastlabki ro'yxatiga kiritilgan. Munchoqtepa nekropoli 1980-yillarda tasodifan topilgan, qamishdan to'qilgan tobutlar va ipak gazlamalar bilan mashhur.",
+     "facts": [
+      "2024 yilda o'zbek-xitoy ekspeditsiyasi 6 ta yangi sag'ana topgan, kattasida kamida 24 kishi dafn etilgan.",
+      "Ipak bo'laklari kechi bilan V asrga oid, ko'pi Xitoydan keltirilgan."
+     ]
+    },
+    "en": {
+     "name": "Ancient Pap (Balandtepa) and Munchoqtepa",
+     "tagline": "1st-8th century town and necropolis",
+     "description": "Ruins of ancient Pap on the Syr Darya and the Munchoqtepa necropolis of underground crypts. During digs, approach only with the archaeologists' permission.",
+     "address": "Syr Darya bank, Pop district",
+     "bestTime": "Spring and autumn mornings",
+     "hoursNote": "Open site without a ticket desk or fixed hours.",
+     "history": "Ancient Pap was a Silk Road town of the 1st-8th centuries, on the UNESCO tentative list since 2008. The Munchoqtepa necropolis was found by chance in the 1980s and is known for reed coffins and silk.",
+     "facts": [
+      "In 2024 a Uzbek-Chinese team found six new tombs, the largest with at least 24 burials.",
+      "Silk fragments date to the 5th century at the latest, mostly imported from China."
+     ]
+    },
+    "ru": {
+     "name": "Древний Пап (Баландтепа) и Мунчактепа",
+     "tagline": "Город и некрополь I-VIII веков",
+     "description": "Руины древнего Папа на Сырдарье и некрополь Мунчактепа с подземными склепами. Во время раскопок подходить только с разрешения археологов.",
+     "address": "Папский район, берег Сырдарьи",
+     "bestTime": "Весной и осенью, утром",
+     "hoursNote": "Открытый памятник без кассы и часов работы.",
+     "history": "Древний Пап был городом на Шёлковом пути в I-VIII веках, с 2008 года в предварительном списке ЮНЕСКО. Некрополь Мунчактепа найден случайно в 1980-х и известен тростниковыми гробами и шёлком.",
+     "facts": [
+      "В 2024 году узбекско-китайская экспедиция нашла шесть новых гробниц, в самой большой не менее 24 погребений.",
+      "Фрагменты шёлка датируются не позднее V века, в основном привезены из Китая."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Dron uchirish uchun oldindan ruxsat kerak.",
+      "en": "Flying a drone needs prior permission.",
+      "ru": "Для полёта дрона нужно заранее получить разрешение."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Qazishma joylariga kirmang, devorlarga chiqmang, topilmalarni olmang.",
+      "en": "Stay out of excavation pits, do not climb walls or pick up finds.",
+      "ru": "Не заходите в раскопы, не лезьте на стены и не берите находки."
+     },
+     "source": "general rules for archaeological sites in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "en.wikipedia: Ancient Pap",
+     "url": "https://en.wikipedia.org/wiki/Ancient_Pap"
+    },
+    {
+     "title": "UNESCO tentative list: Ancient Pap",
+     "url": "https://whc.unesco.org/en/tentativelists/5294/"
+    },
+    {
+     "title": "yuz.uz: Munchoqtepa finds brought to Namangan",
+     "url": "https://yuz.uz/oz/news/munchoqtepa-topilmalari-namangan-shahriga-olib-kelindi"
+    }
+   ],
+   "image": {
+    "file": "r_ancient_pap_munchoqtepa.jpg",
+    "credit": "yuz.uz",
+    "license": null,
+    "sourceUrl": "https://yuz.uz/oz/news/munchoqtepa-topilmalari-namangan-shahriga-olib-kelindi",
+    "source": "yuz.uz"
+   },
+   "research": {
+    "noveltyWhy": "Active excavation site, almost no tourist infrastructure",
+    "locationSource": "https://www.openstreetmap.org/way/816104774",
+    "verified": [
+     "history.summary",
+     "location"
+    ],
+    "unverified": [
+     "photo shows excavation work, not a visitor view",
+     "OSM polygon is the town ruins; necropolis is about 30 m away"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "chust-bazaar",
+   "category": "bazaar",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 40.99709,
+   "lng": 71.22686,
+   "interests": [
+    "craft",
+    "shopping",
+    "food"
+   ],
+   "visitMin": 90,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Chust bozori va pichoqchilar",
+     "tagline": "Chust pichog'i va do'ppisi vatani",
+     "description": "Dehqon bozorida usta tamg'ali Chust pichoqlari, oq naqshli qora do'ppilar, chopon va mis buyumlar sotiladi. Suzangarlar mahallasida pichoq ustaxonalari bor.",
+     "address": "Chust shahri, So'fizoda ko'chasi",
+     "bestTime": "Ertalab, ayniqsa bozor kunlari",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan; ertalab eng faol. Pichoqni samolyotda faqat topshiriladigan yukda olib ketish mumkin.",
+     "feeNote": "Narxlar kelishiladi; pichoqni ustadan to'g'ridan-to'g'ri olish mumkin.",
+     "history": "Chust Farg'ona vodiysining eng qadimiy shaharlaridan, bu yerda Chust madaniyati aniqlangan. Pichoqchilik avloddan avlodga o'tadi, har bir usta tig'ga o'z tamg'asini bosadi.",
+     "facts": [
+      "Yiliga taxminan yarim million esdalik pichoq ishlab chiqariladi.",
+      "Chust do'ppisida qalampir naqshi to'rt marta takrorlanadi.",
+      "Haftada bir marta do'ppi bozori o'tadi."
+     ]
+    },
+    "en": {
+     "name": "Chust Bazaar and knife makers",
+     "tagline": "Home of the Chust knife and skullcap",
+     "description": "The farmers' market sells maker-stamped Chust knives, black skullcaps with white embroidery, robes and copperware; forges sit in the Suzangarlar quarter.",
+     "address": "Sufizoda street, Chust",
+     "bestTime": "Morning, especially on market days",
+     "hoursNote": "No official hours published; busiest in the morning. Knives can fly only in checked baggage.",
+     "feeNote": "Prices are negotiated; knives can be bought straight from the makers.",
+     "history": "Chust is one of the oldest towns of the Fergana Valley, where the Chust culture was identified. Knife-making passes down generations and every smith stamps his mark on the blade.",
+     "facts": [
+      "About half a million souvenir knives are made a year.",
+      "The pepper motif appears four times on a Chust doppi.",
+      "A skullcap market is held once a week."
+     ]
+    },
+    "ru": {
+     "name": "Чустский базар и мастера ножей",
+     "tagline": "Родина чустского ножа и тюбетейки",
+     "description": "На дехканском базаре продают чустские ножи с клеймом мастера, чёрные тюбетейки с белой вышивкой, чапаны и медную посуду; кузницы в квартале Сузангарлар.",
+     "address": "г. Чуст, ул. Суфизода",
+     "bestTime": "Утром, особенно в базарные дни",
+     "hoursNote": "Официальные часы не опубликованы, активнее всего утром. Ножи в самолёте только в багаже.",
+     "feeNote": "Цены договорные, ножи можно купить прямо у мастеров.",
+     "history": "Чуст один из древнейших городов Ферганской долины, здесь выделена чустская культура. Ремесло ножовщиков передаётся из поколения в поколение, каждый мастер ставит клеймо на клинок.",
+     "facts": [
+      "В год делают около полумиллиона сувенирных ножей.",
+      "Узор «калампир» на чустской тюбетейке повторяется четыре раза.",
+      "Раз в неделю проходит рынок тюбетеек."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Sotuvchilarni suratga olishdan oldin ruxsat so'rang.",
+      "en": "Ask vendors before taking their photo.",
+      "ru": "Спросите продавцов, прежде чем их фотографировать."
+     },
+     "source": "general etiquette for bazaars in Uzbekistan"
+    },
+    {
+     "code": "no_smoking",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Yopiq rastalar va oziq-ovqat qatorlarida chekilmaydi.",
+      "en": "No smoking in covered halls and food rows.",
+      "ru": "В крытых рядах и продуктовых рядах не курят."
+     },
+     "source": "general etiquette for bazaars in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "gov.uz: Chust, the city of craftsmen",
+     "url": "https://gov.uz/en/edu/news/view/190067"
+    },
+    {
+     "title": "Uzbektourism: Chust, a town that speaks across millennia",
+     "url": "https://gov.uz/en/uzbektourism/news/view/198922"
+    },
+    {
+     "title": "en.wikipedia: Chust, Uzbekistan",
+     "url": "https://en.wikipedia.org/wiki/Chust,_Uzbekistan"
+    }
+   ],
+   "image": {
+    "file": "r_chust_bazaar.jpg",
+    "credit": "Aziza Olimjonova",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AIMG_Chust_tumani.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Famous craft town, but outside the usual Fergana Valley route",
+    "locationSource": "https://www.openstreetmap.org/way/399882284",
+    "hoursSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeSource": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane",
+    "feeYear": 2026,
+    "verified": [
+     "history.summary",
+     "location"
+    ],
+    "unverified": [
+     "day of the weekly skullcap market not found"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "chodak-village",
+   "category": "ecovillage",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 40.93617,
+   "lng": 70.77516,
+   "interests": [
+    "nature"
+   ],
+   "visitMin": 180,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Chodak qishlog'i",
+     "tagline": "Tog'li turizm qishlog'i, Pop tumani",
+     "description": "Chodaksoy darasidagi qishloq: osma ko'priklar, 50 metrlik shisha ko'prik, zipline, sharsharalar, Chir-chir momo bulog'i va mehmon uylari.",
+     "address": "Pop tumani, Chodak qishlog'i",
+     "bestTime": "Maydan sentyabrgacha",
+     "history": "2024 yil sentyabrida Chodakka \"Turizm qishlog'i\" maqomi berilgan. Qishloqda 300 ga yaqin oilaviy mehmon uyi, to'rtta 300 metrlik osma ko'prik va 400 metrlik osma yo'l bor.",
+     "facts": [
+      "Taksi Namangandan taxminan 40 000 so'm (2025).",
+      "Qishloq yonida 42 metrdan chuqur g'or bor."
+     ]
+    },
+    "en": {
+     "name": "Chodak village",
+     "tagline": "Mountain tourist village, Pop district",
+     "description": "A village in the Chodaksoy gorge with suspension bridges, a 50 m glass bridge, ziplines, waterfalls, the Chir-chir momo spring and guesthouses.",
+     "address": "Chodak village, Pop district",
+     "bestTime": "May to September",
+     "history": "Chodak received tourist village status in September 2024. It has about 300 family guesthouses, four 300 m suspension bridges and a 400 m cable route.",
+     "facts": [
+      "Shared taxi from Namangan about 40,000 soums (2025).",
+      "There is a cave more than 42 m deep nearby."
+     ]
+    },
+    "ru": {
+     "name": "Село Чодак",
+     "tagline": "Горное туристическое село, Папский район",
+     "description": "Село в ущелье Чодаксай: подвесные мосты, стеклянный мост 50 м, зиплайн, водопады, родник Чир-чир момо и гостевые дома.",
+     "address": "Папский район, село Чодак",
+     "bestTime": "С мая по сентябрь",
+     "history": "В сентябре 2024 года Чодак получил статус туристического села. Здесь около 300 семейных гостевых домов, четыре подвесных моста по 300 м и канатная трасса 400 м.",
+     "facts": [
+      "Такси из Намангана около 40 000 сумов (2025).",
+      "Рядом пещера глубиной более 42 м."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "O'rmon va o'tloqda gulxan yoqmang, chekmang.",
+      "en": "Do not light fires or smoke in forest and meadows.",
+      "ru": "Не разводите костры и не курите в лесу и на лугах."
+     },
+     "source": "general etiquette for nature areas in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Uylar va hovlilarni suratga olishdan oldin egasidan ruxsat so'rang.",
+      "en": "Ask owners before photographing houses and yards.",
+      "ru": "Спросите хозяев, прежде чем снимать дома и дворы."
+     },
+     "source": "general etiquette for villages in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "uzbekistan.travel: Chodak awarded tourist village status",
+     "url": "https://uzbekistan.travel/en/o/village-chodak-has-been-awarded-status-tourist-village"
+    },
+    {
+     "title": "Kursiv, 16 Aug 2025",
+     "url": "http://uz.kursiv.media/en/2025-08-16/life-among-mountain-folk-adrenaline-and-serenity-what-to-see-in-namangan-and-how-to-relax/"
+    }
+   ],
+   "image": {
+    "file": "r_chodak_village.jpg",
+    "credit": "MarjonaKhidirova",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AChodak_qishlog%E2%80%98i.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Popular with locals, little known to foreign tourists; tourist village status Sept 2024",
+    "locationSource": "https://www.openstreetmap.org/node/891842903",
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "attraction counts come from the official tourism portal only",
+     "cave depth (single source)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "nanay-village",
+   "category": "ecovillage",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.51324,
+   "lng": 71.7028,
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "visitMin": 180,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Nanay qishlog'i",
+     "tagline": "Vodiydagi birinchi turizm qishlog'i",
+     "description": "Podshootasoy bo'yidagi tog' qishlog'i: osma ko'prik, zipline, 1,3 km sog'lomlashtirish yo'lagi, sun'iy sharsharalar va 150 dan ortiq mehmon uyi.",
+     "address": "Yangiqo'rg'on tumani, Nanay qishlog'i",
+     "bestTime": "Bahorda gullash payti va yozda",
+     "history": "2024 yil 31 avgustda Nanayga Farg'ona vodiysida birinchi bo'lib \"Turizm qishlog'i\" maqomi berildi. 2024 yilning 8 oyida 20 mingga yaqin xorijiy va 220 mingdan ortiq mahalliy sayyoh kelgan.",
+     "facts": [
+      "Qishloq Qirg'iziston chegarasida, Namangandan 40 km.",
+      "Podshootasoyda 7 ta sun'iy sharshara qurilgan."
+     ]
+    },
+    "en": {
+     "name": "Nanay village",
+     "tagline": "First tourism village in the Fergana Valley",
+     "description": "A mountain village on the Podshootasoy stream with a suspension bridge, zipline, a 1.3 km health trail, artificial waterfalls and over 150 guesthouses.",
+     "address": "Nanay village, Yangiqurgan district",
+     "bestTime": "Spring blossom and summer",
+     "history": "On 31 August 2024 Nanay became the first village in the Fergana Valley with tourism village status. In the first eight months of 2024 it had about 20,000 foreign and over 220,000 domestic visitors.",
+     "facts": [
+      "The village sits on the Kyrgyz border, 40 km from Namangan.",
+      "Seven artificial waterfalls were built on the stream."
+     ]
+    },
+    "ru": {
+     "name": "Село Нанай",
+     "tagline": "Первое туристическое село долины",
+     "description": "Горное село на реке Подшоотасай: подвесной мост, зиплайн, тропа здоровья 1,3 км, искусственные водопады и более 150 гостевых домов.",
+     "address": "Янгикурганский район, село Нанай",
+     "bestTime": "Весной во время цветения и летом",
+     "history": "31 августа 2024 года Нанай первым в Ферганской долине получил статус туристического села. За восемь месяцев 2024 года здесь побывали около 20 тысяч иностранных и более 220 тысяч местных туристов.",
+     "facts": [
+      "Село у границы с Кыргызстаном, в 40 км от Намангана.",
+      "На реке построено 7 искусственных водопадов."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 3,
+     "text": {
+      "uz": "O'rmon va o'tloqda gulxan yoqmang, chekmang.",
+      "en": "Do not light fires or smoke in forest and meadows.",
+      "ru": "Не разводите костры и не курите в лесу и на лугах."
+     },
+     "source": "general etiquette for nature areas in Uzbekistan"
+    },
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Chegara yaqinida dron uchirish va chegara postlarini suratga olish mumkin emas.",
+      "en": "Near the border, do not fly drones or photograph border posts.",
+      "ru": "Возле границы нельзя запускать дроны и снимать пограничные посты."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Uylar va hovlilarni suratga olishdan oldin egasidan ruxsat so'rang.",
+      "en": "Ask owners before photographing houses and yards.",
+      "ru": "Спросите хозяев, прежде чем снимать дома и дворы."
+     },
+     "source": "general etiquette for villages in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "UzA, 31 Aug 2024: Nanay gets tourism village status",
+     "url": "https://uza.uz/posts/630921"
+    },
+    {
+     "title": "Kursiv, 16 Aug 2025",
+     "url": "http://uz.kursiv.media/en/2025-08-16/life-among-mountain-folk-adrenaline-and-serenity-what-to-see-in-namangan-and-how-to-relax/"
+    }
+   ],
+   "image": {
+    "file": "r_nanay_village.jpg",
+    "credit": "Usmonov Gayrat",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ANanay_in_Namangan.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Domestic hit, rarely visited by foreigners; tourism village status Aug 2024",
+    "locationSource": "https://www.openstreetmap.org/node/296104951",
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "border-zone access rules not checked"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "sulton-uvays-qarani-complex",
+   "category": "mosque",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.32316,
+   "lng": 71.83693,
+   "interests": [
+    "history",
+    "nature"
+   ],
+   "visitMin": 60,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Sulton Uvays Qaraniy ziyoratgohi (Baliqliko'l)",
+     "tagline": "Chortoq tog'laridagi ziyoratgoh va masjid",
+     "description": "Maqbara, zamonaviy masjid, ramziy darvoza, muzey va baliqli hovuzdan iborat majmua. Yaqinida onasi Bibi Naima ona qadamjoyi bor.",
+     "address": "Chortoq tumani, Bog'iston, Baliqliko'l",
+     "bestTime": "Ish kunlari ertalab, juma va bayramlardan tashqari",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, odatda kunduzi ochiq.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor.",
+     "history": "Ziyoratgoh 2001 yildan faoliyat yuritadi. 2017 yildagi qayta qurish loyihasidan so'ng maqbara to'liq yangidan qurilgan, 6 gektar ko'kalamzorlashtirilgan va 1500 dan ortiq daraxt ekilgan.",
+     "facts": [
+      "Majmuada kutubxona, mehmonxona va konferens-zal bor.",
+      "Hovuz endemik baliqlari bilan mashhur."
+     ]
+    },
+    "en": {
+     "name": "Sultan Uvays Karani Shrine (Baliqlikul)",
+     "tagline": "Mountain shrine and mosque in Chortoq district",
+     "description": "A complex with a tomb, a modern mosque, a symbolic gate, a museum and a fish pond, with the shrine of his mother Bibi Naima nearby.",
+     "address": "Baliqlikul, Bogiston, Chortoq district",
+     "bestTime": "Weekday mornings, avoiding Fridays and holidays",
+     "hoursNote": "No official hours published; usually open in daytime.",
+     "feeNote": "Free entry; there is a donation box.",
+     "history": "The shrine has operated as a pilgrimage site since 2001. After a 2017 reconstruction project the tomb was fully rebuilt, 6 ha were landscaped and over 1,500 trees planted.",
+     "facts": [
+      "The complex has a library, guest rooms and a conference hall.",
+      "The pond is known for its endemic fish."
+     ]
+    },
+    "ru": {
+     "name": "Святыня Султан Увайс Карани (Балыкликуль)",
+     "tagline": "Горная святыня и мечеть в Чартакском районе",
+     "description": "Комплекс с гробницей, современной мечетью, символическими воротами, музеем и прудом с рыбами; рядом святыня его матери Биби Наимы.",
+     "address": "Чартакский район, Богистон, Балыкликуль",
+     "bestTime": "В будни утром, кроме пятниц и праздников",
+     "hoursNote": "Официальные часы не опубликованы, обычно открыто днём.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований.",
+     "history": "Святыня действует с 2001 года. После проекта реконструкции 2017 года гробница полностью перестроена, озеленено 6 га и высажено более 1500 деревьев.",
+     "facts": [
+      "В комплексе библиотека, гостиница и конференц-зал.",
+      "Пруд известен эндемичной рыбой."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Bu ziyoratgoh: ovozni past tuting, duo qilayotganlarga xalaqit bermang.",
+      "en": "This is a place of pilgrimage: keep quiet and do not disturb people praying.",
+      "ru": "Это место паломничества: говорите тихо и не мешайте молящимся."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "president.uz, 2017",
+     "url": "https://president.uz/oz/lists/view/761"
+    },
+    {
+     "title": "UzA, 7 Jul 2017",
+     "url": "https://uza.uz/ar/posts/sulton-uvays-qaraniy-ziyoratgohi-obod-bo-ladi-07-07-2017"
+    },
+    {
+     "title": "Chortoq district khokimiyat",
+     "url": "https://gov.uz/oz/chortoq/pages/sulton-uvays-qaroniy-ziyoratgohi"
+    }
+   ],
+   "image": {
+    "file": "r_sulton_uvays_qarani_complex.jpg",
+    "credit": "Miss Kamola",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ASulton_Uvays_Qaraniy_masjidi.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Major domestic pilgrimage site, little known to foreign visitors",
+    "locationSource": "https://www.openstreetmap.org/node/10200937680",
+    "verified": [
+     "name",
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "fish pond detail (Commons caption)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "kosonsoy-jome-mosque",
+   "category": "mosque",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.25747,
+   "lng": 71.54042,
+   "interests": [
+    "architecture",
+    "history"
+   ],
+   "visitMin": 30,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Kosonsoy jome masjidi",
+     "tagline": "XVIII asr jome masjidi, Kosonsoy",
+     "description": "Devor bilan o'ralgan hovlidagi gumbazli peshtoq, uch mehrobli zal va oq-ko'k bezakli jome masjidi.",
+     "address": "Kosonsoy shahri, Jomiy ko'chasi",
+     "bestTime": "Peshindan keyin, namozlar oralig'ida",
+     "hoursNote": "Rasmiy ish vaqti e'lon qilinmagan, masjid namoz vaqtlariga qarab ochiladi.",
+     "feeNote": "Kirish bepul, xayr-ehson qutisi bor.",
+     "history": "Masjid XVIII asr yodgorligi hisoblanadi, rivoyatga ko'ra qurilish XVII asrda boshlangan. Sovet davrida ombor va maktab bo'lgan, 1991 yilda masjid sifatida qayta ochilgan, 1992 yilda yaqinda dafn etilgan A'loxon Maxdum nomi berilgan.",
+     "facts": [
+      "Zal o'lchami 28,6 x 10,8 m.",
+      "1993 yilda ayvon va sinfxonalar qo'shilgan."
+     ]
+    },
+    "en": {
+     "name": "Kosonsoy Friday Mosque",
+     "tagline": "18th-century Friday mosque in Kosonsoy",
+     "description": "A walled-courtyard Friday mosque with a domed portal, a three-niche mihrab and white-and-blue decoration.",
+     "address": "Jomiy street, Kosonsoy",
+     "bestTime": "Afternoon, between prayers",
+     "hoursNote": "No official hours published; the mosque opens around prayer times.",
+     "feeNote": "Free entry; there is a donation box.",
+     "history": "Regarded as an 18th-century monument, though tradition says building began in the 17th century. In Soviet times it was a warehouse and then a school; it reopened as a mosque in 1991 and was named in 1992 after A'lokhon Makhdum, buried nearby.",
+     "facts": [
+      "The prayer hall measures 28.6 by 10.8 m.",
+      "An iwan and classrooms were added in 1993."
+     ]
+    },
+    "ru": {
+     "name": "Касансайская пятничная мечеть",
+     "tagline": "Пятничная мечеть XVIII века в Касансае",
+     "description": "Пятничная мечеть во дворе за стеной: купольный портал, трёхнишевый михраб, бело-голубой декор.",
+     "address": "г. Касансай, ул. Жомий",
+     "bestTime": "Днём, между намазами",
+     "hoursNote": "Официальные часы не опубликованы, мечеть открыта по времени намаза.",
+     "feeNote": "Вход бесплатный, есть ящик для пожертвований.",
+     "history": "Считается памятником XVIII века, по преданию строительство начато в XVII веке. В советское время был складом, затем школой; вновь открыт как мечеть в 1991 году, в 1992 году назван именем похороненного рядом Алохона Махдума.",
+     "facts": [
+      "Размер зала 28,6 на 10,8 м.",
+      "В 1993 году пристроены айван и классы."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 6,
+     "text": {
+      "uz": "Yelka va tizza yopiq bo'lsin, ayollar ro'mol o'raydi.",
+      "en": "Cover shoulders and knees; women cover their hair.",
+      "ru": "Плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "warn",
+     "priority": 5,
+     "text": {
+      "uz": "Namozxonaga kirishdan oldin poyabzal yechiladi.",
+      "en": "Take your shoes off before entering the prayer hall.",
+      "ru": "Перед входом в молельный зал снимите обувь."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Namoz vaqtida sayyohlarni tashqarida kutish so'ralishi mumkin.",
+      "en": "During prayers tourists may be asked to wait outside.",
+      "ru": "Во время намаза туристов могут попросить подождать снаружи."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Juma kuni peshin namozi payti eng gavjum vaqt, tashrifni boshqa soatga qo'ying.",
+      "en": "Friday midday prayer is the busiest time; plan the visit for another hour.",
+      "ru": "В пятницу в полуденный намаз здесь многолюдно, лучше прийти в другое время."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ovozni past tuting, namoz o'qiyotganlar oldidan o'tmang.",
+      "en": "Keep your voice low and do not walk in front of people praying.",
+      "ru": "Говорите тихо и не проходите перед молящимися."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Namoz o'qiyotgan odamlarni suratga olmang.",
+      "en": "Do not photograph people while they pray.",
+      "ru": "Не фотографируйте людей во время молитвы."
+     },
+     "source": "general etiquette for mosques in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "en.wikipedia: Kosonsoy Mosque",
+     "url": "https://en.wikipedia.org/wiki/Kosonsoy_Mosque"
+    },
+    {
+     "title": "meros.uz: Kosonsoy jome masjidi",
+     "url": "https://meros.uz/ru/object/kosonsoy-jome039-masjidi"
+    }
+   ],
+   "image": {
+    "file": "r_kosonsoy_jome_mosque.jpg",
+    "credit": "meros.uz",
+    "license": null,
+    "sourceUrl": "https://meros.uz/ru/object/kosonsoy-jome039-masjidi",
+    "source": "meros.uz"
+   },
+   "research": {
+    "noveltyWhy": "Historic district mosque outside tourist routes",
+    "locationSource": "https://www.openstreetmap.org/way/455084055",
+    "verified": [
+     "history.summary"
+    ],
+    "unverified": [
+     "OSM object is named A'loxon Maxdum jome masjidi; matched by the 1992 naming"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "ibrat-house-museum",
+   "category": "museum",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.00396,
+   "lng": 71.5072,
+   "interests": [
+    "history",
+    "art"
+   ],
+   "visitMin": 45,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Is'hoqxon To'ra Ibrat yodgorlik majmuasi",
+     "tagline": "Ma'rifatparvar va noshir xotirasiga muzey",
+     "description": "To'raqo'rg'ondagi muzey, bog', xiyobon va haykal: Ibratning hayoti, kitoblari va 1908 yildagi bosmaxonasi haqida.",
+     "address": "To'raqo'rg'on, To'raqo'rg'on ko'chasi",
+     "bestTime": "Ish kunlari, tushdan oldin",
+     "hoursNote": "Ish vaqti onlayn e'lon qilinmagan; borishdan oldin qo'ng'iroq qiling.",
+     "history": "Is'hoqxon To'ra Ibrat 1862 yilda To'raqo'rg'onda tug'ilgan shoir, tilshunos va tarixchi. 1908 yilda Orenburgda litografiya stanogini sotib olib, hovlisida \"Is'hoqiya\" bosmaxonasini ochgan. 1937 yilda qatag'on qilingan.",
+     "facts": [
+      "U olti tilli lug'at tuzgan.",
+      "\"Tarixi Farg'ona\" asarining muallifi.",
+      "Majmua 2017 yilda Prezident tashabbusi bilan barpo etila boshlangan."
+     ]
+    },
+    "en": {
+     "name": "Ishoqxon Ibrat Memorial Complex and Museum",
+     "tagline": "Museum of the enlightener and publisher",
+     "description": "Museum, garden, avenue and statue in Turakurgan on Ibrat's life, books and the printing press he set up in 1908.",
+     "address": "Turakurgan street, Turakurgan",
+     "bestTime": "Weekdays, before lunch",
+     "hoursNote": "Opening hours are not published online; call before you go.",
+     "history": "Ishoqxon Tora Ibrat, born in Turakurgan in 1862, was a poet, linguist and historian. In 1908 he bought a lithographic press in Orenburg and opened the Ishoqiya printing house in his yard. He was arrested in 1937 and died in prison.",
+     "facts": [
+      "He compiled a six-language dictionary.",
+      "Author of the History of Fergana.",
+      "The complex was started in 2017 on the President's initiative."
+     ]
+    },
+    "ru": {
+     "name": "Мемориальный комплекс Исхакхана Ибрата",
+     "tagline": "Музей просветителя и издателя",
+     "description": "Музей, сад, аллея и памятник в Туракургане о жизни Ибрата, его книгах и типографии 1908 года.",
+     "address": "Туракурган, ул. Туракурган",
+     "bestTime": "В будни, до обеда",
+     "hoursNote": "Часы работы в сети не опубликованы, позвоните перед визитом.",
+     "history": "Исхакхан Тура Ибрат родился в Туракургане в 1862 году, поэт, языковед и историк. В 1908 году купил литографский станок в Оренбурге и открыл во дворе типографию «Исхакия». В 1937 году арестован и умер в тюрьме.",
+     "facts": [
+      "Составил словарь на шести языках.",
+      "Автор «Истории Ферганы».",
+      "Комплекс начали создавать в 2017 году по инициативе Президента."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_flash",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Zallarda chaqnoqli suratga olish taqiqlanadi.",
+      "en": "No flash photography in the halls.",
+      "ru": "Съёмка со вспышкой в залах запрещена."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "photo_fee",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Suratga olish uchun alohida to'lov so'ralishi mumkin.",
+      "en": "A separate photo fee may be charged.",
+      "ru": "За фотосъёмку может взиматься отдельная плата."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "no_food",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ekspozitsiya zallariga ovqat va ichimlik olib kirilmaydi.",
+      "en": "No food or drinks in the exhibition halls.",
+      "ru": "В залы экспозиции нельзя с едой и напитками."
+     },
+     "source": "general practice in museums of Uzbekistan"
+    },
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 1,
+     "text": {
+      "uz": "Yopiq kiyimda keling: yelka va tizza yopiq, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly: shoulders and knees covered, women cover their hair.",
+      "ru": "Скромная одежда: плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "president.uz, 7 Jul 2017",
+     "url": "https://president.uz/oz/lists/view/756"
+    },
+    {
+     "title": "UzA, 31 Aug 2026",
+     "url": "https://uza.uz/ar/posts/marifatparvar-alloma-ibrat-merosi-yod-etildi_902249"
+    }
+   ],
+   "image": {
+    "file": "r_ibrat_house_museum.jpg",
+    "credit": "Omina006",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_in_Uzbekistan.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Small district museum, few foreign visitors",
+    "locationSource": "https://www.openstreetmap.org/node/7184600885",
+    "verified": [
+     "location",
+     "history.summary"
+    ],
+    "unverified": [
+     "opening date 3 May 2018 (alluzbekistan.com only)",
+     "hours and fee not found"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "pop-national-nature-park",
+   "category": "ecovillage",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.1276,
+   "lng": 70.78234,
+   "interests": [
+    "nature"
+   ],
+   "visitMin": 180,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Pop milliy tabiat bog'i",
+     "tagline": "2022 yilda tashkil etilgan 10 000 ga tog' bog'i",
+     "description": "Chotqol tog'lari etagidagi archazor va yong'oqzorlar, piyoda yurish uchun dam olish zonasi. Qo'riqlanadigan zonaga kirish cheklangan.",
+     "address": "Pop tumanining tog'li qismi",
+     "bestTime": "Maydan oktyabrgacha",
+     "history": "Bog' Vazirlar Mahkamasining 2022 yil 4 martdagi 93-son qarori bilan tashkil etilgan. 10 000 ga: 6000 ga qo'riqlanadigan, 3000 ga rekreatsiya, 1000 ga xo'jalik zonasi.",
+     "facts": [
+      "Bog'ning asoschisi Davlat o'rmon xo'jaligi qo'mitasi."
+     ]
+    },
+    "en": {
+     "name": "Pop National Nature Park",
+     "tagline": "10,000-ha mountain park created in 2022",
+     "description": "Juniper and walnut woods below the Chatkal range with a recreation zone for walks; the strict reserve zone is closed.",
+     "address": "Mountain area of Pop district",
+     "bestTime": "May to October",
+     "history": "Created by Cabinet of Ministers resolution No. 93 of 4 March 2022. Of 10,000 ha, 6,000 are a strict reserve, 3,000 recreation and 1,000 economic use.",
+     "facts": [
+      "Founded under the State Forestry Committee."
+     ]
+    },
+    "ru": {
+     "name": "Папский национальный природный парк",
+     "tagline": "Горный парк на 10 000 га, создан в 2022 году",
+     "description": "Арчовники и ореховые рощи у подножия Чаткала, рекреационная зона для прогулок; заповедная зона закрыта.",
+     "address": "Горная часть Папского района",
+     "bestTime": "С мая по октябрь",
+     "history": "Создан постановлением Кабмина No. 93 от 4 марта 2022 года. Из 10 000 га 6000 заповедная зона, 3000 рекреационная, 1000 хозяйственная.",
+     "facts": [
+      "Учредитель Госкомитет лесного хозяйства."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "warn",
+     "priority": 3,
+     "text": {
+      "uz": "O'rmon va o'tloqda gulxan yoqmang, chekmang.",
+      "en": "Do not light fires or smoke in forest and meadows.",
+      "ru": "Не разводите костры и не курите в лесу и на лугах."
+     },
+     "source": "general etiquette for nature areas in Uzbekistan"
+    },
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Chegara yaqinida dron uchirish va chegara postlarini suratga olish mumkin emas.",
+      "en": "Near the border, do not fly drones or photograph border posts.",
+      "ru": "Возле границы нельзя запускать дроны и снимать пограничные посты."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    },
+    {
+     "code": "no_pets",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Yovvoyi hayvonlar yashash joyida itlarni bog'lab yuring.",
+      "en": "Keep dogs on a leash in wildlife areas.",
+      "ru": "В местах обитания диких животных держите собак на поводке."
+     },
+     "source": "general etiquette for nature areas in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "lex.uz: Cabinet resolution No. 93 of 4 Mar 2022",
+     "url": "https://lex.uz"
+    },
+    {
+     "title": "alluzbekistan.com: Pop National Nature Park",
+     "url": "https://alluzbekistan.com/en/joylar/pop-milliy-tabiat-bogi"
+    }
+   ],
+   "image": {
+    "file": "r_pop_national_nature_park.jpg",
+    "credit": "Артем Карпов 8б (via alluzbekistan.com)",
+    "license": null,
+    "sourceUrl": "https://alluzbekistan.com/en/joylar/pop-milliy-tabiat-bogi",
+    "source": "alluzbekistan.com"
+   },
+   "research": {
+    "noveltyWhy": "Young national park (2022) with little visitor information",
+    "locationSource": "https://alluzbekistan.com/en/joylar/pop-milliy-tabiat-bogi",
+    "unverified": [
+     "all fields rest on alluzbekistan.com, resolution not opened on lex.uz",
+     "location point is approximate for a large park"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "alisher-navoi-theatre-namangan",
+   "category": "theatre",
+   "novelty": "iconic",
+   "openedAt": null,
+   "lat": 41.00079,
+   "lng": 71.67639,
+   "interests": [
+    "art",
+    "nightlife"
+   ],
+   "visitMin": 120,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Alisher Navoiy nomidagi Namangan viloyat musiqali drama teatri",
+     "tagline": "Ustunli bino, 2026-yilda 95-mavsum",
+     "description": "Shahar markazidagi ustunli teatr binosi: o'zbek tilidagi drama, musiqali spektakl va komediyalar qo'yiladi. Bobur bog'idan piyoda bir necha daqiqa.",
+     "address": "Namangan, Usmon Nosir ko'chasi, 2",
+     "bestTime": "Kechki spektakl, mavsum avgustdan boshlanadi",
+     "history": "Teatr Alisher Navoiy nomini oladi va viloyatning asosiy sahnasi hisoblanadi. 2026-yil avgustida 95-mavsumini \"Laylaklar nolasi\" spektakli bilan ochdi.",
+     "facts": [
+      "Rasmiy nomi: Alisher Navoiy nomidagi Namangan viloyat musiqali drama va komediya teatri.",
+      "95-mavsum 2026-yil avgustida ochildi."
+     ]
+    },
+    "en": {
+     "name": "Alisher Navoi Namangan Regional Musical Drama Theatre",
+     "tagline": "Columned theatre, 95th season in 2026",
+     "description": "A columned theatre in the city centre staging Uzbek-language drama, musicals and comedy, a few minutes' walk from Bobur park.",
+     "address": "2 Usmon Nosir street, Namangan",
+     "bestTime": "An evening show; the season opens in August",
+     "history": "The theatre bears the name of Alisher Navoi and is the region's main stage. In August 2026 it opened its 95th season with the play \"Laylaklar nolasi\".",
+     "facts": [
+      "Official name: Alisher Navoi Namangan Regional Musical Drama and Comedy Theatre.",
+      "The 95th season opened in August 2026."
+     ]
+    },
+    "ru": {
+     "name": "Наманганский областной музыкально-драматический театр имени Алишера Навои",
+     "tagline": "Театр с колоннадой, 95-й сезон в 2026 году",
+     "description": "Театр с колоннадой в центре города: драма, музыкальные спектакли и комедии на узбекском языке, в нескольких минутах от парка Бобура.",
+     "address": "Наманган, ул. Усмана Насыра, 2",
+     "bestTime": "Вечерний спектакль, сезон открывается в августе",
+     "history": "Театр носит имя Алишера Навои и является главной сценой области. В августе 2026 года он открыл 95-й сезон спектаклем «Лайлаклар ноласи».",
+     "facts": [
+      "Официальное название: Наманганский областной театр музыкальной драмы и комедии имени Алишера Навои.",
+      "95-й сезон открылся в августе 2026 года."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "info",
+     "priority": 4,
+     "text": {
+      "uz": "Tomoshaga ozoda, sport kiyimisiz kelish odat.",
+      "en": "Smart casual is customary; avoid sportswear.",
+      "ru": "Принято приходить в опрятной одежде, без спортивной формы."
+     },
+     "source": "general etiquette for theatres in Uzbekistan"
+    },
+    {
+     "code": "no_photo",
+     "severity": "forbidden",
+     "priority": 3,
+     "text": {
+      "uz": "Spektakl paytida suratga olish va video yozish mumkin emas.",
+      "en": "No photos or video during the performance.",
+      "ru": "Во время спектакля нельзя снимать фото и видео."
+     },
+     "source": "general etiquette for theatres in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Kechikkanlar tanaffusgacha kutishi mumkin; telefonni ovozsiz qiling.",
+      "en": "Latecomers may have to wait until the interval; silence your phone.",
+      "ru": "Опоздавших могут пустить только в антракте; выключите звук телефона."
+     },
+     "source": "general etiquette for theatres in Uzbekistan"
+    },
+    {
+     "code": "ticket_required",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Chipta teatr kassasida sotiladi.",
+      "en": "Tickets are sold at the theatre box office.",
+      "ru": "Билеты продаются в кассе театра."
+     },
+     "source": "https://www.goldenpages.uz/uz/company/?Id=61195"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "gov.uz: Namangan theatre 95th season",
+     "url": "https://gov.uz/oz/madaniyat/news/view/204457"
+    },
+    {
+     "title": "gov.uz Namangan: 95-mavsum ochildi",
+     "url": "https://gov.uz/oz/namangan/news/view/204087"
+    },
+    {
+     "title": "Golden Pages listing",
+     "url": "https://www.goldenpages.uz/uz/company/?Id=61195"
+    }
+   ],
+   "image": {
+    "file": "r_alisher_navoi_theatre_namangan.jpg",
+    "credit": "Usmonov Gayrat",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alisher_Navoiy_teatri.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Main regional theatre of Namangan; opened its 95th season in August 2026 (gov.uz)",
+    "locationSource": "https://www.openstreetmap.org/way/168103297",
+    "hoursSource": "https://gov.uz/oz/namangan/news/view/204087",
+    "verified": [
+     "name",
+     "location",
+     "address"
+    ],
+    "unverified": [
+     "hours",
+     "history (season count from one official source)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "nodim-namangoniy-mausoleum",
+   "category": "monument",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 40.99697,
+   "lng": 71.66808,
+   "interests": [
+    "history",
+    "architecture"
+   ],
+   "visitMin": 20,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Nodim Namangoniy maqbarasi",
+     "tagline": "Shoir Nodim (1844-1910) xotirasiga",
+     "description": "Yashil gumbazli kichik maqbara, Nodira ko'chasida, viloyat muzeyi yaqinida. Atrofida obodonlashtirilgan maydon bor.",
+     "address": "Namangan, Nodira ko'chasi, Baynalminal mahallasi",
+     "bestTime": "Muzeyga borganda, kunduzi",
+     "history": "Nodim Namangoniy (asl ismi Sulaymonxo'ja Ulug'xo'ja o'g'li, 1844-1910) Namanganda tug'ilib, shu yerda vafot etgan shoir. U turkiy va forsiy tilda g'azallar, hajviy she'rlar yozgan.",
+     "facts": [
+      "\"Bayozi Nodim\" to'plamining to'liq nusxasi Fanlar akademiyasi Sharqshunoslik institutida saqlanadi.",
+      "She'rlari \"Turkiston viloyatining gazeti\"da chop etilgan."
+     ]
+    },
+    "en": {
+     "name": "Mausoleum of Nodim Namangani",
+     "tagline": "For the poet Nodim (1844-1910)",
+     "description": "A small mausoleum with a green dome on Nodira street, near the regional museum, set in a landscaped square.",
+     "address": "Nodira street, Baynalminal mahalla, Namangan",
+     "bestTime": "Daytime, together with the regional museum",
+     "history": "Nodim Namangani (born Sulaymonkhoja, son of Ulugkhoja, 1844-1910) was a poet born and buried in Namangan. He wrote ghazals in Turkic and Persian and satirical verse.",
+     "facts": [
+      "A full copy of his anthology Bayozi Nodim is kept at the Institute of Oriental Studies.",
+      "His poems appeared in the Turkistan provincial newspaper."
+     ]
+    },
+    "ru": {
+     "name": "Мавзолей Нодима Намангани",
+     "tagline": "В память поэта Нодима (1844-1910)",
+     "description": "Небольшой мавзолей с зелёным куполом на улице Нодиры, рядом с областным музеем, на благоустроенной площадке.",
+     "address": "Наманган, ул. Нодиры, махалля Байналминал",
+     "bestTime": "Днём, вместе с областным музеем",
+     "history": "Нодим Намангани (Сулейманходжа, сын Улугходжи, 1844-1910) поэт, родился и умер в Намангане. Писал газели на тюркском и персидском и сатирические стихи.",
+     "facts": [
+      "Полный список его сборника «Баёзи Нодим» хранится в Институте востоковедения.",
+      "Его стихи печатались в «Туркестанской туземной газете»."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Yopiq kiyimda keling: yelka va tizza yopiq, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly: shoulders and knees covered, women cover their hair.",
+      "ru": "Скромная одежда: плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Ovozni past tuting, duo qilayotganlarga xalaqit bermang.",
+      "en": "Keep quiet and do not disturb people praying.",
+      "ru": "Говорите тихо и не мешайте молящимся."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "Uzbek Wikipedia: Nodim Namangoniy",
+     "url": "https://uz.wikipedia.org/wiki/Nodim_Namangoniy"
+    },
+    {
+     "title": "Wikimedia Commons: Nodim Namangoniy maqbarasi",
+     "url": "https://commons.wikimedia.org/wiki/File:Nodim_Namangoniy_maqbarasi.jpg"
+    }
+   ],
+   "image": {
+    "file": "r_nodim_namangoniy_mausoleum.jpg",
+    "credit": "Usmonov Gayrat",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nodim_Namangoniy_maqbarasi.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Not in common Namangan top lists; local memorial to a 19th century poet",
+    "locationSource": "https://www.openstreetmap.org/way/1525192624",
+    "feeYear": 2026,
+    "verified": [
+     "location (OSM and Commons photo GPS)",
+     "name"
+    ],
+    "unverified": [
+     "construction date of the mausoleum (not found)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "chortoq-sanatorium",
+   "category": "park",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.12144,
+   "lng": 71.79358,
+   "interests": [
+    "nature"
+   ],
+   "visitMin": 180,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "low",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Chortoq sanatoriyasi",
+     "tagline": "Mineral suvli kurort, 650 m balandlikda",
+     "description": "Chortoqsoy vodiysidagi balneologik va iqlim kurorti, Namangandan 25 km. Mineral suv bilan davolanish, bog' va sayr yo'laklari bor; yo'llanma bilan yoki kunlik dam olish uchun boriladi.",
+     "address": "Namangan viloyati, Chortoq, Salomatlik ko'chasi, 13",
+     "bestTime": "Bahor va kuz, yozgi issiqdan qochib",
+     "history": "Rasmiy saytga ko'ra, sanatoriy Chortoqsoy vodiysida, dengiz sathidan 650 m balandlikda joylashgan va harakat, hazm, yurak-qon tomir va asab tizimi kasalliklarini davolashga ixtisoslashgan.",
+     "facts": [
+      "Namangan shahridan 25 km uzoqlikda.",
+      "Yurak infarktidan keyingi reabilitatsiya bo'limi bor.",
+      "Ma'lumotnomada termal mineral suvi yod va bromga boy deb ko'rsatilgan."
+     ]
+    },
+    "en": {
+     "name": "Chortoq Sanatorium",
+     "tagline": "Mineral spring resort at 650 m",
+     "description": "A balneological and climate resort in the Chortoqsoy valley, 25 km from Namangan, with mineral water treatments, gardens and walking paths.",
+     "address": "13 Salomatlik street, Chortoq, Namangan region",
+     "bestTime": "Spring and autumn, or to escape summer heat",
+     "history": "According to its official site, the sanatorium lies in the Chortoqsoy valley at 650 m and specialises in musculoskeletal, digestive, cardiovascular and nervous system conditions.",
+     "facts": [
+      "25 km from Namangan city.",
+      "Has a rehabilitation unit for patients after a heart attack.",
+      "A directory describes its thermal mineral water as rich in iodine and bromine."
+     ]
+    },
+    "ru": {
+     "name": "Санаторий «Чорток»",
+     "tagline": "Курорт с минеральной водой на высоте 650 м",
+     "description": "Бальнеологический и климатический курорт в долине Чартаксая, в 25 км от Намангана: лечение минеральной водой, сад и прогулочные аллеи.",
+     "address": "Наманганская область, Чартак, ул. Саломатлик, 13",
+     "bestTime": "Весной и осенью или чтобы спастись от летней жары",
+     "history": "По данным официального сайта, санаторий расположен в долине Чартаксая на высоте 650 м и специализируется на болезнях опорно-двигательной, пищеварительной, сердечно-сосудистой и нервной систем.",
+     "facts": [
+      "В 25 км от Намангана.",
+      "Есть отделение реабилитации после инфаркта миокарда.",
+      "Справочник описывает термальную минеральную воду как богатую йодом и бромом."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_smoking",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Davolash binolari va bog'da chekilmaydi.",
+      "en": "No smoking in treatment buildings and the garden.",
+      "ru": "В лечебных корпусах и саду не курят."
+     },
+     "source": "general rules for sanatoriums in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Dam oluvchilar uchun tinchlik soatlariga rioya qiling.",
+      "en": "Respect the quiet hours for guests.",
+      "ru": "Соблюдайте тихие часы для отдыхающих."
+     },
+     "source": "general rules for sanatoriums in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "Chortoq sanatorium official site",
+     "url": "https://chortoqsan.uz"
+    },
+    {
+     "title": "Yellow Pages: Chortoq sanatoriy",
+     "url": "https://www.yellowpages.uz/kompaniya/chortoq-sanatorij"
+    },
+    {
+     "title": "Golden Pages: Chortok sanatoriyasi",
+     "url": "https://www.goldenpages.uz/uz/company/?Id=4616"
+    }
+   ],
+   "image": {
+    "file": "r_chortoq_sanatorium.jpg",
+    "credit": "Shohi kubro",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chortoq_sanatoriyasi_bino.png",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Known to locals for health stays, rarely in tourist itineraries",
+    "locationSource": "https://chortoqsan.uz (Google Maps embed on the official site)",
+    "hoursSource": "https://chortoqsan.uz",
+    "verified": [
+     "name",
+     "address (two directories)",
+     "distance and altitude (official site)"
+    ],
+    "unverified": [
+     "exact coordinate (only the official site's map embed)",
+     "mineral water composition (one directory)"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "mavlono-lutfulloh-complex",
+   "category": "monument",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.0021,
+   "lng": 71.23204,
+   "interests": [
+    "history",
+    "architecture",
+    "nature"
+   ],
+   "visitMin": 45,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": false,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "Mavlono Lutfulloh majmuasi (Chust)",
+     "tagline": "17 metrli minora va buloqli bog'",
+     "description": "Chust shahar markazidagi bog' ichida masjid, ramziy qabr, minora va muzey. Bog'dagi buloqlar avliyo nomi bilan bog'lanadi.",
+     "address": "Chust shahri, madaniyat va istirohat bog'i",
+     "bestTime": "Ertalab, Chust bozori bilan birga",
+     "history": "Mavlono Lutfulloh 1487-yilda Pop tumanining Chodak qishlog'ida tug'ilgan, Farg'ona vodiysida Naqshbandiya tariqatining yirik vakili bo'lgan. Majmua bir paytlar madrasa, masjid, maqbara, uy va minoradan iborat edi; asl qabr joyi aniq emas, bog'dagi qabr ramziy.",
+     "facts": [
+      "Saqlanib qolgan minora XIX asr oxirida usta Mulla Qirg'iz va shogirdlari tomonidan ta'mirlangan, balandligi 17 m.",
+      "Masjid ayvonidagi naqshlar 1971-1972 yillarda Namangan ustalari tomonidan tiklangan.",
+      "Majmuada Chust tarixini bronza davridan ko'rsatuvchi muzey bor."
+     ]
+    },
+    "en": {
+     "name": "Mavlono Lutfulloh Complex, Chust",
+     "tagline": "A 17 m minaret and a spring-fed park",
+     "description": "A mosque, a symbolic tomb, a minaret and a museum inside the central park of Chust; the park's springs are linked to the saint in local legend.",
+     "address": "Chust city culture and recreation park",
+     "bestTime": "Morning, together with Chust bazaar",
+     "history": "Mavlono Lutfulloh was born in 1487 in Chodak village, Pop district, and became a leading Naqshbandi figure in the Fergana valley. The complex once had a madrasa, mosque, mausoleum, house and minaret; his real grave is lost and the tomb in the park is symbolic.",
+     "facts": [
+      "The surviving minaret was repaired at the end of the 19th century by master Mulla Qirg'iz and his students; it is 17 m tall.",
+      "The painted decoration of the mosque porch was restored by Namangan painters in 1971-1972.",
+      "A museum in the complex shows Chust history from the Bronze Age."
+     ]
+    },
+    "ru": {
+     "name": "Комплекс Мавлоно Лутфуллы (Чуст)",
+     "tagline": "17-метровый минарет и парк с родниками",
+     "description": "Мечеть, символическая гробница, минарет и музей в центральном парке Чуста; родники парка предание связывает с именем святого.",
+     "address": "Город Чуст, парк культуры и отдыха",
+     "bestTime": "Утром, вместе с Чустским базаром",
+     "history": "Мавлоно Лутфулла родился в 1487 году в кишлаке Чодак Папского района и стал видным деятелем ордена Накшбандия в Ферганской долине. Комплекс включал медресе, мечеть, мавзолей, дом и минарет; настоящая могила утрачена, гробница в парке символическая.",
+     "facts": [
+      "Сохранившийся минарет отремонтирован в конце XIX века мастером Мулла Киргизом с учениками, высота 17 м.",
+      "Росписи айвана мечети восстановлены наманганскими мастерами в 1971-1972 годах.",
+      "В комплексе есть музей истории Чуста с эпохи бронзы."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "dress_code",
+     "severity": "warn",
+     "priority": 4,
+     "text": {
+      "uz": "Yopiq kiyimda keling: yelka va tizza yopiq, ayollar ro'mol o'raydi.",
+      "en": "Dress modestly: shoulders and knees covered, women cover their hair.",
+      "ru": "Скромная одежда: плечи и колени закрыты, женщины покрывают голову."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "shoes_off",
+     "severity": "info",
+     "priority": 3,
+     "text": {
+      "uz": "Masjid va ziyoratxonaga poyabzalsiz kiriladi.",
+      "en": "Shoes come off before entering the mosque or prayer room.",
+      "ru": "В мечеть и зиярат-хану входят без обуви."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "quiet",
+     "severity": "info",
+     "priority": 2,
+     "text": {
+      "uz": "Ovozni past tuting, duo qilayotganlarga xalaqit bermang.",
+      "en": "Keep quiet and do not disturb people praying.",
+      "ru": "Говорите тихо и не мешайте молящимся."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    },
+    {
+     "code": "prayer_time_limit",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "Namoz va juma peshin vaqtida masjidga kirish cheklanishi mumkin.",
+      "en": "Entry to the mosque may be limited during prayers and Friday noon.",
+      "ru": "Во время намаза и пятничной молитвы вход в мечеть может быть ограничен."
+     },
+     "source": "general etiquette for shrines in Uzbekistan"
+    }
+   ],
+   "feeLocal": 0,
+   "feeForeigner": 0,
+   "historySources": [
+    {
+     "title": "Tourist objects in Chust district (TSUOS, 2025)",
+     "url": "https://tsuos.uz/wp-content/uploads/2025/01/Chust.pdf"
+    },
+    {
+     "title": "gov.uz: Chust, the city of craftsmen",
+     "url": "https://gov.uz/en/edu/news/view/190067"
+    }
+   ],
+   "image": {
+    "file": "r_mavlono_lutfulloh_complex.jpg",
+    "credit": "Madinawiki12",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chust_tumani_mavlono_Lutfulloh_nomidagi_istirohat_bog%27idagi_kalta_minora.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Main shrine of Chust, outside standard Namangan routes",
+    "locationSource": "https://www.openstreetmap.org/way/384168570",
+    "feeYear": 2026,
+    "verified": [
+     "history (two sources)",
+     "location (OSM mosque inside the park)"
+    ],
+    "unverified": [
+     "museum opening hours"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  },
+  {
+   "id": "gova-village",
+   "category": "ecovillage",
+   "novelty": "hidden",
+   "openedAt": null,
+   "lat": 41.12875,
+   "lng": 71.12591,
+   "interests": [
+    "nature"
+   ],
+   "visitMin": 180,
+   "priceLevel": 0,
+   "hours": "",
+   "rating": 0,
+   "reviews": 0,
+   "crowd": "medium",
+   "wheelchair": false,
+   "cashOnly": true,
+   "payCard": false,
+   "geofenceRadiusM": 120,
+   "source": "open_data",
+   "text": {
+    "uz": {
+     "name": "G'ova qishlog'i",
+     "tagline": "Tog' daryosi bo'yidagi yozgi dam olish qishlog'i",
+     "description": "Chust tumanining shimolida, Qirg'iziston chegarasi yonidagi tog' qishlog'i. O'rtasidan soy oqadi, yozda vodiy aholisi salqinda dam olish uchun keladi; kottej va mehmon uylarida tunash mumkin. Muzlik suvli daryo juda sovuq va tez: cho'milmang, suvini ichmang.",
+     "address": "Namangan viloyati, Chust tumani, G'ova",
+     "bestTime": "Iyundan sentyabrgacha",
+     "history": "G'ova Chust tumanining shimolidagi tog'li qishloq, Namangandan taxminan 60 km. Aholisi dehqonchilik, bog'dorchilik, chorvachilik va asalarichilik bilan shug'ullanadi.",
+     "facts": [
+      "Chustdan umumiy taksida boriladi.",
+      "2009-yilda shaharcha maqomini olgan.",
+      "Kartoshkachilik bilan ham mashhur."
+     ]
+    },
+    "en": {
+     "name": "Gova village",
+     "tagline": "Mountain village on a cold river, summer escape",
+     "description": "A mountain village in the north of Chust district on the Kyrgyz border. A stream runs through it and valley residents come in summer for the cool air; cottages and guest rooms are available. The glacier river is very cold and fast: do not swim in it or drink from it.",
+     "address": "Gova, Chust district, Namangan region",
+     "bestTime": "June to September",
+     "history": "Gova is a mountain village in northern Chust district, about 60 km from Namangan. Residents live from farming, orchards, livestock and beekeeping.",
+     "facts": [
+      "Reached by shared taxi from Chust.",
+      "It received town status in 2009.",
+      "Also known for potato growing."
+     ]
+    },
+    "ru": {
+     "name": "Кишлак Гова",
+     "tagline": "Горный кишлак у холодной реки, летний отдых",
+     "description": "Горный кишлак на севере Чустского района у границы с Кыргызстаном. Через него течёт речка, летом сюда едут за прохладой; можно снять коттедж или комнату. Ледниковая река очень холодная и быстрая: не купайтесь и не пейте из неё.",
+     "address": "Наманганская область, Чустский район, Гова",
+     "bestTime": "С июня по сентябрь",
+     "history": "Гова горный кишлак на севере Чустского района, примерно в 60 км от Намангана. Жители занимаются земледелием, садоводством, скотоводством и пчеловодством.",
+     "facts": [
+      "Добираются на попутном такси из Чуста.",
+      "В 2009 году получил статус посёлка.",
+      "Известен также выращиванием картофеля."
+     ]
+    }
+   },
+   "rules": [
+    {
+     "code": "no_drone",
+     "severity": "warn",
+     "priority": 2,
+     "text": {
+      "uz": "Chegara yaqinida dron uchirish va chegara postlarini suratga olish mumkin emas.",
+      "en": "Near the border, do not fly drones or photograph border posts.",
+      "ru": "Возле границы нельзя запускать дроны и снимать пограничные посты."
+     },
+     "source": "Uzbekistan drone rules: flights need prior registration and permission"
+    },
+    {
+     "code": "no_smoking",
+     "severity": "info",
+     "priority": 1,
+     "text": {
+      "uz": "O'rmon va bog'larda gulxan yoqmang.",
+      "en": "Do not light fires in woods and orchards.",
+      "ru": "Не разводите костры в лесу и садах."
+     },
+     "source": "general etiquette for nature areas in Uzbekistan"
+    }
+   ],
+   "historySources": [
+    {
+     "title": "Tourist objects in Chust district (TSUOS, 2025)",
+     "url": "https://tsuos.uz/wp-content/uploads/2025/01/Chust.pdf"
+    },
+    {
+     "title": "Aviasales: what to see in Namangan",
+     "url": "https://www.aviasales.uz/yolovchi/article/chto-posmotret-v-namangane"
+    },
+    {
+     "title": "UzA: G'ova, kartoshkachilik bilan tanilgan qishloq",
+     "url": "https://uza.uz/ar/posts/gova-kartoshkachilik-bilan-tanilgan-qishloq_872759"
+    },
+    {
+     "title": "Wikipedia: G'ova",
+     "url": "https://wiki.riteme.site/wiki/G%27ova"
+    }
+   ],
+   "image": {
+    "file": "r_gova_village.jpg",
+    "credit": "Wikipedagog12",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chust_tumani_G%27ova_qishlog%27ining_tabiati.jpg",
+    "source": "Wikimedia Commons"
+   },
+   "research": {
+    "noveltyWhy": "Known regionally as a summer retreat, absent from international guides",
+    "locationSource": "https://www.openstreetmap.org/node/297098198",
+    "verified": [
+     "location",
+     "distance",
+     "summer retreat use (two sources)"
+    ],
+    "unverified": [
+     "guest house count"
+    ],
+    "importedAt": "2026-11-26"
+   }
+  }
+ ],
+ "prices": [
+  {
+   "id": "p_namangan_bus",
+   "category": "transport",
+   "name": {
+    "uz": "Shahar avtobusi",
+    "en": "City bus",
+    "ru": "Городской автобус"
+   },
+   "unit": {
+    "uz": "bir safar (elektron 2300, naqd 3000)",
+    "en": "one ride (electronic 2,300, cash 3,000)",
+    "ru": "поездка (электронно 2300, наличными 3000)"
+   },
+   "min": 2300,
+   "max": 3000,
+   "source": "https://api-portal.gov.uz/uploads/46/2025/05/13/e5689415-fa10-4dff-0e93-ffd1190fd958_media_.pdf",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Namangan regional hokim decision of 24 Mar 2025, effective 1 Apr 2025."
+  },
+  {
+   "id": "p_namangan_region_bus_km",
+   "category": "transport",
+   "name": {
+    "uz": "Viloyat ichidagi avtobus (masalan, Chustga)",
+    "en": "Regional bus within the region (e.g. to Chust)",
+    "ru": "Пригородный автобус по области (например, в Чуст)"
+   },
+   "unit": {
+    "uz": "1 yo'lovchi-km",
+    "en": "per passenger-km",
+    "ru": "за пассажиро-км"
+   },
+   "min": 260,
+   "max": 260,
+   "source": "https://api-portal.gov.uz/uploads/46/2025/05/13/e5689415-fa10-4dff-0e93-ffd1190fd958_media_.pdf",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Official cap, hokim decision Mar 2025. About 35 km to Chust gives roughly 9,000."
+  },
+  {
+   "id": "p_namangan_region_marshrutka_km",
+   "category": "transport",
+   "name": {
+    "uz": "Viloyat ichidagi yo'nalishli taksi (marshrutka)",
+    "en": "Regional marshrutka minibus",
+    "ru": "Маршрутное такси по области"
+   },
+   "unit": {
+    "uz": "1 yo'lovchi-km",
+    "en": "per passenger-km",
+    "ru": "за пассажиро-км"
+   },
+   "min": 410,
+   "max": 410,
+   "source": "https://api-portal.gov.uz/uploads/46/2025/05/13/e5689415-fa10-4dff-0e93-ffd1190fd958_media_.pdf",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Official cap, hokim decision Mar 2025. About 35 km to Chust gives roughly 14,000."
+  },
+  {
+   "id": "p_namangan_baggage",
+   "category": "transport",
+   "name": {
+    "uz": "Avtobusda katta yuk",
+    "en": "Large bag on a bus",
+    "ru": "Крупный багаж в автобусе"
+   },
+   "unit": {
+    "uz": "20 kg dan og'ir yoki katta yuk uchun",
+    "en": "bag over 20 kg or oversize",
+    "ru": "багаж свыше 20 кг или крупный"
+   },
+   "min": 3000,
+   "max": 3000,
+   "source": "https://api-portal.gov.uz/uploads/46/2025/05/13/e5689415-fa10-4dff-0e93-ffd1190fd958_media_.pdf",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": []
+  },
+  {
+   "id": "p_namangan_taxi_city",
+   "category": "taxi",
+   "name": {
+    "uz": "Shahar ichida taksi",
+    "en": "In-city taxi",
+    "ru": "Такси по городу"
+   },
+   "unit": {
+    "uz": "3-5 km safar",
+    "en": "3-5 km trip",
+    "ru": "поездка 3-5 км"
+   },
+   "min": 8000,
+   "max": 11000,
+   "source": "https://www.gobytaxi.com/asia/uzbekistan/namangan",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Weak: converted from USD (start 0.4 USD + 0.1 USD/km; 5 km ride about 0.9 USD). No UZS source found."
+  },
+  {
+   "id": "p_namangan_train_tashkent",
+   "category": "transport",
+   "name": {
+    "uz": "Poyezd: Namangan-Toshkent",
+    "en": "Train: Namangan-Tashkent",
+    "ru": "Поезд: Наманган-Ташкент"
+   },
+   "unit": {
+    "uz": "bir yo'lovchi, bir tomon",
+    "en": "one passenger, one way",
+    "ru": "один пассажир, в одну сторону"
+   },
+   "min": 130000,
+   "max": 190000,
+   "source": "https://www.rome2rio.com/Train/Tashkent/Namangan",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Aggregator figure; no railway tariff published in news."
+  },
+  {
+   "id": "p_namangan_shared_taxi_tashkent",
+   "category": "taxi",
+   "name": {
+    "uz": "Taksi (o'rin): Namangan-Toshkent",
+    "en": "Shared taxi seat: Namangan-Tashkent",
+    "ru": "Такси (место): Наманган-Ташкент"
+   },
+   "unit": {
+    "uz": "bir o'rin, bir tomon",
+    "en": "one seat, one way",
+    "ru": "одно место, в одну сторону"
+   },
+   "min": 120000,
+   "max": 200000,
+   "source": "https://travelask.ru/questions/6343914_uz_podskazhite-pozhaluysta-neobhodimo-dvoim-uehat-iz-tashkenta",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Forum answers."
+  },
+  {
+   "id": "p_namangan_private_taxi_tashkent",
+   "category": "taxi",
+   "name": {
+    "uz": "Taksi (butun mashina): Namangan-Toshkent",
+    "en": "Private taxi: Namangan-Tashkent",
+    "ru": "Такси (вся машина): Наманган-Ташкент"
+   },
+   "unit": {
+    "uz": "butun mashina",
+    "en": "whole car",
+    "ru": "вся машина"
+   },
+   "min": 310000,
+   "max": 380000,
+   "source": "https://www.rome2rio.com/s/Tashkent-Airport-TAS/Namangan",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "gobytaxi 2026 calculator gives about 29 USD (about 340,000)."
+  },
+  {
+   "id": "p_namangan_plov",
+   "category": "food",
+   "name": {
+    "uz": "Namangan oshi",
+    "en": "Namangan plov",
+    "ru": "Наманганский плов"
+   },
+   "unit": {
+    "uz": "bir porsiya",
+    "en": "one portion",
+    "ru": "порция"
+   },
+   "min": 22200,
+   "max": 35000,
+   "source": "https://www.afisha.uz/uz/restaurants/2025/01/03/osh-narxi-oshdi",
+   "year": 2025,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "22,200 = Namangan region plov-centre average Dec 2024, the cheapest in the country (stat agency); 35,000 at a Namangan plov place (weproject.media Apr 2026)."
+  },
+  {
+   "id": "p_namangan_micro_samsa",
+   "category": "food",
+   "name": {
+    "uz": "Mikro somsa",
+    "en": "Mini samsa",
+    "ru": "Микро самса"
+   },
+   "unit": {
+    "uz": "10 dona",
+    "en": "10 pieces",
+    "ru": "10 штук"
+   },
+   "min": 20000,
+   "max": 20000,
+   "source": "https://www.weproject.media/articles/detail/gastrotur-po-ferganskoy-doline-marshrut-dlya-tekh-kto-tsenit-khoroshuyu-edu/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": []
+  },
+  {
+   "id": "p_namangan_sim",
+   "category": "market",
+   "name": {
+    "uz": "Turist SIM-karta (Uztelecom \"Travel 5\")",
+    "en": "Tourist SIM card (Uztelecom \"Travel 5\")",
+    "ru": "Туристическая SIM-карта (Uztelecom \"Travel 5\")"
+   },
+   "unit": {
+    "uz": "paket: 6 GB internet, 500 daqiqa, 500 SMS",
+    "en": "package: 6 GB data, 500 min, 500 SMS",
+    "ru": "пакет: 6 ГБ, 500 минут, 500 SMS"
+   },
+   "min": 55000,
+   "max": 55000,
+   "source": "https://uz.kursiv.media/en/2026-09-04/uzbekistan-travel-cost-budget-2026/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": []
+  },
+  {
+   "id": "p_namangan_dried_fruit",
+   "category": "market",
+   "name": {
+    "uz": "Quruq meva (o'rik qoqi, mayiz)",
+    "en": "Dried fruit (apricots, raisins)",
+    "ru": "Сухофрукты (курага, изюм)"
+   },
+   "unit": {
+    "uz": "500 gramm",
+    "en": "500 g",
+    "ru": "500 г"
+   },
+   "min": 25000,
+   "max": 120000,
+   "source": "https://travelto.ru/blog/chto-privezti-iz-uzbekistana/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Country-wide guide, no Namangan-specific source."
+  },
+  {
+   "id": "p_namangan_nuts",
+   "category": "market",
+   "name": {
+    "uz": "Mayiz va yong'oq",
+    "en": "Raisins and nuts",
+    "ru": "Изюм и орехи"
+   },
+   "unit": {
+    "uz": "500 gramm",
+    "en": "500 g",
+    "ru": "500 г"
+   },
+   "min": 30000,
+   "max": 180000,
+   "source": "https://travelto.ru/blog/chto-privezti-iz-uzbekistana/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Country-wide guide."
+  },
+  {
+   "id": "p_namangan_spices",
+   "category": "market",
+   "name": {
+    "uz": "Osh uchun ziravor",
+    "en": "Spice set for plov",
+    "ru": "Набор специй для плова"
+   },
+   "unit": {
+    "uz": "bir qadoq",
+    "en": "one pack",
+    "ru": "упаковка"
+   },
+   "min": 10000,
+   "max": 60000,
+   "source": "https://travelto.ru/blog/chto-privezti-iz-uzbekistana/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Country-wide guide."
+  },
+  {
+   "id": "p_namangan_chust_knife",
+   "category": "souvenir",
+   "name": {
+    "uz": "Chust pichog'i",
+    "en": "Chust knife (pchak)",
+    "ru": "Чустский нож (пчак)"
+   },
+   "unit": {
+    "uz": "bir dona",
+    "en": "one piece",
+    "ru": "штука"
+   },
+   "min": 100000,
+   "max": 200000,
+   "source": "https://www.olx.uz/q-chust-pichoq/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Few OLX listings, Nov 2026 (one seller in Chust at 200,000)."
+  },
+  {
+   "id": "p_namangan_chust_doppi",
+   "category": "souvenir",
+   "name": {
+    "uz": "Chust do'ppisi",
+    "en": "Chust doppi skullcap",
+    "ru": "Чустская тюбетейка"
+   },
+   "unit": {
+    "uz": "bir dona",
+    "en": "one piece",
+    "ru": "штука"
+   },
+   "min": 40000,
+   "max": 45000,
+   "source": "https://www.olx.uz/q-chust-doppi/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Two OLX listings, Nov 2026; handmade doppi from about 180,000 (travelto)."
+  },
+  {
+   "id": "p_namangan_rishtan_bowl",
+   "category": "souvenir",
+   "name": {
+    "uz": "Rishton piyolasi",
+    "en": "Rishtan ceramic bowl",
+    "ru": "Риштанская пиала"
+   },
+   "unit": {
+    "uz": "bir dona",
+    "en": "one piece",
+    "ru": "штука"
+   },
+   "min": 25000,
+   "max": 100000,
+   "source": "https://travelto.ru/blog/chto-privezti-iz-uzbekistana/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Fergana valley craft."
+  },
+  {
+   "id": "p_namangan_margilan_silk",
+   "category": "souvenir",
+   "name": {
+    "uz": "Marg'ilon atlas yoki adras (bir bo'lak)",
+    "en": "Margilan atlas or adras fabric cut",
+    "ru": "Маргиланский атлас или адрас (отрез)"
+   },
+   "unit": {
+    "uz": "bir dona",
+    "en": "one piece",
+    "ru": "штука"
+   },
+   "min": 180000,
+   "max": 500000,
+   "source": "https://travelto.ru/blog/chto-privezti-iz-uzbekistana/",
+   "year": 2026,
+   "updatedAt": "2026-11-26",
+   "placeIds": [],
+   "note": "Fergana valley craft."
+  }
+ ],
+ "events": [
+  {
+   "id": "e_namangan-flower-festival-2027",
+   "kind": "festival",
+   "title": {
+    "uz": "Xalqaro gullar festivali (Gullar sayli)",
+    "en": "International Flower Festival",
+    "ru": "Международный фестиваль цветов"
+   },
+   "venue": {
+    "uz": "Z. M. Bobur nomidagi madaniyat va istirohat bog'i",
+    "en": "Babur Culture and Recreation Park",
+    "ru": "Парк культуры и отдыха имени Бабура"
+   },
+   "start": "2027-05-24T10:00",
+   "end": "2027-07-12T23:00",
+   "lat": 40.99679,
+   "lng": 71.67197,
+   "isFree": true,
+   "source": "https://gov.uz/en/namangan/news/view/160829",
+   "recurring": "annual",
+   "note": "65th festival ran 24 May to 12 July 2026 (opening at Babur Park, over 100 cultural events). 66th (2027) dates not announced; 2026 dates moved to 2027. Coordinates from research/namangan.json (babur-park).",
+   "image": {
+    "file": "r_e_namangan_flower_festival_2027.jpg",
+    "credit": "gov.uz (Uzbektourism)",
+    "license": null,
+    "sourceUrl": "https://gov.uz/en/uzbektourism/news/view/159835",
+    "source": "gov.uz"
+   }
+  },
+  {
+   "id": "e_navruz-namangan-2027",
+   "kind": "festival",
+   "title": {
+    "uz": "Navro'z sayli: «Afsonalar vodiysi» bog'i",
+    "en": "Navruz festival at Afsonalar Vodiysi park",
+    "ru": "Навруз в парке «Афсоналар водийси»"
+   },
+   "venue": {
+    "uz": "«Afsonalar vodiysi» tematik bog'i",
+    "en": "Afsonalar Vodiysi (Valley of Legends) theme park",
+    "ru": "Тематический парк «Афсоналар водийси»"
+   },
+   "start": "2027-03-21T00:00",
+   "end": "2027-03-21T23:59",
+   "lat": 41.00311,
+   "lng": 71.61779,
+   "isFree": true,
+   "source": "https://gov.uz/oz/yanginamangan/news/view/144742",
+   "recurring": "annual",
+   "note": "2026 Navruz public festival of Yangi Namangan district was held here on 21 March 2026; 2027 programme and hours not published. Coordinates from research/namangan.json.",
+   "image": {
+    "file": "r_e_navruz_namangan_2027.jpg",
+    "credit": "gov.uz (Yangi Namangan district)",
+    "license": null,
+    "sourceUrl": "https://gov.uz/oz/yanginamangan/news/view/144742",
+    "source": "gov.uz"
+   }
+  }
+ ],
+ "stays": [
+  {
+   "id": "s_leore-hotel",
+   "kind": "hotel",
+   "name": "Leore Hotel",
+   "lat": 41.01097,
+   "lng": 71.6714,
+   "address": {
+    "uz": "Namangan, Obihayot, Hamroh ko'chasi 77",
+    "en": "77 Hamroh St, Obi Hayot, Namangan",
+    "ru": "Наманган, Обихаёт, ул. Хамрох, 77"
+   },
+   "pricePerNight": 460000,
+   "priceSource": "https://www.booking.com/budget/city/uz/namangan.html",
+   "rating": 4.8,
+   "ratingSource": "https://www.booking.com/budget/city/uz/namangan.html",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Konditsioner",
+     "en": "Air conditioning",
+     "ru": "Кондиционер"
+    },
+    {
+     "uz": "Nonushta",
+     "en": "Breakfast",
+     "ru": "Завтрак"
+    }
+   ],
+   "note": "From 38.33 USD (Booking.com budget list, 2 adults, 1 night). Rating 9.5 from 50 reviews. Coordinates: Hamroh street (OSM), approximate. Amenities general, verify.",
+   "image": {
+    "file": "r_s_leore_hotel.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://us.trip.com/hotels/namangan-hotel-detail-134944271/leore-hotel/",
+    "source": "us.trip.com"
+   }
+  },
+  {
+   "id": "s_zafar-plaza",
+   "kind": "hotel",
+   "name": "Zafar Plaza Hotel",
+   "lat": 41.00885,
+   "lng": 71.58868,
+   "address": {
+    "uz": "Namangan, Kosonsoy ko'chasi 26",
+    "en": "26 Kosonsoy St, Namangan",
+    "ru": "Наманган, ул. Косонсой, 26"
+   },
+   "pricePerNight": 624000,
+   "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "rating": 4.4,
+   "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Konditsioner",
+     "en": "Air conditioning",
+     "ru": "Кондиционер"
+    },
+    {
+     "uz": "Nonushta",
+     "en": "Breakfast",
+     "ru": "Завтрак"
+    }
+   ],
+   "note": "From 52 USD (KAYAK, late Nov 2026). Rating 8.8 from 14 reviews. Coordinates: Kosonsoy street (OSM), house not mapped, approximate.",
+   "image": {
+    "file": "r_s_zafar_plaza.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://ph.trip.com/hotels/namangan-hotel-detail-132689238",
+    "source": "ph.trip.com"
+   }
+  },
+  {
+   "id": "s_buyuk-ipak-yoli",
+   "kind": "hotel",
+   "name": "Buyuk Ipak Yo'li Hotel",
+   "lat": 40.99675,
+   "lng": 71.59605,
+   "address": {
+    "uz": "Namangan, Islom Karimov ko'chasi 17a",
+    "en": "17a Islam Karimov St, Namangan",
+    "ru": "Наманган, ул. Ислама Каримова, 17а"
+   },
+   "pricePerNight": 840000,
+   "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "rating": 4.2,
+   "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Yopiq basseyn",
+     "en": "Indoor pool",
+     "ru": "Крытый бассейн"
+    },
+    {
+     "uz": "Restoran",
+     "en": "Restaurant",
+     "ru": "Ресторан"
+    }
+   ],
+   "note": "From 70 USD (KAYAK). Rating 8.5 from 42 reviews. Indoor pool per Hotels.com; listed as hostel on some sites. Coordinates: Islom Karimov street (OSM), approximate.",
+   "image": {
+    "file": "r_s_buyuk_ipak_yoli.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://ph.trip.com/hotels/namangan-hotel-detail-101978877/buyuk-ipak-yoli",
+    "source": "ph.trip.com"
+   }
+  },
+  {
+   "id": "s_imran-palace",
+   "kind": "hotel",
+   "name": "Imran Palace Hotel",
+   "lat": 41.0,
+   "lng": 71.60303,
+   "address": {
+    "uz": "Namangan, Do'stlik shoh ko'chasi 21",
+    "en": "21 Dostlik Ave, Namangan",
+    "ru": "Наманган, пр. Дустлик, 21"
+   },
+   "pricePerNight": 852000,
+   "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "rating": 4.5,
+   "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Nonushta",
+     "en": "Breakfast",
+     "ru": "Завтрак"
+    },
+    {
+     "uz": "Bepul avtoturargoh",
+     "en": "Free parking",
+     "ru": "Бесплатная парковка"
+    },
+    {
+     "uz": "Aeroport transferi (pullik)",
+     "en": "Airport shuttle (paid)",
+     "ru": "Трансфер из аэропорта (платно)"
+    }
+   ],
+   "opened": "2026",
+   "note": "From 71 USD (KAYAK); Trip.com from 47 USD. Rating 8.9 from 23 reviews. Opened 2026, 51 rooms, halal breakfast (Trip.com).",
+   "image": {
+    "file": "r_s_imran_palace.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://sg.trip.com/hotels/namangan-hotel-detail-125723122/imran-palace-hotel/",
+    "source": "sg.trip.com"
+   }
+  },
+  {
+   "id": "s_akhsikent-hotel",
+   "kind": "hotel",
+   "name": "Akhsikent Hotel",
+   "lat": 41.01978,
+   "lng": 71.63222,
+   "address": {
+    "uz": "Namangan, Shimoliy aylanma yo'l 46",
+    "en": "46 Shimoliy Aylanma Rd, Namangan",
+    "ru": "Наманган, Северная кольцевая дорога, 46"
+   },
+   "pricePerNight": 852000,
+   "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "rating": 4.0,
+   "ratingSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Nonushta",
+     "en": "Breakfast",
+     "ru": "Завтрак"
+    },
+    {
+     "uz": "Sauna",
+     "en": "Sauna",
+     "ru": "Сауна"
+    },
+    {
+     "uz": "Ochiq basseyn",
+     "en": "Outdoor pool",
+     "ru": "Открытый бассейн"
+    }
+   ],
+   "opened": "2020",
+   "note": "From 71 USD (KAYAK). Rating 8.0 from 44 reviews. 76 rooms, opened 2020, sauna and seasonal outdoor pool (Trip.com).",
+   "image": {
+    "file": "r_s_akhsikent_hotel.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://in.trip.com/hotels/namangan-hotel-detail-75432034/llc-akhsikent-hotel/",
+    "source": "in.trip.com"
+   }
+  },
+  {
+   "id": "s_oydin-plaza",
+   "kind": "hotel",
+   "name": "Oydin Plaza Hotel",
+   "lat": 40.99865,
+   "lng": 71.64459,
+   "address": {
+    "uz": "Namangan, Amir Temur ko'chasi 105",
+    "en": "105 Amir Temur St, Namangan",
+    "ru": "Наманган, ул. Амира Темура, 105"
+   },
+   "pricePerNight": 924000,
+   "priceSource": "https://www.kayak.com/Namangan-Hotels.53756.hotel.ksp",
+   "amenities": [
+    {
+     "uz": "Bepul Wi-Fi",
+     "en": "Free Wi-Fi",
+     "ru": "Бесплатный Wi-Fi"
+    },
+    {
+     "uz": "Konditsioner",
+     "en": "Air conditioning",
+     "ru": "Кондиционер"
+    }
+   ],
+   "note": "From 77 USD (KAYAK search snippet). Only 1 Trip.com review, so no rating given. Amenities minimal, verify.",
+   "image": {
+    "file": "r_s_oydin_plaza.jpg",
+    "credit": "Trip.com",
+    "license": null,
+    "sourceUrl": "https://www.trip.com/hotels/namangan-hotel-detail-52571058/oydinplaza-hotel/",
+    "source": "trip.com"
+   }
+  }
+ ]
+}
