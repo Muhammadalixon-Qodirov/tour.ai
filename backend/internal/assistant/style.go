@@ -23,7 +23,9 @@ func ApproxWord(lang string) string {
 func isDashRune(r rune) bool { return r == '—' || r == '–' }
 
 // special — oqimda keyingi bo'lak kelmaguncha qaror qilib bo'lmaydigan belgilar.
-func special(r rune) bool { return r == '—' || r == '–' || r == '≈' || r == '~' }
+func special(r rune) bool {
+	return r == '—' || r == '–' || r == '≈' || r == '~' || r == '*' || r == '#'
+}
 
 // Sanitize — "—" (va bo'shliqlar orasidagi "–") vergul yoki ikki nuqtaga, "≈" va raqam oldidagi "~" "taxminan" ga almashadi.
 // Raqamlar orasidagi "–" (45 000–60 000) o'zgarmaydi.
@@ -40,9 +42,22 @@ func Sanitize(s, lang string) string {
 		}
 		return j
 	}
+	lineStart := func() bool { return len(b) == 0 || b[len(b)-1] == '\n' }
 	for i := 0; i < len(rs); i++ {
 		r := rs[i]
 		switch {
+		case r == '*': // markdown: "**qalin**" -> "qalin"; qator boshidagi "* " -> "• "
+			if lineStart() && i+1 < len(rs) && rs[i+1] == ' ' {
+				b = append(b, '•')
+			}
+			continue
+		case r == '#' && lineStart(): // markdown sarlavha "### Matn" -> "Matn"
+			j := i
+			for j < len(rs) && rs[j] == '#' {
+				j++
+			}
+			i = skipSpaces(j) - 1
+			continue
 		case r == '—' || r == '–' && dashAsPunct(rs, i):
 			b = trimSpaces(b)
 			j := skipSpaces(i + 1)

@@ -126,8 +126,27 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	if req.Location != nil {
 		areq.Location = &[2]float64{req.Location.Lat, req.Location.Lng}
 	}
+	// javob tili: savoldan; qisqa/noaniq bo'lsa suhbatdagi oldingi savol tilidan; bo'lmasa ilova tili
+	replyLang, ok := assistant.DetectLangOK(req.Message)
+	for i := len(history) - 1; !ok && i >= 0; i-- {
+		if history[i].Role == "user" {
+			replyLang, ok = assistant.DetectLangOK(history[i].Text)
+		}
+	}
+	if !ok {
+		replyLang = langOr(lang)
+	}
+	areq.ReplyLang = replyLang
 	if u, err := s.store.User(ctx, uid); err == nil {
 		var parts []string
+		if u.DisplayName != nil && strings.TrimSpace(*u.DisplayName) != "" {
+			parts = append(parts, "name="+strings.TrimSpace(*u.DisplayName))
+		}
+		if u.Email != nil || u.GoogleSub != nil {
+			parts = append(parts, "signed_in=yes")
+		} else {
+			parts = append(parts, "signed_in=no (guest)")
+		}
 		if u.Budget != nil {
 			parts = append(parts, fmt.Sprintf("budget=%d (1 cheap..3 comfort)", *u.Budget))
 		}
@@ -157,11 +176,11 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// yozish qoidalari: javob tili (savol tili) bo'yicha "taxminan"; "—", "≈", "~" foydalanuvchiga yetmaydi
-	ansLang := assistant.DetectLang(req.Message, langOr(lang))
+	ansLang := replyLang
 	rawEmit := emit
 	emit, flushText := assistant.SanitizeEmit(ansLang, rawEmit)
 
-	tools := assistant.NewTools(s.store, lang, s.now)
+	tools := assistant.NewTools(s.store, replyLang, s.now) // joy nomlari javob tilida
 	tools.Weather = s.weather
 	if tripInfo != nil {
 		tools.Trip = tripInfo
@@ -170,7 +189,11 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	mode := "fallback"
 	var answer string
 	var err error
-	if s.ai != nil {
+	small, isSmall := assistant.SmallTalk(areq)
+	if isSmall { // salom, rahmat, kimsan, men kimman — tayyor javob
+		answer = small
+		emit("delta", map[string]string{"text": answer})
+	} else if s.ai != nil {
 		mode = "ai"
 		actx, cancel := context.WithTimeout(ctx, 150*time.Second)
 		answer, err = s.ai.Answer(actx, areq, tools, emit)
@@ -180,7 +203,7 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 			mode, err = "fallback", nil
 		}
 	}
-	if mode == "fallback" {
+	if mode == "fallback" && !isSmall {
 		answer, err = assistant.Fallback(ctx, areq, tools)
 		if err == nil {
 			emit("delta", map[string]string{"text": answer})

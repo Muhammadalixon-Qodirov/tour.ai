@@ -66,6 +66,7 @@ func (t *Tools) remember(p store.Place) {
 
 type SearchPlacesInput struct {
 	City          string         `json:"city,omitempty"`
+	Name          string         `json:"name,omitempty"` // joy nomi (yoki uning qismi), aliaslar bilan
 	Categories    []string       `json:"categories,omitempty"`
 	Words         []string       `json:"words,omitempty"`
 	Family        bool           `json:"family,omitempty"`
@@ -84,7 +85,8 @@ type placeBrief struct {
 	City       string   `json:"city"`
 	Category   string   `json:"category"`
 	Tagline    string   `json:"tagline,omitempty"`
-	PriceLevel *int     `json:"price_level,omitempty"` // 0 bepul .. 3 qimmat; yo'q — noma'lum
+	PriceLevel *int     `json:"-"`               // 0 bepul .. 3 qimmat; yo'q — noma'lum (zaxira rejim uchun)
+	Price      string   `json:"price,omitempty"` // free | cheap | moderate | expensive (modelga raqam emas, so'z)
 	Rating     *float64 `json:"rating,omitempty"`
 	Reviews    int      `json:"reviews,omitempty"`
 	Family     bool     `json:"family_friendly"`
@@ -100,6 +102,7 @@ func (t *Tools) brief(p store.Place) placeBrief {
 		Reviews: p.Reviews, Family: p.FamilyFriendly, Wheelchair: p.Wheelchair, Novelty: string(p.Novelty), Trust: p.Trust}
 	if pl := p.PriceLevel; pl > 0 || !domain.IsMealCategory(p.Category) { // ovqat joyida 0 — "noma'lum", bepul emas
 		b.PriceLevel = &pl
+		b.Price = priceLabel(t.Lang, pl)
 	}
 	if p.Reviews > 0 || p.Rating > 0 {
 		r := p.Rating
@@ -123,7 +126,7 @@ func (t *Tools) SearchPlaces(ctx context.Context, in SearchPlacesInput) (any, er
 		limit = 6 // token tejash: odatda 3-5 tasi tavsiya qilinadi
 	}
 	in.City = NormCity(in.City)
-	f := store.PlaceFilter{City: in.City, Words: in.Words, Family: in.Family, Wheelchair: in.Wheelchair, MaxPrice: in.MaxPriceLevel,
+	f := store.PlaceFilter{City: in.City, Q: strings.TrimSpace(in.Name), Words: in.Words, Family: in.Family, Wheelchair: in.Wheelchair, MaxPrice: in.MaxPriceLevel,
 		Near: in.Near, RadiusM: in.RadiusM, Limit: 60}
 	for _, c := range in.Categories {
 		if domain.ValidCategory(c) {
@@ -338,4 +341,18 @@ func NormCity(c string) string {
 		}
 	}
 	return c
+}
+
+// priceLabel — narx darajasi so'z bilan, asbob tilida (model uni javobga to'g'ridan-to'g'ri ko'chiradi).
+func priceLabel(lang string, level int) string {
+	labels := map[string][4]string{
+		"uz": {"bepul", "arzon", "o'rtacha", "qimmat"},
+		"ru": {"бесплатно", "недорого", "средне", "дорого"},
+		"en": {"free", "cheap", "moderate", "expensive"},
+	}
+	l, ok := labels[lang]
+	if !ok {
+		l = labels["uz"]
+	}
+	return l[min(max(level, 0), 3)]
 }

@@ -23,6 +23,7 @@ type Request struct {
 	Message     string
 	History     []Turn
 	Lang        string
+	ReplyLang   string // javob tili: savoldan aniqlangan (uz | ru | en)
 	LangGuessed bool   // Accept-Language yuborilmagan — savol tilidan aniqlanadi
 	CityID      string // ilova tanlagan shahar (ixtiyoriy)
 	PlaceID     string // joy sahifasidan so'ralsa
@@ -75,10 +76,12 @@ Ground rules (most important):
 - open_now null means hours are unknown: do not claim a place is open.
 - Only name places, stays, events and services that appeared in a tool result or the trip context, with the exact returned
   name. Never add one you remember or guess.
-- price_level is a 0 to 3 scale, NOT a price: say "bepul"/"arzon"/"o'rtacha"/"qimmat", never "0 so'm". State amounts in
-  so'm only when they come from entry_fee, search_prices, search_stays, get_intercity, search_events or the trip.
+- "price" on a place is already a word in the reply language ("arzon", "недорого", "cheap"): use it as is, never as a
+  number, scale or range like "0-3". Currency name: Uzbek "so'm", Russian "сум", English "UZS" (never mix scripts). State amounts in so'm only when they come from entry_fee,
+  search_prices, search_stays, get_intercity, search_events or the trip.
 - Do not embellish: no "most popular", "great reviews", "central location" unless the data says so.
-- A null or missing value means "unknown": say there is no verified info on it; never write "null".
+- A null or missing value means "unknown": say exactly WHICH detail of WHICH place is missing (e.g. "Oshqand osh
+  markazining ish vaqti haqida tekshirilgan ma'lumot yo'q."), never a generic refusal; never write "null".
 - Never show internal field names or values like "price_level", "open_now true", "trust", ids.
 
 Voice and writing (strict):
@@ -92,8 +95,21 @@ Voice and writing (strict):
   A plain hyphen between numbers is fine: "45 000-60 000 so'm".
 - No emoji, no markdown headings, bold or tables. Plain lines; "•" bullets are fine. Be concise: one short intro line and
   a list. Plain, simple words that any tourist understands.
-- Reply in the language the user's message is written in (Russian question, Russian answer), even if app_language
-  differs; Uzbek in Latin script by default.
+- LANGUAGE: write the whole answer in the language given by reply_language in the context line (uz = Uzbek in Latin
+  script, ru = Russian, en = English). It is detected from the user's own message, so it wins over app_language.
+
+Conversation basics (answer these directly, without tools, and NEVER with the "no verified information" sentence):
+- Do not call tools for small talk or off-topic messages, and write exactly ONE answer in the reply language.
+- Greetings, thanks, "how are you": reply warmly in one short line and offer help (places, food, stays, prices,
+  routes, the user's trip). Thanks example: "Arzimaydi! Yana savol bo'lsa, yozing." (still no first person).
+- "Who are you?" / "Sen kimsan?" / "Кто ты?": one line describing the Safar travel assistant and what it can do
+  (in the neutral voice, e.g. "Safar ilovasining sayohat yordamchisi: joylar, ovqat, mehmonxona, narxlar va safar rejasi
+  bo'yicha yordam beradi."), then one example question the user could ask.
+- "Who am I?" / "Men kimman?" / "Что ты знаешь обо мне?": use the profile in the context line (name, interests,
+  budget, travels_with, signed_in). Say what is known in one or two lines. If nothing is known, say the app does not know
+  the name yet and that interests and budget can be set in the profile, which makes the suggestions more personal.
+- Off-topic chat (jokes, politics, homework): one polite line that the assistant helps with travel in Uzbekistan,
+  plus an example question.
 
 How to work:
 - Call search_places with the filters the request implies: categories (restaurant, cafe, museum, monument, mosque, bazaar,
@@ -105,6 +121,15 @@ How to work:
   search_prices: fair prices (taxi, food, souvenirs, tickets). search_events: concerts, festivals, fairs in a city and
   date range. get_intercity: trains, buses, shared taxis and flights between two cities. get_services: nearest ATM,
   pharmacy, currency exchange, hospital, police and the emergency numbers. get_weather: daily forecast for a city.
+- "qachon ochiladi" / "soat nechada ochiladi" / "во сколько открывается" / "when does it open" ask for today's opening
+  HOURS: call get_place and give the hours (not the year the place opened).
+- Follow-up words like "birinchisi" / "первый" / "the first one" refer to the places listed in the previous answer
+  (their ids are given in the history); call get_place with that id.
+- If the message is just a place name ("Registan", "Chor Minor"), give a short overview of that place from
+  search_places(name) and get_place: what it is, the city, today's hours and the ticket price if known.
+- List ONLY results that really match the request (asked for plov: only places that serve plov). Fewer good results are
+  better than padding the list; never add an unrelated place with a remark like "but it is not ...".
+- Never show internal category ids like "(monument)" or "(restaurant)"; describe the place in normal words.
 - Recommend 3 to 5 options, best first, each with one short reason grounded in the data (price level, family friendly,
   open now, little-known, distance). Mention each name exactly as returned so the app can link it.
 
@@ -119,9 +144,10 @@ The user's trip (when the context line has trip_id):
 
 // toolSpecs — asboblar tavsifi bitta joyda; Claude va OpenAI-mos (Groq) formatlariga o'giriladi.
 var toolSpecs = []toolSpec{
-	spec("search_places", "Search published places (sights, restaurants, cafes, bazaars, workshops...) in the Safar database. Returns brief cards with price_level (0 free..3 expensive), family_friendly, open_now (null = unknown hours), rating, distance.",
+	spec("search_places", "Search published places (sights, restaurants, cafes, bazaars, workshops...) in the Safar database. Returns brief cards with price (a word like cheap/expensive in the reply language), family_friendly, open_now (null = unknown hours), rating, distance.",
 		map[string]any{
 			"city":            map[string]any{"type": "string", "description": "city id, e.g. samarkand"},
+			"name":            map[string]any{"type": "string", "description": "place name or part of it, when the user names a specific place (e.g. Registon, Chor Minor)"},
 			"categories":      map[string]any{"type": "array", "items": map[string]any{"type": "string"}},
 			"words":           map[string]any{"type": "array", "items": map[string]any{"type": "string"}, "description": "word stems matched at word start in name/tagline/description, any of them (e.g. osh, plov, somsa, ceramics)"},
 			"family":          map[string]any{"type": "boolean", "description": "only places marked good for children"},
@@ -295,7 +321,7 @@ func (c *Claude) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (
 			msgs = append(msgs, anthropic.NewUserMessage(anthropic.NewTextBlock(h.Text)))
 		}
 	}
-	msgs = append(msgs, anthropic.NewUserMessage(anthropic.NewTextBlock(contextLine(req)+req.Message)))
+	msgs = append(msgs, anthropic.NewUserMessage(anthropic.NewTextBlock(userContent(req))))
 	params := anthropic.MessageNewParams{
 		Model:     anthropic.Model(c.model),
 		MaxTokens: 4000,
@@ -357,11 +383,23 @@ func (c *Claude) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (
 	return full.String(), nil
 }
 
+// userContent — kontekst + savol + oxirida javob tili (model xabar oxiridagi ko'rsatmaga ko'proq amal qiladi).
+func userContent(req Request) string {
+	tail := ""
+	if name := map[string]string{"uz": "Uzbek (Latin script)", "ru": "Russian", "en": "English"}[req.ReplyLang]; name != "" {
+		tail = "\n\n(Reply language: " + name + ".)"
+	}
+	return contextLine(req) + req.Message + tail
+}
+
 func contextLine(req Request) string {
 	var parts []string
 	parts = append(parts, "today="+time.Now().In(tashkent).Format("2006-01-02 15:04 Mon"))
 	if req.Lang != "" {
 		parts = append(parts, "app_language="+req.Lang)
+	}
+	if req.ReplyLang != "" {
+		parts = append(parts, "reply_language="+req.ReplyLang)
 	}
 	if req.CityID != "" {
 		parts = append(parts, "current_city="+req.CityID)

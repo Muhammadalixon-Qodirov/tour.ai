@@ -45,17 +45,32 @@ func hasAny(text string, ws []string) []string {
 }
 
 var fbText = map[string]map[string]string{
-	"intro":    {"uz": "Bazada topildi:", "ru": "Найдено в базе:", "en": "Found in the base:"},
-	"none":     {"uz": "Bu haqda tekshirilgan ma'lumot yo'q. Shahar yoki joy turini aniqroq yozing (masalan: \"Samarqandda arzon osh\").", "ru": "Проверенной информации об этом нет. Уточните город или тип места (например: «недорогой плов в Самарканде»).", "en": "There is no verified information on this yet. Name a city or a type of place (for example: \"cheap plov in Samarkand\")."},
-	"cheap":    {"uz": "arzon", "ru": "недорого", "en": "budget"},
-	"family":   {"uz": "bolalar bilan qulay", "ru": "удобно с детьми", "en": "good for kids"},
-	"open":     {"uz": "hozir ochiq", "ru": "сейчас открыто", "en": "open now"},
-	"hidden":   {"uz": "kam tanilgan", "ru": "малоизвестное", "en": "little-known"},
-	"free":     {"uz": "bepul", "ru": "бесплатно", "en": "free"},
-	"perNight": {"uz": "so'm/kecha", "ru": "сум/ночь", "en": "UZS/night"},
-	"tripDay":  {"uz": "Reja, %d-kun (%s):", "ru": "План, день %d (%s):", "en": "Plan, day %d (%s):"},
-	"lunch":    {"uz": "tushlik", "ru": "обед", "en": "lunch"},
-	"approx":   {"uz": "taxminan", "ru": "примерно", "en": "about"},
+	"offTopic": {"uz": "Safar yordamchisi O'zbekiston bo'ylab sayohatga yordam beradi: joylar, ovqat, mehmonxona, narxlar va safar rejasi. Masalan: \"Samarqandda arzon osh qayerda?\"",
+		"ru": "Помощник Safar помогает с поездкой по Узбекистану: места, еда, жильё, цены и план поездки. Например: «Где недорогой плов в Самарканде?»",
+		"en": "The Safar assistant helps with travel in Uzbekistan: places, food, stays, prices and trip plans. For example: \"Where is cheap plov in Samarkand?\""},
+	"hello": {"uz": "Salom! Joylar, ovqat, mehmonxona, narxlar yoki safar rejasi haqida so'rashingiz mumkin.",
+		"ru": "Здравствуйте! Можно спросить о местах, еде, жилье, ценах или плане поездки.",
+		"en": "Hello! Ask about places, food, stays, prices or your trip plan."},
+	"thanks": {"uz": "Arzimaydi! Yana savol bo'lsa, bemalol yozing.", "ru": "Пожалуйста! Если будут ещё вопросы, пишите.",
+		"en": "You're welcome! Ask anytime."},
+	"whoAreYou": {"uz": "Safar ilovasining sayohat yordamchisi: joylar, ovqat, mehmonxona, narxlar va safar rejasi bo'yicha yordam beradi. Masalan: \"Buxoroda nima ko'rish mumkin?\"",
+		"ru": "Помощник по путешествиям в приложении Safar: места, еда, жильё, цены и план поездки. Например: «Что посмотреть в Бухаре?»",
+		"en": "The travel assistant in the Safar app: places, food, stays, prices and trip plans. For example: \"What to see in Bukhara?\""},
+	"whoAmI": {"uz": "Ismingiz hali ma'lum emas. Profilda ism, qiziqishlar va byudjetni ko'rsatsangiz, tavsiyalar shaxsiyroq bo'ladi.",
+		"ru": "Ваше имя пока неизвестно. Если указать в профиле имя, интересы и бюджет, советы будут точнее.",
+		"en": "Your name isn't known yet. Add your name, interests and budget in the profile for more personal suggestions."},
+	"whoAmIName": {"uz": "Siz %s. Yana nima bilan yordam kerak?", "ru": "Вы %s. Чем ещё помочь?", "en": "You are %s. How else can the assistant help?"},
+	"intro":      {"uz": "Bazada topildi:", "ru": "Найдено в базе:", "en": "Found in the base:"},
+	"none":       {"uz": "Bu haqda tekshirilgan ma'lumot yo'q. Shahar yoki joy turini aniqroq yozing (masalan: \"Samarqandda arzon osh\").", "ru": "Проверенной информации об этом нет. Уточните город или тип места (например: «недорогой плов в Самарканде»).", "en": "There is no verified information on this yet. Name a city or a type of place (for example: \"cheap plov in Samarkand\")."},
+	"cheap":      {"uz": "arzon", "ru": "недорого", "en": "budget"},
+	"family":     {"uz": "bolalar bilan qulay", "ru": "удобно с детьми", "en": "good for kids"},
+	"open":       {"uz": "hozir ochiq", "ru": "сейчас открыто", "en": "open now"},
+	"hidden":     {"uz": "kam tanilgan", "ru": "малоизвестное", "en": "little-known"},
+	"free":       {"uz": "bepul", "ru": "бесплатно", "en": "free"},
+	"perNight":   {"uz": "so'm/kecha", "ru": "сум/ночь", "en": "UZS/night"},
+	"tripDay":    {"uz": "Reja, %d-kun (%s):", "ru": "План, день %d (%s):", "en": "Plan, day %d (%s):"},
+	"lunch":      {"uz": "tushlik", "ru": "обед", "en": "lunch"},
+	"approx":     {"uz": "taxminan", "ru": "примерно", "en": "about"},
 }
 
 func tr(key, lang string) string {
@@ -67,13 +82,20 @@ func tr(key, lang string) string {
 
 // Fallback — matnli javob va asboblar orqali topilgan joylar (t.Found).
 func Fallback(ctx context.Context, req Request, t *Tools) (string, error) {
-	lang := req.Lang
+	lang := req.ReplyLang
+	if lang == "" {
+		lang = req.Lang
+		if req.LangGuessed {
+			lang = DetectLang(req.Message, lang)
+		}
+	}
 	if lang != "ru" && lang != "en" {
 		lang = "uz"
 	}
-	if req.LangGuessed {
-		lang = DetectLang(req.Message, lang)
+	if ans, ok := smallTalk(req, lang); ok {
+		return ans, nil
 	}
+
 	text := " " + strings.ToLower(strings.NewReplacer("ʻ", "'", "’", "'", "‘", "'", ",", " ", ".", " ", "?", " ", "!", " ").Replace(req.Message)) + " "
 	city := req.CityID
 	for id, ws := range cityWords {
@@ -126,7 +148,34 @@ func Fallback(ctx context.Context, req Request, t *Tools) (string, error) {
 		}
 	}
 	if city == "" && in.Near == nil && len(in.Categories) == 0 && len(in.Words) == 0 {
-		return tr("none", lang), nil
+		// qisqa xabar joy nomi bo'lishi mumkin ("Registan", "Chor Minor") — nom bo'yicha qidiramiz
+		var words []string
+		for _, w := range strings.Fields(strings.Trim(text, " ")) {
+			if len([]rune(w)) >= 4 {
+				words = append(words, w)
+			}
+		}
+		if len(words) > 0 && len(words) <= 3 {
+			// avval nomi mos kelgan joylar ("Registon" → Registon), bo'lmasa tavsifida uchraganlar
+			r, err := t.SearchPlaces(ctx, SearchPlacesInput{Name: strings.Join(words, " "), Limit: 5})
+			if err == nil && r.(map[string]any)["count"].(int) == 0 {
+				r, err = t.SearchPlaces(ctx, SearchPlacesInput{Words: words, Limit: 5})
+			}
+			if err != nil {
+				return "", err
+			}
+			if ps := r.(map[string]any)["places"].([]placeBrief); len(ps) > 0 {
+				b.WriteString(tr("intro", lang))
+				for _, p := range ps {
+					b.WriteString("\n• " + p.Name)
+					if p.Tagline != "" {
+						b.WriteString(": " + p.Tagline)
+					}
+				}
+				return b.String(), nil
+			}
+		}
+		return tr("offTopic", lang), nil
 	}
 	// topilmasa filtrlarni bosqichma-bosqich yumshatamiz: avval taom so'zlari, keyin "hozir ochiq"
 	var places []placeBrief
@@ -199,33 +248,90 @@ func stayLines(list []stayBrief, lang string) []string {
 	return out
 }
 
-// DetectLang — savol tili (ilova tilni yubormagan bo'lsa): kirill → ru (o'zbek kirill so'zlari bo'lsa uz),
-// o'zbekcha belgilar/qo'shimchalar → uz, aks holda def.
+// DetectLang — savol tili: aniqlansa o'sha, aks holda def.
 func DetectLang(msg, def string) string {
-	low := " " + strings.ToLower(msg) + " "
-	cyr := 0
-	for _, r := range low {
-		if r >= 'а' && r <= 'я' || r == 'ё' || r == 'ў' || r == 'қ' || r == 'ғ' || r == 'ҳ' {
-			cyr++
-		}
-	}
-	if cyr > 3 {
-		if strings.ContainsAny(low, "ўқғҳ") {
-			return "uz"
-		}
-		return "ru"
-	}
-	for _, w := range []string{"o'", "g'", "oʻ", "gʻ", "da ", "dagi ", "lar", "qayer", "qanday", "bilan", "uchun", "mumkin", "yaxshi", "arzon", "joy"} {
-		if strings.Contains(low, w) {
-			return "uz"
-		}
-	}
-	for _, w := range []string{" the ", " where ", " what ", " with ", " cheap ", " best ", " near ", " kids "} {
-		if strings.Contains(low, w) {
-			return "en"
-		}
+	if l, ok := DetectLangOK(msg); ok {
+		return l
 	}
 	return def
+}
+
+var (
+	uzWords = toSet("kim kimman kimsan kimsiz man men san sen siz biz nima nimaga nimalar nega qayer qayerda qayerga qayerdan " +
+		"qanday qancha qachon nechta bor bormi yo'q yoq salom assalomu alaykum rahmat raxmat qalay yaxshi yomon kerak kerakmi mumkin " +
+		"mumkinmi uchun bilan va ham emas menga senga sizga mening sening sizning osh palov joy joylar shahar ber bering aytchi " +
+		"ayting ayt qil qilib bo'ladi boladi bo'lsa bolsa ertaga bugun kecha arzon qimmat mehmonxona ovqat borsa borish ko'rish " +
+		"korish tushlik nonushta kechki dam olish sayohat yordam iltimos hop xop ha yo'l yol pul narxi narx")
+	enWords = toSet("the a an where what who how is are am i me my you your can could best near cheap kids hotel food please " +
+		"thanks thank hello hi to in of for and do does tell show find there this that it")
+	uzSuffix = []string{"man", "san", "miz", "siz", "mi", "chi", "dagi", "larni", "ning", "lar", "da", "ga", "dan", "ni"}
+	// o'zbekcha yozilishi inglizchadan farq qiladigan shahar o'zaklari (Samarqand ≠ Samarkand) — kuchli belgi
+	uzStems = []string{"samarqand", "toshkent", "buxoro", "xiva", "farg'ona", "fargona", "qo'qon", "qoqon", "marg'ilon",
+		"andijon", "urganch", "termiz", "navoiy", "qarshi", "jizzax", "shahrisabz", "nukus", "namangan", "chorvoq", "chimyon"}
+)
+
+func toSet(s string) map[string]bool {
+	m := map[string]bool{}
+	for _, w := range strings.Fields(s) {
+		m[w] = true
+	}
+	return m
+}
+
+// DetectLangOK — xabar tilini aniqlaydi; ok=false — aniqlab bo'lmadi (juda qisqa yoki noaniq).
+func DetectLangOK(msg string) (string, bool) {
+	low := strings.ToLower(strings.NewReplacer("ʻ", "'", "’", "'", "‘", "'", "`", "'").Replace(msg))
+	cyr, lat := 0, 0
+	for _, r := range low {
+		switch {
+		case r >= 'а' && r <= 'я' || r == 'ё' || r == 'ў' || r == 'қ' || r == 'ғ' || r == 'ҳ':
+			cyr++
+		case r >= 'a' && r <= 'z':
+			lat++
+		}
+	}
+	if cyr > 0 && cyr >= lat {
+		if strings.ContainsAny(low, "ўқғҳ") {
+			return "uz", true
+		}
+		return "ru", true
+	}
+	if lat == 0 {
+		return "", false
+	}
+	if strings.Contains(low, "o'") || strings.Contains(low, "g'") {
+		return "uz", true
+	}
+	var uz, en float64
+	for _, w := range strings.FieldsFunc(low, func(r rune) bool { return !(r >= 'a' && r <= 'z' || r == '\'') }) {
+		isStem := false
+		for _, st := range uzStems {
+			if strings.HasPrefix(w, st) {
+				isStem = true
+				break
+			}
+		}
+		switch {
+		case uzWords[w] || isStem:
+			uz++
+		case enWords[w]:
+			en++
+		default:
+			for _, suf := range uzSuffix {
+				if len(w) > len(suf)+2 && strings.HasSuffix(w, suf) {
+					uz += 0.4
+					break
+				}
+			}
+		}
+	}
+	switch {
+	case uz > en && uz >= 0.8:
+		return "uz", true
+	case en > uz && en >= 1:
+		return "en", true
+	}
+	return "", false
 }
 
 // groupDigits — 450000 → "450 000"
@@ -297,4 +403,53 @@ func tripAnswer(ti *TripInfo, text, lang string, now time.Time) string {
 		b.WriteString("\n• " + st.Arrive + " " + name)
 	}
 	return b.String()
+}
+
+// SmallTalk — salomlashish, rahmat, "kimsan", "men kimman" ga tayyor, tekshirilgan javob (modelga bormaydi: tez,
+// limitni tejaydi va model namuna savolda fakt to'qimaydi).
+func SmallTalk(req Request) (string, bool) {
+	lang := req.ReplyLang
+	if lang != "ru" && lang != "en" {
+		lang = "uz"
+	}
+	return smallTalk(req, lang)
+}
+
+func smallTalk(req Request, lang string) (string, bool) {
+	low := " " + strings.ToLower(strings.NewReplacer("ʻ", "'", "’", "'", ",", " ", ".", " ", "?", " ", "!", " ").Replace(req.Message)) + " "
+	has := func(ws ...string) bool {
+		for _, w := range ws {
+			if strings.Contains(low, w) {
+				return true
+			}
+		}
+		return false
+	}
+	n := len(strings.Fields(low))
+	switch {
+	case has("kimman", "who am i", "кто я", "обо мне", "about me", "meni bilasan", "men haqimda"):
+		if name := profileValue(req.Profile, "name"); name != "" {
+			return fmt.Sprintf(tr("whoAmIName", lang), name), true
+		}
+		return tr("whoAmI", lang), true
+	case has("kimsan", "kimsiz", "who are you", "кто ты", "кто вы", "nima qila olasan", "what can you do", "что ты умеешь", "что умеешь"):
+		return tr("whoAreYou", lang), true
+	case has("anekdot", "hazil", " joke", "анекдот", "шутк", " she'r", " sher ayt", "стих", " poem", "siyosat", "политик",
+		"politic", "uy vazifa", "homework", "домашн", "kod yoz", "write code", "напиши код"):
+		return tr("offTopic", lang), true
+	case n <= 4 && has(" rahmat", " raxmat", " thank", " thx", "спасибо", " katta rahmat"):
+		return tr("thanks", lang), true
+	case n <= 3 && has(" salom ", " assalomu", " hello ", " hi ", " hey ", "привет", "здравствуй", " qalay", " как дела"):
+		return tr("hello", lang), true
+	}
+	return "", false
+}
+
+func profileValue(profile, key string) string {
+	for _, part := range strings.Split(profile, ";") {
+		if k, v, ok := strings.Cut(strings.TrimSpace(part), "="); ok && k == key {
+			return strings.TrimSpace(v)
+		}
+	}
+	return ""
 }

@@ -45,9 +45,10 @@ func TestGuideFallback(t *testing.T) {
 	}
 	// bazada yo'q narsa — to'qimaydi
 	var none guideResp
-	c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "salom", "conversationId": res.ConversationID}, &none)
-	if !strings.Contains(none.Text, "tekshirilgan ma'lumot yo'q") || none.ConversationID != res.ConversationID {
-		t.Fatalf("bo'sh javob: %+v", none)
+	// bazaga aloqasi yo'q savol — to'qimaydi, sayohatga yo'naltiradi
+	c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "anekdot aytib ber", "conversationId": res.ConversationID}, &none)
+	if !strings.Contains(none.Text, "sayohatga yordam beradi") || none.ConversationID != res.ConversationID {
+		t.Fatalf("begona mavzu: %+v", none)
 	}
 	var conv struct {
 		Messages []map[string]any `json:"messages"`
@@ -299,7 +300,7 @@ func TestGroqKeyFailover(t *testing.T) {
 	c := newClient(t, "guide-device-0012")
 	for i := 0; i < 2; i++ { // navbat: 1-so'rov key-a dan boshlaydi (429 → key-b), 2-so'rov to'g'ri key-b dan
 		var res guideResp
-		if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "salom"}, &res); code != 200 || res.Mode != "ai" || res.Text != "Salom" {
+		if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "Samarqandda nima ko'rish mumkin"}, &res); code != 200 || res.Mode != "ai" || res.Text != "Salom" {
 			t.Fatalf("failover %d: %d %+v", i, code, res)
 		}
 	}
@@ -383,5 +384,46 @@ func TestAssistantTools(t *testing.T) {
 	w, _ := tools.GetWeather(ctx, assistant.GetWeatherInput{City: "samarkand"})
 	if w.(map[string]string)["error"] == "" {
 		t.Fatalf("ob-havo manbasiz: %+v", w)
+	}
+}
+
+// Zaxira rejim (AI siz): ilova tili ruscha, savol o'zbekcha — javob o'zbekcha; salomlashish, rahmat, kimsan, men kimman.
+func TestGuideFallbackSmallTalk(t *testing.T) {
+	testAPI.limiter = NewLimiter()
+	old := testAPI.ai
+	testAPI.ai = nil
+	defer func() { testAPI.ai = old }()
+	c := newClient(t, "guide-device-0030")
+	c.lang = "ru"
+	cases := []struct{ msg, want string }{
+		{"Man kimman", "Ismingiz hali ma'lum emas"},
+		{"San kimsan", "Safar ilovasining sayohat yordamchisi"},
+		{"Salom", "Salom!"},
+		{"rahmat", "Arzimaydi"},
+		{"Кто ты?", "Помощник по путешествиям"},
+		{"Who am I?", "Your name isn't known yet"},
+	}
+	for _, cs := range cases {
+		var res guideResp
+		if code := c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": cs.msg}, &res); code != 200 {
+			t.Fatalf("%s: %d", cs.msg, code)
+		}
+		if !strings.Contains(res.Text, cs.want) {
+			t.Errorf("%q -> %q (kutilgan %q)", cs.msg, res.Text, cs.want)
+		}
+	}
+	// ism profilda bo'lsa — ismi bilan
+	c.do("PATCH", "/api/v1/me", map[string]any{"displayName": "Aziz"}, nil)
+	var res guideResp
+	c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "Man kimman"}, &res)
+	if !strings.Contains(res.Text, "Siz Aziz") {
+		t.Errorf("ism bilan: %q", res.Text)
+	}
+	// qisqa joy nomi — nom bo'yicha qidiradi
+	// qisqa joy nomi — tili aniqlanmaydi (ilova tili ruscha), nomi mos joy birinchi
+	c.do("POST", "/api/v1/guide/chat?stream=false", map[string]any{"message": "Registan"}, &res)
+	lines := strings.Split(res.Text, "\n")
+	if len(lines) < 2 || !strings.Contains(strings.ToLower(lines[1]), "регистан") && !strings.Contains(strings.ToLower(lines[1]), "regist") {
+		t.Errorf("joy nomi: %q", res.Text)
 	}
 }

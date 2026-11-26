@@ -93,7 +93,7 @@ func (g *Groq) Answer(ctx context.Context, req Request, t *Tools, emit Emit) (st
 		}
 		msgs = append(msgs, oaMessage{Role: role, Content: h.Text})
 	}
-	msgs = append(msgs, oaMessage{Role: "user", Content: contextLine(req) + req.Message})
+	msgs = append(msgs, oaMessage{Role: "user", Content: userContent(req)})
 	var full strings.Builder
 	streamed := false
 	for iter := 0; iter < 6; iter++ {
