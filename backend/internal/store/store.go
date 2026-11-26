@@ -149,7 +149,8 @@ func placeDest(p *Place) []any {
 type PlaceFilter struct {
 	City       string
 	Category   string
-	Novelty    string // iconic | new | hidden | novel (= new + hidden)
+	Categories []string // bir nechta kategoriya (Category bilan birga ishlatilmaydi)
+	Novelty    string   // iconic | new | hidden | novel (= new + hidden)
 	Interest   string
 	Q          string
 	Near       *domain.LatLng
@@ -169,6 +170,9 @@ func (s *Store) ListPlaces(ctx context.Context, f PlaceFilter, langs []string) (
 	}
 	if f.Category != "" {
 		where = append(where, "p.category = "+arg(f.Category))
+	}
+	if len(f.Categories) > 0 {
+		where = append(where, "p.category = ANY("+arg(f.Categories)+")")
 	}
 	switch f.Novelty {
 	case "":

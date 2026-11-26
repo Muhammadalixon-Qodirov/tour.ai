@@ -45,6 +45,7 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Narx | `GET /prices?city=&category=&q=` → `PriceItem[]`, `POST /prices/reports` (token ixtiyoriy) `{priceItemId?, cityId?, name?, category?, paid: {amount}, buyer?, location?}` → `201 {id, status: approved\|pending, priceItem?}` |
 | Tadbir | `GET /events?city=&from=&to=` (o'tganlari yo'q) |
 | Qoida | `GET /geofences?city=` |
+| Joy sahifasi pastida | `GET /places/{id}/nearby?limit=5` — **bitta so'rovda**: yaqin turar joylar (turli narxda, foydalanuvchi byudjetiga mos), ovqatlanish (hozir ochiqlari ustun), yana nima ko'rish mumkin (kam tanilganlar ustun), eng yaqin bankomat/dorixona/valyuta; har birida `distanceM`, `walkMin`, `reason` |
 | SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
 | Turar joy | `GET /stays?city=&kind=hotel,hostel,guesthouse&near=lat,lng&radiusM=&maxPrice=&q=` · `GET /stays/{id}` (tadqiqot yozuvlarida `ratingSource`, `pricePerNight.source`) · admin: `GET /admin/stays`, `PATCH /admin/stays/{id}` (aniq narx, kontakt, E-Mehmon, bron havolalari) |
 | Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
