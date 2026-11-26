@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html"
 	"net/http"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -418,13 +419,14 @@ func (s *Server) geofences(w http.ResponseWriter, r *http.Request) {
 // placeholder — rasm hali yo'q joylar uchun kategoriya rangidagi oddiy SVG.
 func (s *Server) placeholder(w http.ResponseWriter, r *http.Request) {
 	name, ok := strings.CutSuffix(r.PathValue("file"), ".svg")
-	if !ok || !(domain.ValidCategory(name) || name == "city") {
+	if !ok || !(domain.ValidCategory(name) || name == "city" || slices.Contains(stayKinds, name)) {
 		http.NotFound(w, r)
 		return
 	}
 	colors := map[string]string{"monument": "#b5651d", "museum": "#6d4c8d", "mosque": "#1f7a8c", "bazaar": "#c27a06",
 		"workshop": "#8a5a2b", "gallery": "#c93f7a", "restaurant": "#b03a2e", "cafe": "#7b5e3b", "park": "#3a8f3a",
-		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "theatre": "#8e3b6a", "city": "#0f8f7e"}
+		"viewpoint": "#2f6fd1", "ecovillage": "#5b8c2a", "theatre": "#8e3b6a", "city": "#0f8f7e",
+		"hotel": "#2b5c8a", "boutique": "#7a4b8c", "guesthouse": "#a0602a", "hostel": "#3a7d5c", "motel": "#6b6b6b", "apartment": "#466b8f"}
 	w.Header().Set("Content-Type", "image/svg+xml")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	fmt.Fprintf(w, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" fill="%s"/>`+

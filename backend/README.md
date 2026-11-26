@@ -44,6 +44,7 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}`, `GET /places/{id}/reviews` |
 | Qoida | `GET /geofences?city=` |
 | SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
+| Turar joy | `GET /stays?city=&kind=hotel,hostel,guesthouse&near=lat,lng&radiusM=&maxPrice=&q=` · `GET /stays/{id}` · admin: `GET /admin/stays`, `PATCH /admin/stays/{id}` (aniq narx, kontakt, E-Mehmon, bron havolalari) |
 | Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
 | Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
@@ -169,3 +170,21 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - Guruh safari: umumiy marshrut a'zolar istaklaridan tuziladi — qiziqishlar (ko'p uchraganlari), eng kichik byudjet,
   eng sokin temp; ko'pchilik "ha" degan joy ustun, yarmi yoki ko'pi "yo'q" degan joy chiqariladi. Marshrutni barcha a'zolar
   ko'radi va tahrirlaydi; kundalik — har kimning o'ziniki.
+
+## OpenStreetMap importi
+
+```sh
+curl -LO https://download.geofabrik.de/asia/uzbekistan-latest.osm.pbf     # ~126 MB, har kuni yangilanadi
+go run ./cmd/osm-extract uzbekistan-latest.osm.pbf > osm-pois.json        # ~8 soniya
+go run ./cmd/osm-import osm-pois.json                                     # upsert, takroran xavfsiz
+```
+
+- Natija (2026-11-26): ~4 800 joy (restoran, kafe, muzey, obida, teatr), ~1 570 turar joy, ~6 200 xizmat
+  (shifoxona, klinika, dorixona, politsiya, bankomat, valyuta, yoqilg'i, EV quvvatlash) — 17+ shahar.
+- Demo SOS xizmatlari o'chiriladi va haqiqiy OSM ma'lumoti bilan almashtiriladi.
+- Qo'lda yoki tadqiqot orqali kiritilgan joy yonida (150 m, o'xshash nom) takror yaratilmaydi.
+- OSM joylari `source='osm'`, `trust='public'`; rejalashtirgichda jamoa tanlagan joylar ustun (×0.75).
+- Turar joy narxi OSM da yo'q — turi/yulduzi bo'yicha **taxmin** (`pricePerNight.estimated = true`, UI da "≈").
+  Admin aniq narx kiritsa `priceTrust='official'` bo'ladi va keyingi import ustiga yozmaydi.
+- **Litsenziya: ODbL.** Ilova va saytda "© OpenStreetMap contributors" yozuvi majburiy.
+  Bazani OSM bilan birga ochiq tarqatmang (share-alike).

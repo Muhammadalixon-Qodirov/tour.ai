@@ -17,7 +17,7 @@ import (
 	"yoldosh/internal/store"
 )
 
-var serviceKinds = []string{"hospital", "pharmacy", "police", "embassy", "atm", "exchange"}
+var serviceKinds = []string{"hospital", "clinic", "pharmacy", "police", "embassy", "atm", "exchange", "fuel", "ev_charging"}
 
 type serviceDTO struct {
 	ID        string                `json:"id"`
@@ -172,7 +172,7 @@ func (s *Server) emergency(w http.ResponseWriter, r *http.Request) {
 		}
 		nearest := map[string]serviceDTO{}
 		loc := tz(city.Timezone)
-		for _, kind := range []string{"hospital", "pharmacy", "police"} {
+		for _, kind := range []string{"hospital", "pharmacy", "police", "embassy"} {
 			sv, err := s.store.NearestService(r.Context(), city.ID, kind, p)
 			if isNotFound(err) {
 				continue

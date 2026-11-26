@@ -87,6 +87,7 @@ var messages = map[string]map[string]string{
 	"refresh_invalid":           {"uz": "Sessiya tugagan, qayta kiring", "ru": "Сессия истекла, войдите снова", "en": "Your session has ended, please sign in again"},
 	"group_not_found":           {"uz": "Guruh topilmadi", "ru": "Группа не найдена", "en": "Group not found"},
 	"invite_invalid":            {"uz": "Taklif kodi noto'g'ri", "ru": "Неверный код приглашения", "en": "Invalid invite code"},
+	"stay_not_found":            {"uz": "Turar joy topilmadi", "ru": "Жильё не найдено", "en": "Accommodation not found"},
 	"rate_limited":              {"uz": "So'rovlar juda ko'p. Birozdan keyin urinib ko'ring", "ru": "Слишком много запросов. Попробуйте чуть позже", "en": "Too many requests. Try again shortly"},
 	"internal":                  {"uz": "Serverda xatolik. Qayta urinib ko'ring", "ru": "Ошибка сервера. Попробуйте ещё раз", "en": "Server error. Please try again"},
 

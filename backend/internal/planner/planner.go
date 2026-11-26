@@ -43,6 +43,7 @@ type Candidate struct {
 	PriceLevel     int
 	Wheelchair     bool
 	FamilyFriendly bool
+	Bulk           bool // ommaviy importdan (OSM), jamoa tanlamagan — reytingda pastroq
 }
 
 func (c Candidate) IsMeal() bool  { return domain.IsMealCategory(c.Category) }
@@ -176,7 +177,11 @@ func Score(c Candidate, p Prefs, cityAvg float64) float64 {
 	if p.Budget > 0 && c.PriceLevel > p.Budget {
 		budget = 0.6
 	}
-	return interest * quality * novelty * budget * (1 + p.Boost[c.ID])
+	curated := 1.0
+	if c.Bulk {
+		curated = 0.75 // qo'lda tanlangan va tekshirilgan joylar ustun; OSM joylari bo'shliqni to'ldiradi
+	}
+	return interest * quality * novelty * budget * curated * (1 + p.Boost[c.ID])
 }
 
 func matchesInterest(c Candidate, interest string) bool {

@@ -246,7 +246,7 @@ func (s *Store) PlacesByIDs(ctx context.Context, ids []string, langs []string) (
 // Candidates — rejalashtirgich uchun shahardagi barcha chop etilgan joylar (matnsiz).
 func (s *Store) Candidates(ctx context.Context, cityID string) ([]planner.Candidate, float64, error) {
 	rows, err := s.DB.Query(ctx, `SELECT id, category, novelty, is_partner, interests, lat, lng, rating::float8, reviews_count,
-		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly
+		visit_duration_min, opening_hours, price_level, wheelchair, family_friendly, source = 'osm'
 		FROM places WHERE city_id = $1 AND status = 'published' ORDER BY id`, cityID)
 	if err != nil {
 		return nil, 0, err
@@ -257,7 +257,7 @@ func (s *Store) Candidates(ctx context.Context, cityID string) ([]planner.Candid
 	for rows.Next() {
 		var c planner.Candidate
 		if err := rows.Scan(&c.ID, &c.Category, &c.Novelty, &c.IsPartner, &c.Interests, &c.Loc.Lat, &c.Loc.Lng,
-			&c.Rating, &c.Reviews, &c.VisitMin, &c.Hours, &c.PriceLevel, &c.Wheelchair, &c.FamilyFriendly); err != nil {
+			&c.Rating, &c.Reviews, &c.VisitMin, &c.Hours, &c.PriceLevel, &c.Wheelchair, &c.FamilyFriendly, &c.Bulk); err != nil {
 			return nil, 0, err
 		}
 		sum += c.Rating

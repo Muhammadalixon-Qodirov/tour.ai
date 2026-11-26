@@ -50,7 +50,7 @@ func TestResidentAliasesTrustBreaks(t *testing.T) {
 	if code := a.do("POST", "/api/v1/admin/places", map[string]any{"cityId": "samarkand", "category": "theatre",
 		"location": map[string]float64{"lat": 39.65, "lng": 66.96}, "aliases": []string{"Opera"}, "trust": "official",
 		"openingHours": []map[string]any{{"day": 1, "open": "10:00", "close": "22:00", "breaks": []map[string]string{{"from": "14:00", "to": "15:00", "reason": "lunch"}}}},
-		"texts": map[string]any{"uz": map[string]string{"name": "Teatr", "tagline": "Kechki spektakllar"}}}, &created); code != 201 {
+		"texts":        map[string]any{"uz": map[string]string{"name": "Teatr", "tagline": "Kechki spektakllar"}}}, &created); code != 201 {
 		t.Fatalf("theatre: %d", code)
 	}
 	if created.Place.Trust != "official" || created.Place.Aliases[0] != "Opera" {

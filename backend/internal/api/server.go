@@ -81,6 +81,8 @@ func (s *Server) Handler() http.Handler {
 	pub("GET /api/v1/places/{id}/reviews", s.placeReviews)
 	pub("GET /api/v1/geofences", s.geofences)
 	pub("GET /api/v1/services", s.listServices)
+	pub("GET /api/v1/stays", s.listStays)
+	pub("GET /api/v1/stays/{id}", s.getStay)
 	pub("GET /api/v1/cities/{id}/emergency", s.emergency)
 	mux.Handle("GET /api/v1/cities/{id}/offline-pack", s.rateIP("offline", 30, http.HandlerFunc(s.offlinePack)))
 
@@ -145,6 +147,8 @@ func (s *Server) Handler() http.Handler {
 	mux.Handle("POST /api/v1/admin/places/{id}/images", s.requireAdmin(s.rate("admin-upload", 30, http.HandlerFunc(s.adminUploadImage))))
 	adm("GET /api/v1/admin/analytics/novelty", s.adminNovelty)
 	adm("GET /api/v1/admin/posts", s.adminPosts)
+	adm("GET /api/v1/admin/stays", s.adminListStays)
+	adm("PATCH /api/v1/admin/stays/{id}", s.adminPatchStay)
 	adm("POST /api/v1/admin/services", s.adminCreateService)
 	adm("PATCH /api/v1/admin/services/{id}", s.adminPatchService)
 	adm("DELETE /api/v1/admin/services/{id}", s.adminDeleteService)
