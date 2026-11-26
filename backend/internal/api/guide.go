@@ -158,12 +158,14 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 	// javobda nomi tilga olingan joylar (fallback — topilganlarning hammasi)
 	var cards []placeSummaryDTO
 	var ids []string
-	low := strings.ToLower(answer)
+	// apostrof turlari (' ʻ ‘ ’ `) va katta-kichik harf farqi kartochka moslashiga xalaqit bermasin
+	normQ := strings.NewReplacer("ʻ", "'", "‘", "'", "’", "'", "`", "'", "ʼ", "'", "*", "")
+	low := strings.ToLower(normQ.Replace(answer))
 	for _, p := range tools.FoundOrdered() {
 		if len(cards) == 6 {
 			break
 		}
-		if mode == "fallback" || strings.Contains(low, strings.ToLower(p.Name)) {
+		if mode == "fallback" || strings.Contains(low, strings.ToLower(normQ.Replace(p.Name))) {
 			cards = append(cards, s.summaryDTO(p, tashkentLoc()))
 			ids = append(ids, p.ID)
 		}

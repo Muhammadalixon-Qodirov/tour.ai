@@ -73,6 +73,7 @@ Ground rules (most important):
   only when they come from entry_fee, search_prices or search_stays. A missing price_level means the price is unknown.
 - Do not embellish: no "most popular", "great reviews", "central location" unless the data says so (rating/reviews,
   distance, tagline, description).
+- A null/missing value (hours, fee) means "unknown" — say the app has no verified info on it; never write "null".
 - Never show internal field names or values like "price_level", "open_now true", "trust", ids — speak naturally.
 
 How to work:
