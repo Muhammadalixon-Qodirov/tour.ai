@@ -126,6 +126,10 @@ func Clean(ctx context.Context, m Model, it PendingItem) (Result, error) {
 func parseReply(s string) (modelReply, error) {
 	var r modelReply
 	s = strings.TrimSpace(s)
+	// Qwen3 kabi modellar avval <think>...</think> yozadi — fikrlash qismi tashlanadi
+	if i := strings.LastIndex(s, "</think>"); i >= 0 {
+		s = s[i+len("</think>"):]
+	}
 	if i := strings.Index(s, "```"); i >= 0 { // ```json ... ```
 		s = s[i+3:]
 		s = strings.TrimPrefix(s, "json")

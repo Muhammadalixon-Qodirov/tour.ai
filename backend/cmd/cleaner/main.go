@@ -9,6 +9,9 @@
 //	AI_BASE_URL     OpenAI-mos model manzili (default http://localhost:11434/v1 — Ollama)
 //	AI_MODEL        model nomi (masalan qwen2.5:7b-instruct, llama3.1:8b)
 //	AI_KEY          model kaliti (ixtiyoriy; lokal server talab qilmaydi)
+//	AI_HOST_HEADER  ixtiyoriy Host sarlavhasi (colibri tunnel orqali: 127.0.0.1)
+//	AI_NO_THINK     1 — Qwen3 "/no_think" (fikrlashsiz, tezroq)
+//	AI_MAX_TOKENS   javob uzunligi chegarasi (default 700)
 //	CLEAN_BATCH     bir siklda nechta (default 20)
 //	CLEAN_INTERVAL  sikllar orasidagi kutish (default 60s)
 //
@@ -56,6 +59,11 @@ func main() {
 	model := cleaner.NewOpenAI(envOr("AI_BASE_URL", "http://localhost:11434/v1"), os.Getenv("AI_KEY"), os.Getenv("AI_MODEL"))
 	if model.Model == "" {
 		fail("AI_MODEL kerak (masalan qwen2.5:7b-instruct)")
+	}
+	model.Host = os.Getenv("AI_HOST_HEADER")
+	model.NoThink = os.Getenv("AI_NO_THINK") == "1"
+	if n := envInt("AI_MAX_TOKENS", 0); n > 0 {
+		model.MaxTokens = n
 	}
 	hc := &http.Client{Timeout: 30 * time.Second}
 	w := &worker{cfg: cfg, model: model, hc: hc}

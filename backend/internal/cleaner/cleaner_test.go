@@ -65,3 +65,10 @@ func TestClean(t *testing.T) {
 }
 
 func ptr(s string) *string { return &s }
+
+func TestParseReplyThink(t *testing.T) {
+	r, err := parseReply("<think>\nfoydalanuvchi {muzey} so'radi...\n</think>\n{\"touristic\":true,\"category\":\"museum\",\"confidence\":0.9}")
+	if err != nil || r.Category != "museum" || !r.Touristic {
+		t.Fatalf("%v %+v", err, r)
+	}
+}
