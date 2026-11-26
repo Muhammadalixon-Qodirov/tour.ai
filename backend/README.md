@@ -50,10 +50,10 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 | SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
 | Turar joy | `GET /stays?city=&kind=hotel,hostel,guesthouse&near=lat,lng&radiusM=&maxPrice=&q=` · `GET /stays/{id}` (tadqiqot yozuvlarida `ratingSource`, `pricePerNight.source`) · admin: `GET /admin/stays`, `PATCH /admin/stays/{id}` (aniq narx, kontakt, E-Mehmon, bron havolalari) |
 | Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
-| Marshrut | `POST /trips` (`days` 1..7, `budgetPerDay`, `isResident` (yo'q bo'lsa profildan), `groupSize`), `GET /trips`, `GET /trips/{id}` (javobda `prefs`), `DELETE /trips/{id}`, `POST /trips/{id}/stops` `{dayIndex, placeId, after?}`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` (takliflar), `POST /trips/{id}/stops/{stopId}/move` `{dayIndex?, position?}` yoki `{step: -1\|1}` |
+| Marshrut | `POST /trips` (`days` 1..7, `budgetPerDay`, `isResident` (yo'q bo'lsa profildan), `groupSize`, `startLocation`, `startLabel` (≤ 80), `startKind: stay\|location\|station\|airport\|custom`), `GET /trips`, `GET /trips/{id}` (javobda `prefs`, har kunda `startLeg`), `DELETE /trips/{id}`, `POST /trips/{id}/stops` `{dayIndex, placeId, after?}`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` (takliflar), `POST /trips/{id}/stops/{stopId}/move` `{dayIndex?, position?}` yoki `{step: -1\|1}` |
 | Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`, `rating: 1..5`, yoki `placeId` — almashtirish), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` (3 ta baho yig'ilgach joy reytingi haqiqiy baholardan hisoblanadi) |
-| AI yordamchi | `POST /guide/chat` `{message, conversationId?, cityId?, placeId?, location?}` — `Accept: text/event-stream` bo'lsa SSE (`delta` {text} → `places` {places: PlaceSummary[]} → `done` {conversationId, messageId, mode: ai\|fallback}), `?stream=false` — bitta JSON `{text, places, conversationId, mode}` (15/daq) · suhbatlar: `GET /guide/conversations` (eng yangisi birinchi: `title, lastText, messageCount, updatedAt`), `GET /guide/conversations/{id}` (xabarlar tartib bilan, javoblarda `places` kartochkalari), `PATCH /guide/conversations/{id}` `{title}`, `DELETE /guide/conversations/{id}` |
+| AI yordamchi | `POST /guide/chat` `{message, conversationId?, cityId?, placeId?, tripId?, location?}` — `Accept: text/event-stream` bo'lsa SSE (`delta` {text} → `places` {places: PlaceSummary[]} → `sources` {sources: {title, url?}[]} (bo'lsa) → `done` {conversationId, messageId, mode: ai\|fallback}), `?stream=false` — bitta JSON `{text, places, sources, conversationId, mode}` (15/daq); `tripId` faqat o'z marshruti (`404 trip_not_found`) · suhbatlar: `GET /guide/conversations` (eng yangisi birinchi: `title, lastText, messageCount, updatedAt`), `GET /guide/conversations/{id}` (xabarlar tartib bilan, javoblarda `places` kartochkalari), `PATCH /guide/conversations/{id}` `{title}`, `DELETE /guide/conversations/{id}` |
 | Joy taklif qilish | `POST /places/suggest` `{name, location, category?, note?, instagram?, telegram?, website?}` → `202 {id, status: queued\|duplicate\|out_of_area, placeId?, suggestedCategory, confidence}` (5/daq) |
 | Joy topish (admin) | `GET /admin/discoveries?status=queued\|published\|duplicate\|rejected\|out_of_area&source=wikidata\|osm\|user\|research&city=` · `POST /admin/discoveries/{id}/approve` `{category?, cityId?, name?}` · `POST /admin/discoveries/{id}/reject` · `POST /admin/discoveries/run` (Wikidata, fonda) |
 | Saqlangan joylar | `GET /me/saved`, `PUT /me/saved/{placeId}`, `DELETE /me/saved/{placeId}` |
@@ -230,16 +230,28 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 
 ## AI yordamchi (`internal/assistant`)
 
-- `ANTHROPIC_API_KEY` bo'lsa: Claude (`AI_MODEL`, standart `claude-opus-5-5`; `AI_EFFORT` standart `low`) 4 ta asbob bilan
-  ishlaydi — `search_places` (shahar, kategoriya, taom so'zlari, bolalar bilan, narx darajasi, hozir ochiq, yaqin atrof),
-  `get_place`, `search_stays`, `search_prices`. **Har bir fakt asbob natijasidan**: bazada yo'q bo'lsa "Bu haqda tekshirilgan
-  ma'lumotim yo'q" deydi. Foydalanuvchi profili (byudjet, qiziqishlar) kontekstga qo'shiladi.
-- `ANTHROPIC_API_KEY` bo'lmasa, `GROQ_API_KEY` bilan Groq (`openai/gpt-oss-120b`, OpenAI-mos API) — xuddi shu asboblar va qoidalar.
+- `ANTHROPIC_API_KEY` bo'lsa: Claude (`AI_MODEL`, standart `claude-opus-5-5`; `AI_EFFORT` standart `low`) 9 ta asbob bilan
+  ishlaydi: `search_places` (shahar, kategoriya, taom so'zlari, bolalar bilan, narx darajasi, hozir ochiq, yaqin atrof),
+  `get_place` (tarix va manbalar bilan), `search_stays`, `search_prices`, `get_trip` (so'rovda `tripId` bo'lsa),
+  `search_events` (shahar, sana oralig'i), `get_intercity` (turlari, vaqt, narx, manba), `get_services` (eng yaqin bankomat,
+  dorixona, valyuta, shifoxona, politsiya + favqulodda raqamlar), `get_weather` (Open-Meteo, 15 kungacha).
+  **Har bir fakt asbob natijasidan**: bazada yo'q bo'lsa (viza qoidalari, bazada yo'q tarix ham) "Bu haqda tekshirilgan
+  ma'lumot yo'q" deydi. Foydalanuvchi profili (byudjet, qiziqishlar) kontekstga qo'shiladi.
+- `tripId` ("Rejam haqida so'rash"): handler marshrut egasini tekshiradi, kontekst qatoriga kunlar va to'xtashlar xulosasi
+  qo'shiladi, `get_trip` to'liq rejani beradi (vaqt, yo'l, xarajat, boshlanish nuqtasi, shaharga yo'l, tayyorgarlik).
+  Marshrut joylari javobda tilga olinsa kartochka bo'lib chiqadi. Chat rejani o'zgartirmaydi, "Kunni moslash" ga yo'naltiradi.
+- Yozish qoidalari (CLAUDE.md): neytral ovoz, birinchi shaxs yo'q ("Bazada topildi:", "Arzon osh uchun:"), "—", "≈", "~"
+  ishlatilmaydi, javob savol tilida. Oxirgi himoya `assistant.Sanitize` / `SanitizeEmit`: oqimdagi bo'laklar (bo'lak
+  chegarasida bo'lingan " —" yoki "~" + "5" ham) "," / ":" va "taxminan" / "примерно" / "about" ga almashadi; saqlanadigan
+  javob ham shu. `GET /places/{id}/guide` `summary` si ham shu tozalagichdan o'tadi.
+- `sources` hodisasi: tilga olingan joylar tarixi manbalari, narx, yo'l, tadbir va ob-havo manbalari (ko'pi bilan 6).
+- `ANTHROPIC_API_KEY` bo'lmasa, `GROQ_API_KEY` bilan Groq (`openai/gpt-oss-120b`, OpenAI-mos API): xuddi shu asboblar va qoidalar.
   Terminalda sinash: `GROQ_API_KEY=... go run ./cmd/guide-try "Samarqandda arzon osh"`.
-- Kalit yo'q yoki model ishlamasa — `mode: fallback`: savoldan shahar, joy turi (`discover.Classify`), "bolalar", "arzon",
-  "hozir ochiq", "kam tanilgan", taom nomlari ajratiladi va bazadan qidiriladi.
-- Suhbatlar `guide_conversations` (sarlavha — birinchi savol) va `guide_messages` (`seq` — qat'iy tartib) da. Har savolda
-  oxirgi 20 xabar modelga beriladi; avvalgi javoblarda ko'rsatilgan joylar (id = nom) ham qo'shiladi — "birinchisi qachon
+- Kalit yo'q yoki model ishlamasa `mode: fallback`: savoldan shahar, joy turi (`discover.Classify`), "bolalar", "arzon",
+  "hozir ochiq", "kam tanilgan", taom nomlari ajratiladi va bazadan qidiriladi. `tripId` bilan "ertaga", "2-kun", "bugun",
+  "tushlik" kabi savollarga o'sha kun rejasi qaytadi.
+- Suhbatlar `guide_conversations` (sarlavha: birinchi savol) va `guide_messages` (`seq`: qat'iy tartib) da. Har savolda
+  oxirgi 20 xabar modelga beriladi; avvalgi javoblarda ko'rsatilgan joylar (id = nom) ham qo'shiladi, "birinchisi qachon
   ochiladi?" kabi davomli savollar ishlaydi. Mehmon hisobidan akkauntga kirilganda suhbatlar ko'chadi.
 - `GROQ_API_KEY` da bir nechta kalit vergul bilan: so'rovlar navbat bilan taqsimlanadi, kalit limitga urilsa (429) yoki
   ishlamasa keyingisiga, hammasi band bo'lsa `gpt-oss-20b` ga o'tadi.

@@ -241,6 +241,8 @@ type Geofence = {
   "isResident": true,
   "groupSize": 3,
   "startLocation": { "lat": 39.6547, "lng": 66.9758 },
+  "startLabel": "Hotel Bibikhanum",
+  "startKind": "stay",
   "constraints": { "wheelchair": false, "withKids": false, "vegetarian": false }
 }
 ```
@@ -248,6 +250,8 @@ type Geofence = {
 - `budgetPerDay` — **kishi boshiga, kuniga, so'mda** (yo'q yoki `null` = cheklovsiz). Kun xarajati (kirish + tushlik 60 000 + taksi ulushi) shu chegaraga sig'guncha **faqat mashhur joylar** (eng qimmati birinchi) olib tashlanadi; yangi/kam tanilgan joylar kvota uchun saqlanadi.
 - `isResident` — `true`: kirish narxi mahalliy tarifda. Yuborilmasa profildagi `isResident` (`PATCH /me`) olinadi.
 - `groupSize` — taksi shu songa bo'linadi; yo'q bo'lsa `companion` dan (solo 1, couple 2, family 3, friends 4).
+- `startLocation` — ixtiyoriy boshlanish nuqtasi (mehmonxona, joylashuv). Har kun shu nuqtadan boshlanadi: birinchi to'xtash nuqtaga eng yaqin joy, uning `transitFromPrev` i nuqtadan yo'l. Tahrir (`stops`, `move`, `PATCH stop`) va `replan` dan keyin ham shu nuqtadan qayta hisoblanadi.
+- `startLabel` — ixtiyoriy, ko'pi bilan 80 belgi (mehmonxona nomi yoki "Mening joylashuvim"); `startKind` — `stay | location | station | airport | custom`. Ikkalasi `prefs` da qaytadi (UI: "Mehmonxonadan 12 daq piyoda"). Boshqa qiymat `400`.
 
 Javob `201` — to'liq `Trip`. Generatsiya **8 soniyadan** oshsa server `202 { tripId, status: "generating" }` qaytaradi va frontend `GET /trips/{id}` ni 1.5 s oraliqda so'raydi (yoki `GET /trips/{id}/stream` SSE).
 
@@ -263,7 +267,8 @@ type Trip = {
   prefs: TripRequest;                               // POST /trips sozlamalari (ko'rsatish va tahrirlash uchun)
 };
 
-type TripDay = { index: number; date: string; title: string; stops: Stop[]; estimatedCost: Money };
+type TripDay = { index: number; date: string; title: string; stops: Stop[]; estimatedCost: Money;
+  startLeg: { mode: "walk" | "taxi"; durationMin: number; distanceM: number; fare?: Money } | null };  // boshlanish nuqtasidan birinchi to'xtashgacha (= stops[0].transitFromPrev); startLocation yo'q bo'lsa null
 
 type Stop = {
   id: string;
@@ -374,16 +379,25 @@ type TranslateResult = {
 
 ### `POST /guide/chat` — savol-javob (SSE oqim)
 ```json
-{ "conversationId": "c_...", "placeId": "registan", "message": "Nega minora qiyshaygan?" }
+{ "message": "Ertaga nima bor?", "conversationId": "<uuid, ixtiyoriy>", "cityId": "samarkand", "placeId": "registan", "tripId": "<uuid, ixtiyoriy>", "location": { "lat": 39.65, "lng": 66.97 } }
 ```
-`text/event-stream`:
+Token majburiy, daqiqasiga 15 ta. `Accept: text/event-stream`:
 ```
-event: delta   data: {"text":"Ulug'bek madrasasining "}
-event: delta   data: {"text":"minorasi..."}
-event: sources data: {"sources":[{"title":"...","url":"..."}]}
-event: done    data: {"messageId":"m_..."}
+event: delta   data: {"text":"Ertangi reja: "}
+event: places  data: {"places":[PlaceSummary...]}
+event: sources data: {"sources":[{"title":"...","url":"..."}]}   // bo'lishi mumkin
+event: done    data: {"conversationId":"<uuid>","messageId":"<uuid>","mode":"ai"|"fallback","newConversation":true}
+event: error   data: {"code":"internal","retryable":true}
 ```
-Bazada javob bo'lmasa model to'qimaydi: `event: done` oldidan `{"text":"Bu haqda tekshirilgan ma'lumotim yo'q."}`.
+- `tripId` — "Rejam haqida so'rash": marshrut shu foydalanuvchiniki bo'lishi kerak (aks holda `404 trip_not_found`, noto'g'ri uuid `400`). Modelga marshrut xulosasi beriladi va `get_trip` asbobi to'liq rejani qaytaradi ("2-kunni yengillashtir", "tushlik qayerda?", "ertaga nima bor?"). `cityId` berilmasa marshrut shahri olinadi. Chat rejani o'zi o'zgartirmaydi: aniq taklif beradi va "Kunni moslash" yoki to'xtash amallariga yo'naltiradi.
+- `places` hodisasi: javobda nomi tilga olingan joylar, to'liq `PlaceSummary` (`cover`, `source`, `trust` bilan).
+- `sources` hodisasi (bo'lsa, `places` dan keyin): ishlatilgan manbalar `{title, url?}[]`, ko'pi bilan 6 ta: tilga olingan joylar tarixi manbalari, narxlar, shaharlararo yo'llar, tadbirlar, ob-havo (Open-Meteo). `?stream=false` javobida `sources` maydoni.
+- Matn qoidalari (server kafolatlaydi): neytral ovoz, birinchi shaxs yo'q ("Bazada topildi:", "Arzon osh uchun:"); "—", "≈", "~" yo'q (oqimdagi bo'laklar ham tozalanadi, "taxminan" / "примерно" / "about"); javob savol tilida. Bazada yo'q narsa (viza qoidalari, bazada yo'q tarix): "Bu haqda tekshirilgan ma'lumot yo'q."
+- Asboblar: `search_places`, `get_place` (tarix va manbalar bilan), `search_stays`, `search_prices`, `get_trip`, `search_events`, `get_intercity`, `get_services` (eng yaqin bankomat, dorixona, valyuta, shifoxona, politsiya + favqulodda raqamlar), `get_weather`.
+`?stream=false` → bitta JSON `{text, places, sources, conversationId, messageId, mode}`.
+
+### `GET /places/{id}/guide?from=lat,lng` — joy atrofidagi amaliy yo'riqnoma
+- Til: `summary`, turar joy narxi izohi (`pricePerNight.note`) va xizmat nomlari so'ralgan tilda (uz/ru/en). OSM dagi umumiy yoki bo'sh nom ("Pharmacy") o'rniga tur nomi + manzil: "Dorixona · Navoiy ko'chasi, 12". Tarjimasi yo'q erkin izoh ru/en da ko'rsatilmaydi (taxminiy narxda umumiy izoh). `summary` da "≈", "~", "—" yo'q ("taxminan" / "примерно" / "about").
 
 ### `POST /speech/tts` → `{ audioUrl, durationSec }` · `POST /speech/stt` (multipart `audio`) → `{ text, lang }`
 
