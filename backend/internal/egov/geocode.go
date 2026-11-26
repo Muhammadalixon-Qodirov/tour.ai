@@ -138,49 +138,32 @@ func (g *Geocoder) Geocode(ctx context.Context, query string) (*Match, error) {
 	return &Match{Loc: loc, Precise: h.PlaceRank >= 26, Class: h.Class}, nil
 }
 
-// GeocodeAddress — bir nechta so'rov shaklini ketma-ket sinaydi (aniqdan umumiyga).
-// parts: eng aniq manzildan boshlab (ko'cha+uy), so'ng tuman, viloyat. Topilgan birinchi natijani qaytaradi.
+// GeocodeAddress — manzilni tuman, so'ng viloyat markaziga geokodlaydi.
+//
+// Diqqat: O'zbekiston manzillaridagi ko'cha darajasidagi geokodlash Nominatim'da ishonchsiz —
+// bir xil ko'cha nomi bir necha tumanda uchraydi va noto'g'ri tumandagi nuqta qaytadi (markazdan ham yomon).
+// Shu bois faqat tuman/viloyat markazini olamiz: to'g'ri hudud, taxminiy nuqta (Match.Precise=false).
+// Aniq koordinata keyin admin yoki OSM moslashtiruvi orqali qo'yiladi; aniq manzil matni Data'da saqlanadi.
 func (g *Geocoder) GeocodeAddress(ctx context.Context, street, district, region string) (*Match, error) {
+	_ = street // ko'cha darajasi ataylab ishlatilmaydi (yuqoridagi izohga qarang)
 	region = strings.TrimSpace(region)
 	district = strings.TrimSpace(district)
-	street = cleanStreet(street)
 	var tries []string
-	if street != "" {
-		if district != "" {
-			tries = append(tries, street+", "+district+", O‘zbekiston")
-		}
-		tries = append(tries, street+", "+region+", O‘zbekiston")
-	}
-	// Aniq manzil topilmasa — hech bo'lmasa tuman/viloyat markazi (taxminiy, admin tekshiradi).
 	if district != "" {
 		tries = append(tries, district+", "+region+", O‘zbekiston")
 	}
 	if region != "" {
 		tries = append(tries, region+", O‘zbekiston")
 	}
-	for i, q := range tries {
+	for _, q := range tries {
 		m, err := g.Geocode(ctx, q)
 		if err != nil {
 			return nil, err
 		}
 		if m != nil {
-			// Oxirgi (umumiy) so'rovlar aniq emas.
-			if i >= len(tries)-2 {
-				m.Precise = false
-			}
+			m.Precise = false // hudud markazi — aniq emas
 			return m, nil
 		}
 	}
 	return nil, nil
-}
-
-// cleanStreet — manzildan uy raqamidan keyingi ortiqcha qismlarni va takroriy viloyat nomini soddalashtiradi.
-func cleanStreet(s string) string {
-	s = strings.TrimSpace(s)
-	if s == "" {
-		return ""
-	}
-	// "ko‘ch." / "ko'chasi" / "mavze" kabi qisqartmalar Nominatim uchun shart emas, lekin zarar qilmaydi.
-	s = strings.Join(strings.Fields(s), " ")
-	return s
 }

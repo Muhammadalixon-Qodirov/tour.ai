@@ -28,6 +28,9 @@ type Found struct {
 	Data    map[string]any    // admin uchun xom ma'lumot (rasm, havola, izoh ...)
 	UserID  string            // foydalanuvchi taklifi bo'lsa
 	Trusted bool              // manba ishonchli — ishonch yetarli bo'lsa avtomatik chop etiladi
+	// ForceCategory — rasmiy reyestr (masalan egov sertifikatlangan mehmonxonalar) kategoriyani aniq biladi;
+	// ehtimollik asosidagi Classify o'rniga shu kategoriya ishlatiladi (ishonch ≥ AutoPublish). Ixtiyoriy.
+	ForceCategory string
 }
 
 const wikidataEndpoint = "https://query.wikidata.org/sparql"

@@ -254,6 +254,15 @@ func ingestOne(ctx context.Context, tx pgx.Tx, ix *index, f Found, rep *Report) 
 		f.Signals.Names = f.Names
 	}
 	res := Classify(f.Signals)
+	if f.ForceCategory != "" && domain.ValidCategory(f.ForceCategory) {
+		// Rasmiy reyestr kategoriyani aniq biladi — ehtimollik ovozini almashtiramiz.
+		res.Category = f.ForceCategory
+		res.Confidence = max(res.Confidence, 0.9)
+		res.Reasons = append([]string{"official:" + f.Source}, res.Reasons...)
+		if len(res.Interests) == 0 {
+			res.Interests = nonNil(domain.CategoryInterests[f.ForceCategory])
+		}
+	}
 	cityID := ix.nearestCity(f.Loc)
 	name, _ := json.Marshal(f.Names)
 	data := map[string]any{}

@@ -32,10 +32,31 @@ type HotelReport struct {
 
 // ImportHotels — sertifikatlangan mehmonxonalarni oladi, manzilini geokodlaydi va discover navbatiga joylaydi.
 func ImportHotels(ctx context.Context, db *pgxpool.Pool, cl *Client, gc *Geocoder, o HotelOptions, log *slog.Logger) (HotelReport, error) {
+	founds, rep, err := CollectHotels(ctx, cl, gc, o, log)
+	if err != nil && len(founds) == 0 {
+		return rep, err
+	}
+	ing, ierr := discover.Ingest(ctx, db, "egov", founds, o.DryRun)
+	rep.Ingest = ing
+	if ierr != nil {
+		return rep, ierr
+	}
+	return rep, err
+}
+
+// IngestFounds — oldindan geokodlangan Found ro'yxatini (export faylidan) discover navbatiga joylaydi.
+// Tashqi tarmoq talab qilmaydi — foreign-IP bloklangan serverda ishlaydi.
+func IngestFounds(ctx context.Context, db *pgxpool.Pool, founds []discover.Found, dryRun bool) (discover.Report, error) {
+	return discover.Ingest(ctx, db, "egov", founds, dryRun)
+}
+
+// CollectHotels — mehmonxonalarni data.egov.uz dan oladi va Nominatim bilan geokodlaydi (DB kerak emas).
+// Natijani faylga saqlab, bloklangan serverda IngestFounds bilan joylash mumkin.
+func CollectHotels(ctx context.Context, cl *Client, gc *Geocoder, o HotelOptions, log *slog.Logger) ([]discover.Found, HotelReport, error) {
 	var rep HotelReport
 	rows, err := cl.AllRows(ctx, HotelsDataset, 200)
 	if err != nil && len(rows) == 0 {
-		return rep, fmt.Errorf("mehmonxonalarni olish: %w", err)
+		return nil, rep, fmt.Errorf("mehmonxonalarni olish: %w", err)
 	}
 	if o.Limit > 0 && len(rows) > o.Limit {
 		rows = rows[:o.Limit]
@@ -45,7 +66,7 @@ func ImportHotels(ctx context.Context, db *pgxpool.Pool, cl *Client, gc *Geocode
 	var founds []discover.Found
 	for i, r := range rows {
 		if ctx.Err() != nil {
-			return rep, ctx.Err()
+			return founds, rep, ctx.Err()
 		}
 		name := strings.TrimSpace(r.Get("name"))
 		if name == "" {
@@ -101,18 +122,17 @@ func ImportHotels(ctx context.Context, db *pgxpool.Pool, cl *Client, gc *Geocode
 				Hint:  "hotel",
 				Text:  typ + " " + address,
 			},
-			Desc:    map[string]string{"uz": shortDesc(display, region, district)},
-			Data:    data,
-			Trusted: o.Trusted && m.Precise, // faqat aniq geokodlangan + ruxsat berilsa
+			Desc:          map[string]string{"uz": shortDesc(display, region, district)},
+			Data:          data,
+			ForceCategory: "hotel",   // rasmiy sertifikatlangan mehmonxona — kategoriya aniq
+			Trusted:       o.Trusted, // --trusted/--publish bilan avtomatik chop etiladi
 		})
 	}
 
 	if log != nil {
 		log.Info("mehmonxonalar geokodlandi", "jami", rep.Rows, "aniq", rep.Geocoded, "taxminiy", rep.Approx, "topilmadi", rep.NoGeo)
 	}
-	ing, err := discover.Ingest(ctx, db, "egov", founds, o.DryRun)
-	rep.Ingest = ing
-	return rep, err
+	return founds, rep, nil
 }
 
 func firstNonEmpty(ss ...string) string {
