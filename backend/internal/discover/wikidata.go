@@ -55,15 +55,34 @@ func FetchWikidata(ctx context.Context, hc *http.Client) ([]Found, error) {
   OPTIONAL { ?item wdt:P1435 ?heritage }
   OPTIONAL { ?item wdt:P856 ?site }
 }`
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, wikidataEndpoint+"?query="+url.QueryEscape(query), nil)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Set("Accept", "application/sparql-results+json")
-	req.Header.Set("User-Agent", UserAgent)
-	resp, err := hc.Do(req)
-	if err != nil {
-		return nil, err
+	var resp *http.Response
+	for attempt := 0; ; attempt++ {
+		req, err := http.NewRequestWithContext(ctx, http.MethodPost, wikidataEndpoint, strings.NewReader(url.Values{"query": {query}}.Encode()))
+		if err != nil {
+			return nil, err
+		}
+		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+		req.Header.Set("Accept", "application/sparql-results+json")
+		req.Header.Set("User-Agent", UserAgent)
+		resp, err = hc.Do(req)
+		if err != nil {
+			return nil, err
+		}
+		// 429/503 — Wikidata yuklamasi: Retry-After (yoki 30 s) kutib 3 martagacha qayta urinamiz
+		if (resp.StatusCode == http.StatusTooManyRequests || resp.StatusCode == http.StatusServiceUnavailable) && attempt < 3 {
+			wait := 30 * time.Second
+			if n, err := strconv.Atoi(resp.Header.Get("Retry-After")); err == nil && n > 0 && n <= 300 {
+				wait = time.Duration(n) * time.Second
+			}
+			resp.Body.Close()
+			select {
+			case <-ctx.Done():
+				return nil, ctx.Err()
+			case <-time.After(wait):
+			}
+			continue
+		}
+		break
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {

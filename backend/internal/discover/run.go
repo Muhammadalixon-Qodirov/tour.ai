@@ -26,15 +26,18 @@ func RunWikidata(ctx context.Context, db *pgxpool.Pool, dryRun bool) (Report, er
 	}
 	defer conn.Exec(context.Background(), `SELECT pg_advisory_unlock($1)`, lockKey)
 
-	var runID int64
-	if err := db.QueryRow(ctx, `INSERT INTO discovery_runs (source) VALUES ('wikidata') RETURNING id`).Scan(&runID); err != nil {
-		return Report{}, err
-	}
 	hc := &http.Client{Timeout: 3 * time.Minute}
 	items, err := FetchWikidata(ctx, hc)
 	var rep Report
 	if err == nil {
 		rep, err = Ingest(ctx, db, "wikidata", items, dryRun)
+	}
+	if dryRun { // sinov — jurnalga yozilmaydi (aks holda jadval "yaqinda ishlagan" deb o'tkazib yuboradi)
+		return rep, err
+	}
+	var runID int64
+	if err := db.QueryRow(ctx, `INSERT INTO discovery_runs (source) VALUES ('wikidata') RETURNING id`).Scan(&runID); err != nil {
+		return rep, err
 	}
 	rj, _ := json.Marshal(rep)
 	var msg *string
@@ -66,6 +69,8 @@ func Schedule(ctx context.Context, db *pgxpool.Pool, log *slog.Logger, first, ev
 		rep, err := RunWikidata(ctx, db, false)
 		if err != nil {
 			log.Error("discovery wikidata", "err", err)
+			t.Reset(time.Hour) // vaqtinchalik xato — bir soatdan keyin qayta
+			continue
 		} else {
 			log.Info("discovery wikidata", "seen", rep.Seen, "new", rep.New, "published", rep.Published, "queued", rep.Queued,
 				"duplicate", rep.Duplicate, "enriched", rep.Enriched)
