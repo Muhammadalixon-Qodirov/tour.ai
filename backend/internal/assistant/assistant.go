@@ -20,13 +20,14 @@ type Turn struct {
 
 // Request — bitta savol.
 type Request struct {
-	Message  string
-	History  []Turn
-	Lang     string
-	CityID   string // ilova tanlagan shahar (ixtiyoriy)
-	PlaceID  string // joy sahifasidan so'ralsa
-	Location *[2]float64
-	Profile  string // "byudjet: tejamkor; qiziqishlar: tarix, ovqat" — ixtiyoriy
+	Message     string
+	History     []Turn
+	Lang        string
+	LangGuessed bool   // Accept-Language yuborilmagan — savol tilidan aniqlanadi
+	CityID      string // ilova tanlagan shahar (ixtiyoriy)
+	PlaceID     string // joy sahifasidan so'ralsa
+	Location    *[2]float64
+	Profile     string // "byudjet: tejamkor; qiziqishlar: tarix, ovqat" — ixtiyoriy
 }
 
 // Emit — oqim hodisasi: "delta" {text} va h.k. Handler SSE ga yozadi.

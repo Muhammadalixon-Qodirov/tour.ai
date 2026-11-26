@@ -87,7 +87,12 @@ func (s *Server) guideChat(w http.ResponseWriter, r *http.Request) {
 			rows.Close()
 		}
 	}
-	areq := assistant.Request{Message: req.Message, History: history, Lang: lang, CityID: req.CityID, PlaceID: req.PlaceID}
+	areq := assistant.Request{Message: req.Message, History: history, Lang: lang, CityID: req.CityID, PlaceID: req.PlaceID,
+		LangGuessed: r.Header.Get("Accept-Language") == ""}
+	if areq.LangGuessed { // joy nomlari ham savol tilida chiqsin
+		lang = assistant.DetectLang(req.Message, lang)
+		areq.Lang = lang
+	}
 	if req.Location != nil {
 		areq.Location = &[2]float64{req.Location.Lat, req.Location.Lng}
 	}

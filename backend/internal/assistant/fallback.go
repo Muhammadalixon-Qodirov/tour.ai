@@ -64,6 +64,9 @@ func Fallback(ctx context.Context, req Request, t *Tools) (string, error) {
 	if lang != "ru" && lang != "en" {
 		lang = "uz"
 	}
+	if req.LangGuessed {
+		lang = DetectLang(req.Message, lang)
+	}
 	text := " " + strings.ToLower(strings.NewReplacer("ʻ", "'", "’", "'", "‘", "'", ",", " ", ".", " ", "?", " ", "!", " ").Replace(req.Message)) + " "
 	city := req.CityID
 	for id, ws := range cityWords {
@@ -138,20 +141,22 @@ func Fallback(ctx context.Context, req Request, t *Tools) (string, error) {
 	}
 	b.WriteString(tr("intro", lang))
 	for _, p := range places {
+		// faqat foydalanuvchi so'ragan mezonlar (+ hozir ochiq) — har joyga bir xil belgilar yopishmasin
 		var why []string
-		switch {
-		case p.PriceLevel == 0 && p.Category != "restaurant" && p.Category != "cafe":
-			why = append(why, tr("free", lang))
-		case p.PriceLevel <= 1:
-			why = append(why, tr("cheap", lang))
+		if in.MaxPriceLevel != nil {
+			if p.PriceLevel == 0 && p.Category != "restaurant" && p.Category != "cafe" {
+				why = append(why, tr("free", lang))
+			} else {
+				why = append(why, tr("cheap", lang))
+			}
 		}
-		if p.Family {
+		if in.Family && p.Family {
 			why = append(why, tr("family", lang))
 		}
 		if p.OpenNow != nil && *p.OpenNow {
 			why = append(why, tr("open", lang))
 		}
-		if p.Novelty != "iconic" && p.Category != "restaurant" && p.Category != "cafe" {
+		if in.Novelty != "" && p.Novelty != "iconic" {
 			why = append(why, tr("hidden", lang))
 		}
 		line := "\n• " + p.Name
@@ -180,4 +185,33 @@ func stayLines(list []stayBrief, lang string) []string {
 		out = append(out, line)
 	}
 	return out
+}
+
+// DetectLang — savol tili (ilova tilni yubormagan bo'lsa): kirill → ru (o'zbek kirill so'zlari bo'lsa uz),
+// o'zbekcha belgilar/qo'shimchalar → uz, aks holda def.
+func DetectLang(msg, def string) string {
+	low := " " + strings.ToLower(msg) + " "
+	cyr := 0
+	for _, r := range low {
+		if r >= 'а' && r <= 'я' || r == 'ё' || r == 'ў' || r == 'қ' || r == 'ғ' || r == 'ҳ' {
+			cyr++
+		}
+	}
+	if cyr > 3 {
+		if strings.ContainsAny(low, "ўқғҳ") {
+			return "uz"
+		}
+		return "ru"
+	}
+	for _, w := range []string{"o'", "g'", "oʻ", "gʻ", "da ", "dagi ", "lar", "qayer", "qanday", "bilan", "uchun", "mumkin", "yaxshi", "arzon", "joy"} {
+		if strings.Contains(low, w) {
+			return "uz"
+		}
+	}
+	for _, w := range []string{" the ", " where ", " what ", " with ", " cheap ", " best ", " near ", " kids "} {
+		if strings.Contains(low, w) {
+			return "en"
+		}
+	}
+	return def
 }
