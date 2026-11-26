@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"html"
 	"log/slog"
 	"math/big"
 	"net/http"
@@ -136,7 +137,7 @@ func (s *Server) emailStart(w http.ResponseWriter, r *http.Request) {
 	}
 	sendCtx, cancel := context.WithTimeout(ctx, 20*time.Second)
 	defer cancel()
-	if err := s.mailer.Send(sendCtx, codeEmail(langOf(r), email, code)); err != nil {
+	if err := s.mailer.Send(sendCtx, codeEmail(s.cfg.AppName, langOf(r), email, code)); err != nil {
 		if errors.Is(err, mailer.ErrNotConfigured) {
 			writeError(w, r, http.StatusServiceUnavailable, "email_unavailable", false)
 			return
@@ -148,11 +149,14 @@ func (s *Server) emailStart(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusAccepted, map[string]any{"sent": true, "expiresInSec": int(codeTTL.Seconds())})
 }
 
-func codeEmail(lang, to, code string) mailer.Message {
+func codeEmail(app, lang, to, code string) mailer.Message {
+	if app == "" {
+		app = "Safar"
+	}
 	t := map[string][3]string{
-		"uz": {"Yo'ldosh AI: kirish kodi %s", "Kirish kodingiz: %s\n\nKod 10 daqiqa amal qiladi. Agar kodni siz so'ramagan bo'lsangiz, bu xatni e'tiborsiz qoldiring.", "Kirish kodingiz"},
-		"ru": {"Yo'ldosh AI: код входа %s", "Ваш код входа: %s\n\nКод действует 10 минут. Если вы его не запрашивали, просто проигнорируйте это письмо.", "Ваш код входа"},
-		"en": {"Yo'ldosh AI: sign-in code %s", "Your sign-in code: %s\n\nThe code is valid for 10 minutes. If you didn't request it, you can ignore this email.", "Your sign-in code"},
+		"uz": {app + ": kirish kodi %s", "Kirish kodingiz: %s\n\nKod 10 daqiqa amal qiladi. Agar kodni siz so'ramagan bo'lsangiz, bu xatni e'tiborsiz qoldiring.", "Kirish kodingiz"},
+		"ru": {app + ": код входа %s", "Ваш код входа: %s\n\nКод действует 10 минут. Если вы его не запрашивали, просто проигнорируйте это письмо.", "Ваш код входа"},
+		"en": {app + ": sign-in code %s", "Your sign-in code: %s\n\nThe code is valid for 10 minutes. If you didn't request it, you can ignore this email.", "Your sign-in code"},
 	}
 	m, ok := t[lang]
 	if !ok {
@@ -160,9 +164,9 @@ func codeEmail(lang, to, code string) mailer.Message {
 	}
 	text := fmt.Sprintf(m[1], code)
 	html := fmt.Sprintf(`<div style="font-family:system-ui,sans-serif;max-width:420px;margin:auto;padding:24px;color:#102a2e">
-<p style="color:#0f8f7e;font-weight:700;font-size:18px">Yo'ldosh AI</p><p>%s:</p>
+<p style="color:#0f8f7e;font-weight:700;font-size:18px">%s</p><p>%s:</p>
 <p style="font-size:32px;font-weight:700;letter-spacing:6px;margin:16px 0">%s</p>
-<p style="color:#55706c;font-size:14px">%s</p></div>`, m[2], code, strings.ReplaceAll(strings.SplitN(text, "\n\n", 2)[1], "\n", "<br>"))
+<p style="color:#55706c;font-size:14px">%s</p></div>`, html.EscapeString(app), m[2], code, strings.ReplaceAll(strings.SplitN(text, "\n\n", 2)[1], "\n", "<br>"))
 	return mailer.Message{To: to, Subject: fmt.Sprintf(m[0], code), Text: text, HTML: html}
 }
 

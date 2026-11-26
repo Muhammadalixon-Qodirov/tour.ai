@@ -34,6 +34,7 @@ type Config struct {
 	SMTPPassword    string
 	MailFrom        string // "Yo'ldosh AI <noreply@domen.uz>"
 	MailDevLog      bool   // faqat lokal: xat yuborilmaydi, kod logga yoziladi
+	AppName         string // foydalanuvchiga ko'rinadigan brend nomi (xatlarda)
 }
 
 func LoadConfig() (Config, error) {
@@ -61,8 +62,9 @@ func LoadConfig() (Config, error) {
 			return c, fmt.Errorf("SMTP_PORT noto'g'ri")
 		}
 	}
-	c.MailFrom = env("MAIL_FROM", "Yo'ldosh AI <noreply@e-investment.uz>")
+	c.MailFrom = env("MAIL_FROM", "Safar <noreply@e-investment.uz>")
 	c.MailDevLog = os.Getenv("MAIL_DEV_LOG") == "true"
+	c.AppName = env("APP_NAME", "Safar")
 	if c.DatabaseURL == "" {
 		return c, fmt.Errorf("DATABASE_URL o'rnatilmagan")
 	}
