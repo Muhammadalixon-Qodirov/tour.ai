@@ -15,3 +15,7 @@ reports/
 # server sirlari
 deploy/.env
 deploy/.seeded
+
+# Google OAuth fayllari (client secret bor!)
+client_secret_*.json
+*.apps.googleusercontent.com.json
