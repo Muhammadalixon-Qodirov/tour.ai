@@ -44,6 +44,7 @@ services:
       CLEANER_KEY: ${CLEANER_KEY:-}
       LENS_VISION_MODEL: ${LENS_VISION_MODEL:-}
       MARKET_PROXY: ${MARKET_PROXY:-}
+      MARKET_FETCH_URL: ${MARKET_FETCH_URL:-}
       STT_RELAY_SOCKET: ${STT_RELAY_SOCKET:-}
       STT_KOTIB_URL: ${STT_KOTIB_URL:-}
       AI_MODEL: ${AI_MODEL:-}
@@ -111,6 +112,17 @@ services:
     mem_limit: 3g
     environment:
       KOTIB_THREADS: "4"
+    logging: *logging
+
+  # market-fetch: marketlardan sahifa oladi (curl — brauzer TLS izi; OLX, Uzum Go mijozini bloklaydi). market-proxy
+  # orqali O'zbekiston IP sidan. Yoqish: COMPOSE_PROFILES ga marketproxy, MARKET_FETCH_URL=http://market-fetch:8890.
+  market-fetch:
+    profiles: ["marketproxy"]
+    build: ./market-fetch
+    restart: unless-stopped
+    environment:
+      MARKET_PROXY_SOCKS: ${MARKET_PROXY_SOCKS:-market-proxy:1080}
+    depends_on: ["market-proxy"]
     logging: *logging
 
   caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)

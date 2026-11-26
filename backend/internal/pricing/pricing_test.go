@@ -5,7 +5,6 @@ import (
 	"image"
 	"image/color"
 	"image/png"
-	"net/http"
 	"testing"
 )
 
@@ -64,17 +63,14 @@ func TestShrink(t *testing.T) {
 	}
 }
 
-func TestSearcherProxy(t *testing.T) {
-	if s := NewSearcher(); s.HC.Transport != nil {
-		t.Fatal("proksisiz — standart transport")
+func TestSearcherModes(t *testing.T) {
+	if s := NewSearcher("", ""); s.fallback != nil {
+		t.Fatal("to'g'ridan-to'g'ri — fallback bo'lmasligi kerak")
 	}
-	s := NewSearcher("http://10.0.0.5:3128")
-	tr, ok := s.HC.Transport.(*http.Transport)
-	if !ok || tr.Proxy == nil {
-		t.Fatal("proksi o'rnatilmadi")
+	if s := NewSearcher("http://10.0.0.5:3128", ""); s.fallback == nil {
+		t.Fatal("proksi — fallback bo'lishi kerak")
 	}
-	req, _ := http.NewRequest("GET", "https://www.olx.uz/", nil)
-	if u, _ := tr.Proxy(req); u == nil || u.Host != "10.0.0.5:3128" {
-		t.Fatalf("proksi manzili: %v", u)
+	if s := NewSearcher("", "http://market-fetch:8890"); s.fallback == nil {
+		t.Fatal("fetch — fallback bo'lishi kerak")
 	}
 }

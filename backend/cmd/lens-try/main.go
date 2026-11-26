@@ -54,7 +54,7 @@ func main() {
 		check(err)
 	}
 	fmt.Printf("BUYUM: %v | so'rov=%q alt=%q | %s | ishonch %.2f\n", id.Item, id.Query, id.AltQuery, id.Category, id.Confidence)
-	res := pricing.NewSearcher(os.Getenv("MARKET_PROXY")).Search(ctx, id.Query)
+	res := pricing.NewSearcher(os.Getenv("MARKET_PROXY"), os.Getenv("MARKET_FETCH_URL")).Search(ctx, id.Query)
 	var flat []pricing.Listing
 	for _, r := range res {
 		fmt.Printf("== %s: %d taklif, xato=%v\n", r.Market.Name, len(r.Listings), r.Err)

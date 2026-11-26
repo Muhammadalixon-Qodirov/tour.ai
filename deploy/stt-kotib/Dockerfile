@@ -12,7 +12,7 @@ RUN python -c "from transformers import AutoTokenizer; AutoTokenizer.from_pretra
 # 2-bosqich: ishlash (ffmpeg + faster-whisper)
 FROM python:3.11-slim-bookworm
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/* \
- && pip install --no-cache-dir faster-whisper==1.1.1
+ && pip install --no-cache-dir faster-whisper==1.1.1 requests
 COPY --from=convert /model /model
 COPY server.py /app/server.py
 ENV KOTIB_THREADS=4

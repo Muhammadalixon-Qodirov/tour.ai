@@ -35,12 +35,15 @@ type Market struct {
 	ID        string // olx, texnomart, ...
 	Name      string // ko'rsatiladigan nom
 	SearchURL func(q string) string
-	Fetch     func(ctx context.Context, hc *http.Client, q string) ([]Listing, error)
+	Fetch     func(ctx context.Context, g Getter, q string) ([]Listing, error)
 }
+
+// Getter — URL ni oladi (to'g'ridan-to'g'ri, proksi yoki market-fetch yordamchisi orqali). Faqat 200 da bayt qaytaradi.
+type Getter func(ctx context.Context, u, accept string) ([]byte, error)
 
 const userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 
-func get(ctx context.Context, hc *http.Client, u, accept string) ([]byte, error) {
+func httpGet(ctx context.Context, hc *http.Client, u, accept string) ([]byte, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, err
@@ -79,8 +82,8 @@ var Markets = []Market{
 		SearchURL: func(q string) string {
 			return "https://www.olx.uz/list/q-" + url.PathEscape(strings.ReplaceAll(q, " ", "-")) + "/"
 		},
-		Fetch: func(ctx context.Context, hc *http.Client, q string) ([]Listing, error) {
-			b, err := get(ctx, hc, "https://www.olx.uz/api/v1/offers/?offset=0&limit=30&query="+url.QueryEscape(q), "application/json")
+		Fetch: func(ctx context.Context, g Getter, q string) ([]Listing, error) {
+			b, err := g(ctx, "https://www.olx.uz/api/v1/offers/?offset=0&limit=30&query="+url.QueryEscape(q), "application/json")
 			if err != nil {
 				return nil, err
 			}
@@ -123,8 +126,8 @@ var Markets = []Market{
 	{
 		ID: "texnomart", Name: "Texnomart",
 		SearchURL: func(q string) string { return "https://texnomart.uz/uz/search?q=" + url.QueryEscape(q) },
-		Fetch: func(ctx context.Context, hc *http.Client, q string) ([]Listing, error) {
-			b, err := get(ctx, hc, "https://gw.texnomart.uz/api/common/v1/search/result?q="+url.QueryEscape(q), "application/json")
+		Fetch: func(ctx context.Context, g Getter, q string) ([]Listing, error) {
+			b, err := g(ctx, "https://gw.texnomart.uz/api/common/v1/search/result?q="+url.QueryEscape(q), "application/json")
 			if err != nil {
 				return nil, err
 			}
@@ -153,8 +156,8 @@ var Markets = []Market{
 	{
 		ID: "asaxiy", Name: "Asaxiy",
 		SearchURL: func(q string) string { return "https://asaxiy.uz/product?key=" + url.QueryEscape(q) },
-		Fetch: func(ctx context.Context, hc *http.Client, q string) ([]Listing, error) {
-			b, err := get(ctx, hc, "https://asaxiy.uz/product?key="+url.QueryEscape(q), "text/html")
+		Fetch: func(ctx context.Context, g Getter, q string) ([]Listing, error) {
+			b, err := g(ctx, "https://asaxiy.uz/product?key="+url.QueryEscape(q), "text/html")
 			if err != nil {
 				return nil, err
 			}
@@ -181,8 +184,8 @@ var Markets = []Market{
 	{
 		ID: "olcha", Name: "Olcha",
 		SearchURL: func(q string) string { return "https://olcha.uz/uz/search?q=" + url.QueryEscape(q) },
-		Fetch: func(ctx context.Context, hc *http.Client, q string) ([]Listing, error) {
-			b, err := get(ctx, hc, "https://api.olcha.uz/api/v2/products?q="+url.QueryEscape(q), "application/json")
+		Fetch: func(ctx context.Context, g Getter, q string) ([]Listing, error) {
+			b, err := g(ctx, "https://api.olcha.uz/api/v2/products?q="+url.QueryEscape(q), "application/json")
 			if err != nil {
 				return nil, err
 			}
@@ -215,8 +218,8 @@ var Markets = []Market{
 	{
 		ID: "idea", Name: "Idea",
 		SearchURL: func(q string) string { return "https://idea.uz/uz/search?q=" + url.QueryEscape(q) },
-		Fetch: func(ctx context.Context, hc *http.Client, q string) ([]Listing, error) {
-			b, err := get(ctx, hc, "https://api.idea.uz/api/v2/products?search="+url.QueryEscape(q), "application/json")
+		Fetch: func(ctx context.Context, g Getter, q string) ([]Listing, error) {
+			b, err := g(ctx, "https://api.idea.uz/api/v2/products?search="+url.QueryEscape(q), "application/json")
 			if err != nil {
 				return nil, err
 			}
@@ -261,26 +264,74 @@ type cacheEntry struct {
 
 // Searcher — marketlarda parallel qidiradi, natijani keshlaydi.
 type Searcher struct {
-	HC      *http.Client
-	direct  *http.Client // proksi ishlamasa — to'g'ridan-to'g'ri (nil — proksi yo'q)
-	Markets []Market
-	TTL     time.Duration
-	mu      sync.Mutex
-	cache   map[string]cacheEntry
+	get      Getter // asosiy yo'l (market-fetch yordamchisi, proksi yoki to'g'ridan-to'g'ri)
+	fallback Getter // asosiy ishlamasa (odatda to'g'ridan-to'g'ri); nil — yo'q
+	Markets  []Market
+	TTL      time.Duration
+	mu       sync.Mutex
+	cache    map[string]cacheEntry
 }
 
-// NewSearcher — proxyURL bo'sh bo'lmasa (masalan "http://10.0.0.5:3128") market so'rovlari o'sha proksi orqali
-// ketadi: O'zbekiston marketlarining ko'pchiligi xorijiy datacenter IP larini bloklaydi, shuning uchun qidiruvni
-// O'zbekistondagi o'z serveringiz orqali yuborish mumkin.
-func NewSearcher(proxyURL ...string) *Searcher {
-	hc := &http.Client{Timeout: 8 * time.Second}
-	if len(proxyURL) > 0 && strings.TrimSpace(proxyURL[0]) != "" {
-		if u, err := url.Parse(strings.TrimSpace(proxyURL[0])); err == nil && u.Host != "" {
-			hc.Transport = &http.Transport{Proxy: http.ProxyURL(u), MaxIdleConnsPerHost: 4, IdleConnTimeout: 60 * time.Second}
-			return &Searcher{HC: hc, direct: &http.Client{Timeout: 8 * time.Second}, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
+// NewSearcher — market so'rovlarini qanday yuborishni tanlaydi:
+//   - fetchURL (market-fetch yordamchisi, masalan "http://market-fetch:8890"): yordamchi curl bilan oladi
+//     (brauzer TLS izi — OLX, Uzum kabi himoyalangan saytlar uchun), O'zbekiston proksisi orqali;
+//   - fetchURL bo'sh, proxyURL bor: Go mijozi proksi orqali (ba'zi saytlar bloklashi mumkin);
+//   - ikkalasi bo'sh: to'g'ridan-to'g'ri.
+//
+// Asosiy yo'l ishlamasa to'g'ridan-to'g'ri (fallback) bilan qayta urinadi.
+func NewSearcher(proxyURL, fetchURL string) *Searcher {
+	direct := &http.Client{Timeout: 10 * time.Second}
+	directGet := func(ctx context.Context, u, accept string) ([]byte, error) { return httpGet(ctx, direct, u, accept) }
+	s := &Searcher{Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}, get: directGet}
+	switch {
+	case strings.TrimSpace(fetchURL) != "":
+		base := strings.TrimRight(fetchURL, "/")
+		fh := &http.Client{Timeout: 20 * time.Second}
+		s.get = func(ctx context.Context, u, accept string) ([]byte, error) { return viaFetch(ctx, fh, base, u, accept) }
+		s.fallback = directGet
+	case strings.TrimSpace(proxyURL) != "":
+		if pu, err := url.Parse(strings.TrimSpace(proxyURL)); err == nil && pu.Host != "" {
+			hc := &http.Client{Timeout: 10 * time.Second, Transport: &http.Transport{Proxy: http.ProxyURL(pu),
+				MaxIdleConnsPerHost: 4, IdleConnTimeout: 60 * time.Second}}
+			s.get = func(ctx context.Context, u, accept string) ([]byte, error) { return httpGet(ctx, hc, u, accept) }
+			s.fallback = directGet
 		}
 	}
-	return &Searcher{HC: hc, Markets: Markets, TTL: 6 * time.Hour, cache: map[string]cacheEntry{}}
+	return s
+}
+
+// viaFetch — market-fetch yordamchisidan URL ni so'raydi (POST {url, accept} -> {status, body}).
+func viaFetch(ctx context.Context, hc *http.Client, base, u, accept string) ([]byte, error) {
+	reqBody, _ := json.Marshal(map[string]string{"url": u, "accept": accept})
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, base+"/fetch", strings.NewReader(string(reqBody)))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	data, _ := io.ReadAll(io.LimitReader(resp.Body, 6<<20))
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("market-fetch %d: %.120s", resp.StatusCode, data)
+	}
+	var out struct {
+		Status int    `json:"status"`
+		Body   string `json:"body"`
+		Error  string `json:"error"`
+	}
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	if out.Error != "" {
+		return nil, fmt.Errorf("market-fetch: %s", out.Error)
+	}
+	if out.Status != 200 {
+		return nil, fmt.Errorf("%s: %d", u, out.Status)
+	}
+	return []byte(out.Body), nil
 }
 
 // Search — barcha marketlarda parallel qidiruv (har biri ≤ 8 s); bitta market ishlamasa qolganlari qaytadi.
@@ -298,9 +349,9 @@ func (s *Searcher) Search(ctx context.Context, q string) []MarketResult {
 		wg.Add(1)
 		go func(i int, m Market) {
 			defer wg.Done()
-			ls, err := m.Fetch(ctx, s.HC, q)
-			if err != nil && s.direct != nil && ctx.Err() == nil { // proksi uzilgan bo'lishi mumkin — to'g'ridan-to'g'ri
-				if ls2, err2 := m.Fetch(ctx, s.direct, q); err2 == nil {
+			ls, err := m.Fetch(ctx, s.get, q)
+			if err != nil && s.fallback != nil && ctx.Err() == nil { // asosiy yo'l ishlamadi — to'g'ridan-to'g'ri
+				if ls2, err2 := m.Fetch(ctx, s.fallback, q); err2 == nil {
 					ls, err = ls2, nil
 				}
 			}

@@ -65,7 +65,7 @@ func NewServer(cfg platform.Config, st *store.Store) *Server {
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now, lensCache: newLensMemo()}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
 	s.lens = pricing.NewGroq(cfg.GroqKey, cfg.LensVisionModel)
-	s.markets = pricing.NewSearcher(cfg.MarketProxy)
+	s.markets = pricing.NewSearcher(cfg.MarketProxy, cfg.MarketFetchURL)
 	s.stt = speech.New(cfg.STTRelaySocket, cfg.STTKotibURL, cfg.GroqKey)
 	s.ai = assistant.New(cfg.AnthropicKey, cfg.GroqKey, cfg.AIModel, cfg.AIEffort)
 	if s.ai != nil {
