@@ -22,8 +22,11 @@ fi
 systemctl enable --now docker >/dev/null
 
 log "80/443 portlar"
-if ss -tlnp | grep -E ':(80|443)\s' | grep -v docker-proxy; then
-  echo "80 yoki 443 port boshqa dastur tomonidan band. Uni to'xtating yoki Caddyfile portlarini o'zgartiring."; exit 1
+MODE=caddy
+if ss -tlnp | grep -E ':(80|443)\s' | grep -q nginx; then
+  MODE=nginx; echo "nginx ishlayapti — mavjud nginx ga alohida sayt qo'shiladi (boshqa saytlarga tegilmaydi)"
+elif ss -tlnp | grep -E ':(80|443)\s' | grep -v docker-proxy; then
+  echo "80/443 nginx bo'lmagan dastur tomonidan band — qo'lda sozlang."; exit 1
 fi
 
 log "Kod: $DIR"
@@ -38,6 +41,8 @@ SERVER_IP=$IP
 DOMAIN=${IP//./-}.sslip.io
 DB_PASSWORD=$(openssl rand -hex 24)
 TOKEN_SECRET=$(openssl rand -base64 48 | tr -d '\n')
+API_PORT=8130
+COMPOSE_PROFILES=$([ "$MODE" = caddy ] && echo caddy)
 CORS_ORIGINS=
 EXPO_PUSH_ENABLED=false
 EXPO_ACCESS_TOKEN=
@@ -59,10 +64,26 @@ log "Konteynerlar (build bir necha daqiqa olishi mumkin)"
 docker compose up -d --build
 
 log "API sog'ligi"
-for i in $(seq 1 60); do
-  if curl -fsS "http://$SERVER_IP/healthz" >/dev/null 2>&1; then echo "ok"; break; fi
-  sleep 2; [ "$i" = 60 ] && { docker compose logs --tail=50 api; exit 1; }
+for i in $(seq 1 90); do
+  if curl -fsS "http://127.0.0.1:${API_PORT:-8130}/healthz" >/dev/null 2>&1; then echo "ok"; break; fi
+  sleep 2; [ "$i" = 90 ] && { docker compose logs --tail=50 api; exit 1; }
 done
+
+if [ "$MODE" = nginx ]; then
+  SITE=/etc/nginx/sites-available/yoldosh
+  if [ ! -f "$SITE" ]; then
+    log "nginx sayti: $DOMAIN → 127.0.0.1:${API_PORT:-8130}"
+    sed -e "s/__DOMAIN__/$DOMAIN/g" -e "s/__PORT__/${API_PORT:-8130}/g" "$DIR/deploy/nginx-site.conf" > "$SITE"
+    ln -sf "$SITE" /etc/nginx/sites-enabled/yoldosh
+    if ! nginx -t; then rm -f /etc/nginx/sites-enabled/yoldosh "$SITE"; echo "nginx -t xato — sayt olib tashlandi"; exit 1; fi
+    systemctl reload nginx
+  fi
+  if command -v certbot >/dev/null && ! certbot certificates 2>/dev/null | grep -q "Domains: $DOMAIN"; then
+    log "HTTPS sertifikat (certbot)"
+    certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos --register-unsafely-without-email --redirect \
+      || echo "certbot muvaffaqiyatsiz — sayt hozircha HTTP orqali ishlaydi"
+  fi
+fi
 
 if [ ! -f .seeded ]; then
   log "Demo ma'lumot va nomzod joylar (faqat birinchi marta)"

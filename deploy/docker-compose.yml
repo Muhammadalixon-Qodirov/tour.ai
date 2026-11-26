@@ -1,4 +1,4 @@
-# Production: PostgreSQL + Go API + Caddy (avtomatik HTTPS).
+# Production: PostgreSQL + Go API; HTTPS — server nginx+certbot yoki Caddy (profil "caddy").
 # Sirlar deploy/.env da (repoga kirmaydi). Boshqarish: deploy/README.md
 name: yoldosh
 
@@ -32,12 +32,14 @@ services:
       EXPO_PUSH_ENABLED: ${EXPO_PUSH_ENABLED:-false}
       EXPO_ACCESS_TOKEN: ${EXPO_ACCESS_TOKEN:-}
     volumes: ["uploads:/app/data/uploads"]
+    ports: ["127.0.0.1:${API_PORT:-8130}:8080"]   # faqat lokal: tashqariga nginx yoki Caddy orqali
     depends_on:
       db: { condition: service_healthy }
     logging: *logging
 
-  caddy:
+  caddy:                     # faqat 80/443 bo'sh serverda (COMPOSE_PROFILES=caddy)
     image: caddy:2
+    profiles: ["caddy"]
     restart: unless-stopped
     ports: ["80:80", "443:443", "443:443/udp"]
     environment:
