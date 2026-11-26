@@ -30,6 +30,7 @@ type Tools struct {
 	Lang  string
 	Now   func() time.Time
 	Found map[string]store.Place
+	Debug func(tool, input string) // ixtiyoriy: asbob chaqiruvlarini kuzatish (cmd/guide-try)
 	order []string
 }
 
@@ -232,6 +233,14 @@ func (t *Tools) SearchStays(ctx context.Context, in SearchStaysInput) (any, erro
 	if err != nil {
 		return nil, err
 	}
+	note := ""
+	if len(list) == 0 && f.MaxPrice > 0 { // chegara juda past bo'lsa — chegarasiz eng arzonlarini ko'rsatamiz
+		f.MaxPrice = 0
+		if list, err = t.Store.Stays(ctx, f); err != nil {
+			return nil, err
+		}
+		note = "nothing under max_price_uzs; these are the nearest/best options without the price limit — compare prices yourself"
+	}
 	out := []stayBrief{}
 	for _, v := range list {
 		s := stayBrief{ID: v.ID, Name: i18n.Pick(v.Name, t.Lang), Kind: v.Kind, Stars: v.Stars, Rating: v.Rating, PriceMin: v.PriceMin,
@@ -242,7 +251,11 @@ func (t *Tools) SearchStays(ctx context.Context, in SearchStaysInput) (any, erro
 		}
 		out = append(out, s)
 	}
-	return map[string]any{"count": len(out), "stays": out}, nil
+	res := map[string]any{"count": len(out), "stays": out}
+	if note != "" {
+		res["note"] = note
+	}
+	return res, nil
 }
 
 // ---------- search_prices ----------

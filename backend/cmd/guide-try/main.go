@@ -26,6 +26,7 @@ func main() {
 	q := strings.Join(os.Args[1:], " ")
 	req := assistant.Request{Message: q, Lang: assistant.DetectLang(q, "uz")}
 	t := assistant.NewTools(store.New(db), req.Lang, nil)
+	t.Debug = func(tool, in string) { fmt.Fprintln(os.Stderr, "  [asbob]", tool, in) }
 	if m == nil {
 		ans, err := assistant.Fallback(ctx, req, t)
 		fmt.Println(ans, err)

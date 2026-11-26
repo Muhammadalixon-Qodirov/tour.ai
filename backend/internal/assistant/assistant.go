@@ -63,7 +63,7 @@ Ground rules (most important):
 - Every concrete fact you state — a place, its price level or ticket price, opening hours, address, hotel price, rules — must come
   from the tool results in this conversation. Never invent places, prices, phone numbers or hours from memory.
 - If the tools return nothing relevant, say plainly that the app has no verified information on that yet, in the user's language
-  (Uzbek: "Bu haqda tekshirilgan ma'lumotim yo'q."), and suggest what you *can* help with. General travel etiquette or how
+  (uz: "Bu haqda tekshirilgan ma'lumotim yo'q.", ru: "У меня пока нет проверенной информации об этом."), and suggest what you *can* help with. General travel etiquette or how
   things work in Uzbekistan (e.g. bargaining at bazaars, dress code at mosques) may come from general knowledge, phrased as general advice.
 - trust "sample" or price_is_estimate=true means approximate data: say "taxminan" / "approximately".
 - open_now null means hours are unknown — do not claim a place is open.
@@ -71,6 +71,8 @@ Ground rules (most important):
   place you remember or guess.
 - price_level is a 0–3 scale, NOT a price: say "bepul"/"arzon"/"o'rtacha"/"qimmat", never "0 so'm". State amounts in so'm
   only when they come from entry_fee, search_prices or search_stays. A missing price_level means the price is unknown.
+- Do not embellish: no "most popular", "great reviews", "central location" unless the data says so (rating/reviews,
+  distance, tagline, description).
 - Never show internal field names or values like "price_level", "open_now true", "trust", ids — speak naturally.
 
 How to work:
@@ -83,7 +85,8 @@ How to work:
   for fair prices (taxi, food, souvenirs, tickets).
 - Recommend 3–5 options, best first, each with one short reason grounded in the data (price level, family friendly, open now,
   little-known, distance). Mention the place name exactly as returned so the app can link it.
-- Reply in the user's language (uz/ru/en; default Uzbek, Latin script). Be concise: a short intro line and a list. No markdown
+- Reply in the language the user's message is written in (Russian question → Russian answer), even if app_language differs;
+  Uzbek in Latin script by default. Be concise: a short intro line and a list. No markdown
   headings or tables; plain lines with "•" bullets are fine.`
 
 // toolSpecs — asboblar tavsifi bitta joyda; Claude va OpenAI-mos (Groq) formatlariga o'giriladi.
@@ -109,7 +112,7 @@ var toolSpecs = []toolSpec{
 			"city":          map[string]any{"type": "string"},
 			"near":          map[string]any{"type": "object", "properties": map[string]any{"lat": map[string]any{"type": "number"}, "lng": map[string]any{"type": "number"}}},
 			"kinds":         map[string]any{"type": "array", "items": map[string]any{"type": "string", "enum": []string{"hotel", "boutique", "guesthouse", "hostel", "motel", "apartment"}}},
-			"max_price_uzs": map[string]any{"type": "integer"},
+			"max_price_uzs": map[string]any{"type": "integer", "description": "per night in Uzbek so'm (1 USD ≈ 12 000 so'm). Typical: hostel 100 000–250 000, guesthouse 250 000–500 000, hotel 500 000+. Omit unless the user gave a budget"},
 			"limit":         map[string]any{"type": "integer", "minimum": 1, "maximum": 10},
 		}, nil),
 	spec("search_prices", "Fair price ranges in UZS (taxi, food, souvenir, market, ticket, transport) for a city.",
@@ -161,6 +164,9 @@ func New(anthropicKey, groqKey, model, effort string) Model {
 }
 
 func (t *Tools) run(ctx context.Context, name string, raw string) (string, bool) {
+	if t.Debug != nil {
+		defer func() { t.Debug(name, raw) }()
+	}
 	var res any
 	var err error
 	dec := func(v any) error { // qat'iy: noto'g'ri yoki kesilgan JSON — xato natija, model qayta urinadi
