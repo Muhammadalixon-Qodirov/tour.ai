@@ -417,7 +417,7 @@ func (s *Server) moveStop(w http.ResponseWriter, r *http.Request) {
 		for k, x := range stops {
 			plan[k] = x.PlanStop
 		}
-		plan = planner.Retime(plan, int(t.Days[day].Date.Weekday()), tc.prefs.StartLocation, tc.city, tc.byID)
+		plan = planner.RetimeAt(plan, int(t.Days[day].Date.Weekday()), tc.prefs.dayStartMin(day), tc.prefs.StartLocation, tc.city, tc.byID)
 		for k := range stops {
 			stops[k].PlanStop = plan[k]
 		}

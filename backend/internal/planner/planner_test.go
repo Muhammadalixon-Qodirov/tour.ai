@@ -173,3 +173,38 @@ func TestTransit(t *testing.T) {
 		t.Fatalf("%+v", taxi)
 	}
 }
+
+// Birinchi kun so'rovdagi vaqtdan boshlanadi, keyingi kunlar 09:00 dan.
+func TestFirstDayStartTime(t *testing.T) {
+	r := rand.New(rand.NewPCG(7, 8))
+	cands := genCity(r, 40)
+	start := time.Date(2026, 12, 1, 0, 0, 0, 0, time.UTC)
+	days, err := Plan(Prefs{Days: 2, StartDate: start, Interests: []string{"history"}, Pace: "balanced", FirstDayStartMin: 13 * 60}, city, cands)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(days[0].Stops) == 0 {
+		t.Fatal("1-kun bo'sh")
+	}
+	for _, s := range days[0].Stops {
+		if s.ArriveMin < 13*60 {
+			t.Errorf("1-kun %s da, 13:00 dan oldin", domain.FormatHHMM(s.ArriveMin))
+		}
+		if s.EndMin() > DayEndMin {
+			t.Errorf("1-kun 20:00 dan keyin tugaydi: %s", domain.FormatHHMM(s.EndMin()))
+		}
+	}
+	if first := days[1].Stops[0].ArriveMin; first >= 13*60 {
+		t.Errorf("2-kun 09:00 atrofida boshlanishi kerak, %s", domain.FormatHHMM(first))
+	}
+	def, err := Plan(Prefs{Days: 1, StartDate: start, Interests: []string{"history"}, Pace: "balanced"}, city, cands)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := def[0].Stops[0].ArriveMin; got >= 10*60 {
+		t.Errorf("startTime yo'q: 1-kun 09:00 dan boshlanishi kerak, %s", domain.FormatHHMM(got))
+	}
+	if DayStartFor(Prefs{FirstDayStartMin: 840}, 1) != DayStartMin || DayStartFor(Prefs{FirstDayStartMin: 840}, 0) != 840 {
+		t.Error("DayStartFor")
+	}
+}

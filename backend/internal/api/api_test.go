@@ -191,6 +191,48 @@ func TestTripContractRules(t *testing.T) {
 	}
 }
 
+// startTime: birinchi kun shu vaqtdan, keyingilari 09:00 dan; tahrirdan keyin ham saqlanadi; noto'g'ri qiymat 400.
+func TestTripStartTime(t *testing.T) {
+	c := newClient(t, "trip-device-start1")
+	body := map[string]any{"cityId": "samarkand", "startDate": "2026-12-02", "startTime": "14:30", "days": 2,
+		"interests": []string{"history", "food"}, "pace": "balanced"}
+	var tr tripDTO
+	if code := c.do("POST", "/api/v1/trips", body, &tr); code != 201 {
+		t.Fatalf("code %d", code)
+	}
+	if tr.Prefs.StartTime != "14:30" {
+		t.Errorf("prefs.startTime %q", tr.Prefs.StartTime)
+	}
+	if len(tr.Days[0].Stops) == 0 || len(tr.Days[1].Stops) == 0 {
+		t.Fatal("bo'sh kun")
+	}
+	for _, s := range tr.Days[0].Stops {
+		if hhmm(t, s.ArriveAt) < 14*60+30 {
+			t.Errorf("1-kun %s da, 14:30 dan oldin", s.ArriveAt)
+		}
+	}
+	if first := hhmm(t, tr.Days[1].Stops[0].ArriveAt); first >= 14*60 {
+		t.Errorf("2-kun ertalab boshlanishi kerak, %s", tr.Days[1].Stops[0].ArriveAt)
+	}
+	// Tahrir (oxirgi to'xtashni olib tashlash) vaqtlarni qayta hisoblaydi, lekin 1-kun baribir 14:30 dan.
+	last := tr.Days[0].Stops[len(tr.Days[0].Stops)-1]
+	var edited tripDTO
+	if code := c.do("DELETE", "/api/v1/trips/"+tr.ID+"/stops/"+last.ID, nil, &edited); code != 200 {
+		t.Fatalf("delete %d", code)
+	}
+	for _, s := range edited.Days[0].Stops {
+		if hhmm(t, s.ArriveAt) < 14*60+30 {
+			t.Errorf("tahrirdan keyin 1-kun %s da", s.ArriveAt)
+		}
+	}
+	for _, bad := range []string{"5:00", "05:00", "19:30", "25:00", "abc"} {
+		b := map[string]any{"cityId": "samarkand", "startDate": "2026-12-02", "startTime": bad, "days": 1, "interests": []string{"history"}}
+		if code := c.do("POST", "/api/v1/trips", b, nil); code != 400 {
+			t.Errorf("startTime %q: code %d, 400 kutilgan", bad, code)
+		}
+	}
+}
+
 func hhmm(t *testing.T, s string) int {
 	var h, m int
 	if _, err := fmt.Sscanf(s, "%d:%d", &h, &m); err != nil {

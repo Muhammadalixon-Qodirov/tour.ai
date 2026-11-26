@@ -22,6 +22,7 @@ import (
 type tripReq struct {
 	CityID        string         `json:"cityId"`
 	StartDate     string         `json:"startDate"`
+	StartTime     string         `json:"startTime,omitempty"` // "HH:MM", birinchi kun shu vaqtdan; yo'q bo'lsa 09:00
 	Days          int            `json:"days"`
 	Interests     []string       `json:"interests"`
 	Companion     string         `json:"companion,omitempty"`
@@ -40,6 +41,29 @@ type tripReq struct {
 
 const maxTripDays = 7
 
+// Birinchi kun boshlanishi mumkin bo'lgan oraliq (startTime): 20:00 da kun tugaydi, 18:00 dan keyin joy sig'maydi.
+const (
+	minStartTimeMin = 6 * 60
+	maxStartTimeMin = 18 * 60
+)
+
+// startMin — "HH:MM" ni daqiqaga o'giradi; bo'sh yoki noto'g'ri bo'lsa 0 (= planner.DayStartMin).
+func (req tripReq) startMin() int {
+	if len(req.StartTime) != 5 || req.StartTime[2] != ':' {
+		return 0
+	}
+	m, err := domain.ParseHHMM(req.StartTime)
+	if err != nil {
+		return 0
+	}
+	return m
+}
+
+// dayStartMin — shu kun nechchida boshlanadi (tahrirdan keyin vaqtlarni qayta hisoblash uchun).
+func (req tripReq) dayStartMin(day int) int {
+	return planner.DayStartFor(planner.Prefs{FirstDayStartMin: req.startMin()}, day)
+}
+
 func (req *tripReq) validate(now time.Time) (time.Time, fieldErrors) {
 	fe := fieldErrors{}
 	if req.CityID == "" {
@@ -50,6 +74,11 @@ func (req *tripReq) validate(now time.Time) (time.Time, fieldErrors) {
 		fe.add("startDate", "YYYY-MM-DD")
 	} else if start.Before(now.AddDate(0, 0, -1).Truncate(24*time.Hour)) || start.After(now.AddDate(1, 0, 0)) {
 		fe.add("startDate", "today .. +1 year")
+	}
+	if req.StartTime != "" {
+		if m := req.startMin(); m < minStartTimeMin || m > maxStartTimeMin {
+			fe.add("startTime", "HH:MM, 06:00..18:00")
+		}
 	}
 	if req.Days < 1 || req.Days > maxTripDays {
 		fe.add("days", "1.."+strconv.Itoa(maxTripDays))
@@ -88,6 +117,7 @@ func (req tripReq) prefs(start time.Time) planner.Prefs {
 		p.BudgetPerDay = *req.BudgetPerDay
 	}
 	p.IsResident = req.IsResident != nil && *req.IsResident
+	p.FirstDayStartMin = req.startMin()
 	group := 0
 	if req.GroupSize != nil {
 		group = *req.GroupSize
@@ -395,7 +425,7 @@ func (s *Server) saveDay(w http.ResponseWriter, r *http.Request, t store.Trip, t
 	for i, st := range stops {
 		plan[i] = st.PlanStop
 	}
-	plan = planner.Retime(plan, int(t.Days[day].Date.Weekday()), tc.prefs.StartLocation, tc.city, tc.byID)
+	plan = planner.RetimeAt(plan, int(t.Days[day].Date.Weekday()), tc.prefs.dayStartMin(day), tc.prefs.StartLocation, tc.city, tc.byID)
 	for i := range stops {
 		stops[i].PlanStop = plan[i]
 	}

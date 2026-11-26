@@ -96,6 +96,17 @@ type Prefs struct {
 	BudgetPerDay int64 // kishi boshiga kuniga, so'm; 0 = cheklovsiz
 	IsResident   bool  // kirish narxi mahalliy tarifda
 	GroupSize    int   // taksi shu songa bo'linadi; 0 = 1
+	// FirstDayStartMin — birinchi kun shu daqiqadan boshlanadi (masalan 14:00 = 840); 0 = DayStartMin.
+	// Keyingi kunlar doim DayStartMin dan.
+	FirstDayStartMin int
+}
+
+// DayStartFor — kunning boshlanish vaqti (daqiqada): birinchi kun so'rovdagi vaqtdan, qolganlari 09:00 dan.
+func DayStartFor(p Prefs, day int) int {
+	if day == 0 && p.FirstDayStartMin > 0 {
+		return p.FirstDayStartMin
+	}
+	return DayStartMin
 }
 
 type City struct {
@@ -145,6 +156,7 @@ func Plan(p Prefs, city City, cands []Candidate) ([]domain.PlanDay, error) {
 	groups := pl.split()
 	days := make([]domain.PlanDay, p.Days)
 	for d := range p.Days {
+		pl.dayStart = DayStartFor(p, d)
 		days[d] = pl.planDay(d, groups[d])
 	}
 	pl.enforceShare(days)
@@ -166,13 +178,15 @@ type planner struct {
 	byID   map[string]Candidate
 	score  map[string]float64 // tanlash bali (ilovadagi score)
 	used   map[string]bool
+	// dayStart — hozir rejalanayotgan kunning boshlanish vaqti (DayStartFor).
+	dayStart int
 }
 
 func newPlanner(p Prefs, city City, cands []Candidate) *planner {
 	if city.AvgRating <= 0 {
 		city.AvgRating = 4.3
 	}
-	pl := &planner{p: p, city: city, byID: map[string]Candidate{}, score: map[string]float64{}, used: map[string]bool{}}
+	pl := &planner{p: p, city: city, byID: map[string]Candidate{}, score: map[string]float64{}, used: map[string]bool{}, dayStart: DayStartMin}
 	for _, c := range cands {
 		if c.VisitMin <= 0 {
 			c.VisitMin = 45
@@ -446,7 +460,7 @@ func (pl *planner) planDay(d int, group []Candidate) domain.PlanDay {
 // (bitta joy bo'lsa undan keyin) eng yaqin ochiq ovqatlanish joyida tushlik.
 func (pl *planner) schedule(order []Candidate, wd int) []domain.PlanStop {
 	var stops []domain.PlanStop
-	t := DayStartMin
+	t := pl.dayStart
 	pos := pl.start()
 	first := pl.p.Start == nil
 	sights, lunch := 0, false
@@ -537,7 +551,7 @@ func (pl *planner) fitBudget(stops []domain.PlanStop, wd int) []domain.PlanStop 
 		if victim < 0 {
 			break
 		}
-		stops = Retime(slices.Delete(slices.Clone(stops), victim, victim+1), wd, pl.p.Start, pl.city, pl.byID)
+		stops = RetimeAt(slices.Delete(slices.Clone(stops), victim, victim+1), wd, pl.dayStart, pl.p.Start, pl.city, pl.byID)
 	}
 	return stops
 }
@@ -672,7 +686,7 @@ func inDay(d domain.PlanDay, id string) bool {
 func (pl *planner) Reschedule(stops []domain.PlanStop, i int, c Candidate, wd int) []domain.PlanStop {
 	out := slices.Clone(stops)
 	out[i] = pl.stopFor(c, domain.KindPlace, 0, c.VisitMin, nil)
-	return Retime(out, wd, pl.p.Start, pl.city, pl.byID)
+	return RetimeAt(out, wd, pl.dayStart, pl.p.Start, pl.city, pl.byID)
 }
 
 // enforceShare — umumiy ulush 1/3 dan past bo'lsa, eng kam yangi joyli kundan boshlab almashtiradi.
@@ -693,7 +707,11 @@ func (pl *planner) enforceShare(days []domain.PlanDay) {
 				bi, bestRatio = i, r
 			}
 		}
-		if bi < 0 || !pl.replaceWithNovel(&days[bi], pl.weekday(bi)) {
+		if bi < 0 {
+			return
+		}
+		pl.dayStart = DayStartFor(pl.p, bi)
+		if !pl.replaceWithNovel(&days[bi], pl.weekday(bi)) {
 			return
 		}
 		for _, s := range days[bi].Stops {
@@ -705,8 +723,13 @@ func (pl *planner) enforceShare(days []domain.PlanDay) {
 // Retime — tartibni saqlagan holda vaqtlar va transportni qayta hisoblaydi (foydalanuvchi tahriridan keyin).
 // Joylar tashlab ketilmaydi: foydalanuvchi qarori hurmat qilinadi.
 func Retime(stops []domain.PlanStop, wd int, start *domain.LatLng, city City, byID map[string]Candidate) []domain.PlanStop {
+	return RetimeAt(stops, wd, DayStartMin, start, city, byID)
+}
+
+// RetimeAt — Retime, kun dayStartMin daqiqadan boshlanadi (birinchi kun so'rovdagi vaqtdan boshlanishi mumkin).
+func RetimeAt(stops []domain.PlanStop, wd, dayStartMin int, start *domain.LatLng, city City, byID map[string]Candidate) []domain.PlanStop {
 	out := slices.Clone(stops)
-	t := DayStartMin
+	t := dayStartMin
 	var pos domain.LatLng
 	hasPos := false
 	if start != nil {
