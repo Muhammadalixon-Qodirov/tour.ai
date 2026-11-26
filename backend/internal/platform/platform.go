@@ -22,6 +22,7 @@ type Config struct {
 	DatabaseURL   string
 	TokenSecret   []byte
 	PublicBaseURL string
+	WebBaseURL    string // sayt manzili: story havolasi, joy sahifasiga va namuna hamkor sahifasiga yo'naltirish
 	CORSOrigins   []string
 	AdminOrigin   string
 	AIBaseURL     string
@@ -42,6 +43,9 @@ type Config struct {
 	TrustedProxies []netip.Prefix
 }
 
+// DefaultWebBaseURL — production sayt manzili (WEB_BASE_URL berilmasa).
+const DefaultWebBaseURL = "https://safar.e-investment.uz"
+
 func LoadConfig() (Config, error) {
 	c := Config{
 		Addr:          env("ADDR", ":8080"),
@@ -51,6 +55,7 @@ func LoadConfig() (Config, error) {
 		AIBaseURL:     os.Getenv("AI_BASE_URL"),
 		AIKey:         os.Getenv("AI_INTERNAL_KEY"),
 		UploadDir:     env("UPLOAD_DIR", "data/uploads"),
+		WebBaseURL:    strings.TrimRight(env("WEB_BASE_URL", DefaultWebBaseURL), "/"),
 	}
 	if v := os.Getenv("CORS_ORIGINS"); v != "" {
 		for _, o := range strings.Split(v, ",") {

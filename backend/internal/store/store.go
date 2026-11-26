@@ -336,19 +336,21 @@ func (s *Store) GeofencePlaces(ctx context.Context, cityID string, langs []strin
 // ---------- Foydalanuvchilar ----------
 
 type User struct {
-	ID            string
-	Lang          string
-	Role          string
-	Interests     []string
-	Companion     *string
-	Pace          *string
-	Budget        *int
-	DisplayName   *string
-	Email         *string
-	EmailVerified bool
-	GoogleSub     *string
-	AvatarURL     *string
-	IsResident    *bool
+	ID              string
+	Lang            string
+	Role            string
+	Interests       []string
+	Companion       *string
+	Pace            *string
+	Budget          *int
+	DisplayName     *string
+	Email           *string
+	EmailVerified   bool
+	GoogleSub       *string
+	AvatarURL       *string
+	IsResident      *bool
+	PartnerID       *string // role = partner: qaysi hamkor xodimi
+	AnalyticsOptOut bool    // true: safarlari Safar Insights statistikasiga kirmaydi
 }
 
 // DeviceSession — qurilma bo'yicha foydalanuvchini topadi yoki yaratadi.
@@ -399,9 +401,9 @@ func getUser(ctx context.Context, q querier, id string) (User, error) {
 func getUserWhere(ctx context.Context, q querier, where string, arg any) (User, error) {
 	var u User
 	err := q.QueryRow(ctx, `SELECT id, lang, role, interests, companion, pace, budget, display_name, email, email_verified,
-		google_sub, avatar_url, is_resident FROM users WHERE `+where, arg).
+		google_sub, avatar_url, is_resident, partner_id, analytics_opt_out FROM users WHERE `+where, arg).
 		Scan(&u.ID, &u.Lang, &u.Role, &u.Interests, &u.Companion, &u.Pace, &u.Budget, &u.DisplayName, &u.Email,
-			&u.EmailVerified, &u.GoogleSub, &u.AvatarURL, &u.IsResident)
+			&u.EmailVerified, &u.GoogleSub, &u.AvatarURL, &u.IsResident, &u.PartnerID, &u.AnalyticsOptOut)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return u, ErrNotFound
 	}
@@ -411,21 +413,22 @@ func getUserWhere(ctx context.Context, q querier, where string, arg any) (User, 
 func (s *Store) User(ctx context.Context, id string) (User, error) { return getUser(ctx, s.DB, id) }
 
 type UserPatch struct {
-	Lang        *string
-	Interests   *[]string
-	Companion   *string
-	Pace        *string
-	Budget      *int
-	DisplayName *string
-	IsResident  *bool
+	Lang            *string
+	Interests       *[]string
+	Companion       *string
+	Pace            *string
+	Budget          *int
+	DisplayName     *string
+	IsResident      *bool
+	AnalyticsOptOut *bool
 }
 
 func (s *Store) UpdateUser(ctx context.Context, id string, p UserPatch) (User, error) {
 	_, err := s.DB.Exec(ctx, `UPDATE users SET
 		lang = COALESCE($2, lang), interests = COALESCE($3, interests), companion = COALESCE($4, companion),
 		pace = COALESCE($5, pace), budget = COALESCE($6, budget), display_name = COALESCE($7, display_name),
-		is_resident = COALESCE($8, is_resident)
-		WHERE id = $1`, id, p.Lang, p.Interests, p.Companion, p.Pace, p.Budget, p.DisplayName, p.IsResident)
+		is_resident = COALESCE($8, is_resident), analytics_opt_out = COALESCE($9, analytics_opt_out)
+		WHERE id = $1`, id, p.Lang, p.Interests, p.Companion, p.Pace, p.Budget, p.DisplayName, p.IsResident, p.AnalyticsOptOut)
 	if err != nil {
 		return User{}, err
 	}

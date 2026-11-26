@@ -24,6 +24,8 @@ type Trip struct {
 	Planner      string
 	CreatedAt    time.Time
 	GroupID      *uuid.UUID
+	Arrival      json.RawMessage // "Qanday borasiz?" tanlovi; nil = tanlanmagan
+	Prep         json.RawMessage // "Safarga tayyorgarlik" holati; nil = bo'sh
 	Days         []TripDay
 }
 
@@ -112,9 +114,11 @@ func (s *Store) ReplaceDayStops(ctx context.Context, tripID uuid.UUID, day int, 
 // Trip — foydalanuvchining marshruti (boshqa foydalanuvchiniki bo'lsa ErrNotFound).
 func (s *Store) Trip(ctx context.Context, id uuid.UUID, userID string) (Trip, error) {
 	var t Trip
-	err := s.DB.QueryRow(ctx, `SELECT id, user_id, city_id, status, start_date, prefs, summary, novelty_share, planner, created_at, group_id
+	err := s.DB.QueryRow(ctx, `SELECT id, user_id, city_id, status, start_date, prefs, summary, novelty_share, planner, created_at, group_id,
+		arrival, prep
 		FROM trips WHERE id = $1 AND (user_id = $2 OR group_id IN (SELECT group_id FROM group_members WHERE user_id = $2))`, id, userID).
-		Scan(&t.ID, &t.UserID, &t.CityID, &t.Status, &t.StartDate, &t.Prefs, &t.Summary, &t.NoveltyShare, &t.Planner, &t.CreatedAt, &t.GroupID)
+		Scan(&t.ID, &t.UserID, &t.CityID, &t.Status, &t.StartDate, &t.Prefs, &t.Summary, &t.NoveltyShare, &t.Planner, &t.CreatedAt, &t.GroupID,
+			&t.Arrival, &t.Prep)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return t, ErrNotFound
 	}
@@ -233,4 +237,28 @@ func (s *Store) DeleteTrip(ctx context.Context, id uuid.UUID, userID string) ([]
 		return err
 	})
 	return files, err
+}
+
+// TripExtrasPatch — PATCH /trips/{id}: Set* true bo'lsa maydon yangilanadi (qiymat nil bo'lsa tozalanadi).
+type TripExtrasPatch struct {
+	SetArrival bool
+	Arrival    json.RawMessage
+	SetPrep    bool
+	Prep       json.RawMessage
+}
+
+func nullJSON(v json.RawMessage) any {
+	if len(v) == 0 || string(v) == "null" {
+		return nil
+	}
+	return []byte(v)
+}
+
+// UpdateTripExtras — arrival va prep (safar egasi yoki guruh a'zosi; ruxsat oldin Trip() bilan tekshiriladi).
+func (s *Store) UpdateTripExtras(ctx context.Context, id uuid.UUID, p TripExtrasPatch) error {
+	_, err := s.DB.Exec(ctx, `UPDATE trips SET
+		arrival = CASE WHEN $2 THEN $3::jsonb ELSE arrival END,
+		prep = CASE WHEN $4 THEN $5::jsonb ELSE prep END,
+		updated_at = now() WHERE id = $1`, id, p.SetArrival, nullJSON(p.Arrival), p.SetPrep, nullJSON(p.Prep))
+	return err
 }

@@ -1,0 +1,124 @@
+{
+  "_comment": "Daromad funksiyalari seed i (docs/MONETIZATION.md). Sayt (web/src/lib/monetization/intercity.ts, sample.ts) va ilova (mobile/src/mock/monetization.ts) bilan bir xil raqamlar. Hamkorlar NAMUNA (sample: true): to'qilgan nomlar va narxlar. Shaharlararo raqamlar ochiq manbadan, sana bilan; manba yo'q joyda Safar hisobi (estimate: yo'l masofasi, ~75 km/soat, haydovchi ~1 200 so'm/km mashina uchun). Tadqiqot: 2026-11-26.",
+  "intercity": {
+    "sources": {
+      "rail": { "source": "O'zbekiston temir yo'llari, Spot.uz", "sourceUrl": "https://www.spot.uz/oz/2026/01/16/afrosiyob/", "updatedAt": "2026-01-16" },
+      "air": { "source": "Uzbekistan Airways, Lite", "sourceUrl": "https://uzairways.com/en/press-center/news/uzbekistan-airways-fare-policy-update", "updatedAt": "2026-03-17" },
+      "yandex": { "source": "Yandex Raspisaniya", "sourceUrl": "https://rasp.yandex.uz/train/tashkent--namangan", "updatedAt": "2026-11-26" },
+      "travelto": { "source": "travelto.ru", "sourceUrl": "https://travelto.ru/blog/blogskolko-stoit-proezd-v-uzbekistane/", "updatedAt": "2026-11-11" },
+      "we": { "source": "WE Project", "sourceUrl": "https://www.weproject.media/articles/detail/kak-dobratsya-iz-tashkenta-v-samarkand-na-poezde-avtobuse-i-taksi/", "updatedAt": "2026-03-27" },
+      "est": { "source": "Safar", "updatedAt": "2026-11-26", "estimate": true }
+    },
+    "hub": "tashkent",
+    "transferMin": 60,
+    "car": { "source": "est", "kmPerHour": 75, "somPerKm": 1200 },
+    "roadKm": {
+      "samarkand|tashkent": 300, "bukhara|tashkent": 570, "namangan|tashkent": 290,
+      "bukhara|samarkand": 270, "namangan|samarkand": 590, "bukhara|namangan": 860
+    },
+    "direct": {
+      "samarkand|tashkent": [
+        { "mode": "train", "durationMin": 180, "source": "we" },
+        { "mode": "afrosiyob", "durationMin": 133, "priceFrom": 311000, "source": "rail" },
+        { "mode": "plane", "durationMin": 60, "priceFrom": 235230, "source": "air" },
+        { "mode": "bus", "durationMin": 270, "priceFrom": 55000, "source": "travelto" }
+      ],
+      "bukhara|tashkent": [
+        { "mode": "train", "durationMin": 360, "source": "est" },
+        { "mode": "afrosiyob", "durationMin": 240, "priceFrom": 509000, "source": "rail" },
+        { "mode": "plane", "durationMin": 85, "priceFrom": 276741, "source": "air" },
+        { "mode": "bus", "durationMin": 540, "priceFrom": 130000, "source": "travelto", "estimate": true }
+      ],
+      "namangan|tashkent": [
+        { "mode": "train", "durationMin": 266, "source": "yandex" },
+        { "mode": "plane", "durationMin": 60, "priceFrom": 235230, "source": "air" },
+        { "mode": "bus", "durationMin": 330, "source": "est" }
+      ],
+      "bukhara|samarkand": [
+        { "mode": "train", "durationMin": 180, "source": "est" },
+        { "mode": "afrosiyob", "durationMin": 100, "source": "est" },
+        { "mode": "bus", "durationMin": 300, "source": "est" }
+      ]
+    },
+    "viaModes": ["train", "plane"]
+  },
+  "partners": [
+    { "id": "sp_yolchi", "name": "Yo'lchi Bilet", "sample": true },
+    { "id": "sp_osmon", "name": "Osmon Avia", "sample": true },
+    { "id": "sp_karvon", "name": "Karvon Transfer", "sample": true },
+    { "id": "sp_aloqa", "name": "Aloqa eSIM", "sample": true },
+    { "id": "sp_himoya", "name": "Himoya Sug'urta", "sample": true },
+    { "id": "sp_registon_choy", "name": "Registon choyxonasi", "cityId": "samarkand", "location": { "lat": 39.6562, "lng": 66.9738 }, "discountPct": 15, "sample": true },
+    { "id": "sp_labi_kulol", "name": "Labi Hovuz kulolchilik ustaxonasi", "cityId": "bukhara", "location": { "lat": 39.7738, "lng": 64.4214 }, "discountPct": 10, "sample": true },
+    { "id": "sp_sayilgoh_cafe", "name": "Sayilgoh kafesi", "cityId": "tashkent", "location": { "lat": 41.3122, "lng": 69.2781 }, "discountPct": 12, "sample": true },
+    { "id": "sp_bobur_choy", "name": "Bobur bog‘i choyxonasi", "cityId": "namangan", "location": { "lat": 40.9995, "lng": 71.6741 }, "discountPct": 20, "sample": true }
+  ],
+  "offers": [
+    {
+      "id": "so_rail", "partnerId": "sp_yolchi", "slot": "transport.cheapest", "mode": "train", "sample": true,
+      "title": { "uz": "Poyezd chiptalari, joy tanlash bilan", "en": "Train tickets with seat choice", "ru": "Билеты на поезд с выбором места" },
+      "body": { "uz": "Elektron chipta pochtaga keladi", "en": "The e-ticket arrives by email", "ru": "Электронный билет придёт на почту" },
+      "cta": { "uz": "Chiptalarni ko'rish", "en": "See tickets", "ru": "Смотреть билеты" }
+    },
+    {
+      "id": "so_rail_fast", "partnerId": "sp_yolchi", "slot": "transport.fastest", "mode": "afrosiyob", "sample": true,
+      "title": { "uz": "Poyezd chiptalari, joy tanlash bilan", "en": "Train tickets with seat choice", "ru": "Билеты на поезд с выбором места" },
+      "body": { "uz": "Elektron chipta pochtaga keladi", "en": "The e-ticket arrives by email", "ru": "Электронный билет придёт на почту" },
+      "cta": { "uz": "Chiptalarni ko'rish", "en": "See tickets", "ru": "Смотреть билеты" }
+    },
+    {
+      "id": "so_air", "partnerId": "sp_osmon", "slot": "transport.fastest", "mode": "plane", "sample": true,
+      "title": { "uz": "Ichki reyslar bitta ro'yxatda", "en": "Domestic flights in one list", "ru": "Внутренние рейсы одним списком" },
+      "body": { "uz": "Bagaj narxi oldindan ko'rinadi", "en": "Baggage price shown up front", "ru": "Цена багажа видна сразу" },
+      "cta": { "uz": "Reyslarni ko'rish", "en": "See flights", "ru": "Смотреть рейсы" }
+    },
+    {
+      "id": "so_driver", "partnerId": "sp_karvon", "slot": "transport.comfort", "mode": "car", "sample": true,
+      "title": { "uz": "Haydovchili mashina, narx oldindan kelishiladi", "en": "Car with a driver, price agreed in advance", "ru": "Машина с водителем, цена заранее" },
+      "body": { "uz": "Bolalar o'rindig'i so'rov bo'yicha", "en": "Child seat on request", "ru": "Детское кресло по запросу" },
+      "cta": { "uz": "Narxni bilish", "en": "Get a price", "ru": "Узнать цену" }
+    },
+    {
+      "id": "so_esim_3", "partnerId": "sp_aloqa", "slot": "prep.esim", "resident": false, "daysMax": 3, "priceFrom": 45000, "sample": true,
+      "title": { "uz": "eSIM 3 kunga, 3 GB", "en": "eSIM for 3 days, 3 GB", "ru": "eSIM на 3 дн., 3 ГБ" },
+      "body": { "uz": "QR-kod pochtaga keladi, o'rnatish 2 daqiqa", "en": "QR code by email, set up in 2 minutes", "ru": "QR-код на почту, установка за 2 минуты" },
+      "cta": { "uz": "eSIM olish", "en": "Get eSIM", "ru": "Получить eSIM" }
+    },
+    {
+      "id": "so_esim_7", "partnerId": "sp_aloqa", "slot": "prep.esim", "resident": false, "daysMin": 4, "daysMax": 7, "priceFrom": 95000, "sample": true,
+      "title": { "uz": "eSIM 7 kunga, 10 GB", "en": "eSIM for 7 days, 10 GB", "ru": "eSIM на 7 дн., 10 ГБ" },
+      "body": { "uz": "QR-kod pochtaga keladi, o'rnatish 2 daqiqa", "en": "QR code by email, set up in 2 minutes", "ru": "QR-код на почту, установка за 2 минуты" },
+      "cta": { "uz": "eSIM olish", "en": "Get eSIM", "ru": "Получить eSIM" }
+    },
+    {
+      "id": "so_esim_15", "partnerId": "sp_aloqa", "slot": "prep.esim", "resident": false, "daysMin": 8, "daysMax": 15, "priceFrom": 160000, "sample": true,
+      "title": { "uz": "eSIM 15 kunga, 20 GB", "en": "eSIM for 15 days, 20 GB", "ru": "eSIM на 15 дн., 20 ГБ" },
+      "body": { "uz": "QR-kod pochtaga keladi, o'rnatish 2 daqiqa", "en": "QR code by email, set up in 2 minutes", "ru": "QR-код на почту, установка за 2 минуты" },
+      "cta": { "uz": "eSIM olish", "en": "Get eSIM", "ru": "Получить eSIM" }
+    },
+    {
+      "id": "so_esim_30", "partnerId": "sp_aloqa", "slot": "prep.esim", "resident": false, "daysMin": 16, "priceFrom": 240000, "sample": true,
+      "title": { "uz": "eSIM 30 kunga, 30 GB", "en": "eSIM for 30 days, 30 GB", "ru": "eSIM на 30 дн., 30 ГБ" },
+      "body": { "uz": "QR-kod pochtaga keladi, o'rnatish 2 daqiqa", "en": "QR code by email, set up in 2 minutes", "ru": "QR-код на почту, установка за 2 минуты" },
+      "cta": { "uz": "eSIM olish", "en": "Get eSIM", "ru": "Получить eSIM" }
+    },
+    {
+      "id": "so_sim", "partnerId": "sp_aloqa", "slot": "prep.sim", "resident": false, "priceFrom": 60000, "sample": true,
+      "title": { "uz": "Mahalliy SIM, aeroportda olib ketish", "en": "Local SIM, pick up at the airport", "ru": "Местная SIM, выдача в аэропорту" },
+      "body": { "uz": "Pasport bilan rasmiylashtiriladi", "en": "Registered with your passport", "ru": "Оформляется по паспорту" },
+      "cta": { "uz": "Buyurtma berish", "en": "Order", "ru": "Заказать" }
+    },
+    {
+      "id": "so_ins", "partnerId": "sp_himoya", "slot": "prep.insurance", "resident": false, "priceFrom": 15000, "priceUnit": "day", "sample": true,
+      "title": { "uz": "Tibbiy sug'urta {d} kunga", "en": "Medical insurance for {d} days", "ru": "Медицинская страховка на {d} дн." },
+      "body": { "uz": "Litsenziyali sug'urta kompaniyasi polisi, Safar agent sifatida. Polis pochtaga keladi.", "en": "A policy from a licensed insurer, with Safar as the agent. The policy arrives by email.", "ru": "Полис лицензированной страховой компании, Safar выступает агентом. Полис придёт на почту." },
+      "cta": { "uz": "Polis olish", "en": "Get a policy", "ru": "Оформить полис" }
+    },
+    {
+      "id": "so_ins_local", "partnerId": "sp_himoya", "slot": "prep.insurance", "resident": true, "priceFrom": 6000, "priceUnit": "day", "sample": true,
+      "title": { "uz": "Baxtsiz hodisa va bagaj sug'urtasi {d} kunga", "en": "Accident and baggage cover for {d} days", "ru": "Страховка от несчастного случая и багажа на {d} дн." },
+      "body": { "uz": "Litsenziyali sug'urta kompaniyasi polisi, Safar agent sifatida. Polis pochtaga keladi.", "en": "A policy from a licensed insurer, with Safar as the agent. The policy arrives by email.", "ru": "Полис лицензированной страховой компании, Safar выступает агентом. Полис придёт на почту." },
+      "cta": { "uz": "Polis olish", "en": "Get a policy", "ru": "Оформить полис" }
+    }
+  ]
+}

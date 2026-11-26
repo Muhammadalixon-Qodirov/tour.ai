@@ -69,7 +69,11 @@ type meDTO struct {
 	Companion     *string  `json:"companion,omitempty"`
 	Pace          *string  `json:"pace,omitempty"`
 	Budget        *int     `json:"budget,omitempty"`
-	Stats         struct {
+	// AnalyticsOptOut — true: safarlari Safar Insights statistikasiga kirmaydi.
+	AnalyticsOptOut bool    `json:"analyticsOptOut"`
+	Role            string  `json:"role"`                // tourist | partner | insights
+	PartnerID       *string `json:"partnerId,omitempty"` // role = partner
+	Stats           struct {
 		PlacesVisited    int `json:"placesVisited"`
 		NewPlacesVisited int `json:"newPlacesVisited"`
 	} `json:"stats"`
@@ -78,7 +82,7 @@ type meDTO struct {
 func (s *Server) meFor(r *http.Request, u store.User) (meDTO, error) {
 	d := meDTO{ID: u.ID, Lang: u.Lang, IsRegistered: u.IsRegistered(), Email: u.Email, AvatarURL: u.AvatarURL, IsResident: u.IsResident,
 		DisplayName: u.DisplayName, Interests: u.Interests, Companion: u.Companion, Pace: u.Pace, Budget: u.Budget,
-		AuthProviders: []string{}}
+		AuthProviders: []string{}, AnalyticsOptOut: u.AnalyticsOptOut, Role: u.Role, PartnerID: u.PartnerID}
 	if u.GoogleSub != nil {
 		d.AuthProviders = append(d.AuthProviders, "google")
 	}
@@ -123,6 +127,8 @@ type mePatch struct {
 	Pace        *string   `json:"pace"`
 	Budget      *int      `json:"budget"`
 	IsResident  *bool     `json:"isResident"`
+	// AnalyticsOptOut — statistikadan chiqish (MONETIZATION.md §0.6).
+	AnalyticsOptOut *bool `json:"analyticsOptOut"`
 }
 
 var (
@@ -175,7 +181,8 @@ func (s *Server) patchMe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	u, err := s.store.UpdateUser(r.Context(), userOf(r), store.UserPatch{Lang: p.Lang, Interests: p.Interests,
-		Companion: p.Companion, Pace: p.Pace, Budget: p.Budget, DisplayName: p.DisplayName, IsResident: p.IsResident})
+		Companion: p.Companion, Pace: p.Pace, Budget: p.Budget, DisplayName: p.DisplayName, IsResident: p.IsResident,
+		AnalyticsOptOut: p.AnalyticsOptOut})
 	if err != nil {
 		s.internalError(w, r, err)
 		return

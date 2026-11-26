@@ -45,6 +45,9 @@ type Server struct {
 func (s *Server) SetImages(f fs.FS) { s.images = f }
 
 func NewServer(cfg platform.Config, st *store.Store) *Server {
+	if cfg.WebBaseURL == "" {
+		cfg.WebBaseURL = platform.DefaultWebBaseURL
+	}
 	s := &Server{cfg: cfg, store: st, limiter: NewLimiter(),
 		media: media.Local{Dir: cfg.UploadDir, BaseURL: cfg.PublicBaseURL}, weather: weather.NewOpenMeteo(), story: diary.Template{}, now: time.Now}
 	s.signer = auth.NewSigner(cfg.TokenSecret, func() time.Time { return s.now() })
@@ -166,6 +169,36 @@ func (s *Server) Handler() http.Handler {
 	adm("DELETE /api/v1/admin/services/{id}", s.adminDeleteService)
 	adm("POST /api/v1/admin/posts/{id}/hide", s.adminPostStatus("hidden"))
 	adm("POST /api/v1/admin/posts/{id}/restore", s.adminPostStatus("visible"))
+
+	// daromad funksiyalari (docs/MONETIZATION.md)
+	pub("GET /api/v1/routes/intercity", s.listIntercity)
+	mux.Handle("GET /api/v1/offers", s.optionalUser(s.rate("general", 120, http.HandlerFunc(s.listOffers))))
+	mux.Handle("POST /api/v1/offers/{id}/impressions", s.optionalUser(s.rate("impressions", 60, http.HandlerFunc(s.offerImpressions))))
+	for _, p := range []string{"GET /r/{clickId}", "GET /api/v1/r/{clickId}"} {
+		mux.Handle(p, s.rateIP("click", 60, http.HandlerFunc(s.offerClick)))
+	}
+	// Story havolasi saytda (safar.e-investment.uz/s/p/...), sayt serveri shu yerga so'raydi (bitta IP): limit kengroq.
+	// Ildizdagi /s/p/ ishlatilmaydi: /s/{slug}/card.png bilan to'qnashadi.
+	mux.Handle("GET /api/v1/s/p/{placeId}", s.rateIP("story-link", 600, http.HandlerFunc(s.storyLink)))
+	user("PATCH /api/v1/trips/{id}", s.patchTrip)
+	mux.Handle("POST /api/v1/stories", s.requireUser(s.rate("stories", 30, http.HandlerFunc(s.createStory))))
+	mux.Handle("POST /api/v1/stories/{shareId}/shared", s.requireUser(s.rate("stories", 30, http.HandlerFunc(s.storyShared))))
+	user("GET /api/v1/me/codes", s.myCodes)
+	mux.Handle("POST /api/v1/partners/conversions", s.requirePartner(true, s.ratePartner("conversions", 600, http.HandlerFunc(s.partnerConversion))))
+	mux.Handle("GET /api/v1/partner/me/stats", s.requirePartner(false, s.ratePartner("partner", 60, http.HandlerFunc(s.partnerStats))))
+	mux.Handle("POST /api/v1/partner/codes/redeem", s.requirePartner(false, s.ratePartner("redeem", 30, http.HandlerFunc(s.redeemCode))))
+	mux.Handle("GET /api/v1/insights/summary", s.requireInsights(s.rate("insights", 30, http.HandlerFunc(s.insightsSummary))))
+	mux.Handle("GET /api/v1/insights/export", s.requireInsights(s.rate("insights", 30, http.HandlerFunc(s.insightsExport))))
+	adm("GET /api/v1/admin/partners", s.adminOnly(s.adminListPartners))
+	adm("POST /api/v1/admin/partners", s.adminOnly(s.adminCreatePartner))
+	adm("PATCH /api/v1/admin/partners/{id}", s.adminOnly(s.adminPatchPartner))
+	adm("GET /api/v1/admin/partners/{id}/keys", s.adminOnly(s.adminListPartnerKeys))
+	adm("POST /api/v1/admin/partners/{id}/keys", s.adminOnly(s.adminCreatePartnerKey))
+	adm("DELETE /api/v1/admin/partners/{id}/keys/{keyId}", s.adminOnly(s.adminRevokePartnerKey))
+	adm("GET /api/v1/admin/offers", s.adminOnly(s.adminListOffers))
+	adm("POST /api/v1/admin/offers", s.adminOnly(s.adminCreateOffer))
+	adm("PATCH /api/v1/admin/offers/{id}", s.adminOnly(s.adminPatchOffer))
+	adm("PUT /api/v1/admin/users/{id}/role", s.adminOnly(s.adminSetUserRole))
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, r, http.StatusNotFound, "not_found", false)
@@ -313,7 +346,7 @@ func (s *Server) cors(next http.Handler) http.Handler {
 		if o := r.Header.Get("Origin"); o != "" && slices.Contains(s.cfg.CORSOrigins, o) {
 			w.Header().Set("Access-Control-Allow-Origin", o)
 			w.Header().Add("Vary", "Origin")
-			w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept-Language, If-None-Match")
+			w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept-Language, If-None-Match, X-Partner-Key")
 			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
 			w.Header().Set("Access-Control-Max-Age", "600")
 			w.Header().Set("Access-Control-Expose-Headers", "ETag, Retry-After, X-Request-Id")

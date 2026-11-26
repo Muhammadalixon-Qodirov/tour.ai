@@ -141,7 +141,9 @@ type tripDTO struct {
 	NoveltyShare float64      `json:"noveltyShare"`
 	Days         []tripDayDTO `json:"days"`
 	Totals       tripTotals   `json:"totals"`
-	Prefs        tripReq      `json:"prefs"` // POST /trips dagi sozlamalar (ko'rsatish va tahrirlash uchun)
+	Prefs        tripReq      `json:"prefs"`   // POST /trips dagi sozlamalar (ko'rsatish va tahrirlash uchun)
+	Arrival      *arrivalDTO  `json:"arrival"` // "Qanday borasiz?" tanlovi; null = tanlanmagan
+	Prep         prepState    `json:"prep"`    // "Safarga tayyorgarlik": {band: done | skipped}
 }
 
 type tripDayDTO struct {
@@ -168,7 +170,9 @@ type tripTotals struct {
 	Places        int          `json:"places"`
 	NewPlaces     int          `json:"newPlaces"`
 	WalkingM      int          `json:"walkingM"`
-	EstimatedCost domain.Money `json:"estimatedCost"` // kishi boshiga, butun safar: kirish + tushlik + taksi ulushi
+	EstimatedCost domain.Money `json:"estimatedCost"` // kishi boshiga, butun safar: kirish + tushlik + taksi ulushi + shaharga yo'l
+	// ArrivalCost — shaharga yetib borish (bir tomonga), kishi boshiga; mashina guruhga bo'linadi. estimatedCost ichida.
+	ArrivalCost *domain.Money `json:"arrivalCost,omitempty"`
 }
 
 func reasonText(st store.Stop, lang string) string {
@@ -253,6 +257,9 @@ func (s *Server) buildTrip(r *http.Request, t store.Trip) (tripDTO, error) {
 			dd.Stops = append(dd.Stops, sd)
 		}
 		out.Days = append(out.Days, dd)
+	}
+	if err := s.addArrival(r, t, req, &out); err != nil {
+		return tripDTO{}, err
 	}
 	if t.Summary != nil && *t.Summary != "" {
 		out.Summary = *t.Summary

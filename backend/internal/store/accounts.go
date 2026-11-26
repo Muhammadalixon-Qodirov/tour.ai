@@ -192,6 +192,11 @@ func mergeUsers(ctx context.Context, tx pgx.Tx, from, into string) error {
 		`INSERT INTO group_votes (group_id, user_id, place_id, vote, created_at) SELECT group_id, $2, place_id, vote, created_at
 		   FROM group_votes WHERE user_id = $1 ON CONFLICT DO NOTHING`,
 		`UPDATE users u SET is_resident = COALESCE(u.is_resident, a.is_resident) FROM users a WHERE u.id = $2 AND a.id = $1`,
+		// daromad funksiyalari: story, kod, bosish hisobga o'tadi; statistikadan chiqish bittasida bo'lsa saqlanadi
+		`UPDATE stories SET user_id = $2 WHERE user_id = $1`,
+		`UPDATE discount_codes SET user_id = $2 WHERE user_id = $1`,
+		`UPDATE offer_clicks SET user_id = $2 WHERE user_id = $1`,
+		`UPDATE users u SET analytics_opt_out = u.analytics_opt_out OR a.analytics_opt_out FROM users a WHERE u.id = $2 AND a.id = $1`,
 		`UPDATE users u SET interests = CASE WHEN cardinality(u.interests) = 0 THEN a.interests ELSE u.interests END,
 		   companion = COALESCE(u.companion, a.companion), pace = COALESCE(u.pace, a.pace), budget = COALESCE(u.budget, a.budget),
 		   display_name = COALESCE(u.display_name, a.display_name)

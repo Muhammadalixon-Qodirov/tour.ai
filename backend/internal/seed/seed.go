@@ -40,6 +40,15 @@ func LoadDir(ctx context.Context, db *pgxpool.Pool, dir string) error {
 		return fmt.Errorf("%s: seed fayllari topilmadi", dir)
 	}
 	slices.Sort(files)
+	// Daromad funksiyalari fayli (hamkorlar, takliflar, yo'nalishlar) alohida va oxirida: hamkor shaharga havola qiladi.
+	monetization := ""
+	files = slices.DeleteFunc(files, func(f string) bool {
+		if filepath.Base(f) == MonetizationFile {
+			monetization = f
+			return true
+		}
+		return false
+	})
 	// Shahar kataloglari xizmat fayllaridan oldin (xizmat shaharga havola qiladi).
 	sort := func(f string) int {
 		if strings.HasPrefix(filepath.Base(f), "sos_") {
@@ -70,6 +79,9 @@ func LoadDir(ctx context.Context, db *pgxpool.Pool, dir string) error {
 		}
 		slog.Info("yuklandi", "file", f, "city", sf.cityID(), "places", len(sf.Places), "prices", len(sf.Prices),
 			"events", len(sf.Events), "stays", len(sf.Stays), "services", len(sf.Services), "retired", retired)
+	}
+	if monetization != "" {
+		return loadMonetization(ctx, db, monetization)
 	}
 	return nil
 }
