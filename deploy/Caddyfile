@@ -1,0 +1,18 @@
+# Asosiy manzil: HTTPS (Let's Encrypt sertifikati avtomatik).
+# Domen bo'lmaguncha DOMAIN=<ip-chiziqcha>.sslip.io ishlatiladi — u server IP siga yo'naltiradi.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy api:8080
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}
+
+# Zaxira: IP orqali oddiy HTTP (sertifikat olinmaguncha yoki test uchun).
+http://{$SERVER_IP} {
+	encode zstd gzip
+	reverse_proxy api:8080
+}

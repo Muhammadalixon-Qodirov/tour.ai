@@ -11,3 +11,7 @@ backend/data/
 
 # tadqiqot hisoboti nusxasi (asosiysi DATA_SOURCES.md)
 reports/
+
+# server sirlari
+deploy/.env
+deploy/.seeded

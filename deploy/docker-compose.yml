@@ -1,0 +1,57 @@
+# Production: PostgreSQL + Go API + Caddy (avtomatik HTTPS).
+# Sirlar deploy/.env da (repoga kirmaydi). Boshqarish: deploy/README.md
+name: yoldosh
+
+x-logging: &logging
+  driver: json-file
+  options: { max-size: "10m", max-file: "5" }
+
+services:
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: yoldosh
+      POSTGRES_USER: yoldosh
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD kerak}
+    volumes: ["pgdata:/var/lib/postgresql"]   # tashqariga port ochilmaydi
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "yoldosh", "-d", "yoldosh"]
+      interval: 5s
+      retries: 30
+    logging: *logging
+
+  api:
+    build: ../backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://yoldosh:${DB_PASSWORD}@db:5432/yoldosh?sslmode=disable
+      TOKEN_SECRET: ${TOKEN_SECRET:?TOKEN_SECRET kerak}
+      PUBLIC_BASE_URL: https://${DOMAIN}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      EXPO_PUSH_ENABLED: ${EXPO_PUSH_ENABLED:-false}
+      EXPO_ACCESS_TOKEN: ${EXPO_ACCESS_TOKEN:-}
+    volumes: ["uploads:/app/data/uploads"]
+    depends_on:
+      db: { condition: service_healthy }
+    logging: *logging
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    environment:
+      DOMAIN: ${DOMAIN}
+      SERVER_IP: ${SERVER_IP}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [api]
+    logging: *logging
+
+volumes:
+  pgdata: {}
+  uploads: {}
+  caddy_data: {}
+  caddy_config: {}
