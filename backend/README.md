@@ -7,7 +7,7 @@ Reja: [../BACKEND_PLAN.md](../BACKEND_PLAN.md) · Kontrakt: [../API_CONTRACT.md]
 ```sh
 cp .env.example .env        # bir marta
 make db-start               # lokal PostgreSQL :5433 (Docker siz)
-make seed                   # migratsiya + demo ma'lumot (Samarqand, Buxoro)
+make seed                   # migratsiya + katalog (4 shahar, 171 joy, narx, tadbir, turar joy) + SOS demo
 make run                    # API → http://localhost:8080
 make test                   # hamma testlar (unit + haqiqiy bazada API testlari)
 ```
@@ -39,24 +39,30 @@ curl -s -X POST $B/trips -H "Authorization: Bearer $TOK" -H 'Accept-Language: uz
 
 | Guruh | Endpoint |
 |---|---|
-| Sessiya | `POST /auth/device` (anonim), `GET /me`, `PATCH /me`, `DELETE /me` (hisobni o'chirish) |
+| Sessiya | `POST /auth/device` (anonim), `GET /me`, `PATCH /me` (`lang, displayName, interests, companion, pace, budget, isResident`), `DELETE /me` (hisobni o'chirish) |
 | Kirish | `POST /auth/email/start` `{email}` → 6 xonali kod emailga · `POST /auth/email/verify` `{email, code, deviceId?}` · `POST /auth/google` `{idToken, deviceId?}` · `POST /auth/refresh` `{refreshToken}` · `POST /auth/logout` `{refreshToken}` · `POST /auth/logout-all` |
-| Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}`, `GET /places/{id}/reviews` |
+| Katalog | `GET /cities`, `GET /places` (`city, category, novelty=iconic\|new\|hidden\|novel, interest, q, near=lat,lng, radiusM, openNow, wheelchair, limit, cursor`), `GET /places/{id}` (`hoursNote, entryFee{local,foreigner,note,source}, feeNote, crowd{level,bestTime}, rules[].source, images[].credit/license/sourceUrl`, `nearbyPrices`), `GET /places/{id}/reviews` |
+| Narx | `GET /prices?city=&category=&q=` → `PriceItem[]`, `POST /prices/reports` (token ixtiyoriy) `{priceItemId?, cityId?, name?, category?, paid: {amount}, buyer?, location?}` → `201 {id, status: approved\|pending, priceItem?}` |
+| Tadbir | `GET /events?city=&from=&to=` (o'tganlari yo'q) |
 | Qoida | `GET /geofences?city=` |
 | SOS va to'lov | `GET /cities/{id}/emergency?near=lat,lng` (raqamlar + eng yaqin shifoxona/dorixona/politsiya + hujjat yo'qolsa yo'riqnoma), `GET /services?city=&kind=hospital,pharmacy,police,embassy,atm,exchange&near=&radiusM=&openNow=` |
-| Turar joy | `GET /stays?city=&kind=hotel,hostel,guesthouse&near=lat,lng&radiusM=&maxPrice=&q=` · `GET /stays/{id}` · admin: `GET /admin/stays`, `PATCH /admin/stays/{id}` (aniq narx, kontakt, E-Mehmon, bron havolalari) |
+| Turar joy | `GET /stays?city=&kind=hotel,hostel,guesthouse&near=lat,lng&radiusM=&maxPrice=&q=` · `GET /stays/{id}` (tadqiqot yozuvlarida `ratingSource`, `pricePerNight.source`) · admin: `GET /admin/stays`, `PATCH /admin/stays/{id}` (aniq narx, kontakt, E-Mehmon, bron havolalari) |
 | Oflayn | `GET /cities/{id}/offline-pack` — joylar, qoidalar, geofence, xizmatlar, SOS bitta JSON da; `ETag` → `304`, gzip |
-| Marshrut | `POST /trips`, `GET /trips`, `GET /trips/{id}`, `POST /trips/{id}/stops`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` |
-| Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
+| Marshrut | `POST /trips` (`days` 1..7, `budgetPerDay`, `isResident` (yo'q bo'lsa profildan), `groupSize`), `GET /trips`, `GET /trips/{id}` (javobda `prefs`), `DELETE /trips/{id}`, `POST /trips/{id}/stops` `{dayIndex, placeId, after?}`, `DELETE /trips/{id}/stops/{stopId}`, `POST /trips/{id}/stops/{stopId}/swap` (takliflar), `POST /trips/{id}/stops/{stopId}/move` `{dayIndex?, position?}` yoki `{step: -1\|1}` |
+| Moslashuvchan | `PATCH /trips/{id}/stops/{stopId}` (`status: visited\|skipped\|current\|upcoming`, `rating: 1..5`, yoki `placeId` — almashtirish), `POST /trips/{id}/replan` (`reason: late+minutes \| tired \| weather \| free_time+minutes+location`, ixtiyoriy `dayIndex`) → `Trip` + `changes[]` |
 | Baho | `POST /visits` |
 | Saqlangan joylar | `GET /me/saved`, `PUT /me/saved/{placeId}`, `DELETE /me/saved/{placeId}` |
 | Guruh safari | `POST /groups` `{name, cityId?}` → `inviteCode` · `POST /groups/join` `{inviteCode}` · `GET /groups`, `GET /groups/{id}` (a'zolar, ovozlar) · `PATCH /groups/{id}/me` `{interests, budget, pace}` · `POST /groups/{id}/votes` `{placeId, vote: 1\|-1\|0}` · `POST /groups/{id}/trip` `{startDate, days}` · `DELETE /groups/{id}/members/me` |
 | Kundalik | `POST /diary/photos` (multipart `image, tripId, dayIndex, stopId?`), `DELETE /diary/photos/{id}`, `GET /trips/{id}/days/{idx}/photos`, `POST·GET /trips/{id}/days/{idx}/diary` (`tone: warm\|short\|fun\|poetic`), `GET·PATCH /diary/{entryId}`, `POST /diary/{entryId}/regenerate`, `POST /diary/{entryId}/publish` (`visibility: public\|link\|private`), `GET /diary/{entryId}/share-card?format=story\|post` (PNG), `POST /diary/{entryId}/shares` (`target`), `POST /me/push-token` |
 | Lenta | `GET /feed?city=`, `GET /posts/{id}`, `POST·DELETE /posts/{id}/like`, `POST /posts/{id}/report`, `DELETE /posts/{id}`; ochiq: `GET /s/{slug}` (HTML + OpenGraph), `GET /s/{slug}/card.png`; admin: `GET /admin/posts?status=reported`, `POST /admin/posts/{id}/hide·restore` |
 | Admin | `POST /admin/auth/login`, `GET /admin/me`, `GET /admin/places?status=&city=&q=`, `POST /admin/places`, `GET·PATCH /admin/places/{id}`, `POST /admin/places/{id}/submit·publish·reject·unpublish`, `PUT /admin/places/{id}/rules`, `POST /admin/places/{id}/images` (multipart `image`, `credit`), `GET /admin/analytics/novelty?days=30`, `POST·PATCH·DELETE /admin/services[/{id}]` |
-| Xizmat | `GET /healthz`, `GET /static/ph/{category}.svg` (rasm yo'q joylar uchun vaqtinchalik rasm), `GET /uploads/{file}` (yuklangan rasmlar) |
+| Xizmat | `GET /healthz`, `GET /static/places/{file}.jpg` (katalog rasmlari, binar ichida), `GET /static/ph/{category\|city\|event\|stay}.svg` (rasm yo'q bo'lsa), `GET /uploads/{file}` (yuklangan rasmlar) |
 
 Til: `Accept-Language: uz | ru | en` (yo'q bo'lsa `en`; matn topilmasa `en` → `uz`).
+Katalog GET javoblarida `ETag` (`If-None-Match` → `304`). Javob shakllari: [../API_CONTRACT.md](../API_CONTRACT.md).
+
+IP bo'yicha limitlar (`/auth/*`, oflayn paket): so'rov `TRUSTED_PROXIES` dagi manzildan kelsa `X-Forwarded-For`
+o'ngdan chapga o'qiladi va birinchi ishonchsiz manzil olinadi; aks holda `RemoteAddr`.
 
 ## Tuzilma
 
@@ -77,7 +83,9 @@ internal/
   i18n         tillar va foydalanuvchiga ko'rinadigan matnlar
   seed         seed yuklovchi
   platform     konfiguratsiya, DB ulanishi, migrator
-seed/          demo ma'lumot (source='demo')
+seed/          katalog (build_seed.py yasaydi) + sos_*.json (SOS demo)
+static/        katalog rasmlari (binar ichiga joylanadi)
+scripts/catalog/build_seed.py  research/ → seed + static
 ```
 
 ## BACKEND.md dan farqlar (ataylab)
@@ -89,11 +97,33 @@ seed/          demo ma'lumot (source='demo')
 | goose + sqlc + oapi-codegen | o'z migratori + qo'lda yozilgan pgx SQL | kamroq vosita, hammasi `go build` bilan |
 | MinIO / S3 | lokal disk (`UPLOAD_DIR`) | `media.Store` interfeysi orqali; S3 keyin shu interfeysga ulanadi |
 
-## Demo ma'lumot haqida
+## Katalog (seed) qayerdan keladi
 
-`seed/` dagi yozuvlar **namuna**: "(demo)" nomli joylar o'ylab topilgan, mashhur joylarning koordinatasi,
-ish vaqti, reytingi va qoidalari taxminiy (`source='demo'`, qoidalarda `verified_by='demo'`).
-Haqiqiy ma'lumot yig'ilganda shu fayllar almashtiriladi yoki admin panel orqali kiritiladi.
+`seed/<city>.json` (samarkand, bukhara, tashkent, namangan) va `static/places/*.jpg` **qo'lda tahrirlanmaydi**:
+ular jamoaning `research/` tadqiqotidan (manbalar bilan) skript bilan yasaladi. Ilova va sayt ham aynan shu
+yozuvlarni ko'radi (`research/convert.py` bilan bir xil birlashtirish qoidalari, bir xil ID lar).
+
+```sh
+# frontend repo (research/, web/public/places/) yonida; avval u yerda research/convert.py ishlatilgan bo'lsin
+python3 -I scripts/catalog/build_seed.py ~/dev/tourism_hackathon
+make seed        # idempotent: qayta yuklaydi
+```
+
+- Joylar `source='open_data'`; katalogda endi yo'q eski seed joylari (`demo`/`open_data`) `draft` ga o'tadi
+  (o'chirilmaydi: eski marshrutlar ularga havola qiladi).
+- Rasmlar binar ichiga joylanadi (`static/`, ~51 MB), bazada nisbiy `/static/places/...` saqlanadi, API
+  `PUBLIC_BASE_URL` bilan to'liq manzil beradi. Litsenziyasi noma'lum rasmlar faqat demo uchun (`license` bo'sh).
+- Narxlar, ish vaqtlari, "yangi" joylar ochiq manbalardan, `sampleSize = 0` (foydalanuvchi kuzatuvi yo'q).
+- Ishonch darajasi: joy, tarix va qoidalar `public`; ish vaqti (`hoursTrust`), kirish narxi (`entryFee.trust`),
+  narxlar (`trust`) va turar joy narxi (`pricePerNight.trust`) `sample`.
+- Turar joylar (28 ta) 0008 dagi `stays` jadvaliga `source='research'` bilan yoziladi: nom 3 tilda, manzil uz,
+  `priceMin` (tadqiqotdagi "dan" narx), reyting 5 ballik + `ratingSource`, qulaylik kodlari (`wifi, breakfast, ac,
+  parking, transfer, courtyard, kitchen, private_bathroom, laundry, pool, spa, sauna, hammam, restaurant, bar, gym,
+  room_service, tea_coffee`). Admin tahrir qilsa `source='manual'` bo'ladi va seed ustiga yozmaydi.
+- Mahalliy nomlar (`aliases`) va tanaffuslar (`lunch`, `fridayPrayer`) tadqiqotda yo'q: `build_seed.py` dagi
+  `ALIASES`, `LUNCH`, `FRIDAY_PRAYER` jadvallarida.
+- `seed/sos_*.json` dagi shifoxona, dorixona va h.k. **o'ylab topilgan demo** (pastda). Shaharda OSM xizmatlari
+  bo'lsa (`osm-import` dan keyin) seed demo xizmatlarni qayta qo'shmaydi.
 
 ## Admin: joy hayot sikli
 
@@ -161,7 +191,9 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 ## Ma'lumot sifati va qo'shimcha maydonlar
 
 - `trust`: `official` (obyekt ma'muriyati, gov.uz) · `public` (ochiq manba) · `community` (foydalanuvchi) · `sample` (demo).
-  Joyda, qoidada (`rules[].trust`) va tarixda (`history.trust`). Demo seed — `sample`; UI buni belgilashi kerak.
+  Joyda, qoidada (`rules[].trust`), tarixda (`history.trust`), ish vaqtida (`hoursTrust`), kirish narxida
+  (`entryFee.trust`), narxlarda (`prices[].trust`) va turar joy narxida (`pricePerNight.trust`, OSM taxmini `estimate`).
+  `sample` — namuna; UI buni belgilashi kerak.
 - `aliases`: mahalliy nomlar ("Chorsu", "Kalon minorasi") — `GET /places?q=` ular bo'yicha ham qidiradi.
 - `openingHours[].breaks`: `[{from, to, reason: lunch|prayer|other}]` — "hozir ochiq" va rejalashtirgich tanaffusni hisobga oladi
   (masjidlarda juma 12:00–14:00).
@@ -183,7 +215,8 @@ go run ./cmd/osm-import osm-pois.json                                     # upse
   (shifoxona, klinika, dorixona, politsiya, bankomat, valyuta, yoqilg'i, EV quvvatlash) — 17+ shahar.
 - Demo SOS xizmatlari o'chiriladi va haqiqiy OSM ma'lumoti bilan almashtiriladi.
 - Qo'lda yoki tadqiqot orqali kiritilgan joy yonida (150 m, o'xshash nom) takror yaratilmaydi.
-- OSM joylari `source='osm'`, `trust='public'`; rejalashtirgichda jamoa tanlagan joylar ustun (×0.75).
+- OSM joylari `source='osm'`, `trust='public'`; rejalashtirgichda jamoa tanlagan joylar ustun (ball −2, ya'ni bitta
+  qiziqish mosligicha).
 - Turar joy narxi OSM da yo'q — turi/yulduzi bo'yicha **taxmin** (`pricePerNight.estimated = true`, UI da "≈").
   Admin aniq narx kiritsa `priceTrust='official'` bo'ladi va keyingi import ustiga yozmaydi.
 - **Litsenziya: ODbL.** Ilova va saytda "© OpenStreetMap contributors" yozuvi majburiy.

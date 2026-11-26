@@ -33,6 +33,9 @@ services:
       EXPO_ACCESS_TOKEN: ${EXPO_ACCESS_TOKEN:-}
       GOOGLE_CLIENT_IDS: ${GOOGLE_CLIENT_IDS:-}
       APP_NAME: ${APP_NAME:-Safar}
+      # X-Forwarded-For ga ishoniladigan proksilar (IP yoki CIDR, vergul bilan): host nginx konteynerga docker
+      # tarmog'i shlyuzidan keladi (172.16.0.0/12), Caddy profili ham shu tarmoqda; + sayt (Next.js) serveri IP si.
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
       SMTP_HOST: ${SMTP_HOST:-}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USER: ${SMTP_USER:-}

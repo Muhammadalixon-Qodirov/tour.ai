@@ -45,6 +45,18 @@ cd /opt/yoldosh/deploy && docker compose logs -f api
 cd /opt/yoldosh/deploy && docker compose ps
 ```
 
+Katalog yangilanganda (`backend/seed/*.json` o'zgargan versiya) `update.sh` dan keyin seed qayta yuklanadi.
+Migratsiyalar (masalan `0009_catalog.sql`) API ishga tushganda avtomatik qo'llanadi, seed ham ularni tekshiradi.
+Seed idempotent: foydalanuvchi baholari, marshrutlar, admin tahrir qilgan turar joylar va OSM importi saqlanadi;
+katalogda yo'q eski seed joylari `draft` ga o'tadi; OSM xizmatlari bor shaharga demo SOS qayta qo'shilmaydi:
+
+```sh
+cd /opt/yoldosh/deploy && docker compose run --rm --entrypoint /app/bin/seed api /app/seed
+```
+
+`.env` da `TRUSTED_PROXIES=127.0.0.1,172.16.0.0/12,<sayt serveri IP>` bo'lsin: aks holda sayt proksisi orqali kelgan
+hamma foydalanuvchi IP limitlarida bitta mijoz hisoblanadi.
+
 Tiklash: `docker compose exec -T db pg_restore -U yoldosh -d yoldosh --clean < /opt/yoldosh/backups/db-XXXX.dump`
 
 ## Xavfsizlik

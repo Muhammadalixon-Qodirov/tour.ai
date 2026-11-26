@@ -49,7 +49,13 @@ Tegishli hujjatlar: [BACKEND.md](BACKEND.md) · [AI_ML.md](AI_ML.md) · [DESIGN.
 type Lang = "uz" | "ru" | "en";
 type LatLng = { lat: number; lng: number };
 type Money = { amount: number; currency: "UZS" };
-type Image = { url: string; blurhash?: string; credit?: string };
+type Image = {
+  url: string; blurhash?: string;
+  credit?: string;      // muallif yoki sayt
+  license?: string;     // "CC BY-SA 4.0"; noma'lum bo'lsa yo'q
+  sourceUrl?: string;   // rasm olingan sahifa (Commons yoki ochiq sahifa)
+  source?: string;      // "Wikimedia Commons", "afisha.uz"
+};
 
 type Interest = "history" | "food" | "nature" | "craft" | "art" | "architecture" | "shopping" | "nightlife";
 type Companion = "solo" | "couple" | "family" | "friends";
@@ -58,7 +64,7 @@ type BudgetLevel = 1 | 2 | 3;              // tejamkor | o'rtacha | qulay
 
 type PlaceCategory =
   | "monument" | "museum" | "mosque" | "bazaar" | "workshop" | "gallery"
-  | "restaurant" | "cafe" | "park" | "viewpoint" | "ecovillage";
+  | "restaurant" | "cafe" | "park" | "viewpoint" | "ecovillage" | "theatre";
 
 /** Loyihaning yuragi: joy "mashhur"mi yoki "yangi/kam tanilgan"mi. */
 type Novelty = "iconic" | "new" | "hidden";
@@ -67,12 +73,17 @@ type RuleCode =
   | "no_flash" | "no_photo" | "photo_fee" | "dress_code" | "shoes_off" | "quiet"
   | "no_drone" | "no_food" | "no_smoking" | "no_pets" | "ticket_required" | "prayer_time_limit";
 
+/** Ishonch darajasi: obyekt ma'muriyati / gov.uz · ochiq manba · foydalanuvchi kuzatuvi · namuna (demo). UI sample ni belgilaydi. */
+type Trust = "official" | "public" | "community" | "sample";
+
 type Rule = {
   code: RuleCode;
   severity: "info" | "warn" | "forbidden";
   text: string;                 // qisqa, 1 gap, foydalanuvchi tilida
+  trust: Trust;
   verifiedBy?: string;          // "Obyekt ma'muriyati"
   verifiedAt?: string;
+  source?: string;              // URL yoki "general etiquette ..."
 };
 
 type PlaceSummary = {
@@ -92,21 +103,33 @@ type PlaceSummary = {
   isOpenNow?: boolean;
   crowd?: { level: "low" | "medium" | "high"; bestTime?: string };
   isPartner: boolean;           // pullik ko'rsatuv — UI da doim "Hamkor" belgisi
+  trust: Trust;                 // tadqiqot katalogi: public
+  distanceM?: number;           // near bilan so'ralganda
 };
 
 type Place = PlaceSummary & {
   description: string;
+  aliases: string[];            // mahalliy nomlar ("Kalon minorasi", "Siyob"); GET /places?q= ular bo'yicha ham qidiradi
+  verifiedAt?: string;
   images: Image[];
   address: string;
-  openingHours: { day: 0|1|2|3|4|5|6; open: string; close: string }[];  // "09:00"
-  entryFee?: { local?: Money; foreigner?: Money; note?: string };
+  openingHours: {
+    day: 0|1|2|3|4|5|6; open: string; close: string;                    // "09:00"
+    breaks?: { from: string; to: string; reason?: "lunch" | "prayer" | "other" }[];  // shu vaqtda yopiq (juma namozi)
+  }[];
+  hoursTrust: Trust;            // ish vaqti ishonchi (tadqiqotda sample)
+  hoursNote?: string;           // dam olish kuni, seanslar, ta'mir
+  entryFee?: { local?: Money; foreigner?: Money; note?: string; source?: Source; trust: Trust };  // noma'lum tarif yo'q; 0 = bepul
+  feeNote?: string;             // narx nimaga bog'liq (yosh, gid, shou); entryFee.note bilan bir xil
   rules: Rule[];
-  history?: { summary: string; facts: string[]; sources: Source[] };
+  history?: { summary: string; facts: string[]; sources: Source[]; trust: Trust };
   audioGuide?: { url: string; durationSec: number; lang: Lang };
   accessibility: { wheelchair: boolean; familyFriendly: boolean; easyWalk: boolean };
   payment: { card: boolean; cashOnly: boolean };
   geofenceRadiusM: number;
-  nearbyPrices: PriceItem[];    // shu joy atrofida dolzarb narxlar (0–5 ta)
+  nearbyPrices: PriceItem[];    // 0–5 ta: shu joyning o'z chiptasi birinchi, keyin joy turiga mos narxlar
+                                // (bozor: market/souvenir/food; ustaxona, galereya: souvenir; restoran, kafe: food;
+                                //  qolganlari: taxi). Boshqa obidalarning chiptalari kirmaydi.
 };
 
 type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinatsiyaga qarshi
@@ -129,6 +152,7 @@ type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinat
 {
   "id": "u_...", "lang": "uz",
   "interests": ["history", "food"], "companion": "couple", "pace": "balanced", "budget": 2,
+  "isResident": true, // O'zbekiston rezidenti: kirish narxi mahalliy tarifda; null = aytilmagan. PATCH /me da ham
   "stats": { "placesVisited": 7, "newPlacesVisited": 3, "points": 240 },
   "badges": [{ "code": "bukhara_explorer", "title": "Buxoro kashfiyotchisi", "earnedAt": "..." }]
 }
@@ -144,8 +168,12 @@ type Source = { title: string; url?: string };   // RAG manbasi — gallyutsinat
 | `GET /places` | filtrlar: `city`, `category`, `novelty`, `interest`, `q`, `near=lat,lng`, `radiusM`, `openNow`, `wheelchair` → `PlaceSummary[]` (sahifalangan) |
 | `GET /places/{id}` | to'liq `Place` |
 | `GET /places/{id}/reviews` | `[{ id, author, rating, text, createdAt }]` |
-| `GET /events` | filtrlar: `city`, `from`, `to`, `interest` → `Event[]` |
-| `GET /stays` | filtrlar: `city`, `near=lat,lng`, `maxPrice`, `checkIn`, `checkOut` → `Stay[]` |
+| `GET /events` | filtrlar: `city`, `from`, `to` (`YYYY-MM-DD` shahar vaqti yoki RFC 3339) → `Event[]`, `startsAt` bo'yicha. O'tib ketgan (`endsAt < hozir`) tadbirlar hech qachon qaytmaydi. `interest` hali yo'q |
+| `GET /stays` | filtrlar: `city` yoki `near=lat,lng` (shart), `radiusM` (near bilan, standart 3000, ≤ 50000), `kind=hotel,hostel,...`, `maxPrice` (so'm, `priceMin` bo'yicha), `q`, `limit` (≤ 50), `cursor` → `{ items: Stay[], nextCursor }`. `near` bo'lsa masofa bo'yicha, aks holda tekshirilgan / aniq narxli / reytingli birinchi |
+| `GET /stays/{id}` | bitta `Stay`; topilmasa `404 stay_not_found` |
+
+Katalog GET javoblari (`/cities`, `/places`, `/places/{id}`, `/geofences`, `/prices`, `/events`, `/stays`) `ETag` beradi;
+`If-None-Match` mos kelsa `304`. ETag tilga bog'liq (`Vary: Accept-Language`).
 | `GET /geofences?city=` | qurilma ichida geofencing uchun yengil ro'yxat (pastda) |
 
 ```ts
@@ -153,14 +181,35 @@ type Event = {
   id: string; cityId: string; title: string; kind: "festival" | "concert" | "fair" | "exhibition" | "sport";
   cover: Image; startsAt: string; endsAt: string; venue: string; location: LatLng;
   price?: Money; isFree: boolean; ticketUrl?: string;
+  source?: Source;               // tadbir e'lon qilingan sahifa
+  recurring?: "annual";          // sana o'tgan yilgi tadbirdan ko'chirilgan
 };
 
 type Stay = {
-  id: string; cityId: string; name: string; kind: "hotel" | "guesthouse" | "boutique" | "hostel";
-  cover: Image; location: LatLng; rating: number; reviewsCount: number;
-  pricePerNight: Money; fairPrice: boolean;      // "Adolatli narx" belgisi
-  verified: boolean; distanceToRouteM?: number; amenities: string[];
+  id: string; cityId: string; name: string;
+  kind: "hotel" | "boutique" | "guesthouse" | "hostel" | "motel" | "apartment";
+  cover: Image; images: Image[];                 // rasm yo'q bo'lsa cover = /static/ph/<kind>.svg
+  location: LatLng; address: string; stars: number | null;
+  rating: number | null;                         // 5 ballik (10 ballik manba 2 ga bo'lingan)
+  ratingSource?: Source;                         // tadqiqot yozuvlarida
+  reviewsCount: number;
+  pricePerNight: {                               // so'm, 2 kishi, oddiy xona
+    min: Money | null; max: Money | null;
+    estimated: boolean;                          // true: OSM turi/yulduzi bo'yicha taxmin, UI da "taxminan"
+    trust: Trust | "estimate" | null; note?: string; updatedAt?: string;
+    source?: Source;                             // tadqiqot yozuvlarida narx qayerdan
+  };
+  fairPrice: boolean; verified: boolean; isPartner: boolean;
+  amenities: string[];   // kodlar: wifi, breakfast, ac, parking, transfer, courtyard, kitchen, private_bathroom, laundry,
+                         // pool, spa, sauna, hammam, restaurant, bar, gym, room_service, tea_coffee
+  contacts: { phone?: string; website?: string; telegram?: string; instagram?: string; email?: string };
+  checkIn?: string; checkOut?: string; wheelchair: boolean | null;
+  emehmon: boolean | null;                       // chet ellikni E-Mehmon orqali ro'yxatga oladimi
+  bookingUrl?: string; agodaUrl?: string;        // hamkor havolalar: faqat web saytda ko'rsatiladi
+  trust: Trust; distanceM?: number;
 };
+// Manbalar: OSM importi (narx taxmin, estimated = true) va jamoa tadqiqoti (28 ta: priceMin = tadqiqotdagi "dan" narx,
+// trust sample, ratingSource / pricePerNight.source bilan). Admin aniq narx kiritsa trust official.
 
 /** Ilova shaharni ochganda bir marta yuklab oladi va OS geofencing ga beradi (oflayn ishlaydi). */
 type Geofence = {
@@ -185,10 +234,18 @@ type Geofence = {
   "companion": "couple",
   "pace": "balanced",
   "budget": 2,
+  "budgetPerDay": 300000,
+  "isResident": true,
+  "groupSize": 3,
   "startLocation": { "lat": 39.6547, "lng": 66.9758 },
   "constraints": { "wheelchair": false, "withKids": false, "vegetarian": false }
 }
 ```
+- `days`: 1..7 (ilova va sayt hozir 1..3 taklif qiladi).
+- `budgetPerDay` — **kishi boshiga, kuniga, so'mda** (yo'q yoki `null` = cheklovsiz). Kun xarajati (kirish + tushlik 60 000 + taksi ulushi) shu chegaraga sig'guncha **faqat mashhur joylar** (eng qimmati birinchi) olib tashlanadi; yangi/kam tanilgan joylar kvota uchun saqlanadi.
+- `isResident` — `true`: kirish narxi mahalliy tarifda. Yuborilmasa profildagi `isResident` (`PATCH /me`) olinadi.
+- `groupSize` — taksi shu songa bo'linadi; yo'q bo'lsa `companion` dan (solo 1, couple 2, family 3, friends 4).
+
 Javob `201` — to'liq `Trip`. Generatsiya **8 soniyadan** oshsa server `202 { tripId, status: "generating" }` qaytaradi va frontend `GET /trips/{id}` ni 1.5 s oraliqda so'raydi (yoki `GET /trips/{id}/stream` SSE).
 
 ```ts
@@ -199,10 +256,11 @@ type Trip = {
   summary: string;                                  // AI yozgan 1–2 gap
   noveltyShare: number;                             // 0–1: yangi/kam tanilgan joylar ulushi
   days: TripDay[];
-  totals: { places: number; newPlaces: number; walkingM: number; estimatedCost: Money };
+  totals: { places: number; newPlaces: number; walkingM: number; estimatedCost: Money };  // estimatedCost — kishi boshiga
+  prefs: TripRequest;                               // POST /trips sozlamalari (ko'rsatish va tahrirlash uchun)
 };
 
-type TripDay = { index: number; date: string; title: string; stops: Stop[] };
+type TripDay = { index: number; date: string; title: string; stops: Stop[]; estimatedCost: Money };
 
 type Stop = {
   id: string;
@@ -214,8 +272,18 @@ type Stop = {
   reason: string;                // NEGA shu joy: "Hunarmandchilikka qiziqishingiz uchun"
   transitFromPrev?: { mode: "walk" | "taxi" | "bus" | "metro"; durationMin: number; distanceM: number; fare?: Money };
   status: "upcoming" | "current" | "visited" | "skipped";
+  rating?: number;               // 1–5, tashrifdan keyingi baho
 };
 ```
+
+**Rejalashtirgich (backend = ilova/sayt planner.ts):** shahar markazidan 18 km ichidagi joylar; ball = qiziqish mosligi×2 +
+(reyting−4)×2 (reyting yo'q = 4.5) + yangi/kam tanilgan 0.6 + olomon (kam +0.3, ko'p −0.3) − markazdan har km 0.35;
+avval yangilik kvotasi (kuniga ≥ 1, jami ≥ 1/3), qolgani mashhur joylar (+2.5); eng yaqin qo'shni zanjiri kunlarga bo'linadi;
+ikkinchi joydan keyin eng yaqin ovqatlanish joyi (restoran, kafe, bozor); 09:00 dan 20:00 gacha, ish vaqti va tanaffuslar
+(tushlik, juma namozi) hisobga olinadi, kelish vaqti 5 daqiqaga yaxlitlanadi; `budgetPerDay` ga sig'maguncha mashhur joylar
+(eng qimmati birinchi) tushadi; yo'l: ko'cha = to'g'ri chiziq × 1.35, 1.3 km gacha piyoda (75 m/daq), aks holda shahar
+taksi tarifi. OSM importidagi joylar jamoa tanlaganlaridan past (ball −2). Guruh marshrutida (`POST /groups/{id}/trip`)
+ko'pchilik "ha" degan joy ball oladi (+4 × ulush), ko'pchilik "yo'q" degani chiqariladi.
 
 **Majburiy biznes qoidalar (backend + AI kafolatlaydi, frontend ko'rsatadi):**
 1. **Yangilik kvotasi:** har bir kunda kamida **1 ta** `novelty ∈ {new, hidden}` to'xtash; butun marshrutda `noveltyShare ≥ 0.25`.
@@ -227,11 +295,25 @@ type Stop = {
 | Endpoint | Tavsif |
 |---|---|
 | `GET /trips` · `GET /trips/{id}` | ro'yxat / bitta marshrut |
+| `DELETE /trips/{id}` | marshrutni o'chirish (kundalik rasmlari va hikoyalari ham) → `204` |
 | `POST /trips/{id}/stops` | `{ dayIndex, placeId \| eventId, after?: stopId }` — bir bosishda qo'shish; server vaqtlarni qayta hisoblaydi va **butun `Trip`** qaytaradi |
 | `DELETE /trips/{id}/stops/{stopId}` | olib tashlash → yangilangan `Trip` |
-| `POST /trips/{id}/stops/{stopId}/swap` | shunga o'xshash boshqa joy taklifi → `{ alternatives: PlaceSummary[] }` |
+| `POST /trips/{id}/stops/{stopId}/swap` | shunga o'xshash boshqa joy taklifi → `{ alternatives: PlaceSummary[] }` (o'zgartirmaydi) |
+| `PATCH /trips/{id}/stops/{stopId}` | `{ status?, rating?: 1–5 }` yoki `{ placeId }` (joyni almashtirish: o'rin va stop `id` saqlanadi, holat `upcoming`) → `Trip`. `rating` `visits` ga ham yoziladi (joy reytingi shundan). Band joy → `409 place_already_in_trip` |
+| `POST /trips/{id}/stops/{stopId}/move` | `{ dayIndex?, position? }` — boshqa kunga yoki kun ichida `position` ga (0 dan; yo'q = oxiriga); yoki `{ step: -1 \| 1 }` — bir pog'ona yuqoriga/pastga (chetda bo'lsa `400`). Boshqa kunga ko'chgan to'xtash `upcoming` bo'ladi. Ikkala kun vaqtlari qayta hisoblanadi → `Trip` |
 | `POST /trips/{id}/replan` | `{ reason: "late" \| "tired" \| "weather" \| "free_time", minutes?: number, location?: LatLng }` → yangilangan `Trip` + `changes: string[]` |
 | `POST /visits` | `{ placeId, tripId?, rating?: 1–5, comment? }` → `{ pointsEarned, badge? }` |
+
+### Saqlangan joylar va guruh safari
+| Endpoint | Tavsif |
+|---|---|
+| `GET /me/saved` · `PUT /me/saved/{placeId}` · `DELETE /me/saved/{placeId}` | "yurakcha": `PlaceSummary[]`; `PUT` takrorlansa xatosiz, yo'q joy `404` |
+| `POST /groups` `{ name, cityId? }` | guruh va `inviteCode`; `POST /groups/join` `{ inviteCode }` |
+| `GET /groups` · `GET /groups/{id}` | a'zolar, istaklar, ovozlar; a'zo bo'lmasa `404` |
+| `PATCH /groups/{id}/me` | `{ interests, budget, pace }` — a'zoning istaklari |
+| `POST /groups/{id}/votes` | `{ placeId, vote: 1 \| -1 \| 0 }` |
+| `POST /groups/{id}/trip` | `{ startDate, days, cityId?, startLocation? }` → `201 Trip` (barcha a'zolar ko'radi va tahrirlaydi). Qiziqishlar ko'p uchraganlari, byudjet eng kichigi, temp eng sokini |
+| `DELETE /groups/{id}/members/me` | chiqish (egasi chiqsa guruh o'chadi, marshrut yaratuvchida qoladi) |
 
 ---
 
@@ -313,14 +395,19 @@ type PriceItem = {
   name: string;                  // "Taksi: Registon → Vokzal"
   fairRange: { min: Money; max: Money; unit: string };
   touristTypical?: Money;        // turistlarga odatda aytiladigan narx
-  updatedAt: string; sampleSize: number;
+  updatedAt: string;             // tadqiqot sanasi yoki oxirgi tasdiqlangan kuzatuv
+  sampleSize: number;            // tasdiqlangan foydalanuvchi kuzatuvlari (tadqiqot manbasi kirmaydi)
+  trust: Trust;                  // tadqiqot oralig'i sample; oraliq kuzatuvlardan hisoblansa community
+  source?: Source;               // ochiq manba (sayt, yil)
+  placeIds?: string[];           // kirish chiptasi qaysi joyga tegishli
 };
+// fairRange: kuzatuv 5 tadan kam bo'lsa tadqiqot oralig'i; ko'p bo'lsa kuzatuvlar + tadqiqot chegaralarining 20–80 protsentili.
 ```
 
 | Endpoint | Tavsif |
 |---|---|
 | `GET /prices?city=&category=&q=` | `PriceItem[]` |
-| `POST /prices/reports` | `{ priceItemId? , name, category, paid: Money, location?: LatLng }` — foydalanuvchi kuzatuvi (anonim) |
+| `POST /prices/reports` | `{ priceItemId?, cityId?, name?, category?, paid: Money, buyer?: "local" \| "tourist", location?: LatLng }` — kuzatuv (token ixtiyoriy, daqiqasiga 10 ta). `priceItemId` bo'lsa `name`/`category` undan. → `201 { id, status: "approved" \| "pending", priceItem?: PriceItem }`. Tadqiqot oralig'ining yarmidan 2 baravarigacha bo'lgan narx darhol tasdiqlanadi va oraliqqa kiradi; qolgani moderatsiyaga. Joylashuv ~100 m gacha yaxlitlanadi. Noma'lum band → `404 price_item_not_found` |
 | `POST /reports/scam` | `{ location, category, description }` — anonim shikoyat → `202` |
 | `GET /vendors?city=&near=` | "Ishonchli sotuvchi" belgili joylar: `[{ id, name, category, location, trustedSince }]` |
 
