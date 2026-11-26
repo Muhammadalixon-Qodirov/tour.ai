@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"math"
 	"net/http"
 	"slices"
@@ -112,8 +113,7 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 	resp.Stays = rankStays(s, stays, budget, limit, lang)
 
 	// ---- Ovqatlanish: 1.5 km, ochiq va tanlangan joylar ustun ----
-	food, err := s.store.ListPlaces(ctx, store.PlaceFilter{City: origin.CityID, Categories: []string{"restaurant", "cafe"},
-		Near: &origin.Loc, RadiusM: 1500, Limit: 80}, i18n.Chain(lang))
+	food, err := s.nearPlaces(ctx, origin, []string{"restaurant", "cafe"}, 1500, limit, lang)
 	if err != nil {
 		s.internalError(w, r, err)
 		return
@@ -139,9 +139,8 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 	})
 
 	// ---- Yana nima ko'rish mumkin: 2 km, yangi / kam tanilgan joylar birinchi ----
-	sights, err := s.store.ListPlaces(ctx, store.PlaceFilter{City: origin.CityID,
-		Categories: []string{"monument", "museum", "mosque", "gallery", "workshop", "park", "viewpoint", "bazaar", "theatre", "ecovillage"},
-		Near:       &origin.Loc, RadiusM: 2000, Limit: 80}, i18n.Chain(lang))
+	sights, err := s.nearPlaces(ctx, origin, []string{"monument", "museum", "mosque", "gallery", "workshop", "park", "viewpoint",
+		"bazaar", "theatre", "ecovillage"}, 2000, limit, lang)
 	if err != nil {
 		s.internalError(w, r, err)
 		return
@@ -173,6 +172,17 @@ func (s *Server) placeNearby(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Cache-Control", "private, max-age=60")
 	writeJSON(w, http.StatusOK, resp)
+}
+
+// nearPlaces — radius ichida kam bo'lsa (limit dan kam) radiusni 3 baravar kengaytiradi.
+func (s *Server) nearPlaces(ctx context.Context, origin store.Place, cats []string, radius float64, limit int, lang string) ([]store.Place, error) {
+	f := store.PlaceFilter{City: origin.CityID, Categories: cats, Near: &origin.Loc, RadiusM: radius, Limit: 80}
+	list, err := s.store.ListPlaces(ctx, f, i18n.Chain(lang))
+	if err == nil && len(list) <= limit { // origin o'zi ham ro'yxatda bo'lishi mumkin
+		f.RadiusM = radius * 3
+		list, err = s.store.ListPlaces(ctx, f, i18n.Chain(lang))
+	}
+	return list, err
 }
 
 // rankStays — ball bo'yicha, lekin turli narx toifalari aralash: tejamkor (hostel/mehmon uyi) va mehmonxona ikkalasi ham chiqadi.
