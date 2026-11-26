@@ -22,7 +22,18 @@ demo ma'lumot va nomzod joylarni yuklaydi (faqat birinchi marta) → kunlik zaxi
 | API (HTTPS) | `https://<ip-chiziqcha>.sslip.io/api/v1` — masalan `https://185-174-254-135.sslip.io/api/v1/cities` |
 | Zaxira (HTTP) | `http://<server-ip>/healthz` |
 
-Domen olinganda: `.env` da `DOMAIN=api.sizningdomen.uz`, DNS A-yozuvi server IP siga, keyin `docker compose up -d`.
+**Joriy production:** `https://safar-api.e-investment.uz/api/v1` (server 185.174.254.135, nginx + certbot, API `127.0.0.1:8130`).
+
+Domenni almashtirish (server nginx rejimida):
+
+```sh
+D=yangi.domen.uz                       # avval DNS A-yozuvi server IP siga
+cd /opt/yoldosh/deploy
+sed -e "s/__DOMAIN__/$D/g" -e "s/__PORT__/8130/g" nginx-site.conf > /etc/nginx/sites-available/yoldosh-$D
+ln -s /etc/nginx/sites-available/yoldosh-$D /etc/nginx/sites-enabled/ && nginx -t && systemctl reload nginx
+certbot --nginx -d $D --redirect
+sed -i "s/^DOMAIN=.*/DOMAIN=$D/" .env && docker compose up -d api   # rasm/havola URL lari yangi domenda
+```
 Mobil ilovada: `EXPO_PUBLIC_API_URL=https://<DOMAIN>/api/v1`.
 
 ## Kundalik ishlar
