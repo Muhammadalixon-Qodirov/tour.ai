@@ -231,6 +231,7 @@ type Geofence = {
 {
   "cityId": "samarkand",
   "startDate": "2026-12-02",
+  "startTime": "09:00",
   "days": 2,
   "interests": ["history", "food", "craft"],
   "companion": "couple",
@@ -526,4 +527,5 @@ kunlik byudjetning 40% iga sig'maydi; bunday rejalar `0 < n < 50` bo'lsa `plans`
 | `GET /admin/partners` · `POST /admin/partners` · `PATCH /admin/partners/{id}` | `{ id?, name, cityId?, location?, discountPct? /* story chegirmasi, location bilan */, website?, active, sample }` |
 | `GET` · `POST /admin/partners/{id}/keys` · `DELETE /admin/partners/{id}/keys/{keyId}` | API kaliti: `POST` → `201 { id, key /* faqat shu javobda */, prefix, createdAt }` |
 | `GET /admin/offers?partner=` · `POST /admin/offers` · `PATCH /admin/offers/{id}` | `{ id?, partnerId, slot, cityId?, routeFrom?, routeTo?, mode?, validFrom?, validTo?, daysMin?, daysMax?, resident?, title, body?, cta /* {uz,ru,en} */, priceFrom?, priceUnit: "trip" \| "day", linkTemplate? /* {subId} {offerId} */, priority, active, sample }`. Jonli (sample emas) taklifga `linkTemplate` majburiy. `PATCH` da `null` maydonni tozalaydi |
-| `PUT /admin/users/{id \| email}/role` | `{ role: "tourist" \| "partner" \| "insights", partnerId?, regions?: string[] }` |
+| `PUT /admin/users/{id \| email}/role` | `{ role: "tourist" \| "partner" \| "insights", partnerId?, regions?: string[] }` |- `startTime` — ixtiyoriy, `"HH:MM"` (06:00..18:00). Birinchi kun shu vaqtdan boshlanadi, keyingi kunlar 09:00 dan. Yo'q bo'lsa 09:00. Javobdagi `prefs.startTime` da qaytadi; tahrirlardan keyin ham 1-kun shu vaqtdan qayta hisoblanadi. (Eski backend bu maydonni bilmaydi va `400` qaytaradi: ilova shunda maydonsiz qayta yuboradi.)
+
