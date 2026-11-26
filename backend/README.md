@@ -257,6 +257,22 @@ manzil favqulodda vaziyatda turistga zarar yetkazishi mumkin. Ilova `isDemo` bo'
 - `GROQ_API_KEY` da bir nechta kalit vergul bilan: so'rovlar navbat bilan taqsimlanadi, kalit limitga urilsa (429) yoki
   ishlamasa keyingisiga, hammasi band bo'lsa `gpt-oss-20b` ga o'tadi.
 
+## Rasm va tavsif bilan boyitish (`internal/enrich`, `cmd/enrich`)
+
+Rasmi yoki tavsifi yo'q joylar ochiq manbalardan to'ldiriladi (qo'lda qo'yilganlar tegilmaydi):
+
+1. **Wikidata bog'langan joylar** — asosiy rasm (P18) Wikimedia Commons'dan: 960 px eskiz havolasi, muallif, litsenziya,
+   Commons sahifasi (`images[0].credit/license/sourceUrl`). Faqat ochiq litsenziya: CC0, PD, CC BY, CC BY-SA
+   (NC/ND va fair use rad etiladi). Tavsif — uz/ru/en Vikipediya maqolasining birinchi 2 gapi, manba
+   "Wikipedia (CC BY-SA 4.0)" `sources` ga qo'shiladi.
+2. **Wikidata'siz obidalar, masjidlar, muzeylar, bog'lar** — 120 m ichidagi Commons rasmlari, fayl nomi joy nomiga mos
+   kelsagina (umumiy so'zlarsiz). Kafe/restoranlar uchun ochiq rasm deyarli yo'q — ularga qo'llanilmaydi.
+
+```sh
+go run ./cmd/enrich --dry-run --limit 50     # nima to'ldirilishini ko'rish
+go run ./cmd/enrich                          # hammasi (serverda: bash deploy/enrich.sh)
+```
+
 ## AI ma'lumot tozalovchi (`internal/cleaner`, `cmd/cleaner`)
 
 Ichki tarmoqdagi AI server (Ollama/llama.cpp/vLLM/LM Studio — OpenAI-mos) topilgan joylarni tozalaydi: haqiqiy

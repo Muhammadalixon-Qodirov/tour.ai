@@ -133,6 +133,15 @@ func (t *Tools) SearchPlaces(ctx context.Context, in SearchPlacesInput) (any, er
 			f.Categories = append(f.Categories, c)
 		}
 	}
+	// taom so'zi bilan (osh, somsa ...) kategoriyasiz qidiruv — faqat ovqatlanish joylari (muzey tavsifidagi "osh" emas)
+	if len(f.Categories) == 0 && len(in.Words) > 0 {
+		for _, w := range in.Words {
+			if len(hasAny(" "+strings.ToLower(w)+" ", dishWords)) > 0 {
+				f.Categories = []string{"restaurant", "cafe", "bazaar"}
+				break
+			}
+		}
+	}
 	if in.Novelty == "novel" || domain.Novelty(in.Novelty).Valid() {
 		f.Novelty = in.Novelty
 	}
