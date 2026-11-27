@@ -254,11 +254,12 @@ func (t *Tools) GetIntercity(ctx context.Context, in GetIntercityInput) (any, er
 		Via         *string `json:"via,omitempty"`
 		Updated     string  `json:"updated"`
 		Source      string  `json:"source"`
+		BookingURL  *string `json:"booking_url,omitempty"`
 	}
 	out := []route{}
 	for _, r := range routes {
 		x := route{Mode: r.Mode, DurationMin: r.DurationMin, PriceFrom: r.PriceFrom, Estimate: r.Estimate, Via: r.Via,
-			Updated: r.UpdatedAt, Source: r.Source}
+			Updated: r.UpdatedAt, Source: r.Source, BookingURL: store.IntercityBooking(r.Mode)}
 		if sr, ok := sourceFromURL(r.SourceURL, nil); ok {
 			if r.Source != "" {
 				sr.Title = r.Source

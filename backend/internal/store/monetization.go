@@ -553,6 +553,21 @@ type IntercityRoute struct {
 	Via         *string
 }
 
+// IntercityBooking — tur bo'yicha rasmiy chipta sotib olish sahifasi (deep-link). Mavjud bo'lmasa nil.
+// Poyezd/Afrosiyob — O'zbekiston temir yo'llari e-chiptasi; samolyot — Uzbekistan Airways. Avtobus/taksi — yo'q.
+func IntercityBooking(mode string) *string {
+	var u string
+	switch mode {
+	case "train", "afrosiyob":
+		u = "https://eticket.railway.uz/"
+	case "plane":
+		u = "https://www.uzairways.com/"
+	default:
+		return nil
+	}
+	return &u
+}
+
 func (s *Store) IntercityRoutes(ctx context.Context, from, to string) ([]IntercityRoute, error) {
 	rows, err := s.DB.Query(ctx, `SELECT mode, duration_min, price_from, source, source_url, to_char(updated_at, 'YYYY-MM-DD'), estimate, via
 		FROM intercity_routes WHERE from_city = $1 AND to_city = $2 ORDER BY position`, from, to)

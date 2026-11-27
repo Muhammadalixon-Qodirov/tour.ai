@@ -67,13 +67,14 @@ type intercityDTO struct {
 	Source      string        `json:"source"`
 	SourceURL   *string       `json:"sourceUrl,omitempty"`
 	UpdatedAt   string        `json:"updatedAt"`
-	Estimate    bool          `json:"estimate,omitempty"` // Safar hisobi (masofa bo'yicha), e'lon qilingan raqam emas
-	Via         *string       `json:"via,omitempty"`      // shu shaharda almashadi
+	Estimate    bool          `json:"estimate,omitempty"`   // Safar hisobi (masofa bo'yicha), e'lon qilingan raqam emas
+	Via         *string       `json:"via,omitempty"`        // shu shaharda almashadi
+	BookingURL  *string       `json:"bookingUrl,omitempty"` // rasmiy chipta sahifasi (poyezd/samolyot)
 }
 
 func intercityOf(r store.IntercityRoute) intercityDTO {
 	d := intercityDTO{Mode: r.Mode, DurationMin: r.DurationMin, Source: r.Source, SourceURL: r.SourceURL, UpdatedAt: r.UpdatedAt,
-		Estimate: r.Estimate, Via: r.Via}
+		Estimate: r.Estimate, Via: r.Via, BookingURL: store.IntercityBooking(r.Mode)}
 	if r.PriceFrom != nil {
 		m := domain.UZS(*r.PriceFrom)
 		d.PriceFrom = &m

@@ -183,7 +183,7 @@ var toolSpecs = []toolSpec{
 			"from": map[string]any{"type": "string", "description": "YYYY-MM-DD"},
 			"to":   map[string]any{"type": "string", "description": "YYYY-MM-DD"},
 		}, nil),
-	spec("get_intercity", "Ways to travel between two cities (train, Afrosiyob high-speed train, bus, shared taxi, flight): duration, price from (UZS), estimate flag, source and update date.",
+	spec("get_intercity", "Ways to travel between two cities (train, Afrosiyob high-speed train, bus, shared taxi, flight): duration, price from (UZS), estimate flag, source, update date, and for train/flight a booking_url (official ticket site; share it when the user asks how to buy a ticket).",
 		map[string]any{
 			"from": map[string]any{"type": "string", "description": "city id, e.g. tashkent"},
 			"to":   map[string]any{"type": "string", "description": "city id, e.g. samarkand"},

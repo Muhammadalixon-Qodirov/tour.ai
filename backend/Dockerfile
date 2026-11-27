@@ -3,7 +3,7 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN for c in api seed import-candidates admin osm-extract osm-import discover cleaner enrich tgbot egov; do \
+RUN for c in api seed import-candidates admin osm-extract osm-import discover cleaner enrich tgbot egov guide-try; do \
       CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/bin/$c ./cmd/$c || exit 1; \
     done && mkdir -p /out/data/uploads
 

@@ -14,7 +14,8 @@
     "car": { "source": "est", "kmPerHour": 75, "somPerKm": 1200 },
     "roadKm": {
       "samarkand|tashkent": 300, "bukhara|tashkent": 570, "namangan|tashkent": 290,
-      "bukhara|samarkand": 270, "namangan|samarkand": 590, "bukhara|namangan": 860
+      "bukhara|samarkand": 270, "namangan|samarkand": 590, "bukhara|namangan": 860,
+      "khiva|tashkent": 1050, "khiva|samarkand": 750, "bukhara|khiva": 450
     },
     "direct": {
       "samarkand|tashkent": [
@@ -38,6 +39,13 @@
         { "mode": "train", "durationMin": 180, "source": "est" },
         { "mode": "afrosiyob", "durationMin": 100, "source": "est" },
         { "mode": "bus", "durationMin": 300, "source": "est" }
+      ],
+      "khiva|tashkent": [
+        { "mode": "plane", "durationMin": 100, "source": "est" },
+        { "mode": "train", "durationMin": 900, "source": "est" }
+      ],
+      "bukhara|khiva": [
+        { "mode": "bus", "durationMin": 420, "source": "est" }
       ]
     },
     "viaModes": ["train", "plane"]
