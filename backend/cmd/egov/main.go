@@ -40,7 +40,14 @@ func main() {
 	trusted := fs.Bool("trusted", false, "aniq geokodlanganini avtomatik chop etish mumkin")
 	sphere := fs.String("sphere", "tourism", "soha: tourism|culture (list uchun)")
 	out := fs.String("out", "", "export: natija JSON fayli (bo'sh — stdout)")
+	// Go flag paketi birinchi positional argumentda to'xtaydi. Positional (fayl/structId) flaglardan oldin
+	// kelsa ham, keyin kelgan flaglar o'qilishi uchun qolgan argumentlarni qayta tahlil qilamiz.
 	_ = fs.Parse(os.Args[2:])
+	var positional []string
+	for fs.NArg() > 0 {
+		positional = append(positional, fs.Arg(0))
+		_ = fs.Parse(fs.Args()[1:])
+	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -64,14 +71,14 @@ func main() {
 		return
 
 	case "rows":
-		if fs.NArg() < 1 {
+		if len(positional) < 1 {
 			fail(fmt.Errorf("structId kerak: egov rows <structId>"))
 		}
 		n := *limit
 		if n == 0 {
 			n = 5
 		}
-		rows, count, err := cl.Rows(ctx, fs.Arg(0), n, 0)
+		rows, count, err := cl.Rows(ctx, positional[0], n, 0)
 		if err != nil {
 			fail(err)
 		}
@@ -105,10 +112,10 @@ func main() {
 		return
 
 	case "ingest-file":
-		if fs.NArg() < 1 {
+		if len(positional) < 1 {
 			fail(fmt.Errorf("fayl kerak: egov ingest-file <founds.json>"))
 		}
-		raw, err := os.ReadFile(fs.Arg(0))
+		raw, err := os.ReadFile(positional[0])
 		if err != nil {
 			fail(err)
 		}
